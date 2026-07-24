@@ -226,6 +226,23 @@ function EventPage() {
           </Link>
         </div>
 
+        {/* Programme */}
+        <Link
+          to="/events/$slug/timeline"
+          params={{ slug: event.slug }}
+          className="flex items-center gap-4 rounded-3xl bg-surface p-5 shadow-card"
+        >
+          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary">
+            <Clock className="h-5 w-5" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="font-serif text-lg">Programme de la journée</p>
+            <p className="text-xs text-muted-foreground">Le déroulé heure par heure</p>
+          </div>
+          <span className="text-muted-foreground">→</span>
+        </Link>
+
+
         {/* Venue */}
         <section className="rounded-3xl bg-surface p-5 shadow-card">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Lieu</p>
