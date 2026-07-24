@@ -30,6 +30,8 @@ import {
   CloudSun,
   HelpCircle,
   Shield,
+  BarChart2,
+  Activity,
 } from "lucide-react";
 
 
