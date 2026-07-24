@@ -86,9 +86,12 @@ function Settings() {
           <p className="mt-1 text-xs text-muted-foreground">
             Livre d'or illimité, live 4K, albums haute définition et export souvenir.
           </p>
-          <button className="mt-4 w-full rounded-full bg-gradient-primary py-3 text-sm font-semibold text-white shadow-glow">
+          <Link
+            to="/app/premium"
+            className="mt-4 block w-full rounded-full bg-gradient-primary py-3 text-center text-sm font-semibold text-white shadow-glow"
+          >
             Découvrir Premium
-          </button>
+          </Link>
         </section>
 
         {/* Notifications */}
