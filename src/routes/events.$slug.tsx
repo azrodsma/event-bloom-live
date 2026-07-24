@@ -17,7 +17,10 @@ import {
   CheckSquare,
   Music2,
   LayoutGrid,
+  Wallet,
+  QrCode,
 } from "lucide-react";
+
 
 import { useEffect, useState } from "react";
 
