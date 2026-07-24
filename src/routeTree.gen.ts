@@ -32,6 +32,7 @@ import { Route as AppRemindersRouteImport } from './routes/app.reminders'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
+import { Route as AppOfficiantsRouteImport } from './routes/app.officiants'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
 import { Route as AppMoodGeneratorRouteImport } from './routes/app.mood-generator'
 import { Route as AppMomentsRouteImport } from './routes/app.moments'
@@ -103,9 +104,11 @@ import { Route as EventsSlugGamesRouteImport } from './routes/events.$slug.games
 import { Route as EventsSlugFlowersRouteImport } from './routes/events.$slug.flowers'
 import { Route as EventsSlugFiltersRouteImport } from './routes/events.$slug.filters'
 import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
+import { Route as EventsSlugFamilyTreeRouteImport } from './routes/events.$slug.family-tree'
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugEcoRouteImport } from './routes/events.$slug.eco'
 import { Route as EventsSlugDresscodeRouteImport } from './routes/events.$slug.dresscode'
+import { Route as EventsSlugDjRequestsRouteImport } from './routes/events.$slug.dj-requests'
 import { Route as EventsSlugDisplayRouteImport } from './routes/events.$slug.display'
 import { Route as EventsSlugDecorRouteImport } from './routes/events.$slug.decor'
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
@@ -247,6 +250,11 @@ const AppProfileRoute = AppProfileRouteImport.update({
 const AppPremiumRoute = AppPremiumRouteImport.update({
   id: '/premium',
   path: '/premium',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOfficiantsRoute = AppOfficiantsRouteImport.update({
+  id: '/officiants',
+  path: '/officiants',
   getParentRoute: () => AppRoute,
 } as any)
 const AppNotificationsRoute = AppNotificationsRouteImport.update({
@@ -605,6 +613,11 @@ const EventsSlugFaqRoute = EventsSlugFaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugFamilyTreeRoute = EventsSlugFamilyTreeRouteImport.update({
+  id: '/family-tree',
+  path: '/family-tree',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugEditRoute = EventsSlugEditRouteImport.update({
   id: '/edit',
   path: '/edit',
@@ -618,6 +631,11 @@ const EventsSlugEcoRoute = EventsSlugEcoRouteImport.update({
 const EventsSlugDresscodeRoute = EventsSlugDresscodeRouteImport.update({
   id: '/dresscode',
   path: '/dresscode',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugDjRequestsRoute = EventsSlugDjRequestsRouteImport.update({
+  id: '/dj-requests',
+  path: '/dj-requests',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugDisplayRoute = EventsSlugDisplayRouteImport.update({
@@ -788,6 +806,7 @@ export interface FileRoutesByFullPath {
   '/app/moments': typeof AppMomentsRoute
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
+  '/app/officiants': typeof AppOfficiantsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
@@ -829,9 +848,11 @@ export interface FileRoutesByFullPath {
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
+  '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
@@ -913,6 +934,7 @@ export interface FileRoutesByTo {
   '/app/moments': typeof AppMomentsRoute
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
+  '/app/officiants': typeof AppOfficiantsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
@@ -954,9 +976,11 @@ export interface FileRoutesByTo {
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
+  '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
@@ -1040,6 +1064,7 @@ export interface FileRoutesById {
   '/app/moments': typeof AppMomentsRoute
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
+  '/app/officiants': typeof AppOfficiantsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
@@ -1081,9 +1106,11 @@ export interface FileRoutesById {
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
+  '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
@@ -1168,6 +1195,7 @@ export interface FileRouteTypes {
     | '/app/moments'
     | '/app/mood-generator'
     | '/app/notifications'
+    | '/app/officiants'
     | '/app/premium'
     | '/app/profile'
     | '/app/referral'
@@ -1209,9 +1237,11 @@ export interface FileRouteTypes {
     | '/events/$slug/dashboard'
     | '/events/$slug/decor'
     | '/events/$slug/display'
+    | '/events/$slug/dj-requests'
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
+    | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/filters'
     | '/events/$slug/flowers'
@@ -1293,6 +1323,7 @@ export interface FileRouteTypes {
     | '/app/moments'
     | '/app/mood-generator'
     | '/app/notifications'
+    | '/app/officiants'
     | '/app/premium'
     | '/app/profile'
     | '/app/referral'
@@ -1334,9 +1365,11 @@ export interface FileRouteTypes {
     | '/events/$slug/dashboard'
     | '/events/$slug/decor'
     | '/events/$slug/display'
+    | '/events/$slug/dj-requests'
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
+    | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/filters'
     | '/events/$slug/flowers'
@@ -1419,6 +1452,7 @@ export interface FileRouteTypes {
     | '/app/moments'
     | '/app/mood-generator'
     | '/app/notifications'
+    | '/app/officiants'
     | '/app/premium'
     | '/app/profile'
     | '/app/referral'
@@ -1460,9 +1494,11 @@ export interface FileRouteTypes {
     | '/events/$slug/dashboard'
     | '/events/$slug/decor'
     | '/events/$slug/display'
+    | '/events/$slug/dj-requests'
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
+    | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/filters'
     | '/events/$slug/flowers'
@@ -1686,6 +1722,13 @@ declare module '@tanstack/react-router' {
       path: '/premium'
       fullPath: '/app/premium'
       preLoaderRoute: typeof AppPremiumRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/officiants': {
+      id: '/app/officiants'
+      path: '/officiants'
+      fullPath: '/app/officiants'
+      preLoaderRoute: typeof AppOfficiantsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/notifications': {
@@ -2185,6 +2228,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugFaqRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/family-tree': {
+      id: '/events/$slug/family-tree'
+      path: '/family-tree'
+      fullPath: '/events/$slug/family-tree'
+      preLoaderRoute: typeof EventsSlugFamilyTreeRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/edit': {
       id: '/events/$slug/edit'
       path: '/edit'
@@ -2204,6 +2254,13 @@ declare module '@tanstack/react-router' {
       path: '/dresscode'
       fullPath: '/events/$slug/dresscode'
       preLoaderRoute: typeof EventsSlugDresscodeRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/dj-requests': {
+      id: '/events/$slug/dj-requests'
+      path: '/dj-requests'
+      fullPath: '/events/$slug/dj-requests'
+      preLoaderRoute: typeof EventsSlugDjRequestsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/display': {
@@ -2448,6 +2505,7 @@ interface AppRouteChildren {
   AppMomentsRoute: typeof AppMomentsRoute
   AppMoodGeneratorRoute: typeof AppMoodGeneratorRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
+  AppOfficiantsRoute: typeof AppOfficiantsRoute
   AppPremiumRoute: typeof AppPremiumRoute
   AppProfileRoute: typeof AppProfileRoute
   AppReferralRoute: typeof AppReferralRoute
@@ -2493,6 +2551,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppMomentsRoute: AppMomentsRoute,
   AppMoodGeneratorRoute: AppMoodGeneratorRoute,
   AppNotificationsRoute: AppNotificationsRoute,
+  AppOfficiantsRoute: AppOfficiantsRoute,
   AppPremiumRoute: AppPremiumRoute,
   AppProfileRoute: AppProfileRoute,
   AppReferralRoute: AppReferralRoute,
@@ -2560,9 +2619,11 @@ interface EventsSlugRouteChildren {
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
   EventsSlugDecorRoute: typeof EventsSlugDecorRoute
   EventsSlugDisplayRoute: typeof EventsSlugDisplayRoute
+  EventsSlugDjRequestsRoute: typeof EventsSlugDjRequestsRoute
   EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
   EventsSlugEcoRoute: typeof EventsSlugEcoRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
+  EventsSlugFamilyTreeRoute: typeof EventsSlugFamilyTreeRoute
   EventsSlugFaqRoute: typeof EventsSlugFaqRoute
   EventsSlugFiltersRoute: typeof EventsSlugFiltersRoute
   EventsSlugFlowersRoute: typeof EventsSlugFlowersRoute
@@ -2632,9 +2693,11 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
   EventsSlugDecorRoute: EventsSlugDecorRoute,
   EventsSlugDisplayRoute: EventsSlugDisplayRoute,
+  EventsSlugDjRequestsRoute: EventsSlugDjRequestsRoute,
   EventsSlugDresscodeRoute: EventsSlugDresscodeRoute,
   EventsSlugEcoRoute: EventsSlugEcoRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
+  EventsSlugFamilyTreeRoute: EventsSlugFamilyTreeRoute,
   EventsSlugFaqRoute: EventsSlugFaqRoute,
   EventsSlugFiltersRoute: EventsSlugFiltersRoute,
   EventsSlugFlowersRoute: EventsSlugFlowersRoute,
