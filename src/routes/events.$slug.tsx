@@ -27,6 +27,9 @@ import {
   Car,
   Mic2,
   Baby,
+  CloudSun,
+  HelpCircle,
+  Shield,
 } from "lucide-react";
 
 
@@ -440,6 +443,40 @@ function EventPage() {
             <p className="text-[10px] text-muted-foreground">Journal</p>
           </Link>
         </div>
+
+        {/* Info & assistance */}
+        <div className="grid grid-cols-3 gap-3">
+          <Link
+            to="/events/$slug/weather"
+            params={{ slug: event.slug }}
+            className="flex flex-col items-start gap-1.5 rounded-2xl bg-gradient-to-br from-sky-100 to-sky-50 p-3.5 text-xs font-semibold ring-1 ring-sky-200"
+          >
+            <CloudSun className="h-5 w-5 text-sky-600" />
+            <span>Météo</span>
+            <span className="text-[10px] font-medium text-sky-700/80">28° ensoleillé</span>
+          </Link>
+          <Link
+            to="/events/$slug/faq"
+            params={{ slug: event.slug }}
+            className="flex flex-col items-start gap-1.5 rounded-2xl bg-secondary p-3.5 text-xs font-semibold"
+          >
+            <HelpCircle className="h-5 w-5 text-primary" />
+            <span>FAQ</span>
+            <span className="text-[10px] font-medium text-muted-foreground">Réponses invités</span>
+          </Link>
+          <Link
+            to="/events/$slug/moderation"
+            params={{ slug: event.slug }}
+            className="flex flex-col items-start gap-1.5 rounded-2xl bg-destructive/5 p-3.5 text-xs font-semibold ring-1 ring-destructive/20"
+          >
+            <Shield className="h-5 w-5 text-destructive" />
+            <span>Modération</span>
+            <span className="text-[10px] font-medium text-destructive/80">2 à traiter</span>
+          </Link>
+        </div>
+
+
+
 
 
 
