@@ -23,10 +23,12 @@ import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
 import { Route as AppMessagesRouteImport } from './routes/app.messages'
+import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
 import { Route as AppHelpRouteImport } from './routes/app.help'
 import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
 import { Route as AppExploreRouteImport } from './routes/app.explore'
 import { Route as AppCreateRouteImport } from './routes/app.create'
+import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as EventsSlugTimelineRouteImport } from './routes/events.$slug.timeline'
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
@@ -35,6 +37,7 @@ import { Route as EventsSlugGuestsRouteImport } from './routes/events.$slug.gues
 import { Route as EventsSlugGuestbookRouteImport } from './routes/events.$slug.guestbook'
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
+import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
 import { Route as AppVendorsIdRouteImport } from './routes/app.vendors.$id'
 import { Route as AppUsersIdRouteImport } from './routes/app.users.$id'
@@ -112,6 +115,11 @@ const AppMessagesRoute = AppMessagesRouteImport.update({
   path: '/messages',
   getParentRoute: () => AppRoute,
 } as any)
+const AppInspirationsRoute = AppInspirationsRouteImport.update({
+  id: '/inspirations',
+  path: '/inspirations',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppHelpRoute = AppHelpRouteImport.update({
   id: '/help',
   path: '/help',
@@ -130,6 +138,11 @@ const AppExploreRoute = AppExploreRouteImport.update({
 const AppCreateRoute = AppCreateRouteImport.update({
   id: '/create',
   path: '/create',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAchievementsRoute = AppAchievementsRouteImport.update({
+  id: '/achievements',
+  path: '/achievements',
   getParentRoute: () => AppRoute,
 } as any)
 const EventsSlugTimelineRoute = EventsSlugTimelineRouteImport.update({
@@ -172,6 +185,11 @@ const EventsSlugDashboardRoute = EventsSlugDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugContributorsRoute = EventsSlugContributorsRouteImport.update({
+  id: '/contributors',
+  path: '/contributors',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugAlbumRoute = EventsSlugAlbumRouteImport.update({
   id: '/album',
   path: '/album',
@@ -209,10 +227,12 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/join': typeof JoinRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/achievements': typeof AppAchievementsRoute
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/help': typeof AppHelpRoute
+  '/app/inspirations': typeof AppInspirationsRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
@@ -227,6 +247,7 @@ export interface FileRoutesByFullPath {
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
@@ -242,10 +263,12 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/join': typeof JoinRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/achievements': typeof AppAchievementsRoute
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/help': typeof AppHelpRoute
+  '/app/inspirations': typeof AppInspirationsRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
@@ -260,6 +283,7 @@ export interface FileRoutesByTo {
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
@@ -277,10 +301,12 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/join': typeof JoinRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/achievements': typeof AppAchievementsRoute
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/help': typeof AppHelpRoute
+  '/app/inspirations': typeof AppInspirationsRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
@@ -295,6 +321,7 @@ export interface FileRoutesById {
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
@@ -313,10 +340,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/join'
     | '/onboarding'
+    | '/app/achievements'
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
     | '/app/help'
+    | '/app/inspirations'
     | '/app/messages'
     | '/app/notifications'
     | '/app/premium'
@@ -331,6 +360,7 @@ export interface FileRouteTypes {
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/album'
+    | '/events/$slug/contributors'
     | '/events/$slug/dashboard'
     | '/events/$slug/edit'
     | '/events/$slug/guestbook'
@@ -346,10 +376,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/join'
     | '/onboarding'
+    | '/app/achievements'
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
     | '/app/help'
+    | '/app/inspirations'
     | '/app/messages'
     | '/app/notifications'
     | '/app/premium'
@@ -364,6 +396,7 @@ export interface FileRouteTypes {
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/album'
+    | '/events/$slug/contributors'
     | '/events/$slug/dashboard'
     | '/events/$slug/edit'
     | '/events/$slug/guestbook'
@@ -380,10 +413,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/join'
     | '/onboarding'
+    | '/app/achievements'
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
     | '/app/help'
+    | '/app/inspirations'
     | '/app/messages'
     | '/app/notifications'
     | '/app/premium'
@@ -398,6 +433,7 @@ export interface FileRouteTypes {
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/album'
+    | '/events/$slug/contributors'
     | '/events/$slug/dashboard'
     | '/events/$slug/edit'
     | '/events/$slug/guestbook'
@@ -519,6 +555,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppMessagesRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/inspirations': {
+      id: '/app/inspirations'
+      path: '/inspirations'
+      fullPath: '/app/inspirations'
+      preLoaderRoute: typeof AppInspirationsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/help': {
       id: '/app/help'
       path: '/help'
@@ -545,6 +588,13 @@ declare module '@tanstack/react-router' {
       path: '/create'
       fullPath: '/app/create'
       preLoaderRoute: typeof AppCreateRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/achievements': {
+      id: '/app/achievements'
+      path: '/achievements'
+      fullPath: '/app/achievements'
+      preLoaderRoute: typeof AppAchievementsRouteImport
       parentRoute: typeof AppRoute
     }
     '/events/$slug/timeline': {
@@ -601,6 +651,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/events/$slug/dashboard'
       preLoaderRoute: typeof EventsSlugDashboardRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/contributors': {
+      id: '/events/$slug/contributors'
+      path: '/contributors'
+      fullPath: '/events/$slug/contributors'
+      preLoaderRoute: typeof EventsSlugContributorsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/album': {
@@ -673,10 +730,12 @@ const AppVendorsRouteWithChildren = AppVendorsRoute._addFileChildren(
 )
 
 interface AppRouteChildren {
+  AppAchievementsRoute: typeof AppAchievementsRoute
   AppCreateRoute: typeof AppCreateRoute
   AppExploreRoute: typeof AppExploreRoute
   AppFavoritesRoute: typeof AppFavoritesRoute
   AppHelpRoute: typeof AppHelpRoute
+  AppInspirationsRoute: typeof AppInspirationsRoute
   AppMessagesRoute: typeof AppMessagesRouteWithChildren
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppPremiumRoute: typeof AppPremiumRoute
@@ -689,10 +748,12 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAchievementsRoute: AppAchievementsRoute,
   AppCreateRoute: AppCreateRoute,
   AppExploreRoute: AppExploreRoute,
   AppFavoritesRoute: AppFavoritesRoute,
   AppHelpRoute: AppHelpRoute,
+  AppInspirationsRoute: AppInspirationsRoute,
   AppMessagesRoute: AppMessagesRouteWithChildren,
   AppNotificationsRoute: AppNotificationsRoute,
   AppPremiumRoute: AppPremiumRoute,
@@ -719,6 +780,7 @@ const EventsSlugGuestbookRouteWithChildren =
 
 interface EventsSlugRouteChildren {
   EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
+  EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
   EventsSlugGuestbookRoute: typeof EventsSlugGuestbookRouteWithChildren
@@ -731,6 +793,7 @@ interface EventsSlugRouteChildren {
 
 const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugAlbumRoute: EventsSlugAlbumRoute,
+  EventsSlugContributorsRoute: EventsSlugContributorsRoute,
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
   EventsSlugGuestbookRoute: EventsSlugGuestbookRouteWithChildren,
