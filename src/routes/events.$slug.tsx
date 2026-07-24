@@ -70,9 +70,14 @@ function EventPage() {
               <button className="grid h-10 w-10 place-items-center rounded-full bg-white/90 backdrop-blur">
                 <Heart className="h-4 w-4" />
               </button>
-              <button className="grid h-10 w-10 place-items-center rounded-full bg-white/90 backdrop-blur">
+              <Link
+                to="/events/$slug/invite"
+                params={{ slug: event.slug }}
+                className="grid h-10 w-10 place-items-center rounded-full bg-white/90 backdrop-blur"
+                aria-label="Partager"
+              >
                 <Share2 className="h-4 w-4" />
-              </button>
+              </Link>
             </div>
           </div>
           <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
