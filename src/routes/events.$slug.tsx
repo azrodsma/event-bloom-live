@@ -17,7 +17,10 @@ import {
   CheckSquare,
   Music2,
   LayoutGrid,
+  Wallet,
+  QrCode,
 } from "lucide-react";
+
 
 import { useEffect, useState } from "react";
 
@@ -283,6 +286,46 @@ function EventPage() {
             <p className="text-[10px] text-muted-foreground">5 tables</p>
           </Link>
         </div>
+
+
+
+        <div className="grid grid-cols-3 gap-3">
+          <Link
+            to="/events/$slug/budget"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/15 text-primary">
+              <Wallet className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Budget</p>
+            <p className="text-[10px] text-muted-foreground">38 000 €</p>
+          </Link>
+          <Link
+            to="/events/$slug/registry"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-accent/40 text-foreground">
+              <Gift className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Cadeaux</p>
+            <p className="text-[10px] text-muted-foreground">5 idées</p>
+          </Link>
+          <Link
+            to="/events/$slug/checkin"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-foreground text-background">
+              <QrCode className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Check-in</p>
+            <p className="text-[10px] text-muted-foreground">QR code</p>
+          </Link>
+        </div>
+
+
 
 
 
