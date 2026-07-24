@@ -31,6 +31,7 @@ import { Route as AppPremiumRouteImport } from './routes/app.premium'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
 import { Route as AppMomentsRouteImport } from './routes/app.moments'
 import { Route as AppMessagesRouteImport } from './routes/app.messages'
+import { Route as AppMemoriesMapRouteImport } from './routes/app.memories-map'
 import { Route as AppJournalRouteImport } from './routes/app.journal'
 import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
 import { Route as AppHelpRouteImport } from './routes/app.help'
@@ -79,6 +80,7 @@ import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugDresscodeRouteImport } from './routes/events.$slug.dresscode'
 import { Route as EventsSlugDisplayRouteImport } from './routes/events.$slug.display'
+import { Route as EventsSlugDecorRouteImport } from './routes/events.$slug.decor'
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
 import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.countdown'
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
@@ -88,6 +90,7 @@ import { Route as EventsSlugCarpoolRouteImport } from './routes/events.$slug.car
 import { Route as EventsSlugCamerasRouteImport } from './routes/events.$slug.cameras'
 import { Route as EventsSlugBudgetRouteImport } from './routes/events.$slug.budget'
 import { Route as EventsSlugBroadcastRouteImport } from './routes/events.$slug.broadcast'
+import { Route as EventsSlugBarRouteImport } from './routes/events.$slug.bar'
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
 import { Route as EventsSlugAfterpartyRouteImport } from './routes/events.$slug.afterparty'
 import { Route as EventsSlugActivityRouteImport } from './routes/events.$slug.activity'
@@ -207,6 +210,11 @@ const AppMomentsRoute = AppMomentsRouteImport.update({
 const AppMessagesRoute = AppMessagesRouteImport.update({
   id: '/messages',
   path: '/messages',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMemoriesMapRoute = AppMemoriesMapRouteImport.update({
+  id: '/memories-map',
+  path: '/memories-map',
   getParentRoute: () => AppRoute,
 } as any)
 const AppJournalRoute = AppJournalRouteImport.update({
@@ -449,6 +457,11 @@ const EventsSlugDisplayRoute = EventsSlugDisplayRouteImport.update({
   path: '/display',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugDecorRoute = EventsSlugDecorRouteImport.update({
+  id: '/decor',
+  path: '/decor',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugDashboardRoute = EventsSlugDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -492,6 +505,11 @@ const EventsSlugBudgetRoute = EventsSlugBudgetRouteImport.update({
 const EventsSlugBroadcastRoute = EventsSlugBroadcastRouteImport.update({
   id: '/broadcast',
   path: '/broadcast',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugBarRoute = EventsSlugBarRouteImport.update({
+  id: '/bar',
+  path: '/bar',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugAlbumRoute = EventsSlugAlbumRouteImport.update({
@@ -566,6 +584,7 @@ export interface FileRoutesByFullPath {
   '/app/help': typeof AppHelpRoute
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
+  '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
   '/app/notifications': typeof AppNotificationsRoute
@@ -589,6 +608,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
@@ -598,6 +618,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
@@ -656,6 +677,7 @@ export interface FileRoutesByTo {
   '/app/help': typeof AppHelpRoute
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
+  '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
   '/app/notifications': typeof AppNotificationsRoute
@@ -679,6 +701,7 @@ export interface FileRoutesByTo {
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
@@ -688,6 +711,7 @@ export interface FileRoutesByTo {
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
@@ -748,6 +772,7 @@ export interface FileRoutesById {
   '/app/help': typeof AppHelpRoute
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
+  '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
   '/app/notifications': typeof AppNotificationsRoute
@@ -771,6 +796,7 @@ export interface FileRoutesById {
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
@@ -780,6 +806,7 @@ export interface FileRoutesById {
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
@@ -841,6 +868,7 @@ export interface FileRouteTypes {
     | '/app/help'
     | '/app/inspirations'
     | '/app/journal'
+    | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
     | '/app/notifications'
@@ -864,6 +892,7 @@ export interface FileRouteTypes {
     | '/events/$slug/activity'
     | '/events/$slug/afterparty'
     | '/events/$slug/album'
+    | '/events/$slug/bar'
     | '/events/$slug/broadcast'
     | '/events/$slug/budget'
     | '/events/$slug/cameras'
@@ -873,6 +902,7 @@ export interface FileRouteTypes {
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
+    | '/events/$slug/decor'
     | '/events/$slug/display'
     | '/events/$slug/dresscode'
     | '/events/$slug/edit'
@@ -931,6 +961,7 @@ export interface FileRouteTypes {
     | '/app/help'
     | '/app/inspirations'
     | '/app/journal'
+    | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
     | '/app/notifications'
@@ -954,6 +985,7 @@ export interface FileRouteTypes {
     | '/events/$slug/activity'
     | '/events/$slug/afterparty'
     | '/events/$slug/album'
+    | '/events/$slug/bar'
     | '/events/$slug/broadcast'
     | '/events/$slug/budget'
     | '/events/$slug/cameras'
@@ -963,6 +995,7 @@ export interface FileRouteTypes {
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
+    | '/events/$slug/decor'
     | '/events/$slug/display'
     | '/events/$slug/dresscode'
     | '/events/$slug/edit'
@@ -1022,6 +1055,7 @@ export interface FileRouteTypes {
     | '/app/help'
     | '/app/inspirations'
     | '/app/journal'
+    | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
     | '/app/notifications'
@@ -1045,6 +1079,7 @@ export interface FileRouteTypes {
     | '/events/$slug/activity'
     | '/events/$slug/afterparty'
     | '/events/$slug/album'
+    | '/events/$slug/bar'
     | '/events/$slug/broadcast'
     | '/events/$slug/budget'
     | '/events/$slug/cameras'
@@ -1054,6 +1089,7 @@ export interface FileRouteTypes {
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
+    | '/events/$slug/decor'
     | '/events/$slug/display'
     | '/events/$slug/dresscode'
     | '/events/$slug/edit'
@@ -1258,6 +1294,13 @@ declare module '@tanstack/react-router' {
       path: '/messages'
       fullPath: '/app/messages'
       preLoaderRoute: typeof AppMessagesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/memories-map': {
+      id: '/app/memories-map'
+      path: '/memories-map'
+      fullPath: '/app/memories-map'
+      preLoaderRoute: typeof AppMemoriesMapRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/journal': {
@@ -1596,6 +1639,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugDisplayRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/decor': {
+      id: '/events/$slug/decor'
+      path: '/decor'
+      fullPath: '/events/$slug/decor'
+      preLoaderRoute: typeof EventsSlugDecorRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/dashboard': {
       id: '/events/$slug/dashboard'
       path: '/dashboard'
@@ -1657,6 +1707,13 @@ declare module '@tanstack/react-router' {
       path: '/broadcast'
       fullPath: '/events/$slug/broadcast'
       preLoaderRoute: typeof EventsSlugBroadcastRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/bar': {
+      id: '/events/$slug/bar'
+      path: '/bar'
+      fullPath: '/events/$slug/bar'
+      preLoaderRoute: typeof EventsSlugBarRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/album': {
@@ -1771,6 +1828,7 @@ interface AppRouteChildren {
   AppHelpRoute: typeof AppHelpRoute
   AppInspirationsRoute: typeof AppInspirationsRoute
   AppJournalRoute: typeof AppJournalRoute
+  AppMemoriesMapRoute: typeof AppMemoriesMapRoute
   AppMessagesRoute: typeof AppMessagesRouteWithChildren
   AppMomentsRoute: typeof AppMomentsRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
@@ -1804,6 +1862,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppHelpRoute: AppHelpRoute,
   AppInspirationsRoute: AppInspirationsRoute,
   AppJournalRoute: AppJournalRoute,
+  AppMemoriesMapRoute: AppMemoriesMapRoute,
   AppMessagesRoute: AppMessagesRouteWithChildren,
   AppMomentsRoute: AppMomentsRoute,
   AppNotificationsRoute: AppNotificationsRoute,
@@ -1853,6 +1912,7 @@ interface EventsSlugRouteChildren {
   EventsSlugActivityRoute: typeof EventsSlugActivityRoute
   EventsSlugAfterpartyRoute: typeof EventsSlugAfterpartyRoute
   EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
+  EventsSlugBarRoute: typeof EventsSlugBarRoute
   EventsSlugBroadcastRoute: typeof EventsSlugBroadcastRoute
   EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
   EventsSlugCamerasRoute: typeof EventsSlugCamerasRoute
@@ -1862,6 +1922,7 @@ interface EventsSlugRouteChildren {
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
   EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
+  EventsSlugDecorRoute: typeof EventsSlugDecorRoute
   EventsSlugDisplayRoute: typeof EventsSlugDisplayRoute
   EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
@@ -1902,6 +1963,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugActivityRoute: EventsSlugActivityRoute,
   EventsSlugAfterpartyRoute: EventsSlugAfterpartyRoute,
   EventsSlugAlbumRoute: EventsSlugAlbumRoute,
+  EventsSlugBarRoute: EventsSlugBarRoute,
   EventsSlugBroadcastRoute: EventsSlugBroadcastRoute,
   EventsSlugBudgetRoute: EventsSlugBudgetRoute,
   EventsSlugCamerasRoute: EventsSlugCamerasRoute,
@@ -1911,6 +1973,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
   EventsSlugCountdownRoute: EventsSlugCountdownRoute,
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
+  EventsSlugDecorRoute: EventsSlugDecorRoute,
   EventsSlugDisplayRoute: EventsSlugDisplayRoute,
   EventsSlugDresscodeRoute: EventsSlugDresscodeRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
@@ -1964,3 +2027,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
