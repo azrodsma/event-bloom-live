@@ -17,7 +17,7 @@ export function StoryRail() {
       {stories.map((s) => (
         <Link
           key={s.id}
-          to="/events/$slug"
+          to="/stories/$slug"
           params={{ slug: s.event }}
           className="flex w-16 shrink-0 flex-col items-center gap-1.5"
         >

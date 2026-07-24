@@ -14,13 +14,13 @@ function AppLayout() {
         <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-3">
           <Link to="/app"><Logo /></Link>
           <div className="flex items-center gap-2">
-            <button className="relative grid h-10 w-10 place-items-center rounded-full hover:bg-muted" aria-label="Notifications">
+            <Link to="/app/notifications" className="relative grid h-10 w-10 place-items-center rounded-full hover:bg-muted" aria-label="Notifications">
               <Bell className="h-5 w-5 text-foreground" />
               <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary" />
-            </button>
-            <button className="grid h-10 w-10 place-items-center rounded-full hover:bg-muted" aria-label="Messages">
+            </Link>
+            <Link to="/app/explore" className="grid h-10 w-10 place-items-center rounded-full hover:bg-muted" aria-label="Messages">
               <MessageCircle className="h-5 w-5 text-foreground" />
-            </button>
+            </Link>
           </div>
         </div>
       </header>
