@@ -14,13 +14,16 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
+import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
 import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
 import { Route as AppExploreRouteImport } from './routes/app.explore'
 import { Route as AppCreateRouteImport } from './routes/app.create'
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugGuestbookRouteImport } from './routes/events.$slug.guestbook'
+import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
 
 const JoinRoute = JoinRouteImport.update({
   id: '/join',
@@ -47,6 +50,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const StoriesSlugRoute = StoriesSlugRouteImport.update({
+  id: '/stories/$slug',
+  path: '/stories/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EventsSlugRoute = EventsSlugRouteImport.update({
   id: '/events/$slug',
   path: '/events/$slug',
@@ -55,6 +63,11 @@ const EventsSlugRoute = EventsSlugRouteImport.update({
 const AppProfileRoute = AppProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
   getParentRoute: () => AppRoute,
 } as any)
 const AppFavoritesRoute = AppFavoritesRouteImport.update({
@@ -82,6 +95,11 @@ const EventsSlugGuestbookRoute = EventsSlugGuestbookRouteImport.update({
   path: '/guestbook',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugAlbumRoute = EventsSlugAlbumRouteImport.update({
+  id: '/album',
+  path: '/album',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -91,9 +109,12 @@ export interface FileRoutesByFullPath {
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
+  '/app/notifications': typeof AppNotificationsRoute
   '/app/profile': typeof AppProfileRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
+  '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
+  '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
 }
@@ -104,9 +125,12 @@ export interface FileRoutesByTo {
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
+  '/app/notifications': typeof AppNotificationsRoute
   '/app/profile': typeof AppProfileRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
+  '/stories/$slug': typeof StoriesSlugRoute
   '/app': typeof AppIndexRoute
+  '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
 }
@@ -119,9 +143,12 @@ export interface FileRoutesById {
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
+  '/app/notifications': typeof AppNotificationsRoute
   '/app/profile': typeof AppProfileRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
+  '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
+  '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
 }
@@ -135,9 +162,12 @@ export interface FileRouteTypes {
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
+    | '/app/notifications'
     | '/app/profile'
     | '/events/$slug'
+    | '/stories/$slug'
     | '/app/'
+    | '/events/$slug/album'
     | '/events/$slug/guestbook'
     | '/events/$slug/live'
   fileRoutesByTo: FileRoutesByTo
@@ -148,9 +178,12 @@ export interface FileRouteTypes {
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
+    | '/app/notifications'
     | '/app/profile'
     | '/events/$slug'
+    | '/stories/$slug'
     | '/app'
+    | '/events/$slug/album'
     | '/events/$slug/guestbook'
     | '/events/$slug/live'
   id:
@@ -162,9 +195,12 @@ export interface FileRouteTypes {
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
+    | '/app/notifications'
     | '/app/profile'
     | '/events/$slug'
+    | '/stories/$slug'
     | '/app/'
+    | '/events/$slug/album'
     | '/events/$slug/guestbook'
     | '/events/$slug/live'
   fileRoutesById: FileRoutesById
@@ -175,6 +211,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   JoinRoute: typeof JoinRoute
   EventsSlugRoute: typeof EventsSlugRouteWithChildren
+  StoriesSlugRoute: typeof StoriesSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -214,6 +251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/stories/$slug': {
+      id: '/stories/$slug'
+      path: '/stories/$slug'
+      fullPath: '/stories/$slug'
+      preLoaderRoute: typeof StoriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/events/$slug': {
       id: '/events/$slug'
       path: '/events/$slug'
@@ -226,6 +270,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/app/profile'
       preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/notifications': {
+      id: '/app/notifications'
+      path: '/notifications'
+      fullPath: '/app/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/favorites': {
@@ -263,6 +314,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugGuestbookRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/album': {
+      id: '/events/$slug/album'
+      path: '/album'
+      fullPath: '/events/$slug/album'
+      preLoaderRoute: typeof EventsSlugAlbumRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
   }
 }
 
@@ -270,6 +328,7 @@ interface AppRouteChildren {
   AppCreateRoute: typeof AppCreateRoute
   AppExploreRoute: typeof AppExploreRoute
   AppFavoritesRoute: typeof AppFavoritesRoute
+  AppNotificationsRoute: typeof AppNotificationsRoute
   AppProfileRoute: typeof AppProfileRoute
   AppIndexRoute: typeof AppIndexRoute
 }
@@ -278,6 +337,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppCreateRoute: AppCreateRoute,
   AppExploreRoute: AppExploreRoute,
   AppFavoritesRoute: AppFavoritesRoute,
+  AppNotificationsRoute: AppNotificationsRoute,
   AppProfileRoute: AppProfileRoute,
   AppIndexRoute: AppIndexRoute,
 }
@@ -285,11 +345,13 @@ const AppRouteChildren: AppRouteChildren = {
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface EventsSlugRouteChildren {
+  EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
   EventsSlugGuestbookRoute: typeof EventsSlugGuestbookRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRoute
 }
 
 const EventsSlugRouteChildren: EventsSlugRouteChildren = {
+  EventsSlugAlbumRoute: EventsSlugAlbumRoute,
   EventsSlugGuestbookRoute: EventsSlugGuestbookRoute,
   EventsSlugLiveRoute: EventsSlugLiveRoute,
 }
@@ -304,6 +366,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   JoinRoute: JoinRoute,
   EventsSlugRoute: EventsSlugRouteWithChildren,
+  StoriesSlugRoute: StoriesSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
