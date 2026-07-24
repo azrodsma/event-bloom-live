@@ -1,110 +1,53 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
-import { ArrowLeft, Baby, Palette, Gamepad2, IceCream, Sparkles, Users, Clock, Heart } from "lucide-react";
-import { useState } from "react";
+import { ArrowLeft, Baby, Sparkles, Clock, MapPin, Phone, Heart, Play, Palette, Music, Puzzle } from "lucide-react";
 
 export const Route = createFileRoute("/events/$slug/kids")({
   component: KidsCorner,
   head: () => ({
     meta: [
       { title: "Espace enfants · Memento Live" },
-      { name: "description", content: "Activités, ateliers, animateurs et menus enfants — tout pour que les petits vivent aussi une journée magique." },
+      { name: "description", content: "Un coin dédié aux petits invités : activités, garderie, coloriages et chasse au trésor." },
       { property: "og:title", content: "Espace enfants · Memento Live" },
-      { property: "og:description", content: "Les enfants aussi vivent l'événement à fond." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:description", content: "Les petits aussi ont leur fête." },
+      { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
 
-interface Kid {
-  id: string;
-  name: string;
-  age: number;
-  parents: string;
-  avatar: string;
-  needs: string[];
-}
-
-const kids: Kid[] = [
-  { id: "k1", name: "Lila", age: 4, parents: "Camille & Julien", avatar: "https://i.pravatar.cc/64?img=1", needs: ["Sans gluten", "Sieste 14 h"] },
-  { id: "k2", name: "Noé", age: 6, parents: "Nadia & Karim", avatar: "https://i.pravatar.cc/64?img=3", needs: [] },
-  { id: "k3", name: "Alba", age: 2, parents: "Léa & Paul", avatar: "https://i.pravatar.cc/64?img=5", needs: ["Chaise haute"] },
-  { id: "k4", name: "Tom", age: 8, parents: "Antoine & Sophie", avatar: "https://i.pravatar.cc/64?img=7", needs: [] },
-  { id: "k5", name: "Iris", age: 5, parents: "Émilie & Paul", avatar: "https://i.pravatar.cc/64?img=9", needs: ["Végétarien"] },
+const registered = [
+  { name: "Léo", age: 6, allergies: "Arachide", avatar: "https://images.unsplash.com/photo-1503457574462-bd27054394c1?w=200", diet: "Standard" },
+  { name: "Alice", age: 4, allergies: "—", avatar: "https://images.unsplash.com/photo-1519340333755-56e9c1d8b8dd?w=200", diet: "Végé" },
+  { name: "Noé", age: 2, allergies: "Œuf", avatar: "https://images.unsplash.com/photo-1502781252888-9143ba7f074e?w=200", diet: "Sans œuf" },
+  { name: "Zoé", age: 8, allergies: "—", avatar: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=200", diet: "Standard" },
 ];
 
-interface Activity {
-  id: string;
-  time: string;
-  title: string;
-  desc: string;
-  ages: string;
-  icon: typeof Palette;
-  color: string;
-  spots?: string;
-}
+const timeline = [
+  { time: "14:00", label: "Accueil parents", place: "Tente rose", color: "bg-rose-100 text-rose-700" },
+  { time: "15:30", label: "Maquillage & tatoos", place: "Studio glitter", color: "bg-amber-100 text-amber-700" },
+  { time: "17:00", label: "Chasse au trésor", place: "Jardin nord", color: "bg-emerald-100 text-emerald-700" },
+  { time: "18:30", label: "Goûter magique", place: "Chapiteau kids", color: "bg-primary/15 text-primary" },
+  { time: "20:00", label: "Cinéma sous couette", place: "Salon", color: "bg-violet-100 text-violet-700" },
+  { time: "21:30", label: "Récupération dodo", place: "Chambres", color: "bg-slate-100 text-slate-700" },
+];
 
-const activities: Activity[] = [
-  {
-    id: "a1",
-    time: "15 h 30",
-    title: "Atelier couronnes de fleurs",
-    desc: "Fabriquer sa couronne avec fleurs séchées et rubans dorés.",
-    ages: "3-8 ans",
-    icon: Palette,
-    color: "bg-primary/15 text-primary",
-    spots: "12 places · 8 inscrits",
-  },
-  {
-    id: "a2",
-    time: "17 h 00",
-    title: "Chasse aux trésors",
-    desc: "Parcours dans les jardins avec cartes et énigmes.",
-    ages: "5-12 ans",
-    icon: Sparkles,
-    color: "bg-accent/40 text-foreground",
-    spots: "Illimité",
-  },
-  {
-    id: "a3",
-    time: "18 h 30",
-    title: "Coin lecture & câlin",
-    desc: "Livres, coussins et couvertures pour un moment doux.",
-    ages: "0-6 ans",
-    icon: Heart,
-    color: "bg-secondary text-foreground",
-  },
-  {
-    id: "a4",
-    time: "19 h 30",
-    title: "Buffet enfants & glaces",
-    desc: "Menu adapté servi tôt, avec bar à glaces.",
-    ages: "Tous",
-    icon: IceCream,
-    color: "bg-primary/15 text-primary",
-  },
-  {
-    id: "a5",
-    time: "21 h 00",
-    title: "Cinéma dans la grange",
-    desc: "Projection d'un dessin animé pendant que les grands dansent.",
-    ages: "Tous",
-    icon: Gamepad2,
-    color: "bg-foreground text-background",
-    spots: "Coussins & couvertures fournis",
-  },
+const activities = [
+  { icon: Palette, emoji: "🎨", title: "Coloriage magique", desc: "10 planches à imprimer", cta: "Télécharger", tint: "from-rose-100 to-primary/10" },
+  { icon: Puzzle, emoji: "🧩", title: "Chasse au trésor", desc: "7 énigmes autour du domaine", cta: "Lancer", tint: "from-amber-100 to-amber-200" },
+  { icon: Music, emoji: "🎤", title: "Karaoké enfants", desc: "20 titres Disney & Pixar", cta: "Ouvrir", tint: "from-violet-100 to-violet-200" },
+  { icon: Play, emoji: "🎬", title: "Ciné sous les étoiles", desc: "3 films au choix", cta: "Voter", tint: "from-sky-100 to-sky-200" },
+];
+
+const staff = [
+  { name: "Marion Bel", role: "Animatrice BAFA", exp: "8 ans", avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200" },
+  { name: "Camille D.", role: "Assistante puér.", exp: "5 ans", avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200" },
 ];
 
 function KidsCorner() {
   const { slug } = useParams({ from: "/events/$slug/kids" });
-  const [registered, setRegistered] = useState<Record<string, boolean>>({ a1: true, a4: true });
-
-  function toggle(id: string) {
-    setRegistered((r) => ({ ...r, [id]: !r[id] }));
-  }
 
   return (
-    <div className="min-h-screen bg-background pb-16">
+    <div className="min-h-screen bg-background pb-24">
       <div className="sticky top-0 z-20 flex items-center justify-between border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
         <Link to="/events/$slug" params={{ slug }} className="grid h-9 w-9 place-items-center rounded-full hover:bg-muted" aria-label="Retour">
           <ArrowLeft className="h-5 w-5" />
@@ -113,122 +56,138 @@ function KidsCorner() {
         <span className="w-9" />
       </div>
 
-      <section className="relative overflow-hidden px-4 pb-6 pt-6">
-        <div
-          className="absolute inset-0 opacity-70"
-          style={{ background: "linear-gradient(135deg, #FFF8F4 0%, #F5C6D0 60%, #FCE1B7 100%)" }}
-        />
-        <div className="relative">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-foreground/70">
-            <Baby className="h-3.5 w-3.5 text-primary" /> Journée des petits
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-rose-100/60 via-primary/10 to-transparent" />
+        <div className="absolute -left-6 top-16 text-7xl opacity-15 -rotate-12">🎈</div>
+        <div className="absolute right-2 top-4 text-6xl opacity-15">🦄</div>
+        <div className="absolute right-16 bottom-4 text-4xl opacity-15">🎠</div>
+        <div className="relative px-4 pb-6 pt-6">
+          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            <Baby className="h-3.5 w-3.5 text-primary" /> 12 enfants · 2 encadrants
           </div>
-          <h1 className="mt-2 font-serif text-3xl leading-tight text-foreground">
-            Une aventure magique<br />pour les enfants ✨
+          <h1 className="mt-2 font-serif text-4xl leading-tight">
+            Les petits aussi<br />
+            <span className="italic text-primary">ont leur fête</span>
           </h1>
-          <p className="mt-3 text-sm text-foreground/70">
-            Ateliers créatifs, chasses au trésor, coin lecture et cinéma étoilé — deux animateurs professionnels toute la journée.
+          <p className="mt-2 max-w-xs text-sm text-muted-foreground">
+            Un cocon dédié pour que les enfants s'amusent en toute sécurité pendant que vous célébrez.
           </p>
-          <div className="mt-4 grid grid-cols-3 gap-2">
-            <div className="rounded-2xl bg-background/80 p-3 text-center">
-              <p className="font-serif text-xl leading-none">{kids.length}</p>
-              <p className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground">Enfants</p>
-            </div>
-            <div className="rounded-2xl bg-background/80 p-3 text-center">
-              <p className="font-serif text-xl leading-none text-primary">{activities.length}</p>
-              <p className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground">Activités</p>
-            </div>
-            <div className="rounded-2xl bg-background/80 p-3 text-center">
-              <p className="font-serif text-xl leading-none">2</p>
-              <p className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground">Animateurs</p>
-            </div>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-3 py-1 text-[10px] font-bold text-emerald-700">
+              ✅ Encadrement diplômé
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold text-primary">
+              <MapPin className="h-3 w-3" /> Tente rose · aile ouest
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1 text-[10px] font-bold">
+              14 h → 22 h
+            </span>
           </div>
         </div>
       </section>
 
-      <section className="px-4 pt-6">
-        <div className="mb-3 flex items-baseline justify-between">
-          <h2 className="font-serif text-lg">Programme du jour</h2>
-          <span className="text-[11px] text-muted-foreground">15 h → 22 h</span>
+      <section className="mt-2 px-4">
+        <div className="flex items-center justify-between">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Petits invités inscrits</p>
+          <button className="text-[10px] font-semibold text-primary">+ Inscrire</button>
         </div>
-        <ol className="space-y-3">
-          {activities.map((a) => {
-            const Icon = a.icon;
-            const reg = !!registered[a.id];
-            return (
-              <li key={a.id} className="flex gap-3 rounded-3xl border border-border/60 bg-card p-4">
-                <div className="flex flex-col items-center gap-2 pr-3 border-r border-border/60">
-                  <span className={`grid h-11 w-11 place-items-center rounded-2xl ${a.color}`}>
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="font-serif text-xs font-bold">{a.time}</span>
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="font-serif text-base leading-tight">{a.title}</p>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground">{a.desc}</p>
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium">
-                      <Users className="mr-1 inline h-2.5 w-2.5" /> {a.ages}
-                    </span>
-                    {a.spots && (
-                      <span className="rounded-full bg-background px-2 py-0.5 text-[10px] font-medium ring-1 ring-border">
-                        {a.spots}
-                      </span>
-                    )}
-                  </div>
-                  <button
-                    onClick={() => toggle(a.id)}
-                    className={`mt-3 rounded-full px-3 py-1.5 text-[11px] font-semibold transition-colors ${
-                      reg ? "bg-primary/10 text-primary" : "bg-foreground text-background"
-                    }`}
-                  >
-                    {reg ? "✓ Inscrit" : "Inscrire un enfant"}
-                  </button>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
+        <div className="-mx-1 mt-2 flex gap-3 overflow-x-auto px-1 pb-1">
+          {registered.map((k) => (
+            <div key={k.name} className="w-24 shrink-0 rounded-2xl border border-border/60 bg-card p-2 text-center">
+              <img src={k.avatar} alt="" className="mx-auto h-16 w-16 rounded-full object-cover ring-2 ring-primary/25" />
+              <p className="mt-1.5 line-clamp-1 text-xs font-bold">{k.name}</p>
+              <p className="text-[9px] text-muted-foreground">{k.age} ans</p>
+              <p className="mt-1 truncate rounded-full bg-secondary/60 px-1.5 py-0.5 text-[9px]">{k.diet}</p>
+              {k.allergies !== "—" && (
+                <p className="mt-0.5 text-[9px] text-rose-600">⚠ {k.allergies}</p>
+              )}
+            </div>
+          ))}
+        </div>
       </section>
 
-      <section className="px-4 pt-8">
-        <div className="mb-3 flex items-baseline justify-between">
-          <h2 className="font-serif text-lg">Enfants attendus</h2>
-          <span className="text-[11px] text-muted-foreground">{kids.length} inscrits</span>
+      <section className="mt-6 px-4">
+        <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+          <Clock className="h-3.5 w-3.5 text-primary" /> Programme
         </div>
-        <ul className="space-y-2">
-          {kids.map((k) => (
-            <li key={k.id} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card p-3">
-              <img src={k.avatar} alt="" className="h-11 w-11 rounded-full object-cover ring-2 ring-primary/20" />
-              <div className="min-w-0 flex-1">
-                <div className="flex items-baseline gap-2">
-                  <p className="text-sm font-medium">{k.name}</p>
-                  <span className="text-[10px] text-muted-foreground">{k.age} ans</span>
+        <ul className="relative mt-3 space-y-2 border-l border-dashed border-primary/30 pl-4">
+          {timeline.map((t) => (
+            <li key={t.label} className="relative">
+              <span className="absolute -left-[21px] top-3 h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-background" />
+              <div className="flex items-center gap-3 rounded-2xl bg-card p-3 ring-1 ring-border/60">
+                <span className={`shrink-0 rounded-full px-2.5 py-1 font-mono text-[10px] font-bold ${t.color}`}>
+                  {t.time}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[13px] font-semibold">{t.label}</p>
+                  <p className="text-[10px] text-muted-foreground">{t.place}</p>
                 </div>
-                <p className="truncate text-[11px] text-muted-foreground">Parents · {k.parents}</p>
-                {k.needs.length > 0 && (
-                  <div className="mt-1.5 flex flex-wrap gap-1">
-                    {k.needs.map((n) => (
-                      <span key={n} className="rounded-full bg-primary/10 px-2 py-0.5 text-[9px] font-semibold text-primary">
-                        {n}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </div>
             </li>
           ))}
         </ul>
       </section>
 
-      <section className="mx-4 mt-8 rounded-3xl border border-border/60 bg-card p-5">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary">
-          <Clock className="h-3.5 w-3.5" /> Espace repos
+      <section className="mt-6 px-4">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Activités à télécharger</p>
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          {activities.map((a) => (
+            <div key={a.title} className={`overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br ${a.tint} p-4`}>
+              <div className="text-4xl">{a.emoji}</div>
+              <p className="mt-2 font-serif text-base leading-tight">{a.title}</p>
+              <p className="mt-1 text-[10px] text-muted-foreground">{a.desc}</p>
+              <button className="mt-3 w-full rounded-full bg-foreground py-1.5 text-[10px] font-bold text-background">
+                {a.cta}
+              </button>
+            </div>
+          ))}
         </div>
-        <p className="mt-2 font-serif text-lg">Une salle calme est disponible</p>
-        <p className="mt-1 text-xs text-muted-foreground">
-          Chambre au rez-de-chaussée équipée de lits parapluies, table à langer et lumières tamisées. Ouverte toute la journée.
-        </p>
       </section>
+
+      <section className="mt-6 px-4">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">L'équipe qui veille</p>
+        <ul className="mt-2 space-y-2">
+          {staff.map((s) => (
+            <li key={s.name} className="flex items-center gap-3 rounded-2xl bg-card p-3 ring-1 ring-border/60">
+              <img src={s.avatar} alt="" className="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-emerald-300" />
+              <div className="min-w-0 flex-1">
+                <p className="text-[13px] font-semibold">{s.name}</p>
+                <p className="text-[10px] text-muted-foreground">{s.role} · {s.exp} d'expérience</p>
+              </div>
+              <button className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground" aria-label="Appeler">
+                <Phone className="h-4 w-4" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mx-4 mt-6 rounded-3xl border border-primary/25 bg-primary/5 p-5">
+        <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-primary">
+          <Sparkles className="h-3.5 w-3.5" /> Menu enfants
+        </div>
+        <p className="mt-2 font-serif text-lg leading-tight">Un festin pensé pour les petits palais</p>
+        <ul className="mt-3 space-y-1.5 text-[12px]">
+          <li className="flex justify-between rounded-xl bg-background px-3 py-2 ring-1 ring-border/60">
+            <span>🍝 Mini-lasagnes maison</span>
+            <span className="text-[10px] text-muted-foreground">18 h</span>
+          </li>
+          <li className="flex justify-between rounded-xl bg-background px-3 py-2 ring-1 ring-border/60">
+            <span>🥕 Bâtonnets de légumes & houmous</span>
+            <span className="text-[10px] text-muted-foreground">17 h</span>
+          </li>
+          <li className="flex justify-between rounded-xl bg-background px-3 py-2 ring-1 ring-border/60">
+            <span>🧁 Cupcakes licorne</span>
+            <span className="text-[10px] text-muted-foreground">19 h</span>
+          </li>
+        </ul>
+      </section>
+
+      <div className="mx-4 mt-6 flex items-center gap-3 rounded-3xl bg-rose-50 p-4 text-[11px] text-rose-900">
+        <Heart className="h-5 w-5 shrink-0 fill-rose-500 text-rose-500" />
+        <p>En cas de pépin, un SMS automatique est envoyé au parent référent. Bouton rouge sur la carte du domaine.</p>
+      </div>
     </div>
   );
 }
