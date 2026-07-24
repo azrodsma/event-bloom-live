@@ -110,8 +110,10 @@ function Messages() {
         <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Conversations</p>
         <div className="space-y-1">
           {threads.map((t) => (
-            <div
+            <Link
               key={t.id}
+              to="/app/messages/$id"
+              params={{ id: t.id }}
               className="flex cursor-pointer items-center gap-3 rounded-2xl p-2.5 transition-colors hover:bg-surface"
             >
               <div className="relative shrink-0">
@@ -136,7 +138,7 @@ function Messages() {
                 </div>
                 <p className={`truncate text-xs ${t.unread > 0 ? "font-medium text-foreground" : "text-muted-foreground"}`}>{t.last}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
