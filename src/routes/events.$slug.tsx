@@ -14,7 +14,11 @@ import {
   ExternalLink,
   BarChart3,
   Clock,
+  CheckSquare,
+  Music2,
+  LayoutGrid,
 } from "lucide-react";
+
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/events/$slug")({
@@ -242,6 +246,45 @@ function EventPage() {
           </div>
           <span className="text-muted-foreground">→</span>
         </Link>
+
+        {/* Modules d'organisation */}
+        <div className="grid grid-cols-3 gap-3">
+          <Link
+            to="/events/$slug/checklist"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/10 text-primary">
+              <CheckSquare className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Checklist</p>
+            <p className="text-[10px] text-muted-foreground">4/10 faits</p>
+          </Link>
+          <Link
+            to="/events/$slug/playlist"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-accent/30 text-foreground">
+              <Music2 className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Playlist</p>
+            <p className="text-[10px] text-muted-foreground">8 morceaux</p>
+          </Link>
+          <Link
+            to="/events/$slug/seating"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-secondary text-foreground">
+              <LayoutGrid className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Plan de table</p>
+            <p className="text-[10px] text-muted-foreground">5 tables</p>
+          </Link>
+        </div>
+
+
 
 
         {/* Venue */}
