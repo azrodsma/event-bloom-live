@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as LegalRouteImport } from './routes/legal'
 import { Route as JoinRouteImport } from './routes/join'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/app'
@@ -54,11 +55,13 @@ import { Route as EventsSlugGiftsReceivedRouteImport } from './routes/events.$sl
 import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugDresscodeRouteImport } from './routes/events.$slug.dresscode'
+import { Route as EventsSlugDisplayRouteImport } from './routes/events.$slug.display'
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
 import { Route as EventsSlugCheckinRouteImport } from './routes/events.$slug.checkin'
 import { Route as EventsSlugCarpoolRouteImport } from './routes/events.$slug.carpool'
+import { Route as EventsSlugCamerasRouteImport } from './routes/events.$slug.cameras'
 import { Route as EventsSlugBudgetRouteImport } from './routes/events.$slug.budget'
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
 import { Route as EventsSlugActivityRouteImport } from './routes/events.$slug.activity'
@@ -72,6 +75,11 @@ import { Route as EventsSlugGuestbookNewRouteImport } from './routes/events.$slu
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JoinRoute = JoinRouteImport.update({
@@ -294,6 +302,11 @@ const EventsSlugDresscodeRoute = EventsSlugDresscodeRouteImport.update({
   path: '/dresscode',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugDisplayRoute = EventsSlugDisplayRouteImport.update({
+  id: '/display',
+  path: '/display',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugDashboardRoute = EventsSlugDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -317,6 +330,11 @@ const EventsSlugCheckinRoute = EventsSlugCheckinRouteImport.update({
 const EventsSlugCarpoolRoute = EventsSlugCarpoolRouteImport.update({
   id: '/carpool',
   path: '/carpool',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugCamerasRoute = EventsSlugCamerasRouteImport.update({
+  id: '/cameras',
+  path: '/cameras',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugBudgetRoute = EventsSlugBudgetRouteImport.update({
@@ -370,6 +388,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/join': typeof JoinRoute
+  '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
@@ -396,11 +415,13 @@ export interface FileRoutesByFullPath {
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
+  '/events/$slug/cameras': typeof EventsSlugCamerasRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -430,6 +451,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/join': typeof JoinRoute
+  '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
@@ -456,11 +478,13 @@ export interface FileRoutesByTo {
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
+  '/events/$slug/cameras': typeof EventsSlugCamerasRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -492,6 +516,7 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/join': typeof JoinRoute
+  '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
@@ -518,11 +543,13 @@ export interface FileRoutesById {
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
+  '/events/$slug/cameras': typeof EventsSlugCamerasRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -555,6 +582,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/join'
+    | '/legal'
     | '/onboarding'
     | '/app/achievements'
     | '/app/agenda'
@@ -581,11 +609,13 @@ export interface FileRouteTypes {
     | '/events/$slug/activity'
     | '/events/$slug/album'
     | '/events/$slug/budget'
+    | '/events/$slug/cameras'
     | '/events/$slug/carpool'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/contributors'
     | '/events/$slug/dashboard'
+    | '/events/$slug/display'
     | '/events/$slug/dresscode'
     | '/events/$slug/edit'
     | '/events/$slug/faq'
@@ -615,6 +645,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/join'
+    | '/legal'
     | '/onboarding'
     | '/app/achievements'
     | '/app/agenda'
@@ -641,11 +672,13 @@ export interface FileRouteTypes {
     | '/events/$slug/activity'
     | '/events/$slug/album'
     | '/events/$slug/budget'
+    | '/events/$slug/cameras'
     | '/events/$slug/carpool'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/contributors'
     | '/events/$slug/dashboard'
+    | '/events/$slug/display'
     | '/events/$slug/dresscode'
     | '/events/$slug/edit'
     | '/events/$slug/faq'
@@ -676,6 +709,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/join'
+    | '/legal'
     | '/onboarding'
     | '/app/achievements'
     | '/app/agenda'
@@ -702,11 +736,13 @@ export interface FileRouteTypes {
     | '/events/$slug/activity'
     | '/events/$slug/album'
     | '/events/$slug/budget'
+    | '/events/$slug/cameras'
     | '/events/$slug/carpool'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/contributors'
     | '/events/$slug/dashboard'
+    | '/events/$slug/display'
     | '/events/$slug/dresscode'
     | '/events/$slug/edit'
     | '/events/$slug/faq'
@@ -738,6 +774,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
   JoinRoute: typeof JoinRoute
+  LegalRoute: typeof LegalRoute
   OnboardingRoute: typeof OnboardingRoute
   EventsSlugRoute: typeof EventsSlugRouteWithChildren
   StoriesSlugRoute: typeof StoriesSlugRoute
@@ -750,6 +787,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/join': {
@@ -1060,6 +1104,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugDresscodeRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/display': {
+      id: '/events/$slug/display'
+      path: '/display'
+      fullPath: '/events/$slug/display'
+      preLoaderRoute: typeof EventsSlugDisplayRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/dashboard': {
       id: '/events/$slug/dashboard'
       path: '/dashboard'
@@ -1093,6 +1144,13 @@ declare module '@tanstack/react-router' {
       path: '/carpool'
       fullPath: '/events/$slug/carpool'
       preLoaderRoute: typeof EventsSlugCarpoolRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/cameras': {
+      id: '/events/$slug/cameras'
+      path: '/cameras'
+      fullPath: '/events/$slug/cameras'
+      preLoaderRoute: typeof EventsSlugCamerasRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/budget': {
@@ -1256,11 +1314,13 @@ interface EventsSlugRouteChildren {
   EventsSlugActivityRoute: typeof EventsSlugActivityRoute
   EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
   EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
+  EventsSlugCamerasRoute: typeof EventsSlugCamerasRoute
   EventsSlugCarpoolRoute: typeof EventsSlugCarpoolRoute
   EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
+  EventsSlugDisplayRoute: typeof EventsSlugDisplayRoute
   EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
   EventsSlugFaqRoute: typeof EventsSlugFaqRoute
@@ -1289,11 +1349,13 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugActivityRoute: EventsSlugActivityRoute,
   EventsSlugAlbumRoute: EventsSlugAlbumRoute,
   EventsSlugBudgetRoute: EventsSlugBudgetRoute,
+  EventsSlugCamerasRoute: EventsSlugCamerasRoute,
   EventsSlugCarpoolRoute: EventsSlugCarpoolRoute,
   EventsSlugCheckinRoute: EventsSlugCheckinRoute,
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
+  EventsSlugDisplayRoute: EventsSlugDisplayRoute,
   EventsSlugDresscodeRoute: EventsSlugDresscodeRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
   EventsSlugFaqRoute: EventsSlugFaqRoute,
@@ -1327,6 +1389,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
   JoinRoute: JoinRoute,
+  LegalRoute: LegalRoute,
   OnboardingRoute: OnboardingRoute,
   EventsSlugRoute: EventsSlugRouteWithChildren,
   StoriesSlugRoute: StoriesSlugRoute,
