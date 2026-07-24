@@ -81,9 +81,13 @@ function Guestbook() {
                 </button>
               ))}
             </div>
-            <button className="rounded-full bg-gradient-primary px-5 py-2 text-sm font-semibold text-white shadow-glow">
+            <Link
+              to="/events/$slug/guestbook/new"
+              params={{ slug: event.slug }}
+              className="rounded-full bg-gradient-primary px-5 py-2 text-sm font-semibold text-white shadow-glow"
+            >
               Publier
-            </button>
+            </Link>
           </div>
         </div>
 

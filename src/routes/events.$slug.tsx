@@ -12,7 +12,7 @@ import {
   Gift,
   Users,
   ExternalLink,
-} from "lucide-react";
+  BarChart3,
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/events/$slug")({
