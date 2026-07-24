@@ -324,6 +324,10 @@ function EventPage() {
           >
             <div className="grid h-10 w-10 place-items-center rounded-2xl bg-foreground text-background">
               <QrCode className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Check-in</p>
+            <p className="text-[10px] text-muted-foreground">QR code</p>
+          </Link>
         </div>
 
         <div className="grid grid-cols-3 gap-3">
@@ -364,6 +368,42 @@ function EventPage() {
 
         <div className="grid grid-cols-3 gap-3">
           <Link
+            to="/events/$slug/carpool"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/15 text-primary">
+              <Car className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Covoiturage</p>
+            <p className="text-[10px] text-muted-foreground">4 trajets</p>
+          </Link>
+          <Link
+            to="/events/$slug/speeches"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-accent/40 text-foreground">
+              <Mic2 className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Discours</p>
+            <p className="text-[10px] text-muted-foreground">5 · 29 min</p>
+          </Link>
+          <Link
+            to="/events/$slug/kids"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-secondary text-foreground">
+              <Baby className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Enfants</p>
+            <p className="text-[10px] text-muted-foreground">5 petits</p>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-3 gap-3">
+          <Link
             to="/events/$slug/photobooth"
             params={{ slug: event.slug }}
             className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
@@ -397,10 +437,8 @@ function EventPage() {
             <p className="text-[10px] text-muted-foreground">Journal</p>
           </Link>
         </div>
-            <p className="font-serif text-sm leading-tight">Check-in</p>
-            <p className="text-[10px] text-muted-foreground">QR code</p>
-          </Link>
-        </div>
+
+
 
 
 
