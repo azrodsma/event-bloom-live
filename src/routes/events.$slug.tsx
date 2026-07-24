@@ -24,6 +24,9 @@ import {
   Sparkles,
   MailCheck,
   PackageOpen,
+  Car,
+  Mic2,
+  Baby,
 } from "lucide-react";
 
 
