@@ -31,6 +31,7 @@ import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
+import { Route as AppMoodGeneratorRouteImport } from './routes/app.mood-generator'
 import { Route as AppMomentsRouteImport } from './routes/app.moments'
 import { Route as AppMessagesRouteImport } from './routes/app.messages'
 import { Route as AppMemoriesMapRouteImport } from './routes/app.memories-map'
@@ -75,8 +76,10 @@ import { Route as EventsSlugPrintShopRouteImport } from './routes/events.$slug.p
 import { Route as EventsSlugPressRouteImport } from './routes/events.$slug.press'
 import { Route as EventsSlugPollsRouteImport } from './routes/events.$slug.polls'
 import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.playlist'
+import { Route as EventsSlugPhotoshootRouteImport } from './routes/events.$slug.photoshoot'
 import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.photobooth'
 import { Route as EventsSlugPhotoChallengesRouteImport } from './routes/events.$slug.photo-challenges'
+import { Route as EventsSlugPetsRouteImport } from './routes/events.$slug.pets'
 import { Route as EventsSlugModerationRouteImport } from './routes/events.$slug.moderation'
 import { Route as EventsSlugMenuRouteImport } from './routes/events.$slug.menu'
 import { Route as EventsSlugMapRouteImport } from './routes/events.$slug.map'
@@ -230,6 +233,11 @@ const AppPremiumRoute = AppPremiumRouteImport.update({
 const AppNotificationsRoute = AppNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMoodGeneratorRoute = AppMoodGeneratorRouteImport.update({
+  id: '/mood-generator',
+  path: '/mood-generator',
   getParentRoute: () => AppRoute,
 } as any)
 const AppMomentsRoute = AppMomentsRouteImport.update({
@@ -452,6 +460,11 @@ const EventsSlugPlaylistRoute = EventsSlugPlaylistRouteImport.update({
   path: '/playlist',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugPhotoshootRoute = EventsSlugPhotoshootRouteImport.update({
+  id: '/photoshoot',
+  path: '/photoshoot',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugPhotoboothRoute = EventsSlugPhotoboothRouteImport.update({
   id: '/photobooth',
   path: '/photobooth',
@@ -463,6 +476,11 @@ const EventsSlugPhotoChallengesRoute =
     path: '/photo-challenges',
     getParentRoute: () => EventsSlugRoute,
   } as any)
+const EventsSlugPetsRoute = EventsSlugPetsRouteImport.update({
+  id: '/pets',
+  path: '/pets',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugModerationRoute = EventsSlugModerationRouteImport.update({
   id: '/moderation',
   path: '/moderation',
@@ -713,6 +731,7 @@ export interface FileRoutesByFullPath {
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
+  '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
@@ -770,8 +789,10 @@ export interface FileRoutesByFullPath {
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
+  '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
+  '/events/$slug/photoshoot': typeof EventsSlugPhotoshootRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
@@ -826,6 +847,7 @@ export interface FileRoutesByTo {
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
+  '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
@@ -883,8 +905,10 @@ export interface FileRoutesByTo {
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
+  '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
+  '/events/$slug/photoshoot': typeof EventsSlugPhotoshootRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
@@ -941,6 +965,7 @@ export interface FileRoutesById {
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
+  '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
@@ -998,8 +1023,10 @@ export interface FileRoutesById {
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
+  '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
+  '/events/$slug/photoshoot': typeof EventsSlugPhotoshootRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
@@ -1057,6 +1084,7 @@ export interface FileRouteTypes {
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
+    | '/app/mood-generator'
     | '/app/notifications'
     | '/app/premium'
     | '/app/profile'
@@ -1114,8 +1142,10 @@ export interface FileRouteTypes {
     | '/events/$slug/map'
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
+    | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photobooth'
+    | '/events/$slug/photoshoot'
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
     | '/events/$slug/press'
@@ -1170,6 +1200,7 @@ export interface FileRouteTypes {
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
+    | '/app/mood-generator'
     | '/app/notifications'
     | '/app/premium'
     | '/app/profile'
@@ -1227,8 +1258,10 @@ export interface FileRouteTypes {
     | '/events/$slug/map'
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
+    | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photobooth'
+    | '/events/$slug/photoshoot'
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
     | '/events/$slug/press'
@@ -1284,6 +1317,7 @@ export interface FileRouteTypes {
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
+    | '/app/mood-generator'
     | '/app/notifications'
     | '/app/premium'
     | '/app/profile'
@@ -1341,8 +1375,10 @@ export interface FileRouteTypes {
     | '/events/$slug/map'
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
+    | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photobooth'
+    | '/events/$slug/photoshoot'
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
     | '/events/$slug/press'
@@ -1535,6 +1571,13 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/app/notifications'
       preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/mood-generator': {
+      id: '/app/mood-generator'
+      path: '/mood-generator'
+      fullPath: '/app/mood-generator'
+      preLoaderRoute: typeof AppMoodGeneratorRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/moments': {
@@ -1845,6 +1888,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugPlaylistRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/photoshoot': {
+      id: '/events/$slug/photoshoot'
+      path: '/photoshoot'
+      fullPath: '/events/$slug/photoshoot'
+      preLoaderRoute: typeof EventsSlugPhotoshootRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/photobooth': {
       id: '/events/$slug/photobooth'
       path: '/photobooth'
@@ -1857,6 +1907,13 @@ declare module '@tanstack/react-router' {
       path: '/photo-challenges'
       fullPath: '/events/$slug/photo-challenges'
       preLoaderRoute: typeof EventsSlugPhotoChallengesRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/pets': {
+      id: '/events/$slug/pets'
+      path: '/pets'
+      fullPath: '/events/$slug/pets'
+      preLoaderRoute: typeof EventsSlugPetsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/moderation': {
@@ -2217,6 +2274,7 @@ interface AppRouteChildren {
   AppMemoriesMapRoute: typeof AppMemoriesMapRoute
   AppMessagesRoute: typeof AppMessagesRouteWithChildren
   AppMomentsRoute: typeof AppMomentsRoute
+  AppMoodGeneratorRoute: typeof AppMoodGeneratorRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppPremiumRoute: typeof AppPremiumRoute
   AppProfileRoute: typeof AppProfileRoute
@@ -2258,6 +2316,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppMemoriesMapRoute: AppMemoriesMapRoute,
   AppMessagesRoute: AppMessagesRouteWithChildren,
   AppMomentsRoute: AppMomentsRoute,
+  AppMoodGeneratorRoute: AppMoodGeneratorRoute,
   AppNotificationsRoute: AppNotificationsRoute,
   AppPremiumRoute: AppPremiumRoute,
   AppProfileRoute: AppProfileRoute,
@@ -2341,8 +2400,10 @@ interface EventsSlugRouteChildren {
   EventsSlugMapRoute: typeof EventsSlugMapRoute
   EventsSlugMenuRoute: typeof EventsSlugMenuRoute
   EventsSlugModerationRoute: typeof EventsSlugModerationRoute
+  EventsSlugPetsRoute: typeof EventsSlugPetsRoute
   EventsSlugPhotoChallengesRoute: typeof EventsSlugPhotoChallengesRoute
   EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
+  EventsSlugPhotoshootRoute: typeof EventsSlugPhotoshootRoute
   EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
   EventsSlugPollsRoute: typeof EventsSlugPollsRoute
   EventsSlugPressRoute: typeof EventsSlugPressRoute
@@ -2405,8 +2466,10 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugMapRoute: EventsSlugMapRoute,
   EventsSlugMenuRoute: EventsSlugMenuRoute,
   EventsSlugModerationRoute: EventsSlugModerationRoute,
+  EventsSlugPetsRoute: EventsSlugPetsRoute,
   EventsSlugPhotoChallengesRoute: EventsSlugPhotoChallengesRoute,
   EventsSlugPhotoboothRoute: EventsSlugPhotoboothRoute,
+  EventsSlugPhotoshootRoute: EventsSlugPhotoshootRoute,
   EventsSlugPlaylistRoute: EventsSlugPlaylistRoute,
   EventsSlugPollsRoute: EventsSlugPollsRoute,
   EventsSlugPressRoute: EventsSlugPressRoute,
