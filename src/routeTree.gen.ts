@@ -33,6 +33,7 @@ import { Route as AppHelpRouteImport } from './routes/app.help'
 import { Route as AppGiftIdeasRouteImport } from './routes/app.gift-ideas'
 import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
 import { Route as AppExploreRouteImport } from './routes/app.explore'
+import { Route as AppDraftsRouteImport } from './routes/app.drafts'
 import { Route as AppCreateRouteImport } from './routes/app.create'
 import { Route as AppCommunityRouteImport } from './routes/app.community'
 import { Route as AppCareRouteImport } from './routes/app.care'
@@ -52,6 +53,7 @@ import { Route as EventsSlugPollsRouteImport } from './routes/events.$slug.polls
 import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.playlist'
 import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.photobooth'
 import { Route as EventsSlugModerationRouteImport } from './routes/events.$slug.moderation'
+import { Route as EventsSlugMenuRouteImport } from './routes/events.$slug.menu'
 import { Route as EventsSlugMapRouteImport } from './routes/events.$slug.map'
 import { Route as EventsSlugLiveAnalyticsRouteImport } from './routes/events.$slug.live-analytics'
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
@@ -80,6 +82,7 @@ import { Route as AppPostsIdRouteImport } from './routes/app.posts.$id'
 import { Route as AppMessagesIdRouteImport } from './routes/app.messages.$id'
 import { Route as EventsSlugLiveSetupRouteImport } from './routes/events.$slug.live.setup'
 import { Route as EventsSlugGuestbookNewRouteImport } from './routes/events.$slug.guestbook.new'
+import { Route as EventsSlugGuestbookIdRouteImport } from './routes/events.$slug.guestbook.$id'
 
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
@@ -201,6 +204,11 @@ const AppExploreRoute = AppExploreRouteImport.update({
   path: '/explore',
   getParentRoute: () => AppRoute,
 } as any)
+const AppDraftsRoute = AppDraftsRouteImport.update({
+  id: '/drafts',
+  path: '/drafts',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCreateRoute = AppCreateRouteImport.update({
   id: '/create',
   path: '/create',
@@ -294,6 +302,11 @@ const EventsSlugPhotoboothRoute = EventsSlugPhotoboothRouteImport.update({
 const EventsSlugModerationRoute = EventsSlugModerationRouteImport.update({
   id: '/moderation',
   path: '/moderation',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugMenuRoute = EventsSlugMenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugMapRoute = EventsSlugMapRouteImport.update({
@@ -436,6 +449,11 @@ const EventsSlugGuestbookNewRoute = EventsSlugGuestbookNewRouteImport.update({
   path: '/new',
   getParentRoute: () => EventsSlugGuestbookRoute,
 } as any)
+const EventsSlugGuestbookIdRoute = EventsSlugGuestbookIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => EventsSlugGuestbookRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -449,6 +467,7 @@ export interface FileRoutesByFullPath {
   '/app/care': typeof AppCareRoute
   '/app/community': typeof AppCommunityRoute
   '/app/create': typeof AppCreateRoute
+  '/app/drafts': typeof AppDraftsRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
@@ -493,6 +512,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
   '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
   '/events/$slug/map': typeof EventsSlugMapRoute
+  '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
@@ -507,6 +527,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
 }
@@ -521,6 +542,7 @@ export interface FileRoutesByTo {
   '/app/care': typeof AppCareRoute
   '/app/community': typeof AppCommunityRoute
   '/app/create': typeof AppCreateRoute
+  '/app/drafts': typeof AppDraftsRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
@@ -565,6 +587,7 @@ export interface FileRoutesByTo {
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
   '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
   '/events/$slug/map': typeof EventsSlugMapRoute
+  '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
@@ -579,6 +602,7 @@ export interface FileRoutesByTo {
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
 }
@@ -595,6 +619,7 @@ export interface FileRoutesById {
   '/app/care': typeof AppCareRoute
   '/app/community': typeof AppCommunityRoute
   '/app/create': typeof AppCreateRoute
+  '/app/drafts': typeof AppDraftsRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
@@ -639,6 +664,7 @@ export interface FileRoutesById {
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
   '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
   '/events/$slug/map': typeof EventsSlugMapRoute
+  '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
@@ -653,6 +679,7 @@ export interface FileRoutesById {
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
 }
@@ -670,6 +697,7 @@ export interface FileRouteTypes {
     | '/app/care'
     | '/app/community'
     | '/app/create'
+    | '/app/drafts'
     | '/app/explore'
     | '/app/favorites'
     | '/app/gift-ideas'
@@ -714,6 +742,7 @@ export interface FileRouteTypes {
     | '/events/$slug/live'
     | '/events/$slug/live-analytics'
     | '/events/$slug/map'
+    | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
@@ -728,6 +757,7 @@ export interface FileRouteTypes {
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
     | '/events/$slug/weather'
+    | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
   fileRoutesByTo: FileRoutesByTo
@@ -742,6 +772,7 @@ export interface FileRouteTypes {
     | '/app/care'
     | '/app/community'
     | '/app/create'
+    | '/app/drafts'
     | '/app/explore'
     | '/app/favorites'
     | '/app/gift-ideas'
@@ -786,6 +817,7 @@ export interface FileRouteTypes {
     | '/events/$slug/live'
     | '/events/$slug/live-analytics'
     | '/events/$slug/map'
+    | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
@@ -800,6 +832,7 @@ export interface FileRouteTypes {
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
     | '/events/$slug/weather'
+    | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
   id:
@@ -815,6 +848,7 @@ export interface FileRouteTypes {
     | '/app/care'
     | '/app/community'
     | '/app/create'
+    | '/app/drafts'
     | '/app/explore'
     | '/app/favorites'
     | '/app/gift-ideas'
@@ -859,6 +893,7 @@ export interface FileRouteTypes {
     | '/events/$slug/live'
     | '/events/$slug/live-analytics'
     | '/events/$slug/map'
+    | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
@@ -873,6 +908,7 @@ export interface FileRouteTypes {
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
     | '/events/$slug/weather'
+    | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
   fileRoutesById: FileRoutesById
@@ -1058,6 +1094,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppExploreRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/drafts': {
+      id: '/app/drafts'
+      path: '/drafts'
+      fullPath: '/app/drafts'
+      preLoaderRoute: typeof AppDraftsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/create': {
       id: '/app/create'
       path: '/create'
@@ -1189,6 +1232,13 @@ declare module '@tanstack/react-router' {
       path: '/moderation'
       fullPath: '/events/$slug/moderation'
       preLoaderRoute: typeof EventsSlugModerationRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/menu': {
+      id: '/events/$slug/menu'
+      path: '/menu'
+      fullPath: '/events/$slug/menu'
+      preLoaderRoute: typeof EventsSlugMenuRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/map': {
@@ -1387,6 +1437,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugGuestbookNewRouteImport
       parentRoute: typeof EventsSlugGuestbookRoute
     }
+    '/events/$slug/guestbook/$id': {
+      id: '/events/$slug/guestbook/$id'
+      path: '/$id'
+      fullPath: '/events/$slug/guestbook/$id'
+      preLoaderRoute: typeof EventsSlugGuestbookIdRouteImport
+      parentRoute: typeof EventsSlugGuestbookRoute
+    }
   }
 }
 
@@ -1420,6 +1477,7 @@ interface AppRouteChildren {
   AppCareRoute: typeof AppCareRoute
   AppCommunityRoute: typeof AppCommunityRoute
   AppCreateRoute: typeof AppCreateRoute
+  AppDraftsRoute: typeof AppDraftsRoute
   AppExploreRoute: typeof AppExploreRoute
   AppFavoritesRoute: typeof AppFavoritesRoute
   AppGiftIdeasRoute: typeof AppGiftIdeasRoute
@@ -1446,6 +1504,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppCareRoute: AppCareRoute,
   AppCommunityRoute: AppCommunityRoute,
   AppCreateRoute: AppCreateRoute,
+  AppDraftsRoute: AppDraftsRoute,
   AppExploreRoute: AppExploreRoute,
   AppFavoritesRoute: AppFavoritesRoute,
   AppGiftIdeasRoute: AppGiftIdeasRoute,
@@ -1469,10 +1528,12 @@ const AppRouteChildren: AppRouteChildren = {
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface EventsSlugGuestbookRouteChildren {
+  EventsSlugGuestbookIdRoute: typeof EventsSlugGuestbookIdRoute
   EventsSlugGuestbookNewRoute: typeof EventsSlugGuestbookNewRoute
 }
 
 const EventsSlugGuestbookRouteChildren: EventsSlugGuestbookRouteChildren = {
+  EventsSlugGuestbookIdRoute: EventsSlugGuestbookIdRoute,
   EventsSlugGuestbookNewRoute: EventsSlugGuestbookNewRoute,
 }
 
@@ -1514,6 +1575,7 @@ interface EventsSlugRouteChildren {
   EventsSlugLiveRoute: typeof EventsSlugLiveRouteWithChildren
   EventsSlugLiveAnalyticsRoute: typeof EventsSlugLiveAnalyticsRoute
   EventsSlugMapRoute: typeof EventsSlugMapRoute
+  EventsSlugMenuRoute: typeof EventsSlugMenuRoute
   EventsSlugModerationRoute: typeof EventsSlugModerationRoute
   EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
   EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
@@ -1553,6 +1615,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugLiveRoute: EventsSlugLiveRouteWithChildren,
   EventsSlugLiveAnalyticsRoute: EventsSlugLiveAnalyticsRoute,
   EventsSlugMapRoute: EventsSlugMapRoute,
+  EventsSlugMenuRoute: EventsSlugMenuRoute,
   EventsSlugModerationRoute: EventsSlugModerationRoute,
   EventsSlugPhotoboothRoute: EventsSlugPhotoboothRoute,
   EventsSlugPlaylistRoute: EventsSlugPlaylistRoute,
@@ -1586,3 +1649,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
