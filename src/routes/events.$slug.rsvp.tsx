@@ -81,7 +81,7 @@ function Rsvp() {
         <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Vous êtes invité·e à</p>
         <h1 className="mt-2 font-serif text-3xl leading-tight">{event?.title ?? "Notre événement"}</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {event ? new Date(event.startDate).toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""}
+          {event ? new Date(event.date).toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""}
         </p>
       </section>
 
