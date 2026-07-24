@@ -281,7 +281,13 @@ function EventPage() {
           >
             <div className="grid h-10 w-10 place-items-center rounded-2xl bg-secondary text-foreground">
               <LayoutGrid className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Plan de table</p>
+            <p className="text-[10px] text-muted-foreground">5 tables</p>
+          </Link>
         </div>
+
+
 
         <div className="grid grid-cols-3 gap-3">
           <Link
