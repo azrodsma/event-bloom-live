@@ -28,6 +28,7 @@ import { Route as AppTimeCapsuleRouteImport } from './routes/app.time-capsule'
 import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
 import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppSecurityRouteImport } from './routes/app.security'
 import { Route as AppRemindersRouteImport } from './routes/app.reminders'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
@@ -69,6 +70,7 @@ import { Route as EventsSlugThankYouCardsRouteImport } from './routes/events.$sl
 import { Route as EventsSlugTastingsRouteImport } from './routes/events.$slug.tastings'
 import { Route as EventsSlugSurprisesRouteImport } from './routes/events.$slug.surprises'
 import { Route as EventsSlugSpeechesRouteImport } from './routes/events.$slug.speeches'
+import { Route as EventsSlugSpeechBuilderRouteImport } from './routes/events.$slug.speech-builder'
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
 import { Route as EventsSlugShuttleRouteImport } from './routes/events.$slug.shuttle'
 import { Route as EventsSlugSecurityRouteImport } from './routes/events.$slug.security'
@@ -95,6 +97,7 @@ import { Route as EventsSlugLiveAnalyticsRouteImport } from './routes/events.$sl
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugKidsRouteImport } from './routes/events.$slug.kids'
 import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invite'
+import { Route as EventsSlugIcebreakersRouteImport } from './routes/events.$slug.icebreakers'
 import { Route as EventsSlugHallOfFameRouteImport } from './routes/events.$slug.hall-of-fame'
 import { Route as EventsSlugGuidesRouteImport } from './routes/events.$slug.guides'
 import { Route as EventsSlugGuestsRouteImport } from './routes/events.$slug.guests'
@@ -230,6 +233,11 @@ const AppSoundsRoute = AppSoundsRouteImport.update({
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSecurityRoute = AppSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
   getParentRoute: () => AppRoute,
 } as any)
 const AppRemindersRoute = AppRemindersRouteImport.update({
@@ -437,6 +445,11 @@ const EventsSlugSpeechesRoute = EventsSlugSpeechesRouteImport.update({
   path: '/speeches',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugSpeechBuilderRoute = EventsSlugSpeechBuilderRouteImport.update({
+  id: '/speech-builder',
+  path: '/speech-builder',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugSouvenirRoute = EventsSlugSouvenirRouteImport.update({
   id: '/souvenir',
   path: '/souvenir',
@@ -566,6 +579,11 @@ const EventsSlugKidsRoute = EventsSlugKidsRouteImport.update({
 const EventsSlugInviteRoute = EventsSlugInviteRouteImport.update({
   id: '/invite',
   path: '/invite',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugIcebreakersRoute = EventsSlugIcebreakersRouteImport.update({
+  id: '/icebreakers',
+  path: '/icebreakers',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugHallOfFameRoute = EventsSlugHallOfFameRouteImport.update({
@@ -811,6 +829,7 @@ export interface FileRoutesByFullPath {
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
   '/app/reminders': typeof AppRemindersRoute
+  '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
@@ -862,6 +881,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
+  '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -888,6 +908,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
+  '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
@@ -939,6 +960,7 @@ export interface FileRoutesByTo {
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
   '/app/reminders': typeof AppRemindersRoute
+  '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
@@ -990,6 +1012,7 @@ export interface FileRoutesByTo {
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
+  '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -1016,6 +1039,7 @@ export interface FileRoutesByTo {
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
+  '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
@@ -1069,6 +1093,7 @@ export interface FileRoutesById {
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
   '/app/reminders': typeof AppRemindersRoute
+  '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
@@ -1120,6 +1145,7 @@ export interface FileRoutesById {
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
+  '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -1146,6 +1172,7 @@ export interface FileRoutesById {
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
+  '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
@@ -1200,6 +1227,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/referral'
     | '/app/reminders'
+    | '/app/security'
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
@@ -1251,6 +1279,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guests'
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
+    | '/events/$slug/icebreakers'
     | '/events/$slug/invite'
     | '/events/$slug/kids'
     | '/events/$slug/live'
@@ -1277,6 +1306,7 @@ export interface FileRouteTypes {
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
     | '/events/$slug/souvenir'
+    | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
@@ -1328,6 +1358,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/referral'
     | '/app/reminders'
+    | '/app/security'
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
@@ -1379,6 +1410,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guests'
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
+    | '/events/$slug/icebreakers'
     | '/events/$slug/invite'
     | '/events/$slug/kids'
     | '/events/$slug/live'
@@ -1405,6 +1437,7 @@ export interface FileRouteTypes {
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
     | '/events/$slug/souvenir'
+    | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
@@ -1457,6 +1490,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/referral'
     | '/app/reminders'
+    | '/app/security'
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
@@ -1508,6 +1542,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guests'
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
+    | '/events/$slug/icebreakers'
     | '/events/$slug/invite'
     | '/events/$slug/kids'
     | '/events/$slug/live'
@@ -1534,6 +1569,7 @@ export interface FileRouteTypes {
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
     | '/events/$slug/souvenir'
+    | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
@@ -1694,6 +1730,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/app/settings'
       preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/security': {
+      id: '/app/security'
+      path: '/security'
+      fullPath: '/app/security'
+      preLoaderRoute: typeof AppSecurityRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/reminders': {
@@ -1983,6 +2026,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugSpeechesRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/speech-builder': {
+      id: '/events/$slug/speech-builder'
+      path: '/speech-builder'
+      fullPath: '/events/$slug/speech-builder'
+      preLoaderRoute: typeof EventsSlugSpeechBuilderRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/souvenir': {
       id: '/events/$slug/souvenir'
       path: '/souvenir'
@@ -2163,6 +2213,13 @@ declare module '@tanstack/react-router' {
       path: '/invite'
       fullPath: '/events/$slug/invite'
       preLoaderRoute: typeof EventsSlugInviteRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/icebreakers': {
+      id: '/events/$slug/icebreakers'
+      path: '/icebreakers'
+      fullPath: '/events/$slug/icebreakers'
+      preLoaderRoute: typeof EventsSlugIcebreakersRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/hall-of-fame': {
@@ -2510,6 +2567,7 @@ interface AppRouteChildren {
   AppProfileRoute: typeof AppProfileRoute
   AppReferralRoute: typeof AppReferralRoute
   AppRemindersRoute: typeof AppRemindersRoute
+  AppSecurityRoute: typeof AppSecurityRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppSoundsRoute: typeof AppSoundsRoute
   AppStoryComposerRoute: typeof AppStoryComposerRoute
@@ -2556,6 +2614,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppProfileRoute: AppProfileRoute,
   AppReferralRoute: AppReferralRoute,
   AppRemindersRoute: AppRemindersRoute,
+  AppSecurityRoute: AppSecurityRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppSoundsRoute: AppSoundsRoute,
   AppStoryComposerRoute: AppStoryComposerRoute,
@@ -2633,6 +2692,7 @@ interface EventsSlugRouteChildren {
   EventsSlugGuestsRoute: typeof EventsSlugGuestsRoute
   EventsSlugGuidesRoute: typeof EventsSlugGuidesRoute
   EventsSlugHallOfFameRoute: typeof EventsSlugHallOfFameRoute
+  EventsSlugIcebreakersRoute: typeof EventsSlugIcebreakersRoute
   EventsSlugInviteRoute: typeof EventsSlugInviteRoute
   EventsSlugKidsRoute: typeof EventsSlugKidsRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRouteWithChildren
@@ -2659,6 +2719,7 @@ interface EventsSlugRouteChildren {
   EventsSlugSecurityRoute: typeof EventsSlugSecurityRoute
   EventsSlugShuttleRoute: typeof EventsSlugShuttleRoute
   EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
+  EventsSlugSpeechBuilderRoute: typeof EventsSlugSpeechBuilderRoute
   EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
   EventsSlugSurprisesRoute: typeof EventsSlugSurprisesRoute
   EventsSlugTastingsRoute: typeof EventsSlugTastingsRoute
@@ -2707,6 +2768,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugGuestsRoute: EventsSlugGuestsRoute,
   EventsSlugGuidesRoute: EventsSlugGuidesRoute,
   EventsSlugHallOfFameRoute: EventsSlugHallOfFameRoute,
+  EventsSlugIcebreakersRoute: EventsSlugIcebreakersRoute,
   EventsSlugInviteRoute: EventsSlugInviteRoute,
   EventsSlugKidsRoute: EventsSlugKidsRoute,
   EventsSlugLiveRoute: EventsSlugLiveRouteWithChildren,
@@ -2733,6 +2795,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugSecurityRoute: EventsSlugSecurityRoute,
   EventsSlugShuttleRoute: EventsSlugShuttleRoute,
   EventsSlugSouvenirRoute: EventsSlugSouvenirRoute,
+  EventsSlugSpeechBuilderRoute: EventsSlugSpeechBuilderRoute,
   EventsSlugSpeechesRoute: EventsSlugSpeechesRoute,
   EventsSlugSurprisesRoute: EventsSlugSurprisesRoute,
   EventsSlugTastingsRoute: EventsSlugTastingsRoute,
