@@ -19,6 +19,11 @@ import {
   LayoutGrid,
   Wallet,
   QrCode,
+  Shirt,
+  Map as MapIcon,
+  Sparkles,
+  MailCheck,
+  PackageOpen,
 } from "lucide-react";
 
 
