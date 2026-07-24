@@ -1,0 +1,72 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { EventCard } from "@/components/EventCard";
+import { mockEvents, eventTypes, eventTypeIcons } from "@/lib/mock-data";
+import { Search } from "lucide-react";
+import { useState } from "react";
+
+export const Route = createFileRoute("/app/explore")({
+  head: () => ({
+    meta: [
+      { title: "Explorer — Memento Live" },
+      { name: "description", content: "Découvrez des événements en direct et à venir." },
+    ],
+  }),
+  component: Explore,
+});
+
+function Explore() {
+  const [q, setQ] = useState("");
+  const [filter, setFilter] = useState<string | null>(null);
+
+  const filtered = mockEvents.filter((e) => {
+    if (filter && e.type !== filter) return false;
+    if (q && !`${e.title} ${e.city} ${e.type}`.toLowerCase().includes(q.toLowerCase())) return false;
+    return true;
+  });
+
+  return (
+    <div className="space-y-5 px-4 py-4">
+      <h1 className="font-serif text-3xl">Explorer</h1>
+      <div className="relative">
+        <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Rechercher un événement, une ville..."
+          className="w-full rounded-full border border-border bg-surface py-3 pl-11 pr-4 text-sm outline-none focus:border-primary"
+        />
+      </div>
+      <div className="scrollbar-hide -mx-4 flex gap-2 overflow-x-auto px-4">
+        <button
+          onClick={() => setFilter(null)}
+          className={`shrink-0 rounded-full px-4 py-2 text-xs font-medium ${
+            !filter ? "bg-foreground text-background" : "bg-surface text-muted-foreground"
+          }`}
+        >
+          Tous
+        </button>
+        {eventTypes.map((t) => (
+          <button
+            key={t}
+            onClick={() => setFilter(t === filter ? null : t)}
+            className={`shrink-0 rounded-full px-4 py-2 text-xs font-medium ${
+              t === filter ? "bg-primary text-primary-foreground" : "bg-surface text-muted-foreground"
+            }`}
+          >
+            {eventTypeIcons[t]} {t}
+          </button>
+        ))}
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {filtered.map((e) => (
+          <EventCard key={e.id} event={e} />
+        ))}
+        {filtered.length === 0 && (
+          <p className="col-span-full py-16 text-center text-sm text-muted-foreground">
+            Aucun événement trouvé.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}

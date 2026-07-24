@@ -9,38 +9,197 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as JoinRouteImport } from './routes/join'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as EventsSlugRouteImport } from './routes/events.$slug'
+import { Route as AppProfileRouteImport } from './routes/app.profile'
+import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
+import { Route as AppExploreRouteImport } from './routes/app.explore'
+import { Route as AppCreateRouteImport } from './routes/app.create'
+import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
+import { Route as EventsSlugGuestbookRouteImport } from './routes/events.$slug.guestbook'
 
+const JoinRoute = JoinRouteImport.update({
+  id: '/join',
+  path: '/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const EventsSlugRoute = EventsSlugRouteImport.update({
+  id: '/events/$slug',
+  path: '/events/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFavoritesRoute = AppFavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExploreRoute = AppExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCreateRoute = AppCreateRouteImport.update({
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => AppRoute,
+} as any)
+const EventsSlugLiveRoute = EventsSlugLiveRouteImport.update({
+  id: '/live',
+  path: '/live',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugGuestbookRoute = EventsSlugGuestbookRouteImport.update({
+  id: '/guestbook',
+  path: '/guestbook',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/join': typeof JoinRoute
+  '/app/create': typeof AppCreateRoute
+  '/app/explore': typeof AppExploreRoute
+  '/app/favorites': typeof AppFavoritesRoute
+  '/app/profile': typeof AppProfileRoute
+  '/events/$slug': typeof EventsSlugRouteWithChildren
+  '/app/': typeof AppIndexRoute
+  '/events/$slug/guestbook': typeof EventsSlugGuestbookRoute
+  '/events/$slug/live': typeof EventsSlugLiveRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/join': typeof JoinRoute
+  '/app/create': typeof AppCreateRoute
+  '/app/explore': typeof AppExploreRoute
+  '/app/favorites': typeof AppFavoritesRoute
+  '/app/profile': typeof AppProfileRoute
+  '/events/$slug': typeof EventsSlugRouteWithChildren
+  '/app': typeof AppIndexRoute
+  '/events/$slug/guestbook': typeof EventsSlugGuestbookRoute
+  '/events/$slug/live': typeof EventsSlugLiveRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/join': typeof JoinRoute
+  '/app/create': typeof AppCreateRoute
+  '/app/explore': typeof AppExploreRoute
+  '/app/favorites': typeof AppFavoritesRoute
+  '/app/profile': typeof AppProfileRoute
+  '/events/$slug': typeof EventsSlugRouteWithChildren
+  '/app/': typeof AppIndexRoute
+  '/events/$slug/guestbook': typeof EventsSlugGuestbookRoute
+  '/events/$slug/live': typeof EventsSlugLiveRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/join'
+    | '/app/create'
+    | '/app/explore'
+    | '/app/favorites'
+    | '/app/profile'
+    | '/events/$slug'
+    | '/app/'
+    | '/events/$slug/guestbook'
+    | '/events/$slug/live'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/join'
+    | '/app/create'
+    | '/app/explore'
+    | '/app/favorites'
+    | '/app/profile'
+    | '/events/$slug'
+    | '/app'
+    | '/events/$slug/guestbook'
+    | '/events/$slug/live'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/join'
+    | '/app/create'
+    | '/app/explore'
+    | '/app/favorites'
+    | '/app/profile'
+    | '/events/$slug'
+    | '/app/'
+    | '/events/$slug/guestbook'
+    | '/events/$slug/live'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  JoinRoute: typeof JoinRoute
+  EventsSlugRoute: typeof EventsSlugRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/join': {
+      id: '/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof JoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +207,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/events/$slug': {
+      id: '/events/$slug'
+      path: '/events/$slug'
+      fullPath: '/events/$slug'
+      preLoaderRoute: typeof EventsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/favorites': {
+      id: '/app/favorites'
+      path: '/favorites'
+      fullPath: '/app/favorites'
+      preLoaderRoute: typeof AppFavoritesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/explore': {
+      id: '/app/explore'
+      path: '/explore'
+      fullPath: '/app/explore'
+      preLoaderRoute: typeof AppExploreRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/create': {
+      id: '/app/create'
+      path: '/create'
+      fullPath: '/app/create'
+      preLoaderRoute: typeof AppCreateRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/events/$slug/live': {
+      id: '/events/$slug/live'
+      path: '/live'
+      fullPath: '/events/$slug/live'
+      preLoaderRoute: typeof EventsSlugLiveRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/guestbook': {
+      id: '/events/$slug/guestbook'
+      path: '/guestbook'
+      fullPath: '/events/$slug/guestbook'
+      preLoaderRoute: typeof EventsSlugGuestbookRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppCreateRoute: typeof AppCreateRoute
+  AppExploreRoute: typeof AppExploreRoute
+  AppFavoritesRoute: typeof AppFavoritesRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppCreateRoute: AppCreateRoute,
+  AppExploreRoute: AppExploreRoute,
+  AppFavoritesRoute: AppFavoritesRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
+interface EventsSlugRouteChildren {
+  EventsSlugGuestbookRoute: typeof EventsSlugGuestbookRoute
+  EventsSlugLiveRoute: typeof EventsSlugLiveRoute
+}
+
+const EventsSlugRouteChildren: EventsSlugRouteChildren = {
+  EventsSlugGuestbookRoute: EventsSlugGuestbookRoute,
+  EventsSlugLiveRoute: EventsSlugLiveRoute,
+}
+
+const EventsSlugRouteWithChildren = EventsSlugRoute._addFileChildren(
+  EventsSlugRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  AuthRoute: AuthRoute,
+  JoinRoute: JoinRoute,
+  EventsSlugRoute: EventsSlugRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
