@@ -39,6 +39,7 @@ import { Route as AppGiftIdeasRouteImport } from './routes/app.gift-ideas'
 import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
 import { Route as AppExploreRouteImport } from './routes/app.explore'
 import { Route as AppDraftsRouteImport } from './routes/app.drafts'
+import { Route as AppDiscoverRouteImport } from './routes/app.discover'
 import { Route as AppCreateRouteImport } from './routes/app.create'
 import { Route as AppCommunityRouteImport } from './routes/app.community'
 import { Route as AppCollectionsRouteImport } from './routes/app.collections'
@@ -59,6 +60,7 @@ import { Route as EventsSlugRsvpRouteImport } from './routes/events.$slug.rsvp'
 import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
 import { Route as EventsSlugRehearsalRouteImport } from './routes/events.$slug.rehearsal'
 import { Route as EventsSlugRegistryRouteImport } from './routes/events.$slug.registry'
+import { Route as EventsSlugPrintShopRouteImport } from './routes/events.$slug.print-shop'
 import { Route as EventsSlugPressRouteImport } from './routes/events.$slug.press'
 import { Route as EventsSlugPollsRouteImport } from './routes/events.$slug.polls'
 import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.playlist'
@@ -78,6 +80,7 @@ import { Route as EventsSlugGiftsReceivedRouteImport } from './routes/events.$sl
 import { Route as EventsSlugGamesRouteImport } from './routes/events.$slug.games'
 import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
+import { Route as EventsSlugEcoRouteImport } from './routes/events.$slug.eco'
 import { Route as EventsSlugDresscodeRouteImport } from './routes/events.$slug.dresscode'
 import { Route as EventsSlugDisplayRouteImport } from './routes/events.$slug.display'
 import { Route as EventsSlugDecorRouteImport } from './routes/events.$slug.decor'
@@ -252,6 +255,11 @@ const AppDraftsRoute = AppDraftsRouteImport.update({
   path: '/drafts',
   getParentRoute: () => AppRoute,
 } as any)
+const AppDiscoverRoute = AppDiscoverRouteImport.update({
+  id: '/discover',
+  path: '/discover',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCreateRoute = AppCreateRouteImport.update({
   id: '/create',
   path: '/create',
@@ -352,6 +360,11 @@ const EventsSlugRegistryRoute = EventsSlugRegistryRouteImport.update({
   path: '/registry',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugPrintShopRoute = EventsSlugPrintShopRouteImport.update({
+  id: '/print-shop',
+  path: '/print-shop',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugPressRoute = EventsSlugPressRouteImport.update({
   id: '/press',
   path: '/press',
@@ -445,6 +458,11 @@ const EventsSlugFaqRoute = EventsSlugFaqRouteImport.update({
 const EventsSlugEditRoute = EventsSlugEditRouteImport.update({
   id: '/edit',
   path: '/edit',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugEcoRoute = EventsSlugEcoRouteImport.update({
+  id: '/eco',
+  path: '/eco',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugDresscodeRoute = EventsSlugDresscodeRouteImport.update({
@@ -577,6 +595,7 @@ export interface FileRoutesByFullPath {
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
   '/app/create': typeof AppCreateRoute
+  '/app/discover': typeof AppDiscoverRoute
   '/app/drafts': typeof AppDraftsRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
@@ -621,6 +640,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
+  '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
@@ -640,6 +660,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
+  '/events/$slug/print-shop': typeof EventsSlugPrintShopRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
@@ -670,6 +691,7 @@ export interface FileRoutesByTo {
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
   '/app/create': typeof AppCreateRoute
+  '/app/discover': typeof AppDiscoverRoute
   '/app/drafts': typeof AppDraftsRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
@@ -714,6 +736,7 @@ export interface FileRoutesByTo {
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
+  '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
@@ -733,6 +756,7 @@ export interface FileRoutesByTo {
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
+  '/events/$slug/print-shop': typeof EventsSlugPrintShopRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
@@ -765,6 +789,7 @@ export interface FileRoutesById {
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
   '/app/create': typeof AppCreateRoute
+  '/app/discover': typeof AppDiscoverRoute
   '/app/drafts': typeof AppDraftsRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
@@ -809,6 +834,7 @@ export interface FileRoutesById {
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
+  '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
@@ -828,6 +854,7 @@ export interface FileRoutesById {
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
+  '/events/$slug/print-shop': typeof EventsSlugPrintShopRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
@@ -861,6 +888,7 @@ export interface FileRouteTypes {
     | '/app/collections'
     | '/app/community'
     | '/app/create'
+    | '/app/discover'
     | '/app/drafts'
     | '/app/explore'
     | '/app/favorites'
@@ -905,6 +933,7 @@ export interface FileRouteTypes {
     | '/events/$slug/decor'
     | '/events/$slug/display'
     | '/events/$slug/dresscode'
+    | '/events/$slug/eco'
     | '/events/$slug/edit'
     | '/events/$slug/faq'
     | '/events/$slug/games'
@@ -924,6 +953,7 @@ export interface FileRouteTypes {
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
     | '/events/$slug/press'
+    | '/events/$slug/print-shop'
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
@@ -954,6 +984,7 @@ export interface FileRouteTypes {
     | '/app/collections'
     | '/app/community'
     | '/app/create'
+    | '/app/discover'
     | '/app/drafts'
     | '/app/explore'
     | '/app/favorites'
@@ -998,6 +1029,7 @@ export interface FileRouteTypes {
     | '/events/$slug/decor'
     | '/events/$slug/display'
     | '/events/$slug/dresscode'
+    | '/events/$slug/eco'
     | '/events/$slug/edit'
     | '/events/$slug/faq'
     | '/events/$slug/games'
@@ -1017,6 +1049,7 @@ export interface FileRouteTypes {
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
     | '/events/$slug/press'
+    | '/events/$slug/print-shop'
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
@@ -1048,6 +1081,7 @@ export interface FileRouteTypes {
     | '/app/collections'
     | '/app/community'
     | '/app/create'
+    | '/app/discover'
     | '/app/drafts'
     | '/app/explore'
     | '/app/favorites'
@@ -1092,6 +1126,7 @@ export interface FileRouteTypes {
     | '/events/$slug/decor'
     | '/events/$slug/display'
     | '/events/$slug/dresscode'
+    | '/events/$slug/eco'
     | '/events/$slug/edit'
     | '/events/$slug/faq'
     | '/events/$slug/games'
@@ -1111,6 +1146,7 @@ export interface FileRouteTypes {
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
     | '/events/$slug/press'
+    | '/events/$slug/print-shop'
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
@@ -1352,6 +1388,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDraftsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/discover': {
+      id: '/app/discover'
+      path: '/discover'
+      fullPath: '/app/discover'
+      preLoaderRoute: typeof AppDiscoverRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/create': {
       id: '/app/create'
       path: '/create'
@@ -1492,6 +1535,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugRegistryRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/print-shop': {
+      id: '/events/$slug/print-shop'
+      path: '/print-shop'
+      fullPath: '/events/$slug/print-shop'
+      preLoaderRoute: typeof EventsSlugPrintShopRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/press': {
       id: '/events/$slug/press'
       path: '/press'
@@ -1623,6 +1673,13 @@ declare module '@tanstack/react-router' {
       path: '/edit'
       fullPath: '/events/$slug/edit'
       preLoaderRoute: typeof EventsSlugEditRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/eco': {
+      id: '/events/$slug/eco'
+      path: '/eco'
+      fullPath: '/events/$slug/eco'
+      preLoaderRoute: typeof EventsSlugEcoRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/dresscode': {
@@ -1821,6 +1878,7 @@ interface AppRouteChildren {
   AppCollectionsRoute: typeof AppCollectionsRoute
   AppCommunityRoute: typeof AppCommunityRoute
   AppCreateRoute: typeof AppCreateRoute
+  AppDiscoverRoute: typeof AppDiscoverRoute
   AppDraftsRoute: typeof AppDraftsRoute
   AppExploreRoute: typeof AppExploreRoute
   AppFavoritesRoute: typeof AppFavoritesRoute
@@ -1855,6 +1913,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppCollectionsRoute: AppCollectionsRoute,
   AppCommunityRoute: AppCommunityRoute,
   AppCreateRoute: AppCreateRoute,
+  AppDiscoverRoute: AppDiscoverRoute,
   AppDraftsRoute: AppDraftsRoute,
   AppExploreRoute: AppExploreRoute,
   AppFavoritesRoute: AppFavoritesRoute,
@@ -1925,6 +1984,7 @@ interface EventsSlugRouteChildren {
   EventsSlugDecorRoute: typeof EventsSlugDecorRoute
   EventsSlugDisplayRoute: typeof EventsSlugDisplayRoute
   EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
+  EventsSlugEcoRoute: typeof EventsSlugEcoRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
   EventsSlugFaqRoute: typeof EventsSlugFaqRoute
   EventsSlugGamesRoute: typeof EventsSlugGamesRoute
@@ -1944,6 +2004,7 @@ interface EventsSlugRouteChildren {
   EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
   EventsSlugPollsRoute: typeof EventsSlugPollsRoute
   EventsSlugPressRoute: typeof EventsSlugPressRoute
+  EventsSlugPrintShopRoute: typeof EventsSlugPrintShopRoute
   EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
   EventsSlugRehearsalRoute: typeof EventsSlugRehearsalRoute
   EventsSlugReplayRoute: typeof EventsSlugReplayRoute
@@ -1976,6 +2037,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugDecorRoute: EventsSlugDecorRoute,
   EventsSlugDisplayRoute: EventsSlugDisplayRoute,
   EventsSlugDresscodeRoute: EventsSlugDresscodeRoute,
+  EventsSlugEcoRoute: EventsSlugEcoRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
   EventsSlugFaqRoute: EventsSlugFaqRoute,
   EventsSlugGamesRoute: EventsSlugGamesRoute,
@@ -1995,6 +2057,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugPlaylistRoute: EventsSlugPlaylistRoute,
   EventsSlugPollsRoute: EventsSlugPollsRoute,
   EventsSlugPressRoute: EventsSlugPressRoute,
+  EventsSlugPrintShopRoute: EventsSlugPrintShopRoute,
   EventsSlugRegistryRoute: EventsSlugRegistryRoute,
   EventsSlugRehearsalRoute: EventsSlugRehearsalRoute,
   EventsSlugReplayRoute: EventsSlugReplayRoute,
