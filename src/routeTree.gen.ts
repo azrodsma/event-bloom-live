@@ -21,6 +21,7 @@ import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as AppYearInReviewRouteImport } from './routes/app.year-in-review'
 import { Route as AppWalletRouteImport } from './routes/app.wallet'
 import { Route as AppVendorsRouteImport } from './routes/app.vendors'
+import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
@@ -29,6 +30,7 @@ import { Route as AppNotificationsRouteImport } from './routes/app.notifications
 import { Route as AppMessagesRouteImport } from './routes/app.messages'
 import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
 import { Route as AppHelpRouteImport } from './routes/app.help'
+import { Route as AppGiftIdeasRouteImport } from './routes/app.gift-ideas'
 import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
 import { Route as AppExploreRouteImport } from './routes/app.explore'
 import { Route as AppCreateRouteImport } from './routes/app.create'
@@ -42,6 +44,7 @@ import { Route as EventsSlugSpeechesRouteImport } from './routes/events.$slug.sp
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
 import { Route as EventsSlugSeatingRouteImport } from './routes/events.$slug.seating'
 import { Route as EventsSlugRsvpRouteImport } from './routes/events.$slug.rsvp'
+import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
 import { Route as EventsSlugRegistryRouteImport } from './routes/events.$slug.registry'
 import { Route as EventsSlugPollsRouteImport } from './routes/events.$slug.polls'
 import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.playlist'
@@ -135,6 +138,11 @@ const AppVendorsRoute = AppVendorsRouteImport.update({
   path: '/vendors',
   getParentRoute: () => AppRoute,
 } as any)
+const AppStoryComposerRoute = AppStoryComposerRouteImport.update({
+  id: '/story-composer',
+  path: '/story-composer',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -173,6 +181,11 @@ const AppInspirationsRoute = AppInspirationsRouteImport.update({
 const AppHelpRoute = AppHelpRouteImport.update({
   id: '/help',
   path: '/help',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGiftIdeasRoute = AppGiftIdeasRouteImport.update({
+  id: '/gift-ideas',
+  path: '/gift-ideas',
   getParentRoute: () => AppRoute,
 } as any)
 const AppFavoritesRoute = AppFavoritesRouteImport.update({
@@ -238,6 +251,11 @@ const EventsSlugSeatingRoute = EventsSlugSeatingRouteImport.update({
 const EventsSlugRsvpRoute = EventsSlugRsvpRouteImport.update({
   id: '/rsvp',
   path: '/rsvp',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugReplayRoute = EventsSlugReplayRouteImport.update({
+  id: '/replay',
+  path: '/replay',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugRegistryRoute = EventsSlugRegistryRouteImport.update({
@@ -414,6 +432,7 @@ export interface FileRoutesByFullPath {
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
+  '/app/gift-ideas': typeof AppGiftIdeasRoute
   '/app/help': typeof AppHelpRoute
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
@@ -422,6 +441,7 @@ export interface FileRoutesByFullPath {
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
   '/app/settings': typeof AppSettingsRoute
+  '/app/story-composer': typeof AppStoryComposerRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/wallet': typeof AppWalletRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
@@ -458,6 +478,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
+  '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
@@ -480,6 +501,7 @@ export interface FileRoutesByTo {
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
+  '/app/gift-ideas': typeof AppGiftIdeasRoute
   '/app/help': typeof AppHelpRoute
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
@@ -488,6 +510,7 @@ export interface FileRoutesByTo {
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
   '/app/settings': typeof AppSettingsRoute
+  '/app/story-composer': typeof AppStoryComposerRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/wallet': typeof AppWalletRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
@@ -524,6 +547,7 @@ export interface FileRoutesByTo {
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
+  '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
@@ -548,6 +572,7 @@ export interface FileRoutesById {
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
+  '/app/gift-ideas': typeof AppGiftIdeasRoute
   '/app/help': typeof AppHelpRoute
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
@@ -556,6 +581,7 @@ export interface FileRoutesById {
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
   '/app/settings': typeof AppSettingsRoute
+  '/app/story-composer': typeof AppStoryComposerRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/wallet': typeof AppWalletRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
@@ -592,6 +618,7 @@ export interface FileRoutesById {
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
+  '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
@@ -617,6 +644,7 @@ export interface FileRouteTypes {
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
+    | '/app/gift-ideas'
     | '/app/help'
     | '/app/inspirations'
     | '/app/messages'
@@ -625,6 +653,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/referral'
     | '/app/settings'
+    | '/app/story-composer'
     | '/app/vendors'
     | '/app/wallet'
     | '/app/year-in-review'
@@ -661,6 +690,7 @@ export interface FileRouteTypes {
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
     | '/events/$slug/registry'
+    | '/events/$slug/replay'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
     | '/events/$slug/souvenir'
@@ -683,6 +713,7 @@ export interface FileRouteTypes {
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
+    | '/app/gift-ideas'
     | '/app/help'
     | '/app/inspirations'
     | '/app/messages'
@@ -691,6 +722,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/referral'
     | '/app/settings'
+    | '/app/story-composer'
     | '/app/vendors'
     | '/app/wallet'
     | '/app/year-in-review'
@@ -727,6 +759,7 @@ export interface FileRouteTypes {
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
     | '/events/$slug/registry'
+    | '/events/$slug/replay'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
     | '/events/$slug/souvenir'
@@ -750,6 +783,7 @@ export interface FileRouteTypes {
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
+    | '/app/gift-ideas'
     | '/app/help'
     | '/app/inspirations'
     | '/app/messages'
@@ -758,6 +792,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/referral'
     | '/app/settings'
+    | '/app/story-composer'
     | '/app/vendors'
     | '/app/wallet'
     | '/app/year-in-review'
@@ -794,6 +829,7 @@ export interface FileRouteTypes {
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
     | '/events/$slug/registry'
+    | '/events/$slug/replay'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
     | '/events/$slug/souvenir'
@@ -902,6 +938,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppVendorsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/story-composer': {
+      id: '/app/story-composer'
+      path: '/story-composer'
+      fullPath: '/app/story-composer'
+      preLoaderRoute: typeof AppStoryComposerRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/settings': {
       id: '/app/settings'
       path: '/settings'
@@ -956,6 +999,13 @@ declare module '@tanstack/react-router' {
       path: '/help'
       fullPath: '/app/help'
       preLoaderRoute: typeof AppHelpRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/gift-ideas': {
+      id: '/app/gift-ideas'
+      path: '/gift-ideas'
+      fullPath: '/app/gift-ideas'
+      preLoaderRoute: typeof AppGiftIdeasRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/favorites': {
@@ -1047,6 +1097,13 @@ declare module '@tanstack/react-router' {
       path: '/rsvp'
       fullPath: '/events/$slug/rsvp'
       preLoaderRoute: typeof EventsSlugRsvpRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/replay': {
+      id: '/events/$slug/replay'
+      path: '/replay'
+      fullPath: '/events/$slug/replay'
+      preLoaderRoute: typeof EventsSlugReplayRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/registry': {
@@ -1307,6 +1364,7 @@ interface AppRouteChildren {
   AppCreateRoute: typeof AppCreateRoute
   AppExploreRoute: typeof AppExploreRoute
   AppFavoritesRoute: typeof AppFavoritesRoute
+  AppGiftIdeasRoute: typeof AppGiftIdeasRoute
   AppHelpRoute: typeof AppHelpRoute
   AppInspirationsRoute: typeof AppInspirationsRoute
   AppMessagesRoute: typeof AppMessagesRouteWithChildren
@@ -1315,6 +1373,7 @@ interface AppRouteChildren {
   AppProfileRoute: typeof AppProfileRoute
   AppReferralRoute: typeof AppReferralRoute
   AppSettingsRoute: typeof AppSettingsRoute
+  AppStoryComposerRoute: typeof AppStoryComposerRoute
   AppVendorsRoute: typeof AppVendorsRouteWithChildren
   AppWalletRoute: typeof AppWalletRoute
   AppYearInReviewRoute: typeof AppYearInReviewRoute
@@ -1330,6 +1389,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppCreateRoute: AppCreateRoute,
   AppExploreRoute: AppExploreRoute,
   AppFavoritesRoute: AppFavoritesRoute,
+  AppGiftIdeasRoute: AppGiftIdeasRoute,
   AppHelpRoute: AppHelpRoute,
   AppInspirationsRoute: AppInspirationsRoute,
   AppMessagesRoute: AppMessagesRouteWithChildren,
@@ -1338,6 +1398,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppProfileRoute: AppProfileRoute,
   AppReferralRoute: AppReferralRoute,
   AppSettingsRoute: AppSettingsRoute,
+  AppStoryComposerRoute: AppStoryComposerRoute,
   AppVendorsRoute: AppVendorsRouteWithChildren,
   AppWalletRoute: AppWalletRoute,
   AppYearInReviewRoute: AppYearInReviewRoute,
@@ -1398,6 +1459,7 @@ interface EventsSlugRouteChildren {
   EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
   EventsSlugPollsRoute: typeof EventsSlugPollsRoute
   EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
+  EventsSlugReplayRoute: typeof EventsSlugReplayRoute
   EventsSlugRsvpRoute: typeof EventsSlugRsvpRoute
   EventsSlugSeatingRoute: typeof EventsSlugSeatingRoute
   EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
@@ -1434,6 +1496,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugPlaylistRoute: EventsSlugPlaylistRoute,
   EventsSlugPollsRoute: EventsSlugPollsRoute,
   EventsSlugRegistryRoute: EventsSlugRegistryRoute,
+  EventsSlugReplayRoute: EventsSlugReplayRoute,
   EventsSlugRsvpRoute: EventsSlugRsvpRoute,
   EventsSlugSeatingRoute: EventsSlugSeatingRoute,
   EventsSlugSouvenirRoute: EventsSlugSouvenirRoute,
