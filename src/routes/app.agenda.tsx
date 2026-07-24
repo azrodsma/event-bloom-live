@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Calendar, ChevronLeft, ChevronRight, MapPin, Clock, Radio, Bell, Plus, Filter } from "lucide-react";
 import { useMemo, useState } from "react";
-import { events, eventTypeIcons } from "@/lib/mock-data";
+import { mockEvents as events, eventTypeIcons, type MockEvent } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/app/agenda")({
   component: Agenda,
@@ -48,7 +48,7 @@ function buildAgenda(): AgendaItem[] {
   const roles: Array<AgendaItem["role"]> = ["host", "guest", "guest", "host", "guest", "guest"];
   const statuses: Array<AgendaItem["status"]> = ["confirmed", "confirmed", "pending", "live", "confirmed", "confirmed"];
   const offsets = [1, 12, 34, 0, -14, 62];
-  return events.slice(0, 6).map((e, i) => {
+  return events.slice(0, 6).map((e: MockEvent, i: number) => {
     const d = new Date(now);
     d.setDate(now.getDate() + offsets[i]);
     return {
