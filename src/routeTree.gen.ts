@@ -37,11 +37,14 @@ import { Route as EventsSlugRsvpRouteImport } from './routes/events.$slug.rsvp'
 import { Route as EventsSlugRegistryRouteImport } from './routes/events.$slug.registry'
 import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.playlist'
 import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.photobooth'
+import { Route as EventsSlugMapRouteImport } from './routes/events.$slug.map'
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invite'
 import { Route as EventsSlugGuestsRouteImport } from './routes/events.$slug.guests'
 import { Route as EventsSlugGuestbookRouteImport } from './routes/events.$slug.guestbook'
+import { Route as EventsSlugGiftsReceivedRouteImport } from './routes/events.$slug.gifts-received'
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
+import { Route as EventsSlugDresscodeRouteImport } from './routes/events.$slug.dresscode'
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
@@ -194,6 +197,11 @@ const EventsSlugPhotoboothRoute = EventsSlugPhotoboothRouteImport.update({
   path: '/photobooth',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugMapRoute = EventsSlugMapRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugLiveRoute = EventsSlugLiveRouteImport.update({
   id: '/live',
   path: '/live',
@@ -214,9 +222,19 @@ const EventsSlugGuestbookRoute = EventsSlugGuestbookRouteImport.update({
   path: '/guestbook',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugGiftsReceivedRoute = EventsSlugGiftsReceivedRouteImport.update({
+  id: '/gifts-received',
+  path: '/gifts-received',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugEditRoute = EventsSlugEditRouteImport.update({
   id: '/edit',
   path: '/edit',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugDresscodeRoute = EventsSlugDresscodeRouteImport.update({
+  id: '/dresscode',
+  path: '/dresscode',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugDashboardRoute = EventsSlugDashboardRouteImport.update({
@@ -306,11 +324,14 @@ export interface FileRoutesByFullPath {
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
+  '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
@@ -351,11 +372,14 @@ export interface FileRoutesByTo {
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
+  '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
@@ -398,11 +422,14 @@ export interface FileRoutesById {
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
+  '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
@@ -446,11 +473,14 @@ export interface FileRouteTypes {
     | '/events/$slug/checklist'
     | '/events/$slug/contributors'
     | '/events/$slug/dashboard'
+    | '/events/$slug/dresscode'
     | '/events/$slug/edit'
+    | '/events/$slug/gifts-received'
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/invite'
     | '/events/$slug/live'
+    | '/events/$slug/map'
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
     | '/events/$slug/registry'
@@ -491,11 +521,14 @@ export interface FileRouteTypes {
     | '/events/$slug/checklist'
     | '/events/$slug/contributors'
     | '/events/$slug/dashboard'
+    | '/events/$slug/dresscode'
     | '/events/$slug/edit'
+    | '/events/$slug/gifts-received'
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/invite'
     | '/events/$slug/live'
+    | '/events/$slug/map'
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
     | '/events/$slug/registry'
@@ -537,11 +570,14 @@ export interface FileRouteTypes {
     | '/events/$slug/checklist'
     | '/events/$slug/contributors'
     | '/events/$slug/dashboard'
+    | '/events/$slug/dresscode'
     | '/events/$slug/edit'
+    | '/events/$slug/gifts-received'
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/invite'
     | '/events/$slug/live'
+    | '/events/$slug/map'
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
     | '/events/$slug/registry'
@@ -761,6 +797,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugPhotoboothRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/map': {
+      id: '/events/$slug/map'
+      path: '/map'
+      fullPath: '/events/$slug/map'
+      preLoaderRoute: typeof EventsSlugMapRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/live': {
       id: '/events/$slug/live'
       path: '/live'
@@ -789,11 +832,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugGuestbookRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/gifts-received': {
+      id: '/events/$slug/gifts-received'
+      path: '/gifts-received'
+      fullPath: '/events/$slug/gifts-received'
+      preLoaderRoute: typeof EventsSlugGiftsReceivedRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/edit': {
       id: '/events/$slug/edit'
       path: '/edit'
       fullPath: '/events/$slug/edit'
       preLoaderRoute: typeof EventsSlugEditRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/dresscode': {
+      id: '/events/$slug/dresscode'
+      path: '/dresscode'
+      fullPath: '/events/$slug/dresscode'
+      preLoaderRoute: typeof EventsSlugDresscodeRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/dashboard': {
@@ -956,11 +1013,14 @@ interface EventsSlugRouteChildren {
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
+  EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
+  EventsSlugGiftsReceivedRoute: typeof EventsSlugGiftsReceivedRoute
   EventsSlugGuestbookRoute: typeof EventsSlugGuestbookRouteWithChildren
   EventsSlugGuestsRoute: typeof EventsSlugGuestsRoute
   EventsSlugInviteRoute: typeof EventsSlugInviteRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRoute
+  EventsSlugMapRoute: typeof EventsSlugMapRoute
   EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
   EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
   EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
@@ -978,11 +1038,14 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
+  EventsSlugDresscodeRoute: EventsSlugDresscodeRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
+  EventsSlugGiftsReceivedRoute: EventsSlugGiftsReceivedRoute,
   EventsSlugGuestbookRoute: EventsSlugGuestbookRouteWithChildren,
   EventsSlugGuestsRoute: EventsSlugGuestsRoute,
   EventsSlugInviteRoute: EventsSlugInviteRoute,
   EventsSlugLiveRoute: EventsSlugLiveRoute,
+  EventsSlugMapRoute: EventsSlugMapRoute,
   EventsSlugPhotoboothRoute: EventsSlugPhotoboothRoute,
   EventsSlugPlaylistRoute: EventsSlugPlaylistRoute,
   EventsSlugRegistryRoute: EventsSlugRegistryRoute,
