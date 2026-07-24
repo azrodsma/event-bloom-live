@@ -30,6 +30,8 @@ import {
   CloudSun,
   HelpCircle,
   Shield,
+  BarChart2,
+  Activity,
 } from "lucide-react";
 
 
@@ -474,6 +476,39 @@ function EventPage() {
             <span className="text-[10px] font-medium text-destructive/80">2 à traiter</span>
           </Link>
         </div>
+
+        {/* Engagement & journal */}
+        <div className="grid grid-cols-2 gap-3">
+          <Link
+            to="/events/$slug/polls"
+            params={{ slug: event.slug }}
+            className="relative flex items-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-br from-fuchsia-500/15 to-primary/10 p-4 ring-1 ring-primary/20"
+          >
+            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-primary text-primary-foreground">
+              <BarChart2 className="h-5 w-5" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-sm font-semibold">Sondages live</p>
+              <p className="text-[11px] text-muted-foreground">2 en cours</p>
+            </div>
+          </Link>
+          <Link
+            to="/events/$slug/activity"
+            params={{ slug: event.slug }}
+            className="relative flex items-center gap-3 overflow-hidden rounded-2xl bg-card p-4 ring-1 ring-border/60"
+          >
+            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-secondary">
+              <Activity className="h-5 w-5 text-primary" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-sm font-semibold">Journal</p>
+              <p className="text-[11px] text-muted-foreground">12 activités · 24 h</p>
+            </div>
+          </Link>
+        </div>
+
+
+
 
 
 

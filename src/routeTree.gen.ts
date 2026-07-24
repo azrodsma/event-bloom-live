@@ -19,6 +19,7 @@ import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as AppVendorsRouteImport } from './routes/app.vendors'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
@@ -37,6 +38,7 @@ import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.so
 import { Route as EventsSlugSeatingRouteImport } from './routes/events.$slug.seating'
 import { Route as EventsSlugRsvpRouteImport } from './routes/events.$slug.rsvp'
 import { Route as EventsSlugRegistryRouteImport } from './routes/events.$slug.registry'
+import { Route as EventsSlugPollsRouteImport } from './routes/events.$slug.polls'
 import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.playlist'
 import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.photobooth'
 import { Route as EventsSlugModerationRouteImport } from './routes/events.$slug.moderation'
@@ -57,6 +59,7 @@ import { Route as EventsSlugCheckinRouteImport } from './routes/events.$slug.che
 import { Route as EventsSlugCarpoolRouteImport } from './routes/events.$slug.carpool'
 import { Route as EventsSlugBudgetRouteImport } from './routes/events.$slug.budget'
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
+import { Route as EventsSlugActivityRouteImport } from './routes/events.$slug.activity'
 import { Route as AppVendorsIdRouteImport } from './routes/app.vendors.$id'
 import { Route as AppUsersIdRouteImport } from './routes/app.users.$id'
 import { Route as AppPostsIdRouteImport } from './routes/app.posts.$id'
@@ -111,6 +114,11 @@ const AppVendorsRoute = AppVendorsRouteImport.update({
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReferralRoute = AppReferralRouteImport.update({
+  id: '/referral',
+  path: '/referral',
   getParentRoute: () => AppRoute,
 } as any)
 const AppProfileRoute = AppProfileRouteImport.update({
@@ -201,6 +209,11 @@ const EventsSlugRsvpRoute = EventsSlugRsvpRouteImport.update({
 const EventsSlugRegistryRoute = EventsSlugRegistryRouteImport.update({
   id: '/registry',
   path: '/registry',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugPollsRoute = EventsSlugPollsRouteImport.update({
+  id: '/polls',
+  path: '/polls',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugPlaylistRoute = EventsSlugPlaylistRouteImport.update({
@@ -303,6 +316,11 @@ const EventsSlugAlbumRoute = EventsSlugAlbumRouteImport.update({
   path: '/album',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugActivityRoute = EventsSlugActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const AppVendorsIdRoute = AppVendorsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -345,6 +363,7 @@ export interface FileRoutesByFullPath {
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
+  '/app/referral': typeof AppReferralRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/events/$slug': typeof EventsSlugRouteWithChildren
@@ -354,6 +373,7 @@ export interface FileRoutesByFullPath {
   '/app/posts/$id': typeof AppPostsIdRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
+  '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
@@ -374,6 +394,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
+  '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
@@ -399,6 +420,7 @@ export interface FileRoutesByTo {
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
+  '/app/referral': typeof AppReferralRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/events/$slug': typeof EventsSlugRouteWithChildren
@@ -408,6 +430,7 @@ export interface FileRoutesByTo {
   '/app/posts/$id': typeof AppPostsIdRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
+  '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
@@ -428,6 +451,7 @@ export interface FileRoutesByTo {
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
+  '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
@@ -455,6 +479,7 @@ export interface FileRoutesById {
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
+  '/app/referral': typeof AppReferralRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/events/$slug': typeof EventsSlugRouteWithChildren
@@ -464,6 +489,7 @@ export interface FileRoutesById {
   '/app/posts/$id': typeof AppPostsIdRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
+  '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
@@ -484,6 +510,7 @@ export interface FileRoutesById {
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
+  '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
@@ -512,6 +539,7 @@ export interface FileRouteTypes {
     | '/app/notifications'
     | '/app/premium'
     | '/app/profile'
+    | '/app/referral'
     | '/app/settings'
     | '/app/vendors'
     | '/events/$slug'
@@ -521,6 +549,7 @@ export interface FileRouteTypes {
     | '/app/posts/$id'
     | '/app/users/$id'
     | '/app/vendors/$id'
+    | '/events/$slug/activity'
     | '/events/$slug/album'
     | '/events/$slug/budget'
     | '/events/$slug/carpool'
@@ -541,6 +570,7 @@ export interface FileRouteTypes {
     | '/events/$slug/moderation'
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
+    | '/events/$slug/polls'
     | '/events/$slug/registry'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
@@ -566,6 +596,7 @@ export interface FileRouteTypes {
     | '/app/notifications'
     | '/app/premium'
     | '/app/profile'
+    | '/app/referral'
     | '/app/settings'
     | '/app/vendors'
     | '/events/$slug'
@@ -575,6 +606,7 @@ export interface FileRouteTypes {
     | '/app/posts/$id'
     | '/app/users/$id'
     | '/app/vendors/$id'
+    | '/events/$slug/activity'
     | '/events/$slug/album'
     | '/events/$slug/budget'
     | '/events/$slug/carpool'
@@ -595,6 +627,7 @@ export interface FileRouteTypes {
     | '/events/$slug/moderation'
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
+    | '/events/$slug/polls'
     | '/events/$slug/registry'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
@@ -621,6 +654,7 @@ export interface FileRouteTypes {
     | '/app/notifications'
     | '/app/premium'
     | '/app/profile'
+    | '/app/referral'
     | '/app/settings'
     | '/app/vendors'
     | '/events/$slug'
@@ -630,6 +664,7 @@ export interface FileRouteTypes {
     | '/app/posts/$id'
     | '/app/users/$id'
     | '/app/vendors/$id'
+    | '/events/$slug/activity'
     | '/events/$slug/album'
     | '/events/$slug/budget'
     | '/events/$slug/carpool'
@@ -650,6 +685,7 @@ export interface FileRouteTypes {
     | '/events/$slug/moderation'
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
+    | '/events/$slug/polls'
     | '/events/$slug/registry'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
@@ -741,6 +777,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/app/settings'
       preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/referral': {
+      id: '/app/referral'
+      path: '/referral'
+      fullPath: '/app/referral'
+      preLoaderRoute: typeof AppReferralRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/profile': {
@@ -867,6 +910,13 @@ declare module '@tanstack/react-router' {
       path: '/registry'
       fullPath: '/events/$slug/registry'
       preLoaderRoute: typeof EventsSlugRegistryRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/polls': {
+      id: '/events/$slug/polls'
+      path: '/polls'
+      fullPath: '/events/$slug/polls'
+      preLoaderRoute: typeof EventsSlugPollsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/playlist': {
@@ -1009,6 +1059,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugAlbumRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/activity': {
+      id: '/events/$slug/activity'
+      path: '/activity'
+      fullPath: '/events/$slug/activity'
+      preLoaderRoute: typeof EventsSlugActivityRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/app/vendors/$id': {
       id: '/app/vendors/$id'
       path: '/$id'
@@ -1082,6 +1139,7 @@ interface AppRouteChildren {
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppPremiumRoute: typeof AppPremiumRoute
   AppProfileRoute: typeof AppProfileRoute
+  AppReferralRoute: typeof AppReferralRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppVendorsRoute: typeof AppVendorsRouteWithChildren
   AppIndexRoute: typeof AppIndexRoute
@@ -1100,6 +1158,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppNotificationsRoute: AppNotificationsRoute,
   AppPremiumRoute: AppPremiumRoute,
   AppProfileRoute: AppProfileRoute,
+  AppReferralRoute: AppReferralRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppVendorsRoute: AppVendorsRouteWithChildren,
   AppIndexRoute: AppIndexRoute,
@@ -1121,6 +1180,7 @@ const EventsSlugGuestbookRouteWithChildren =
   EventsSlugGuestbookRoute._addFileChildren(EventsSlugGuestbookRouteChildren)
 
 interface EventsSlugRouteChildren {
+  EventsSlugActivityRoute: typeof EventsSlugActivityRoute
   EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
   EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
   EventsSlugCarpoolRoute: typeof EventsSlugCarpoolRoute
@@ -1141,6 +1201,7 @@ interface EventsSlugRouteChildren {
   EventsSlugModerationRoute: typeof EventsSlugModerationRoute
   EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
   EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
+  EventsSlugPollsRoute: typeof EventsSlugPollsRoute
   EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
   EventsSlugRsvpRoute: typeof EventsSlugRsvpRoute
   EventsSlugSeatingRoute: typeof EventsSlugSeatingRoute
@@ -1152,6 +1213,7 @@ interface EventsSlugRouteChildren {
 }
 
 const EventsSlugRouteChildren: EventsSlugRouteChildren = {
+  EventsSlugActivityRoute: EventsSlugActivityRoute,
   EventsSlugAlbumRoute: EventsSlugAlbumRoute,
   EventsSlugBudgetRoute: EventsSlugBudgetRoute,
   EventsSlugCarpoolRoute: EventsSlugCarpoolRoute,
@@ -1172,6 +1234,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugModerationRoute: EventsSlugModerationRoute,
   EventsSlugPhotoboothRoute: EventsSlugPhotoboothRoute,
   EventsSlugPlaylistRoute: EventsSlugPlaylistRoute,
+  EventsSlugPollsRoute: EventsSlugPollsRoute,
   EventsSlugRegistryRoute: EventsSlugRegistryRoute,
   EventsSlugRsvpRoute: EventsSlugRsvpRoute,
   EventsSlugSeatingRoute: EventsSlugSeatingRoute,

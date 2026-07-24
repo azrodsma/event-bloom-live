@@ -136,6 +136,7 @@ function Settings() {
         <Group title="Aide" icon={HelpCircle}>
           <NavRow icon={HelpCircle} label="Centre d'aide" to="/app/help" />
           <NavRow icon={HelpCircle} label="Récompenses & badges" to="/app/achievements" />
+          <NavRow icon={HelpCircle} label="Parrainage · 1 mois offert" to="/app/referral" />
           <NavRow icon={HelpCircle} label="Nous contacter" />
         </Group>
 
