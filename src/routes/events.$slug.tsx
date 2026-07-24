@@ -239,6 +239,40 @@ function EventPage() {
             <MapPin className="h-3.5 w-3.5" /> Voir sur la carte
           </a>
         </section>
+
+        {/* Souvenir / recap */}
+        <Link
+          to="/events/$slug/souvenir"
+          params={{ slug: event.slug }}
+          className="relative flex items-center gap-4 overflow-hidden rounded-3xl bg-gradient-primary p-5 text-white shadow-glow"
+        >
+          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/20 backdrop-blur">
+            ✨
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-bold uppercase tracking-widest opacity-90">Le souvenir</p>
+            <p className="font-serif text-xl">Revivez la journée en un clin d'œil</p>
+          </div>
+          <span className="text-xl">→</span>
+        </Link>
+
+        {/* Organizer actions */}
+        <div className="grid grid-cols-2 gap-3">
+          <Link
+            to="/events/$slug/guests"
+            params={{ slug: event.slug }}
+            className="flex items-center gap-2 rounded-2xl border border-border bg-background px-4 py-3 text-sm font-semibold"
+          >
+            <Users className="h-4 w-4 text-primary" /> Invités
+          </Link>
+          <Link
+            to="/events/$slug/edit"
+            params={{ slug: event.slug }}
+            className="flex items-center gap-2 rounded-2xl border border-border bg-background px-4 py-3 text-sm font-semibold"
+          >
+            <Calendar className="h-4 w-4 text-primary" /> Modifier
+          </Link>
+        </div>
       </main>
     </div>
   );
