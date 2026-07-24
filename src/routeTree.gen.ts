@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as JoinRouteImport } from './routes/join'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/app'
@@ -16,6 +17,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
+import { Route as AppVendorsRouteImport } from './routes/app.vendors'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
@@ -39,6 +41,11 @@ import { Route as AppPostsIdRouteImport } from './routes/app.posts.$id'
 import { Route as AppMessagesIdRouteImport } from './routes/app.messages.$id'
 import { Route as EventsSlugGuestbookNewRouteImport } from './routes/events.$slug.guestbook.new'
 
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JoinRoute = JoinRouteImport.update({
   id: '/join',
   path: '/join',
@@ -73,6 +80,11 @@ const EventsSlugRoute = EventsSlugRouteImport.update({
   id: '/events/$slug',
   path: '/events/$slug',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppVendorsRoute = AppVendorsRouteImport.update({
+  id: '/vendors',
+  path: '/vendors',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
@@ -190,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/join': typeof JoinRoute
+  '/onboarding': typeof OnboardingRoute
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
@@ -199,6 +212,7 @@ export interface FileRoutesByFullPath {
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/settings': typeof AppSettingsRoute
+  '/app/vendors': typeof AppVendorsRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
@@ -220,6 +234,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/join': typeof JoinRoute
+  '/onboarding': typeof OnboardingRoute
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
@@ -229,6 +244,7 @@ export interface FileRoutesByTo {
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/settings': typeof AppSettingsRoute
+  '/app/vendors': typeof AppVendorsRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
   '/app': typeof AppIndexRoute
@@ -252,6 +268,7 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/join': typeof JoinRoute
+  '/onboarding': typeof OnboardingRoute
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
@@ -261,6 +278,7 @@ export interface FileRoutesById {
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/settings': typeof AppSettingsRoute
+  '/app/vendors': typeof AppVendorsRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
@@ -285,6 +303,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/join'
+    | '/onboarding'
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
@@ -294,6 +313,7 @@ export interface FileRouteTypes {
     | '/app/premium'
     | '/app/profile'
     | '/app/settings'
+    | '/app/vendors'
     | '/events/$slug'
     | '/stories/$slug'
     | '/app/'
@@ -315,6 +335,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/join'
+    | '/onboarding'
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
@@ -324,6 +345,7 @@ export interface FileRouteTypes {
     | '/app/premium'
     | '/app/profile'
     | '/app/settings'
+    | '/app/vendors'
     | '/events/$slug'
     | '/stories/$slug'
     | '/app'
@@ -346,6 +368,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/join'
+    | '/onboarding'
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
@@ -355,6 +378,7 @@ export interface FileRouteTypes {
     | '/app/premium'
     | '/app/profile'
     | '/app/settings'
+    | '/app/vendors'
     | '/events/$slug'
     | '/stories/$slug'
     | '/app/'
@@ -378,12 +402,20 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
   JoinRoute: typeof JoinRoute
+  OnboardingRoute: typeof OnboardingRoute
   EventsSlugRoute: typeof EventsSlugRouteWithChildren
   StoriesSlugRoute: typeof StoriesSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/join': {
       id: '/join'
       path: '/join'
@@ -432,6 +464,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/events/$slug'
       preLoaderRoute: typeof EventsSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/app/vendors': {
+      id: '/app/vendors'
+      path: '/vendors'
+      fullPath: '/app/vendors'
+      preLoaderRoute: typeof AppVendorsRouteImport
+      parentRoute: typeof AppRoute
     }
     '/app/settings': {
       id: '/app/settings'
@@ -612,6 +651,7 @@ interface AppRouteChildren {
   AppPremiumRoute: typeof AppPremiumRoute
   AppProfileRoute: typeof AppProfileRoute
   AppSettingsRoute: typeof AppSettingsRoute
+  AppVendorsRoute: typeof AppVendorsRoute
   AppIndexRoute: typeof AppIndexRoute
   AppPostsIdRoute: typeof AppPostsIdRoute
   AppUsersIdRoute: typeof AppUsersIdRoute
@@ -627,6 +667,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppPremiumRoute: AppPremiumRoute,
   AppProfileRoute: AppProfileRoute,
   AppSettingsRoute: AppSettingsRoute,
+  AppVendorsRoute: AppVendorsRoute,
   AppIndexRoute: AppIndexRoute,
   AppPostsIdRoute: AppPostsIdRoute,
   AppUsersIdRoute: AppUsersIdRoute,
@@ -678,6 +719,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
   JoinRoute: JoinRoute,
+  OnboardingRoute: OnboardingRoute,
   EventsSlugRoute: EventsSlugRouteWithChildren,
   StoriesSlugRoute: StoriesSlugRoute,
 }
