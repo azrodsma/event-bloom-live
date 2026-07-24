@@ -56,12 +56,12 @@ function buildAgenda(): AgendaItem[] {
       title: e.title,
       type: e.type,
       date: d,
-      time: e.time ?? "14 h 30",
+      time: "14 h 30",
       venue: e.venue,
       city: e.city,
       role: roles[i],
       status: statuses[i],
-      cover: e.coverImage,
+      cover: e.cover,
     };
   });
 }
