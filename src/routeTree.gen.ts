@@ -19,6 +19,7 @@ import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as AppYearInReviewRouteImport } from './routes/app.year-in-review'
+import { Route as AppWishesRouteImport } from './routes/app.wishes'
 import { Route as AppWalletRouteImport } from './routes/app.wallet'
 import { Route as AppVendorsRouteImport } from './routes/app.vendors'
 import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
@@ -52,7 +53,9 @@ import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.so
 import { Route as EventsSlugSeatingRouteImport } from './routes/events.$slug.seating'
 import { Route as EventsSlugRsvpRouteImport } from './routes/events.$slug.rsvp'
 import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
+import { Route as EventsSlugRehearsalRouteImport } from './routes/events.$slug.rehearsal'
 import { Route as EventsSlugRegistryRouteImport } from './routes/events.$slug.registry'
+import { Route as EventsSlugPressRouteImport } from './routes/events.$slug.press'
 import { Route as EventsSlugPollsRouteImport } from './routes/events.$slug.polls'
 import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.playlist'
 import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.photobooth'
@@ -138,6 +141,11 @@ const EventsSlugRoute = EventsSlugRouteImport.update({
 const AppYearInReviewRoute = AppYearInReviewRouteImport.update({
   id: '/year-in-review',
   path: '/year-in-review',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppWishesRoute = AppWishesRouteImport.update({
+  id: '/wishes',
+  path: '/wishes',
   getParentRoute: () => AppRoute,
 } as any)
 const AppWalletRoute = AppWalletRouteImport.update({
@@ -305,9 +313,19 @@ const EventsSlugReplayRoute = EventsSlugReplayRouteImport.update({
   path: '/replay',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugRehearsalRoute = EventsSlugRehearsalRouteImport.update({
+  id: '/rehearsal',
+  path: '/rehearsal',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugRegistryRoute = EventsSlugRegistryRouteImport.update({
   id: '/registry',
   path: '/registry',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugPressRoute = EventsSlugPressRouteImport.update({
+  id: '/press',
+  path: '/press',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugPollsRoute = EventsSlugPollsRouteImport.update({
@@ -521,6 +539,7 @@ export interface FileRoutesByFullPath {
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/wallet': typeof AppWalletRoute
+  '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
@@ -558,7 +577,9 @@ export interface FileRoutesByFullPath {
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
+  '/events/$slug/press': typeof EventsSlugPressRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
+  '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
@@ -602,6 +623,7 @@ export interface FileRoutesByTo {
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/wallet': typeof AppWalletRoute
+  '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
@@ -639,7 +661,9 @@ export interface FileRoutesByTo {
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
+  '/events/$slug/press': typeof EventsSlugPressRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
+  '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
@@ -685,6 +709,7 @@ export interface FileRoutesById {
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/wallet': typeof AppWalletRoute
+  '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
@@ -722,7 +747,9 @@ export interface FileRoutesById {
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
+  '/events/$slug/press': typeof EventsSlugPressRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
+  '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
@@ -769,6 +796,7 @@ export interface FileRouteTypes {
     | '/app/story-composer'
     | '/app/vendors'
     | '/app/wallet'
+    | '/app/wishes'
     | '/app/year-in-review'
     | '/events/$slug'
     | '/stories/$slug'
@@ -806,7 +834,9 @@ export interface FileRouteTypes {
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
+    | '/events/$slug/press'
     | '/events/$slug/registry'
+    | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
@@ -850,6 +880,7 @@ export interface FileRouteTypes {
     | '/app/story-composer'
     | '/app/vendors'
     | '/app/wallet'
+    | '/app/wishes'
     | '/app/year-in-review'
     | '/events/$slug'
     | '/stories/$slug'
@@ -887,7 +918,9 @@ export interface FileRouteTypes {
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
+    | '/events/$slug/press'
     | '/events/$slug/registry'
+    | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
@@ -932,6 +965,7 @@ export interface FileRouteTypes {
     | '/app/story-composer'
     | '/app/vendors'
     | '/app/wallet'
+    | '/app/wishes'
     | '/app/year-in-review'
     | '/events/$slug'
     | '/stories/$slug'
@@ -969,7 +1003,9 @@ export interface FileRouteTypes {
     | '/events/$slug/photobooth'
     | '/events/$slug/playlist'
     | '/events/$slug/polls'
+    | '/events/$slug/press'
     | '/events/$slug/registry'
+    | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
@@ -1066,6 +1102,13 @@ declare module '@tanstack/react-router' {
       path: '/year-in-review'
       fullPath: '/app/year-in-review'
       preLoaderRoute: typeof AppYearInReviewRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/wishes': {
+      id: '/app/wishes'
+      path: '/wishes'
+      fullPath: '/app/wishes'
+      preLoaderRoute: typeof AppWishesRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/wallet': {
@@ -1299,11 +1342,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugReplayRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/rehearsal': {
+      id: '/events/$slug/rehearsal'
+      path: '/rehearsal'
+      fullPath: '/events/$slug/rehearsal'
+      preLoaderRoute: typeof EventsSlugRehearsalRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/registry': {
       id: '/events/$slug/registry'
       path: '/registry'
       fullPath: '/events/$slug/registry'
       preLoaderRoute: typeof EventsSlugRegistryRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/press': {
+      id: '/events/$slug/press'
+      path: '/press'
+      fullPath: '/events/$slug/press'
+      preLoaderRoute: typeof EventsSlugPressRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/polls': {
@@ -1609,6 +1666,7 @@ interface AppRouteChildren {
   AppStoryComposerRoute: typeof AppStoryComposerRoute
   AppVendorsRoute: typeof AppVendorsRouteWithChildren
   AppWalletRoute: typeof AppWalletRoute
+  AppWishesRoute: typeof AppWishesRoute
   AppYearInReviewRoute: typeof AppYearInReviewRoute
   AppIndexRoute: typeof AppIndexRoute
   AppPostsIdRoute: typeof AppPostsIdRoute
@@ -1639,6 +1697,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppStoryComposerRoute: AppStoryComposerRoute,
   AppVendorsRoute: AppVendorsRouteWithChildren,
   AppWalletRoute: AppWalletRoute,
+  AppWishesRoute: AppWishesRoute,
   AppYearInReviewRoute: AppYearInReviewRoute,
   AppIndexRoute: AppIndexRoute,
   AppPostsIdRoute: AppPostsIdRoute,
@@ -1702,7 +1761,9 @@ interface EventsSlugRouteChildren {
   EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
   EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
   EventsSlugPollsRoute: typeof EventsSlugPollsRoute
+  EventsSlugPressRoute: typeof EventsSlugPressRoute
   EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
+  EventsSlugRehearsalRoute: typeof EventsSlugRehearsalRoute
   EventsSlugReplayRoute: typeof EventsSlugReplayRoute
   EventsSlugRsvpRoute: typeof EventsSlugRsvpRoute
   EventsSlugSeatingRoute: typeof EventsSlugSeatingRoute
@@ -1745,7 +1806,9 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugPhotoboothRoute: EventsSlugPhotoboothRoute,
   EventsSlugPlaylistRoute: EventsSlugPlaylistRoute,
   EventsSlugPollsRoute: EventsSlugPollsRoute,
+  EventsSlugPressRoute: EventsSlugPressRoute,
   EventsSlugRegistryRoute: EventsSlugRegistryRoute,
+  EventsSlugRehearsalRoute: EventsSlugRehearsalRoute,
   EventsSlugReplayRoute: EventsSlugReplayRoute,
   EventsSlugRsvpRoute: EventsSlugRsvpRoute,
   EventsSlugSeatingRoute: EventsSlugSeatingRoute,
