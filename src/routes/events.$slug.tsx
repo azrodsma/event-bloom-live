@@ -79,7 +79,7 @@ function EventPage() {
             <div className="mx-auto max-w-2xl">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold">
-                  {eventTypeIcons[event.type]} {event.type}
+                  {eventTypeIcons[event.type as keyof typeof eventTypeIcons]} {event.type}
                 </span>
                 {event.isLive && (
                   <span className="animate-pulse-live rounded-full bg-live px-3 py-1 text-xs font-bold uppercase text-white">
