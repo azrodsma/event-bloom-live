@@ -50,6 +50,7 @@ import { Route as AppExploreRouteImport } from './routes/app.explore'
 import { Route as AppDraftsRouteImport } from './routes/app.drafts'
 import { Route as AppDiscoverRouteImport } from './routes/app.discover'
 import { Route as AppCreateRouteImport } from './routes/app.create'
+import { Route as AppConciergeRouteImport } from './routes/app.concierge'
 import { Route as AppCommunityRouteImport } from './routes/app.community'
 import { Route as AppCollectionsRouteImport } from './routes/app.collections'
 import { Route as AppCareRouteImport } from './routes/app.care'
@@ -120,7 +121,9 @@ import { Route as EventsSlugBroadcastRouteImport } from './routes/events.$slug.b
 import { Route as EventsSlugBarRouteImport } from './routes/events.$slug.bar'
 import { Route as EventsSlugBackupPlanRouteImport } from './routes/events.$slug.backup-plan'
 import { Route as EventsSlugAuctionRouteImport } from './routes/events.$slug.auction'
+import { Route as EventsSlugArchiveRouteImport } from './routes/events.$slug.archive'
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
+import { Route as EventsSlugAiPortraitsRouteImport } from './routes/events.$slug.ai-portraits'
 import { Route as EventsSlugAfterpartyRouteImport } from './routes/events.$slug.afterparty'
 import { Route as EventsSlugActivityRouteImport } from './routes/events.$slug.activity'
 import { Route as AppVendorsIdRouteImport } from './routes/app.vendors.$id'
@@ -334,6 +337,11 @@ const AppDiscoverRoute = AppDiscoverRouteImport.update({
 const AppCreateRoute = AppCreateRouteImport.update({
   id: '/create',
   path: '/create',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConciergeRoute = AppConciergeRouteImport.update({
+  id: '/concierge',
+  path: '/concierge',
   getParentRoute: () => AppRoute,
 } as any)
 const AppCommunityRoute = AppCommunityRouteImport.update({
@@ -687,9 +695,19 @@ const EventsSlugAuctionRoute = EventsSlugAuctionRouteImport.update({
   path: '/auction',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugArchiveRoute = EventsSlugArchiveRouteImport.update({
+  id: '/archive',
+  path: '/archive',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugAlbumRoute = EventsSlugAlbumRouteImport.update({
   id: '/album',
   path: '/album',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugAiPortraitsRoute = EventsSlugAiPortraitsRouteImport.update({
+  id: '/ai-portraits',
+  path: '/ai-portraits',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugAfterpartyRoute = EventsSlugAfterpartyRouteImport.update({
@@ -751,6 +769,7 @@ export interface FileRoutesByFullPath {
   '/app/care': typeof AppCareRoute
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
+  '/app/concierge': typeof AppConciergeRoute
   '/app/create': typeof AppCreateRoute
   '/app/discover': typeof AppDiscoverRoute
   '/app/drafts': typeof AppDraftsRoute
@@ -792,7 +811,9 @@ export interface FileRoutesByFullPath {
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
+  '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
@@ -873,6 +894,7 @@ export interface FileRoutesByTo {
   '/app/care': typeof AppCareRoute
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
+  '/app/concierge': typeof AppConciergeRoute
   '/app/create': typeof AppCreateRoute
   '/app/discover': typeof AppDiscoverRoute
   '/app/drafts': typeof AppDraftsRoute
@@ -914,7 +936,9 @@ export interface FileRoutesByTo {
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
+  '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
@@ -997,6 +1021,7 @@ export interface FileRoutesById {
   '/app/care': typeof AppCareRoute
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
+  '/app/concierge': typeof AppConciergeRoute
   '/app/create': typeof AppCreateRoute
   '/app/discover': typeof AppDiscoverRoute
   '/app/drafts': typeof AppDraftsRoute
@@ -1038,7 +1063,9 @@ export interface FileRoutesById {
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
+  '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
@@ -1122,6 +1149,7 @@ export interface FileRouteTypes {
     | '/app/care'
     | '/app/collections'
     | '/app/community'
+    | '/app/concierge'
     | '/app/create'
     | '/app/discover'
     | '/app/drafts'
@@ -1163,7 +1191,9 @@ export interface FileRouteTypes {
     | '/app/vendors/$id'
     | '/events/$slug/activity'
     | '/events/$slug/afterparty'
+    | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
+    | '/events/$slug/archive'
     | '/events/$slug/auction'
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
@@ -1244,6 +1274,7 @@ export interface FileRouteTypes {
     | '/app/care'
     | '/app/collections'
     | '/app/community'
+    | '/app/concierge'
     | '/app/create'
     | '/app/discover'
     | '/app/drafts'
@@ -1285,7 +1316,9 @@ export interface FileRouteTypes {
     | '/app/vendors/$id'
     | '/events/$slug/activity'
     | '/events/$slug/afterparty'
+    | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
+    | '/events/$slug/archive'
     | '/events/$slug/auction'
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
@@ -1367,6 +1400,7 @@ export interface FileRouteTypes {
     | '/app/care'
     | '/app/collections'
     | '/app/community'
+    | '/app/concierge'
     | '/app/create'
     | '/app/discover'
     | '/app/drafts'
@@ -1408,7 +1442,9 @@ export interface FileRouteTypes {
     | '/app/vendors/$id'
     | '/events/$slug/activity'
     | '/events/$slug/afterparty'
+    | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
+    | '/events/$slug/archive'
     | '/events/$slug/auction'
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
@@ -1776,6 +1812,13 @@ declare module '@tanstack/react-router' {
       path: '/create'
       fullPath: '/app/create'
       preLoaderRoute: typeof AppCreateRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/concierge': {
+      id: '/app/concierge'
+      path: '/concierge'
+      fullPath: '/app/concierge'
+      preLoaderRoute: typeof AppConciergeRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/community': {
@@ -2268,11 +2311,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugAuctionRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/archive': {
+      id: '/events/$slug/archive'
+      path: '/archive'
+      fullPath: '/events/$slug/archive'
+      preLoaderRoute: typeof EventsSlugArchiveRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/album': {
       id: '/events/$slug/album'
       path: '/album'
       fullPath: '/events/$slug/album'
       preLoaderRoute: typeof EventsSlugAlbumRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/ai-portraits': {
+      id: '/events/$slug/ai-portraits'
+      path: '/ai-portraits'
+      fullPath: '/events/$slug/ai-portraits'
+      preLoaderRoute: typeof EventsSlugAiPortraitsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/afterparty': {
@@ -2372,6 +2429,7 @@ interface AppRouteChildren {
   AppCareRoute: typeof AppCareRoute
   AppCollectionsRoute: typeof AppCollectionsRoute
   AppCommunityRoute: typeof AppCommunityRoute
+  AppConciergeRoute: typeof AppConciergeRoute
   AppCreateRoute: typeof AppCreateRoute
   AppDiscoverRoute: typeof AppDiscoverRoute
   AppDraftsRoute: typeof AppDraftsRoute
@@ -2416,6 +2474,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppCareRoute: AppCareRoute,
   AppCollectionsRoute: AppCollectionsRoute,
   AppCommunityRoute: AppCommunityRoute,
+  AppConciergeRoute: AppConciergeRoute,
   AppCreateRoute: AppCreateRoute,
   AppDiscoverRoute: AppDiscoverRoute,
   AppDraftsRoute: AppDraftsRoute,
@@ -2483,7 +2542,9 @@ const EventsSlugLiveRouteWithChildren = EventsSlugLiveRoute._addFileChildren(
 interface EventsSlugRouteChildren {
   EventsSlugActivityRoute: typeof EventsSlugActivityRoute
   EventsSlugAfterpartyRoute: typeof EventsSlugAfterpartyRoute
+  EventsSlugAiPortraitsRoute: typeof EventsSlugAiPortraitsRoute
   EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
+  EventsSlugArchiveRoute: typeof EventsSlugArchiveRoute
   EventsSlugAuctionRoute: typeof EventsSlugAuctionRoute
   EventsSlugBackupPlanRoute: typeof EventsSlugBackupPlanRoute
   EventsSlugBarRoute: typeof EventsSlugBarRoute
@@ -2553,7 +2614,9 @@ interface EventsSlugRouteChildren {
 const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugActivityRoute: EventsSlugActivityRoute,
   EventsSlugAfterpartyRoute: EventsSlugAfterpartyRoute,
+  EventsSlugAiPortraitsRoute: EventsSlugAiPortraitsRoute,
   EventsSlugAlbumRoute: EventsSlugAlbumRoute,
+  EventsSlugArchiveRoute: EventsSlugArchiveRoute,
   EventsSlugAuctionRoute: EventsSlugAuctionRoute,
   EventsSlugBackupPlanRoute: EventsSlugBackupPlanRoute,
   EventsSlugBarRoute: EventsSlugBarRoute,
