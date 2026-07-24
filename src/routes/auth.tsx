@@ -71,7 +71,7 @@ function AuthPage() {
               </div>
             )}
             <Link
-              to="/app"
+              to={mode === "signup" ? "/onboarding" : "/app"}
               className="inline-flex w-full items-center justify-center rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow"
             >
               {mode === "login" ? "Se connecter" : "Créer mon compte"}
