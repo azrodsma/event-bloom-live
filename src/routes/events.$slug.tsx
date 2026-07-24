@@ -12,6 +12,7 @@ import {
   Gift,
   Users,
   ExternalLink,
+  BarChart3,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -257,18 +258,25 @@ function EventPage() {
         </Link>
 
         {/* Organizer actions */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-3">
+          <Link
+            to="/events/$slug/dashboard"
+            params={{ slug: event.slug }}
+            className="flex flex-col items-start gap-1 rounded-2xl border border-border bg-background px-3 py-3 text-xs font-semibold"
+          >
+            <BarChart3 className="h-4 w-4 text-primary" /> Stats
+          </Link>
           <Link
             to="/events/$slug/guests"
             params={{ slug: event.slug }}
-            className="flex items-center gap-2 rounded-2xl border border-border bg-background px-4 py-3 text-sm font-semibold"
+            className="flex flex-col items-start gap-1 rounded-2xl border border-border bg-background px-3 py-3 text-xs font-semibold"
           >
             <Users className="h-4 w-4 text-primary" /> Invités
           </Link>
           <Link
             to="/events/$slug/edit"
             params={{ slug: event.slug }}
-            className="flex items-center gap-2 rounded-2xl border border-border bg-background px-4 py-3 text-sm font-semibold"
+            className="flex flex-col items-start gap-1 rounded-2xl border border-border bg-background px-3 py-3 text-xs font-semibold"
           >
             <Calendar className="h-4 w-4 text-primary" /> Modifier
           </Link>
