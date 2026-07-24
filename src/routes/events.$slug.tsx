@@ -324,7 +324,79 @@ function EventPage() {
           >
             <div className="grid h-10 w-10 place-items-center rounded-2xl bg-foreground text-background">
               <QrCode className="h-5 w-5" />
+        </div>
+
+        <div className="grid grid-cols-3 gap-3">
+          <Link
+            to="/events/$slug/rsvp"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/15 text-primary">
+              <MailCheck className="h-5 w-5" />
             </div>
+            <p className="font-serif text-sm leading-tight">RSVP</p>
+            <p className="text-[10px] text-muted-foreground">Confirmer</p>
+          </Link>
+          <Link
+            to="/events/$slug/dresscode"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-accent/40 text-foreground">
+              <Shirt className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Dress code</p>
+            <p className="text-[10px] text-muted-foreground">Palette & tenues</p>
+          </Link>
+          <Link
+            to="/events/$slug/map"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-secondary text-foreground">
+              <MapIcon className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Plan</p>
+            <p className="text-[10px] text-muted-foreground">Itinéraires</p>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-3 gap-3">
+          <Link
+            to="/events/$slug/photobooth"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-foreground text-background">
+              <Sparkles className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Photobooth</p>
+            <p className="text-[10px] text-muted-foreground">Filtres & stickers</p>
+          </Link>
+          <Link
+            to="/events/$slug/thanks"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/15 text-primary">
+              <Heart className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Remerciements</p>
+            <p className="text-[10px] text-muted-foreground">Cartes à envoyer</p>
+          </Link>
+          <Link
+            to="/events/$slug/gifts-received"
+            params={{ slug: event.slug }}
+            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-accent/40 text-foreground">
+              <PackageOpen className="h-5 w-5" />
+            </div>
+            <p className="font-serif text-sm leading-tight">Cadeaux reçus</p>
+            <p className="text-[10px] text-muted-foreground">Journal</p>
+          </Link>
+        </div>
             <p className="font-serif text-sm leading-tight">Check-in</p>
             <p className="text-[10px] text-muted-foreground">QR code</p>
           </Link>
