@@ -31,6 +31,7 @@ import { Route as AppCreateRouteImport } from './routes/app.create'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as EventsSlugTimelineRouteImport } from './routes/events.$slug.timeline'
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
+import { Route as EventsSlugSeatingRouteImport } from './routes/events.$slug.seating'
 import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.playlist'
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invite'
@@ -157,6 +158,11 @@ const EventsSlugSouvenirRoute = EventsSlugSouvenirRouteImport.update({
   path: '/souvenir',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugSeatingRoute = EventsSlugSeatingRouteImport.update({
+  id: '/seating',
+  path: '/seating',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugPlaylistRoute = EventsSlugPlaylistRouteImport.update({
   id: '/playlist',
   path: '/playlist',
@@ -268,6 +274,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
+  '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -306,6 +313,7 @@ export interface FileRoutesByTo {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
+  '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -346,6 +354,7 @@ export interface FileRoutesById {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
+  '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -387,6 +396,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/live'
     | '/events/$slug/playlist'
+    | '/events/$slug/seating'
     | '/events/$slug/souvenir'
     | '/events/$slug/timeline'
     | '/events/$slug/guestbook/new'
@@ -425,6 +435,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/live'
     | '/events/$slug/playlist'
+    | '/events/$slug/seating'
     | '/events/$slug/souvenir'
     | '/events/$slug/timeline'
     | '/events/$slug/guestbook/new'
@@ -464,6 +475,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/live'
     | '/events/$slug/playlist'
+    | '/events/$slug/seating'
     | '/events/$slug/souvenir'
     | '/events/$slug/timeline'
     | '/events/$slug/guestbook/new'
@@ -633,6 +645,13 @@ declare module '@tanstack/react-router' {
       path: '/souvenir'
       fullPath: '/events/$slug/souvenir'
       preLoaderRoute: typeof EventsSlugSouvenirRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/seating': {
+      id: '/events/$slug/seating'
+      path: '/seating'
+      fullPath: '/events/$slug/seating'
+      preLoaderRoute: typeof EventsSlugSeatingRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/playlist': {
@@ -827,6 +846,7 @@ interface EventsSlugRouteChildren {
   EventsSlugInviteRoute: typeof EventsSlugInviteRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRoute
   EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
+  EventsSlugSeatingRoute: typeof EventsSlugSeatingRoute
   EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
   EventsSlugTimelineRoute: typeof EventsSlugTimelineRoute
 }
@@ -842,6 +862,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugInviteRoute: EventsSlugInviteRoute,
   EventsSlugLiveRoute: EventsSlugLiveRoute,
   EventsSlugPlaylistRoute: EventsSlugPlaylistRoute,
+  EventsSlugSeatingRoute: EventsSlugSeatingRoute,
   EventsSlugSouvenirRoute: EventsSlugSouvenirRoute,
   EventsSlugTimelineRoute: EventsSlugTimelineRoute,
 }
