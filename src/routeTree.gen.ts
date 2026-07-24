@@ -28,6 +28,7 @@ import { Route as AppTimeCapsuleRouteImport } from './routes/app.time-capsule'
 import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
 import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppRemindersRouteImport } from './routes/app.reminders'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
@@ -64,6 +65,7 @@ import { Route as EventsSlugTimelineRouteImport } from './routes/events.$slug.ti
 import { Route as EventsSlugThanksRouteImport } from './routes/events.$slug.thanks'
 import { Route as EventsSlugThankYouCardsRouteImport } from './routes/events.$slug.thank-you-cards'
 import { Route as EventsSlugTastingsRouteImport } from './routes/events.$slug.tastings'
+import { Route as EventsSlugSurprisesRouteImport } from './routes/events.$slug.surprises'
 import { Route as EventsSlugSpeechesRouteImport } from './routes/events.$slug.speeches'
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
 import { Route as EventsSlugShuttleRouteImport } from './routes/events.$slug.shuttle'
@@ -116,6 +118,7 @@ import { Route as EventsSlugCakeRouteImport } from './routes/events.$slug.cake'
 import { Route as EventsSlugBudgetRouteImport } from './routes/events.$slug.budget'
 import { Route as EventsSlugBroadcastRouteImport } from './routes/events.$slug.broadcast'
 import { Route as EventsSlugBarRouteImport } from './routes/events.$slug.bar'
+import { Route as EventsSlugBackupPlanRouteImport } from './routes/events.$slug.backup-plan'
 import { Route as EventsSlugAuctionRouteImport } from './routes/events.$slug.auction'
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
 import { Route as EventsSlugAfterpartyRouteImport } from './routes/events.$slug.afterparty'
@@ -221,6 +224,11 @@ const AppSoundsRoute = AppSoundsRouteImport.update({
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRemindersRoute = AppRemindersRouteImport.update({
+  id: '/reminders',
+  path: '/reminders',
   getParentRoute: () => AppRoute,
 } as any)
 const AppReferralRoute = AppReferralRouteImport.update({
@@ -401,6 +409,11 @@ const EventsSlugThankYouCardsRoute = EventsSlugThankYouCardsRouteImport.update({
 const EventsSlugTastingsRoute = EventsSlugTastingsRouteImport.update({
   id: '/tastings',
   path: '/tastings',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugSurprisesRoute = EventsSlugSurprisesRouteImport.update({
+  id: '/surprises',
+  path: '/surprises',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugSpeechesRoute = EventsSlugSpeechesRouteImport.update({
@@ -664,6 +677,11 @@ const EventsSlugBarRoute = EventsSlugBarRouteImport.update({
   path: '/bar',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugBackupPlanRoute = EventsSlugBackupPlanRouteImport.update({
+  id: '/backup-plan',
+  path: '/backup-plan',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugAuctionRoute = EventsSlugAuctionRouteImport.update({
   id: '/auction',
   path: '/auction',
@@ -754,6 +772,7 @@ export interface FileRoutesByFullPath {
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
+  '/app/reminders': typeof AppRemindersRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
@@ -775,6 +794,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
+  '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
@@ -827,6 +847,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
+  '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
@@ -873,6 +894,7 @@ export interface FileRoutesByTo {
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
+  '/app/reminders': typeof AppRemindersRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
@@ -894,6 +916,7 @@ export interface FileRoutesByTo {
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
+  '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
@@ -946,6 +969,7 @@ export interface FileRoutesByTo {
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
+  '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
@@ -994,6 +1018,7 @@ export interface FileRoutesById {
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/referral': typeof AppReferralRoute
+  '/app/reminders': typeof AppRemindersRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
@@ -1015,6 +1040,7 @@ export interface FileRoutesById {
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
+  '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
@@ -1067,6 +1093,7 @@ export interface FileRoutesById {
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
+  '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
@@ -1116,6 +1143,7 @@ export interface FileRouteTypes {
     | '/app/premium'
     | '/app/profile'
     | '/app/referral'
+    | '/app/reminders'
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
@@ -1137,6 +1165,7 @@ export interface FileRouteTypes {
     | '/events/$slug/afterparty'
     | '/events/$slug/album'
     | '/events/$slug/auction'
+    | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
     | '/events/$slug/broadcast'
     | '/events/$slug/budget'
@@ -1189,6 +1218,7 @@ export interface FileRouteTypes {
     | '/events/$slug/shuttle'
     | '/events/$slug/souvenir'
     | '/events/$slug/speeches'
+    | '/events/$slug/surprises'
     | '/events/$slug/tastings'
     | '/events/$slug/thank-you-cards'
     | '/events/$slug/thanks'
@@ -1235,6 +1265,7 @@ export interface FileRouteTypes {
     | '/app/premium'
     | '/app/profile'
     | '/app/referral'
+    | '/app/reminders'
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
@@ -1256,6 +1287,7 @@ export interface FileRouteTypes {
     | '/events/$slug/afterparty'
     | '/events/$slug/album'
     | '/events/$slug/auction'
+    | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
     | '/events/$slug/broadcast'
     | '/events/$slug/budget'
@@ -1308,6 +1340,7 @@ export interface FileRouteTypes {
     | '/events/$slug/shuttle'
     | '/events/$slug/souvenir'
     | '/events/$slug/speeches'
+    | '/events/$slug/surprises'
     | '/events/$slug/tastings'
     | '/events/$slug/thank-you-cards'
     | '/events/$slug/thanks'
@@ -1355,6 +1388,7 @@ export interface FileRouteTypes {
     | '/app/premium'
     | '/app/profile'
     | '/app/referral'
+    | '/app/reminders'
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
@@ -1376,6 +1410,7 @@ export interface FileRouteTypes {
     | '/events/$slug/afterparty'
     | '/events/$slug/album'
     | '/events/$slug/auction'
+    | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
     | '/events/$slug/broadcast'
     | '/events/$slug/budget'
@@ -1428,6 +1463,7 @@ export interface FileRouteTypes {
     | '/events/$slug/shuttle'
     | '/events/$slug/souvenir'
     | '/events/$slug/speeches'
+    | '/events/$slug/surprises'
     | '/events/$slug/tastings'
     | '/events/$slug/thank-you-cards'
     | '/events/$slug/thanks'
@@ -1586,6 +1622,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/app/settings'
       preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/reminders': {
+      id: '/app/reminders'
+      path: '/reminders'
+      fullPath: '/app/reminders'
+      preLoaderRoute: typeof AppRemindersRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/referral': {
@@ -1838,6 +1881,13 @@ declare module '@tanstack/react-router' {
       path: '/tastings'
       fullPath: '/events/$slug/tastings'
       preLoaderRoute: typeof EventsSlugTastingsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/surprises': {
+      id: '/events/$slug/surprises'
+      path: '/surprises'
+      fullPath: '/events/$slug/surprises'
+      preLoaderRoute: typeof EventsSlugSurprisesRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/speeches': {
@@ -2204,6 +2254,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugBarRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/backup-plan': {
+      id: '/events/$slug/backup-plan'
+      path: '/backup-plan'
+      fullPath: '/events/$slug/backup-plan'
+      preLoaderRoute: typeof EventsSlugBackupPlanRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/auction': {
       id: '/events/$slug/auction'
       path: '/auction'
@@ -2336,6 +2393,7 @@ interface AppRouteChildren {
   AppPremiumRoute: typeof AppPremiumRoute
   AppProfileRoute: typeof AppProfileRoute
   AppReferralRoute: typeof AppReferralRoute
+  AppRemindersRoute: typeof AppRemindersRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppSoundsRoute: typeof AppSoundsRoute
   AppStoryComposerRoute: typeof AppStoryComposerRoute
@@ -2379,6 +2437,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppPremiumRoute: AppPremiumRoute,
   AppProfileRoute: AppProfileRoute,
   AppReferralRoute: AppReferralRoute,
+  AppRemindersRoute: AppRemindersRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppSoundsRoute: AppSoundsRoute,
   AppStoryComposerRoute: AppStoryComposerRoute,
@@ -2426,6 +2485,7 @@ interface EventsSlugRouteChildren {
   EventsSlugAfterpartyRoute: typeof EventsSlugAfterpartyRoute
   EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
   EventsSlugAuctionRoute: typeof EventsSlugAuctionRoute
+  EventsSlugBackupPlanRoute: typeof EventsSlugBackupPlanRoute
   EventsSlugBarRoute: typeof EventsSlugBarRoute
   EventsSlugBroadcastRoute: typeof EventsSlugBroadcastRoute
   EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
@@ -2478,6 +2538,7 @@ interface EventsSlugRouteChildren {
   EventsSlugShuttleRoute: typeof EventsSlugShuttleRoute
   EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
   EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
+  EventsSlugSurprisesRoute: typeof EventsSlugSurprisesRoute
   EventsSlugTastingsRoute: typeof EventsSlugTastingsRoute
   EventsSlugThankYouCardsRoute: typeof EventsSlugThankYouCardsRoute
   EventsSlugThanksRoute: typeof EventsSlugThanksRoute
@@ -2494,6 +2555,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugAfterpartyRoute: EventsSlugAfterpartyRoute,
   EventsSlugAlbumRoute: EventsSlugAlbumRoute,
   EventsSlugAuctionRoute: EventsSlugAuctionRoute,
+  EventsSlugBackupPlanRoute: EventsSlugBackupPlanRoute,
   EventsSlugBarRoute: EventsSlugBarRoute,
   EventsSlugBroadcastRoute: EventsSlugBroadcastRoute,
   EventsSlugBudgetRoute: EventsSlugBudgetRoute,
@@ -2546,6 +2608,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugShuttleRoute: EventsSlugShuttleRoute,
   EventsSlugSouvenirRoute: EventsSlugSouvenirRoute,
   EventsSlugSpeechesRoute: EventsSlugSpeechesRoute,
+  EventsSlugSurprisesRoute: EventsSlugSurprisesRoute,
   EventsSlugTastingsRoute: EventsSlugTastingsRoute,
   EventsSlugThankYouCardsRoute: EventsSlugThankYouCardsRoute,
   EventsSlugThanksRoute: EventsSlugThanksRoute,
