@@ -18,7 +18,7 @@ function AppLayout() {
               <Bell className="h-5 w-5 text-foreground" />
               <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary" />
             </Link>
-            <Link to="/app/explore" className="grid h-10 w-10 place-items-center rounded-full hover:bg-muted" aria-label="Messages">
+            <Link to="/app/messages" className="grid h-10 w-10 place-items-center rounded-full hover:bg-muted" aria-label="Messages">
               <MessageCircle className="h-5 w-5 text-foreground" />
             </Link>
           </div>
