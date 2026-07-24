@@ -19,6 +19,7 @@ import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as AppYearInReviewRouteImport } from './routes/app.year-in-review'
+import { Route as AppWalletRouteImport } from './routes/app.wallet'
 import { Route as AppVendorsRouteImport } from './routes/app.vendors'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
@@ -31,6 +32,7 @@ import { Route as AppHelpRouteImport } from './routes/app.help'
 import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
 import { Route as AppExploreRouteImport } from './routes/app.explore'
 import { Route as AppCreateRouteImport } from './routes/app.create'
+import { Route as AppCareRouteImport } from './routes/app.care'
 import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as EventsSlugWeatherRouteImport } from './routes/events.$slug.weather'
@@ -46,6 +48,7 @@ import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.pl
 import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.photobooth'
 import { Route as EventsSlugModerationRouteImport } from './routes/events.$slug.moderation'
 import { Route as EventsSlugMapRouteImport } from './routes/events.$slug.map'
+import { Route as EventsSlugLiveAnalyticsRouteImport } from './routes/events.$slug.live-analytics'
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugKidsRouteImport } from './routes/events.$slug.kids'
 import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invite'
@@ -122,6 +125,11 @@ const AppYearInReviewRoute = AppYearInReviewRouteImport.update({
   path: '/year-in-review',
   getParentRoute: () => AppRoute,
 } as any)
+const AppWalletRoute = AppWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppVendorsRoute = AppVendorsRouteImport.update({
   id: '/vendors',
   path: '/vendors',
@@ -180,6 +188,11 @@ const AppExploreRoute = AppExploreRouteImport.update({
 const AppCreateRoute = AppCreateRouteImport.update({
   id: '/create',
   path: '/create',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCareRoute = AppCareRouteImport.update({
+  id: '/care',
+  path: '/care',
   getParentRoute: () => AppRoute,
 } as any)
 const AppAgendaRoute = AppAgendaRouteImport.update({
@@ -255,6 +268,11 @@ const EventsSlugModerationRoute = EventsSlugModerationRouteImport.update({
 const EventsSlugMapRoute = EventsSlugMapRouteImport.update({
   id: '/map',
   path: '/map',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugLiveAnalyticsRoute = EventsSlugLiveAnalyticsRouteImport.update({
+  id: '/live-analytics',
+  path: '/live-analytics',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugLiveRoute = EventsSlugLiveRouteImport.update({
@@ -392,6 +410,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
+  '/app/care': typeof AppCareRoute
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
@@ -404,6 +423,7 @@ export interface FileRoutesByFullPath {
   '/app/referral': typeof AppReferralRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
+  '/app/wallet': typeof AppWalletRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
@@ -431,6 +451,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
+  '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
@@ -455,6 +476,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
+  '/app/care': typeof AppCareRoute
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
@@ -467,6 +489,7 @@ export interface FileRoutesByTo {
   '/app/referral': typeof AppReferralRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
+  '/app/wallet': typeof AppWalletRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
@@ -494,6 +517,7 @@ export interface FileRoutesByTo {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
+  '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
@@ -520,6 +544,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
+  '/app/care': typeof AppCareRoute
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
@@ -532,6 +557,7 @@ export interface FileRoutesById {
   '/app/referral': typeof AppReferralRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
+  '/app/wallet': typeof AppWalletRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
@@ -559,6 +585,7 @@ export interface FileRoutesById {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
+  '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
@@ -586,6 +613,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/app/achievements'
     | '/app/agenda'
+    | '/app/care'
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
@@ -598,6 +626,7 @@ export interface FileRouteTypes {
     | '/app/referral'
     | '/app/settings'
     | '/app/vendors'
+    | '/app/wallet'
     | '/app/year-in-review'
     | '/events/$slug'
     | '/stories/$slug'
@@ -625,6 +654,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/kids'
     | '/events/$slug/live'
+    | '/events/$slug/live-analytics'
     | '/events/$slug/map'
     | '/events/$slug/moderation'
     | '/events/$slug/photobooth'
@@ -649,6 +679,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/app/achievements'
     | '/app/agenda'
+    | '/app/care'
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
@@ -661,6 +692,7 @@ export interface FileRouteTypes {
     | '/app/referral'
     | '/app/settings'
     | '/app/vendors'
+    | '/app/wallet'
     | '/app/year-in-review'
     | '/events/$slug'
     | '/stories/$slug'
@@ -688,6 +720,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/kids'
     | '/events/$slug/live'
+    | '/events/$slug/live-analytics'
     | '/events/$slug/map'
     | '/events/$slug/moderation'
     | '/events/$slug/photobooth'
@@ -713,6 +746,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/app/achievements'
     | '/app/agenda'
+    | '/app/care'
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
@@ -725,6 +759,7 @@ export interface FileRouteTypes {
     | '/app/referral'
     | '/app/settings'
     | '/app/vendors'
+    | '/app/wallet'
     | '/app/year-in-review'
     | '/events/$slug'
     | '/stories/$slug'
@@ -752,6 +787,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/kids'
     | '/events/$slug/live'
+    | '/events/$slug/live-analytics'
     | '/events/$slug/map'
     | '/events/$slug/moderation'
     | '/events/$slug/photobooth'
@@ -852,6 +888,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppYearInReviewRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/wallet': {
+      id: '/app/wallet'
+      path: '/wallet'
+      fullPath: '/app/wallet'
+      preLoaderRoute: typeof AppWalletRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/vendors': {
       id: '/app/vendors'
       path: '/vendors'
@@ -934,6 +977,13 @@ declare module '@tanstack/react-router' {
       path: '/create'
       fullPath: '/app/create'
       preLoaderRoute: typeof AppCreateRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/care': {
+      id: '/app/care'
+      path: '/care'
+      fullPath: '/app/care'
+      preLoaderRoute: typeof AppCareRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/agenda': {
@@ -1039,6 +1089,13 @@ declare module '@tanstack/react-router' {
       path: '/map'
       fullPath: '/events/$slug/map'
       preLoaderRoute: typeof EventsSlugMapRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/live-analytics': {
+      id: '/events/$slug/live-analytics'
+      path: '/live-analytics'
+      fullPath: '/events/$slug/live-analytics'
+      preLoaderRoute: typeof EventsSlugLiveAnalyticsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/live': {
@@ -1246,6 +1303,7 @@ const AppVendorsRouteWithChildren = AppVendorsRoute._addFileChildren(
 interface AppRouteChildren {
   AppAchievementsRoute: typeof AppAchievementsRoute
   AppAgendaRoute: typeof AppAgendaRoute
+  AppCareRoute: typeof AppCareRoute
   AppCreateRoute: typeof AppCreateRoute
   AppExploreRoute: typeof AppExploreRoute
   AppFavoritesRoute: typeof AppFavoritesRoute
@@ -1258,6 +1316,7 @@ interface AppRouteChildren {
   AppReferralRoute: typeof AppReferralRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppVendorsRoute: typeof AppVendorsRouteWithChildren
+  AppWalletRoute: typeof AppWalletRoute
   AppYearInReviewRoute: typeof AppYearInReviewRoute
   AppIndexRoute: typeof AppIndexRoute
   AppPostsIdRoute: typeof AppPostsIdRoute
@@ -1267,6 +1326,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppAchievementsRoute: AppAchievementsRoute,
   AppAgendaRoute: AppAgendaRoute,
+  AppCareRoute: AppCareRoute,
   AppCreateRoute: AppCreateRoute,
   AppExploreRoute: AppExploreRoute,
   AppFavoritesRoute: AppFavoritesRoute,
@@ -1279,6 +1339,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppReferralRoute: AppReferralRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppVendorsRoute: AppVendorsRouteWithChildren,
+  AppWalletRoute: AppWalletRoute,
   AppYearInReviewRoute: AppYearInReviewRoute,
   AppIndexRoute: AppIndexRoute,
   AppPostsIdRoute: AppPostsIdRoute,
@@ -1330,6 +1391,7 @@ interface EventsSlugRouteChildren {
   EventsSlugInviteRoute: typeof EventsSlugInviteRoute
   EventsSlugKidsRoute: typeof EventsSlugKidsRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRouteWithChildren
+  EventsSlugLiveAnalyticsRoute: typeof EventsSlugLiveAnalyticsRoute
   EventsSlugMapRoute: typeof EventsSlugMapRoute
   EventsSlugModerationRoute: typeof EventsSlugModerationRoute
   EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
@@ -1365,6 +1427,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugInviteRoute: EventsSlugInviteRoute,
   EventsSlugKidsRoute: EventsSlugKidsRoute,
   EventsSlugLiveRoute: EventsSlugLiveRouteWithChildren,
+  EventsSlugLiveAnalyticsRoute: EventsSlugLiveAnalyticsRoute,
   EventsSlugMapRoute: EventsSlugMapRoute,
   EventsSlugModerationRoute: EventsSlugModerationRoute,
   EventsSlugPhotoboothRoute: EventsSlugPhotoboothRoute,
