@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { EventCard } from "@/components/EventCard";
 import { mockEvents, eventTypes, eventTypeIcons } from "@/lib/mock-data";
-import { Search } from "lucide-react";
+import { Search, Sparkles, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/app/explore")({
@@ -57,6 +57,19 @@ function Explore() {
           </button>
         ))}
       </div>
+      <Link
+        to="/app/vendors"
+        className="flex items-center gap-4 rounded-3xl border border-border/60 bg-gradient-to-r from-primary/10 via-accent/10 to-background p-4 transition-colors hover:border-primary/40"
+      >
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-primary text-primary-foreground">
+          <Sparkles className="h-5 w-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="font-serif text-lg leading-tight">Prestataires recommandés</p>
+          <p className="text-xs text-muted-foreground">Photographes, DJs, traiteurs vérifiés</p>
+        </div>
+        <ChevronRight className="h-5 w-5 text-muted-foreground" />
+      </Link>
       <div className="grid gap-4 sm:grid-cols-2">
         {filtered.map((e) => (
           <EventCard key={e.id} event={e} />
