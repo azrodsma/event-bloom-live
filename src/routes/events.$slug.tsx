@@ -210,7 +210,7 @@ function EventPage() {
             <p className="text-xs text-muted-foreground">{event.guestbookCount} messages</p>
           </Link>
           <Link
-            to="/events/$slug"
+            to="/events/$slug/album"
             params={{ slug: event.slug }}
             className="rounded-3xl bg-surface p-5 shadow-card"
           >
