@@ -21,9 +21,11 @@ import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
 import { Route as AppMessagesRouteImport } from './routes/app.messages'
+import { Route as AppHelpRouteImport } from './routes/app.help'
 import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
 import { Route as AppExploreRouteImport } from './routes/app.explore'
 import { Route as AppCreateRouteImport } from './routes/app.create'
+import { Route as EventsSlugTimelineRouteImport } from './routes/events.$slug.timeline'
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invite'
@@ -33,6 +35,7 @@ import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
 import { Route as AppUsersIdRouteImport } from './routes/app.users.$id'
+import { Route as AppPostsIdRouteImport } from './routes/app.posts.$id'
 import { Route as AppMessagesIdRouteImport } from './routes/app.messages.$id'
 import { Route as EventsSlugGuestbookNewRouteImport } from './routes/events.$slug.guestbook.new'
 
@@ -96,6 +99,11 @@ const AppMessagesRoute = AppMessagesRouteImport.update({
   path: '/messages',
   getParentRoute: () => AppRoute,
 } as any)
+const AppHelpRoute = AppHelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppFavoritesRoute = AppFavoritesRouteImport.update({
   id: '/favorites',
   path: '/favorites',
@@ -110,6 +118,11 @@ const AppCreateRoute = AppCreateRouteImport.update({
   id: '/create',
   path: '/create',
   getParentRoute: () => AppRoute,
+} as any)
+const EventsSlugTimelineRoute = EventsSlugTimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugSouvenirRoute = EventsSlugSouvenirRouteImport.update({
   id: '/souvenir',
@@ -156,6 +169,11 @@ const AppUsersIdRoute = AppUsersIdRouteImport.update({
   path: '/users/$id',
   getParentRoute: () => AppRoute,
 } as any)
+const AppPostsIdRoute = AppPostsIdRouteImport.update({
+  id: '/posts/$id',
+  path: '/posts/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppMessagesIdRoute = AppMessagesIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -175,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
+  '/app/help': typeof AppHelpRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
@@ -184,6 +203,7 @@ export interface FileRoutesByFullPath {
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
+  '/app/posts/$id': typeof AppPostsIdRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
@@ -193,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
+  '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
 }
 export interface FileRoutesByTo {
@@ -202,6 +223,7 @@ export interface FileRoutesByTo {
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
+  '/app/help': typeof AppHelpRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
@@ -211,6 +233,7 @@ export interface FileRoutesByTo {
   '/stories/$slug': typeof StoriesSlugRoute
   '/app': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
+  '/app/posts/$id': typeof AppPostsIdRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
@@ -220,6 +243,7 @@ export interface FileRoutesByTo {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
+  '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
 }
 export interface FileRoutesById {
@@ -231,6 +255,7 @@ export interface FileRoutesById {
   '/app/create': typeof AppCreateRoute
   '/app/explore': typeof AppExploreRoute
   '/app/favorites': typeof AppFavoritesRoute
+  '/app/help': typeof AppHelpRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/notifications': typeof AppNotificationsRoute
   '/app/premium': typeof AppPremiumRoute
@@ -240,6 +265,7 @@ export interface FileRoutesById {
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
+  '/app/posts/$id': typeof AppPostsIdRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
@@ -249,6 +275,7 @@ export interface FileRoutesById {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/live': typeof EventsSlugLiveRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
+  '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
 }
 export interface FileRouteTypes {
@@ -261,6 +288,7 @@ export interface FileRouteTypes {
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
+    | '/app/help'
     | '/app/messages'
     | '/app/notifications'
     | '/app/premium'
@@ -270,6 +298,7 @@ export interface FileRouteTypes {
     | '/stories/$slug'
     | '/app/'
     | '/app/messages/$id'
+    | '/app/posts/$id'
     | '/app/users/$id'
     | '/events/$slug/album'
     | '/events/$slug/dashboard'
@@ -279,6 +308,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/live'
     | '/events/$slug/souvenir'
+    | '/events/$slug/timeline'
     | '/events/$slug/guestbook/new'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -288,6 +318,7 @@ export interface FileRouteTypes {
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
+    | '/app/help'
     | '/app/messages'
     | '/app/notifications'
     | '/app/premium'
@@ -297,6 +328,7 @@ export interface FileRouteTypes {
     | '/stories/$slug'
     | '/app'
     | '/app/messages/$id'
+    | '/app/posts/$id'
     | '/app/users/$id'
     | '/events/$slug/album'
     | '/events/$slug/dashboard'
@@ -306,6 +338,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/live'
     | '/events/$slug/souvenir'
+    | '/events/$slug/timeline'
     | '/events/$slug/guestbook/new'
   id:
     | '__root__'
@@ -316,6 +349,7 @@ export interface FileRouteTypes {
     | '/app/create'
     | '/app/explore'
     | '/app/favorites'
+    | '/app/help'
     | '/app/messages'
     | '/app/notifications'
     | '/app/premium'
@@ -325,6 +359,7 @@ export interface FileRouteTypes {
     | '/stories/$slug'
     | '/app/'
     | '/app/messages/$id'
+    | '/app/posts/$id'
     | '/app/users/$id'
     | '/events/$slug/album'
     | '/events/$slug/dashboard'
@@ -334,6 +369,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/live'
     | '/events/$slug/souvenir'
+    | '/events/$slug/timeline'
     | '/events/$slug/guestbook/new'
   fileRoutesById: FileRoutesById
 }
@@ -432,6 +468,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppMessagesRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/help': {
+      id: '/app/help'
+      path: '/help'
+      fullPath: '/app/help'
+      preLoaderRoute: typeof AppHelpRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/favorites': {
       id: '/app/favorites'
       path: '/favorites'
@@ -452,6 +495,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/app/create'
       preLoaderRoute: typeof AppCreateRouteImport
       parentRoute: typeof AppRoute
+    }
+    '/events/$slug/timeline': {
+      id: '/events/$slug/timeline'
+      path: '/timeline'
+      fullPath: '/events/$slug/timeline'
+      preLoaderRoute: typeof EventsSlugTimelineRouteImport
+      parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/souvenir': {
       id: '/events/$slug/souvenir'
@@ -516,6 +566,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppUsersIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/posts/$id': {
+      id: '/app/posts/$id'
+      path: '/posts/$id'
+      fullPath: '/app/posts/$id'
+      preLoaderRoute: typeof AppPostsIdRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/messages/$id': {
       id: '/app/messages/$id'
       path: '/$id'
@@ -549,12 +606,14 @@ interface AppRouteChildren {
   AppCreateRoute: typeof AppCreateRoute
   AppExploreRoute: typeof AppExploreRoute
   AppFavoritesRoute: typeof AppFavoritesRoute
+  AppHelpRoute: typeof AppHelpRoute
   AppMessagesRoute: typeof AppMessagesRouteWithChildren
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppPremiumRoute: typeof AppPremiumRoute
   AppProfileRoute: typeof AppProfileRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppPostsIdRoute: typeof AppPostsIdRoute
   AppUsersIdRoute: typeof AppUsersIdRoute
 }
 
@@ -562,12 +621,14 @@ const AppRouteChildren: AppRouteChildren = {
   AppCreateRoute: AppCreateRoute,
   AppExploreRoute: AppExploreRoute,
   AppFavoritesRoute: AppFavoritesRoute,
+  AppHelpRoute: AppHelpRoute,
   AppMessagesRoute: AppMessagesRouteWithChildren,
   AppNotificationsRoute: AppNotificationsRoute,
   AppPremiumRoute: AppPremiumRoute,
   AppProfileRoute: AppProfileRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppIndexRoute: AppIndexRoute,
+  AppPostsIdRoute: AppPostsIdRoute,
   AppUsersIdRoute: AppUsersIdRoute,
 }
 
@@ -593,6 +654,7 @@ interface EventsSlugRouteChildren {
   EventsSlugInviteRoute: typeof EventsSlugInviteRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRoute
   EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
+  EventsSlugTimelineRoute: typeof EventsSlugTimelineRoute
 }
 
 const EventsSlugRouteChildren: EventsSlugRouteChildren = {
@@ -604,6 +666,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugInviteRoute: EventsSlugInviteRoute,
   EventsSlugLiveRoute: EventsSlugLiveRoute,
   EventsSlugSouvenirRoute: EventsSlugSouvenirRoute,
+  EventsSlugTimelineRoute: EventsSlugTimelineRoute,
 }
 
 const EventsSlugRouteWithChildren = EventsSlugRoute._addFileChildren(

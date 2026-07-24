@@ -134,7 +134,7 @@ function Settings() {
 
         {/* Support */}
         <Group title="Aide" icon={HelpCircle}>
-          <NavRow icon={HelpCircle} label="Centre d'aide" />
+          <NavRow icon={HelpCircle} label="Centre d'aide" to="/app/help" />
           <NavRow icon={HelpCircle} label="Nous contacter" />
         </Group>
 
@@ -189,13 +189,22 @@ function Row({ label, desc, children }: { label: string; desc?: string; children
   );
 }
 
-function NavRow({ icon: Icon, label, hint }: { icon: typeof Bell; label: string; hint?: string }) {
-  return (
-    <button className="flex w-full items-center gap-3 p-4 text-left transition-colors hover:bg-cream">
+function NavRow({ icon: Icon, label, hint, to }: { icon: typeof Bell; label: string; hint?: string; to?: string }) {
+  const content = (
+    <>
       <Icon className="h-4 w-4 text-muted-foreground" />
       <span className="flex-1 text-sm font-medium">{label}</span>
       {hint && <span className="text-xs text-muted-foreground">{hint}</span>}
       <ChevronRight className="h-4 w-4 text-muted-foreground" />
-    </button>
+    </>
   );
+  const className = "flex w-full items-center gap-3 p-4 text-left transition-colors hover:bg-cream";
+  if (to) {
+    return (
+      <Link to={to} className={className}>
+        {content}
+      </Link>
+    );
+  }
+  return <button className={className}>{content}</button>;
 }
