@@ -276,7 +276,7 @@ function EventPage() {
         </Link>
 
         {/* Organizer actions */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <Link
             to="/events/$slug/dashboard"
             params={{ slug: event.slug }}
@@ -292,12 +292,20 @@ function EventPage() {
             <Users className="h-4 w-4 text-primary" /> Invités
           </Link>
           <Link
+            to="/events/$slug/contributors"
+            params={{ slug: event.slug }}
+            className="flex flex-col items-start gap-1 rounded-2xl border border-border bg-background px-3 py-3 text-xs font-semibold"
+          >
+            <Users className="h-4 w-4 text-primary" /> Équipe
+          </Link>
+          <Link
             to="/events/$slug/edit"
             params={{ slug: event.slug }}
             className="flex flex-col items-start gap-1 rounded-2xl border border-border bg-background px-3 py-3 text-xs font-semibold"
           >
             <Calendar className="h-4 w-4 text-primary" /> Modifier
           </Link>
+
         </div>
       </main>
     </div>

@@ -135,8 +135,10 @@ function Settings() {
         {/* Support */}
         <Group title="Aide" icon={HelpCircle}>
           <NavRow icon={HelpCircle} label="Centre d'aide" to="/app/help" />
+          <NavRow icon={HelpCircle} label="Récompenses & badges" to="/app/achievements" />
           <NavRow icon={HelpCircle} label="Nous contacter" />
         </Group>
+
 
         {/* Danger zone */}
         <section className="space-y-2">
