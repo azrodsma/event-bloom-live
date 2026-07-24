@@ -31,6 +31,7 @@ import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSecurityRouteImport } from './routes/app.security'
 import { Route as AppRemindersRouteImport } from './routes/app.reminders'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
+import { Route as AppQuestsRouteImport } from './routes/app.quests'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
 import { Route as AppOfficiantsRouteImport } from './routes/app.officiants'
@@ -63,6 +64,7 @@ import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as EventsSlugWeatherRouteImport } from './routes/events.$slug.weather'
 import { Route as EventsSlugVowsRouteImport } from './routes/events.$slug.vows'
 import { Route as EventsSlugVipRouteImport } from './routes/events.$slug.vip'
+import { Route as EventsSlugVendorsHubRouteImport } from './routes/events.$slug.vendors-hub'
 import { Route as EventsSlugTributeRouteImport } from './routes/events.$slug.tribute'
 import { Route as EventsSlugToastRouteImport } from './routes/events.$slug.toast'
 import { Route as EventsSlugTimelineRouteImport } from './routes/events.$slug.timeline'
@@ -111,6 +113,7 @@ import { Route as EventsSlugFlowersRouteImport } from './routes/events.$slug.flo
 import { Route as EventsSlugFiltersRouteImport } from './routes/events.$slug.filters'
 import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
 import { Route as EventsSlugFamilyTreeRouteImport } from './routes/events.$slug.family-tree'
+import { Route as EventsSlugEntranceRouteImport } from './routes/events.$slug.entrance'
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugEcoRouteImport } from './routes/events.$slug.eco'
 import { Route as EventsSlugDresscodeRouteImport } from './routes/events.$slug.dresscode'
@@ -251,6 +254,11 @@ const AppRemindersRoute = AppRemindersRouteImport.update({
 const AppReferralRoute = AppReferralRouteImport.update({
   id: '/referral',
   path: '/referral',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppQuestsRoute = AppQuestsRouteImport.update({
+  id: '/quests',
+  path: '/quests',
   getParentRoute: () => AppRoute,
 } as any)
 const AppProfileRoute = AppProfileRouteImport.update({
@@ -411,6 +419,11 @@ const EventsSlugVowsRoute = EventsSlugVowsRouteImport.update({
 const EventsSlugVipRoute = EventsSlugVipRouteImport.update({
   id: '/vip',
   path: '/vip',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugVendorsHubRoute = EventsSlugVendorsHubRouteImport.update({
+  id: '/vendors-hub',
+  path: '/vendors-hub',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugTributeRoute = EventsSlugTributeRouteImport.update({
@@ -654,6 +667,11 @@ const EventsSlugFamilyTreeRoute = EventsSlugFamilyTreeRouteImport.update({
   path: '/family-tree',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugEntranceRoute = EventsSlugEntranceRouteImport.update({
+  id: '/entrance',
+  path: '/entrance',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugEditRoute = EventsSlugEditRouteImport.update({
   id: '/edit',
   path: '/edit',
@@ -846,6 +864,7 @@ export interface FileRoutesByFullPath {
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
+  '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/security': typeof AppSecurityRoute
@@ -890,6 +909,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
@@ -938,6 +958,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
+  '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
@@ -980,6 +1001,7 @@ export interface FileRoutesByTo {
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
+  '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/security': typeof AppSecurityRoute
@@ -1024,6 +1046,7 @@ export interface FileRoutesByTo {
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
@@ -1072,6 +1095,7 @@ export interface FileRoutesByTo {
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
+  '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
@@ -1116,6 +1140,7 @@ export interface FileRoutesById {
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
+  '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/security': typeof AppSecurityRoute
@@ -1160,6 +1185,7 @@ export interface FileRoutesById {
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
@@ -1208,6 +1234,7 @@ export interface FileRoutesById {
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
+  '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
@@ -1253,6 +1280,7 @@ export interface FileRouteTypes {
     | '/app/officiants'
     | '/app/premium'
     | '/app/profile'
+    | '/app/quests'
     | '/app/referral'
     | '/app/reminders'
     | '/app/security'
@@ -1297,6 +1325,7 @@ export interface FileRouteTypes {
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
+    | '/events/$slug/entrance'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/filters'
@@ -1345,6 +1374,7 @@ export interface FileRouteTypes {
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
     | '/events/$slug/tribute'
+    | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
@@ -1387,6 +1417,7 @@ export interface FileRouteTypes {
     | '/app/officiants'
     | '/app/premium'
     | '/app/profile'
+    | '/app/quests'
     | '/app/referral'
     | '/app/reminders'
     | '/app/security'
@@ -1431,6 +1462,7 @@ export interface FileRouteTypes {
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
+    | '/events/$slug/entrance'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/filters'
@@ -1479,6 +1511,7 @@ export interface FileRouteTypes {
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
     | '/events/$slug/tribute'
+    | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
@@ -1522,6 +1555,7 @@ export interface FileRouteTypes {
     | '/app/officiants'
     | '/app/premium'
     | '/app/profile'
+    | '/app/quests'
     | '/app/referral'
     | '/app/reminders'
     | '/app/security'
@@ -1566,6 +1600,7 @@ export interface FileRouteTypes {
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
+    | '/events/$slug/entrance'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/filters'
@@ -1614,6 +1649,7 @@ export interface FileRouteTypes {
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
     | '/events/$slug/tribute'
+    | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
@@ -1787,6 +1823,13 @@ declare module '@tanstack/react-router' {
       path: '/referral'
       fullPath: '/app/referral'
       preLoaderRoute: typeof AppReferralRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/quests': {
+      id: '/app/quests'
+      path: '/quests'
+      fullPath: '/app/quests'
+      preLoaderRoute: typeof AppQuestsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/profile': {
@@ -2011,6 +2054,13 @@ declare module '@tanstack/react-router' {
       path: '/vip'
       fullPath: '/events/$slug/vip'
       preLoaderRoute: typeof EventsSlugVipRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/vendors-hub': {
+      id: '/events/$slug/vendors-hub'
+      path: '/vendors-hub'
+      fullPath: '/events/$slug/vendors-hub'
+      preLoaderRoute: typeof EventsSlugVendorsHubRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/tribute': {
@@ -2349,6 +2399,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugFamilyTreeRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/entrance': {
+      id: '/events/$slug/entrance'
+      path: '/entrance'
+      fullPath: '/events/$slug/entrance'
+      preLoaderRoute: typeof EventsSlugEntranceRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/edit': {
       id: '/events/$slug/edit'
       path: '/edit'
@@ -2623,6 +2680,7 @@ interface AppRouteChildren {
   AppOfficiantsRoute: typeof AppOfficiantsRoute
   AppPremiumRoute: typeof AppPremiumRoute
   AppProfileRoute: typeof AppProfileRoute
+  AppQuestsRoute: typeof AppQuestsRoute
   AppReferralRoute: typeof AppReferralRoute
   AppRemindersRoute: typeof AppRemindersRoute
   AppSecurityRoute: typeof AppSecurityRoute
@@ -2671,6 +2729,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppOfficiantsRoute: AppOfficiantsRoute,
   AppPremiumRoute: AppPremiumRoute,
   AppProfileRoute: AppProfileRoute,
+  AppQuestsRoute: AppQuestsRoute,
   AppReferralRoute: AppReferralRoute,
   AppRemindersRoute: AppRemindersRoute,
   AppSecurityRoute: AppSecurityRoute,
@@ -2741,6 +2800,7 @@ interface EventsSlugRouteChildren {
   EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
   EventsSlugEcoRoute: typeof EventsSlugEcoRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
+  EventsSlugEntranceRoute: typeof EventsSlugEntranceRoute
   EventsSlugFamilyTreeRoute: typeof EventsSlugFamilyTreeRoute
   EventsSlugFaqRoute: typeof EventsSlugFaqRoute
   EventsSlugFiltersRoute: typeof EventsSlugFiltersRoute
@@ -2789,6 +2849,7 @@ interface EventsSlugRouteChildren {
   EventsSlugTimelineRoute: typeof EventsSlugTimelineRoute
   EventsSlugToastRoute: typeof EventsSlugToastRoute
   EventsSlugTributeRoute: typeof EventsSlugTributeRoute
+  EventsSlugVendorsHubRoute: typeof EventsSlugVendorsHubRoute
   EventsSlugVipRoute: typeof EventsSlugVipRoute
   EventsSlugVowsRoute: typeof EventsSlugVowsRoute
   EventsSlugWeatherRoute: typeof EventsSlugWeatherRoute
@@ -2819,6 +2880,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugDresscodeRoute: EventsSlugDresscodeRoute,
   EventsSlugEcoRoute: EventsSlugEcoRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
+  EventsSlugEntranceRoute: EventsSlugEntranceRoute,
   EventsSlugFamilyTreeRoute: EventsSlugFamilyTreeRoute,
   EventsSlugFaqRoute: EventsSlugFaqRoute,
   EventsSlugFiltersRoute: EventsSlugFiltersRoute,
@@ -2867,6 +2929,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugTimelineRoute: EventsSlugTimelineRoute,
   EventsSlugToastRoute: EventsSlugToastRoute,
   EventsSlugTributeRoute: EventsSlugTributeRoute,
+  EventsSlugVendorsHubRoute: EventsSlugVendorsHubRoute,
   EventsSlugVipRoute: EventsSlugVipRoute,
   EventsSlugVowsRoute: EventsSlugVowsRoute,
   EventsSlugWeatherRoute: EventsSlugWeatherRoute,
