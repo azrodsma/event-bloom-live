@@ -159,7 +159,7 @@ function Invite() {
               <p className="font-serif text-lg">Liste d'invités</p>
               <p className="text-xs text-muted-foreground">124 invités · 87 confirmés · 12 en attente</p>
             </div>
-            <button className="rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold">Gérer</button>
+            <Link to="/events/$slug/guests" params={{ slug: event.slug }} className="rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold">Gérer</Link>
           </div>
           <div className="mt-4 h-2 overflow-hidden rounded-full bg-primary-light">
             <div className="h-full w-[70%] rounded-full bg-gradient-primary" />
