@@ -28,9 +28,9 @@ function Profile() {
             <h1 className="font-serif text-2xl">Sarah Laurent</h1>
             <p className="text-sm text-white/80">Organisatrice · Bordeaux</p>
           </div>
-          <button className="grid h-10 w-10 place-items-center rounded-full bg-white/20 backdrop-blur">
+          <Link to="/app/settings" className="grid h-10 w-10 place-items-center rounded-full bg-white/20 backdrop-blur" aria-label="Paramètres">
             <Settings className="h-5 w-5" />
-          </button>
+          </Link>
         </div>
       </div>
 
