@@ -34,6 +34,7 @@ import { Route as AppMessagesRouteImport } from './routes/app.messages'
 import { Route as AppMemoriesMapRouteImport } from './routes/app.memories-map'
 import { Route as AppJournalRouteImport } from './routes/app.journal'
 import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
+import { Route as AppInboxRouteImport } from './routes/app.inbox'
 import { Route as AppHelpRouteImport } from './routes/app.help'
 import { Route as AppGiftIdeasRouteImport } from './routes/app.gift-ideas'
 import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
@@ -55,6 +56,7 @@ import { Route as EventsSlugTimelineRouteImport } from './routes/events.$slug.ti
 import { Route as EventsSlugThanksRouteImport } from './routes/events.$slug.thanks'
 import { Route as EventsSlugSpeechesRouteImport } from './routes/events.$slug.speeches'
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
+import { Route as EventsSlugSecurityRouteImport } from './routes/events.$slug.security'
 import { Route as EventsSlugSeatingRouteImport } from './routes/events.$slug.seating'
 import { Route as EventsSlugRsvpRouteImport } from './routes/events.$slug.rsvp'
 import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
@@ -73,6 +75,7 @@ import { Route as EventsSlugLiveAnalyticsRouteImport } from './routes/events.$sl
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugKidsRouteImport } from './routes/events.$slug.kids'
 import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invite'
+import { Route as EventsSlugHallOfFameRouteImport } from './routes/events.$slug.hall-of-fame'
 import { Route as EventsSlugGuidesRouteImport } from './routes/events.$slug.guides'
 import { Route as EventsSlugGuestsRouteImport } from './routes/events.$slug.guests'
 import { Route as EventsSlugGuestbookRouteImport } from './routes/events.$slug.guestbook'
@@ -230,6 +233,11 @@ const AppInspirationsRoute = AppInspirationsRouteImport.update({
   path: '/inspirations',
   getParentRoute: () => AppRoute,
 } as any)
+const AppInboxRoute = AppInboxRouteImport.update({
+  id: '/inbox',
+  path: '/inbox',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppHelpRoute = AppHelpRouteImport.update({
   id: '/help',
   path: '/help',
@@ -335,6 +343,11 @@ const EventsSlugSouvenirRoute = EventsSlugSouvenirRouteImport.update({
   path: '/souvenir',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugSecurityRoute = EventsSlugSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugSeatingRoute = EventsSlugSeatingRouteImport.update({
   id: '/seating',
   path: '/seating',
@@ -423,6 +436,11 @@ const EventsSlugKidsRoute = EventsSlugKidsRouteImport.update({
 const EventsSlugInviteRoute = EventsSlugInviteRouteImport.update({
   id: '/invite',
   path: '/invite',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugHallOfFameRoute = EventsSlugHallOfFameRouteImport.update({
+  id: '/hall-of-fame',
+  path: '/hall-of-fame',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugGuidesRoute = EventsSlugGuidesRouteImport.update({
@@ -601,6 +619,7 @@ export interface FileRoutesByFullPath {
   '/app/favorites': typeof AppFavoritesRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
   '/app/help': typeof AppHelpRoute
+  '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
@@ -648,6 +667,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
+  '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -666,6 +686,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
+  '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
@@ -697,6 +718,7 @@ export interface FileRoutesByTo {
   '/app/favorites': typeof AppFavoritesRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
   '/app/help': typeof AppHelpRoute
+  '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
@@ -744,6 +766,7 @@ export interface FileRoutesByTo {
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
+  '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -762,6 +785,7 @@ export interface FileRoutesByTo {
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
+  '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
@@ -795,6 +819,7 @@ export interface FileRoutesById {
   '/app/favorites': typeof AppFavoritesRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
   '/app/help': typeof AppHelpRoute
+  '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
@@ -842,6 +867,7 @@ export interface FileRoutesById {
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
+  '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -860,6 +886,7 @@ export interface FileRoutesById {
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
+  '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
@@ -894,6 +921,7 @@ export interface FileRouteTypes {
     | '/app/favorites'
     | '/app/gift-ideas'
     | '/app/help'
+    | '/app/inbox'
     | '/app/inspirations'
     | '/app/journal'
     | '/app/memories-map'
@@ -941,6 +969,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/guides'
+    | '/events/$slug/hall-of-fame'
     | '/events/$slug/invite'
     | '/events/$slug/kids'
     | '/events/$slug/live'
@@ -959,6 +988,7 @@ export interface FileRouteTypes {
     | '/events/$slug/replay'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
+    | '/events/$slug/security'
     | '/events/$slug/souvenir'
     | '/events/$slug/speeches'
     | '/events/$slug/thanks'
@@ -990,6 +1020,7 @@ export interface FileRouteTypes {
     | '/app/favorites'
     | '/app/gift-ideas'
     | '/app/help'
+    | '/app/inbox'
     | '/app/inspirations'
     | '/app/journal'
     | '/app/memories-map'
@@ -1037,6 +1068,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/guides'
+    | '/events/$slug/hall-of-fame'
     | '/events/$slug/invite'
     | '/events/$slug/kids'
     | '/events/$slug/live'
@@ -1055,6 +1087,7 @@ export interface FileRouteTypes {
     | '/events/$slug/replay'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
+    | '/events/$slug/security'
     | '/events/$slug/souvenir'
     | '/events/$slug/speeches'
     | '/events/$slug/thanks'
@@ -1087,6 +1120,7 @@ export interface FileRouteTypes {
     | '/app/favorites'
     | '/app/gift-ideas'
     | '/app/help'
+    | '/app/inbox'
     | '/app/inspirations'
     | '/app/journal'
     | '/app/memories-map'
@@ -1134,6 +1168,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/guides'
+    | '/events/$slug/hall-of-fame'
     | '/events/$slug/invite'
     | '/events/$slug/kids'
     | '/events/$slug/live'
@@ -1152,6 +1187,7 @@ export interface FileRouteTypes {
     | '/events/$slug/replay'
     | '/events/$slug/rsvp'
     | '/events/$slug/seating'
+    | '/events/$slug/security'
     | '/events/$slug/souvenir'
     | '/events/$slug/speeches'
     | '/events/$slug/thanks'
@@ -1353,6 +1389,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppInspirationsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/inbox': {
+      id: '/app/inbox'
+      path: '/inbox'
+      fullPath: '/app/inbox'
+      preLoaderRoute: typeof AppInboxRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/help': {
       id: '/app/help'
       path: '/help'
@@ -1500,6 +1543,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugSouvenirRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/security': {
+      id: '/events/$slug/security'
+      path: '/security'
+      fullPath: '/events/$slug/security'
+      preLoaderRoute: typeof EventsSlugSecurityRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/seating': {
       id: '/events/$slug/seating'
       path: '/seating'
@@ -1624,6 +1674,13 @@ declare module '@tanstack/react-router' {
       path: '/invite'
       fullPath: '/events/$slug/invite'
       preLoaderRoute: typeof EventsSlugInviteRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/hall-of-fame': {
+      id: '/events/$slug/hall-of-fame'
+      path: '/hall-of-fame'
+      fullPath: '/events/$slug/hall-of-fame'
+      preLoaderRoute: typeof EventsSlugHallOfFameRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/guides': {
@@ -1884,6 +1941,7 @@ interface AppRouteChildren {
   AppFavoritesRoute: typeof AppFavoritesRoute
   AppGiftIdeasRoute: typeof AppGiftIdeasRoute
   AppHelpRoute: typeof AppHelpRoute
+  AppInboxRoute: typeof AppInboxRoute
   AppInspirationsRoute: typeof AppInspirationsRoute
   AppJournalRoute: typeof AppJournalRoute
   AppMemoriesMapRoute: typeof AppMemoriesMapRoute
@@ -1919,6 +1977,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppFavoritesRoute: AppFavoritesRoute,
   AppGiftIdeasRoute: AppGiftIdeasRoute,
   AppHelpRoute: AppHelpRoute,
+  AppInboxRoute: AppInboxRoute,
   AppInspirationsRoute: AppInspirationsRoute,
   AppJournalRoute: AppJournalRoute,
   AppMemoriesMapRoute: AppMemoriesMapRoute,
@@ -1992,6 +2051,7 @@ interface EventsSlugRouteChildren {
   EventsSlugGuestbookRoute: typeof EventsSlugGuestbookRouteWithChildren
   EventsSlugGuestsRoute: typeof EventsSlugGuestsRoute
   EventsSlugGuidesRoute: typeof EventsSlugGuidesRoute
+  EventsSlugHallOfFameRoute: typeof EventsSlugHallOfFameRoute
   EventsSlugInviteRoute: typeof EventsSlugInviteRoute
   EventsSlugKidsRoute: typeof EventsSlugKidsRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRouteWithChildren
@@ -2010,6 +2070,7 @@ interface EventsSlugRouteChildren {
   EventsSlugReplayRoute: typeof EventsSlugReplayRoute
   EventsSlugRsvpRoute: typeof EventsSlugRsvpRoute
   EventsSlugSeatingRoute: typeof EventsSlugSeatingRoute
+  EventsSlugSecurityRoute: typeof EventsSlugSecurityRoute
   EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
   EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
   EventsSlugThanksRoute: typeof EventsSlugThanksRoute
@@ -2045,6 +2106,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugGuestbookRoute: EventsSlugGuestbookRouteWithChildren,
   EventsSlugGuestsRoute: EventsSlugGuestsRoute,
   EventsSlugGuidesRoute: EventsSlugGuidesRoute,
+  EventsSlugHallOfFameRoute: EventsSlugHallOfFameRoute,
   EventsSlugInviteRoute: EventsSlugInviteRoute,
   EventsSlugKidsRoute: EventsSlugKidsRoute,
   EventsSlugLiveRoute: EventsSlugLiveRouteWithChildren,
@@ -2063,6 +2125,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugReplayRoute: EventsSlugReplayRoute,
   EventsSlugRsvpRoute: EventsSlugRsvpRoute,
   EventsSlugSeatingRoute: EventsSlugSeatingRoute,
+  EventsSlugSecurityRoute: EventsSlugSecurityRoute,
   EventsSlugSouvenirRoute: EventsSlugSouvenirRoute,
   EventsSlugSpeechesRoute: EventsSlugSpeechesRoute,
   EventsSlugThanksRoute: EventsSlugThanksRoute,
