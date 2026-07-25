@@ -17,7 +17,6 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
-import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as AppYearInReviewRouteImport } from './routes/app.year-in-review'
 import { Route as AppWishesRouteImport } from './routes/app.wishes'
 import { Route as AppWalletRouteImport } from './routes/app.wallet'
@@ -61,6 +60,7 @@ import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
 import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries'
 import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
+import { Route as EventsSlugIndexRouteImport } from './routes/events.$slug.index'
 import { Route as EventsSlugWeatherRouteImport } from './routes/events.$slug.weather'
 import { Route as EventsSlugVowsRouteImport } from './routes/events.$slug.vows'
 import { Route as EventsSlugVipRouteImport } from './routes/events.$slug.vip'
@@ -184,11 +184,6 @@ const AppIndexRoute = AppIndexRouteImport.update({
 const StoriesSlugRoute = StoriesSlugRouteImport.update({
   id: '/stories/$slug',
   path: '/stories/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EventsSlugRoute = EventsSlugRouteImport.update({
-  id: '/events/$slug',
-  path: '/events/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppYearInReviewRoute = AppYearInReviewRouteImport.update({
@@ -406,391 +401,396 @@ const AppAchievementsRoute = AppAchievementsRouteImport.update({
   path: '/achievements',
   getParentRoute: () => AppRoute,
 } as any)
+const EventsSlugIndexRoute = EventsSlugIndexRouteImport.update({
+  id: '/events/$slug/',
+  path: '/events/$slug/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EventsSlugWeatherRoute = EventsSlugWeatherRouteImport.update({
-  id: '/weather',
-  path: '/weather',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/weather',
+  path: '/events/$slug/weather',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugVowsRoute = EventsSlugVowsRouteImport.update({
-  id: '/vows',
-  path: '/vows',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/vows',
+  path: '/events/$slug/vows',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugVipRoute = EventsSlugVipRouteImport.update({
-  id: '/vip',
-  path: '/vip',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/vip',
+  path: '/events/$slug/vip',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugVendorsHubRoute = EventsSlugVendorsHubRouteImport.update({
-  id: '/vendors-hub',
-  path: '/vendors-hub',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/vendors-hub',
+  path: '/events/$slug/vendors-hub',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugTributeRoute = EventsSlugTributeRouteImport.update({
-  id: '/tribute',
-  path: '/tribute',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/tribute',
+  path: '/events/$slug/tribute',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugToastRoute = EventsSlugToastRouteImport.update({
-  id: '/toast',
-  path: '/toast',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/toast',
+  path: '/events/$slug/toast',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugTimelineRoute = EventsSlugTimelineRouteImport.update({
-  id: '/timeline',
-  path: '/timeline',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/timeline',
+  path: '/events/$slug/timeline',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugThanksRoute = EventsSlugThanksRouteImport.update({
-  id: '/thanks',
-  path: '/thanks',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/thanks',
+  path: '/events/$slug/thanks',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugThankYouCardsRoute = EventsSlugThankYouCardsRouteImport.update({
-  id: '/thank-you-cards',
-  path: '/thank-you-cards',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/thank-you-cards',
+  path: '/events/$slug/thank-you-cards',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugTastingsRoute = EventsSlugTastingsRouteImport.update({
-  id: '/tastings',
-  path: '/tastings',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/tastings',
+  path: '/events/$slug/tastings',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugSurprisesRoute = EventsSlugSurprisesRouteImport.update({
-  id: '/surprises',
-  path: '/surprises',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/surprises',
+  path: '/events/$slug/surprises',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugSpeechesRoute = EventsSlugSpeechesRouteImport.update({
-  id: '/speeches',
-  path: '/speeches',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/speeches',
+  path: '/events/$slug/speeches',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugSpeechBuilderRoute = EventsSlugSpeechBuilderRouteImport.update({
-  id: '/speech-builder',
-  path: '/speech-builder',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/speech-builder',
+  path: '/events/$slug/speech-builder',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugSouvenirRoute = EventsSlugSouvenirRouteImport.update({
-  id: '/souvenir',
-  path: '/souvenir',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/souvenir',
+  path: '/events/$slug/souvenir',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugShuttleRoute = EventsSlugShuttleRouteImport.update({
-  id: '/shuttle',
-  path: '/shuttle',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/shuttle',
+  path: '/events/$slug/shuttle',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugSecurityRoute = EventsSlugSecurityRouteImport.update({
-  id: '/security',
-  path: '/security',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/security',
+  path: '/events/$slug/security',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugSeatingRoute = EventsSlugSeatingRouteImport.update({
-  id: '/seating',
-  path: '/seating',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/seating',
+  path: '/events/$slug/seating',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugRsvpRoute = EventsSlugRsvpRouteImport.update({
-  id: '/rsvp',
-  path: '/rsvp',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/rsvp',
+  path: '/events/$slug/rsvp',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugRitualsRoute = EventsSlugRitualsRouteImport.update({
-  id: '/rituals',
-  path: '/rituals',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/rituals',
+  path: '/events/$slug/rituals',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugReplayRoute = EventsSlugReplayRouteImport.update({
-  id: '/replay',
-  path: '/replay',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/replay',
+  path: '/events/$slug/replay',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugRehearsalRoute = EventsSlugRehearsalRouteImport.update({
-  id: '/rehearsal',
-  path: '/rehearsal',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/rehearsal',
+  path: '/events/$slug/rehearsal',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugRegistryRoute = EventsSlugRegistryRouteImport.update({
-  id: '/registry',
-  path: '/registry',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/registry',
+  path: '/events/$slug/registry',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugPrintShopRoute = EventsSlugPrintShopRouteImport.update({
-  id: '/print-shop',
-  path: '/print-shop',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/print-shop',
+  path: '/events/$slug/print-shop',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugPressRoute = EventsSlugPressRouteImport.update({
-  id: '/press',
-  path: '/press',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/press',
+  path: '/events/$slug/press',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugPollsRoute = EventsSlugPollsRouteImport.update({
-  id: '/polls',
-  path: '/polls',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/polls',
+  path: '/events/$slug/polls',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugPodcastRoute = EventsSlugPodcastRouteImport.update({
-  id: '/podcast',
-  path: '/podcast',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/podcast',
+  path: '/events/$slug/podcast',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugPlaylistRoute = EventsSlugPlaylistRouteImport.update({
-  id: '/playlist',
-  path: '/playlist',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/playlist',
+  path: '/events/$slug/playlist',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugPhotoshootRoute = EventsSlugPhotoshootRouteImport.update({
-  id: '/photoshoot',
-  path: '/photoshoot',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/photoshoot',
+  path: '/events/$slug/photoshoot',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugPhotoboothRoute = EventsSlugPhotoboothRouteImport.update({
-  id: '/photobooth',
-  path: '/photobooth',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/photobooth',
+  path: '/events/$slug/photobooth',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugPhotoChallengesRoute =
   EventsSlugPhotoChallengesRouteImport.update({
-    id: '/photo-challenges',
-    path: '/photo-challenges',
-    getParentRoute: () => EventsSlugRoute,
+    id: '/events/$slug/photo-challenges',
+    path: '/events/$slug/photo-challenges',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const EventsSlugPetsRoute = EventsSlugPetsRouteImport.update({
-  id: '/pets',
-  path: '/pets',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/pets',
+  path: '/events/$slug/pets',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugModerationRoute = EventsSlugModerationRouteImport.update({
-  id: '/moderation',
-  path: '/moderation',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/moderation',
+  path: '/events/$slug/moderation',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugMenuRoute = EventsSlugMenuRouteImport.update({
-  id: '/menu',
-  path: '/menu',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/menu',
+  path: '/events/$slug/menu',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugMapRoute = EventsSlugMapRouteImport.update({
-  id: '/map',
-  path: '/map',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/map',
+  path: '/events/$slug/map',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugLostFoundRoute = EventsSlugLostFoundRouteImport.update({
-  id: '/lost-found',
-  path: '/lost-found',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/lost-found',
+  path: '/events/$slug/lost-found',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugLiveAnalyticsRoute = EventsSlugLiveAnalyticsRouteImport.update({
-  id: '/live-analytics',
-  path: '/live-analytics',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/live-analytics',
+  path: '/events/$slug/live-analytics',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugLiveRoute = EventsSlugLiveRouteImport.update({
-  id: '/live',
-  path: '/live',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/live',
+  path: '/events/$slug/live',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugKidsRoute = EventsSlugKidsRouteImport.update({
-  id: '/kids',
-  path: '/kids',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/kids',
+  path: '/events/$slug/kids',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugInviteRoute = EventsSlugInviteRouteImport.update({
-  id: '/invite',
-  path: '/invite',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/invite',
+  path: '/events/$slug/invite',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugInvitationsRoute = EventsSlugInvitationsRouteImport.update({
-  id: '/invitations',
-  path: '/invitations',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/invitations',
+  path: '/events/$slug/invitations',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugInsightsRoute = EventsSlugInsightsRouteImport.update({
-  id: '/insights',
-  path: '/insights',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/insights',
+  path: '/events/$slug/insights',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugIcebreakersRoute = EventsSlugIcebreakersRouteImport.update({
-  id: '/icebreakers',
-  path: '/icebreakers',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/icebreakers',
+  path: '/events/$slug/icebreakers',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugHallOfFameRoute = EventsSlugHallOfFameRouteImport.update({
-  id: '/hall-of-fame',
-  path: '/hall-of-fame',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/hall-of-fame',
+  path: '/events/$slug/hall-of-fame',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugGuidesRoute = EventsSlugGuidesRouteImport.update({
-  id: '/guides',
-  path: '/guides',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/guides',
+  path: '/events/$slug/guides',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugGuestsRoute = EventsSlugGuestsRouteImport.update({
-  id: '/guests',
-  path: '/guests',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/guests',
+  path: '/events/$slug/guests',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugGuestbookRoute = EventsSlugGuestbookRouteImport.update({
-  id: '/guestbook',
-  path: '/guestbook',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/guestbook',
+  path: '/events/$slug/guestbook',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugGiftsReceivedRoute = EventsSlugGiftsReceivedRouteImport.update({
-  id: '/gifts-received',
-  path: '/gifts-received',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/gifts-received',
+  path: '/events/$slug/gifts-received',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugGamesRoute = EventsSlugGamesRouteImport.update({
-  id: '/games',
-  path: '/games',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/games',
+  path: '/events/$slug/games',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugFlowersRoute = EventsSlugFlowersRouteImport.update({
-  id: '/flowers',
-  path: '/flowers',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/flowers',
+  path: '/events/$slug/flowers',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugFiltersRoute = EventsSlugFiltersRouteImport.update({
-  id: '/filters',
-  path: '/filters',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/filters',
+  path: '/events/$slug/filters',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugFaqRoute = EventsSlugFaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/faq',
+  path: '/events/$slug/faq',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugFamilyTreeRoute = EventsSlugFamilyTreeRouteImport.update({
-  id: '/family-tree',
-  path: '/family-tree',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/family-tree',
+  path: '/events/$slug/family-tree',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugEntranceRoute = EventsSlugEntranceRouteImport.update({
-  id: '/entrance',
-  path: '/entrance',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/entrance',
+  path: '/events/$slug/entrance',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugEditRoute = EventsSlugEditRouteImport.update({
-  id: '/edit',
-  path: '/edit',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/edit',
+  path: '/events/$slug/edit',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugEcoRoute = EventsSlugEcoRouteImport.update({
-  id: '/eco',
-  path: '/eco',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/eco',
+  path: '/events/$slug/eco',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugDresscodeRoute = EventsSlugDresscodeRouteImport.update({
-  id: '/dresscode',
-  path: '/dresscode',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/dresscode',
+  path: '/events/$slug/dresscode',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugDjRequestsRoute = EventsSlugDjRequestsRouteImport.update({
-  id: '/dj-requests',
-  path: '/dj-requests',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/dj-requests',
+  path: '/events/$slug/dj-requests',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugDisplayRoute = EventsSlugDisplayRouteImport.update({
-  id: '/display',
-  path: '/display',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/display',
+  path: '/events/$slug/display',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugDecorRoute = EventsSlugDecorRouteImport.update({
-  id: '/decor',
-  path: '/decor',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/decor',
+  path: '/events/$slug/decor',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugDashboardRoute = EventsSlugDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/dashboard',
+  path: '/events/$slug/dashboard',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugCountdownRoute = EventsSlugCountdownRouteImport.update({
-  id: '/countdown',
-  path: '/countdown',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/countdown',
+  path: '/events/$slug/countdown',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugContributorsRoute = EventsSlugContributorsRouteImport.update({
-  id: '/contributors',
-  path: '/contributors',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/contributors',
+  path: '/events/$slug/contributors',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugChecklistRoute = EventsSlugChecklistRouteImport.update({
-  id: '/checklist',
-  path: '/checklist',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/checklist',
+  path: '/events/$slug/checklist',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugCheckinRoute = EventsSlugCheckinRouteImport.update({
-  id: '/checkin',
-  path: '/checkin',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/checkin',
+  path: '/events/$slug/checkin',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugCarpoolRoute = EventsSlugCarpoolRouteImport.update({
-  id: '/carpool',
-  path: '/carpool',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/carpool',
+  path: '/events/$slug/carpool',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugCamerasRoute = EventsSlugCamerasRouteImport.update({
-  id: '/cameras',
-  path: '/cameras',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/cameras',
+  path: '/events/$slug/cameras',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugCakeRoute = EventsSlugCakeRouteImport.update({
-  id: '/cake',
-  path: '/cake',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/cake',
+  path: '/events/$slug/cake',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugBudgetRoute = EventsSlugBudgetRouteImport.update({
-  id: '/budget',
-  path: '/budget',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/budget',
+  path: '/events/$slug/budget',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugBroadcastRoute = EventsSlugBroadcastRouteImport.update({
-  id: '/broadcast',
-  path: '/broadcast',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/broadcast',
+  path: '/events/$slug/broadcast',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugBarRoute = EventsSlugBarRouteImport.update({
-  id: '/bar',
-  path: '/bar',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/bar',
+  path: '/events/$slug/bar',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugBackupPlanRoute = EventsSlugBackupPlanRouteImport.update({
-  id: '/backup-plan',
-  path: '/backup-plan',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/backup-plan',
+  path: '/events/$slug/backup-plan',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugAuctionRoute = EventsSlugAuctionRouteImport.update({
-  id: '/auction',
-  path: '/auction',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/auction',
+  path: '/events/$slug/auction',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugArchiveRoute = EventsSlugArchiveRouteImport.update({
-  id: '/archive',
-  path: '/archive',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/archive',
+  path: '/events/$slug/archive',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugAlbumRoute = EventsSlugAlbumRouteImport.update({
-  id: '/album',
-  path: '/album',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/album',
+  path: '/events/$slug/album',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugAiPortraitsRoute = EventsSlugAiPortraitsRouteImport.update({
-  id: '/ai-portraits',
-  path: '/ai-portraits',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/ai-portraits',
+  path: '/events/$slug/ai-portraits',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugAfterpartyRoute = EventsSlugAfterpartyRouteImport.update({
-  id: '/afterparty',
-  path: '/afterparty',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/afterparty',
+  path: '/events/$slug/afterparty',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugActivityRoute = EventsSlugActivityRouteImport.update({
-  id: '/activity',
-  path: '/activity',
-  getParentRoute: () => EventsSlugRoute,
+  id: '/events/$slug/activity',
+  path: '/events/$slug/activity',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AppVendorsIdRoute = AppVendorsIdRouteImport.update({
   id: '/$id',
@@ -878,7 +878,6 @@ export interface FileRoutesByFullPath {
   '/app/wallet': typeof AppWalletRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
-  '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
@@ -962,6 +961,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug/': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
@@ -1015,7 +1015,6 @@ export interface FileRoutesByTo {
   '/app/wallet': typeof AppWalletRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
-  '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
   '/app': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
@@ -1099,6 +1098,7 @@ export interface FileRoutesByTo {
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
@@ -1154,7 +1154,6 @@ export interface FileRoutesById {
   '/app/wallet': typeof AppWalletRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
-  '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
@@ -1238,6 +1237,7 @@ export interface FileRoutesById {
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug/': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
@@ -1294,7 +1294,6 @@ export interface FileRouteTypes {
     | '/app/wallet'
     | '/app/wishes'
     | '/app/year-in-review'
-    | '/events/$slug'
     | '/stories/$slug'
     | '/app/'
     | '/app/messages/$id'
@@ -1378,6 +1377,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
+    | '/events/$slug/'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
@@ -1431,7 +1431,6 @@ export interface FileRouteTypes {
     | '/app/wallet'
     | '/app/wishes'
     | '/app/year-in-review'
-    | '/events/$slug'
     | '/stories/$slug'
     | '/app'
     | '/app/messages/$id'
@@ -1515,6 +1514,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
+    | '/events/$slug'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
@@ -1569,7 +1569,6 @@ export interface FileRouteTypes {
     | '/app/wallet'
     | '/app/wishes'
     | '/app/year-in-review'
-    | '/events/$slug'
     | '/stories/$slug'
     | '/app/'
     | '/app/messages/$id'
@@ -1653,6 +1652,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
+    | '/events/$slug/'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
@@ -1665,8 +1665,85 @@ export interface RootRouteChildren {
   JoinRoute: typeof JoinRoute
   LegalRoute: typeof LegalRoute
   OnboardingRoute: typeof OnboardingRoute
-  EventsSlugRoute: typeof EventsSlugRouteWithChildren
   StoriesSlugRoute: typeof StoriesSlugRoute
+  EventsSlugActivityRoute: typeof EventsSlugActivityRoute
+  EventsSlugAfterpartyRoute: typeof EventsSlugAfterpartyRoute
+  EventsSlugAiPortraitsRoute: typeof EventsSlugAiPortraitsRoute
+  EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
+  EventsSlugArchiveRoute: typeof EventsSlugArchiveRoute
+  EventsSlugAuctionRoute: typeof EventsSlugAuctionRoute
+  EventsSlugBackupPlanRoute: typeof EventsSlugBackupPlanRoute
+  EventsSlugBarRoute: typeof EventsSlugBarRoute
+  EventsSlugBroadcastRoute: typeof EventsSlugBroadcastRoute
+  EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
+  EventsSlugCakeRoute: typeof EventsSlugCakeRoute
+  EventsSlugCamerasRoute: typeof EventsSlugCamerasRoute
+  EventsSlugCarpoolRoute: typeof EventsSlugCarpoolRoute
+  EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
+  EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
+  EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
+  EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
+  EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
+  EventsSlugDecorRoute: typeof EventsSlugDecorRoute
+  EventsSlugDisplayRoute: typeof EventsSlugDisplayRoute
+  EventsSlugDjRequestsRoute: typeof EventsSlugDjRequestsRoute
+  EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
+  EventsSlugEcoRoute: typeof EventsSlugEcoRoute
+  EventsSlugEditRoute: typeof EventsSlugEditRoute
+  EventsSlugEntranceRoute: typeof EventsSlugEntranceRoute
+  EventsSlugFamilyTreeRoute: typeof EventsSlugFamilyTreeRoute
+  EventsSlugFaqRoute: typeof EventsSlugFaqRoute
+  EventsSlugFiltersRoute: typeof EventsSlugFiltersRoute
+  EventsSlugFlowersRoute: typeof EventsSlugFlowersRoute
+  EventsSlugGamesRoute: typeof EventsSlugGamesRoute
+  EventsSlugGiftsReceivedRoute: typeof EventsSlugGiftsReceivedRoute
+  EventsSlugGuestbookRoute: typeof EventsSlugGuestbookRouteWithChildren
+  EventsSlugGuestsRoute: typeof EventsSlugGuestsRoute
+  EventsSlugGuidesRoute: typeof EventsSlugGuidesRoute
+  EventsSlugHallOfFameRoute: typeof EventsSlugHallOfFameRoute
+  EventsSlugIcebreakersRoute: typeof EventsSlugIcebreakersRoute
+  EventsSlugInsightsRoute: typeof EventsSlugInsightsRoute
+  EventsSlugInvitationsRoute: typeof EventsSlugInvitationsRoute
+  EventsSlugInviteRoute: typeof EventsSlugInviteRoute
+  EventsSlugKidsRoute: typeof EventsSlugKidsRoute
+  EventsSlugLiveRoute: typeof EventsSlugLiveRouteWithChildren
+  EventsSlugLiveAnalyticsRoute: typeof EventsSlugLiveAnalyticsRoute
+  EventsSlugLostFoundRoute: typeof EventsSlugLostFoundRoute
+  EventsSlugMapRoute: typeof EventsSlugMapRoute
+  EventsSlugMenuRoute: typeof EventsSlugMenuRoute
+  EventsSlugModerationRoute: typeof EventsSlugModerationRoute
+  EventsSlugPetsRoute: typeof EventsSlugPetsRoute
+  EventsSlugPhotoChallengesRoute: typeof EventsSlugPhotoChallengesRoute
+  EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
+  EventsSlugPhotoshootRoute: typeof EventsSlugPhotoshootRoute
+  EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
+  EventsSlugPodcastRoute: typeof EventsSlugPodcastRoute
+  EventsSlugPollsRoute: typeof EventsSlugPollsRoute
+  EventsSlugPressRoute: typeof EventsSlugPressRoute
+  EventsSlugPrintShopRoute: typeof EventsSlugPrintShopRoute
+  EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
+  EventsSlugRehearsalRoute: typeof EventsSlugRehearsalRoute
+  EventsSlugReplayRoute: typeof EventsSlugReplayRoute
+  EventsSlugRitualsRoute: typeof EventsSlugRitualsRoute
+  EventsSlugRsvpRoute: typeof EventsSlugRsvpRoute
+  EventsSlugSeatingRoute: typeof EventsSlugSeatingRoute
+  EventsSlugSecurityRoute: typeof EventsSlugSecurityRoute
+  EventsSlugShuttleRoute: typeof EventsSlugShuttleRoute
+  EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
+  EventsSlugSpeechBuilderRoute: typeof EventsSlugSpeechBuilderRoute
+  EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
+  EventsSlugSurprisesRoute: typeof EventsSlugSurprisesRoute
+  EventsSlugTastingsRoute: typeof EventsSlugTastingsRoute
+  EventsSlugThankYouCardsRoute: typeof EventsSlugThankYouCardsRoute
+  EventsSlugThanksRoute: typeof EventsSlugThanksRoute
+  EventsSlugTimelineRoute: typeof EventsSlugTimelineRoute
+  EventsSlugToastRoute: typeof EventsSlugToastRoute
+  EventsSlugTributeRoute: typeof EventsSlugTributeRoute
+  EventsSlugVendorsHubRoute: typeof EventsSlugVendorsHubRoute
+  EventsSlugVipRoute: typeof EventsSlugVipRoute
+  EventsSlugVowsRoute: typeof EventsSlugVowsRoute
+  EventsSlugWeatherRoute: typeof EventsSlugWeatherRoute
+  EventsSlugIndexRoute: typeof EventsSlugIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1725,13 +1802,6 @@ declare module '@tanstack/react-router' {
       path: '/stories/$slug'
       fullPath: '/stories/$slug'
       preLoaderRoute: typeof StoriesSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/events/$slug': {
-      id: '/events/$slug'
-      path: '/events/$slug'
-      fullPath: '/events/$slug'
-      preLoaderRoute: typeof EventsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app/year-in-review': {
@@ -2035,544 +2105,551 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAchievementsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/events/$slug/': {
+      id: '/events/$slug/'
+      path: '/events/$slug'
+      fullPath: '/events/$slug/'
+      preLoaderRoute: typeof EventsSlugIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/events/$slug/weather': {
       id: '/events/$slug/weather'
-      path: '/weather'
+      path: '/events/$slug/weather'
       fullPath: '/events/$slug/weather'
       preLoaderRoute: typeof EventsSlugWeatherRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/vows': {
       id: '/events/$slug/vows'
-      path: '/vows'
+      path: '/events/$slug/vows'
       fullPath: '/events/$slug/vows'
       preLoaderRoute: typeof EventsSlugVowsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/vip': {
       id: '/events/$slug/vip'
-      path: '/vip'
+      path: '/events/$slug/vip'
       fullPath: '/events/$slug/vip'
       preLoaderRoute: typeof EventsSlugVipRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/vendors-hub': {
       id: '/events/$slug/vendors-hub'
-      path: '/vendors-hub'
+      path: '/events/$slug/vendors-hub'
       fullPath: '/events/$slug/vendors-hub'
       preLoaderRoute: typeof EventsSlugVendorsHubRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/tribute': {
       id: '/events/$slug/tribute'
-      path: '/tribute'
+      path: '/events/$slug/tribute'
       fullPath: '/events/$slug/tribute'
       preLoaderRoute: typeof EventsSlugTributeRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/toast': {
       id: '/events/$slug/toast'
-      path: '/toast'
+      path: '/events/$slug/toast'
       fullPath: '/events/$slug/toast'
       preLoaderRoute: typeof EventsSlugToastRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/timeline': {
       id: '/events/$slug/timeline'
-      path: '/timeline'
+      path: '/events/$slug/timeline'
       fullPath: '/events/$slug/timeline'
       preLoaderRoute: typeof EventsSlugTimelineRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/thanks': {
       id: '/events/$slug/thanks'
-      path: '/thanks'
+      path: '/events/$slug/thanks'
       fullPath: '/events/$slug/thanks'
       preLoaderRoute: typeof EventsSlugThanksRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/thank-you-cards': {
       id: '/events/$slug/thank-you-cards'
-      path: '/thank-you-cards'
+      path: '/events/$slug/thank-you-cards'
       fullPath: '/events/$slug/thank-you-cards'
       preLoaderRoute: typeof EventsSlugThankYouCardsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/tastings': {
       id: '/events/$slug/tastings'
-      path: '/tastings'
+      path: '/events/$slug/tastings'
       fullPath: '/events/$slug/tastings'
       preLoaderRoute: typeof EventsSlugTastingsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/surprises': {
       id: '/events/$slug/surprises'
-      path: '/surprises'
+      path: '/events/$slug/surprises'
       fullPath: '/events/$slug/surprises'
       preLoaderRoute: typeof EventsSlugSurprisesRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/speeches': {
       id: '/events/$slug/speeches'
-      path: '/speeches'
+      path: '/events/$slug/speeches'
       fullPath: '/events/$slug/speeches'
       preLoaderRoute: typeof EventsSlugSpeechesRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/speech-builder': {
       id: '/events/$slug/speech-builder'
-      path: '/speech-builder'
+      path: '/events/$slug/speech-builder'
       fullPath: '/events/$slug/speech-builder'
       preLoaderRoute: typeof EventsSlugSpeechBuilderRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/souvenir': {
       id: '/events/$slug/souvenir'
-      path: '/souvenir'
+      path: '/events/$slug/souvenir'
       fullPath: '/events/$slug/souvenir'
       preLoaderRoute: typeof EventsSlugSouvenirRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/shuttle': {
       id: '/events/$slug/shuttle'
-      path: '/shuttle'
+      path: '/events/$slug/shuttle'
       fullPath: '/events/$slug/shuttle'
       preLoaderRoute: typeof EventsSlugShuttleRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/security': {
       id: '/events/$slug/security'
-      path: '/security'
+      path: '/events/$slug/security'
       fullPath: '/events/$slug/security'
       preLoaderRoute: typeof EventsSlugSecurityRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/seating': {
       id: '/events/$slug/seating'
-      path: '/seating'
+      path: '/events/$slug/seating'
       fullPath: '/events/$slug/seating'
       preLoaderRoute: typeof EventsSlugSeatingRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/rsvp': {
       id: '/events/$slug/rsvp'
-      path: '/rsvp'
+      path: '/events/$slug/rsvp'
       fullPath: '/events/$slug/rsvp'
       preLoaderRoute: typeof EventsSlugRsvpRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/rituals': {
       id: '/events/$slug/rituals'
-      path: '/rituals'
+      path: '/events/$slug/rituals'
       fullPath: '/events/$slug/rituals'
       preLoaderRoute: typeof EventsSlugRitualsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/replay': {
       id: '/events/$slug/replay'
-      path: '/replay'
+      path: '/events/$slug/replay'
       fullPath: '/events/$slug/replay'
       preLoaderRoute: typeof EventsSlugReplayRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/rehearsal': {
       id: '/events/$slug/rehearsal'
-      path: '/rehearsal'
+      path: '/events/$slug/rehearsal'
       fullPath: '/events/$slug/rehearsal'
       preLoaderRoute: typeof EventsSlugRehearsalRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/registry': {
       id: '/events/$slug/registry'
-      path: '/registry'
+      path: '/events/$slug/registry'
       fullPath: '/events/$slug/registry'
       preLoaderRoute: typeof EventsSlugRegistryRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/print-shop': {
       id: '/events/$slug/print-shop'
-      path: '/print-shop'
+      path: '/events/$slug/print-shop'
       fullPath: '/events/$slug/print-shop'
       preLoaderRoute: typeof EventsSlugPrintShopRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/press': {
       id: '/events/$slug/press'
-      path: '/press'
+      path: '/events/$slug/press'
       fullPath: '/events/$slug/press'
       preLoaderRoute: typeof EventsSlugPressRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/polls': {
       id: '/events/$slug/polls'
-      path: '/polls'
+      path: '/events/$slug/polls'
       fullPath: '/events/$slug/polls'
       preLoaderRoute: typeof EventsSlugPollsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/podcast': {
       id: '/events/$slug/podcast'
-      path: '/podcast'
+      path: '/events/$slug/podcast'
       fullPath: '/events/$slug/podcast'
       preLoaderRoute: typeof EventsSlugPodcastRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/playlist': {
       id: '/events/$slug/playlist'
-      path: '/playlist'
+      path: '/events/$slug/playlist'
       fullPath: '/events/$slug/playlist'
       preLoaderRoute: typeof EventsSlugPlaylistRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/photoshoot': {
       id: '/events/$slug/photoshoot'
-      path: '/photoshoot'
+      path: '/events/$slug/photoshoot'
       fullPath: '/events/$slug/photoshoot'
       preLoaderRoute: typeof EventsSlugPhotoshootRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/photobooth': {
       id: '/events/$slug/photobooth'
-      path: '/photobooth'
+      path: '/events/$slug/photobooth'
       fullPath: '/events/$slug/photobooth'
       preLoaderRoute: typeof EventsSlugPhotoboothRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/photo-challenges': {
       id: '/events/$slug/photo-challenges'
-      path: '/photo-challenges'
+      path: '/events/$slug/photo-challenges'
       fullPath: '/events/$slug/photo-challenges'
       preLoaderRoute: typeof EventsSlugPhotoChallengesRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/pets': {
       id: '/events/$slug/pets'
-      path: '/pets'
+      path: '/events/$slug/pets'
       fullPath: '/events/$slug/pets'
       preLoaderRoute: typeof EventsSlugPetsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/moderation': {
       id: '/events/$slug/moderation'
-      path: '/moderation'
+      path: '/events/$slug/moderation'
       fullPath: '/events/$slug/moderation'
       preLoaderRoute: typeof EventsSlugModerationRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/menu': {
       id: '/events/$slug/menu'
-      path: '/menu'
+      path: '/events/$slug/menu'
       fullPath: '/events/$slug/menu'
       preLoaderRoute: typeof EventsSlugMenuRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/map': {
       id: '/events/$slug/map'
-      path: '/map'
+      path: '/events/$slug/map'
       fullPath: '/events/$slug/map'
       preLoaderRoute: typeof EventsSlugMapRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/lost-found': {
       id: '/events/$slug/lost-found'
-      path: '/lost-found'
+      path: '/events/$slug/lost-found'
       fullPath: '/events/$slug/lost-found'
       preLoaderRoute: typeof EventsSlugLostFoundRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/live-analytics': {
       id: '/events/$slug/live-analytics'
-      path: '/live-analytics'
+      path: '/events/$slug/live-analytics'
       fullPath: '/events/$slug/live-analytics'
       preLoaderRoute: typeof EventsSlugLiveAnalyticsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/live': {
       id: '/events/$slug/live'
-      path: '/live'
+      path: '/events/$slug/live'
       fullPath: '/events/$slug/live'
       preLoaderRoute: typeof EventsSlugLiveRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/kids': {
       id: '/events/$slug/kids'
-      path: '/kids'
+      path: '/events/$slug/kids'
       fullPath: '/events/$slug/kids'
       preLoaderRoute: typeof EventsSlugKidsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/invite': {
       id: '/events/$slug/invite'
-      path: '/invite'
+      path: '/events/$slug/invite'
       fullPath: '/events/$slug/invite'
       preLoaderRoute: typeof EventsSlugInviteRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/invitations': {
       id: '/events/$slug/invitations'
-      path: '/invitations'
+      path: '/events/$slug/invitations'
       fullPath: '/events/$slug/invitations'
       preLoaderRoute: typeof EventsSlugInvitationsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/insights': {
       id: '/events/$slug/insights'
-      path: '/insights'
+      path: '/events/$slug/insights'
       fullPath: '/events/$slug/insights'
       preLoaderRoute: typeof EventsSlugInsightsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/icebreakers': {
       id: '/events/$slug/icebreakers'
-      path: '/icebreakers'
+      path: '/events/$slug/icebreakers'
       fullPath: '/events/$slug/icebreakers'
       preLoaderRoute: typeof EventsSlugIcebreakersRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/hall-of-fame': {
       id: '/events/$slug/hall-of-fame'
-      path: '/hall-of-fame'
+      path: '/events/$slug/hall-of-fame'
       fullPath: '/events/$slug/hall-of-fame'
       preLoaderRoute: typeof EventsSlugHallOfFameRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/guides': {
       id: '/events/$slug/guides'
-      path: '/guides'
+      path: '/events/$slug/guides'
       fullPath: '/events/$slug/guides'
       preLoaderRoute: typeof EventsSlugGuidesRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/guests': {
       id: '/events/$slug/guests'
-      path: '/guests'
+      path: '/events/$slug/guests'
       fullPath: '/events/$slug/guests'
       preLoaderRoute: typeof EventsSlugGuestsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/guestbook': {
       id: '/events/$slug/guestbook'
-      path: '/guestbook'
+      path: '/events/$slug/guestbook'
       fullPath: '/events/$slug/guestbook'
       preLoaderRoute: typeof EventsSlugGuestbookRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/gifts-received': {
       id: '/events/$slug/gifts-received'
-      path: '/gifts-received'
+      path: '/events/$slug/gifts-received'
       fullPath: '/events/$slug/gifts-received'
       preLoaderRoute: typeof EventsSlugGiftsReceivedRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/games': {
       id: '/events/$slug/games'
-      path: '/games'
+      path: '/events/$slug/games'
       fullPath: '/events/$slug/games'
       preLoaderRoute: typeof EventsSlugGamesRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/flowers': {
       id: '/events/$slug/flowers'
-      path: '/flowers'
+      path: '/events/$slug/flowers'
       fullPath: '/events/$slug/flowers'
       preLoaderRoute: typeof EventsSlugFlowersRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/filters': {
       id: '/events/$slug/filters'
-      path: '/filters'
+      path: '/events/$slug/filters'
       fullPath: '/events/$slug/filters'
       preLoaderRoute: typeof EventsSlugFiltersRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/faq': {
       id: '/events/$slug/faq'
-      path: '/faq'
+      path: '/events/$slug/faq'
       fullPath: '/events/$slug/faq'
       preLoaderRoute: typeof EventsSlugFaqRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/family-tree': {
       id: '/events/$slug/family-tree'
-      path: '/family-tree'
+      path: '/events/$slug/family-tree'
       fullPath: '/events/$slug/family-tree'
       preLoaderRoute: typeof EventsSlugFamilyTreeRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/entrance': {
       id: '/events/$slug/entrance'
-      path: '/entrance'
+      path: '/events/$slug/entrance'
       fullPath: '/events/$slug/entrance'
       preLoaderRoute: typeof EventsSlugEntranceRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/edit': {
       id: '/events/$slug/edit'
-      path: '/edit'
+      path: '/events/$slug/edit'
       fullPath: '/events/$slug/edit'
       preLoaderRoute: typeof EventsSlugEditRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/eco': {
       id: '/events/$slug/eco'
-      path: '/eco'
+      path: '/events/$slug/eco'
       fullPath: '/events/$slug/eco'
       preLoaderRoute: typeof EventsSlugEcoRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/dresscode': {
       id: '/events/$slug/dresscode'
-      path: '/dresscode'
+      path: '/events/$slug/dresscode'
       fullPath: '/events/$slug/dresscode'
       preLoaderRoute: typeof EventsSlugDresscodeRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/dj-requests': {
       id: '/events/$slug/dj-requests'
-      path: '/dj-requests'
+      path: '/events/$slug/dj-requests'
       fullPath: '/events/$slug/dj-requests'
       preLoaderRoute: typeof EventsSlugDjRequestsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/display': {
       id: '/events/$slug/display'
-      path: '/display'
+      path: '/events/$slug/display'
       fullPath: '/events/$slug/display'
       preLoaderRoute: typeof EventsSlugDisplayRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/decor': {
       id: '/events/$slug/decor'
-      path: '/decor'
+      path: '/events/$slug/decor'
       fullPath: '/events/$slug/decor'
       preLoaderRoute: typeof EventsSlugDecorRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/dashboard': {
       id: '/events/$slug/dashboard'
-      path: '/dashboard'
+      path: '/events/$slug/dashboard'
       fullPath: '/events/$slug/dashboard'
       preLoaderRoute: typeof EventsSlugDashboardRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/countdown': {
       id: '/events/$slug/countdown'
-      path: '/countdown'
+      path: '/events/$slug/countdown'
       fullPath: '/events/$slug/countdown'
       preLoaderRoute: typeof EventsSlugCountdownRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/contributors': {
       id: '/events/$slug/contributors'
-      path: '/contributors'
+      path: '/events/$slug/contributors'
       fullPath: '/events/$slug/contributors'
       preLoaderRoute: typeof EventsSlugContributorsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/checklist': {
       id: '/events/$slug/checklist'
-      path: '/checklist'
+      path: '/events/$slug/checklist'
       fullPath: '/events/$slug/checklist'
       preLoaderRoute: typeof EventsSlugChecklistRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/checkin': {
       id: '/events/$slug/checkin'
-      path: '/checkin'
+      path: '/events/$slug/checkin'
       fullPath: '/events/$slug/checkin'
       preLoaderRoute: typeof EventsSlugCheckinRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/carpool': {
       id: '/events/$slug/carpool'
-      path: '/carpool'
+      path: '/events/$slug/carpool'
       fullPath: '/events/$slug/carpool'
       preLoaderRoute: typeof EventsSlugCarpoolRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/cameras': {
       id: '/events/$slug/cameras'
-      path: '/cameras'
+      path: '/events/$slug/cameras'
       fullPath: '/events/$slug/cameras'
       preLoaderRoute: typeof EventsSlugCamerasRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/cake': {
       id: '/events/$slug/cake'
-      path: '/cake'
+      path: '/events/$slug/cake'
       fullPath: '/events/$slug/cake'
       preLoaderRoute: typeof EventsSlugCakeRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/budget': {
       id: '/events/$slug/budget'
-      path: '/budget'
+      path: '/events/$slug/budget'
       fullPath: '/events/$slug/budget'
       preLoaderRoute: typeof EventsSlugBudgetRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/broadcast': {
       id: '/events/$slug/broadcast'
-      path: '/broadcast'
+      path: '/events/$slug/broadcast'
       fullPath: '/events/$slug/broadcast'
       preLoaderRoute: typeof EventsSlugBroadcastRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/bar': {
       id: '/events/$slug/bar'
-      path: '/bar'
+      path: '/events/$slug/bar'
       fullPath: '/events/$slug/bar'
       preLoaderRoute: typeof EventsSlugBarRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/backup-plan': {
       id: '/events/$slug/backup-plan'
-      path: '/backup-plan'
+      path: '/events/$slug/backup-plan'
       fullPath: '/events/$slug/backup-plan'
       preLoaderRoute: typeof EventsSlugBackupPlanRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/auction': {
       id: '/events/$slug/auction'
-      path: '/auction'
+      path: '/events/$slug/auction'
       fullPath: '/events/$slug/auction'
       preLoaderRoute: typeof EventsSlugAuctionRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/archive': {
       id: '/events/$slug/archive'
-      path: '/archive'
+      path: '/events/$slug/archive'
       fullPath: '/events/$slug/archive'
       preLoaderRoute: typeof EventsSlugArchiveRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/album': {
       id: '/events/$slug/album'
-      path: '/album'
+      path: '/events/$slug/album'
       fullPath: '/events/$slug/album'
       preLoaderRoute: typeof EventsSlugAlbumRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/ai-portraits': {
       id: '/events/$slug/ai-portraits'
-      path: '/ai-portraits'
+      path: '/events/$slug/ai-portraits'
       fullPath: '/events/$slug/ai-portraits'
       preLoaderRoute: typeof EventsSlugAiPortraitsRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/afterparty': {
       id: '/events/$slug/afterparty'
-      path: '/afterparty'
+      path: '/events/$slug/afterparty'
       fullPath: '/events/$slug/afterparty'
       preLoaderRoute: typeof EventsSlugAfterpartyRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/events/$slug/activity': {
       id: '/events/$slug/activity'
-      path: '/activity'
+      path: '/events/$slug/activity'
       fullPath: '/events/$slug/activity'
       preLoaderRoute: typeof EventsSlugActivityRouteImport
-      parentRoute: typeof EventsSlugRoute
+      parentRoute: typeof rootRouteImport
     }
     '/app/vendors/$id': {
       id: '/app/vendors/$id'
@@ -2775,87 +2852,14 @@ const EventsSlugLiveRouteWithChildren = EventsSlugLiveRoute._addFileChildren(
   EventsSlugLiveRouteChildren,
 )
 
-interface EventsSlugRouteChildren {
-  EventsSlugActivityRoute: typeof EventsSlugActivityRoute
-  EventsSlugAfterpartyRoute: typeof EventsSlugAfterpartyRoute
-  EventsSlugAiPortraitsRoute: typeof EventsSlugAiPortraitsRoute
-  EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
-  EventsSlugArchiveRoute: typeof EventsSlugArchiveRoute
-  EventsSlugAuctionRoute: typeof EventsSlugAuctionRoute
-  EventsSlugBackupPlanRoute: typeof EventsSlugBackupPlanRoute
-  EventsSlugBarRoute: typeof EventsSlugBarRoute
-  EventsSlugBroadcastRoute: typeof EventsSlugBroadcastRoute
-  EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
-  EventsSlugCakeRoute: typeof EventsSlugCakeRoute
-  EventsSlugCamerasRoute: typeof EventsSlugCamerasRoute
-  EventsSlugCarpoolRoute: typeof EventsSlugCarpoolRoute
-  EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
-  EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
-  EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
-  EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
-  EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
-  EventsSlugDecorRoute: typeof EventsSlugDecorRoute
-  EventsSlugDisplayRoute: typeof EventsSlugDisplayRoute
-  EventsSlugDjRequestsRoute: typeof EventsSlugDjRequestsRoute
-  EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
-  EventsSlugEcoRoute: typeof EventsSlugEcoRoute
-  EventsSlugEditRoute: typeof EventsSlugEditRoute
-  EventsSlugEntranceRoute: typeof EventsSlugEntranceRoute
-  EventsSlugFamilyTreeRoute: typeof EventsSlugFamilyTreeRoute
-  EventsSlugFaqRoute: typeof EventsSlugFaqRoute
-  EventsSlugFiltersRoute: typeof EventsSlugFiltersRoute
-  EventsSlugFlowersRoute: typeof EventsSlugFlowersRoute
-  EventsSlugGamesRoute: typeof EventsSlugGamesRoute
-  EventsSlugGiftsReceivedRoute: typeof EventsSlugGiftsReceivedRoute
-  EventsSlugGuestbookRoute: typeof EventsSlugGuestbookRouteWithChildren
-  EventsSlugGuestsRoute: typeof EventsSlugGuestsRoute
-  EventsSlugGuidesRoute: typeof EventsSlugGuidesRoute
-  EventsSlugHallOfFameRoute: typeof EventsSlugHallOfFameRoute
-  EventsSlugIcebreakersRoute: typeof EventsSlugIcebreakersRoute
-  EventsSlugInsightsRoute: typeof EventsSlugInsightsRoute
-  EventsSlugInvitationsRoute: typeof EventsSlugInvitationsRoute
-  EventsSlugInviteRoute: typeof EventsSlugInviteRoute
-  EventsSlugKidsRoute: typeof EventsSlugKidsRoute
-  EventsSlugLiveRoute: typeof EventsSlugLiveRouteWithChildren
-  EventsSlugLiveAnalyticsRoute: typeof EventsSlugLiveAnalyticsRoute
-  EventsSlugLostFoundRoute: typeof EventsSlugLostFoundRoute
-  EventsSlugMapRoute: typeof EventsSlugMapRoute
-  EventsSlugMenuRoute: typeof EventsSlugMenuRoute
-  EventsSlugModerationRoute: typeof EventsSlugModerationRoute
-  EventsSlugPetsRoute: typeof EventsSlugPetsRoute
-  EventsSlugPhotoChallengesRoute: typeof EventsSlugPhotoChallengesRoute
-  EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
-  EventsSlugPhotoshootRoute: typeof EventsSlugPhotoshootRoute
-  EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
-  EventsSlugPodcastRoute: typeof EventsSlugPodcastRoute
-  EventsSlugPollsRoute: typeof EventsSlugPollsRoute
-  EventsSlugPressRoute: typeof EventsSlugPressRoute
-  EventsSlugPrintShopRoute: typeof EventsSlugPrintShopRoute
-  EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
-  EventsSlugRehearsalRoute: typeof EventsSlugRehearsalRoute
-  EventsSlugReplayRoute: typeof EventsSlugReplayRoute
-  EventsSlugRitualsRoute: typeof EventsSlugRitualsRoute
-  EventsSlugRsvpRoute: typeof EventsSlugRsvpRoute
-  EventsSlugSeatingRoute: typeof EventsSlugSeatingRoute
-  EventsSlugSecurityRoute: typeof EventsSlugSecurityRoute
-  EventsSlugShuttleRoute: typeof EventsSlugShuttleRoute
-  EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
-  EventsSlugSpeechBuilderRoute: typeof EventsSlugSpeechBuilderRoute
-  EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
-  EventsSlugSurprisesRoute: typeof EventsSlugSurprisesRoute
-  EventsSlugTastingsRoute: typeof EventsSlugTastingsRoute
-  EventsSlugThankYouCardsRoute: typeof EventsSlugThankYouCardsRoute
-  EventsSlugThanksRoute: typeof EventsSlugThanksRoute
-  EventsSlugTimelineRoute: typeof EventsSlugTimelineRoute
-  EventsSlugToastRoute: typeof EventsSlugToastRoute
-  EventsSlugTributeRoute: typeof EventsSlugTributeRoute
-  EventsSlugVendorsHubRoute: typeof EventsSlugVendorsHubRoute
-  EventsSlugVipRoute: typeof EventsSlugVipRoute
-  EventsSlugVowsRoute: typeof EventsSlugVowsRoute
-  EventsSlugWeatherRoute: typeof EventsSlugWeatherRoute
-}
-
-const EventsSlugRouteChildren: EventsSlugRouteChildren = {
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  AuthRoute: AuthRoute,
+  JoinRoute: JoinRoute,
+  LegalRoute: LegalRoute,
+  OnboardingRoute: OnboardingRoute,
+  StoriesSlugRoute: StoriesSlugRoute,
   EventsSlugActivityRoute: EventsSlugActivityRoute,
   EventsSlugAfterpartyRoute: EventsSlugAfterpartyRoute,
   EventsSlugAiPortraitsRoute: EventsSlugAiPortraitsRoute,
@@ -2933,32 +2937,8 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugVipRoute: EventsSlugVipRoute,
   EventsSlugVowsRoute: EventsSlugVowsRoute,
   EventsSlugWeatherRoute: EventsSlugWeatherRoute,
-}
-
-const EventsSlugRouteWithChildren = EventsSlugRoute._addFileChildren(
-  EventsSlugRouteChildren,
-)
-
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AppRoute: AppRouteWithChildren,
-  AuthRoute: AuthRoute,
-  JoinRoute: JoinRoute,
-  LegalRoute: LegalRoute,
-  OnboardingRoute: OnboardingRoute,
-  EventsSlugRoute: EventsSlugRouteWithChildren,
-  StoriesSlugRoute: StoriesSlugRoute,
+  EventsSlugIndexRoute: EventsSlugIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

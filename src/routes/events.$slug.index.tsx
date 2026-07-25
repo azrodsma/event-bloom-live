@@ -37,7 +37,7 @@ import {
 
 import { useEffect, useState } from "react";
 
-export const Route = createFileRoute("/events/$slug")({
+export const Route = createFileRoute("/events/$slug/")({
   head: ({ params }) => {
     const e = findEvent(params.slug);
     if (!e) return { meta: [{ title: "Événement — Memento Live" }] };
