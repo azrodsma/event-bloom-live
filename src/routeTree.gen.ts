@@ -61,6 +61,7 @@ import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
 import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries'
 import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
+import { Route as EventsSlugIndexRouteImport } from './routes/events.$slug.index'
 import { Route as EventsSlugWeatherRouteImport } from './routes/events.$slug.weather'
 import { Route as EventsSlugVowsRouteImport } from './routes/events.$slug.vows'
 import { Route as EventsSlugVipRouteImport } from './routes/events.$slug.vip'
@@ -405,6 +406,11 @@ const AppAchievementsRoute = AppAchievementsRouteImport.update({
   id: '/achievements',
   path: '/achievements',
   getParentRoute: () => AppRoute,
+} as any)
+const EventsSlugIndexRoute = EventsSlugIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugWeatherRoute = EventsSlugWeatherRouteImport.update({
   id: '/weather',
@@ -962,6 +968,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug/': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
@@ -1015,7 +1022,6 @@ export interface FileRoutesByTo {
   '/app/wallet': typeof AppWalletRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
-  '/events/$slug': typeof EventsSlugRouteWithChildren
   '/stories/$slug': typeof StoriesSlugRoute
   '/app': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
@@ -1099,6 +1105,7 @@ export interface FileRoutesByTo {
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
@@ -1238,6 +1245,7 @@ export interface FileRoutesById {
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug/': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
@@ -1378,6 +1386,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
+    | '/events/$slug/'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
@@ -1431,7 +1440,6 @@ export interface FileRouteTypes {
     | '/app/wallet'
     | '/app/wishes'
     | '/app/year-in-review'
-    | '/events/$slug'
     | '/stories/$slug'
     | '/app'
     | '/app/messages/$id'
@@ -1515,6 +1523,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
+    | '/events/$slug'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
@@ -1653,6 +1662,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
+    | '/events/$slug/'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
@@ -2034,6 +2044,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/app/achievements'
       preLoaderRoute: typeof AppAchievementsRouteImport
       parentRoute: typeof AppRoute
+    }
+    '/events/$slug/': {
+      id: '/events/$slug/'
+      path: '/'
+      fullPath: '/events/$slug/'
+      preLoaderRoute: typeof EventsSlugIndexRouteImport
+      parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/weather': {
       id: '/events/$slug/weather'
@@ -2853,6 +2870,7 @@ interface EventsSlugRouteChildren {
   EventsSlugVipRoute: typeof EventsSlugVipRoute
   EventsSlugVowsRoute: typeof EventsSlugVowsRoute
   EventsSlugWeatherRoute: typeof EventsSlugWeatherRoute
+  EventsSlugIndexRoute: typeof EventsSlugIndexRoute
 }
 
 const EventsSlugRouteChildren: EventsSlugRouteChildren = {
@@ -2933,6 +2951,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugVipRoute: EventsSlugVipRoute,
   EventsSlugVowsRoute: EventsSlugVowsRoute,
   EventsSlugWeatherRoute: EventsSlugWeatherRoute,
+  EventsSlugIndexRoute: EventsSlugIndexRoute,
 }
 
 const EventsSlugRouteWithChildren = EventsSlugRoute._addFileChildren(
