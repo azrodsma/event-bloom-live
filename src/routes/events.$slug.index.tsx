@@ -40,13 +40,26 @@ import { useEffect, useState } from "react";
 export const Route = createFileRoute("/events/$slug/")({
   head: ({ params }) => {
     const e = findEvent(params.slug);
-    if (!e) return { meta: [{ title: "Événement — Memento Live" }] };
+    if (!e) {
+      return {
+        meta: [
+          { title: "Événement — Memento Live" },
+          { name: "description", content: "Consultez les détails de votre événement privé Memento Live." },
+          { property: "og:title", content: "Événement — Memento Live" },
+          { property: "og:description", content: "Consultez les détails de votre événement privé Memento Live." },
+          { property: "og:type", content: "website" },
+          { name: "twitter:card", content: "summary_large_image" },
+        ],
+      };
+    }
     return {
       meta: [
         { title: `${e.title} — Memento Live` },
         { name: "description", content: e.description },
         { property: "og:title", content: e.title },
         { property: "og:description", content: e.description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
         { property: "og:image", content: e.cover },
         { name: "twitter:image", content: e.cover },
       ],
