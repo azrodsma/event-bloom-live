@@ -1,10 +1,11 @@
-import { createFileRoute, Link, useParams } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Share2, Bell, Sparkles, Calendar, MapPin, Heart } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { findEvent } from "@/lib/mock-data";
+import { getEventBySlug } from "@/lib/events.functions";
+import { adaptEvent } from "@/lib/event-adapter";
+import { getEventStats } from "@/lib/stats.functions";
 
 export const Route = createFileRoute("/events/$slug/countdown")({
-  component: Countdown,
   head: () => ({
     meta: [
       { title: "Compte à rebours · Memento Live" },
@@ -15,6 +16,13 @@ export const Route = createFileRoute("/events/$slug/countdown")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
+  loader: async ({ params }) => {
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) throw notFound();
+    const stats = await getEventStats({ data: { eventId: db.id } });
+    return { event: adaptEvent(db), targetIso: db.event_date, stats };
+  },
+  component: Countdown,
 });
 
 type Theme = "rose" | "gold" | "night";
@@ -40,13 +48,6 @@ const themes: Record<Theme, { bg: string; accent: string; text: string; subtext:
   },
 };
 
-function computeTarget() {
-  const t = new Date();
-  t.setDate(t.getDate() + 34);
-  t.setHours(15, 30, 0, 0);
-  return t;
-}
-
 function useCountdown(target: Date) {
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
@@ -62,12 +63,26 @@ function useCountdown(target: Date) {
 }
 
 function Countdown() {
-  const { slug } = useParams({ from: "/events/$slug/countdown" });
-  const event = useMemo(() => findEvent(slug), [slug]);
-  const target = useMemo(computeTarget, []);
+  const { event, targetIso, stats } = Route.useLoaderData();
+  const target = useMemo(() => (targetIso ? new Date(targetIso) : new Date(Date.now() + 86_400_000 * 30)), [targetIso]);
   const { days, hours, minutes, seconds } = useCountdown(target);
   const [theme, setTheme] = useState<Theme>("rose");
   const t = themes[theme];
+
+  const dateLabel = targetIso
+    ? target.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })
+      + " · " + target.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+    : "Date à confirmer";
+
+  const share = async () => {
+    const url = typeof window !== "undefined" ? window.location.origin + "/events/" + event.slug : "";
+    if (navigator.share) {
+      try { await navigator.share({ title: event.title, url }); } catch {}
+    } else {
+      navigator.clipboard?.writeText(url);
+    }
+  };
+
 
   return (
     <div className="fixed inset-0 overflow-hidden" style={{ background: t.bg }}>
