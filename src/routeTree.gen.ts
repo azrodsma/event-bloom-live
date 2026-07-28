@@ -35,6 +35,7 @@ import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSecurityRouteImport } from './routes/app.security'
 import { Route as AppSavedRouteImport } from './routes/app.saved'
+import { Route as AppRoadmapRouteImport } from './routes/app.roadmap'
 import { Route as AppRewardsRouteImport } from './routes/app.rewards'
 import { Route as AppRemindersRouteImport } from './routes/app.reminders'
 import { Route as AppReferralsRouteImport } from './routes/app.referrals'
@@ -98,6 +99,7 @@ import { Route as EventsSlugVendorsHubRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugTributeRouteImport } from './routes/events.$slug.tribute'
 import { Route as EventsSlugTranslationsRouteImport } from './routes/events.$slug.translations'
 import { Route as EventsSlugToastRouteImport } from './routes/events.$slug.toast'
+import { Route as EventsSlugTipsJarRouteImport } from './routes/events.$slug.tips-jar'
 import { Route as EventsSlugTimelineRouteImport } from './routes/events.$slug.timeline'
 import { Route as EventsSlugTicketsRouteImport } from './routes/events.$slug.tickets'
 import { Route as EventsSlugThanksRouteImport } from './routes/events.$slug.thanks'
@@ -352,6 +354,11 @@ const AppSecurityRoute = AppSecurityRouteImport.update({
 const AppSavedRoute = AppSavedRouteImport.update({
   id: '/saved',
   path: '/saved',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRoadmapRoute = AppRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
   getParentRoute: () => AppRoute,
 } as any)
 const AppRewardsRoute = AppRewardsRouteImport.update({
@@ -668,6 +675,11 @@ const EventsSlugTranslationsRoute = EventsSlugTranslationsRouteImport.update({
 const EventsSlugToastRoute = EventsSlugToastRouteImport.update({
   id: '/toast',
   path: '/toast',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugTipsJarRoute = EventsSlugTipsJarRouteImport.update({
+  id: '/tips-jar',
+  path: '/tips-jar',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugTimelineRoute = EventsSlugTimelineRouteImport.update({
@@ -1357,6 +1369,7 @@ export interface FileRoutesByFullPath {
   '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/rewards': typeof AppRewardsRoute
+  '/app/roadmap': typeof AppRoadmapRoute
   '/app/saved': typeof AppSavedRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1499,6 +1512,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/tickets': typeof EventsSlugTicketsRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
+  '/events/$slug/tips-jar': typeof EventsSlugTipsJarRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
@@ -1572,6 +1586,7 @@ export interface FileRoutesByTo {
   '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/rewards': typeof AppRewardsRoute
+  '/app/roadmap': typeof AppRoadmapRoute
   '/app/saved': typeof AppSavedRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1713,6 +1728,7 @@ export interface FileRoutesByTo {
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/tickets': typeof EventsSlugTicketsRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
+  '/events/$slug/tips-jar': typeof EventsSlugTipsJarRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
@@ -1788,6 +1804,7 @@ export interface FileRoutesById {
   '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/rewards': typeof AppRewardsRoute
+  '/app/roadmap': typeof AppRoadmapRoute
   '/app/saved': typeof AppSavedRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1930,6 +1947,7 @@ export interface FileRoutesById {
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/tickets': typeof EventsSlugTicketsRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
+  '/events/$slug/tips-jar': typeof EventsSlugTipsJarRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
@@ -2006,6 +2024,7 @@ export interface FileRouteTypes {
     | '/app/referrals'
     | '/app/reminders'
     | '/app/rewards'
+    | '/app/roadmap'
     | '/app/saved'
     | '/app/security'
     | '/app/settings'
@@ -2148,6 +2167,7 @@ export interface FileRouteTypes {
     | '/events/$slug/thanks'
     | '/events/$slug/tickets'
     | '/events/$slug/timeline'
+    | '/events/$slug/tips-jar'
     | '/events/$slug/toast'
     | '/events/$slug/translations'
     | '/events/$slug/tribute'
@@ -2221,6 +2241,7 @@ export interface FileRouteTypes {
     | '/app/referrals'
     | '/app/reminders'
     | '/app/rewards'
+    | '/app/roadmap'
     | '/app/saved'
     | '/app/security'
     | '/app/settings'
@@ -2362,6 +2383,7 @@ export interface FileRouteTypes {
     | '/events/$slug/thanks'
     | '/events/$slug/tickets'
     | '/events/$slug/timeline'
+    | '/events/$slug/tips-jar'
     | '/events/$slug/toast'
     | '/events/$slug/translations'
     | '/events/$slug/tribute'
@@ -2436,6 +2458,7 @@ export interface FileRouteTypes {
     | '/app/referrals'
     | '/app/reminders'
     | '/app/rewards'
+    | '/app/roadmap'
     | '/app/saved'
     | '/app/security'
     | '/app/settings'
@@ -2578,6 +2601,7 @@ export interface FileRouteTypes {
     | '/events/$slug/thanks'
     | '/events/$slug/tickets'
     | '/events/$slug/timeline'
+    | '/events/$slug/tips-jar'
     | '/events/$slug/toast'
     | '/events/$slug/translations'
     | '/events/$slug/tribute'
@@ -2789,6 +2813,13 @@ declare module '@tanstack/react-router' {
       path: '/saved'
       fullPath: '/app/saved'
       preLoaderRoute: typeof AppSavedRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/roadmap': {
+      id: '/app/roadmap'
+      path: '/roadmap'
+      fullPath: '/app/roadmap'
+      preLoaderRoute: typeof AppRoadmapRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/rewards': {
@@ -3230,6 +3261,13 @@ declare module '@tanstack/react-router' {
       path: '/toast'
       fullPath: '/events/$slug/toast'
       preLoaderRoute: typeof EventsSlugToastRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/tips-jar': {
+      id: '/events/$slug/tips-jar'
+      path: '/tips-jar'
+      fullPath: '/events/$slug/tips-jar'
+      preLoaderRoute: typeof EventsSlugTipsJarRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/timeline': {
@@ -4185,6 +4223,7 @@ interface AppRouteChildren {
   AppReferralsRoute: typeof AppReferralsRoute
   AppRemindersRoute: typeof AppRemindersRoute
   AppRewardsRoute: typeof AppRewardsRoute
+  AppRoadmapRoute: typeof AppRoadmapRoute
   AppSavedRoute: typeof AppSavedRoute
   AppSecurityRoute: typeof AppSecurityRoute
   AppSettingsRoute: typeof AppSettingsRoute
@@ -4258,6 +4297,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppReferralsRoute: AppReferralsRoute,
   AppRemindersRoute: AppRemindersRoute,
   AppRewardsRoute: AppRewardsRoute,
+  AppRoadmapRoute: AppRoadmapRoute,
   AppSavedRoute: AppSavedRoute,
   AppSecurityRoute: AppSecurityRoute,
   AppSettingsRoute: AppSettingsRoute,
@@ -4426,6 +4466,7 @@ interface EventsSlugRouteChildren {
   EventsSlugThanksRoute: typeof EventsSlugThanksRoute
   EventsSlugTicketsRoute: typeof EventsSlugTicketsRoute
   EventsSlugTimelineRoute: typeof EventsSlugTimelineRoute
+  EventsSlugTipsJarRoute: typeof EventsSlugTipsJarRoute
   EventsSlugToastRoute: typeof EventsSlugToastRoute
   EventsSlugTranslationsRoute: typeof EventsSlugTranslationsRoute
   EventsSlugTributeRoute: typeof EventsSlugTributeRoute
@@ -4560,6 +4601,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugThanksRoute: EventsSlugThanksRoute,
   EventsSlugTicketsRoute: EventsSlugTicketsRoute,
   EventsSlugTimelineRoute: EventsSlugTimelineRoute,
+  EventsSlugTipsJarRoute: EventsSlugTipsJarRoute,
   EventsSlugToastRoute: EventsSlugToastRoute,
   EventsSlugTranslationsRoute: EventsSlugTranslationsRoute,
   EventsSlugTributeRoute: EventsSlugTributeRoute,
