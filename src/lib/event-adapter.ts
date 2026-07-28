@@ -1,5 +1,28 @@
 import type { EventType, MockEvent } from "@/lib/mock-data";
 
+export function toEmbedUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+    if (host === "youtu.be") return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
+    if (host.endsWith("youtube.com")) {
+      if (u.pathname.startsWith("/embed/") || u.pathname.startsWith("/live/")) return url.replace("/live/", "/embed/");
+      const v = u.searchParams.get("v");
+      if (v) return `https://www.youtube.com/embed/${v}`;
+    }
+    if (host.endsWith("twitch.tv")) {
+      const channel = u.pathname.split("/").filter(Boolean)[0];
+      if (channel) {
+        const parent = typeof window !== "undefined" ? window.location.hostname : "lovable.app";
+        return `https://player.twitch.tv/?channel=${channel}&parent=${parent}`;
+      }
+    }
+    return url;
+  } catch {
+    return url;
+  }
+}
+
 type DbEventType = "wedding" | "baptism" | "birthday" | "anniversary" | "engagement" | "babyshower" | "other";
 
 export const dbTypeToLabel: Record<DbEventType, EventType> = {
@@ -38,6 +61,7 @@ export function adaptEvent(e: DbEvent): MockEvent {
   const days = Math.max(0, Math.ceil((new Date(eventDate).getTime() - Date.now()) / 86400000));
   const [city = e.location ?? ""] = (e.location ?? "").split(",").reverse();
   const platform: "YouTube" | "Twitch" = (e.live_url ?? "").includes("twitch") ? "Twitch" : "YouTube";
+  const embedUrl = e.live_url ? toEmbedUrl(e.live_url) : undefined;
   return {
     id: e.id,
     slug: e.slug,
@@ -63,7 +87,7 @@ export function adaptEvent(e: DbEvent): MockEvent {
         }
       : undefined,
     livestream: e.live_url
-      ? { platform, url: e.live_url, embedUrl: e.live_url }
+      ? { platform, url: e.live_url, embedUrl: embedUrl ?? e.live_url }
       : undefined,
     guestbookCount: 0,
     photosCount: 0,

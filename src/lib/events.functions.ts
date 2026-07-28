@@ -157,6 +157,36 @@ export const updateCagnotte = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+export const updateEvent = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input) =>
+    z
+      .object({
+        eventId: z.string().uuid(),
+        title: z.string().trim().min(2).max(120).optional(),
+        type: eventTypeEnum.optional(),
+        event_date: z.string().datetime().nullable().optional(),
+        location: z.string().trim().max(200).nullable().optional(),
+        description: z.string().trim().max(2000).nullable().optional(),
+        cover_url: z.string().url().nullable().optional(),
+        visibility: visibilityEnum.optional(),
+        live_url: z.string().url().nullable().optional(),
+        status: z.enum(["draft", "upcoming", "live", "past", "archived"]).optional(),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { data: allowed } = await context.supabase.rpc("is_event_organizer", {
+      _event_id: data.eventId,
+      _user_id: context.userId,
+    });
+    if (!allowed) throw new Error("Non autorisé");
+    const { eventId, ...patch } = data;
+    const { error } = await context.supabase.from("events").update(patch).eq("id", eventId);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
 export const listEventStories = createServerFn({ method: "GET" })
   .inputValidator((i) => z.object({ eventId: z.string().uuid() }).parse(i))
   .handler(async ({ data }) => {
