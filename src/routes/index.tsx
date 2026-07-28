@@ -2,6 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 import { EventCard } from "@/components/EventCard";
 import { mockEvents, eventTypes, eventTypeIcons } from "@/lib/mock-data";
+import { listPublicEvents } from "@/lib/events.functions";
+import { adaptEvent, type DbEvent } from "@/lib/event-adapter";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import {
   Radio,
   Gift,
@@ -34,7 +38,15 @@ export const Route = createFileRoute("/")({
 });
 
 function Landing() {
-  const liveEvents = mockEvents.filter((e) => e.isLive);
+  const fetchPublic = useServerFn(listPublicEvents);
+  const { data: publicEvents } = useQuery({
+    queryKey: ["public-events"],
+    queryFn: () => fetchPublic(),
+  });
+  const realEvents = (publicEvents ?? []).map((e) => adaptEvent(e as unknown as DbEvent));
+  const showcase = realEvents.length > 0 ? realEvents : mockEvents;
+  const liveEvents = showcase.filter((e) => e.isLive);
+  const featured = liveEvents.concat(showcase).slice(0, 3);
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -251,7 +263,7 @@ function Landing() {
           </Link>
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {liveEvents.concat(mockEvents.slice(0, 3)).slice(0, 3).map((e) => (
+          {featured.map((e) => (
             <EventCard key={e.id} event={e} />
           ))}
         </div>
