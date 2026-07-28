@@ -22,6 +22,7 @@ import { Route as AppYearInReviewRouteImport } from './routes/app.year-in-review
 import { Route as AppWishesRouteImport } from './routes/app.wishes'
 import { Route as AppWellnessRouteImport } from './routes/app.wellness'
 import { Route as AppWalletRouteImport } from './routes/app.wallet'
+import { Route as AppVenuesMapRouteImport } from './routes/app.venues-map'
 import { Route as AppVenuesRouteImport } from './routes/app.venues'
 import { Route as AppVendorsRouteImport } from './routes/app.vendors'
 import { Route as AppTrendsRouteImport } from './routes/app.trends'
@@ -146,6 +147,7 @@ import { Route as EventsSlugRitualsRouteImport } from './routes/events.$slug.rit
 import { Route as EventsSlugRingsRouteImport } from './routes/events.$slug.rings'
 import { Route as EventsSlugRingBearerRouteImport } from './routes/events.$slug.ring-bearer'
 import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
+import { Route as EventsSlugRentalsRouteImport } from './routes/events.$slug.rentals'
 import { Route as EventsSlugRemindersRouteImport } from './routes/events.$slug.reminders'
 import { Route as EventsSlugReligiousRouteImport } from './routes/events.$slug.religious'
 import { Route as EventsSlugRehearsalRouteImport } from './routes/events.$slug.rehearsal'
@@ -221,6 +223,7 @@ import { Route as EventsSlugDisposableCamsRouteImport } from './routes/events.$s
 import { Route as EventsSlugDisplayRouteImport } from './routes/events.$slug.display'
 import { Route as EventsSlugDeliveriesRouteImport } from './routes/events.$slug.deliveries'
 import { Route as EventsSlugDecorRouteImport } from './routes/events.$slug.decor'
+import { Route as EventsSlugDayBeforeRouteImport } from './routes/events.$slug.day-before'
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
 import { Route as EventsSlugCoupleShootRouteImport } from './routes/events.$slug.couple-shoot'
 import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.countdown'
@@ -328,6 +331,11 @@ const AppWellnessRoute = AppWellnessRouteImport.update({
 const AppWalletRoute = AppWalletRouteImport.update({
   id: '/wallet',
   path: '/wallet',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVenuesMapRoute = AppVenuesMapRouteImport.update({
+  id: '/venues-map',
+  path: '/venues-map',
   getParentRoute: () => AppRoute,
 } as any)
 const AppVenuesRoute = AppVenuesRouteImport.update({
@@ -952,6 +960,11 @@ const EventsSlugReplayRoute = EventsSlugReplayRouteImport.update({
   path: '/replay',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugRentalsRoute = EventsSlugRentalsRouteImport.update({
+  id: '/rentals',
+  path: '/rentals',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugRemindersRoute = EventsSlugRemindersRouteImport.update({
   id: '/reminders',
   path: '/reminders',
@@ -1330,6 +1343,11 @@ const EventsSlugDecorRoute = EventsSlugDecorRouteImport.update({
   path: '/decor',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugDayBeforeRoute = EventsSlugDayBeforeRouteImport.update({
+  id: '/day-before',
+  path: '/day-before',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugDashboardRoute = EventsSlugDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -1634,6 +1652,7 @@ export interface FileRoutesByFullPath {
   '/app/trends': typeof AppTrendsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
+  '/app/venues-map': typeof AppVenuesMapRoute
   '/app/wallet': typeof AppWalletRoute
   '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
@@ -1681,6 +1700,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/day-before': typeof EventsSlugDayBeforeRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
@@ -1756,6 +1776,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/religious': typeof EventsSlugReligiousRoute
   '/events/$slug/reminders': typeof EventsSlugRemindersRoute
+  '/events/$slug/rentals': typeof EventsSlugRentalsRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rings': typeof EventsSlugRingsRoute
@@ -1890,6 +1911,7 @@ export interface FileRoutesByTo {
   '/app/trends': typeof AppTrendsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
+  '/app/venues-map': typeof AppVenuesMapRoute
   '/app/wallet': typeof AppWalletRoute
   '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
@@ -1936,6 +1958,7 @@ export interface FileRoutesByTo {
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/day-before': typeof EventsSlugDayBeforeRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
@@ -2011,6 +2034,7 @@ export interface FileRoutesByTo {
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/religious': typeof EventsSlugReligiousRoute
   '/events/$slug/reminders': typeof EventsSlugRemindersRoute
+  '/events/$slug/rentals': typeof EventsSlugRentalsRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rings': typeof EventsSlugRingsRoute
@@ -2147,6 +2171,7 @@ export interface FileRoutesById {
   '/app/trends': typeof AppTrendsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
+  '/app/venues-map': typeof AppVenuesMapRoute
   '/app/wallet': typeof AppWalletRoute
   '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
@@ -2194,6 +2219,7 @@ export interface FileRoutesById {
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
+  '/events/$slug/day-before': typeof EventsSlugDayBeforeRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
@@ -2269,6 +2295,7 @@ export interface FileRoutesById {
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/religious': typeof EventsSlugReligiousRoute
   '/events/$slug/reminders': typeof EventsSlugRemindersRoute
+  '/events/$slug/rentals': typeof EventsSlugRentalsRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rings': typeof EventsSlugRingsRoute
@@ -2406,6 +2433,7 @@ export interface FileRouteTypes {
     | '/app/trends'
     | '/app/vendors'
     | '/app/venues'
+    | '/app/venues-map'
     | '/app/wallet'
     | '/app/wellness'
     | '/app/wishes'
@@ -2453,6 +2481,7 @@ export interface FileRouteTypes {
     | '/events/$slug/countdown'
     | '/events/$slug/couple-shoot'
     | '/events/$slug/dashboard'
+    | '/events/$slug/day-before'
     | '/events/$slug/decor'
     | '/events/$slug/deliveries'
     | '/events/$slug/display'
@@ -2528,6 +2557,7 @@ export interface FileRouteTypes {
     | '/events/$slug/rehearsal'
     | '/events/$slug/religious'
     | '/events/$slug/reminders'
+    | '/events/$slug/rentals'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
     | '/events/$slug/rings'
@@ -2662,6 +2692,7 @@ export interface FileRouteTypes {
     | '/app/trends'
     | '/app/vendors'
     | '/app/venues'
+    | '/app/venues-map'
     | '/app/wallet'
     | '/app/wellness'
     | '/app/wishes'
@@ -2708,6 +2739,7 @@ export interface FileRouteTypes {
     | '/events/$slug/countdown'
     | '/events/$slug/couple-shoot'
     | '/events/$slug/dashboard'
+    | '/events/$slug/day-before'
     | '/events/$slug/decor'
     | '/events/$slug/deliveries'
     | '/events/$slug/display'
@@ -2783,6 +2815,7 @@ export interface FileRouteTypes {
     | '/events/$slug/rehearsal'
     | '/events/$slug/religious'
     | '/events/$slug/reminders'
+    | '/events/$slug/rentals'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
     | '/events/$slug/rings'
@@ -2918,6 +2951,7 @@ export interface FileRouteTypes {
     | '/app/trends'
     | '/app/vendors'
     | '/app/venues'
+    | '/app/venues-map'
     | '/app/wallet'
     | '/app/wellness'
     | '/app/wishes'
@@ -2965,6 +2999,7 @@ export interface FileRouteTypes {
     | '/events/$slug/countdown'
     | '/events/$slug/couple-shoot'
     | '/events/$slug/dashboard'
+    | '/events/$slug/day-before'
     | '/events/$slug/decor'
     | '/events/$slug/deliveries'
     | '/events/$slug/display'
@@ -3040,6 +3075,7 @@ export interface FileRouteTypes {
     | '/events/$slug/rehearsal'
     | '/events/$slug/religious'
     | '/events/$slug/reminders'
+    | '/events/$slug/rentals'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
     | '/events/$slug/rings'
@@ -3192,6 +3228,13 @@ declare module '@tanstack/react-router' {
       path: '/wallet'
       fullPath: '/app/wallet'
       preLoaderRoute: typeof AppWalletRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/venues-map': {
+      id: '/app/venues-map'
+      path: '/venues-map'
+      fullPath: '/app/venues-map'
+      preLoaderRoute: typeof AppVenuesMapRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/venues': {
@@ -4062,6 +4105,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugReplayRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/rentals': {
+      id: '/events/$slug/rentals'
+      path: '/rentals'
+      fullPath: '/events/$slug/rentals'
+      preLoaderRoute: typeof EventsSlugRentalsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/reminders': {
       id: '/events/$slug/reminders'
       path: '/reminders'
@@ -4587,6 +4637,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugDecorRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/day-before': {
+      id: '/events/$slug/day-before'
+      path: '/day-before'
+      fullPath: '/events/$slug/day-before'
+      preLoaderRoute: typeof EventsSlugDayBeforeRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/dashboard': {
       id: '/events/$slug/dashboard'
       path: '/dashboard'
@@ -4995,6 +5052,7 @@ interface AppRouteChildren {
   AppTrendsRoute: typeof AppTrendsRoute
   AppVendorsRoute: typeof AppVendorsRouteWithChildren
   AppVenuesRoute: typeof AppVenuesRoute
+  AppVenuesMapRoute: typeof AppVenuesMapRoute
   AppWalletRoute: typeof AppWalletRoute
   AppWellnessRoute: typeof AppWellnessRoute
   AppWishesRoute: typeof AppWishesRoute
@@ -5084,6 +5142,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppTrendsRoute: AppTrendsRoute,
   AppVendorsRoute: AppVendorsRouteWithChildren,
   AppVenuesRoute: AppVenuesRoute,
+  AppVenuesMapRoute: AppVenuesMapRoute,
   AppWalletRoute: AppWalletRoute,
   AppWellnessRoute: AppWellnessRoute,
   AppWishesRoute: AppWishesRoute,
@@ -5157,6 +5216,7 @@ interface EventsSlugRouteChildren {
   EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
   EventsSlugCoupleShootRoute: typeof EventsSlugCoupleShootRoute
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
+  EventsSlugDayBeforeRoute: typeof EventsSlugDayBeforeRoute
   EventsSlugDecorRoute: typeof EventsSlugDecorRoute
   EventsSlugDeliveriesRoute: typeof EventsSlugDeliveriesRoute
   EventsSlugDisplayRoute: typeof EventsSlugDisplayRoute
@@ -5232,6 +5292,7 @@ interface EventsSlugRouteChildren {
   EventsSlugRehearsalRoute: typeof EventsSlugRehearsalRoute
   EventsSlugReligiousRoute: typeof EventsSlugReligiousRoute
   EventsSlugRemindersRoute: typeof EventsSlugRemindersRoute
+  EventsSlugRentalsRoute: typeof EventsSlugRentalsRoute
   EventsSlugReplayRoute: typeof EventsSlugReplayRoute
   EventsSlugRingBearerRoute: typeof EventsSlugRingBearerRoute
   EventsSlugRingsRoute: typeof EventsSlugRingsRoute
@@ -5316,6 +5377,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugCountdownRoute: EventsSlugCountdownRoute,
   EventsSlugCoupleShootRoute: EventsSlugCoupleShootRoute,
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
+  EventsSlugDayBeforeRoute: EventsSlugDayBeforeRoute,
   EventsSlugDecorRoute: EventsSlugDecorRoute,
   EventsSlugDeliveriesRoute: EventsSlugDeliveriesRoute,
   EventsSlugDisplayRoute: EventsSlugDisplayRoute,
@@ -5391,6 +5453,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugRehearsalRoute: EventsSlugRehearsalRoute,
   EventsSlugReligiousRoute: EventsSlugReligiousRoute,
   EventsSlugRemindersRoute: EventsSlugRemindersRoute,
+  EventsSlugRentalsRoute: EventsSlugRentalsRoute,
   EventsSlugReplayRoute: EventsSlugReplayRoute,
   EventsSlugRingBearerRoute: EventsSlugRingBearerRoute,
   EventsSlugRingsRoute: EventsSlugRingsRoute,
