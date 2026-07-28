@@ -86,6 +86,7 @@ import { Route as AppCareRouteImport } from './routes/app.care'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
 import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries'
+import { Route as AppAiStudioRouteImport } from './routes/app.ai-studio'
 import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as AppAccessibilityRouteImport } from './routes/app.accessibility'
@@ -617,6 +618,11 @@ const AppAppearanceRoute = AppAppearanceRouteImport.update({
 const AppAnniversariesRoute = AppAnniversariesRouteImport.update({
   id: '/anniversaries',
   path: '/anniversaries',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiStudioRoute = AppAiStudioRouteImport.update({
+  id: '/ai-studio',
+  path: '/ai-studio',
   getParentRoute: () => AppRoute,
 } as any)
 const AppAgendaRoute = AppAgendaRouteImport.update({
@@ -1365,6 +1371,7 @@ export interface FileRoutesByFullPath {
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
+  '/app/ai-studio': typeof AppAiStudioRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
@@ -1589,6 +1596,7 @@ export interface FileRoutesByTo {
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
+  '/app/ai-studio': typeof AppAiStudioRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
@@ -1814,6 +1822,7 @@ export interface FileRoutesById {
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
+  '/app/ai-studio': typeof AppAiStudioRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
@@ -2041,6 +2050,7 @@ export interface FileRouteTypes {
     | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
+    | '/app/ai-studio'
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
@@ -2265,6 +2275,7 @@ export interface FileRouteTypes {
     | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
+    | '/app/ai-studio'
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
@@ -2489,6 +2500,7 @@ export interface FileRouteTypes {
     | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
+    | '/app/ai-studio'
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
@@ -3255,6 +3267,13 @@ declare module '@tanstack/react-router' {
       path: '/anniversaries'
       fullPath: '/app/anniversaries'
       preLoaderRoute: typeof AppAnniversariesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ai-studio': {
+      id: '/app/ai-studio'
+      path: '/ai-studio'
+      fullPath: '/app/ai-studio'
+      preLoaderRoute: typeof AppAiStudioRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/agenda': {
@@ -4310,6 +4329,7 @@ interface AppRouteChildren {
   AppAccessibilityRoute: typeof AppAccessibilityRoute
   AppAchievementsRoute: typeof AppAchievementsRoute
   AppAgendaRoute: typeof AppAgendaRoute
+  AppAiStudioRoute: typeof AppAiStudioRoute
   AppAnniversariesRoute: typeof AppAnniversariesRoute
   AppAppearanceRoute: typeof AppAppearanceRoute
   AppBillingRoute: typeof AppBillingRoute
@@ -4387,6 +4407,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAccessibilityRoute: AppAccessibilityRoute,
   AppAchievementsRoute: AppAchievementsRoute,
   AppAgendaRoute: AppAgendaRoute,
+  AppAiStudioRoute: AppAiStudioRoute,
   AppAnniversariesRoute: AppAnniversariesRoute,
   AppAppearanceRoute: AppAppearanceRoute,
   AppBillingRoute: AppBillingRoute,
