@@ -1,7 +1,11 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { findEvent } from "@/lib/mock-data";
-import { ChevronLeft, Type, Mic, Camera, Video, Sparkles, Send, X, Pause } from "lucide-react";
-import { useState } from "react";
+import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
+import { ChevronLeft, Type, Mic, Camera, Video, Sparkles, Send, X, Pause, LogIn } from "lucide-react";
+import { useRef, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { getEventBySlug } from "@/lib/events.functions";
+import { createGuestbookEntry } from "@/lib/guestbook.functions";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/events/$slug/guestbook/new")({
   head: ({ params }) => ({
@@ -10,32 +14,106 @@ export const Route = createFileRoute("/events/$slug/guestbook/new")({
       { name: "description", content: `Écrivez un mot doux pour ${params.slug}.` },
     ],
   }),
-  loader: ({ params }) => {
-    const e = findEvent(params.slug);
-    if (!e) throw notFound();
-    return { event: e };
+  loader: async ({ params }) => {
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) throw notFound();
+    return { event: { id: db.id, slug: db.slug, title: db.title } };
   },
   component: NewEntry,
 });
 
 type Mode = "text" | "voice" | "photo" | "video";
 
+async function uploadToStorage(file: Blob, ext: string, eventId: string): Promise<string> {
+  const path = `guestbook/${eventId}/${crypto.randomUUID()}.${ext}`;
+  const { error } = await supabase.storage.from("event-media").upload(path, file, {
+    upsert: false,
+    contentType: file.type || undefined,
+  });
+  if (error) throw error;
+  const { data } = supabase.storage.from("event-media").getPublicUrl(path);
+  return data.publicUrl;
+}
+
 function NewEntry() {
   const { event } = Route.useLoaderData();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const create = useServerFn(createGuestbookEntry);
+
   const [mode, setMode] = useState<Mode>("text");
   const [text, setText] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [recording, setRecording] = useState(false);
   const [seconds, setSeconds] = useState(0);
-  const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const toggleRec = () => {
-    setRecording((r) => !r);
-    if (!recording) {
+  const mediaRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+  const timerRef = useRef<number | null>(null);
+
+  const toggleRec = async () => {
+    if (recording) {
+      mediaRef.current?.stop();
+      if (timerRef.current) window.clearInterval(timerRef.current);
+      setRecording(false);
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const rec = new MediaRecorder(stream);
+      chunksRef.current = [];
+      rec.ondataavailable = (e) => chunksRef.current.push(e.data);
+      rec.onstop = () => {
+        setAudioBlob(new Blob(chunksRef.current, { type: "audio/webm" }));
+        stream.getTracks().forEach((t) => t.stop());
+      };
+      rec.start();
+      mediaRef.current = rec;
+      setSeconds(0);
       const start = Date.now();
-      const id = setInterval(() => setSeconds(Math.floor((Date.now() - start) / 1000)), 500);
-      (window as unknown as { __rec?: number }).__rec = id as unknown as number;
-    } else {
-      clearInterval((window as unknown as { __rec?: number }).__rec);
+      timerRef.current = window.setInterval(
+        () => setSeconds(Math.floor((Date.now() - start) / 1000)),
+        500,
+      );
+      setRecording(true);
+    } catch (e) {
+      setError("Micro indisponible");
+    }
+  };
+
+  const submit = async () => {
+    if (!user) return;
+    setSending(true);
+    setError(null);
+    try {
+      if (mode === "text") {
+        if (!text.trim()) throw new Error("Message vide");
+        await create({ data: { eventId: event.id, kind: "text", content: text.trim() } });
+      } else if (mode === "photo" || mode === "video") {
+        if (!file) throw new Error("Aucun fichier sélectionné");
+        const ext = file.name.split(".").pop() || (mode === "photo" ? "jpg" : "mp4");
+        const url = await uploadToStorage(file, ext, event.id);
+        await create({
+          data: {
+            eventId: event.id,
+            kind: mode,
+            content: text.trim() || undefined,
+            mediaUrl: url,
+          },
+        });
+      } else if (mode === "voice") {
+        if (!audioBlob) throw new Error("Aucun enregistrement");
+        const url = await uploadToStorage(audioBlob, "webm", event.id);
+        await create({ data: { eventId: event.id, kind: "audio", mediaUrl: url } });
+      }
+      navigate({ to: "/events/$slug/guestbook", params: { slug: event.slug } });
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Erreur");
+    } finally {
+      setSending(false);
     }
   };
 
@@ -53,8 +131,15 @@ function NewEntry() {
     "Ce jour restera gravé à jamais 🌸",
   ];
 
+  const canSend =
+    !sending &&
+    !!user &&
+    ((mode === "text" && text.trim().length > 0) ||
+      ((mode === "photo" || mode === "video") && !!file) ||
+      (mode === "voice" && !!audioBlob));
+
   return (
-    <div className="min-h-screen bg-gradient-warm pb-24">
+    <div className="min-h-screen bg-gradient-warm pb-32">
       <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-border bg-background/95 px-4 py-3 backdrop-blur">
         <Link
           to="/events/$slug/guestbook"
@@ -73,12 +158,18 @@ function NewEntry() {
         <section className="rounded-3xl bg-gradient-primary p-5 text-white shadow-glow">
           <Sparkles className="h-5 w-5 opacity-80" />
           <h1 className="mt-2 font-serif text-2xl leading-tight">Laissez un mot doux</h1>
-          <p className="mt-1 text-sm opacity-90">
-            Un souvenir précieux à retrouver après l'événement.
-          </p>
+          <p className="mt-1 text-sm opacity-90">Un souvenir précieux à retrouver après l'événement.</p>
         </section>
 
-        {/* Mode picker */}
+        {!user && (
+          <Link
+            to="/auth"
+            className="flex items-center justify-center gap-2 rounded-3xl bg-surface p-4 text-sm font-semibold shadow-card"
+          >
+            <LogIn className="h-4 w-4" /> Se connecter pour publier
+          </Link>
+        )}
+
         <section>
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Format</p>
           <div className="grid grid-cols-4 gap-2">
@@ -93,14 +184,15 @@ function NewEntry() {
                   }`}
                 >
                   <m.icon className={`h-4 w-4 ${active ? "text-primary" : "text-muted-foreground"}`} />
-                  <span className={`text-[11px] font-semibold ${active ? "text-primary" : "text-foreground"}`}>{m.label}</span>
+                  <span className={`text-[11px] font-semibold ${active ? "text-primary" : "text-foreground"}`}>
+                    {m.label}
+                  </span>
                 </button>
               );
             })}
           </div>
         </section>
 
-        {/* Composer */}
         <section className="rounded-3xl bg-surface p-5 shadow-card">
           {mode === "text" && (
             <>
@@ -114,7 +206,6 @@ function NewEntry() {
               />
               <div className="mt-2 flex items-center justify-between text-[11px] text-muted-foreground">
                 <span>{text.length} / 500</span>
-                <button className="font-semibold text-primary">✨ Aide-moi à écrire</button>
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
                 {suggestions.map((s) => (
@@ -143,38 +234,44 @@ function NewEntry() {
                 {recording && <span className="animate-ping absolute inset-0 rounded-full bg-live/40" />}
               </button>
               <p className="mt-4 font-serif text-3xl tabular-nums">
-                {String(Math.floor(seconds / 60)).padStart(2, "0")}:{String(seconds % 60).padStart(2, "0")}
+                {String(Math.floor(seconds / 60)).padStart(2, "0")}:
+                {String(seconds % 60).padStart(2, "0")}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                {recording ? "Enregistrement en cours…" : "Appuyez pour commencer"}
+                {recording ? "Enregistrement…" : audioBlob ? "Prêt à envoyer ✓" : "Appuyez pour commencer"}
               </p>
-              {seconds > 0 && !recording && (
-                <div className="mt-5 flex items-end gap-0.5">
-                  {Array.from({ length: 28 }).map((_, i) => (
-                    <span key={i} className="w-1 rounded-full bg-primary/60" style={{ height: `${8 + ((i * 13) % 20)}px` }} />
-                  ))}
-                </div>
+              {audioBlob && !recording && (
+                <audio controls src={URL.createObjectURL(audioBlob)} className="mt-4 w-full" />
               )}
             </div>
           )}
 
           {(mode === "photo" || mode === "video") && (
-            <div className="flex flex-col items-center gap-4 py-8">
-              <div className="grid h-24 w-24 place-items-center rounded-3xl bg-primary-light">
-                {mode === "photo" ? <Camera className="h-10 w-10 text-primary" /> : <Video className="h-10 w-10 text-primary" />}
-              </div>
-              <div className="text-center">
+            <div className="flex flex-col items-center gap-4 py-4">
+              <label className="flex w-full cursor-pointer flex-col items-center gap-3 rounded-2xl border-2 border-dashed border-border bg-background p-6">
+                <div className="grid h-16 w-16 place-items-center rounded-2xl bg-primary-light">
+                  {mode === "photo" ? (
+                    <Camera className="h-8 w-8 text-primary" />
+                  ) : (
+                    <Video className="h-8 w-8 text-primary" />
+                  )}
+                </div>
                 <p className="font-serif text-lg">
-                  {mode === "photo" ? "Ajoutez une photo" : "Enregistrez une vidéo"}
+                  {file ? file.name : mode === "photo" ? "Ajoutez une photo" : "Ajoutez une vidéo"}
                 </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  {mode === "photo" ? "JPG, PNG · max 10 Mo" : "MP4 · max 60 secondes"}
-                </p>
-              </div>
-              <button className="rounded-full bg-gradient-primary px-5 py-2.5 text-sm font-semibold text-white shadow-glow">
-                Choisir un fichier
-              </button>
+                <input
+                  type="file"
+                  accept={mode === "photo" ? "image/*" : "video/*"}
+                  className="hidden"
+                  onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                />
+                <span className="rounded-full bg-gradient-primary px-5 py-2 text-sm font-semibold text-white shadow-glow">
+                  Choisir un fichier
+                </span>
+              </label>
               <textarea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
                 placeholder="Ajouter une légende…"
                 rows={2}
                 className="w-full resize-none rounded-2xl border border-border bg-background p-3 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none"
@@ -183,24 +280,11 @@ function NewEntry() {
           )}
         </section>
 
-        {/* Author */}
-        <section className="rounded-3xl bg-surface p-5 shadow-card">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Signature</p>
-          <div className="mt-3 flex items-center gap-3">
-            <img src="https://i.pravatar.cc/80?img=32" alt="" className="h-10 w-10 rounded-full object-cover" />
-            <input
-              defaultValue="Camille & Jules"
-              className="flex-1 rounded-2xl border border-border bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none"
-            />
-          </div>
-          <label className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
-            <input type="checkbox" className="h-4 w-4 rounded border-border text-primary" />
-            Publier de façon anonyme
-          </label>
-        </section>
+        {error && (
+          <p className="rounded-2xl bg-live/10 p-3 text-center text-sm text-live">{error}</p>
+        )}
       </main>
 
-      {/* Send bar */}
       <div className="fixed inset-x-0 bottom-16 z-10 border-t border-border bg-background/95 px-4 py-3 backdrop-blur">
         <div className="mx-auto flex max-w-2xl items-center gap-3">
           <Link
@@ -212,13 +296,11 @@ function NewEntry() {
             <X className="h-4 w-4" />
           </Link>
           <button
-            onClick={() => {
-              setSent(true);
-              setTimeout(() => setSent(false), 2500);
-            }}
-            className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-primary px-5 py-3 text-sm font-semibold text-white shadow-glow"
+            onClick={submit}
+            disabled={!canSend}
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-primary px-5 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50"
           >
-            <Send className="h-4 w-4" /> {sent ? "Message envoyé ✓" : "Envoyer au livre d'or"}
+            <Send className="h-4 w-4" /> {sending ? "Envoi…" : "Envoyer au livre d'or"}
           </button>
         </div>
       </div>
