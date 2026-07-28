@@ -1,10 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Sparkles, Wand2, Loader2, Copy, Check } from "lucide-react";
+import { ArrowLeft, Sparkles, Wand2, Loader2, Copy, Check, Upload, X, Image as ImageIcon, Film } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { composeStory } from "@/lib/story.functions";
+
+type MediaItem = {
+  id: string;
+  file: File;
+  kind: "image" | "video";
+  url: string;
+  duration?: number;
+  caption: string;
+};
+
+const fmtSize = (b: number) => (b < 1024 * 1024 ? `${Math.round(b / 1024)} Ko` : `${(b / 1024 / 1024).toFixed(1)} Mo`);
+const fmtDur = (s?: number) => (s ? `${Math.round(s)}s` : "");
 
 export const Route = createFileRoute("/app/ai-story")({
   component: AIStory,
