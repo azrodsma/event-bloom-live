@@ -107,6 +107,7 @@ import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invi
 import { Route as EventsSlugInvitationsRouteImport } from './routes/events.$slug.invitations'
 import { Route as EventsSlugInsightsRouteImport } from './routes/events.$slug.insights'
 import { Route as EventsSlugIcebreakersRouteImport } from './routes/events.$slug.icebreakers'
+import { Route as EventsSlugHighlightReelRouteImport } from './routes/events.$slug.highlight-reel'
 import { Route as EventsSlugHallOfFameRouteImport } from './routes/events.$slug.hall-of-fame'
 import { Route as EventsSlugGuidesRouteImport } from './routes/events.$slug.guides'
 import { Route as EventsSlugGuestsRouteImport } from './routes/events.$slug.guests'
@@ -641,6 +642,11 @@ const EventsSlugIcebreakersRoute = EventsSlugIcebreakersRouteImport.update({
   path: '/icebreakers',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugHighlightReelRoute = EventsSlugHighlightReelRouteImport.update({
+  id: '/highlight-reel',
+  path: '/highlight-reel',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugHallOfFameRoute = EventsSlugHallOfFameRouteImport.update({
   id: '/hall-of-fame',
   path: '/hall-of-fame',
@@ -945,6 +951,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
+  '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
   '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
@@ -1085,6 +1092,7 @@ export interface FileRoutesByTo {
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
+  '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
   '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
@@ -1228,6 +1236,7 @@ export interface FileRoutesById {
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
+  '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
   '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
@@ -1372,6 +1381,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guests'
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
+    | '/events/$slug/highlight-reel'
     | '/events/$slug/icebreakers'
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
@@ -1512,6 +1522,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guests'
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
+    | '/events/$slug/highlight-reel'
     | '/events/$slug/icebreakers'
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
@@ -1654,6 +1665,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guests'
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
+    | '/events/$slug/highlight-reel'
     | '/events/$slug/icebreakers'
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
@@ -2403,6 +2415,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugIcebreakersRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/highlight-reel': {
+      id: '/events/$slug/highlight-reel'
+      path: '/highlight-reel'
+      fullPath: '/events/$slug/highlight-reel'
+      preLoaderRoute: typeof EventsSlugHighlightReelRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/hall-of-fame': {
       id: '/events/$slug/hall-of-fame'
       path: '/hall-of-fame'
@@ -2887,6 +2906,7 @@ interface EventsSlugRouteChildren {
   EventsSlugGuestsRoute: typeof EventsSlugGuestsRoute
   EventsSlugGuidesRoute: typeof EventsSlugGuidesRoute
   EventsSlugHallOfFameRoute: typeof EventsSlugHallOfFameRoute
+  EventsSlugHighlightReelRoute: typeof EventsSlugHighlightReelRoute
   EventsSlugIcebreakersRoute: typeof EventsSlugIcebreakersRoute
   EventsSlugInsightsRoute: typeof EventsSlugInsightsRoute
   EventsSlugInvitationsRoute: typeof EventsSlugInvitationsRoute
@@ -2970,6 +2990,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugGuestsRoute: EventsSlugGuestsRoute,
   EventsSlugGuidesRoute: EventsSlugGuidesRoute,
   EventsSlugHallOfFameRoute: EventsSlugHallOfFameRoute,
+  EventsSlugHighlightReelRoute: EventsSlugHighlightReelRoute,
   EventsSlugIcebreakersRoute: EventsSlugIcebreakersRoute,
   EventsSlugInsightsRoute: EventsSlugInsightsRoute,
   EventsSlugInvitationsRoute: EventsSlugInvitationsRoute,
