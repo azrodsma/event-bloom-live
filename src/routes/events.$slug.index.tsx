@@ -42,43 +42,36 @@ import { CagnotteCard } from "@/components/CagnotteCard";
 
 
 export const Route = createFileRoute("/events/$slug/")({
-  head: ({ params }) => {
-    const e = findEvent(params.slug);
-    if (!e) {
-      return {
-        meta: [
-          { title: "Événement — Memento Live" },
-          { name: "description", content: "Consultez les détails de votre événement privé Memento Live." },
-          { property: "og:title", content: "Événement — Memento Live" },
-          { property: "og:description", content: "Consultez les détails de votre événement privé Memento Live." },
-          { property: "og:type", content: "website" },
-          { name: "twitter:card", content: "summary_large_image" },
-        ],
-      };
+  head: ({ loaderData }: { loaderData?: { event?: { title?: string; description?: string; cover?: string } } }) => {
+    const e = loaderData?.event;
+    const title = e?.title ?? "Événement";
+    const description = e?.description ?? "Consultez les détails de votre événement privé Memento Live.";
+    const meta: Array<Record<string, string>> = [
+      { title: `${title} — Memento Live` },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ];
+    if (e?.cover && /^https?:\/\//.test(e.cover)) {
+      meta.push({ property: "og:image", content: e.cover });
+      meta.push({ name: "twitter:image", content: e.cover });
     }
-    return {
-      meta: [
-        { title: `${e.title} — Memento Live` },
-        { name: "description", content: e.description },
-        { property: "og:title", content: e.title },
-        { property: "og:description", content: e.description },
-        { property: "og:type", content: "website" },
-        { name: "twitter:card", content: "summary_large_image" },
-        { property: "og:image", content: e.cover },
-        { name: "twitter:image", content: e.cover },
-      ],
-    };
+    return { meta };
   },
   loader: async ({ params }) => {
     const { getEventBySlug } = await import("@/lib/events.functions");
     const { adaptEvent } = await import("@/lib/event-adapter");
+    const { getEventStats } = await import("@/lib/stats.functions");
     const db = await getEventBySlug({ data: { slug: params.slug } });
     if (!db) {
       const e = findEvent(params.slug);
       if (!e) throw notFound();
-      return { event: e, dbId: null as string | null };
+      return { event: e, dbId: null as string | null, stats: null as Awaited<ReturnType<typeof getEventStats>> | null };
     }
-    return { event: adaptEvent(db), dbId: db.id };
+    const stats = await getEventStats({ data: { eventId: db.id } });
+    return { event: adaptEvent(db), dbId: db.id, stats };
   },
   component: EventPage,
 });
@@ -99,7 +92,7 @@ function useCountdown(iso: string) {
 }
 
 function EventPage() {
-  const { event, dbId } = Route.useLoaderData();
+  const { event, dbId, stats } = Route.useLoaderData();
   const cd = useCountdown(event.date);
 
   return (
@@ -277,7 +270,7 @@ function EventPage() {
           >
             <BookHeart className="h-6 w-6 text-primary" />
             <p className="mt-3 font-serif text-lg">Livre d'or</p>
-            <p className="text-xs text-muted-foreground">{event.guestbookCount} messages</p>
+            <p className="text-xs text-muted-foreground">{stats?.guestbook ?? event.guestbookCount} messages</p>
           </Link>
           <Link
             to="/events/$slug/album"
@@ -286,7 +279,7 @@ function EventPage() {
           >
             <Camera className="h-6 w-6 text-primary" />
             <p className="mt-3 font-serif text-lg">Album</p>
-            <p className="text-xs text-muted-foreground">{event.photosCount} photos</p>
+            <p className="text-xs text-muted-foreground">{stats?.photos ?? event.photosCount} photos</p>
           </Link>
         </div>
 
@@ -317,7 +310,7 @@ function EventPage() {
               <CheckSquare className="h-5 w-5" />
             </div>
             <p className="font-serif text-sm leading-tight">Checklist</p>
-            <p className="text-[10px] text-muted-foreground">4/10 faits</p>
+            <p className="text-[10px] text-muted-foreground">{stats ? `${stats.checklistDone}/${stats.checklistTotal} faits` : "—"}</p>
           </Link>
           <Link
             to="/events/$slug/playlist"
@@ -328,7 +321,7 @@ function EventPage() {
               <Music2 className="h-5 w-5" />
             </div>
             <p className="font-serif text-sm leading-tight">Playlist</p>
-            <p className="text-[10px] text-muted-foreground">8 morceaux</p>
+            <p className="text-[10px] text-muted-foreground">{stats?.songs ?? 0} morceaux</p>
           </Link>
           <Link
             to="/events/$slug/seating"
@@ -339,7 +332,7 @@ function EventPage() {
               <LayoutGrid className="h-5 w-5" />
             </div>
             <p className="font-serif text-sm leading-tight">Plan de table</p>
-            <p className="text-[10px] text-muted-foreground">5 tables</p>
+            <p className="text-[10px] text-muted-foreground">{stats?.tables ?? 0} tables</p>
           </Link>
         </div>
 
