@@ -1,7 +1,15 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ChevronLeft, Camera, Upload, Download, Heart, Grid3x3, Play } from "lucide-react";
+import { ChevronLeft, Camera, Upload, Download, Grid3x3, Play, LogIn } from "lucide-react";
 import { findEvent } from "@/lib/mock-data";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getEventBySlug } from "@/lib/events.functions";
+import { adaptEvent } from "@/lib/event-adapter";
+import { listAlbumMedia, createAlbumMedia } from "@/lib/album.functions";
+import { uploadEventMedia } from "@/lib/storage";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/events/$slug/album")({
   head: ({ params }) => ({
@@ -10,30 +18,88 @@ export const Route = createFileRoute("/events/$slug/album")({
       { name: "description", content: "Album photo collaboratif de l'événement." },
     ],
   }),
-  loader: ({ params }) => {
-    const event = findEvent(params.slug);
-    if (!event) throw notFound();
-    return { event };
+  loader: async ({ params }) => {
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) {
+      const e = findEvent(params.slug);
+      if (!e) throw notFound();
+      return { event: e, dbId: null as string | null };
+    }
+    return { event: adaptEvent(db), dbId: db.id };
   },
   component: Album,
 });
 
-const photos = [
-  { id: "p1", url: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800", author: "Marie", likes: 42, video: false },
-  { id: "p2", url: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800", author: "Alex", likes: 28, video: false },
-  { id: "p3", url: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800", author: "Emma", likes: 51, video: false },
-  { id: "p4", url: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800", author: "Julien", likes: 17, video: true },
-  { id: "p5", url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800", author: "Chloé", likes: 34, video: false },
-  { id: "p6", url: "https://images.unsplash.com/photo-1530023367847-a683933f4172?w=800", author: "Papa", likes: 63, video: false },
-  { id: "p7", url: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&sat=-20", author: "Léa", likes: 22, video: false },
-  { id: "p8", url: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&hue=10", author: "Marc", likes: 9, video: true },
-  { id: "p9", url: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800&sat=-30", author: "Sofia", likes: 15, video: false },
-];
+type Media = {
+  id: string;
+  uploader_name: string | null;
+  url: string;
+  media_type: string;
+  caption: string | null;
+  created_at: string;
+};
 
 function Album() {
-  const { event } = Route.useLoaderData();
+  const { event, dbId } = Route.useLoaderData();
+  const { user } = useAuth();
+  const qc = useQueryClient();
   const [selected, setSelected] = useState<string | null>(null);
+  const [filter, setFilter] = useState<"all" | "image" | "video">("all");
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const list = useServerFn(listAlbumMedia);
+  const create = useServerFn(createAlbumMedia);
+
+  const key = ["album", dbId] as const;
+  const { data: photos = [] } = useQuery({
+    queryKey: key,
+    enabled: !!dbId,
+    queryFn: async () => (await list({ data: { eventId: dbId! } })) as Media[],
+  });
+
+  useEffect(() => {
+    if (!dbId) return;
+    const ch = supabase
+      .channel(`album-${dbId}`)
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "album_media", filter: `event_id=eq.${dbId}` },
+        (payload) => {
+          qc.setQueryData<Media[]>(key, (prev = []) => [payload.new as Media, ...prev]);
+        },
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(ch);
+    };
+  }, [dbId, qc]);
+
+  const filtered = photos.filter((p) => (filter === "all" ? true : filter === "video" ? p.media_type === "video" : p.media_type === "image"));
   const active = photos.find((p) => p.id === selected);
+
+  const onPickFiles = () => fileRef.current?.click();
+
+  const onFilesChosen: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
+    if (!user || !dbId) return;
+    const files = Array.from(e.target.files ?? []);
+    e.target.value = "";
+    if (files.length === 0) return;
+    setError(null);
+    setUploading(true);
+    try {
+      for (const file of files) {
+        const mediaType: "image" | "video" = file.type.startsWith("video") ? "video" : "image";
+        const { url } = await uploadEventMedia({ eventId: dbId, file, userId: user.id });
+        await create({ data: { eventId: dbId, url, mediaType } });
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Échec de l'envoi");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -58,44 +124,83 @@ function Album() {
       </header>
 
       <main className="mx-auto max-w-2xl px-4 py-4">
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/*,video/*"
+          multiple
+          className="hidden"
+          onChange={onFilesChosen}
+        />
+
         <div className="mb-4 flex items-center justify-between rounded-2xl bg-gradient-primary p-4 text-white shadow-glow">
-          <div>
+          <div className="min-w-0 flex-1">
             <p className="font-serif text-lg">Partagez vos plus belles photos</p>
             <p className="text-xs text-white/80">Toutes les photos ajoutées sont visibles par les invités.</p>
+            {error && <p className="mt-1 text-xs font-semibold">⚠︎ {error}</p>}
           </div>
-          <button className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-primary">
-            <Upload className="h-4 w-4" /> Ajouter
-          </button>
+          {user ? (
+            <button
+              onClick={onPickFiles}
+              disabled={uploading || !dbId}
+              className="ml-3 flex shrink-0 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-primary disabled:opacity-70"
+            >
+              <Upload className="h-4 w-4" /> {uploading ? "Envoi…" : "Ajouter"}
+            </button>
+          ) : (
+            <Link to="/auth" className="ml-3 flex shrink-0 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-primary">
+              <LogIn className="h-4 w-4" /> Connexion
+            </Link>
+          )}
         </div>
 
         <div className="mb-3 flex items-center gap-2 text-xs">
-          <button className="flex items-center gap-1 rounded-full bg-primary px-3 py-1.5 font-medium text-white">
+          <button
+            onClick={() => setFilter("all")}
+            className={`flex items-center gap-1 rounded-full px-3 py-1.5 font-medium ${filter === "all" ? "bg-primary text-white" : "bg-surface text-muted-foreground"}`}
+          >
             <Grid3x3 className="h-3 w-3" /> Tout
           </button>
-          <button className="rounded-full bg-surface px-3 py-1.5 font-medium text-muted-foreground">Photos</button>
-          <button className="rounded-full bg-surface px-3 py-1.5 font-medium text-muted-foreground">Vidéos</button>
-          <button className="rounded-full bg-surface px-3 py-1.5 font-medium text-muted-foreground">Mises en avant</button>
+          <button
+            onClick={() => setFilter("image")}
+            className={`rounded-full px-3 py-1.5 font-medium ${filter === "image" ? "bg-primary text-white" : "bg-surface text-muted-foreground"}`}
+          >
+            Photos
+          </button>
+          <button
+            onClick={() => setFilter("video")}
+            className={`rounded-full px-3 py-1.5 font-medium ${filter === "video" ? "bg-primary text-white" : "bg-surface text-muted-foreground"}`}
+          >
+            Vidéos
+          </button>
         </div>
 
-        <div className="grid grid-cols-3 gap-1.5">
-          {photos.map((p) => (
-            <button
-              key={p.id}
-              onClick={() => setSelected(p.id)}
-              className="group relative aspect-square overflow-hidden rounded-xl bg-surface"
-            >
-              <img src={p.url} alt={`Photo de ${p.author}`} className="h-full w-full object-cover transition-transform group-active:scale-95" />
-              {p.video && (
-                <span className="absolute right-1.5 top-1.5 grid h-6 w-6 place-items-center rounded-full bg-black/50 text-white">
-                  <Play className="h-3 w-3" fill="currentColor" />
-                </span>
-              )}
-              <span className="absolute bottom-1.5 left-1.5 flex items-center gap-1 rounded-full bg-black/40 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur">
-                <Heart className="h-3 w-3" fill="currentColor" /> {p.likes}
-              </span>
-            </button>
-          ))}
-        </div>
+        {filtered.length === 0 ? (
+          <div className="rounded-3xl bg-surface p-8 text-center text-sm text-muted-foreground">
+            Aucun média pour le moment. Sois le premier à partager une photo 📸
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-1.5">
+            {filtered.map((p) => (
+              <button
+                key={p.id}
+                onClick={() => setSelected(p.id)}
+                className="group relative aspect-square overflow-hidden rounded-xl bg-surface"
+              >
+                {p.media_type === "video" ? (
+                  <video src={p.url} className="h-full w-full object-cover" muted playsInline preload="metadata" />
+                ) : (
+                  <img src={p.url} alt={`Photo de ${p.uploader_name ?? "Invité"}`} className="h-full w-full object-cover transition-transform group-active:scale-95" />
+                )}
+                {p.media_type === "video" && (
+                  <span className="absolute right-1.5 top-1.5 grid h-6 w-6 place-items-center rounded-full bg-black/50 text-white">
+                    <Play className="h-3 w-3" fill="currentColor" />
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        )}
       </main>
 
       {active && (
@@ -110,23 +215,31 @@ function Album() {
             <ChevronLeft className="h-5 w-5" />
           </button>
           <div className="flex flex-1 items-center justify-center">
-            <img src={active.url} alt="" className="max-h-full max-w-full rounded-2xl object-contain" />
+            {active.media_type === "video" ? (
+              <video src={active.url} controls className="max-h-full max-w-full rounded-2xl" />
+            ) : (
+              <img src={active.url} alt="" className="max-h-full max-w-full rounded-2xl object-contain" />
+            )}
           </div>
           <div className="mx-auto flex w-full max-w-md items-center justify-between rounded-2xl bg-white/10 p-3 text-white backdrop-blur">
             <div>
-              <p className="text-sm font-semibold">Photo de {active.author}</p>
-              <p className="text-xs text-white/70">{active.likes} j'aime</p>
+              <p className="text-sm font-semibold">Partagé par {active.uploader_name ?? "Invité"}</p>
+              <p className="text-xs text-white/70">{new Date(active.created_at).toLocaleString("fr-FR")}</p>
             </div>
-            <button className="grid h-10 w-10 place-items-center rounded-full bg-primary">
-              <Heart className="h-5 w-5" fill="currentColor" />
-            </button>
           </div>
         </div>
       )}
 
-      <button className="fixed bottom-8 right-6 z-40 grid h-14 w-14 place-items-center rounded-full bg-gradient-primary text-white shadow-glow">
-        <Camera className="h-6 w-6" />
-      </button>
+      {user && (
+        <button
+          onClick={onPickFiles}
+          disabled={uploading || !dbId}
+          className="fixed bottom-8 right-6 z-40 grid h-14 w-14 place-items-center rounded-full bg-gradient-primary text-white shadow-glow disabled:opacity-70"
+          aria-label="Ajouter des photos"
+        >
+          <Camera className="h-6 w-6" />
+        </button>
+      )}
     </div>
   );
 }
