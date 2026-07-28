@@ -1,6 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { EventCard } from "@/components/EventCard";
-import { mockEvents } from "@/lib/mock-data";
+import { adaptEvent, type DbEvent } from "@/lib/event-adapter";
+import { listMyFavorites } from "@/lib/favorites.functions";
+import { useAuth } from "@/lib/auth";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { Bookmark, Heart } from "lucide-react";
 import { useState } from "react";
 
@@ -14,40 +18,25 @@ export const Route = createFileRoute("/app/favorites")({
   component: Favorites,
 });
 
-const tabs = ["À venir", "En Live", "Passés"] as const;
+const tabs = ["Tous", "À venir", "En Live", "Passés"] as const;
 type Tab = (typeof tabs)[number];
 
-const savedMemories = [
-  {
-    id: "m1",
-    cover: "https://images.unsplash.com/photo-1519741497674-611481863552?w=600",
-    title: "Discours de Marie",
-    event: "Sarah & Thomas",
-    kind: "Message vocal",
-  },
-  {
-    id: "m2",
-    cover: "https://images.unsplash.com/photo-1530023367847-a683933f4172?w=600",
-    title: "Première danse",
-    event: "Sarah & Thomas",
-    kind: "Vidéo",
-  },
-  {
-    id: "m3",
-    cover: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=600",
-    title: "Lettre de Grand-mère",
-    event: "Baptême Gabriel",
-    kind: "Photo",
-  },
-];
-
 function Favorites() {
-  const [tab, setTab] = useState<Tab>("À venir");
+  const [tab, setTab] = useState<Tab>("Tous");
+  const { user, loading } = useAuth();
+  const fetchFavs = useServerFn(listMyFavorites);
+  const { data, isLoading } = useQuery({
+    queryKey: ["favorites", user?.id],
+    queryFn: () => fetchFavs(),
+    enabled: !!user,
+  });
 
-  const filtered = mockEvents.filter((e) => {
+  const events = (data ?? []).map((e) => adaptEvent(e as unknown as DbEvent));
+  const filtered = events.filter((e) => {
     if (tab === "En Live") return e.isLive;
     if (tab === "À venir") return !e.isLive && (e.countdownDays ?? 0) > 0;
-    return !e.isLive && (e.countdownDays ?? 0) === 0;
+    if (tab === "Passés") return !e.isLive && (e.countdownDays ?? 0) === 0;
+    return true;
   });
 
   return (
@@ -59,68 +48,77 @@ function Favorites() {
         </p>
       </div>
 
-      <div className="flex gap-2 overflow-x-auto">
-        {tabs.map((t) => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={`whitespace-nowrap rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${
-              tab === t
-                ? "bg-primary text-white shadow-glow"
-                : "bg-surface text-muted-foreground"
-            }`}
+      {!user && !loading ? (
+        <div className="rounded-3xl border border-dashed border-border bg-surface p-8 text-center">
+          <Heart className="mx-auto h-8 w-8 text-primary" />
+          <p className="mt-3 font-serif text-lg">Connectez-vous pour retrouver vos favoris</p>
+          <Link
+            to="/auth"
+            className="mt-4 inline-flex rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white shadow-glow"
           >
-            {t}
-          </button>
-        ))}
-      </div>
-
-      <section>
-        <div className="mb-3 flex items-center gap-2 text-primary">
-          <Heart className="h-4 w-4" fill="currentColor" />
-          <h2 className="font-serif text-xl text-foreground">Événements suivis</h2>
+            Se connecter
+          </Link>
         </div>
-        {filtered.length === 0 ? (
-          <div className="rounded-3xl border border-dashed border-border bg-surface p-8 text-center">
-            <p className="font-serif text-lg">Rien pour l'instant</p>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Aucun événement dans cette catégorie.
-            </p>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {filtered.map((e) => (
-              <EventCard key={e.id} event={e} />
+      ) : (
+        <>
+          <div className="flex gap-2 overflow-x-auto">
+            {tabs.map((t) => (
+              <button
+                key={t}
+                onClick={() => setTab(t)}
+                className={`whitespace-nowrap rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${
+                  tab === t
+                    ? "bg-primary text-white shadow-glow"
+                    : "bg-surface text-muted-foreground"
+                }`}
+              >
+                {t}
+              </button>
             ))}
           </div>
-        )}
-      </section>
 
-      <section>
-        <div className="mb-3 flex items-center gap-2 text-gold">
-          <Bookmark className="h-4 w-4" fill="currentColor" />
-          <h2 className="font-serif text-xl text-foreground">Souvenirs sauvegardés</h2>
-        </div>
-        <div className="scrollbar-hide -mx-4 flex gap-3 overflow-x-auto px-4 pb-2">
-          {savedMemories.map((m) => (
-            <div
-              key={m.id}
-              className="w-40 shrink-0 overflow-hidden rounded-2xl bg-surface shadow-card"
-            >
-              <div className="relative aspect-[3/4]">
-                <img src={m.cover} alt="" className="h-full w-full object-cover" />
-                <span className="absolute left-2 top-2 rounded-full bg-black/50 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur">
-                  {m.kind}
-                </span>
-              </div>
-              <div className="p-3">
-                <p className="truncate text-sm font-semibold">{m.title}</p>
-                <p className="truncate text-[11px] text-muted-foreground">{m.event}</p>
-              </div>
+          <section>
+            <div className="mb-3 flex items-center gap-2 text-primary">
+              <Heart className="h-4 w-4" fill="currentColor" />
+              <h2 className="font-serif text-xl text-foreground">Événements suivis</h2>
             </div>
-          ))}
-        </div>
-      </section>
+            {isLoading ? (
+              <div className="rounded-3xl bg-surface p-8 text-center text-sm text-muted-foreground">
+                Chargement…
+              </div>
+            ) : filtered.length === 0 ? (
+              <div className="rounded-3xl border border-dashed border-border bg-surface p-8 text-center">
+                <p className="font-serif text-lg">Aucun favori</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Touchez le cœur d'un événement pour l'ajouter ici.
+                </p>
+                <Link
+                  to="/app/explore"
+                  className="mt-4 inline-flex rounded-full bg-primary px-5 py-2 text-xs font-semibold text-white"
+                >
+                  Explorer
+                </Link>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {filtered.map((e) => (
+                  <EventCard key={e.id} event={e} />
+                ))}
+              </div>
+            )}
+          </section>
+
+          <section>
+            <div className="mb-3 flex items-center gap-2 text-gold">
+              <Bookmark className="h-4 w-4" fill="currentColor" />
+              <h2 className="font-serif text-xl text-foreground">Souvenirs sauvegardés</h2>
+            </div>
+            <div className="rounded-3xl border border-dashed border-border bg-surface p-6 text-center text-xs text-muted-foreground">
+              Bientôt : épinglez vos moments préférés du livre d'or et de l'album.
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 }
