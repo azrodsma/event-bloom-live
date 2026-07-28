@@ -1,6 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Settings, LogOut, Calendar, MessageCircle, Image, Heart } from "lucide-react";
 import { mockEvents } from "@/lib/mock-data";
+import { useAuth } from "@/hooks/use-auth";
+import { useQueryClient } from "@tanstack/react-query";
+
 
 export const Route = createFileRoute("/app/profile")({
   head: () => ({
@@ -13,21 +16,42 @@ export const Route = createFileRoute("/app/profile")({
 });
 
 function Profile() {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const stats = [
     { icon: Calendar, label: "Événements", value: 6 },
     { icon: MessageCircle, label: "Messages", value: 24 },
     { icon: Image, label: "Photos", value: 87 },
     { icon: Heart, label: "Favoris", value: 3 },
   ];
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+
+  const displayName =
+    (user?.user_metadata?.display_name as string | undefined) ??
+    user?.email?.split("@")[0] ??
+    "Invité";
+  const avatarUrl =
+    (user?.user_metadata?.avatar_url as string | undefined) ??
+    `https://i.pravatar.cc/150?u=${encodeURIComponent(user?.id ?? "guest")}`;
+
   return (
     <div className="space-y-6 px-4 py-4">
+
       <div className="rounded-3xl bg-gradient-primary p-6 text-white shadow-glow">
         <div className="flex items-center gap-4">
-          <img src="https://i.pravatar.cc/150?img=32" className="h-16 w-16 rounded-full border-2 border-white" alt="" />
+          <img src={avatarUrl} className="h-16 w-16 rounded-full border-2 border-white" alt="" />
           <div className="min-w-0 flex-1">
-            <h1 className="font-serif text-2xl">Sarah Laurent</h1>
-            <p className="text-sm text-white/80">Organisatrice · Bordeaux</p>
+            <h1 className="font-serif text-2xl">{displayName}</h1>
+            <p className="text-sm text-white/80">{user?.email ?? "Non connecté"}</p>
           </div>
+
           <Link to="/app/settings" className="grid h-10 w-10 place-items-center rounded-full bg-white/20 backdrop-blur" aria-label="Paramètres">
             <Settings className="h-5 w-5" />
           </Link>
@@ -67,9 +91,10 @@ function Profile() {
         </div>
       </div>
 
-      <button className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium text-danger">
+      <button onClick={handleSignOut} className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium text-danger">
         <LogOut className="h-4 w-4" /> Se déconnecter
       </button>
+
     </div>
   );
 }
