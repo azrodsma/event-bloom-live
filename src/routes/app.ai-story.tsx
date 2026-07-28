@@ -289,7 +289,7 @@ function AIStory() {
             )}
             {media.length > 0 && (
               <p className="mt-2 text-[10px] text-muted-foreground">
-                L'IA reçoit le contexte de chaque média (numéro, type, durée, légende) pour tisser le storyboard.
+                Glissez-déposez les tuiles pour changer l'ordre — l'IA suivra cette séquence pour le storyboard et les légendes.
               </p>
             )}
           </div>
