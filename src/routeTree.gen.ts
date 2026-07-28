@@ -57,6 +57,7 @@ import { Route as AppCreateRouteImport } from './routes/app.create'
 import { Route as AppConciergeRouteImport } from './routes/app.concierge'
 import { Route as AppCommunityRouteImport } from './routes/app.community'
 import { Route as AppCollectionsRouteImport } from './routes/app.collections'
+import { Route as AppCoOrganizersRouteImport } from './routes/app.co-organizers'
 import { Route as AppCareRouteImport } from './routes/app.care'
 import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
 import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries'
@@ -107,6 +108,7 @@ import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invi
 import { Route as EventsSlugInvitationsRouteImport } from './routes/events.$slug.invitations'
 import { Route as EventsSlugInsightsRouteImport } from './routes/events.$slug.insights'
 import { Route as EventsSlugIcebreakersRouteImport } from './routes/events.$slug.icebreakers'
+import { Route as EventsSlugHighlightReelRouteImport } from './routes/events.$slug.highlight-reel'
 import { Route as EventsSlugHallOfFameRouteImport } from './routes/events.$slug.hall-of-fame'
 import { Route as EventsSlugGuidesRouteImport } from './routes/events.$slug.guides'
 import { Route as EventsSlugGuestsRouteImport } from './routes/events.$slug.guests'
@@ -127,6 +129,7 @@ import { Route as EventsSlugDecorRouteImport } from './routes/events.$slug.decor
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
 import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.countdown'
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
+import { Route as EventsSlugCityGuideRouteImport } from './routes/events.$slug.city-guide'
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
 import { Route as EventsSlugCheckinRouteImport } from './routes/events.$slug.checkin'
 import { Route as EventsSlugCarpoolRouteImport } from './routes/events.$slug.carpool'
@@ -390,6 +393,11 @@ const AppCollectionsRoute = AppCollectionsRouteImport.update({
   path: '/collections',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCoOrganizersRoute = AppCoOrganizersRouteImport.update({
+  id: '/co-organizers',
+  path: '/co-organizers',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCareRoute = AppCareRouteImport.update({
   id: '/care',
   path: '/care',
@@ -641,6 +649,11 @@ const EventsSlugIcebreakersRoute = EventsSlugIcebreakersRouteImport.update({
   path: '/icebreakers',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugHighlightReelRoute = EventsSlugHighlightReelRouteImport.update({
+  id: '/highlight-reel',
+  path: '/highlight-reel',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugHallOfFameRoute = EventsSlugHallOfFameRouteImport.update({
   id: '/hall-of-fame',
   path: '/hall-of-fame',
@@ -739,6 +752,11 @@ const EventsSlugCountdownRoute = EventsSlugCountdownRouteImport.update({
 const EventsSlugContributorsRoute = EventsSlugContributorsRouteImport.update({
   id: '/contributors',
   path: '/contributors',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugCityGuideRoute = EventsSlugCityGuideRouteImport.update({
+  id: '/city-guide',
+  path: '/city-guide',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugChecklistRoute = EventsSlugChecklistRouteImport.update({
@@ -864,6 +882,7 @@ export interface FileRoutesByFullPath {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/care': typeof AppCareRoute
+  '/app/co-organizers': typeof AppCoOrganizersRoute
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
   '/app/concierge': typeof AppConciergeRoute
@@ -925,6 +944,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
+  '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
@@ -945,6 +965,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
+  '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
   '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
@@ -1005,6 +1026,7 @@ export interface FileRoutesByTo {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/care': typeof AppCareRoute
+  '/app/co-organizers': typeof AppCoOrganizersRoute
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
   '/app/concierge': typeof AppConciergeRoute
@@ -1065,6 +1087,7 @@ export interface FileRoutesByTo {
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
+  '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
@@ -1085,6 +1108,7 @@ export interface FileRoutesByTo {
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
+  '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
   '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
@@ -1147,6 +1171,7 @@ export interface FileRoutesById {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/care': typeof AppCareRoute
+  '/app/co-organizers': typeof AppCoOrganizersRoute
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
   '/app/concierge': typeof AppConciergeRoute
@@ -1208,6 +1233,7 @@ export interface FileRoutesById {
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
+  '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
@@ -1228,6 +1254,7 @@ export interface FileRoutesById {
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
+  '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
   '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
@@ -1291,6 +1318,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/care'
+    | '/app/co-organizers'
     | '/app/collections'
     | '/app/community'
     | '/app/concierge'
@@ -1352,6 +1380,7 @@ export interface FileRouteTypes {
     | '/events/$slug/carpool'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
+    | '/events/$slug/city-guide'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
@@ -1372,6 +1401,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guests'
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
+    | '/events/$slug/highlight-reel'
     | '/events/$slug/icebreakers'
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
@@ -1432,6 +1462,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/care'
+    | '/app/co-organizers'
     | '/app/collections'
     | '/app/community'
     | '/app/concierge'
@@ -1492,6 +1523,7 @@ export interface FileRouteTypes {
     | '/events/$slug/carpool'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
+    | '/events/$slug/city-guide'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
@@ -1512,6 +1544,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guests'
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
+    | '/events/$slug/highlight-reel'
     | '/events/$slug/icebreakers'
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
@@ -1573,6 +1606,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/care'
+    | '/app/co-organizers'
     | '/app/collections'
     | '/app/community'
     | '/app/concierge'
@@ -1634,6 +1668,7 @@ export interface FileRouteTypes {
     | '/events/$slug/carpool'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
+    | '/events/$slug/city-guide'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
@@ -1654,6 +1689,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guests'
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
+    | '/events/$slug/highlight-reel'
     | '/events/$slug/icebreakers'
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
@@ -2053,6 +2089,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCollectionsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/co-organizers': {
+      id: '/app/co-organizers'
+      path: '/co-organizers'
+      fullPath: '/app/co-organizers'
+      preLoaderRoute: typeof AppCoOrganizersRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/care': {
       id: '/app/care'
       path: '/care'
@@ -2403,6 +2446,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugIcebreakersRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/highlight-reel': {
+      id: '/events/$slug/highlight-reel'
+      path: '/highlight-reel'
+      fullPath: '/events/$slug/highlight-reel'
+      preLoaderRoute: typeof EventsSlugHighlightReelRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/hall-of-fame': {
       id: '/events/$slug/hall-of-fame'
       path: '/hall-of-fame'
@@ -2541,6 +2591,13 @@ declare module '@tanstack/react-router' {
       path: '/contributors'
       fullPath: '/events/$slug/contributors'
       preLoaderRoute: typeof EventsSlugContributorsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/city-guide': {
+      id: '/events/$slug/city-guide'
+      path: '/city-guide'
+      fullPath: '/events/$slug/city-guide'
+      preLoaderRoute: typeof EventsSlugCityGuideRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/checklist': {
@@ -2730,6 +2787,7 @@ interface AppRouteChildren {
   AppAnniversariesRoute: typeof AppAnniversariesRoute
   AppAppearanceRoute: typeof AppAppearanceRoute
   AppCareRoute: typeof AppCareRoute
+  AppCoOrganizersRoute: typeof AppCoOrganizersRoute
   AppCollectionsRoute: typeof AppCollectionsRoute
   AppCommunityRoute: typeof AppCommunityRoute
   AppConciergeRoute: typeof AppConciergeRoute
@@ -2780,6 +2838,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAnniversariesRoute: AppAnniversariesRoute,
   AppAppearanceRoute: AppAppearanceRoute,
   AppCareRoute: AppCareRoute,
+  AppCoOrganizersRoute: AppCoOrganizersRoute,
   AppCollectionsRoute: AppCollectionsRoute,
   AppCommunityRoute: AppCommunityRoute,
   AppConciergeRoute: AppConciergeRoute,
@@ -2867,6 +2926,7 @@ interface EventsSlugRouteChildren {
   EventsSlugCarpoolRoute: typeof EventsSlugCarpoolRoute
   EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
+  EventsSlugCityGuideRoute: typeof EventsSlugCityGuideRoute
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
   EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
@@ -2887,6 +2947,7 @@ interface EventsSlugRouteChildren {
   EventsSlugGuestsRoute: typeof EventsSlugGuestsRoute
   EventsSlugGuidesRoute: typeof EventsSlugGuidesRoute
   EventsSlugHallOfFameRoute: typeof EventsSlugHallOfFameRoute
+  EventsSlugHighlightReelRoute: typeof EventsSlugHighlightReelRoute
   EventsSlugIcebreakersRoute: typeof EventsSlugIcebreakersRoute
   EventsSlugInsightsRoute: typeof EventsSlugInsightsRoute
   EventsSlugInvitationsRoute: typeof EventsSlugInvitationsRoute
@@ -2950,6 +3011,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugCarpoolRoute: EventsSlugCarpoolRoute,
   EventsSlugCheckinRoute: EventsSlugCheckinRoute,
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
+  EventsSlugCityGuideRoute: EventsSlugCityGuideRoute,
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
   EventsSlugCountdownRoute: EventsSlugCountdownRoute,
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
@@ -2970,6 +3032,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugGuestsRoute: EventsSlugGuestsRoute,
   EventsSlugGuidesRoute: EventsSlugGuidesRoute,
   EventsSlugHallOfFameRoute: EventsSlugHallOfFameRoute,
+  EventsSlugHighlightReelRoute: EventsSlugHighlightReelRoute,
   EventsSlugIcebreakersRoute: EventsSlugIcebreakersRoute,
   EventsSlugInsightsRoute: EventsSlugInsightsRoute,
   EventsSlugInvitationsRoute: EventsSlugInvitationsRoute,
