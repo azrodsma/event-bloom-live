@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Heart, MessageCircle, Send } from "lucide-react";
 import { toast } from "sonner";
 import { listEventPosts, createPost, togglePostLike } from "@/lib/social.functions";
+import { CommentThread } from "@/components/CommentThread";
 import { useAuth } from "@/hooks/use-auth";
 
 export function PostFeed({ eventId }: { eventId: string }) {
@@ -13,6 +14,7 @@ export function PostFeed({ eventId }: { eventId: string }) {
   const addPost = useServerFn(createPost);
   const toggleLike = useServerFn(togglePostLike);
   const [content, setContent] = useState("");
+  const [openComments, setOpenComments] = useState<Record<string, boolean>>({});
 
   const { data, isLoading } = useQuery({
     queryKey: ["posts", eventId],
@@ -111,10 +113,15 @@ export function PostFeed({ eventId }: { eventId: string }) {
                   >
                     <Heart className="h-4 w-4" /> {likes}
                   </button>
-                  <span className="inline-flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => setOpenComments((s) => ({ ...s, [p.id]: !s[p.id] }))}
+                    className="inline-flex items-center gap-1.5 transition hover:text-primary"
+                  >
                     <MessageCircle className="h-4 w-4" /> {comments}
-                  </span>
+                  </button>
                 </footer>
+                {openComments[p.id] && <CommentThread postId={p.id} eventId={eventId} />}
               </article>
             );
           })}
