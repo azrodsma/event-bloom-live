@@ -46,11 +46,12 @@ function Profile() {
 
       <div className="rounded-3xl bg-gradient-primary p-6 text-white shadow-glow">
         <div className="flex items-center gap-4">
-          <img src="https://i.pravatar.cc/150?img=32" className="h-16 w-16 rounded-full border-2 border-white" alt="" />
+          <img src={avatarUrl} className="h-16 w-16 rounded-full border-2 border-white" alt="" />
           <div className="min-w-0 flex-1">
-            <h1 className="font-serif text-2xl">Sarah Laurent</h1>
-            <p className="text-sm text-white/80">Organisatrice · Bordeaux</p>
+            <h1 className="font-serif text-2xl">{displayName}</h1>
+            <p className="text-sm text-white/80">{user?.email ?? "Non connecté"}</p>
           </div>
+
           <Link to="/app/settings" className="grid h-10 w-10 place-items-center rounded-full bg-white/20 backdrop-blur" aria-label="Paramètres">
             <Settings className="h-5 w-5" />
           </Link>
