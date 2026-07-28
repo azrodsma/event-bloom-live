@@ -153,6 +153,10 @@ function EventPage() {
           <p className="text-sm leading-relaxed text-foreground">{event.description}</p>
         </section>
 
+        {dbId && <PostFeed eventId={dbId} />}
+
+
+
         {/* Live block */}
         {event.livestream && (
           <Link
