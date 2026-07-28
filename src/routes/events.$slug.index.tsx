@@ -36,6 +36,8 @@ import {
 
 
 import { useEffect, useState } from "react";
+import { PostFeed } from "@/components/PostFeed";
+
 
 export const Route = createFileRoute("/events/$slug/")({
   head: ({ params }) => {
