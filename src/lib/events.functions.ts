@@ -157,3 +157,48 @@ export const updateCagnotte = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+export const listEventStories = createServerFn({ method: "GET" })
+  .inputValidator((i) => z.object({ eventId: z.string().uuid() }).parse(i))
+  .handler(async ({ data }) => {
+    const sb = serverPublic();
+    const { data: rows, error } = await sb
+      .from("stories")
+      .select("id, author_name, author_avatar, media_url, media_type, created_at, expires_at")
+      .eq("event_id", data.eventId)
+      .gt("expires_at", new Date().toISOString())
+      .order("created_at", { ascending: false })
+      .limit(50);
+    if (error) throw new Error(error.message);
+    return rows ?? [];
+  });
+
+export const createStory = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i) =>
+    z.object({
+      eventId: z.string().uuid(),
+      mediaUrl: z.string().url(),
+      mediaType: z.enum(["image", "video"]).default("image"),
+    }).parse(i),
+  )
+  .handler(async ({ data, context }) => {
+    const { data: profile } = await context.supabase
+      .from("profiles").select("display_name, avatar_url").eq("id", context.userId).maybeSingle();
+    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+    const { data: row, error } = await context.supabase
+      .from("stories")
+      .insert({
+        event_id: data.eventId,
+        author_id: context.userId,
+        author_name: profile?.display_name ?? "Invité",
+        author_avatar: profile?.avatar_url ?? null,
+        media_url: data.mediaUrl,
+        media_type: data.mediaType,
+        expires_at: expiresAt,
+      })
+      .select().single();
+    if (error) throw new Error(error.message);
+    return row;
+  });
+
+
