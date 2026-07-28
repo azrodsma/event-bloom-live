@@ -28,6 +28,7 @@ import { Route as AppTrendsRouteImport } from './routes/app.trends'
 import { Route as AppTipsRouteImport } from './routes/app.tips'
 import { Route as AppTimeCapsuleRouteImport } from './routes/app.time-capsule'
 import { Route as AppThemeStudioRouteImport } from './routes/app.theme-studio'
+import { Route as AppTemplatesRouteImport } from './routes/app.templates'
 import { Route as AppSupportRouteImport } from './routes/app.support'
 import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
 import { Route as AppSoundsRouteImport } from './routes/app.sounds'
@@ -196,7 +197,9 @@ import { Route as EventsSlugComfortRouteImport } from './routes/events.$slug.com
 import { Route as EventsSlugCityGuideRouteImport } from './routes/events.$slug.city-guide'
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
 import { Route as EventsSlugCheckinRouteImport } from './routes/events.$slug.checkin'
+import { Route as EventsSlugCeremonyBookletRouteImport } from './routes/events.$slug.ceremony-booklet'
 import { Route as EventsSlugCarpoolRouteImport } from './routes/events.$slug.carpool'
+import { Route as EventsSlugCarbonRouteImport } from './routes/events.$slug.carbon'
 import { Route as EventsSlugCamerasRouteImport } from './routes/events.$slug.cameras'
 import { Route as EventsSlugCakeRouteImport } from './routes/events.$slug.cake'
 import { Route as EventsSlugBudgetRouteImport } from './routes/events.$slug.budget'
@@ -314,6 +317,11 @@ const AppTimeCapsuleRoute = AppTimeCapsuleRouteImport.update({
 const AppThemeStudioRoute = AppThemeStudioRouteImport.update({
   id: '/theme-studio',
   path: '/theme-studio',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTemplatesRoute = AppTemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSupportRoute = AppSupportRouteImport.update({
@@ -1160,9 +1168,20 @@ const EventsSlugCheckinRoute = EventsSlugCheckinRouteImport.update({
   path: '/checkin',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugCeremonyBookletRoute =
+  EventsSlugCeremonyBookletRouteImport.update({
+    id: '/ceremony-booklet',
+    path: '/ceremony-booklet',
+    getParentRoute: () => EventsSlugRoute,
+  } as any)
 const EventsSlugCarpoolRoute = EventsSlugCarpoolRouteImport.update({
   id: '/carpool',
   path: '/carpool',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugCarbonRoute = EventsSlugCarbonRouteImport.update({
+  id: '/carbon',
+  path: '/carbon',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugCamerasRoute = EventsSlugCamerasRouteImport.update({
@@ -1344,6 +1363,7 @@ export interface FileRoutesByFullPath {
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/support': typeof AppSupportRoute
+  '/app/templates': typeof AppTemplatesRoute
   '/app/theme-studio': typeof AppThemeStudioRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
@@ -1377,7 +1397,9 @@ export interface FileRoutesByFullPath {
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
+  '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
+  '/events/$slug/ceremony-booklet': typeof EventsSlugCeremonyBookletRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
@@ -1556,6 +1578,7 @@ export interface FileRoutesByTo {
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/support': typeof AppSupportRoute
+  '/app/templates': typeof AppTemplatesRoute
   '/app/theme-studio': typeof AppThemeStudioRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
@@ -1588,7 +1611,9 @@ export interface FileRoutesByTo {
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
+  '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
+  '/events/$slug/ceremony-booklet': typeof EventsSlugCeremonyBookletRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
@@ -1769,6 +1794,7 @@ export interface FileRoutesById {
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/support': typeof AppSupportRoute
+  '/app/templates': typeof AppTemplatesRoute
   '/app/theme-studio': typeof AppThemeStudioRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
@@ -1802,7 +1828,9 @@ export interface FileRoutesById {
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
+  '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
+  '/events/$slug/ceremony-booklet': typeof EventsSlugCeremonyBookletRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
@@ -1984,6 +2012,7 @@ export interface FileRouteTypes {
     | '/app/sounds'
     | '/app/story-composer'
     | '/app/support'
+    | '/app/templates'
     | '/app/theme-studio'
     | '/app/time-capsule'
     | '/app/tips'
@@ -2017,7 +2046,9 @@ export interface FileRouteTypes {
     | '/events/$slug/budget'
     | '/events/$slug/cake'
     | '/events/$slug/cameras'
+    | '/events/$slug/carbon'
     | '/events/$slug/carpool'
+    | '/events/$slug/ceremony-booklet'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
@@ -2196,6 +2227,7 @@ export interface FileRouteTypes {
     | '/app/sounds'
     | '/app/story-composer'
     | '/app/support'
+    | '/app/templates'
     | '/app/theme-studio'
     | '/app/time-capsule'
     | '/app/tips'
@@ -2228,7 +2260,9 @@ export interface FileRouteTypes {
     | '/events/$slug/budget'
     | '/events/$slug/cake'
     | '/events/$slug/cameras'
+    | '/events/$slug/carbon'
     | '/events/$slug/carpool'
+    | '/events/$slug/ceremony-booklet'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
@@ -2408,6 +2442,7 @@ export interface FileRouteTypes {
     | '/app/sounds'
     | '/app/story-composer'
     | '/app/support'
+    | '/app/templates'
     | '/app/theme-studio'
     | '/app/time-capsule'
     | '/app/tips'
@@ -2441,7 +2476,9 @@ export interface FileRouteTypes {
     | '/events/$slug/budget'
     | '/events/$slug/cake'
     | '/events/$slug/cameras'
+    | '/events/$slug/carbon'
     | '/events/$slug/carpool'
+    | '/events/$slug/ceremony-booklet'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
@@ -2703,6 +2740,13 @@ declare module '@tanstack/react-router' {
       path: '/theme-studio'
       fullPath: '/app/theme-studio'
       preLoaderRoute: typeof AppThemeStudioRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/templates': {
+      id: '/app/templates'
+      path: '/templates'
+      fullPath: '/app/templates'
+      preLoaderRoute: typeof AppTemplatesRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/support': {
@@ -3881,11 +3925,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugCheckinRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/ceremony-booklet': {
+      id: '/events/$slug/ceremony-booklet'
+      path: '/ceremony-booklet'
+      fullPath: '/events/$slug/ceremony-booklet'
+      preLoaderRoute: typeof EventsSlugCeremonyBookletRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/carpool': {
       id: '/events/$slug/carpool'
       path: '/carpool'
       fullPath: '/events/$slug/carpool'
       preLoaderRoute: typeof EventsSlugCarpoolRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/carbon': {
+      id: '/events/$slug/carbon'
+      path: '/carbon'
+      fullPath: '/events/$slug/carbon'
+      preLoaderRoute: typeof EventsSlugCarbonRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/cameras': {
@@ -4133,6 +4191,7 @@ interface AppRouteChildren {
   AppSoundsRoute: typeof AppSoundsRoute
   AppStoryComposerRoute: typeof AppStoryComposerRoute
   AppSupportRoute: typeof AppSupportRoute
+  AppTemplatesRoute: typeof AppTemplatesRoute
   AppThemeStudioRoute: typeof AppThemeStudioRoute
   AppTimeCapsuleRoute: typeof AppTimeCapsuleRoute
   AppTipsRoute: typeof AppTipsRoute
@@ -4205,6 +4264,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppSoundsRoute: AppSoundsRoute,
   AppStoryComposerRoute: AppStoryComposerRoute,
   AppSupportRoute: AppSupportRoute,
+  AppTemplatesRoute: AppTemplatesRoute,
   AppThemeStudioRoute: AppThemeStudioRoute,
   AppTimeCapsuleRoute: AppTimeCapsuleRoute,
   AppTipsRoute: AppTipsRoute,
@@ -4264,7 +4324,9 @@ interface EventsSlugRouteChildren {
   EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
   EventsSlugCakeRoute: typeof EventsSlugCakeRoute
   EventsSlugCamerasRoute: typeof EventsSlugCamerasRoute
+  EventsSlugCarbonRoute: typeof EventsSlugCarbonRoute
   EventsSlugCarpoolRoute: typeof EventsSlugCarpoolRoute
+  EventsSlugCeremonyBookletRoute: typeof EventsSlugCeremonyBookletRoute
   EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
   EventsSlugCityGuideRoute: typeof EventsSlugCityGuideRoute
@@ -4396,7 +4458,9 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugBudgetRoute: EventsSlugBudgetRoute,
   EventsSlugCakeRoute: EventsSlugCakeRoute,
   EventsSlugCamerasRoute: EventsSlugCamerasRoute,
+  EventsSlugCarbonRoute: EventsSlugCarbonRoute,
   EventsSlugCarpoolRoute: EventsSlugCarpoolRoute,
+  EventsSlugCeremonyBookletRoute: EventsSlugCeremonyBookletRoute,
   EventsSlugCheckinRoute: EventsSlugCheckinRoute,
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
   EventsSlugCityGuideRoute: EventsSlugCityGuideRoute,
