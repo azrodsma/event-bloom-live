@@ -9,10 +9,18 @@ export const Route = createFileRoute("/events/$slug/dashboard")({
       { name: "description", content: `Statistiques de l'événement ${params.slug}.` },
     ],
   }),
-  loader: ({ params }) => {
-    const e = findEvent(params.slug);
-    if (!e) throw notFound();
-    return { event: e };
+  loader: async ({ params }) => {
+    const { getEventBySlug } = await import("@/lib/events.functions");
+    const { adaptEvent } = await import("@/lib/event-adapter");
+    const { getEventStats } = await import("@/lib/stats.functions");
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) {
+      const e = findEvent(params.slug);
+      if (!e) throw notFound();
+      return { event: e, stats: null as Awaited<ReturnType<typeof getEventStats>> | null };
+    }
+    const stats = await getEventStats({ data: { eventId: db.id } });
+    return { event: adaptEvent(db), stats };
   },
   component: Dashboard,
 });
@@ -20,7 +28,7 @@ export const Route = createFileRoute("/events/$slug/dashboard")({
 const chartData = [12, 24, 38, 52, 70, 95, 120, 148, 172, 190, 205, 220];
 
 function Dashboard() {
-  const { event } = Route.useLoaderData();
+  const { event, stats } = Route.useLoaderData();
   const max = Math.max(...chartData);
   const potPercent = event.moneyPot
     ? Math.min(100, (event.moneyPot.current / event.moneyPot.target) * 100)
