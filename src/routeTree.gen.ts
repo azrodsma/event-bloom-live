@@ -171,6 +171,7 @@ import { Route as EventsSlugOutdoorRouteImport } from './routes/events.$slug.out
 import { Route as EventsSlugOpenBarRouteImport } from './routes/events.$slug.open-bar'
 import { Route as EventsSlugNurseryRouteImport } from './routes/events.$slug.nursery'
 import { Route as EventsSlugNameBadgesRouteImport } from './routes/events.$slug.name-badges'
+import { Route as EventsSlugMulticamRouteImport } from './routes/events.$slug.multicam'
 import { Route as EventsSlugModerationRouteImport } from './routes/events.$slug.moderation'
 import { Route as EventsSlugMenuRouteImport } from './routes/events.$slug.menu'
 import { Route as EventsSlugMediaTeamRouteImport } from './routes/events.$slug.media-team'
@@ -216,6 +217,7 @@ import { Route as EventsSlugFamilyTreeRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugFamilyPortraitsRouteImport } from './routes/events.$slug.family-portraits'
 import { Route as EventsSlugExitRouteImport } from './routes/events.$slug.exit'
 import { Route as EventsSlugEntranceRouteImport } from './routes/events.$slug.entrance'
+import { Route as EventsSlugEmotionHeatmapRouteImport } from './routes/events.$slug.emotion-heatmap'
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugEcoRouteImport } from './routes/events.$slug.eco'
 import { Route as EventsSlugDresscodeRouteImport } from './routes/events.$slug.dresscode'
@@ -1085,6 +1087,11 @@ const EventsSlugNameBadgesRoute = EventsSlugNameBadgesRouteImport.update({
   path: '/name-badges',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugMulticamRoute = EventsSlugMulticamRouteImport.update({
+  id: '/multicam',
+  path: '/multicam',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugModerationRoute = EventsSlugModerationRouteImport.update({
   id: '/moderation',
   path: '/moderation',
@@ -1311,6 +1318,12 @@ const EventsSlugEntranceRoute = EventsSlugEntranceRouteImport.update({
   path: '/entrance',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugEmotionHeatmapRoute =
+  EventsSlugEmotionHeatmapRouteImport.update({
+    id: '/emotion-heatmap',
+    path: '/emotion-heatmap',
+    getParentRoute: () => EventsSlugRoute,
+  } as any)
 const EventsSlugEditRoute = EventsSlugEditRouteImport.update({
   id: '/edit',
   path: '/edit',
@@ -1737,6 +1750,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/emotion-heatmap': typeof EventsSlugEmotionHeatmapRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/exit': typeof EventsSlugExitRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
@@ -1782,6 +1796,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/media-team': typeof EventsSlugMediaTeamRoute
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
+  '/events/$slug/multicam': typeof EventsSlugMulticamRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/nursery': typeof EventsSlugNurseryRoute
   '/events/$slug/open-bar': typeof EventsSlugOpenBarRoute
@@ -1999,6 +2014,7 @@ export interface FileRoutesByTo {
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/emotion-heatmap': typeof EventsSlugEmotionHeatmapRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/exit': typeof EventsSlugExitRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
@@ -2044,6 +2060,7 @@ export interface FileRoutesByTo {
   '/events/$slug/media-team': typeof EventsSlugMediaTeamRoute
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
+  '/events/$slug/multicam': typeof EventsSlugMulticamRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/nursery': typeof EventsSlugNurseryRoute
   '/events/$slug/open-bar': typeof EventsSlugOpenBarRoute
@@ -2264,6 +2281,7 @@ export interface FileRoutesById {
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
+  '/events/$slug/emotion-heatmap': typeof EventsSlugEmotionHeatmapRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/exit': typeof EventsSlugExitRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
@@ -2309,6 +2327,7 @@ export interface FileRoutesById {
   '/events/$slug/media-team': typeof EventsSlugMediaTeamRoute
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
+  '/events/$slug/multicam': typeof EventsSlugMulticamRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/nursery': typeof EventsSlugNurseryRoute
   '/events/$slug/open-bar': typeof EventsSlugOpenBarRoute
@@ -2530,6 +2549,7 @@ export interface FileRouteTypes {
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
+    | '/events/$slug/emotion-heatmap'
     | '/events/$slug/entrance'
     | '/events/$slug/exit'
     | '/events/$slug/family-portraits'
@@ -2575,6 +2595,7 @@ export interface FileRouteTypes {
     | '/events/$slug/media-team'
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
+    | '/events/$slug/multicam'
     | '/events/$slug/name-badges'
     | '/events/$slug/nursery'
     | '/events/$slug/open-bar'
@@ -2792,6 +2813,7 @@ export interface FileRouteTypes {
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
+    | '/events/$slug/emotion-heatmap'
     | '/events/$slug/entrance'
     | '/events/$slug/exit'
     | '/events/$slug/family-portraits'
@@ -2837,6 +2859,7 @@ export interface FileRouteTypes {
     | '/events/$slug/media-team'
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
+    | '/events/$slug/multicam'
     | '/events/$slug/name-badges'
     | '/events/$slug/nursery'
     | '/events/$slug/open-bar'
@@ -3056,6 +3079,7 @@ export interface FileRouteTypes {
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
+    | '/events/$slug/emotion-heatmap'
     | '/events/$slug/entrance'
     | '/events/$slug/exit'
     | '/events/$slug/family-portraits'
@@ -3101,6 +3125,7 @@ export interface FileRouteTypes {
     | '/events/$slug/media-team'
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
+    | '/events/$slug/multicam'
     | '/events/$slug/name-badges'
     | '/events/$slug/nursery'
     | '/events/$slug/open-bar'
@@ -4322,6 +4347,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugNameBadgesRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/multicam': {
+      id: '/events/$slug/multicam'
+      path: '/multicam'
+      fullPath: '/events/$slug/multicam'
+      preLoaderRoute: typeof EventsSlugMulticamRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/moderation': {
       id: '/events/$slug/moderation'
       path: '/moderation'
@@ -4635,6 +4667,13 @@ declare module '@tanstack/react-router' {
       path: '/entrance'
       fullPath: '/events/$slug/entrance'
       preLoaderRoute: typeof EventsSlugEntranceRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/emotion-heatmap': {
+      id: '/events/$slug/emotion-heatmap'
+      path: '/emotion-heatmap'
+      fullPath: '/events/$slug/emotion-heatmap'
+      preLoaderRoute: typeof EventsSlugEmotionHeatmapRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/edit': {
@@ -5305,6 +5344,7 @@ interface EventsSlugRouteChildren {
   EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
   EventsSlugEcoRoute: typeof EventsSlugEcoRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
+  EventsSlugEmotionHeatmapRoute: typeof EventsSlugEmotionHeatmapRoute
   EventsSlugEntranceRoute: typeof EventsSlugEntranceRoute
   EventsSlugExitRoute: typeof EventsSlugExitRoute
   EventsSlugFamilyPortraitsRoute: typeof EventsSlugFamilyPortraitsRoute
@@ -5350,6 +5390,7 @@ interface EventsSlugRouteChildren {
   EventsSlugMediaTeamRoute: typeof EventsSlugMediaTeamRoute
   EventsSlugMenuRoute: typeof EventsSlugMenuRoute
   EventsSlugModerationRoute: typeof EventsSlugModerationRoute
+  EventsSlugMulticamRoute: typeof EventsSlugMulticamRoute
   EventsSlugNameBadgesRoute: typeof EventsSlugNameBadgesRoute
   EventsSlugNurseryRoute: typeof EventsSlugNurseryRoute
   EventsSlugOpenBarRoute: typeof EventsSlugOpenBarRoute
@@ -5470,6 +5511,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugDresscodeRoute: EventsSlugDresscodeRoute,
   EventsSlugEcoRoute: EventsSlugEcoRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
+  EventsSlugEmotionHeatmapRoute: EventsSlugEmotionHeatmapRoute,
   EventsSlugEntranceRoute: EventsSlugEntranceRoute,
   EventsSlugExitRoute: EventsSlugExitRoute,
   EventsSlugFamilyPortraitsRoute: EventsSlugFamilyPortraitsRoute,
@@ -5515,6 +5557,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugMediaTeamRoute: EventsSlugMediaTeamRoute,
   EventsSlugMenuRoute: EventsSlugMenuRoute,
   EventsSlugModerationRoute: EventsSlugModerationRoute,
+  EventsSlugMulticamRoute: EventsSlugMulticamRoute,
   EventsSlugNameBadgesRoute: EventsSlugNameBadgesRoute,
   EventsSlugNurseryRoute: EventsSlugNurseryRoute,
   EventsSlugOpenBarRoute: EventsSlugOpenBarRoute,

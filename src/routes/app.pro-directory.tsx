@@ -1,110 +1,69 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Award, Star, Verified, Sparkles } from "lucide-react";
+import { ArrowLeft, Users2, Award } from "lucide-react";
 
 export const Route = createFileRoute("/app/pro-directory")({
   component: ProDirectory,
   head: () => ({
     meta: [
-      { title: "Pros vérifiés · Memento Live" },
-      { name: "description", content: "Annuaire de prestataires vérifiés : photographes, DJ, traiteurs, wedding planners." },
-      { property: "og:title", content: "Pros vérifiés · Memento Live" },
-      { property: "og:description", content: "Une sélection de confiance." },
+      { title: "Annuaire pro · Memento Live" },
+      { name: "description", content: "1 240 prestataires vérifiés, notés par leurs pairs et par les mariés." },
+      { property: "og:title", content: "Annuaire pro · Memento Live" },
+      { property: "og:description", content: "Photographes, traiteurs, DJ, fleuristes : la sélection Memento." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
 
-const categories = ["Tous", "Photo", "DJ", "Traiteur", "Wedding planner", "Fleuriste", "Vidéo"];
-
-const pros = [
-  { name: "Studio Aurore", cat: "Photo", city: "Paris", rate: 4.9, reviews: 128, gold: true, price: "€€€", tag: "Reportage émotionnel" },
-  { name: "DJ Solène", cat: "DJ", city: "Lyon", rate: 4.8, reviews: 96, gold: true, price: "€€", tag: "House & French touch" },
-  { name: "Maison Vera", cat: "Traiteur", city: "Bordeaux", rate: 4.9, reviews: 74, gold: true, price: "€€€€", tag: "Cuisine bistronomique locavore" },
-  { name: "Élodie · Planner", cat: "Wedding planner", city: "Nice", rate: 5.0, reviews: 42, gold: true, price: "€€€", tag: "Cérémonies laïques poétiques" },
-  { name: "Atelier Foliage", cat: "Fleuriste", city: "Lille", rate: 4.7, reviews: 58, gold: false, price: "€€", tag: "Compositions sauvages & séchées" },
-  { name: "Studio Verso", cat: "Vidéo", city: "Toulouse", rate: 4.9, reviews: 61, gold: true, price: "€€€", tag: "Films cinématiques 6K" },
+const cats = [
+  { l: "Photographes", n: 214, rate: "4.87 ★", top: "Léa Ferrand (Bordeaux)" },
+  { l: "Traiteurs", n: 189, rate: "4.79 ★", top: "Kambo (Paris)" },
+  { l: "Vidéastes", n: 142, rate: "4.84 ★", top: "Studio Antan (Lyon)" },
+  { l: "DJ · Live band", n: 168, rate: "4.81 ★", top: "Nova Collectif" },
+  { l: "Fleuristes", n: 156, rate: "4.90 ★", top: "Rose & Sauge" },
+  { l: "Wedding planners", n: 98, rate: "4.92 ★", top: "Blanc & Cie" },
+  { l: "Officiants laïques", n: 74, rate: "4.94 ★", top: "Camille Dorval" },
+  { l: "Papetiers", n: 62, rate: "4.86 ★", top: "Atelier Plume" },
+  { l: "Pâtissiers", n: 89, rate: "4.83 ★", top: "Yann Couvreur" },
+  { l: "Voituriers", n: 48, rate: "4.71 ★", top: "Prestige Auto Cannes" },
 ];
 
 function ProDirectory() {
   return (
-    <div className="min-h-screen bg-background pb-24">
-      <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
-        <Link to="/app" className="grid h-9 w-9 place-items-center rounded-full bg-surface">
-          <ArrowLeft className="h-5 w-5" />
-        </Link>
-        <div>
-          <p className="font-serif text-lg leading-tight">Pros vérifiés</p>
-          <p className="text-xs text-muted-foreground">{pros.length} pros · liseré doré = vérifié</p>
+    <div className="min-h-screen bg-background pb-20">
+      <header className="sticky top-0 z-40 border-b border-border/50 bg-background/90 backdrop-blur">
+        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
+          <Link to="/app" className="rounded-full bg-cream p-2">
+            <ArrowLeft className="h-4 w-4" />
+          </Link>
+          <div className="flex-1">
+            <h1 className="font-display text-xl">Annuaire pro</h1>
+            <p className="text-xs text-muted-foreground">1 240 prestataires vérifiés</p>
+          </div>
+          <Users2 className="h-5 w-5 text-primary" />
         </div>
       </header>
 
-      <main className="mx-auto max-w-2xl space-y-5 px-4 py-5">
-        <section className="rounded-3xl bg-gradient-to-br from-gold via-primary to-primary-dark p-6 text-white shadow-card">
-          <Award className="h-6 w-6" />
-          <p className="mt-3 font-serif text-3xl leading-tight">Une sélection de confiance</p>
-          <p className="mt-2 text-sm opacity-90">
-            Chaque pro doré est audité : SIRET, assurance RCP, avis clients recoupés, éthique respectée.
-          </p>
+      <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
+        <section className="rounded-3xl bg-gradient-to-br from-cream to-gold/20 p-6">
+          <Award className="h-6 w-6 text-primary" />
+          <h2 className="mt-2 font-display text-3xl leading-tight">Notés par les mariés. Certifiés par nos équipes.</h2>
+          <p className="mt-2 text-sm text-muted-foreground">Chaque prestataire fait l'objet d'une visite terrain, d'un dossier fiscal vérifié et d'un score composite (avis, réactivité, respect des délais, RSE).</p>
         </section>
-
-        <div className="-mx-4 overflow-x-auto scrollbar-none">
-          <div className="flex gap-2 px-4">
-            {categories.map((c, i) => (
-              <button
-                key={c}
-                className={`shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold ${
-                  i === 0 ? "bg-primary text-white" : "bg-surface text-muted-foreground shadow-soft"
-                }`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        </div>
 
         <section className="space-y-2">
-          {pros.map((p) => (
-            <article
-              key={p.name}
-              className={`rounded-2xl bg-surface p-3.5 shadow-soft ${p.gold ? "ring-1 ring-gold/50" : ""}`}
-            >
-              <div className="flex items-start gap-3">
-                <div className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl font-bold text-white ${p.gold ? "bg-gradient-to-br from-gold to-primary" : "bg-gradient-to-br from-muted to-foreground"}`}>
-                  {p.name[0]}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    <p className="truncate text-sm font-semibold">{p.name}</p>
-                    {p.gold && <Verified className="h-3.5 w-3.5 fill-gold text-white" />}
-                  </div>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground">
-                    {p.cat} · {p.city} · {p.price}
-                  </p>
-                  <p className="mt-1 text-xs">{p.tag}</p>
-                </div>
-                <div className="text-right">
-                  <p className="flex items-center gap-0.5 text-sm font-bold">
-                    <Star className="h-3.5 w-3.5 fill-gold text-gold" /> {p.rate}
-                  </p>
-                  <p className="text-[10px] text-muted-foreground">{p.reviews} avis</p>
-                </div>
+          {cats.map((c) => (
+            <div key={c.l} className="rounded-2xl border border-border/50 bg-card p-4 flex items-center justify-between">
+              <div>
+                <p className="font-medium text-sm">{c.l}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Coup de cœur · {c.top}</p>
               </div>
-              <div className="mt-3 flex gap-2">
-                <button className="flex-1 rounded-full bg-cream py-2 text-xs font-semibold">Voir le portfolio</button>
-                <button className="flex-1 rounded-full bg-primary py-2 text-xs font-semibold text-white">Demander un devis</button>
+              <div className="text-right">
+                <p className="font-display text-xl text-primary">{c.n}</p>
+                <p className="text-[10px] text-gold">{c.rate}</p>
               </div>
-            </article>
+            </div>
           ))}
-        </section>
-
-        <section className="rounded-3xl bg-cream p-5">
-          <Sparkles className="h-5 w-5 text-primary-dark" />
-          <p className="mt-2 font-serif text-lg leading-tight">Vous êtes un pro ?</p>
-          <p className="mt-1 text-xs text-muted-foreground">Postulez à la certification Memento (gratuit, 15 min).</p>
-          <button className="mt-3 rounded-full bg-foreground px-4 py-2 text-xs font-semibold text-background">
-            Devenir pro vérifié
-          </button>
         </section>
       </main>
     </div>
