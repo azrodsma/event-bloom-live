@@ -62,6 +62,7 @@ import { Route as AppLeaderboardRouteImport } from './routes/app.leaderboard'
 import { Route as AppLanguagesRouteImport } from './routes/app.languages'
 import { Route as AppJournalRouteImport } from './routes/app.journal'
 import { Route as AppInvestorsRouteImport } from './routes/app.investors'
+import { Route as AppInternationalRouteImport } from './routes/app.international'
 import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
 import { Route as AppInboxRouteImport } from './routes/app.inbox'
 import { Route as AppImpactRouteImport } from './routes/app.impact'
@@ -111,6 +112,7 @@ import { Route as EventsSlugTimelineRouteImport } from './routes/events.$slug.ti
 import { Route as EventsSlugTicketsRouteImport } from './routes/events.$slug.tickets'
 import { Route as EventsSlugThanksRouteImport } from './routes/events.$slug.thanks'
 import { Route as EventsSlugThankYouCardsRouteImport } from './routes/events.$slug.thank-you-cards'
+import { Route as EventsSlugTestimonialsRouteImport } from './routes/events.$slug.testimonials'
 import { Route as EventsSlugTastingsRouteImport } from './routes/events.$slug.tastings'
 import { Route as EventsSlugSurprisesRouteImport } from './routes/events.$slug.surprises'
 import { Route as EventsSlugSunsetRouteImport } from './routes/events.$slug.sunset'
@@ -183,6 +185,7 @@ import { Route as EventsSlugGettingReadyRouteImport } from './routes/events.$slu
 import { Route as EventsSlugGamesRouteImport } from './routes/events.$slug.games'
 import { Route as EventsSlugFlowersRouteImport } from './routes/events.$slug.flowers'
 import { Route as EventsSlugFloralsRouteImport } from './routes/events.$slug.florals'
+import { Route as EventsSlugFirstLookRouteImport } from './routes/events.$slug.first-look'
 import { Route as EventsSlugFirstDanceRouteImport } from './routes/events.$slug.first-dance'
 import { Route as EventsSlugFireworksRouteImport } from './routes/events.$slug.fireworks'
 import { Route as EventsSlugFiltersRouteImport } from './routes/events.$slug.filters'
@@ -502,6 +505,11 @@ const AppInvestorsRoute = AppInvestorsRouteImport.update({
   path: '/investors',
   getParentRoute: () => AppRoute,
 } as any)
+const AppInternationalRoute = AppInternationalRouteImport.update({
+  id: '/international',
+  path: '/international',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppInspirationsRoute = AppInspirationsRouteImport.update({
   id: '/inspirations',
   path: '/inspirations',
@@ -745,6 +753,11 @@ const EventsSlugThanksRoute = EventsSlugThanksRouteImport.update({
 const EventsSlugThankYouCardsRoute = EventsSlugThankYouCardsRouteImport.update({
   id: '/thank-you-cards',
   path: '/thank-you-cards',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugTestimonialsRoute = EventsSlugTestimonialsRouteImport.update({
+  id: '/testimonials',
+  path: '/testimonials',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugTastingsRoute = EventsSlugTastingsRouteImport.update({
@@ -1109,6 +1122,11 @@ const EventsSlugFloralsRoute = EventsSlugFloralsRouteImport.update({
   path: '/florals',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugFirstLookRoute = EventsSlugFirstLookRouteImport.update({
+  id: '/first-look',
+  path: '/first-look',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugFirstDanceRoute = EventsSlugFirstDanceRouteImport.update({
   id: '/first-dance',
   path: '/first-dance',
@@ -1409,6 +1427,7 @@ export interface FileRoutesByFullPath {
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/languages': typeof AppLanguagesRoute
@@ -1505,6 +1524,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
   '/events/$slug/fireworks': typeof EventsSlugFireworksRoute
   '/events/$slug/first-dance': typeof EventsSlugFirstDanceRoute
+  '/events/$slug/first-look': typeof EventsSlugFirstLookRoute
   '/events/$slug/florals': typeof EventsSlugFloralsRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
@@ -1577,6 +1597,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/sunset': typeof EventsSlugSunsetRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
+  '/events/$slug/testimonials': typeof EventsSlugTestimonialsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/tickets': typeof EventsSlugTicketsRoute
@@ -1636,6 +1657,7 @@ export interface FileRoutesByTo {
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/languages': typeof AppLanguagesRoute
@@ -1731,6 +1753,7 @@ export interface FileRoutesByTo {
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
   '/events/$slug/fireworks': typeof EventsSlugFireworksRoute
   '/events/$slug/first-dance': typeof EventsSlugFirstDanceRoute
+  '/events/$slug/first-look': typeof EventsSlugFirstLookRoute
   '/events/$slug/florals': typeof EventsSlugFloralsRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
@@ -1803,6 +1826,7 @@ export interface FileRoutesByTo {
   '/events/$slug/sunset': typeof EventsSlugSunsetRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
+  '/events/$slug/testimonials': typeof EventsSlugTestimonialsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/tickets': typeof EventsSlugTicketsRoute
@@ -1864,6 +1888,7 @@ export interface FileRoutesById {
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/languages': typeof AppLanguagesRoute
@@ -1960,6 +1985,7 @@ export interface FileRoutesById {
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
   '/events/$slug/fireworks': typeof EventsSlugFireworksRoute
   '/events/$slug/first-dance': typeof EventsSlugFirstDanceRoute
+  '/events/$slug/first-look': typeof EventsSlugFirstLookRoute
   '/events/$slug/florals': typeof EventsSlugFloralsRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
@@ -2032,6 +2058,7 @@ export interface FileRoutesById {
   '/events/$slug/sunset': typeof EventsSlugSunsetRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
+  '/events/$slug/testimonials': typeof EventsSlugTestimonialsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/tickets': typeof EventsSlugTicketsRoute
@@ -2094,6 +2121,7 @@ export interface FileRouteTypes {
     | '/app/impact'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/international'
     | '/app/investors'
     | '/app/journal'
     | '/app/languages'
@@ -2190,6 +2218,7 @@ export interface FileRouteTypes {
     | '/events/$slug/filters'
     | '/events/$slug/fireworks'
     | '/events/$slug/first-dance'
+    | '/events/$slug/first-look'
     | '/events/$slug/florals'
     | '/events/$slug/flowers'
     | '/events/$slug/games'
@@ -2262,6 +2291,7 @@ export interface FileRouteTypes {
     | '/events/$slug/sunset'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
+    | '/events/$slug/testimonials'
     | '/events/$slug/thank-you-cards'
     | '/events/$slug/thanks'
     | '/events/$slug/tickets'
@@ -2321,6 +2351,7 @@ export interface FileRouteTypes {
     | '/app/impact'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/international'
     | '/app/investors'
     | '/app/journal'
     | '/app/languages'
@@ -2416,6 +2447,7 @@ export interface FileRouteTypes {
     | '/events/$slug/filters'
     | '/events/$slug/fireworks'
     | '/events/$slug/first-dance'
+    | '/events/$slug/first-look'
     | '/events/$slug/florals'
     | '/events/$slug/flowers'
     | '/events/$slug/games'
@@ -2488,6 +2520,7 @@ export interface FileRouteTypes {
     | '/events/$slug/sunset'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
+    | '/events/$slug/testimonials'
     | '/events/$slug/thank-you-cards'
     | '/events/$slug/thanks'
     | '/events/$slug/tickets'
@@ -2548,6 +2581,7 @@ export interface FileRouteTypes {
     | '/app/impact'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/international'
     | '/app/investors'
     | '/app/journal'
     | '/app/languages'
@@ -2644,6 +2678,7 @@ export interface FileRouteTypes {
     | '/events/$slug/filters'
     | '/events/$slug/fireworks'
     | '/events/$slug/first-dance'
+    | '/events/$slug/first-look'
     | '/events/$slug/florals'
     | '/events/$slug/flowers'
     | '/events/$slug/games'
@@ -2716,6 +2751,7 @@ export interface FileRouteTypes {
     | '/events/$slug/sunset'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
+    | '/events/$slug/testimonials'
     | '/events/$slug/thank-you-cards'
     | '/events/$slug/thanks'
     | '/events/$slug/tickets'
@@ -3125,6 +3161,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppInvestorsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/international': {
+      id: '/app/international'
+      path: '/international'
+      fullPath: '/app/international'
+      preLoaderRoute: typeof AppInternationalRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/inspirations': {
       id: '/app/inspirations'
       path: '/inspirations'
@@ -3466,6 +3509,13 @@ declare module '@tanstack/react-router' {
       path: '/thank-you-cards'
       fullPath: '/events/$slug/thank-you-cards'
       preLoaderRoute: typeof EventsSlugThankYouCardsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/testimonials': {
+      id: '/events/$slug/testimonials'
+      path: '/testimonials'
+      fullPath: '/events/$slug/testimonials'
+      preLoaderRoute: typeof EventsSlugTestimonialsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/tastings': {
@@ -3972,6 +4022,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugFloralsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/first-look': {
+      id: '/events/$slug/first-look'
+      path: '/first-look'
+      fullPath: '/events/$slug/first-look'
+      preLoaderRoute: typeof EventsSlugFirstLookRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/first-dance': {
       id: '/events/$slug/first-dance'
       path: '/first-dance'
@@ -4393,6 +4450,7 @@ interface AppRouteChildren {
   AppImpactRoute: typeof AppImpactRoute
   AppInboxRoute: typeof AppInboxRoute
   AppInspirationsRoute: typeof AppInspirationsRoute
+  AppInternationalRoute: typeof AppInternationalRoute
   AppInvestorsRoute: typeof AppInvestorsRoute
   AppJournalRoute: typeof AppJournalRoute
   AppLanguagesRoute: typeof AppLanguagesRoute
@@ -4472,6 +4530,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppImpactRoute: AppImpactRoute,
   AppInboxRoute: AppInboxRoute,
   AppInspirationsRoute: AppInspirationsRoute,
+  AppInternationalRoute: AppInternationalRoute,
   AppInvestorsRoute: AppInvestorsRoute,
   AppJournalRoute: AppJournalRoute,
   AppLanguagesRoute: AppLanguagesRoute,
@@ -4594,6 +4653,7 @@ interface EventsSlugRouteChildren {
   EventsSlugFiltersRoute: typeof EventsSlugFiltersRoute
   EventsSlugFireworksRoute: typeof EventsSlugFireworksRoute
   EventsSlugFirstDanceRoute: typeof EventsSlugFirstDanceRoute
+  EventsSlugFirstLookRoute: typeof EventsSlugFirstLookRoute
   EventsSlugFloralsRoute: typeof EventsSlugFloralsRoute
   EventsSlugFlowersRoute: typeof EventsSlugFlowersRoute
   EventsSlugGamesRoute: typeof EventsSlugGamesRoute
@@ -4666,6 +4726,7 @@ interface EventsSlugRouteChildren {
   EventsSlugSunsetRoute: typeof EventsSlugSunsetRoute
   EventsSlugSurprisesRoute: typeof EventsSlugSurprisesRoute
   EventsSlugTastingsRoute: typeof EventsSlugTastingsRoute
+  EventsSlugTestimonialsRoute: typeof EventsSlugTestimonialsRoute
   EventsSlugThankYouCardsRoute: typeof EventsSlugThankYouCardsRoute
   EventsSlugThanksRoute: typeof EventsSlugThanksRoute
   EventsSlugTicketsRoute: typeof EventsSlugTicketsRoute
@@ -4734,6 +4795,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugFiltersRoute: EventsSlugFiltersRoute,
   EventsSlugFireworksRoute: EventsSlugFireworksRoute,
   EventsSlugFirstDanceRoute: EventsSlugFirstDanceRoute,
+  EventsSlugFirstLookRoute: EventsSlugFirstLookRoute,
   EventsSlugFloralsRoute: EventsSlugFloralsRoute,
   EventsSlugFlowersRoute: EventsSlugFlowersRoute,
   EventsSlugGamesRoute: EventsSlugGamesRoute,
@@ -4806,6 +4868,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugSunsetRoute: EventsSlugSunsetRoute,
   EventsSlugSurprisesRoute: EventsSlugSurprisesRoute,
   EventsSlugTastingsRoute: EventsSlugTastingsRoute,
+  EventsSlugTestimonialsRoute: EventsSlugTestimonialsRoute,
   EventsSlugThankYouCardsRoute: EventsSlugThankYouCardsRoute,
   EventsSlugThanksRoute: EventsSlugThanksRoute,
   EventsSlugTicketsRoute: EventsSlugTicketsRoute,
