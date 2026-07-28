@@ -1,8 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { EventCard } from "@/components/EventCard";
-import { mockEvents, eventTypes, eventTypeIcons } from "@/lib/mock-data";
+import { eventTypes, eventTypeIcons } from "@/lib/mock-data";
 import { Search, Sparkles, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { listPublicEvents } from "@/lib/events.functions";
+import { adaptEvent, type DbEvent } from "@/lib/event-adapter";
 
 export const Route = createFileRoute("/app/explore")({
   head: () => ({
@@ -17,8 +21,14 @@ export const Route = createFileRoute("/app/explore")({
 function Explore() {
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<string | null>(null);
+  const fetchEvents = useServerFn(listPublicEvents);
+  const { data } = useQuery({
+    queryKey: ["events", "public"],
+    queryFn: () => fetchEvents(),
+  });
+  const events = (data ?? []).map((e) => adaptEvent(e as DbEvent));
 
-  const filtered = mockEvents.filter((e) => {
+  const filtered = events.filter((e) => {
     if (filter && e.type !== filter) return false;
     if (q && !`${e.title} ${e.city} ${e.type}`.toLowerCase().includes(q.toLowerCase())) return false;
     return true;
