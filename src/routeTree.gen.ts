@@ -82,6 +82,7 @@ import { Route as EventsSlugSurprisesRouteImport } from './routes/events.$slug.s
 import { Route as EventsSlugSpeechesRouteImport } from './routes/events.$slug.speeches'
 import { Route as EventsSlugSpeechBuilderRouteImport } from './routes/events.$slug.speech-builder'
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
+import { Route as EventsSlugSongDedicationsRouteImport } from './routes/events.$slug.song-dedications'
 import { Route as EventsSlugShuttleRouteImport } from './routes/events.$slug.shuttle'
 import { Route as EventsSlugSecurityRouteImport } from './routes/events.$slug.security'
 import { Route as EventsSlugSeatingRouteImport } from './routes/events.$slug.seating'
@@ -523,6 +524,12 @@ const EventsSlugSouvenirRoute = EventsSlugSouvenirRouteImport.update({
   path: '/souvenir',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugSongDedicationsRoute =
+  EventsSlugSongDedicationsRouteImport.update({
+    id: '/song-dedications',
+    path: '/song-dedications',
+    getParentRoute: () => EventsSlugRoute,
+  } as any)
 const EventsSlugShuttleRoute = EventsSlugShuttleRouteImport.update({
   id: '/shuttle',
   path: '/shuttle',
@@ -1029,6 +1036,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
+  '/events/$slug/song-dedications': typeof EventsSlugSongDedicationsRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
@@ -1177,6 +1185,7 @@ export interface FileRoutesByTo {
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
+  '/events/$slug/song-dedications': typeof EventsSlugSongDedicationsRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
@@ -1328,6 +1337,7 @@ export interface FileRoutesById {
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
+  '/events/$slug/song-dedications': typeof EventsSlugSongDedicationsRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
@@ -1480,6 +1490,7 @@ export interface FileRouteTypes {
     | '/events/$slug/seating'
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
+    | '/events/$slug/song-dedications'
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
@@ -1628,6 +1639,7 @@ export interface FileRouteTypes {
     | '/events/$slug/seating'
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
+    | '/events/$slug/song-dedications'
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
@@ -1778,6 +1790,7 @@ export interface FileRouteTypes {
     | '/events/$slug/seating'
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
+    | '/events/$slug/song-dedications'
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
@@ -2322,6 +2335,13 @@ declare module '@tanstack/react-router' {
       path: '/souvenir'
       fullPath: '/events/$slug/souvenir'
       preLoaderRoute: typeof EventsSlugSouvenirRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/song-dedications': {
+      id: '/events/$slug/song-dedications'
+      path: '/song-dedications'
+      fullPath: '/events/$slug/song-dedications'
+      preLoaderRoute: typeof EventsSlugSongDedicationsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/shuttle': {
@@ -3078,6 +3098,7 @@ interface EventsSlugRouteChildren {
   EventsSlugSeatingRoute: typeof EventsSlugSeatingRoute
   EventsSlugSecurityRoute: typeof EventsSlugSecurityRoute
   EventsSlugShuttleRoute: typeof EventsSlugShuttleRoute
+  EventsSlugSongDedicationsRoute: typeof EventsSlugSongDedicationsRoute
   EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
   EventsSlugSpeechBuilderRoute: typeof EventsSlugSpeechBuilderRoute
   EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
@@ -3166,6 +3187,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugSeatingRoute: EventsSlugSeatingRoute,
   EventsSlugSecurityRoute: EventsSlugSecurityRoute,
   EventsSlugShuttleRoute: EventsSlugShuttleRoute,
+  EventsSlugSongDedicationsRoute: EventsSlugSongDedicationsRoute,
   EventsSlugSouvenirRoute: EventsSlugSouvenirRoute,
   EventsSlugSpeechBuilderRoute: EventsSlugSpeechBuilderRoute,
   EventsSlugSpeechesRoute: EventsSlugSpeechesRoute,
