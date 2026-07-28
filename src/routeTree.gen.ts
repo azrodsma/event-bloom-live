@@ -48,6 +48,7 @@ import { Route as AppMomentsRouteImport } from './routes/app.moments'
 import { Route as AppMessagesRouteImport } from './routes/app.messages'
 import { Route as AppMemoriesMapRouteImport } from './routes/app.memories-map'
 import { Route as AppLoyaltyRouteImport } from './routes/app.loyalty'
+import { Route as AppLegalRouteImport } from './routes/app.legal'
 import { Route as AppLeaderboardRouteImport } from './routes/app.leaderboard'
 import { Route as AppLanguagesRouteImport } from './routes/app.languages'
 import { Route as AppJournalRouteImport } from './routes/app.journal'
@@ -112,6 +113,7 @@ import { Route as EventsSlugRehearsalRouteImport } from './routes/events.$slug.r
 import { Route as EventsSlugRegistryRouteImport } from './routes/events.$slug.registry'
 import { Route as EventsSlugProcessionRouteImport } from './routes/events.$slug.procession'
 import { Route as EventsSlugPrintShopRouteImport } from './routes/events.$slug.print-shop'
+import { Route as EventsSlugPressCornerRouteImport } from './routes/events.$slug.press-corner'
 import { Route as EventsSlugPressRouteImport } from './routes/events.$slug.press'
 import { Route as EventsSlugPollsRouteImport } from './routes/events.$slug.polls'
 import { Route as EventsSlugPodcastRouteImport } from './routes/events.$slug.podcast'
@@ -166,6 +168,7 @@ import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.d
 import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.countdown'
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
 import { Route as EventsSlugConfettiRouteImport } from './routes/events.$slug.confetti'
+import { Route as EventsSlugComfortRouteImport } from './routes/events.$slug.comfort'
 import { Route as EventsSlugCityGuideRouteImport } from './routes/events.$slug.city-guide'
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
 import { Route as EventsSlugCheckinRouteImport } from './routes/events.$slug.checkin'
@@ -386,6 +389,11 @@ const AppMemoriesMapRoute = AppMemoriesMapRouteImport.update({
 const AppLoyaltyRoute = AppLoyaltyRouteImport.update({
   id: '/loyalty',
   path: '/loyalty',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLegalRoute = AppLegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
   getParentRoute: () => AppRoute,
 } as any)
 const AppLeaderboardRoute = AppLeaderboardRouteImport.update({
@@ -709,6 +717,11 @@ const EventsSlugPrintShopRoute = EventsSlugPrintShopRouteImport.update({
   path: '/print-shop',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugPressCornerRoute = EventsSlugPressCornerRouteImport.update({
+  id: '/press-corner',
+  path: '/press-corner',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugPressRoute = EventsSlugPressRouteImport.update({
   id: '/press',
   path: '/press',
@@ -981,6 +994,11 @@ const EventsSlugConfettiRoute = EventsSlugConfettiRouteImport.update({
   path: '/confetti',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugComfortRoute = EventsSlugComfortRouteImport.update({
+  id: '/comfort',
+  path: '/comfort',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugCityGuideRoute = EventsSlugCityGuideRouteImport.update({
   id: '/city-guide',
   path: '/city-guide',
@@ -1142,6 +1160,7 @@ export interface FileRoutesByFullPath {
   '/app/journal': typeof AppJournalRoute
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
+  '/app/legal': typeof AppLegalRoute
   '/app/loyalty': typeof AppLoyaltyRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
@@ -1197,6 +1216,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
+  '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
@@ -1251,6 +1271,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/podcast': typeof EventsSlugPodcastRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
+  '/events/$slug/press-corner': typeof EventsSlugPressCornerRoute
   '/events/$slug/print-shop': typeof EventsSlugPrintShopRoute
   '/events/$slug/procession': typeof EventsSlugProcessionRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
@@ -1325,6 +1346,7 @@ export interface FileRoutesByTo {
   '/app/journal': typeof AppJournalRoute
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
+  '/app/legal': typeof AppLegalRoute
   '/app/loyalty': typeof AppLoyaltyRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
@@ -1379,6 +1401,7 @@ export interface FileRoutesByTo {
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
+  '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
@@ -1433,6 +1456,7 @@ export interface FileRoutesByTo {
   '/events/$slug/podcast': typeof EventsSlugPodcastRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
+  '/events/$slug/press-corner': typeof EventsSlugPressCornerRoute
   '/events/$slug/print-shop': typeof EventsSlugPrintShopRoute
   '/events/$slug/procession': typeof EventsSlugProcessionRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
@@ -1509,6 +1533,7 @@ export interface FileRoutesById {
   '/app/journal': typeof AppJournalRoute
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
+  '/app/legal': typeof AppLegalRoute
   '/app/loyalty': typeof AppLoyaltyRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
@@ -1564,6 +1589,7 @@ export interface FileRoutesById {
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
+  '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
@@ -1618,6 +1644,7 @@ export interface FileRoutesById {
   '/events/$slug/podcast': typeof EventsSlugPodcastRoute
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
+  '/events/$slug/press-corner': typeof EventsSlugPressCornerRoute
   '/events/$slug/print-shop': typeof EventsSlugPrintShopRoute
   '/events/$slug/procession': typeof EventsSlugProcessionRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
@@ -1695,6 +1722,7 @@ export interface FileRouteTypes {
     | '/app/journal'
     | '/app/languages'
     | '/app/leaderboard'
+    | '/app/legal'
     | '/app/loyalty'
     | '/app/memories-map'
     | '/app/messages'
@@ -1750,6 +1778,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
+    | '/events/$slug/comfort'
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
@@ -1804,6 +1833,7 @@ export interface FileRouteTypes {
     | '/events/$slug/podcast'
     | '/events/$slug/polls'
     | '/events/$slug/press'
+    | '/events/$slug/press-corner'
     | '/events/$slug/print-shop'
     | '/events/$slug/procession'
     | '/events/$slug/registry'
@@ -1878,6 +1908,7 @@ export interface FileRouteTypes {
     | '/app/journal'
     | '/app/languages'
     | '/app/leaderboard'
+    | '/app/legal'
     | '/app/loyalty'
     | '/app/memories-map'
     | '/app/messages'
@@ -1932,6 +1963,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
+    | '/events/$slug/comfort'
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
@@ -1986,6 +2018,7 @@ export interface FileRouteTypes {
     | '/events/$slug/podcast'
     | '/events/$slug/polls'
     | '/events/$slug/press'
+    | '/events/$slug/press-corner'
     | '/events/$slug/print-shop'
     | '/events/$slug/procession'
     | '/events/$slug/registry'
@@ -2061,6 +2094,7 @@ export interface FileRouteTypes {
     | '/app/journal'
     | '/app/languages'
     | '/app/leaderboard'
+    | '/app/legal'
     | '/app/loyalty'
     | '/app/memories-map'
     | '/app/messages'
@@ -2116,6 +2150,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
+    | '/events/$slug/comfort'
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
@@ -2170,6 +2205,7 @@ export interface FileRouteTypes {
     | '/events/$slug/podcast'
     | '/events/$slug/polls'
     | '/events/$slug/press'
+    | '/events/$slug/press-corner'
     | '/events/$slug/print-shop'
     | '/events/$slug/procession'
     | '/events/$slug/registry'
@@ -2495,6 +2531,13 @@ declare module '@tanstack/react-router' {
       path: '/loyalty'
       fullPath: '/app/loyalty'
       preLoaderRoute: typeof AppLoyaltyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/legal': {
+      id: '/app/legal'
+      path: '/legal'
+      fullPath: '/app/legal'
+      preLoaderRoute: typeof AppLegalRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/leaderboard': {
@@ -2945,6 +2988,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugPrintShopRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/press-corner': {
+      id: '/events/$slug/press-corner'
+      path: '/press-corner'
+      fullPath: '/events/$slug/press-corner'
+      preLoaderRoute: typeof EventsSlugPressCornerRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/press': {
       id: '/events/$slug/press'
       path: '/press'
@@ -3323,6 +3373,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugConfettiRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/comfort': {
+      id: '/events/$slug/comfort'
+      path: '/comfort'
+      fullPath: '/events/$slug/comfort'
+      preLoaderRoute: typeof EventsSlugComfortRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/city-guide': {
       id: '/events/$slug/city-guide'
       path: '/city-guide'
@@ -3554,6 +3611,7 @@ interface AppRouteChildren {
   AppJournalRoute: typeof AppJournalRoute
   AppLanguagesRoute: typeof AppLanguagesRoute
   AppLeaderboardRoute: typeof AppLeaderboardRoute
+  AppLegalRoute: typeof AppLegalRoute
   AppLoyaltyRoute: typeof AppLoyaltyRoute
   AppMemoriesMapRoute: typeof AppMemoriesMapRoute
   AppMessagesRoute: typeof AppMessagesRouteWithChildren
@@ -3618,6 +3676,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppJournalRoute: AppJournalRoute,
   AppLanguagesRoute: AppLanguagesRoute,
   AppLeaderboardRoute: AppLeaderboardRoute,
+  AppLegalRoute: AppLegalRoute,
   AppLoyaltyRoute: AppLoyaltyRoute,
   AppMemoriesMapRoute: AppMemoriesMapRoute,
   AppMessagesRoute: AppMessagesRouteWithChildren,
@@ -3699,6 +3758,7 @@ interface EventsSlugRouteChildren {
   EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
   EventsSlugCityGuideRoute: typeof EventsSlugCityGuideRoute
+  EventsSlugComfortRoute: typeof EventsSlugComfortRoute
   EventsSlugConfettiRoute: typeof EventsSlugConfettiRoute
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
   EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
@@ -3753,6 +3813,7 @@ interface EventsSlugRouteChildren {
   EventsSlugPodcastRoute: typeof EventsSlugPodcastRoute
   EventsSlugPollsRoute: typeof EventsSlugPollsRoute
   EventsSlugPressRoute: typeof EventsSlugPressRoute
+  EventsSlugPressCornerRoute: typeof EventsSlugPressCornerRoute
   EventsSlugPrintShopRoute: typeof EventsSlugPrintShopRoute
   EventsSlugProcessionRoute: typeof EventsSlugProcessionRoute
   EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
@@ -3810,6 +3871,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugCheckinRoute: EventsSlugCheckinRoute,
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
   EventsSlugCityGuideRoute: EventsSlugCityGuideRoute,
+  EventsSlugComfortRoute: EventsSlugComfortRoute,
   EventsSlugConfettiRoute: EventsSlugConfettiRoute,
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
   EventsSlugCountdownRoute: EventsSlugCountdownRoute,
@@ -3864,6 +3926,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugPodcastRoute: EventsSlugPodcastRoute,
   EventsSlugPollsRoute: EventsSlugPollsRoute,
   EventsSlugPressRoute: EventsSlugPressRoute,
+  EventsSlugPressCornerRoute: EventsSlugPressCornerRoute,
   EventsSlugPrintShopRoute: EventsSlugPrintShopRoute,
   EventsSlugProcessionRoute: EventsSlugProcessionRoute,
   EventsSlugRegistryRoute: EventsSlugRegistryRoute,
