@@ -60,6 +60,7 @@ import { Route as AppLoyaltyRouteImport } from './routes/app.loyalty'
 import { Route as AppLegalRouteImport } from './routes/app.legal'
 import { Route as AppLeaderboardRouteImport } from './routes/app.leaderboard'
 import { Route as AppLanguagesRouteImport } from './routes/app.languages'
+import { Route as AppLabsRouteImport } from './routes/app.labs'
 import { Route as AppJournalRouteImport } from './routes/app.journal'
 import { Route as AppInvestorsRouteImport } from './routes/app.investors'
 import { Route as AppInternationalRouteImport } from './routes/app.international'
@@ -165,6 +166,7 @@ import { Route as EventsSlugMenuRouteImport } from './routes/events.$slug.menu'
 import { Route as EventsSlugMediaTeamRouteImport } from './routes/events.$slug.media-team'
 import { Route as EventsSlugMapRouteImport } from './routes/events.$slug.map'
 import { Route as EventsSlugLostFoundRouteImport } from './routes/events.$slug.lost-found'
+import { Route as EventsSlugLiveBandRouteImport } from './routes/events.$slug.live-band'
 import { Route as EventsSlugLiveAnalyticsRouteImport } from './routes/events.$slug.live-analytics'
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugLightPlanRouteImport } from './routes/events.$slug.light-plan'
@@ -224,6 +226,7 @@ import { Route as EventsSlugCeremonyBookletRouteImport } from './routes/events.$
 import { Route as EventsSlugCarpoolRouteImport } from './routes/events.$slug.carpool'
 import { Route as EventsSlugCarbonRouteImport } from './routes/events.$slug.carbon'
 import { Route as EventsSlugCamerasRouteImport } from './routes/events.$slug.cameras'
+import { Route as EventsSlugCalligraphyRouteImport } from './routes/events.$slug.calligraphy'
 import { Route as EventsSlugCakeRouteImport } from './routes/events.$slug.cake'
 import { Route as EventsSlugBudgetRouteImport } from './routes/events.$slug.budget'
 import { Route as EventsSlugBrunchRouteImport } from './routes/events.$slug.brunch'
@@ -502,6 +505,11 @@ const AppLeaderboardRoute = AppLeaderboardRouteImport.update({
 const AppLanguagesRoute = AppLanguagesRouteImport.update({
   id: '/languages',
   path: '/languages',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLabsRoute = AppLabsRouteImport.update({
+  id: '/labs',
+  path: '/labs',
   getParentRoute: () => AppRoute,
 } as any)
 const AppJournalRoute = AppJournalRouteImport.update({
@@ -1031,6 +1039,11 @@ const EventsSlugLostFoundRoute = EventsSlugLostFoundRouteImport.update({
   path: '/lost-found',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugLiveBandRoute = EventsSlugLiveBandRouteImport.update({
+  id: '/live-band',
+  path: '/live-band',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugLiveAnalyticsRoute = EventsSlugLiveAnalyticsRouteImport.update({
   id: '/live-analytics',
   path: '/live-analytics',
@@ -1329,6 +1342,11 @@ const EventsSlugCamerasRoute = EventsSlugCamerasRouteImport.update({
   path: '/cameras',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugCalligraphyRoute = EventsSlugCalligraphyRouteImport.update({
+  id: '/calligraphy',
+  path: '/calligraphy',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugCakeRoute = EventsSlugCakeRouteImport.update({
   id: '/cake',
   path: '/cake',
@@ -1489,6 +1507,7 @@ export interface FileRoutesByFullPath {
   '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
+  '/app/labs': typeof AppLabsRoute
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
   '/app/legal': typeof AppLegalRoute
@@ -1554,6 +1573,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
+  '/events/$slug/calligraphy': typeof EventsSlugCalligraphyRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
   '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
@@ -1613,6 +1633,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
   '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
+  '/events/$slug/live-band': typeof EventsSlugLiveBandRoute
   '/events/$slug/lost-found': typeof EventsSlugLostFoundRoute
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/media-team': typeof EventsSlugMediaTeamRoute
@@ -1728,6 +1749,7 @@ export interface FileRoutesByTo {
   '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
+  '/app/labs': typeof AppLabsRoute
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
   '/app/legal': typeof AppLegalRoute
@@ -1792,6 +1814,7 @@ export interface FileRoutesByTo {
   '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
+  '/events/$slug/calligraphy': typeof EventsSlugCalligraphyRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
   '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
@@ -1851,6 +1874,7 @@ export interface FileRoutesByTo {
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
   '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
+  '/events/$slug/live-band': typeof EventsSlugLiveBandRoute
   '/events/$slug/lost-found': typeof EventsSlugLostFoundRoute
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/media-team': typeof EventsSlugMediaTeamRoute
@@ -1968,6 +1992,7 @@ export interface FileRoutesById {
   '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
+  '/app/labs': typeof AppLabsRoute
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
   '/app/legal': typeof AppLegalRoute
@@ -2033,6 +2058,7 @@ export interface FileRoutesById {
   '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
+  '/events/$slug/calligraphy': typeof EventsSlugCalligraphyRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
   '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
@@ -2092,6 +2118,7 @@ export interface FileRoutesById {
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
   '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
+  '/events/$slug/live-band': typeof EventsSlugLiveBandRoute
   '/events/$slug/lost-found': typeof EventsSlugLostFoundRoute
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/media-team': typeof EventsSlugMediaTeamRoute
@@ -2210,6 +2237,7 @@ export interface FileRouteTypes {
     | '/app/international'
     | '/app/investors'
     | '/app/journal'
+    | '/app/labs'
     | '/app/languages'
     | '/app/leaderboard'
     | '/app/legal'
@@ -2275,6 +2303,7 @@ export interface FileRouteTypes {
     | '/events/$slug/brunch'
     | '/events/$slug/budget'
     | '/events/$slug/cake'
+    | '/events/$slug/calligraphy'
     | '/events/$slug/cameras'
     | '/events/$slug/carbon'
     | '/events/$slug/carpool'
@@ -2334,6 +2363,7 @@ export interface FileRouteTypes {
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
     | '/events/$slug/live-analytics'
+    | '/events/$slug/live-band'
     | '/events/$slug/lost-found'
     | '/events/$slug/map'
     | '/events/$slug/media-team'
@@ -2449,6 +2479,7 @@ export interface FileRouteTypes {
     | '/app/international'
     | '/app/investors'
     | '/app/journal'
+    | '/app/labs'
     | '/app/languages'
     | '/app/leaderboard'
     | '/app/legal'
@@ -2513,6 +2544,7 @@ export interface FileRouteTypes {
     | '/events/$slug/brunch'
     | '/events/$slug/budget'
     | '/events/$slug/cake'
+    | '/events/$slug/calligraphy'
     | '/events/$slug/cameras'
     | '/events/$slug/carbon'
     | '/events/$slug/carpool'
@@ -2572,6 +2604,7 @@ export interface FileRouteTypes {
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
     | '/events/$slug/live-analytics'
+    | '/events/$slug/live-band'
     | '/events/$slug/lost-found'
     | '/events/$slug/map'
     | '/events/$slug/media-team'
@@ -2688,6 +2721,7 @@ export interface FileRouteTypes {
     | '/app/international'
     | '/app/investors'
     | '/app/journal'
+    | '/app/labs'
     | '/app/languages'
     | '/app/leaderboard'
     | '/app/legal'
@@ -2753,6 +2787,7 @@ export interface FileRouteTypes {
     | '/events/$slug/brunch'
     | '/events/$slug/budget'
     | '/events/$slug/cake'
+    | '/events/$slug/calligraphy'
     | '/events/$slug/cameras'
     | '/events/$slug/carbon'
     | '/events/$slug/carpool'
@@ -2812,6 +2847,7 @@ export interface FileRouteTypes {
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
     | '/events/$slug/live-analytics'
+    | '/events/$slug/live-band'
     | '/events/$slug/lost-found'
     | '/events/$slug/map'
     | '/events/$slug/media-team'
@@ -3254,6 +3290,13 @@ declare module '@tanstack/react-router' {
       path: '/languages'
       fullPath: '/app/languages'
       preLoaderRoute: typeof AppLanguagesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/labs': {
+      id: '/app/labs'
+      path: '/labs'
+      fullPath: '/app/labs'
+      preLoaderRoute: typeof AppLabsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/journal': {
@@ -3991,6 +4034,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugLostFoundRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/live-band': {
+      id: '/events/$slug/live-band'
+      path: '/live-band'
+      fullPath: '/events/$slug/live-band'
+      preLoaderRoute: typeof EventsSlugLiveBandRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/live-analytics': {
       id: '/events/$slug/live-analytics'
       path: '/live-analytics'
@@ -4404,6 +4454,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugCamerasRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/calligraphy': {
+      id: '/events/$slug/calligraphy'
+      path: '/calligraphy'
+      fullPath: '/events/$slug/calligraphy'
+      preLoaderRoute: typeof EventsSlugCalligraphyRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/cake': {
       id: '/events/$slug/cake'
       path: '/cake'
@@ -4629,6 +4686,7 @@ interface AppRouteChildren {
   AppInternationalRoute: typeof AppInternationalRoute
   AppInvestorsRoute: typeof AppInvestorsRoute
   AppJournalRoute: typeof AppJournalRoute
+  AppLabsRoute: typeof AppLabsRoute
   AppLanguagesRoute: typeof AppLanguagesRoute
   AppLeaderboardRoute: typeof AppLeaderboardRoute
   AppLegalRoute: typeof AppLegalRoute
@@ -4713,6 +4771,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppInternationalRoute: AppInternationalRoute,
   AppInvestorsRoute: AppInvestorsRoute,
   AppJournalRoute: AppJournalRoute,
+  AppLabsRoute: AppLabsRoute,
   AppLanguagesRoute: AppLanguagesRoute,
   AppLeaderboardRoute: AppLeaderboardRoute,
   AppLegalRoute: AppLegalRoute,
@@ -4804,6 +4863,7 @@ interface EventsSlugRouteChildren {
   EventsSlugBrunchRoute: typeof EventsSlugBrunchRoute
   EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
   EventsSlugCakeRoute: typeof EventsSlugCakeRoute
+  EventsSlugCalligraphyRoute: typeof EventsSlugCalligraphyRoute
   EventsSlugCamerasRoute: typeof EventsSlugCamerasRoute
   EventsSlugCarbonRoute: typeof EventsSlugCarbonRoute
   EventsSlugCarpoolRoute: typeof EventsSlugCarpoolRoute
@@ -4863,6 +4923,7 @@ interface EventsSlugRouteChildren {
   EventsSlugLightPlanRoute: typeof EventsSlugLightPlanRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRouteWithChildren
   EventsSlugLiveAnalyticsRoute: typeof EventsSlugLiveAnalyticsRoute
+  EventsSlugLiveBandRoute: typeof EventsSlugLiveBandRoute
   EventsSlugLostFoundRoute: typeof EventsSlugLostFoundRoute
   EventsSlugMapRoute: typeof EventsSlugMapRoute
   EventsSlugMediaTeamRoute: typeof EventsSlugMediaTeamRoute
@@ -4951,6 +5012,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugBrunchRoute: EventsSlugBrunchRoute,
   EventsSlugBudgetRoute: EventsSlugBudgetRoute,
   EventsSlugCakeRoute: EventsSlugCakeRoute,
+  EventsSlugCalligraphyRoute: EventsSlugCalligraphyRoute,
   EventsSlugCamerasRoute: EventsSlugCamerasRoute,
   EventsSlugCarbonRoute: EventsSlugCarbonRoute,
   EventsSlugCarpoolRoute: EventsSlugCarpoolRoute,
@@ -5010,6 +5072,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugLightPlanRoute: EventsSlugLightPlanRoute,
   EventsSlugLiveRoute: EventsSlugLiveRouteWithChildren,
   EventsSlugLiveAnalyticsRoute: EventsSlugLiveAnalyticsRoute,
+  EventsSlugLiveBandRoute: EventsSlugLiveBandRoute,
   EventsSlugLostFoundRoute: EventsSlugLostFoundRoute,
   EventsSlugMapRoute: EventsSlugMapRoute,
   EventsSlugMediaTeamRoute: EventsSlugMediaTeamRoute,
