@@ -16,14 +16,34 @@ export const Route = createFileRoute("/app/profile")({
 });
 
 function Profile() {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const stats = [
     { icon: Calendar, label: "Événements", value: 6 },
     { icon: MessageCircle, label: "Messages", value: 24 },
     { icon: Image, label: "Photos", value: 87 },
     { icon: Heart, label: "Favoris", value: 3 },
   ];
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+
+  const displayName =
+    (user?.user_metadata?.display_name as string | undefined) ??
+    user?.email?.split("@")[0] ??
+    "Invité";
+  const avatarUrl =
+    (user?.user_metadata?.avatar_url as string | undefined) ??
+    `https://i.pravatar.cc/150?u=${encodeURIComponent(user?.id ?? "guest")}`;
+
   return (
     <div className="space-y-6 px-4 py-4">
+
       <div className="rounded-3xl bg-gradient-primary p-6 text-white shadow-glow">
         <div className="flex items-center gap-4">
           <img src="https://i.pravatar.cc/150?img=32" className="h-16 w-16 rounded-full border-2 border-white" alt="" />
