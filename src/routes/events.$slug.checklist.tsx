@@ -1,97 +1,102 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
-import { ArrowLeft, Plus, CheckCircle2, Circle, Trash2, Calendar as CalendarIcon, Users } from "lucide-react";
+import { ArrowLeft, Plus, CheckCircle2, Circle, Trash2, Calendar as CalendarIcon, Loader2 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { toast } from "sonner";
+import { getEventBySlug } from "@/lib/events.functions";
+import {
+  listChecklist,
+  createChecklistItem,
+  toggleChecklistItem,
+  deleteChecklistItem,
+} from "@/lib/logistics.functions";
+import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/events/$slug/checklist")({
   component: Checklist,
   head: () => ({
     meta: [
       { title: "Checklist · Memento Live" },
-      { name: "description", content: "Cochez chaque étape de votre organisation, de la réservation du lieu au jour J." },
+      { name: "description", content: "Une checklist collaborative pour ne rien oublier." },
       { property: "og:title", content: "Checklist · Memento Live" },
-      { property: "og:description", content: "Une checklist collaborative pour ne rien oublier." },
+      { property: "og:description", content: "Cochez chaque étape de votre organisation." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
   }),
 });
 
-type Category = "Administratif" | "Lieu & Déco" | "Prestataires" | "Invités" | "Jour J";
-
-interface Task {
-  id: string;
-  title: string;
-  done: boolean;
-  category: Category;
-  due: string;
-  assignee: string;
-}
-
-const initialTasks: Task[] = [
-  { id: "t1", title: "Réserver le lieu de réception", done: true, category: "Lieu & Déco", due: "J-180", assignee: "Sarah" },
-  { id: "t2", title: "Envoyer les faire-part", done: true, category: "Invités", due: "J-120", assignee: "Thomas" },
-  { id: "t3", title: "Choisir le photographe / vidéaste", done: true, category: "Prestataires", due: "J-150", assignee: "Sarah" },
-  { id: "t4", title: "Sélectionner le traiteur et menu", done: true, category: "Prestataires", due: "J-90", assignee: "Thomas" },
-  { id: "t5", title: "Répétition à la mairie", done: false, category: "Administratif", due: "J-14", assignee: "Sarah" },
-  { id: "t6", title: "Confirmer la playlist finale avec le DJ", done: false, category: "Prestataires", due: "J-10", assignee: "Camille" },
-  { id: "t7", title: "Finaliser le plan de table", done: false, category: "Invités", due: "J-7", assignee: "Sarah" },
-  { id: "t8", title: "Préparer les accessoires du photobooth", done: false, category: "Lieu & Déco", due: "J-3", assignee: "Julien" },
-  { id: "t9", title: "Briefing des témoins", done: false, category: "Jour J", due: "J-1", assignee: "Thomas" },
-  { id: "t10", title: "Vérifier le matériel de diffusion Live", done: false, category: "Jour J", due: "Jour J", assignee: "Camille" },
-];
-
-const categoryOrder: Category[] = ["Administratif", "Lieu & Déco", "Prestataires", "Invités", "Jour J"];
-
-const categoryStyles: Record<Category, string> = {
-  "Administratif": "bg-primary/10 text-primary",
-  "Lieu & Déco": "bg-accent/30 text-foreground",
-  "Prestataires": "bg-secondary text-foreground",
-  "Invités": "bg-primary/15 text-primary",
-  "Jour J": "bg-foreground text-background",
-};
+const categorySuggestions = ["Administratif", "Lieu & Déco", "Prestataires", "Invités", "Jour J"];
 
 function Checklist() {
   const { slug } = useParams({ from: "/events/$slug/checklist" });
-  const [tasks, setTasks] = useState(initialTasks);
+  const { user } = useAuth();
+  const qc = useQueryClient();
+  const fetchEvent = useServerFn(getEventBySlug);
+  const fetchList = useServerFn(listChecklist);
+  const addItem = useServerFn(createChecklistItem);
+  const toggle = useServerFn(toggleChecklistItem);
+  const remove = useServerFn(deleteChecklistItem);
+
+  const { data: event } = useQuery({
+    queryKey: ["event", slug],
+    queryFn: () => fetchEvent({ data: { slug } }),
+  });
+  const eventId = event?.id;
+
+  const { data: tasks = [], isLoading } = useQuery({
+    enabled: !!eventId,
+    queryKey: ["checklist", eventId],
+    queryFn: () => fetchList({ data: { eventId: eventId! } }),
+  });
+
   const [filter, setFilter] = useState<"Tous" | "À faire" | "Faits">("À faire");
   const [showAdd, setShowAdd] = useState(false);
   const [newTitle, setNewTitle] = useState("");
-  const [newCategory, setNewCategory] = useState<Category>("Prestataires");
+  const [newCategory, setNewCategory] = useState<string>("Prestataires");
 
-  const done = tasks.filter((t) => t.done).length;
-  const percent = Math.round((done / tasks.length) * 100);
+  const done = tasks.filter((t) => t.is_done).length;
+  const percent = tasks.length ? Math.round((done / tasks.length) * 100) : 0;
 
   const filtered = useMemo(() => {
-    if (filter === "À faire") return tasks.filter((t) => !t.done);
-    if (filter === "Faits") return tasks.filter((t) => t.done);
+    if (filter === "À faire") return tasks.filter((t) => !t.is_done);
+    if (filter === "Faits") return tasks.filter((t) => t.is_done);
     return tasks;
   }, [tasks, filter]);
 
   const grouped = useMemo(() => {
-    const map = new Map<Category, Task[]>();
+    const map = new Map<string, typeof tasks>();
     for (const t of filtered) {
-      const arr = map.get(t.category) ?? [];
+      const cat = t.category ?? "Autres";
+      const arr = map.get(cat) ?? [];
       arr.push(t);
-      map.set(t.category, arr);
+      map.set(cat, arr);
     }
-    return categoryOrder.map((c) => [c, map.get(c) ?? []] as const).filter(([, arr]) => arr.length > 0);
+    return Array.from(map.entries());
   }, [filtered]);
 
-  function toggle(id: string) {
-    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
-  }
-  function remove(id: string) {
-    setTasks((prev) => prev.filter((t) => t.id !== id));
-  }
-  function add() {
-    if (!newTitle.trim()) return;
-    setTasks((prev) => [
-      ...prev,
-      { id: `t${Date.now()}`, title: newTitle.trim(), done: false, category: newCategory, due: "J-30", assignee: "Moi" },
-    ]);
-    setNewTitle("");
-    setShowAdd(false);
-  }
+  const invalidate = () => qc.invalidateQueries({ queryKey: ["checklist", eventId] });
+
+  const addMut = useMutation({
+    mutationFn: (input: { title: string; category: string }) =>
+      addItem({ data: { eventId: eventId!, title: input.title, category: input.category } }),
+    onSuccess: () => {
+      setNewTitle("");
+      setShowAdd(false);
+      invalidate();
+      toast.success("Tâche ajoutée");
+    },
+    onError: (e: unknown) => toast.error(e instanceof Error ? e.message : "Erreur"),
+  });
+  const toggleMut = useMutation({
+    mutationFn: (input: { id: string; isDone: boolean }) => toggle({ data: input }),
+    onSuccess: invalidate,
+  });
+  const delMut = useMutation({
+    mutationFn: (id: string) => remove({ data: { id } }),
+    onSuccess: invalidate,
+  });
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -101,7 +106,7 @@ function Checklist() {
         </Link>
         <p className="font-serif text-lg">Checklist</p>
         <button
-          onClick={() => setShowAdd(true)}
+          onClick={() => user ? setShowAdd(true) : toast.error("Connecte-toi pour ajouter une tâche")}
           className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground"
           aria-label="Ajouter une tâche"
         >
@@ -136,13 +141,17 @@ function Checklist() {
         ))}
       </div>
 
+      {isLoading && (
+        <div className="flex items-center justify-center py-16 text-muted-foreground">
+          <Loader2 className="h-5 w-5 animate-spin" />
+        </div>
+      )}
+
       <div className="space-y-6 px-4">
         {grouped.map(([cat, list]) => (
           <section key={cat}>
             <div className="mb-2 flex items-center gap-2">
-              <span className={`rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider ${categoryStyles[cat]}`}>
-                {cat}
-              </span>
+              <span className="rounded-full bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">{cat}</span>
               <span className="text-xs text-muted-foreground">{list.length}</span>
             </div>
             <ul className="space-y-2">
@@ -150,41 +159,48 @@ function Checklist() {
                 <li
                   key={t.id}
                   className={`group flex items-start gap-3 rounded-2xl border p-4 transition-colors ${
-                    t.done ? "border-transparent bg-secondary/50" : "border-border/60 bg-card"
+                    t.is_done ? "border-transparent bg-secondary/50" : "border-border/60 bg-card"
                   }`}
                 >
                   <button
-                    onClick={() => toggle(t.id)}
+                    onClick={() => user && toggleMut.mutate({ id: t.id, isDone: !t.is_done })}
+                    disabled={!user}
                     className="mt-0.5 shrink-0"
-                    aria-label={t.done ? "Décocher" : "Cocher"}
+                    aria-label={t.is_done ? "Décocher" : "Cocher"}
                   >
-                    {t.done ? (
+                    {t.is_done ? (
                       <CheckCircle2 className="h-6 w-6 text-primary" />
                     ) : (
                       <Circle className="h-6 w-6 text-muted-foreground/60" />
                     )}
                   </button>
                   <div className="min-w-0 flex-1">
-                    <p className={`text-sm leading-snug ${t.done ? "text-muted-foreground line-through" : "text-foreground"}`}>
+                    <p className={`text-sm leading-snug ${t.is_done ? "text-muted-foreground line-through" : "text-foreground"}`}>
                       {t.title}
                     </p>
-                    <div className="mt-1.5 flex flex-wrap items-center gap-3 text-[11px] text-muted-foreground">
-                      <span className="inline-flex items-center gap-1"><CalendarIcon className="h-3 w-3" /> {t.due}</span>
-                      <span className="inline-flex items-center gap-1"><Users className="h-3 w-3" /> {t.assignee}</span>
-                    </div>
+                    {t.due_date && (
+                      <div className="mt-1.5 flex flex-wrap items-center gap-3 text-[11px] text-muted-foreground">
+                        <span className="inline-flex items-center gap-1"><CalendarIcon className="h-3 w-3" /> {t.due_date}</span>
+                      </div>
+                    )}
                   </div>
-                  <button
-                    onClick={() => remove(t.id)}
-                    className="opacity-0 transition-opacity group-hover:opacity-100"
-                    aria-label="Supprimer"
-                  >
-                    <Trash2 className="h-4 w-4 text-muted-foreground hover:text-danger" />
-                  </button>
+                  {user && (
+                    <button
+                      onClick={() => delMut.mutate(t.id)}
+                      className="opacity-0 transition-opacity group-hover:opacity-100"
+                      aria-label="Supprimer"
+                    >
+                      <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
           </section>
         ))}
+        {!isLoading && grouped.length === 0 && (
+          <p className="py-10 text-center text-sm text-muted-foreground">Aucune tâche pour ce filtre.</p>
+        )}
       </div>
 
       {showAdd && (
@@ -203,7 +219,7 @@ function Checklist() {
 
             <label className="mt-4 block text-xs font-medium uppercase tracking-wider text-muted-foreground">Catégorie</label>
             <div className="mt-1.5 grid grid-cols-2 gap-2">
-              {categoryOrder.map((c) => (
+              {categorySuggestions.map((c) => (
                 <button
                   key={c}
                   onClick={() => setNewCategory(c)}
@@ -221,8 +237,8 @@ function Checklist() {
                 Annuler
               </button>
               <button
-                onClick={add}
-                disabled={!newTitle.trim()}
+                onClick={() => newTitle.trim() && addMut.mutate({ title: newTitle.trim(), category: newCategory })}
+                disabled={!newTitle.trim() || addMut.isPending}
                 className="flex-1 rounded-full bg-primary py-3 text-sm font-semibold text-primary-foreground disabled:opacity-40"
               >
                 Ajouter
