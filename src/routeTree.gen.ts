@@ -17,6 +17,7 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
+import { Route as RsvpSlugRouteImport } from './routes/rsvp.$slug'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as AppYearInReviewRouteImport } from './routes/app.year-in-review'
 import { Route as AppWishesRouteImport } from './routes/app.wishes'
@@ -254,6 +255,7 @@ import { Route as EventsSlugCarbonRouteImport } from './routes/events.$slug.carb
 import { Route as EventsSlugCamerasRouteImport } from './routes/events.$slug.cameras'
 import { Route as EventsSlugCalligraphyRouteImport } from './routes/events.$slug.calligraphy'
 import { Route as EventsSlugCakeRouteImport } from './routes/events.$slug.cake'
+import { Route as EventsSlugCagnotteRouteImport } from './routes/events.$slug.cagnotte'
 import { Route as EventsSlugBudgetRouteImport } from './routes/events.$slug.budget'
 import { Route as EventsSlugBrunchRouteImport } from './routes/events.$slug.brunch'
 import { Route as EventsSlugBroadcastRouteImport } from './routes/events.$slug.broadcast'
@@ -319,6 +321,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
 const StoriesSlugRoute = StoriesSlugRouteImport.update({
   id: '/stories/$slug',
   path: '/stories/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RsvpSlugRoute = RsvpSlugRouteImport.update({
+  id: '/rsvp/$slug',
+  path: '/rsvp/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugRoute = EventsSlugRouteImport.update({
@@ -1513,6 +1520,11 @@ const EventsSlugCakeRoute = EventsSlugCakeRouteImport.update({
   path: '/cake',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugCagnotteRoute = EventsSlugCagnotteRouteImport.update({
+  id: '/cagnotte',
+  path: '/cagnotte',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugBudgetRoute = EventsSlugBudgetRouteImport.update({
   id: '/budget',
   path: '/budget',
@@ -1743,6 +1755,7 @@ export interface FileRoutesByFullPath {
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
+  '/rsvp/$slug': typeof RsvpSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
@@ -1768,6 +1781,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
+  '/events/$slug/cagnotte': typeof EventsSlugCagnotteRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
   '/events/$slug/calligraphy': typeof EventsSlugCalligraphyRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
@@ -2014,6 +2028,7 @@ export interface FileRoutesByTo {
   '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
+  '/rsvp/$slug': typeof RsvpSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/app': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
@@ -2039,6 +2054,7 @@ export interface FileRoutesByTo {
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
+  '/events/$slug/cagnotte': typeof EventsSlugCagnotteRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
   '/events/$slug/calligraphy': typeof EventsSlugCalligraphyRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
@@ -2288,6 +2304,7 @@ export interface FileRoutesById {
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
+  '/rsvp/$slug': typeof RsvpSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
@@ -2313,6 +2330,7 @@ export interface FileRoutesById {
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
+  '/events/$slug/cagnotte': typeof EventsSlugCagnotteRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
   '/events/$slug/calligraphy': typeof EventsSlugCalligraphyRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
@@ -2563,6 +2581,7 @@ export interface FileRouteTypes {
     | '/app/wishes'
     | '/app/year-in-review'
     | '/events/$slug'
+    | '/rsvp/$slug'
     | '/stories/$slug'
     | '/app/'
     | '/app/messages/$id'
@@ -2588,6 +2607,7 @@ export interface FileRouteTypes {
     | '/events/$slug/broadcast'
     | '/events/$slug/brunch'
     | '/events/$slug/budget'
+    | '/events/$slug/cagnotte'
     | '/events/$slug/cake'
     | '/events/$slug/calligraphy'
     | '/events/$slug/cameras'
@@ -2834,6 +2854,7 @@ export interface FileRouteTypes {
     | '/app/wellness'
     | '/app/wishes'
     | '/app/year-in-review'
+    | '/rsvp/$slug'
     | '/stories/$slug'
     | '/app'
     | '/app/messages/$id'
@@ -2859,6 +2880,7 @@ export interface FileRouteTypes {
     | '/events/$slug/broadcast'
     | '/events/$slug/brunch'
     | '/events/$slug/budget'
+    | '/events/$slug/cagnotte'
     | '/events/$slug/cake'
     | '/events/$slug/calligraphy'
     | '/events/$slug/cameras'
@@ -3107,6 +3129,7 @@ export interface FileRouteTypes {
     | '/app/wishes'
     | '/app/year-in-review'
     | '/events/$slug'
+    | '/rsvp/$slug'
     | '/stories/$slug'
     | '/app/'
     | '/app/messages/$id'
@@ -3132,6 +3155,7 @@ export interface FileRouteTypes {
     | '/events/$slug/broadcast'
     | '/events/$slug/brunch'
     | '/events/$slug/budget'
+    | '/events/$slug/cagnotte'
     | '/events/$slug/cake'
     | '/events/$slug/calligraphy'
     | '/events/$slug/cameras'
@@ -3294,6 +3318,7 @@ export interface RootRouteChildren {
   LegalRoute: typeof LegalRoute
   OnboardingRoute: typeof OnboardingRoute
   EventsSlugRoute: typeof EventsSlugRouteWithChildren
+  RsvpSlugRoute: typeof RsvpSlugRoute
   StoriesSlugRoute: typeof StoriesSlugRoute
 }
 
@@ -3353,6 +3378,13 @@ declare module '@tanstack/react-router' {
       path: '/stories/$slug'
       fullPath: '/stories/$slug'
       preLoaderRoute: typeof StoriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rsvp/$slug': {
+      id: '/rsvp/$slug'
+      path: '/rsvp/$slug'
+      fullPath: '/rsvp/$slug'
+      preLoaderRoute: typeof RsvpSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events/$slug': {
@@ -5014,6 +5046,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugCakeRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/cagnotte': {
+      id: '/events/$slug/cagnotte'
+      path: '/cagnotte'
+      fullPath: '/events/$slug/cagnotte'
+      preLoaderRoute: typeof EventsSlugCagnotteRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/budget': {
       id: '/events/$slug/budget'
       path: '/budget'
@@ -5456,6 +5495,7 @@ interface EventsSlugRouteChildren {
   EventsSlugBroadcastRoute: typeof EventsSlugBroadcastRoute
   EventsSlugBrunchRoute: typeof EventsSlugBrunchRoute
   EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
+  EventsSlugCagnotteRoute: typeof EventsSlugCagnotteRoute
   EventsSlugCakeRoute: typeof EventsSlugCakeRoute
   EventsSlugCalligraphyRoute: typeof EventsSlugCalligraphyRoute
   EventsSlugCamerasRoute: typeof EventsSlugCamerasRoute
@@ -5627,6 +5667,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugBroadcastRoute: EventsSlugBroadcastRoute,
   EventsSlugBrunchRoute: EventsSlugBrunchRoute,
   EventsSlugBudgetRoute: EventsSlugBudgetRoute,
+  EventsSlugCagnotteRoute: EventsSlugCagnotteRoute,
   EventsSlugCakeRoute: EventsSlugCakeRoute,
   EventsSlugCalligraphyRoute: EventsSlugCalligraphyRoute,
   EventsSlugCamerasRoute: EventsSlugCamerasRoute,
@@ -5790,6 +5831,7 @@ const rootRouteChildren: RootRouteChildren = {
   LegalRoute: LegalRoute,
   OnboardingRoute: OnboardingRoute,
   EventsSlugRoute: EventsSlugRouteWithChildren,
+  RsvpSlugRoute: RsvpSlugRoute,
   StoriesSlugRoute: StoriesSlugRoute,
 }
 export const routeTree = rootRouteImport

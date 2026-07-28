@@ -37,6 +37,8 @@ import {
 
 import { useEffect, useState } from "react";
 import { PostFeed } from "@/components/PostFeed";
+import { CagnotteCard } from "@/components/CagnotteCard";
+
 
 
 export const Route = createFileRoute("/events/$slug/")({
@@ -156,6 +158,15 @@ function EventPage() {
         </section>
 
         {dbId && <PostFeed eventId={dbId} />}
+
+        {event.moneyPot && (
+          <CagnotteCard
+            url={event.moneyPot.url}
+            goal={event.moneyPot.target}
+            current={event.moneyPot.current}
+          />
+        )}
+
 
 
 
