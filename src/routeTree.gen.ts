@@ -135,6 +135,7 @@ import { Route as EventsSlugLostFoundRouteImport } from './routes/events.$slug.l
 import { Route as EventsSlugLiveAnalyticsRouteImport } from './routes/events.$slug.live-analytics'
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugLightPlanRouteImport } from './routes/events.$slug.light-plan'
+import { Route as EventsSlugLeftoversRouteImport } from './routes/events.$slug.leftovers'
 import { Route as EventsSlugKidsRouteImport } from './routes/events.$slug.kids'
 import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invite'
 import { Route as EventsSlugInvitationsRouteImport } from './routes/events.$slug.invitations'
@@ -828,6 +829,11 @@ const EventsSlugLightPlanRoute = EventsSlugLightPlanRouteImport.update({
   path: '/light-plan',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugLeftoversRoute = EventsSlugLeftoversRouteImport.update({
+  id: '/leftovers',
+  path: '/leftovers',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugKidsRoute = EventsSlugKidsRouteImport.update({
   id: '/kids',
   path: '/kids',
@@ -1250,6 +1256,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
+  '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
   '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
@@ -1435,6 +1442,7 @@ export interface FileRoutesByTo {
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
+  '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
   '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
@@ -1623,6 +1631,7 @@ export interface FileRoutesById {
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
+  '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
   '/events/$slug/live-analytics': typeof EventsSlugLiveAnalyticsRoute
@@ -1812,6 +1821,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invitations'
     | '/events/$slug/invite'
     | '/events/$slug/kids'
+    | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
     | '/events/$slug/live-analytics'
@@ -1997,6 +2007,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invitations'
     | '/events/$slug/invite'
     | '/events/$slug/kids'
+    | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
     | '/events/$slug/live-analytics'
@@ -2184,6 +2195,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invitations'
     | '/events/$slug/invite'
     | '/events/$slug/kids'
+    | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
     | '/events/$slug/live-analytics'
@@ -3142,6 +3154,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugLightPlanRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/leftovers': {
+      id: '/events/$slug/leftovers'
+      path: '/leftovers'
+      fullPath: '/events/$slug/leftovers'
+      preLoaderRoute: typeof EventsSlugLeftoversRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/kids': {
       id: '/events/$slug/kids'
       path: '/kids'
@@ -3792,6 +3811,7 @@ interface EventsSlugRouteChildren {
   EventsSlugInvitationsRoute: typeof EventsSlugInvitationsRoute
   EventsSlugInviteRoute: typeof EventsSlugInviteRoute
   EventsSlugKidsRoute: typeof EventsSlugKidsRoute
+  EventsSlugLeftoversRoute: typeof EventsSlugLeftoversRoute
   EventsSlugLightPlanRoute: typeof EventsSlugLightPlanRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRouteWithChildren
   EventsSlugLiveAnalyticsRoute: typeof EventsSlugLiveAnalyticsRoute
@@ -3905,6 +3925,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugInvitationsRoute: EventsSlugInvitationsRoute,
   EventsSlugInviteRoute: EventsSlugInviteRoute,
   EventsSlugKidsRoute: EventsSlugKidsRoute,
+  EventsSlugLeftoversRoute: EventsSlugLeftoversRoute,
   EventsSlugLightPlanRoute: EventsSlugLightPlanRoute,
   EventsSlugLiveRoute: EventsSlugLiveRouteWithChildren,
   EventsSlugLiveAnalyticsRoute: EventsSlugLiveAnalyticsRoute,
