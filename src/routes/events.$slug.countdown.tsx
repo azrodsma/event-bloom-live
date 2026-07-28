@@ -90,17 +90,14 @@ function Countdown() {
         <div className="flex items-center justify-between px-4 py-3">
           <Link
             to="/events/$slug"
-            params={{ slug }}
+            params={{ slug: event.slug }}
             className="grid h-10 w-10 place-items-center rounded-full bg-white/15 backdrop-blur"
             aria-label="Retour"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div className="flex gap-2">
-            <button className="grid h-10 w-10 place-items-center rounded-full bg-white/15 backdrop-blur" aria-label="Notifications">
-              <Bell className="h-4 w-4" />
-            </button>
-            <button className="grid h-10 w-10 place-items-center rounded-full bg-white/15 backdrop-blur" aria-label="Partager">
+            <button onClick={share} className="grid h-10 w-10 place-items-center rounded-full bg-white/15 backdrop-blur" aria-label="Partager">
               <Share2 className="h-4 w-4" />
             </button>
           </div>
@@ -111,16 +108,20 @@ function Countdown() {
             <Sparkles className="h-3 w-3" /> Save the date
           </div>
           <h1 className="mt-4 font-serif text-4xl leading-tight">
-            {event?.title ?? "Sarah & Thomas"}
+            {event.title}
           </h1>
           <div className={`mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs ${t.subtext}`}>
-            <span className="inline-flex items-center gap-1">
-              <Calendar className="h-3 w-3" /> Samedi 14 juin 2026 · 15 h 30
+            <span className="inline-flex items-center gap-1 capitalize">
+              <Calendar className="h-3 w-3" /> {dateLabel}
             </span>
-            <span className="hidden sm:inline">·</span>
-            <span className="inline-flex items-center gap-1">
-              <MapPin className="h-3 w-3" /> {event?.venue ?? "Château de Villette"}
-            </span>
+            {event.venue && (
+              <>
+                <span className="hidden sm:inline">·</span>
+                <span className="inline-flex items-center gap-1">
+                  <MapPin className="h-3 w-3" /> {event.venue}
+                </span>
+              </>
+            )}
           </div>
 
           <div className="mt-10 grid grid-cols-4 gap-2 sm:gap-4">
@@ -137,13 +138,13 @@ function Countdown() {
             ))}
           </div>
 
-          <p className={`mt-8 max-w-xs text-sm italic ${t.subtext}`}>
-            « Le bonheur n'est réel que lorsqu'il est partagé. »
-          </p>
+          {event.description && (
+            <p className={`mt-8 max-w-xs text-sm italic ${t.subtext}`}>« {event.description} »</p>
+          )}
 
           <div className="mt-8 flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-semibold backdrop-blur">
-              <Heart className="h-3 w-3" style={{ color: t.accent }} /> 68 invités confirmés
+              <Heart className="h-3 w-3" style={{ color: t.accent }} /> {stats.guestsConfirmed} invités confirmés
             </span>
           </div>
         </div>
