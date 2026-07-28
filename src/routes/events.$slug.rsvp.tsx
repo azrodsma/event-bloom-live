@@ -1,29 +1,37 @@
-import { createFileRoute, Link, useParams } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useParams } from "@tanstack/react-router";
 import { ArrowLeft, Check, Heart, Utensils, Users, Sparkles, Baby, Wheat, Wine } from "lucide-react";
 import { useState } from "react";
-import { findEvent } from "@/lib/mock-data";
+import { useServerFn } from "@tanstack/react-start";
+import { getEventBySlug } from "@/lib/events.functions";
+import { submitRsvp } from "@/lib/rsvp.functions";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/events/$slug/rsvp")({
   component: Rsvp,
-  head: () => ({
+  head: ({ params }) => ({
     meta: [
-      { title: "Confirmer ma présence · Memento Live" },
-      { name: "description", content: "Confirmez votre présence, indiquez vos préférences alimentaires et laissez un mot doux aux mariés." },
+      { title: `Confirmer ma présence · ${params.slug} — Memento Live` },
+      { name: "description", content: "Confirmez votre présence et vos préférences." },
       { property: "og:title", content: "Confirmer ma présence · Memento Live" },
-      { property: "og:description", content: "Le formulaire de réponse à l'invitation." },
+      { property: "og:description", content: "Répondez à l'invitation." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
   }),
+  loader: async ({ params }) => {
+    const ev = await getEventBySlug({ data: { slug: params.slug } });
+    if (!ev) throw notFound();
+    return { event: ev };
+  },
 });
 
 type Attend = "yes" | "no" | "maybe";
 type Diet = "std" | "veg" | "vegan" | "sansGluten" | "enfant";
 
-const attendMeta: Record<Attend, { label: string; color: string }> = {
-  yes: { label: "Avec joie ✨", color: "border-primary bg-primary/10 text-primary" },
-  maybe: { label: "Peut-être", color: "border-accent bg-accent/20 text-foreground" },
-  no: { label: "Impossible", color: "border-border bg-muted text-muted-foreground" },
+const attendMeta: Record<Attend, { label: string; color: string; value: "confirmed" | "declined" | "maybe" }> = {
+  yes: { label: "Avec joie ✨", color: "border-primary bg-primary/10 text-primary", value: "confirmed" },
+  maybe: { label: "Peut-être", color: "border-accent bg-accent/20 text-foreground", value: "maybe" },
+  no: { label: "Impossible", color: "border-border bg-muted text-muted-foreground", value: "declined" },
 };
 
 const dietOptions: Array<{ id: Diet; label: string; icon: typeof Utensils }> = [
@@ -35,33 +43,61 @@ const dietOptions: Array<{ id: Diet; label: string; icon: typeof Utensils }> = [
 ];
 
 function Rsvp() {
+  const { event } = Route.useLoaderData();
   const { slug } = useParams({ from: "/events/$slug/rsvp" });
-  const event = findEvent(slug);
+  const submit = useServerFn(submitRsvp);
 
   const [step, setStep] = useState(0);
   const [attend, setAttend] = useState<Attend | null>(null);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [plusOnes, setPlusOnes] = useState(0);
   const [diet, setDiet] = useState<Diet>("std");
+  const [dietNote, setDietNote] = useState("");
   const [note, setNote] = useState("");
   const [songs, setSongs] = useState("");
+  const [sending, setSending] = useState(false);
 
   const totalSteps = 5;
   const progress = Math.round(((step + 1) / totalSteps) * 100);
 
-  function next() {
+  const canNext =
+    (step === 0 && attend !== null) ||
+    (step === 1 && name.trim().length > 1 && /.+@.+\..+/.test(email)) ||
+    step === 2 ||
+    step === 3 ||
+    step === 4;
+
+  async function next() {
+    if (step === totalSteps - 2) {
+      if (!attend) return;
+      setSending(true);
+      try {
+        await submit({
+          data: {
+            slug,
+            full_name: name.trim(),
+            email: email.trim(),
+            rsvp: attendMeta[attend].value,
+            plus_ones: plusOnes,
+            dietary: [dietOptions.find((d) => d.id === diet)?.label, dietNote.trim()].filter(Boolean).join(" · ") || null,
+            notes: [note.trim(), songs.trim() ? `Morceau : ${songs.trim()}` : null].filter(Boolean).join("\n") || null,
+          },
+        });
+        toast.success("Réponse enregistrée ✨");
+        setStep(totalSteps - 1);
+      } catch (e) {
+        toast.error(e instanceof Error ? e.message : "Erreur");
+      } finally {
+        setSending(false);
+      }
+      return;
+    }
     setStep((s) => Math.min(s + 1, totalSteps - 1));
   }
   function back() {
     setStep((s) => Math.max(0, s - 1));
   }
-
-  const canNext =
-    (step === 0 && attend !== null) ||
-    (step === 1 && name.trim().length > 1) ||
-    step === 2 ||
-    step === 3 ||
-    step === 4;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary/60 via-background to-background pb-24">
@@ -79,9 +115,9 @@ function Rsvp() {
 
       <section className="px-6 pt-8 text-center">
         <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Vous êtes invité·e à</p>
-        <h1 className="mt-2 font-serif text-3xl leading-tight">{event?.title ?? "Notre événement"}</h1>
+        <h1 className="mt-2 font-serif text-3xl leading-tight">{event.title}</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {event ? new Date(event.date).toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""}
+          {event.event_date ? new Date(event.event_date).toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""}
         </p>
       </section>
 
@@ -118,13 +154,21 @@ function Rsvp() {
         {step === 1 && (
           <div>
             <h2 className="font-serif text-2xl">Qui répond ?</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Indiquez votre nom pour que nous vous reconnaissions.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Nom et email pour vous envoyer les infos pratiques.</p>
             <label className="mt-6 block text-xs font-medium uppercase tracking-wider text-muted-foreground">Nom complet</label>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Prénom NOM"
               autoFocus
+              className="mt-1.5 w-full rounded-2xl border border-border bg-card px-4 py-3.5 text-sm outline-none focus:border-primary"
+            />
+            <label className="mt-4 block text-xs font-medium uppercase tracking-wider text-muted-foreground">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="vous@exemple.fr"
               className="mt-1.5 w-full rounded-2xl border border-border bg-card px-4 py-3.5 text-sm outline-none focus:border-primary"
             />
 
@@ -182,6 +226,8 @@ function Rsvp() {
               })}
             </div>
             <textarea
+              value={dietNote}
+              onChange={(e) => setDietNote(e.target.value)}
               placeholder="Allergie, intolérance particulière…"
               className="mt-4 min-h-[80px] w-full resize-none rounded-2xl border border-border bg-card px-4 py-3 text-sm outline-none focus:border-primary"
             />
@@ -248,10 +294,10 @@ function Rsvp() {
             )}
             <button
               onClick={next}
-              disabled={!canNext}
+              disabled={!canNext || sending}
               className="flex-1 rounded-full bg-primary py-3 text-sm font-semibold text-primary-foreground disabled:opacity-40"
             >
-              {step === totalSteps - 2 ? "Envoyer ma réponse" : "Continuer"}
+              {sending ? "Envoi…" : step === totalSteps - 2 ? "Envoyer ma réponse" : "Continuer"}
             </button>
           </div>
         </div>
