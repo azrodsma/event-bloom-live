@@ -27,6 +27,7 @@ import { Route as AppVendorsRouteImport } from './routes/app.vendors'
 import { Route as AppTrendsRouteImport } from './routes/app.trends'
 import { Route as AppTipsRouteImport } from './routes/app.tips'
 import { Route as AppTimeCapsuleRouteImport } from './routes/app.time-capsule'
+import { Route as AppThemeStudioRouteImport } from './routes/app.theme-studio'
 import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
 import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
@@ -111,6 +112,7 @@ import { Route as EventsSlugSaveTheDateRouteImport } from './routes/events.$slug
 import { Route as EventsSlugSafetyRouteImport } from './routes/events.$slug.safety'
 import { Route as EventsSlugRsvpRouteImport } from './routes/events.$slug.rsvp'
 import { Route as EventsSlugRitualsRouteImport } from './routes/events.$slug.rituals'
+import { Route as EventsSlugRingBearerRouteImport } from './routes/events.$slug.ring-bearer'
 import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
 import { Route as EventsSlugRehearsalRouteImport } from './routes/events.$slug.rehearsal'
 import { Route as EventsSlugRegistryRouteImport } from './routes/events.$slug.registry'
@@ -140,6 +142,7 @@ import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugLightPlanRouteImport } from './routes/events.$slug.light-plan'
 import { Route as EventsSlugLeftoversRouteImport } from './routes/events.$slug.leftovers'
 import { Route as EventsSlugKidsRouteImport } from './routes/events.$slug.kids'
+import { Route as EventsSlugKeysRouteImport } from './routes/events.$slug.keys'
 import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invite'
 import { Route as EventsSlugInvitationsRouteImport } from './routes/events.$slug.invitations'
 import { Route as EventsSlugInsightsRouteImport } from './routes/events.$slug.insights'
@@ -287,6 +290,11 @@ const AppTipsRoute = AppTipsRouteImport.update({
 const AppTimeCapsuleRoute = AppTimeCapsuleRouteImport.update({
   id: '/time-capsule',
   path: '/time-capsule',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppThemeStudioRoute = AppThemeStudioRouteImport.update({
+  id: '/theme-studio',
+  path: '/theme-studio',
   getParentRoute: () => AppRoute,
 } as any)
 const AppStoryComposerRoute = AppStoryComposerRouteImport.update({
@@ -711,6 +719,11 @@ const EventsSlugRitualsRoute = EventsSlugRitualsRouteImport.update({
   path: '/rituals',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugRingBearerRoute = EventsSlugRingBearerRouteImport.update({
+  id: '/ring-bearer',
+  path: '/ring-bearer',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugReplayRoute = EventsSlugReplayRouteImport.update({
   id: '/replay',
   path: '/replay',
@@ -855,6 +868,11 @@ const EventsSlugLeftoversRoute = EventsSlugLeftoversRouteImport.update({
 const EventsSlugKidsRoute = EventsSlugKidsRouteImport.update({
   id: '/kids',
   path: '/kids',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugKeysRoute = EventsSlugKeysRouteImport.update({
+  id: '/keys',
+  path: '/keys',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugInviteRoute = EventsSlugInviteRouteImport.update({
@@ -1207,6 +1225,7 @@ export interface FileRoutesByFullPath {
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
+  '/app/theme-studio': typeof AppThemeStudioRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
   '/app/trends': typeof AppTrendsRoute
@@ -1274,6 +1293,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
+  '/events/$slug/keys': typeof EventsSlugKeysRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
@@ -1303,6 +1323,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
+  '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rituals': typeof EventsSlugRitualsRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/safety': typeof EventsSlugSafetyRoute
@@ -1397,6 +1418,7 @@ export interface FileRoutesByTo {
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
+  '/app/theme-studio': typeof AppThemeStudioRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
   '/app/trends': typeof AppTrendsRoute
@@ -1463,6 +1485,7 @@ export interface FileRoutesByTo {
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
+  '/events/$slug/keys': typeof EventsSlugKeysRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
@@ -1492,6 +1515,7 @@ export interface FileRoutesByTo {
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
+  '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rituals': typeof EventsSlugRitualsRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/safety': typeof EventsSlugSafetyRoute
@@ -1588,6 +1612,7 @@ export interface FileRoutesById {
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
+  '/app/theme-studio': typeof AppThemeStudioRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
   '/app/trends': typeof AppTrendsRoute
@@ -1655,6 +1680,7 @@ export interface FileRoutesById {
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
   '/events/$slug/invite': typeof EventsSlugInviteRoute
+  '/events/$slug/keys': typeof EventsSlugKeysRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
@@ -1684,6 +1710,7 @@ export interface FileRoutesById {
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
+  '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rituals': typeof EventsSlugRitualsRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/safety': typeof EventsSlugSafetyRoute
@@ -1781,6 +1808,7 @@ export interface FileRouteTypes {
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
+    | '/app/theme-studio'
     | '/app/time-capsule'
     | '/app/tips'
     | '/app/trends'
@@ -1848,6 +1876,7 @@ export interface FileRouteTypes {
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
     | '/events/$slug/invite'
+    | '/events/$slug/keys'
     | '/events/$slug/kids'
     | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
@@ -1877,6 +1906,7 @@ export interface FileRouteTypes {
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
+    | '/events/$slug/ring-bearer'
     | '/events/$slug/rituals'
     | '/events/$slug/rsvp'
     | '/events/$slug/safety'
@@ -1971,6 +2001,7 @@ export interface FileRouteTypes {
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
+    | '/app/theme-studio'
     | '/app/time-capsule'
     | '/app/tips'
     | '/app/trends'
@@ -2037,6 +2068,7 @@ export interface FileRouteTypes {
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
     | '/events/$slug/invite'
+    | '/events/$slug/keys'
     | '/events/$slug/kids'
     | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
@@ -2066,6 +2098,7 @@ export interface FileRouteTypes {
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
+    | '/events/$slug/ring-bearer'
     | '/events/$slug/rituals'
     | '/events/$slug/rsvp'
     | '/events/$slug/safety'
@@ -2161,6 +2194,7 @@ export interface FileRouteTypes {
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
+    | '/app/theme-studio'
     | '/app/time-capsule'
     | '/app/tips'
     | '/app/trends'
@@ -2228,6 +2262,7 @@ export interface FileRouteTypes {
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
     | '/events/$slug/invite'
+    | '/events/$slug/keys'
     | '/events/$slug/kids'
     | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
@@ -2257,6 +2292,7 @@ export interface FileRouteTypes {
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
+    | '/events/$slug/ring-bearer'
     | '/events/$slug/rituals'
     | '/events/$slug/rsvp'
     | '/events/$slug/safety'
@@ -2432,6 +2468,13 @@ declare module '@tanstack/react-router' {
       path: '/time-capsule'
       fullPath: '/app/time-capsule'
       preLoaderRoute: typeof AppTimeCapsuleRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/theme-studio': {
+      id: '/app/theme-studio'
+      path: '/theme-studio'
+      fullPath: '/app/theme-studio'
+      preLoaderRoute: typeof AppThemeStudioRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/story-composer': {
@@ -3022,6 +3065,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugRitualsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/ring-bearer': {
+      id: '/events/$slug/ring-bearer'
+      path: '/ring-bearer'
+      fullPath: '/events/$slug/ring-bearer'
+      preLoaderRoute: typeof EventsSlugRingBearerRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/replay': {
       id: '/events/$slug/replay'
       path: '/replay'
@@ -3223,6 +3273,13 @@ declare module '@tanstack/react-router' {
       path: '/kids'
       fullPath: '/events/$slug/kids'
       preLoaderRoute: typeof EventsSlugKidsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/keys': {
+      id: '/events/$slug/keys'
+      path: '/keys'
+      fullPath: '/events/$slug/keys'
+      preLoaderRoute: typeof EventsSlugKeysRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/invite': {
@@ -3710,6 +3767,7 @@ interface AppRouteChildren {
   AppSettingsRoute: typeof AppSettingsRoute
   AppSoundsRoute: typeof AppSoundsRoute
   AppStoryComposerRoute: typeof AppStoryComposerRoute
+  AppThemeStudioRoute: typeof AppThemeStudioRoute
   AppTimeCapsuleRoute: typeof AppTimeCapsuleRoute
   AppTipsRoute: typeof AppTipsRoute
   AppTrendsRoute: typeof AppTrendsRoute
@@ -3776,6 +3834,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppSettingsRoute: AppSettingsRoute,
   AppSoundsRoute: AppSoundsRoute,
   AppStoryComposerRoute: AppStoryComposerRoute,
+  AppThemeStudioRoute: AppThemeStudioRoute,
   AppTimeCapsuleRoute: AppTimeCapsuleRoute,
   AppTipsRoute: AppTipsRoute,
   AppTrendsRoute: AppTrendsRoute,
@@ -3869,6 +3928,7 @@ interface EventsSlugRouteChildren {
   EventsSlugInsightsRoute: typeof EventsSlugInsightsRoute
   EventsSlugInvitationsRoute: typeof EventsSlugInvitationsRoute
   EventsSlugInviteRoute: typeof EventsSlugInviteRoute
+  EventsSlugKeysRoute: typeof EventsSlugKeysRoute
   EventsSlugKidsRoute: typeof EventsSlugKidsRoute
   EventsSlugLeftoversRoute: typeof EventsSlugLeftoversRoute
   EventsSlugLightPlanRoute: typeof EventsSlugLightPlanRoute
@@ -3898,6 +3958,7 @@ interface EventsSlugRouteChildren {
   EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
   EventsSlugRehearsalRoute: typeof EventsSlugRehearsalRoute
   EventsSlugReplayRoute: typeof EventsSlugReplayRoute
+  EventsSlugRingBearerRoute: typeof EventsSlugRingBearerRoute
   EventsSlugRitualsRoute: typeof EventsSlugRitualsRoute
   EventsSlugRsvpRoute: typeof EventsSlugRsvpRoute
   EventsSlugSafetyRoute: typeof EventsSlugSafetyRoute
@@ -3985,6 +4046,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugInsightsRoute: EventsSlugInsightsRoute,
   EventsSlugInvitationsRoute: EventsSlugInvitationsRoute,
   EventsSlugInviteRoute: EventsSlugInviteRoute,
+  EventsSlugKeysRoute: EventsSlugKeysRoute,
   EventsSlugKidsRoute: EventsSlugKidsRoute,
   EventsSlugLeftoversRoute: EventsSlugLeftoversRoute,
   EventsSlugLightPlanRoute: EventsSlugLightPlanRoute,
@@ -4014,6 +4076,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugRegistryRoute: EventsSlugRegistryRoute,
   EventsSlugRehearsalRoute: EventsSlugRehearsalRoute,
   EventsSlugReplayRoute: EventsSlugReplayRoute,
+  EventsSlugRingBearerRoute: EventsSlugRingBearerRoute,
   EventsSlugRitualsRoute: EventsSlugRitualsRoute,
   EventsSlugRsvpRoute: EventsSlugRsvpRoute,
   EventsSlugSafetyRoute: EventsSlugSafetyRoute,
