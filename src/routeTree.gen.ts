@@ -128,6 +128,7 @@ import { Route as EventsSlugDecorRouteImport } from './routes/events.$slug.decor
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
 import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.countdown'
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
+import { Route as EventsSlugCityGuideRouteImport } from './routes/events.$slug.city-guide'
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
 import { Route as EventsSlugCheckinRouteImport } from './routes/events.$slug.checkin'
 import { Route as EventsSlugCarpoolRouteImport } from './routes/events.$slug.carpool'
@@ -747,6 +748,11 @@ const EventsSlugContributorsRoute = EventsSlugContributorsRouteImport.update({
   path: '/contributors',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugCityGuideRoute = EventsSlugCityGuideRouteImport.update({
+  id: '/city-guide',
+  path: '/city-guide',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugChecklistRoute = EventsSlugChecklistRouteImport.update({
   id: '/checklist',
   path: '/checklist',
@@ -931,6 +937,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
+  '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
@@ -1072,6 +1079,7 @@ export interface FileRoutesByTo {
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
+  '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
@@ -1216,6 +1224,7 @@ export interface FileRoutesById {
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
+  '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
@@ -1361,6 +1370,7 @@ export interface FileRouteTypes {
     | '/events/$slug/carpool'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
+    | '/events/$slug/city-guide'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
@@ -1502,6 +1512,7 @@ export interface FileRouteTypes {
     | '/events/$slug/carpool'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
+    | '/events/$slug/city-guide'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
@@ -1645,6 +1656,7 @@ export interface FileRouteTypes {
     | '/events/$slug/carpool'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
+    | '/events/$slug/city-guide'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
@@ -2562,6 +2574,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugContributorsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/city-guide': {
+      id: '/events/$slug/city-guide'
+      path: '/city-guide'
+      fullPath: '/events/$slug/city-guide'
+      preLoaderRoute: typeof EventsSlugCityGuideRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/checklist': {
       id: '/events/$slug/checklist'
       path: '/checklist'
@@ -2886,6 +2905,7 @@ interface EventsSlugRouteChildren {
   EventsSlugCarpoolRoute: typeof EventsSlugCarpoolRoute
   EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
+  EventsSlugCityGuideRoute: typeof EventsSlugCityGuideRoute
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
   EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
@@ -2970,6 +2990,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugCarpoolRoute: EventsSlugCarpoolRoute,
   EventsSlugCheckinRoute: EventsSlugCheckinRoute,
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
+  EventsSlugCityGuideRoute: EventsSlugCityGuideRoute,
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
   EventsSlugCountdownRoute: EventsSlugCountdownRoute,
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
