@@ -114,9 +114,14 @@ function EventPage() {
               <ChevronLeft className="h-5 w-5" />
             </Link>
             <div className="flex gap-2">
-              <button className="grid h-10 w-10 place-items-center rounded-full bg-white/90 backdrop-blur">
-                <Heart className="h-4 w-4" />
-              </button>
+              <Link
+                to="/events/$slug/story/new"
+                params={{ slug: event.slug }}
+                className="grid h-10 w-10 place-items-center rounded-full bg-white/90 backdrop-blur"
+                aria-label="Publier une story"
+              >
+                <Camera className="h-4 w-4" />
+              </Link>
               <Link
                 to="/events/$slug/invite"
                 params={{ slug: event.slug }}

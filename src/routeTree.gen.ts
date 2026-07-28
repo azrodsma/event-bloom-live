@@ -280,6 +280,7 @@ import { Route as AppVendorsIdRouteImport } from './routes/app.vendors.$id'
 import { Route as AppUsersIdRouteImport } from './routes/app.users.$id'
 import { Route as AppPostsIdRouteImport } from './routes/app.posts.$id'
 import { Route as AppMessagesIdRouteImport } from './routes/app.messages.$id'
+import { Route as EventsSlugStoryNewRouteImport } from './routes/events.$slug.story.new'
 import { Route as EventsSlugLiveSetupRouteImport } from './routes/events.$slug.live.setup'
 import { Route as EventsSlugGuestbookNewRouteImport } from './routes/events.$slug.guestbook.new'
 import { Route as EventsSlugGuestbookIdRouteImport } from './routes/events.$slug.guestbook.$id'
@@ -1650,6 +1651,11 @@ const AppMessagesIdRoute = AppMessagesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => AppMessagesRoute,
 } as any)
+const EventsSlugStoryNewRoute = EventsSlugStoryNewRouteImport.update({
+  id: '/story/new',
+  path: '/story/new',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugLiveSetupRoute = EventsSlugLiveSetupRouteImport.update({
   id: '/setup',
   path: '/setup',
@@ -1941,6 +1947,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
+  '/events/$slug/story/new': typeof EventsSlugStoryNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -2215,6 +2222,7 @@ export interface FileRoutesByTo {
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
+  '/events/$slug/story/new': typeof EventsSlugStoryNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -2492,6 +2500,7 @@ export interface FileRoutesById {
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
   '/events/$slug/live/setup': typeof EventsSlugLiveSetupRoute
+  '/events/$slug/story/new': typeof EventsSlugStoryNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -2770,6 +2779,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
+    | '/events/$slug/story/new'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -3044,6 +3054,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
+    | '/events/$slug/story/new'
   id:
     | '__root__'
     | '/'
@@ -3320,6 +3331,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
     | '/events/$slug/live/setup'
+    | '/events/$slug/story/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -5234,6 +5246,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppMessagesIdRouteImport
       parentRoute: typeof AppMessagesRoute
     }
+    '/events/$slug/story/new': {
+      id: '/events/$slug/story/new'
+      path: '/story/new'
+      fullPath: '/events/$slug/story/new'
+      preLoaderRoute: typeof EventsSlugStoryNewRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/live/setup': {
       id: '/events/$slug/live/setup'
       path: '/setup'
@@ -5665,6 +5684,7 @@ interface EventsSlugRouteChildren {
   EventsSlugWinePairingsRoute: typeof EventsSlugWinePairingsRoute
   EventsSlugWitnessesRoute: typeof EventsSlugWitnessesRoute
   EventsSlugIndexRoute: typeof EventsSlugIndexRoute
+  EventsSlugStoryNewRoute: typeof EventsSlugStoryNewRoute
 }
 
 const EventsSlugRouteChildren: EventsSlugRouteChildren = {
@@ -5837,6 +5857,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugWinePairingsRoute: EventsSlugWinePairingsRoute,
   EventsSlugWitnessesRoute: EventsSlugWitnessesRoute,
   EventsSlugIndexRoute: EventsSlugIndexRoute,
+  EventsSlugStoryNewRoute: EventsSlugStoryNewRoute,
 }
 
 const EventsSlugRouteWithChildren = EventsSlugRoute._addFileChildren(
