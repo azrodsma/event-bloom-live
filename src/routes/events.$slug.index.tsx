@@ -92,7 +92,7 @@ function useCountdown(iso: string) {
 }
 
 function EventPage() {
-  const { event, dbId } = Route.useLoaderData();
+  const { event, dbId, stats } = Route.useLoaderData();
   const cd = useCountdown(event.date);
 
   return (
@@ -270,7 +270,7 @@ function EventPage() {
           >
             <BookHeart className="h-6 w-6 text-primary" />
             <p className="mt-3 font-serif text-lg">Livre d'or</p>
-            <p className="text-xs text-muted-foreground">{event.guestbookCount} messages</p>
+            <p className="text-xs text-muted-foreground">{stats?.guestbook ?? event.guestbookCount} messages</p>
           </Link>
           <Link
             to="/events/$slug/album"
@@ -279,7 +279,7 @@ function EventPage() {
           >
             <Camera className="h-6 w-6 text-primary" />
             <p className="mt-3 font-serif text-lg">Album</p>
-            <p className="text-xs text-muted-foreground">{event.photosCount} photos</p>
+            <p className="text-xs text-muted-foreground">{stats?.photos ?? event.photosCount} photos</p>
           </Link>
         </div>
 
@@ -310,7 +310,7 @@ function EventPage() {
               <CheckSquare className="h-5 w-5" />
             </div>
             <p className="font-serif text-sm leading-tight">Checklist</p>
-            <p className="text-[10px] text-muted-foreground">4/10 faits</p>
+            <p className="text-[10px] text-muted-foreground">{stats ? `${stats.checklistDone}/${stats.checklistTotal} faits` : "—"}</p>
           </Link>
           <Link
             to="/events/$slug/playlist"
@@ -321,7 +321,7 @@ function EventPage() {
               <Music2 className="h-5 w-5" />
             </div>
             <p className="font-serif text-sm leading-tight">Playlist</p>
-            <p className="text-[10px] text-muted-foreground">8 morceaux</p>
+            <p className="text-[10px] text-muted-foreground">{stats?.songs ?? 0} morceaux</p>
           </Link>
           <Link
             to="/events/$slug/seating"
@@ -332,7 +332,7 @@ function EventPage() {
               <LayoutGrid className="h-5 w-5" />
             </div>
             <p className="font-serif text-sm leading-tight">Plan de table</p>
-            <p className="text-[10px] text-muted-foreground">5 tables</p>
+            <p className="text-[10px] text-muted-foreground">{stats?.tables ?? 0} tables</p>
           </Link>
         </div>
 
