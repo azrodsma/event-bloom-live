@@ -20,6 +20,7 @@ import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as AppYearInReviewRouteImport } from './routes/app.year-in-review'
 import { Route as AppWishesRouteImport } from './routes/app.wishes'
+import { Route as AppWellnessRouteImport } from './routes/app.wellness'
 import { Route as AppWalletRouteImport } from './routes/app.wallet'
 import { Route as AppVenuesRouteImport } from './routes/app.venues'
 import { Route as AppVendorsRouteImport } from './routes/app.vendors'
@@ -202,6 +203,11 @@ const AppYearInReviewRoute = AppYearInReviewRouteImport.update({
 const AppWishesRoute = AppWishesRouteImport.update({
   id: '/wishes',
   path: '/wishes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppWellnessRoute = AppWellnessRouteImport.update({
+  id: '/wellness',
+  path: '/wellness',
   getParentRoute: () => AppRoute,
 } as any)
 const AppWalletRoute = AppWalletRouteImport.update({
@@ -894,6 +900,7 @@ export interface FileRoutesByFullPath {
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/wallet': typeof AppWalletRoute
+  '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
@@ -1034,6 +1041,7 @@ export interface FileRoutesByTo {
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/wallet': typeof AppWalletRoute
+  '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/stories/$slug': typeof StoriesSlugRoute
@@ -1175,6 +1183,7 @@ export interface FileRoutesById {
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/wallet': typeof AppWalletRoute
+  '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
@@ -1318,6 +1327,7 @@ export interface FileRouteTypes {
     | '/app/vendors'
     | '/app/venues'
     | '/app/wallet'
+    | '/app/wellness'
     | '/app/wishes'
     | '/app/year-in-review'
     | '/events/$slug'
@@ -1458,6 +1468,7 @@ export interface FileRouteTypes {
     | '/app/vendors'
     | '/app/venues'
     | '/app/wallet'
+    | '/app/wellness'
     | '/app/wishes'
     | '/app/year-in-review'
     | '/stories/$slug'
@@ -1598,6 +1609,7 @@ export interface FileRouteTypes {
     | '/app/vendors'
     | '/app/venues'
     | '/app/wallet'
+    | '/app/wellness'
     | '/app/wishes'
     | '/app/year-in-review'
     | '/events/$slug'
@@ -1780,6 +1792,13 @@ declare module '@tanstack/react-router' {
       path: '/wishes'
       fullPath: '/app/wishes'
       preLoaderRoute: typeof AppWishesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/wellness': {
+      id: '/app/wellness'
+      path: '/wellness'
+      fullPath: '/app/wellness'
+      preLoaderRoute: typeof AppWellnessRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/wallet': {
@@ -2747,6 +2766,7 @@ interface AppRouteChildren {
   AppVendorsRoute: typeof AppVendorsRouteWithChildren
   AppVenuesRoute: typeof AppVenuesRoute
   AppWalletRoute: typeof AppWalletRoute
+  AppWellnessRoute: typeof AppWellnessRoute
   AppWishesRoute: typeof AppWishesRoute
   AppYearInReviewRoute: typeof AppYearInReviewRoute
   AppIndexRoute: typeof AppIndexRoute
@@ -2796,6 +2816,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppVendorsRoute: AppVendorsRouteWithChildren,
   AppVenuesRoute: AppVenuesRoute,
   AppWalletRoute: AppWalletRoute,
+  AppWellnessRoute: AppWellnessRoute,
   AppWishesRoute: AppWishesRoute,
   AppYearInReviewRoute: AppYearInReviewRoute,
   AppIndexRoute: AppIndexRoute,
