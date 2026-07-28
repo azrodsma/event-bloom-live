@@ -41,6 +41,7 @@ import { Route as AppMoodGeneratorRouteImport } from './routes/app.mood-generato
 import { Route as AppMomentsRouteImport } from './routes/app.moments'
 import { Route as AppMessagesRouteImport } from './routes/app.messages'
 import { Route as AppMemoriesMapRouteImport } from './routes/app.memories-map'
+import { Route as AppLoyaltyRouteImport } from './routes/app.loyalty'
 import { Route as AppLeaderboardRouteImport } from './routes/app.leaderboard'
 import { Route as AppJournalRouteImport } from './routes/app.journal'
 import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
@@ -312,6 +313,11 @@ const AppMessagesRoute = AppMessagesRouteImport.update({
 const AppMemoriesMapRoute = AppMemoriesMapRouteImport.update({
   id: '/memories-map',
   path: '/memories-map',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLoyaltyRoute = AppLoyaltyRouteImport.update({
+  id: '/loyalty',
+  path: '/loyalty',
   getParentRoute: () => AppRoute,
 } as any)
 const AppLeaderboardRoute = AppLeaderboardRouteImport.update({
@@ -905,6 +911,7 @@ export interface FileRoutesByFullPath {
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
+  '/app/loyalty': typeof AppLoyaltyRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
@@ -1050,6 +1057,7 @@ export interface FileRoutesByTo {
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
+  '/app/loyalty': typeof AppLoyaltyRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
@@ -1196,6 +1204,7 @@ export interface FileRoutesById {
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
+  '/app/loyalty': typeof AppLoyaltyRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
@@ -1344,6 +1353,7 @@ export interface FileRouteTypes {
     | '/app/inspirations'
     | '/app/journal'
     | '/app/leaderboard'
+    | '/app/loyalty'
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
@@ -1489,6 +1499,7 @@ export interface FileRouteTypes {
     | '/app/inspirations'
     | '/app/journal'
     | '/app/leaderboard'
+    | '/app/loyalty'
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
@@ -1634,6 +1645,7 @@ export interface FileRouteTypes {
     | '/app/inspirations'
     | '/app/journal'
     | '/app/leaderboard'
+    | '/app/loyalty'
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
@@ -1987,6 +1999,13 @@ declare module '@tanstack/react-router' {
       path: '/memories-map'
       fullPath: '/app/memories-map'
       preLoaderRoute: typeof AppMemoriesMapRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/loyalty': {
+      id: '/app/loyalty'
+      path: '/loyalty'
+      fullPath: '/app/loyalty'
+      preLoaderRoute: typeof AppLoyaltyRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/leaderboard': {
@@ -2823,6 +2842,7 @@ interface AppRouteChildren {
   AppInspirationsRoute: typeof AppInspirationsRoute
   AppJournalRoute: typeof AppJournalRoute
   AppLeaderboardRoute: typeof AppLeaderboardRoute
+  AppLoyaltyRoute: typeof AppLoyaltyRoute
   AppMemoriesMapRoute: typeof AppMemoriesMapRoute
   AppMessagesRoute: typeof AppMessagesRouteWithChildren
   AppMomentsRoute: typeof AppMomentsRoute
@@ -2874,6 +2894,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppInspirationsRoute: AppInspirationsRoute,
   AppJournalRoute: AppJournalRoute,
   AppLeaderboardRoute: AppLeaderboardRoute,
+  AppLoyaltyRoute: AppLoyaltyRoute,
   AppMemoriesMapRoute: AppMemoriesMapRoute,
   AppMessagesRoute: AppMessagesRouteWithChildren,
   AppMomentsRoute: AppMomentsRoute,
