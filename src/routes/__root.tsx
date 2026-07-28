@@ -133,7 +133,53 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AuthProvider>
+        <AuthEffects />
+        <RouteGuard />
+        <Outlet />
+        <Toaster position="top-center" richColors />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
+
+// Refetch queries + navigate on identity transitions.
+function AuthEffects() {
+  const router = useRouter();
+  const queryClient = useQueryClientLike();
+  useEffect(() => {
+    const { data: sub } = supabase.auth.onAuthStateChange((event) => {
+      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
+      router.invalidate();
+      if (event !== "SIGNED_OUT") queryClient?.invalidateQueries();
+    });
+    return () => sub.subscription.unsubscribe();
+  }, [router, queryClient]);
+  return null;
+}
+
+function useQueryClientLike() {
+  try {
+    // Lazy require to avoid SSR issues if unavailable
+    const { useQueryClient } = require("@tanstack/react-query");
+    return useQueryClient();
+  } catch {
+    return null;
+  }
+}
+
+// Client-side gate: redirect /app/* and /events/* to /auth when not signed in.
+function RouteGuard() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+  const isProtected = pathname.startsWith("/app") || pathname.startsWith("/events/");
+  useEffect(() => {
+    if (loading) return;
+    if (isProtected && !user) {
+      navigate({ to: "/auth", search: { redirect: pathname } as never, replace: true });
+    }
+  }, [loading, user, isProtected, pathname, navigate]);
+  return null;
+}
+
