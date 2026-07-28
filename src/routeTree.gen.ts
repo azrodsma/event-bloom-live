@@ -89,6 +89,7 @@ import { Route as AppCareRouteImport } from './routes/app.care'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
 import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries'
+import { Route as AppAmbassadorsRouteImport } from './routes/app.ambassadors'
 import { Route as AppAiStudioRouteImport } from './routes/app.ai-studio'
 import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
@@ -194,6 +195,7 @@ import { Route as EventsSlugFiltersRouteImport } from './routes/events.$slug.fil
 import { Route as EventsSlugFavorsRouteImport } from './routes/events.$slug.favors'
 import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
 import { Route as EventsSlugFamilyTreeRouteImport } from './routes/events.$slug.family-tree'
+import { Route as EventsSlugFamilyPortraitsRouteImport } from './routes/events.$slug.family-portraits'
 import { Route as EventsSlugEntranceRouteImport } from './routes/events.$slug.entrance'
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugEcoRouteImport } from './routes/events.$slug.eco'
@@ -642,6 +644,11 @@ const AppAppearanceRoute = AppAppearanceRouteImport.update({
 const AppAnniversariesRoute = AppAnniversariesRouteImport.update({
   id: '/anniversaries',
   path: '/anniversaries',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAmbassadorsRoute = AppAmbassadorsRouteImport.update({
+  id: '/ambassadors',
+  path: '/ambassadors',
   getParentRoute: () => AppRoute,
 } as any)
 const AppAiStudioRoute = AppAiStudioRouteImport.update({
@@ -1171,6 +1178,12 @@ const EventsSlugFamilyTreeRoute = EventsSlugFamilyTreeRouteImport.update({
   path: '/family-tree',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugFamilyPortraitsRoute =
+  EventsSlugFamilyPortraitsRouteImport.update({
+    id: '/family-portraits',
+    path: '/family-portraits',
+    getParentRoute: () => EventsSlugRoute,
+  } as any)
 const EventsSlugEntranceRoute = EventsSlugEntranceRouteImport.update({
   id: '/entrance',
   path: '/entrance',
@@ -1427,6 +1440,7 @@ export interface FileRoutesByFullPath {
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
   '/app/ai-studio': typeof AppAiStudioRoute
+  '/app/ambassadors': typeof AppAmbassadorsRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
@@ -1546,6 +1560,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
+  '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/favors': typeof EventsSlugFavorsRoute
@@ -1661,6 +1676,7 @@ export interface FileRoutesByTo {
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
   '/app/ai-studio': typeof AppAiStudioRoute
+  '/app/ambassadors': typeof AppAmbassadorsRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
@@ -1779,6 +1795,7 @@ export interface FileRoutesByTo {
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
+  '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/favors': typeof EventsSlugFavorsRoute
@@ -1896,6 +1913,7 @@ export interface FileRoutesById {
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
   '/app/ai-studio': typeof AppAiStudioRoute
+  '/app/ambassadors': typeof AppAmbassadorsRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
@@ -2015,6 +2033,7 @@ export interface FileRoutesById {
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
+  '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/favors': typeof EventsSlugFavorsRoute
@@ -2133,6 +2152,7 @@ export interface FileRouteTypes {
     | '/app/achievements'
     | '/app/agenda'
     | '/app/ai-studio'
+    | '/app/ambassadors'
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
@@ -2252,6 +2272,7 @@ export interface FileRouteTypes {
     | '/events/$slug/eco'
     | '/events/$slug/edit'
     | '/events/$slug/entrance'
+    | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/favors'
@@ -2367,6 +2388,7 @@ export interface FileRouteTypes {
     | '/app/achievements'
     | '/app/agenda'
     | '/app/ai-studio'
+    | '/app/ambassadors'
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
@@ -2485,6 +2507,7 @@ export interface FileRouteTypes {
     | '/events/$slug/eco'
     | '/events/$slug/edit'
     | '/events/$slug/entrance'
+    | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/favors'
@@ -2601,6 +2624,7 @@ export interface FileRouteTypes {
     | '/app/achievements'
     | '/app/agenda'
     | '/app/ai-studio'
+    | '/app/ambassadors'
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
@@ -2720,6 +2744,7 @@ export interface FileRouteTypes {
     | '/events/$slug/eco'
     | '/events/$slug/edit'
     | '/events/$slug/entrance'
+    | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/favors'
@@ -3396,6 +3421,13 @@ declare module '@tanstack/react-router' {
       path: '/anniversaries'
       fullPath: '/app/anniversaries'
       preLoaderRoute: typeof AppAnniversariesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ambassadors': {
+      id: '/app/ambassadors'
+      path: '/ambassadors'
+      fullPath: '/app/ambassadors'
+      preLoaderRoute: typeof AppAmbassadorsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/ai-studio': {
@@ -4133,6 +4165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugFamilyTreeRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/family-portraits': {
+      id: '/events/$slug/family-portraits'
+      path: '/family-portraits'
+      fullPath: '/events/$slug/family-portraits'
+      preLoaderRoute: typeof EventsSlugFamilyPortraitsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/entrance': {
       id: '/events/$slug/entrance'
       path: '/entrance'
@@ -4502,6 +4541,7 @@ interface AppRouteChildren {
   AppAchievementsRoute: typeof AppAchievementsRoute
   AppAgendaRoute: typeof AppAgendaRoute
   AppAiStudioRoute: typeof AppAiStudioRoute
+  AppAmbassadorsRoute: typeof AppAmbassadorsRoute
   AppAnniversariesRoute: typeof AppAnniversariesRoute
   AppAppearanceRoute: typeof AppAppearanceRoute
   AppBillingRoute: typeof AppBillingRoute
@@ -4584,6 +4624,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAchievementsRoute: AppAchievementsRoute,
   AppAgendaRoute: AppAgendaRoute,
   AppAiStudioRoute: AppAiStudioRoute,
+  AppAmbassadorsRoute: AppAmbassadorsRoute,
   AppAnniversariesRoute: AppAnniversariesRoute,
   AppAppearanceRoute: AppAppearanceRoute,
   AppBillingRoute: AppBillingRoute,
@@ -4729,6 +4770,7 @@ interface EventsSlugRouteChildren {
   EventsSlugEcoRoute: typeof EventsSlugEcoRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
   EventsSlugEntranceRoute: typeof EventsSlugEntranceRoute
+  EventsSlugFamilyPortraitsRoute: typeof EventsSlugFamilyPortraitsRoute
   EventsSlugFamilyTreeRoute: typeof EventsSlugFamilyTreeRoute
   EventsSlugFaqRoute: typeof EventsSlugFaqRoute
   EventsSlugFavorsRoute: typeof EventsSlugFavorsRoute
@@ -4873,6 +4915,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugEcoRoute: EventsSlugEcoRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
   EventsSlugEntranceRoute: EventsSlugEntranceRoute,
+  EventsSlugFamilyPortraitsRoute: EventsSlugFamilyPortraitsRoute,
   EventsSlugFamilyTreeRoute: EventsSlugFamilyTreeRoute,
   EventsSlugFaqRoute: EventsSlugFaqRoute,
   EventsSlugFavorsRoute: EventsSlugFavorsRoute,
