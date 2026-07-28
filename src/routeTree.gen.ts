@@ -148,6 +148,7 @@ import { Route as EventsSlugArchiveRouteImport } from './routes/events.$slug.arc
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
 import { Route as EventsSlugAiPortraitsRouteImport } from './routes/events.$slug.ai-portraits'
 import { Route as EventsSlugAfterpartyRouteImport } from './routes/events.$slug.afterparty'
+import { Route as EventsSlugAfterPartyRouteImport } from './routes/events.$slug.after-party'
 import { Route as EventsSlugActivityRouteImport } from './routes/events.$slug.activity'
 import { Route as AppVendorsIdRouteImport } from './routes/app.vendors.$id'
 import { Route as AppUsersIdRouteImport } from './routes/app.users.$id'
@@ -853,6 +854,11 @@ const EventsSlugAfterpartyRoute = EventsSlugAfterpartyRouteImport.update({
   path: '/afterparty',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugAfterPartyRoute = EventsSlugAfterPartyRouteImport.update({
+  id: '/after-party',
+  path: '/after-party',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugActivityRoute = EventsSlugActivityRouteImport.update({
   id: '/activity',
   path: '/activity',
@@ -956,6 +962,7 @@ export interface FileRoutesByFullPath {
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
+  '/events/$slug/after-party': typeof EventsSlugAfterPartyRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
@@ -1103,6 +1110,7 @@ export interface FileRoutesByTo {
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
+  '/events/$slug/after-party': typeof EventsSlugAfterPartyRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
@@ -1253,6 +1261,7 @@ export interface FileRoutesById {
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
+  '/events/$slug/after-party': typeof EventsSlugAfterPartyRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
@@ -1404,6 +1413,7 @@ export interface FileRouteTypes {
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/activity'
+    | '/events/$slug/after-party'
     | '/events/$slug/afterparty'
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
@@ -1551,6 +1561,7 @@ export interface FileRouteTypes {
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/activity'
+    | '/events/$slug/after-party'
     | '/events/$slug/afterparty'
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
@@ -1700,6 +1711,7 @@ export interface FileRouteTypes {
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/activity'
+    | '/events/$slug/after-party'
     | '/events/$slug/afterparty'
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
@@ -2774,6 +2786,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugAfterpartyRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/after-party': {
+      id: '/events/$slug/after-party'
+      path: '/after-party'
+      fullPath: '/events/$slug/after-party'
+      preLoaderRoute: typeof EventsSlugAfterPartyRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/activity': {
       id: '/events/$slug/activity'
       path: '/activity'
@@ -2992,6 +3011,7 @@ const EventsSlugLiveRouteWithChildren = EventsSlugLiveRoute._addFileChildren(
 
 interface EventsSlugRouteChildren {
   EventsSlugActivityRoute: typeof EventsSlugActivityRoute
+  EventsSlugAfterPartyRoute: typeof EventsSlugAfterPartyRoute
   EventsSlugAfterpartyRoute: typeof EventsSlugAfterpartyRoute
   EventsSlugAiPortraitsRoute: typeof EventsSlugAiPortraitsRoute
   EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
@@ -3079,6 +3099,7 @@ interface EventsSlugRouteChildren {
 
 const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugActivityRoute: EventsSlugActivityRoute,
+  EventsSlugAfterPartyRoute: EventsSlugAfterPartyRoute,
   EventsSlugAfterpartyRoute: EventsSlugAfterpartyRoute,
   EventsSlugAiPortraitsRoute: EventsSlugAiPortraitsRoute,
   EventsSlugAlbumRoute: EventsSlugAlbumRoute,
