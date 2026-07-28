@@ -305,15 +305,20 @@ function LivePage() {
 
         {tab === "Photos" && (
           <div className="grid flex-1 grid-cols-3 gap-1 overflow-y-auto p-1">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="aspect-square overflow-hidden">
-                <img
-                  src={`https://picsum.photos/seed/live${i}/300/300`}
-                  alt=""
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            ))}
+            {album.length === 0 && (
+              <p className="col-span-3 mt-6 text-center text-xs text-white/50">
+                Aucune photo pour l'instant. Invite tes proches à contribuer !
+              </p>
+            )}
+            {album.map((m) =>
+              m.media_type === "video" ? (
+                <video key={m.id} src={m.url} className="aspect-square h-full w-full object-cover" muted playsInline />
+              ) : (
+                <div key={m.id} className="aspect-square overflow-hidden">
+                  <img src={m.url} alt="" className="h-full w-full object-cover" loading="lazy" />
+                </div>
+              ),
+            )}
           </div>
         )}
       </div>
