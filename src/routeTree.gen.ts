@@ -48,6 +48,7 @@ import { Route as AppMoodGeneratorRouteImport } from './routes/app.mood-generato
 import { Route as AppMomentsRouteImport } from './routes/app.moments'
 import { Route as AppMessagesRouteImport } from './routes/app.messages'
 import { Route as AppMemoriesMapRouteImport } from './routes/app.memories-map'
+import { Route as AppMasterclassesRouteImport } from './routes/app.masterclasses'
 import { Route as AppLoyaltyRouteImport } from './routes/app.loyalty'
 import { Route as AppLegalRouteImport } from './routes/app.legal'
 import { Route as AppLeaderboardRouteImport } from './routes/app.leaderboard'
@@ -80,6 +81,7 @@ import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as AppAccessibilityRouteImport } from './routes/app.accessibility'
 import { Route as EventsSlugIndexRouteImport } from './routes/events.$slug.index'
+import { Route as EventsSlugWitnessesRouteImport } from './routes/events.$slug.witnesses'
 import { Route as EventsSlugWinePairingsRouteImport } from './routes/events.$slug.wine-pairings'
 import { Route as EventsSlugWelcomeBagRouteImport } from './routes/events.$slug.welcome-bag'
 import { Route as EventsSlugWeatherRouteImport } from './routes/events.$slug.weather'
@@ -103,6 +105,7 @@ import { Route as EventsSlugSplitCostsRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugSpeechesRouteImport } from './routes/events.$slug.speeches'
 import { Route as EventsSlugSpeechBuilderRouteImport } from './routes/events.$slug.speech-builder'
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
+import { Route as EventsSlugSoundCheckRouteImport } from './routes/events.$slug.sound-check'
 import { Route as EventsSlugSongDedicationsRouteImport } from './routes/events.$slug.song-dedications'
 import { Route as EventsSlugShuttleRouteImport } from './routes/events.$slug.shuttle'
 import { Route as EventsSlugSecurityRouteImport } from './routes/events.$slug.security'
@@ -400,6 +403,11 @@ const AppMemoriesMapRoute = AppMemoriesMapRouteImport.update({
   path: '/memories-map',
   getParentRoute: () => AppRoute,
 } as any)
+const AppMasterclassesRoute = AppMasterclassesRouteImport.update({
+  id: '/masterclasses',
+  path: '/masterclasses',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppLoyaltyRoute = AppLoyaltyRouteImport.update({
   id: '/loyalty',
   path: '/loyalty',
@@ -560,6 +568,11 @@ const EventsSlugIndexRoute = EventsSlugIndexRouteImport.update({
   path: '/',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugWitnessesRoute = EventsSlugWitnessesRouteImport.update({
+  id: '/witnesses',
+  path: '/witnesses',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugWinePairingsRoute = EventsSlugWinePairingsRouteImport.update({
   id: '/wine-pairings',
   path: '/wine-pairings',
@@ -673,6 +686,11 @@ const EventsSlugSpeechBuilderRoute = EventsSlugSpeechBuilderRouteImport.update({
 const EventsSlugSouvenirRoute = EventsSlugSouvenirRouteImport.update({
   id: '/souvenir',
   path: '/souvenir',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugSoundCheckRoute = EventsSlugSoundCheckRouteImport.update({
+  id: '/sound-check',
+  path: '/sound-check',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugSongDedicationsRoute =
@@ -1217,6 +1235,7 @@ export interface FileRoutesByFullPath {
   '/app/leaderboard': typeof AppLeaderboardRoute
   '/app/legal': typeof AppLegalRoute
   '/app/loyalty': typeof AppLoyaltyRoute
+  '/app/masterclasses': typeof AppMasterclassesRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
@@ -1347,6 +1366,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
   '/events/$slug/song-dedications': typeof EventsSlugSongDedicationsRoute
+  '/events/$slug/sound-check': typeof EventsSlugSoundCheckRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
@@ -1370,6 +1390,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
   '/events/$slug/welcome-bag': typeof EventsSlugWelcomeBagRoute
   '/events/$slug/wine-pairings': typeof EventsSlugWinePairingsRoute
+  '/events/$slug/witnesses': typeof EventsSlugWitnessesRoute
   '/events/$slug/': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -1412,6 +1433,7 @@ export interface FileRoutesByTo {
   '/app/leaderboard': typeof AppLeaderboardRoute
   '/app/legal': typeof AppLegalRoute
   '/app/loyalty': typeof AppLoyaltyRoute
+  '/app/masterclasses': typeof AppMasterclassesRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
@@ -1541,6 +1563,7 @@ export interface FileRoutesByTo {
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
   '/events/$slug/song-dedications': typeof EventsSlugSongDedicationsRoute
+  '/events/$slug/sound-check': typeof EventsSlugSoundCheckRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
@@ -1564,6 +1587,7 @@ export interface FileRoutesByTo {
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
   '/events/$slug/welcome-bag': typeof EventsSlugWelcomeBagRoute
   '/events/$slug/wine-pairings': typeof EventsSlugWinePairingsRoute
+  '/events/$slug/witnesses': typeof EventsSlugWitnessesRoute
   '/events/$slug': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -1608,6 +1632,7 @@ export interface FileRoutesById {
   '/app/leaderboard': typeof AppLeaderboardRoute
   '/app/legal': typeof AppLegalRoute
   '/app/loyalty': typeof AppLoyaltyRoute
+  '/app/masterclasses': typeof AppMasterclassesRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
@@ -1738,6 +1763,7 @@ export interface FileRoutesById {
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
   '/events/$slug/song-dedications': typeof EventsSlugSongDedicationsRoute
+  '/events/$slug/sound-check': typeof EventsSlugSoundCheckRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
@@ -1761,6 +1787,7 @@ export interface FileRoutesById {
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
   '/events/$slug/welcome-bag': typeof EventsSlugWelcomeBagRoute
   '/events/$slug/wine-pairings': typeof EventsSlugWinePairingsRoute
+  '/events/$slug/witnesses': typeof EventsSlugWitnessesRoute
   '/events/$slug/': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -1806,6 +1833,7 @@ export interface FileRouteTypes {
     | '/app/leaderboard'
     | '/app/legal'
     | '/app/loyalty'
+    | '/app/masterclasses'
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
@@ -1936,6 +1964,7 @@ export interface FileRouteTypes {
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
     | '/events/$slug/song-dedications'
+    | '/events/$slug/sound-check'
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
@@ -1959,6 +1988,7 @@ export interface FileRouteTypes {
     | '/events/$slug/weather'
     | '/events/$slug/welcome-bag'
     | '/events/$slug/wine-pairings'
+    | '/events/$slug/witnesses'
     | '/events/$slug/'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
@@ -2001,6 +2031,7 @@ export interface FileRouteTypes {
     | '/app/leaderboard'
     | '/app/legal'
     | '/app/loyalty'
+    | '/app/masterclasses'
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
@@ -2130,6 +2161,7 @@ export interface FileRouteTypes {
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
     | '/events/$slug/song-dedications'
+    | '/events/$slug/sound-check'
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
@@ -2153,6 +2185,7 @@ export interface FileRouteTypes {
     | '/events/$slug/weather'
     | '/events/$slug/welcome-bag'
     | '/events/$slug/wine-pairings'
+    | '/events/$slug/witnesses'
     | '/events/$slug'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
@@ -2196,6 +2229,7 @@ export interface FileRouteTypes {
     | '/app/leaderboard'
     | '/app/legal'
     | '/app/loyalty'
+    | '/app/masterclasses'
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
@@ -2326,6 +2360,7 @@ export interface FileRouteTypes {
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
     | '/events/$slug/song-dedications'
+    | '/events/$slug/sound-check'
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
@@ -2349,6 +2384,7 @@ export interface FileRouteTypes {
     | '/events/$slug/weather'
     | '/events/$slug/welcome-bag'
     | '/events/$slug/wine-pairings'
+    | '/events/$slug/witnesses'
     | '/events/$slug/'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
@@ -2641,6 +2677,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppMemoriesMapRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/masterclasses': {
+      id: '/app/masterclasses'
+      path: '/masterclasses'
+      fullPath: '/app/masterclasses'
+      preLoaderRoute: typeof AppMasterclassesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/loyalty': {
       id: '/app/loyalty'
       path: '/loyalty'
@@ -2865,6 +2908,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugIndexRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/witnesses': {
+      id: '/events/$slug/witnesses'
+      path: '/witnesses'
+      fullPath: '/events/$slug/witnesses'
+      preLoaderRoute: typeof EventsSlugWitnessesRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/wine-pairings': {
       id: '/events/$slug/wine-pairings'
       path: '/wine-pairings'
@@ -3024,6 +3074,13 @@ declare module '@tanstack/react-router' {
       path: '/souvenir'
       fullPath: '/events/$slug/souvenir'
       preLoaderRoute: typeof EventsSlugSouvenirRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/sound-check': {
+      id: '/events/$slug/sound-check'
+      path: '/sound-check'
+      fullPath: '/events/$slug/sound-check'
+      preLoaderRoute: typeof EventsSlugSoundCheckRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/song-dedications': {
@@ -3785,6 +3842,7 @@ interface AppRouteChildren {
   AppLeaderboardRoute: typeof AppLeaderboardRoute
   AppLegalRoute: typeof AppLegalRoute
   AppLoyaltyRoute: typeof AppLoyaltyRoute
+  AppMasterclassesRoute: typeof AppMasterclassesRoute
   AppMemoriesMapRoute: typeof AppMemoriesMapRoute
   AppMessagesRoute: typeof AppMessagesRouteWithChildren
   AppMomentsRoute: typeof AppMomentsRoute
@@ -3852,6 +3910,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppLeaderboardRoute: AppLeaderboardRoute,
   AppLegalRoute: AppLegalRoute,
   AppLoyaltyRoute: AppLoyaltyRoute,
+  AppMasterclassesRoute: AppMasterclassesRoute,
   AppMemoriesMapRoute: AppMemoriesMapRoute,
   AppMessagesRoute: AppMessagesRouteWithChildren,
   AppMomentsRoute: AppMomentsRoute,
@@ -4008,6 +4067,7 @@ interface EventsSlugRouteChildren {
   EventsSlugSecurityRoute: typeof EventsSlugSecurityRoute
   EventsSlugShuttleRoute: typeof EventsSlugShuttleRoute
   EventsSlugSongDedicationsRoute: typeof EventsSlugSongDedicationsRoute
+  EventsSlugSoundCheckRoute: typeof EventsSlugSoundCheckRoute
   EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
   EventsSlugSpeechBuilderRoute: typeof EventsSlugSpeechBuilderRoute
   EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
@@ -4031,6 +4091,7 @@ interface EventsSlugRouteChildren {
   EventsSlugWeatherRoute: typeof EventsSlugWeatherRoute
   EventsSlugWelcomeBagRoute: typeof EventsSlugWelcomeBagRoute
   EventsSlugWinePairingsRoute: typeof EventsSlugWinePairingsRoute
+  EventsSlugWitnessesRoute: typeof EventsSlugWitnessesRoute
   EventsSlugIndexRoute: typeof EventsSlugIndexRoute
 }
 
@@ -4128,6 +4189,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugSecurityRoute: EventsSlugSecurityRoute,
   EventsSlugShuttleRoute: EventsSlugShuttleRoute,
   EventsSlugSongDedicationsRoute: EventsSlugSongDedicationsRoute,
+  EventsSlugSoundCheckRoute: EventsSlugSoundCheckRoute,
   EventsSlugSouvenirRoute: EventsSlugSouvenirRoute,
   EventsSlugSpeechBuilderRoute: EventsSlugSpeechBuilderRoute,
   EventsSlugSpeechesRoute: EventsSlugSpeechesRoute,
@@ -4151,6 +4213,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugWeatherRoute: EventsSlugWeatherRoute,
   EventsSlugWelcomeBagRoute: EventsSlugWelcomeBagRoute,
   EventsSlugWinePairingsRoute: EventsSlugWinePairingsRoute,
+  EventsSlugWitnessesRoute: EventsSlugWitnessesRoute,
   EventsSlugIndexRoute: EventsSlugIndexRoute,
 }
 
