@@ -46,6 +46,7 @@ import { Route as AppProDirectoryRouteImport } from './routes/app.pro-directory'
 import { Route as AppPressRouteImport } from './routes/app.press'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
 import { Route as AppPerformanceRouteImport } from './routes/app.performance'
+import { Route as AppPartnersRouteImport } from './routes/app.partners'
 import { Route as AppOfficiantsRouteImport } from './routes/app.officiants'
 import { Route as AppNotificationsSettingsRouteImport } from './routes/app.notifications-settings'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
@@ -97,6 +98,7 @@ import { Route as EventsSlugWardrobeRouteImport } from './routes/events.$slug.wa
 import { Route as EventsSlugVowsRouteImport } from './routes/events.$slug.vows'
 import { Route as EventsSlugVoicemailsRouteImport } from './routes/events.$slug.voicemails'
 import { Route as EventsSlugVipRouteImport } from './routes/events.$slug.vip'
+import { Route as EventsSlugVideographerRouteImport } from './routes/events.$slug.videographer'
 import { Route as EventsSlugVendorsHubRouteImport } from './routes/events.$slug.vendors-hub'
 import { Route as EventsSlugTributeRouteImport } from './routes/events.$slug.tribute'
 import { Route as EventsSlugTransportRouteImport } from './routes/events.$slug.transport'
@@ -414,6 +416,11 @@ const AppPerformanceRoute = AppPerformanceRouteImport.update({
   path: '/performance',
   getParentRoute: () => AppRoute,
 } as any)
+const AppPartnersRoute = AppPartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppOfficiantsRoute = AppOfficiantsRouteImport.update({
   id: '/officiants',
   path: '/officiants',
@@ -668,6 +675,11 @@ const EventsSlugVoicemailsRoute = EventsSlugVoicemailsRouteImport.update({
 const EventsSlugVipRoute = EventsSlugVipRouteImport.update({
   id: '/vip',
   path: '/vip',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugVideographerRoute = EventsSlugVideographerRouteImport.update({
+  id: '/videographer',
+  path: '/videographer',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugVendorsHubRoute = EventsSlugVendorsHubRouteImport.update({
@@ -1379,6 +1391,7 @@ export interface FileRoutesByFullPath {
   '/app/notifications': typeof AppNotificationsRoute
   '/app/notifications-settings': typeof AppNotificationsSettingsRoute
   '/app/officiants': typeof AppOfficiantsRoute
+  '/app/partners': typeof AppPartnersRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/press': typeof AppPressRoute
@@ -1538,6 +1551,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/transport': typeof EventsSlugTransportRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
+  '/events/$slug/videographer': typeof EventsSlugVideographerRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/voicemails': typeof EventsSlugVoicemailsRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
@@ -1599,6 +1613,7 @@ export interface FileRoutesByTo {
   '/app/notifications': typeof AppNotificationsRoute
   '/app/notifications-settings': typeof AppNotificationsSettingsRoute
   '/app/officiants': typeof AppOfficiantsRoute
+  '/app/partners': typeof AppPartnersRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/press': typeof AppPressRoute
@@ -1757,6 +1772,7 @@ export interface FileRoutesByTo {
   '/events/$slug/transport': typeof EventsSlugTransportRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
+  '/events/$slug/videographer': typeof EventsSlugVideographerRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/voicemails': typeof EventsSlugVoicemailsRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
@@ -1820,6 +1836,7 @@ export interface FileRoutesById {
   '/app/notifications': typeof AppNotificationsRoute
   '/app/notifications-settings': typeof AppNotificationsSettingsRoute
   '/app/officiants': typeof AppOfficiantsRoute
+  '/app/partners': typeof AppPartnersRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/press': typeof AppPressRoute
@@ -1979,6 +1996,7 @@ export interface FileRoutesById {
   '/events/$slug/transport': typeof EventsSlugTransportRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
+  '/events/$slug/videographer': typeof EventsSlugVideographerRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/voicemails': typeof EventsSlugVoicemailsRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
@@ -2043,6 +2061,7 @@ export interface FileRouteTypes {
     | '/app/notifications'
     | '/app/notifications-settings'
     | '/app/officiants'
+    | '/app/partners'
     | '/app/performance'
     | '/app/premium'
     | '/app/press'
@@ -2202,6 +2221,7 @@ export interface FileRouteTypes {
     | '/events/$slug/transport'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
+    | '/events/$slug/videographer'
     | '/events/$slug/vip'
     | '/events/$slug/voicemails'
     | '/events/$slug/vows'
@@ -2263,6 +2283,7 @@ export interface FileRouteTypes {
     | '/app/notifications'
     | '/app/notifications-settings'
     | '/app/officiants'
+    | '/app/partners'
     | '/app/performance'
     | '/app/premium'
     | '/app/press'
@@ -2421,6 +2442,7 @@ export interface FileRouteTypes {
     | '/events/$slug/transport'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
+    | '/events/$slug/videographer'
     | '/events/$slug/vip'
     | '/events/$slug/voicemails'
     | '/events/$slug/vows'
@@ -2483,6 +2505,7 @@ export interface FileRouteTypes {
     | '/app/notifications'
     | '/app/notifications-settings'
     | '/app/officiants'
+    | '/app/partners'
     | '/app/performance'
     | '/app/premium'
     | '/app/press'
@@ -2642,6 +2665,7 @@ export interface FileRouteTypes {
     | '/events/$slug/transport'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
+    | '/events/$slug/videographer'
     | '/events/$slug/vip'
     | '/events/$slug/voicemails'
     | '/events/$slug/vows'
@@ -2926,6 +2950,13 @@ declare module '@tanstack/react-router' {
       path: '/performance'
       fullPath: '/app/performance'
       preLoaderRoute: typeof AppPerformanceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/partners': {
+      id: '/app/partners'
+      path: '/partners'
+      fullPath: '/app/partners'
+      preLoaderRoute: typeof AppPartnersRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/officiants': {
@@ -3283,6 +3314,13 @@ declare module '@tanstack/react-router' {
       path: '/vip'
       fullPath: '/events/$slug/vip'
       preLoaderRoute: typeof EventsSlugVipRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/videographer': {
+      id: '/events/$slug/videographer'
+      path: '/videographer'
+      fullPath: '/events/$slug/videographer'
+      preLoaderRoute: typeof EventsSlugVideographerRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/vendors-hub': {
@@ -4272,6 +4310,7 @@ interface AppRouteChildren {
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppNotificationsSettingsRoute: typeof AppNotificationsSettingsRoute
   AppOfficiantsRoute: typeof AppOfficiantsRoute
+  AppPartnersRoute: typeof AppPartnersRoute
   AppPerformanceRoute: typeof AppPerformanceRoute
   AppPremiumRoute: typeof AppPremiumRoute
   AppPressRoute: typeof AppPressRoute
@@ -4348,6 +4387,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppNotificationsRoute: AppNotificationsRoute,
   AppNotificationsSettingsRoute: AppNotificationsSettingsRoute,
   AppOfficiantsRoute: AppOfficiantsRoute,
+  AppPartnersRoute: AppPartnersRoute,
   AppPerformanceRoute: AppPerformanceRoute,
   AppPremiumRoute: AppPremiumRoute,
   AppPressRoute: AppPressRoute,
@@ -4533,6 +4573,7 @@ interface EventsSlugRouteChildren {
   EventsSlugTransportRoute: typeof EventsSlugTransportRoute
   EventsSlugTributeRoute: typeof EventsSlugTributeRoute
   EventsSlugVendorsHubRoute: typeof EventsSlugVendorsHubRoute
+  EventsSlugVideographerRoute: typeof EventsSlugVideographerRoute
   EventsSlugVipRoute: typeof EventsSlugVipRoute
   EventsSlugVoicemailsRoute: typeof EventsSlugVoicemailsRoute
   EventsSlugVowsRoute: typeof EventsSlugVowsRoute
@@ -4669,6 +4710,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugTransportRoute: EventsSlugTransportRoute,
   EventsSlugTributeRoute: EventsSlugTributeRoute,
   EventsSlugVendorsHubRoute: EventsSlugVendorsHubRoute,
+  EventsSlugVideographerRoute: EventsSlugVideographerRoute,
   EventsSlugVipRoute: EventsSlugVipRoute,
   EventsSlugVoicemailsRoute: EventsSlugVoicemailsRoute,
   EventsSlugVowsRoute: EventsSlugVowsRoute,
