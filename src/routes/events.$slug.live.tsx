@@ -7,6 +7,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getEventBySlug } from "@/lib/events.functions";
 import { adaptEvent } from "@/lib/event-adapter";
 import { listLiveMessages, sendLiveMessage, sendLiveReaction } from "@/lib/live.functions";
+import { listAlbumMedia } from "@/lib/album.functions";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -52,6 +53,13 @@ function LivePage() {
     enabled: !!dbId,
     queryFn: async () => (await list({ data: { eventId: dbId! } })) as LiveMsg[],
     refetchOnWindowFocus: false,
+  });
+
+  const albumList = useServerFn(listAlbumMedia);
+  const { data: album = [] } = useQuery({
+    queryKey: ["live-album", dbId],
+    enabled: !!dbId && tab === "Photos",
+    queryFn: async () => (await albumList({ data: { eventId: dbId! } })) as Array<{ id: string; url: string; media_type: string }>,
   });
 
   // Realtime subscription for chat + reactions
@@ -297,15 +305,20 @@ function LivePage() {
 
         {tab === "Photos" && (
           <div className="grid flex-1 grid-cols-3 gap-1 overflow-y-auto p-1">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="aspect-square overflow-hidden">
-                <img
-                  src={`https://picsum.photos/seed/live${i}/300/300`}
-                  alt=""
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            ))}
+            {album.length === 0 && (
+              <p className="col-span-3 mt-6 text-center text-xs text-white/50">
+                Aucune photo pour l'instant. Invite tes proches à contribuer !
+              </p>
+            )}
+            {album.map((m) =>
+              m.media_type === "video" ? (
+                <video key={m.id} src={m.url} className="aspect-square h-full w-full object-cover" muted playsInline />
+              ) : (
+                <div key={m.id} className="aspect-square overflow-hidden">
+                  <img src={m.url} alt="" className="h-full w-full object-cover" loading="lazy" />
+                </div>
+              ),
+            )}
           </div>
         )}
       </div>
