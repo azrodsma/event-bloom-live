@@ -1,6 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ChevronLeft, Copy, Check, Mail, MessageCircle, Share2, QrCode } from "lucide-react";
+import { ChevronLeft, Copy, Check, Mail, MessageCircle, Share2, QrCode, UserPlus, Sparkles } from "lucide-react";
 import { getEventBySlug } from "@/lib/events.functions";
+import { createGuestInvite } from "@/lib/rsvp.functions";
+import { useServerFn } from "@tanstack/react-start";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { useMemo, useState } from "react";
 import { QrCodeSvg } from "@/components/QrCodeSvg";
 
