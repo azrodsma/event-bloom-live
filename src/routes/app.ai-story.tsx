@@ -49,13 +49,66 @@ function AIStory() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [media, setMedia] = useState<MediaItem[]>([]);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => () => { media.forEach((m) => URL.revokeObjectURL(m.url)); }, [media]);
+
+  const mediaDescriptor = (list: MediaItem[]) =>
+    list.length
+      ? "\n\nMédias fournis (" + list.length + ") :\n" +
+        list.map((m, i) => `#${i + 1} ${m.kind === "image" ? "photo" : "clip " + fmtDur(m.duration)} — ${m.file.name}${m.caption ? " · " + m.caption : ""}`).join("\n")
+      : "";
+
+  const promptForModel = () => moments + mediaDescriptor(media);
+
+  const addFiles = async (files: FileList | null) => {
+    if (!files) return;
+    const next: MediaItem[] = [];
+    for (const file of Array.from(files)) {
+      const isImg = file.type.startsWith("image/");
+      const isVid = file.type.startsWith("video/");
+      if (!isImg && !isVid) continue;
+      const url = URL.createObjectURL(file);
+      const item: MediaItem = {
+        id: crypto.randomUUID(),
+        file,
+        kind: isImg ? "image" : "video",
+        url,
+        caption: "",
+      };
+      if (isVid) {
+        item.duration = await new Promise<number | undefined>((resolve) => {
+          const v = document.createElement("video");
+          v.preload = "metadata";
+          v.onloadedmetadata = () => resolve(isFinite(v.duration) ? v.duration : undefined);
+          v.onerror = () => resolve(undefined);
+          v.src = url;
+        });
+      }
+      next.push(item);
+    }
+    setMedia((m) => [...m, ...next]);
+    if (fileRef.current) fileRef.current.value = "";
+  };
+
+  const removeMedia = (id: string) => {
+    setMedia((m) => {
+      const item = m.find((x) => x.id === id);
+      if (item) URL.revokeObjectURL(item.url);
+      return m.filter((x) => x.id !== id);
+    });
+  };
+
+  const updateCaption = (id: string, caption: string) =>
+    setMedia((m) => m.map((x) => (x.id === id ? { ...x, caption } : x)));
 
   const onGenerate = async () => {
     setLoading(true);
     setError(null);
     setResult(null);
     try {
-      const r = await compose({ data: { eventType, eventName, tone, moments, language: "fr" } });
+      const r = await compose({ data: { eventType, eventName, tone, moments: promptForModel(), language: "fr" } });
       setResult(r.markdown);
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Erreur inconnue";
