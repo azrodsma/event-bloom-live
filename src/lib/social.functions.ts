@@ -85,6 +85,21 @@ export const togglePostLike = createServerFn({ method: "POST" })
       return { liked: false };
     }
     await context.supabase.from("post_likes").insert({ post_id: data.postId, user_id: context.userId });
+    // Notify author (skip self-likes)
+    const { data: post } = await context.supabase
+      .from("posts").select("author_id, event_id, content").eq("id", data.postId).maybeSingle();
+    if (post?.author_id && post.author_id !== context.userId) {
+      const { data: liker } = await context.supabase
+        .from("profiles").select("display_name").eq("id", context.userId).maybeSingle();
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      await supabaseAdmin.from("notifications").insert({
+        user_id: post.author_id,
+        event_id: post.event_id,
+        type: "like",
+        title: `${liker?.display_name ?? "Un invité"} a aimé votre publication`,
+        body: (post.content ?? "").slice(0, 120),
+      });
+    }
     return { liked: true };
   });
 
@@ -117,5 +132,17 @@ export const createComment = createServerFn({ method: "POST" })
       })
       .select().single();
     if (error) throw new Error(error.message);
+    const { data: post } = await context.supabase
+      .from("posts").select("author_id, event_id").eq("id", data.postId).maybeSingle();
+    if (post?.author_id && post.author_id !== context.userId) {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      await supabaseAdmin.from("notifications").insert({
+        user_id: post.author_id,
+        event_id: post.event_id,
+        type: "comment",
+        title: `${profile?.display_name ?? "Un invité"} a commenté votre publication`,
+        body: data.content.slice(0, 160),
+      });
+    }
     return row;
   });
