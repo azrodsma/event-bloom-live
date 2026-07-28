@@ -42,43 +42,36 @@ import { CagnotteCard } from "@/components/CagnotteCard";
 
 
 export const Route = createFileRoute("/events/$slug/")({
-  head: ({ params }) => {
-    const e = findEvent(params.slug);
-    if (!e) {
-      return {
-        meta: [
-          { title: "Événement — Memento Live" },
-          { name: "description", content: "Consultez les détails de votre événement privé Memento Live." },
-          { property: "og:title", content: "Événement — Memento Live" },
-          { property: "og:description", content: "Consultez les détails de votre événement privé Memento Live." },
-          { property: "og:type", content: "website" },
-          { name: "twitter:card", content: "summary_large_image" },
-        ],
-      };
+  head: ({ loaderData }) => {
+    const e = loaderData?.event;
+    const title = e?.title ?? "Événement";
+    const description = e?.description ?? "Consultez les détails de votre événement privé Memento Live.";
+    const meta: Array<Record<string, string>> = [
+      { title: `${title} — Memento Live` },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ];
+    if (e?.cover && /^https?:\/\//.test(e.cover)) {
+      meta.push({ property: "og:image", content: e.cover });
+      meta.push({ name: "twitter:image", content: e.cover });
     }
-    return {
-      meta: [
-        { title: `${e.title} — Memento Live` },
-        { name: "description", content: e.description },
-        { property: "og:title", content: e.title },
-        { property: "og:description", content: e.description },
-        { property: "og:type", content: "website" },
-        { name: "twitter:card", content: "summary_large_image" },
-        { property: "og:image", content: e.cover },
-        { name: "twitter:image", content: e.cover },
-      ],
-    };
+    return { meta };
   },
   loader: async ({ params }) => {
     const { getEventBySlug } = await import("@/lib/events.functions");
     const { adaptEvent } = await import("@/lib/event-adapter");
+    const { getEventStats } = await import("@/lib/stats.functions");
     const db = await getEventBySlug({ data: { slug: params.slug } });
     if (!db) {
       const e = findEvent(params.slug);
       if (!e) throw notFound();
-      return { event: e, dbId: null as string | null };
+      return { event: e, dbId: null as string | null, stats: null as Awaited<ReturnType<typeof getEventStats>> | null };
     }
-    return { event: adaptEvent(db), dbId: db.id };
+    const stats = await getEventStats({ data: { eventId: db.id } });
+    return { event: adaptEvent(db), dbId: db.id, stats };
   },
   component: EventPage,
 });
