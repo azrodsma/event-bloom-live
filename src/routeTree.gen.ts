@@ -201,6 +201,7 @@ import { Route as EventsSlugGuestbookRouteImport } from './routes/events.$slug.g
 import { Route as EventsSlugGratitudeWallRouteImport } from './routes/events.$slug.gratitude-wall'
 import { Route as EventsSlugGodparentsRouteImport } from './routes/events.$slug.godparents'
 import { Route as EventsSlugGiftsReceivedRouteImport } from './routes/events.$slug.gifts-received'
+import { Route as EventsSlugGiftRegistryRouteImport } from './routes/events.$slug.gift-registry'
 import { Route as EventsSlugGettingReadyRouteImport } from './routes/events.$slug.getting-ready'
 import { Route as EventsSlugGamesRouteImport } from './routes/events.$slug.games'
 import { Route as EventsSlugFlowersRouteImport } from './routes/events.$slug.flowers'
@@ -253,6 +254,7 @@ import { Route as EventsSlugBouquetRouteImport } from './routes/events.$slug.bou
 import { Route as EventsSlugBarRouteImport } from './routes/events.$slug.bar'
 import { Route as EventsSlugBackupPlanRouteImport } from './routes/events.$slug.backup-plan'
 import { Route as EventsSlugBachelorPartyRouteImport } from './routes/events.$slug.bachelor-party'
+import { Route as EventsSlugAudioGuestbookRouteImport } from './routes/events.$slug.audio-guestbook'
 import { Route as EventsSlugAuctionRouteImport } from './routes/events.$slug.auction'
 import { Route as EventsSlugArchiveRouteImport } from './routes/events.$slug.archive'
 import { Route as EventsSlugAllergiesRouteImport } from './routes/events.$slug.allergies'
@@ -1233,6 +1235,11 @@ const EventsSlugGiftsReceivedRoute = EventsSlugGiftsReceivedRouteImport.update({
   path: '/gifts-received',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugGiftRegistryRoute = EventsSlugGiftRegistryRouteImport.update({
+  id: '/gift-registry',
+  path: '/gift-registry',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugGettingReadyRoute = EventsSlugGettingReadyRouteImport.update({
   id: '/getting-ready',
   path: '/getting-ready',
@@ -1496,6 +1503,12 @@ const EventsSlugBachelorPartyRoute = EventsSlugBachelorPartyRouteImport.update({
   path: '/bachelor-party',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugAudioGuestbookRoute =
+  EventsSlugAudioGuestbookRouteImport.update({
+    id: '/audio-guestbook',
+    path: '/audio-guestbook',
+    getParentRoute: () => EventsSlugRoute,
+  } as any)
 const EventsSlugAuctionRoute = EventsSlugAuctionRouteImport.update({
   id: '/auction',
   path: '/auction',
@@ -1685,6 +1698,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/allergies': typeof EventsSlugAllergiesRoute
   '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
+  '/events/$slug/audio-guestbook': typeof EventsSlugAudioGuestbookRoute
   '/events/$slug/bachelor-party': typeof EventsSlugBachelorPartyRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
@@ -1737,6 +1751,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/getting-ready': typeof EventsSlugGettingReadyRoute
+  '/events/$slug/gift-registry': typeof EventsSlugGiftRegistryRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
   '/events/$slug/godparents': typeof EventsSlugGodparentsRoute
   '/events/$slug/gratitude-wall': typeof EventsSlugGratitudeWallRoute
@@ -1945,6 +1960,7 @@ export interface FileRoutesByTo {
   '/events/$slug/allergies': typeof EventsSlugAllergiesRoute
   '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
+  '/events/$slug/audio-guestbook': typeof EventsSlugAudioGuestbookRoute
   '/events/$slug/bachelor-party': typeof EventsSlugBachelorPartyRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
@@ -1997,6 +2013,7 @@ export interface FileRoutesByTo {
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/getting-ready': typeof EventsSlugGettingReadyRoute
+  '/events/$slug/gift-registry': typeof EventsSlugGiftRegistryRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
   '/events/$slug/godparents': typeof EventsSlugGodparentsRoute
   '/events/$slug/gratitude-wall': typeof EventsSlugGratitudeWallRoute
@@ -2208,6 +2225,7 @@ export interface FileRoutesById {
   '/events/$slug/allergies': typeof EventsSlugAllergiesRoute
   '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
+  '/events/$slug/audio-guestbook': typeof EventsSlugAudioGuestbookRoute
   '/events/$slug/bachelor-party': typeof EventsSlugBachelorPartyRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
@@ -2260,6 +2278,7 @@ export interface FileRoutesById {
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/getting-ready': typeof EventsSlugGettingReadyRoute
+  '/events/$slug/gift-registry': typeof EventsSlugGiftRegistryRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
   '/events/$slug/godparents': typeof EventsSlugGodparentsRoute
   '/events/$slug/gratitude-wall': typeof EventsSlugGratitudeWallRoute
@@ -2472,6 +2491,7 @@ export interface FileRouteTypes {
     | '/events/$slug/allergies'
     | '/events/$slug/archive'
     | '/events/$slug/auction'
+    | '/events/$slug/audio-guestbook'
     | '/events/$slug/bachelor-party'
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
@@ -2524,6 +2544,7 @@ export interface FileRouteTypes {
     | '/events/$slug/flowers'
     | '/events/$slug/games'
     | '/events/$slug/getting-ready'
+    | '/events/$slug/gift-registry'
     | '/events/$slug/gifts-received'
     | '/events/$slug/godparents'
     | '/events/$slug/gratitude-wall'
@@ -2732,6 +2753,7 @@ export interface FileRouteTypes {
     | '/events/$slug/allergies'
     | '/events/$slug/archive'
     | '/events/$slug/auction'
+    | '/events/$slug/audio-guestbook'
     | '/events/$slug/bachelor-party'
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
@@ -2784,6 +2806,7 @@ export interface FileRouteTypes {
     | '/events/$slug/flowers'
     | '/events/$slug/games'
     | '/events/$slug/getting-ready'
+    | '/events/$slug/gift-registry'
     | '/events/$slug/gifts-received'
     | '/events/$slug/godparents'
     | '/events/$slug/gratitude-wall'
@@ -2994,6 +3017,7 @@ export interface FileRouteTypes {
     | '/events/$slug/allergies'
     | '/events/$slug/archive'
     | '/events/$slug/auction'
+    | '/events/$slug/audio-guestbook'
     | '/events/$slug/bachelor-party'
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
@@ -3046,6 +3070,7 @@ export interface FileRouteTypes {
     | '/events/$slug/flowers'
     | '/events/$slug/games'
     | '/events/$slug/getting-ready'
+    | '/events/$slug/gift-registry'
     | '/events/$slug/gifts-received'
     | '/events/$slug/godparents'
     | '/events/$slug/gratitude-wall'
@@ -4507,6 +4532,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugGiftsReceivedRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/gift-registry': {
+      id: '/events/$slug/gift-registry'
+      path: '/gift-registry'
+      fullPath: '/events/$slug/gift-registry'
+      preLoaderRoute: typeof EventsSlugGiftRegistryRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/getting-ready': {
       id: '/events/$slug/getting-ready'
       path: '/getting-ready'
@@ -4871,6 +4903,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugBachelorPartyRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/audio-guestbook': {
+      id: '/events/$slug/audio-guestbook'
+      path: '/audio-guestbook'
+      fullPath: '/events/$slug/audio-guestbook'
+      preLoaderRoute: typeof EventsSlugAudioGuestbookRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/auction': {
       id: '/events/$slug/auction'
       path: '/auction'
@@ -5227,6 +5266,7 @@ interface EventsSlugRouteChildren {
   EventsSlugAllergiesRoute: typeof EventsSlugAllergiesRoute
   EventsSlugArchiveRoute: typeof EventsSlugArchiveRoute
   EventsSlugAuctionRoute: typeof EventsSlugAuctionRoute
+  EventsSlugAudioGuestbookRoute: typeof EventsSlugAudioGuestbookRoute
   EventsSlugBachelorPartyRoute: typeof EventsSlugBachelorPartyRoute
   EventsSlugBackupPlanRoute: typeof EventsSlugBackupPlanRoute
   EventsSlugBarRoute: typeof EventsSlugBarRoute
@@ -5279,6 +5319,7 @@ interface EventsSlugRouteChildren {
   EventsSlugFlowersRoute: typeof EventsSlugFlowersRoute
   EventsSlugGamesRoute: typeof EventsSlugGamesRoute
   EventsSlugGettingReadyRoute: typeof EventsSlugGettingReadyRoute
+  EventsSlugGiftRegistryRoute: typeof EventsSlugGiftRegistryRoute
   EventsSlugGiftsReceivedRoute: typeof EventsSlugGiftsReceivedRoute
   EventsSlugGodparentsRoute: typeof EventsSlugGodparentsRoute
   EventsSlugGratitudeWallRoute: typeof EventsSlugGratitudeWallRoute
@@ -5390,6 +5431,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugAllergiesRoute: EventsSlugAllergiesRoute,
   EventsSlugArchiveRoute: EventsSlugArchiveRoute,
   EventsSlugAuctionRoute: EventsSlugAuctionRoute,
+  EventsSlugAudioGuestbookRoute: EventsSlugAudioGuestbookRoute,
   EventsSlugBachelorPartyRoute: EventsSlugBachelorPartyRoute,
   EventsSlugBackupPlanRoute: EventsSlugBackupPlanRoute,
   EventsSlugBarRoute: EventsSlugBarRoute,
@@ -5442,6 +5484,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugFlowersRoute: EventsSlugFlowersRoute,
   EventsSlugGamesRoute: EventsSlugGamesRoute,
   EventsSlugGettingReadyRoute: EventsSlugGettingReadyRoute,
+  EventsSlugGiftRegistryRoute: EventsSlugGiftRegistryRoute,
   EventsSlugGiftsReceivedRoute: EventsSlugGiftsReceivedRoute,
   EventsSlugGodparentsRoute: EventsSlugGodparentsRoute,
   EventsSlugGratitudeWallRoute: EventsSlugGratitudeWallRoute,
