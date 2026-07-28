@@ -59,6 +59,7 @@ import { Route as AppLegalRouteImport } from './routes/app.legal'
 import { Route as AppLeaderboardRouteImport } from './routes/app.leaderboard'
 import { Route as AppLanguagesRouteImport } from './routes/app.languages'
 import { Route as AppJournalRouteImport } from './routes/app.journal'
+import { Route as AppInvestorsRouteImport } from './routes/app.investors'
 import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
 import { Route as AppInboxRouteImport } from './routes/app.inbox'
 import { Route as AppHelpRouteImport } from './routes/app.help'
@@ -97,6 +98,7 @@ import { Route as EventsSlugVoicemailsRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugVipRouteImport } from './routes/events.$slug.vip'
 import { Route as EventsSlugVendorsHubRouteImport } from './routes/events.$slug.vendors-hub'
 import { Route as EventsSlugTributeRouteImport } from './routes/events.$slug.tribute'
+import { Route as EventsSlugTransportRouteImport } from './routes/events.$slug.transport'
 import { Route as EventsSlugTranslationsRouteImport } from './routes/events.$slug.translations'
 import { Route as EventsSlugToastRouteImport } from './routes/events.$slug.toast'
 import { Route as EventsSlugTipsJarRouteImport } from './routes/events.$slug.tips-jar'
@@ -477,6 +479,11 @@ const AppJournalRoute = AppJournalRouteImport.update({
   path: '/journal',
   getParentRoute: () => AppRoute,
 } as any)
+const AppInvestorsRoute = AppInvestorsRouteImport.update({
+  id: '/investors',
+  path: '/investors',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppInspirationsRoute = AppInspirationsRouteImport.update({
   id: '/inspirations',
   path: '/inspirations',
@@ -665,6 +672,11 @@ const EventsSlugVendorsHubRoute = EventsSlugVendorsHubRouteImport.update({
 const EventsSlugTributeRoute = EventsSlugTributeRouteImport.update({
   id: '/tribute',
   path: '/tribute',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugTransportRoute = EventsSlugTransportRouteImport.update({
+  id: '/transport',
+  path: '/transport',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugTranslationsRoute = EventsSlugTranslationsRouteImport.update({
@@ -1346,6 +1358,7 @@ export interface FileRoutesByFullPath {
   '/app/help': typeof AppHelpRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
@@ -1515,6 +1528,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/tips-jar': typeof EventsSlugTipsJarRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/translations': typeof EventsSlugTranslationsRoute
+  '/events/$slug/transport': typeof EventsSlugTransportRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -1563,6 +1577,7 @@ export interface FileRoutesByTo {
   '/app/help': typeof AppHelpRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
@@ -1731,6 +1746,7 @@ export interface FileRoutesByTo {
   '/events/$slug/tips-jar': typeof EventsSlugTipsJarRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/translations': typeof EventsSlugTranslationsRoute
+  '/events/$slug/transport': typeof EventsSlugTransportRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -1781,6 +1797,7 @@ export interface FileRoutesById {
   '/app/help': typeof AppHelpRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
@@ -1950,6 +1967,7 @@ export interface FileRoutesById {
   '/events/$slug/tips-jar': typeof EventsSlugTipsJarRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
   '/events/$slug/translations': typeof EventsSlugTranslationsRoute
+  '/events/$slug/transport': typeof EventsSlugTransportRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -2001,6 +2019,7 @@ export interface FileRouteTypes {
     | '/app/help'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/investors'
     | '/app/journal'
     | '/app/languages'
     | '/app/leaderboard'
@@ -2170,6 +2189,7 @@ export interface FileRouteTypes {
     | '/events/$slug/tips-jar'
     | '/events/$slug/toast'
     | '/events/$slug/translations'
+    | '/events/$slug/transport'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
@@ -2218,6 +2238,7 @@ export interface FileRouteTypes {
     | '/app/help'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/investors'
     | '/app/journal'
     | '/app/languages'
     | '/app/leaderboard'
@@ -2386,6 +2407,7 @@ export interface FileRouteTypes {
     | '/events/$slug/tips-jar'
     | '/events/$slug/toast'
     | '/events/$slug/translations'
+    | '/events/$slug/transport'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
@@ -2435,6 +2457,7 @@ export interface FileRouteTypes {
     | '/app/help'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/investors'
     | '/app/journal'
     | '/app/languages'
     | '/app/leaderboard'
@@ -2604,6 +2627,7 @@ export interface FileRouteTypes {
     | '/events/$slug/tips-jar'
     | '/events/$slug/toast'
     | '/events/$slug/translations'
+    | '/events/$slug/transport'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
@@ -2983,6 +3007,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppJournalRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/investors': {
+      id: '/app/investors'
+      path: '/investors'
+      fullPath: '/app/investors'
+      preLoaderRoute: typeof AppInvestorsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/inspirations': {
       id: '/app/inspirations'
       path: '/inspirations'
@@ -3247,6 +3278,13 @@ declare module '@tanstack/react-router' {
       path: '/tribute'
       fullPath: '/events/$slug/tribute'
       preLoaderRoute: typeof EventsSlugTributeRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/transport': {
+      id: '/events/$slug/transport'
+      path: '/transport'
+      fullPath: '/events/$slug/transport'
+      preLoaderRoute: typeof EventsSlugTransportRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/translations': {
@@ -4200,6 +4238,7 @@ interface AppRouteChildren {
   AppHelpRoute: typeof AppHelpRoute
   AppInboxRoute: typeof AppInboxRoute
   AppInspirationsRoute: typeof AppInspirationsRoute
+  AppInvestorsRoute: typeof AppInvestorsRoute
   AppJournalRoute: typeof AppJournalRoute
   AppLanguagesRoute: typeof AppLanguagesRoute
   AppLeaderboardRoute: typeof AppLeaderboardRoute
@@ -4274,6 +4313,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppHelpRoute: AppHelpRoute,
   AppInboxRoute: AppInboxRoute,
   AppInspirationsRoute: AppInspirationsRoute,
+  AppInvestorsRoute: AppInvestorsRoute,
   AppJournalRoute: AppJournalRoute,
   AppLanguagesRoute: AppLanguagesRoute,
   AppLeaderboardRoute: AppLeaderboardRoute,
@@ -4469,6 +4509,7 @@ interface EventsSlugRouteChildren {
   EventsSlugTipsJarRoute: typeof EventsSlugTipsJarRoute
   EventsSlugToastRoute: typeof EventsSlugToastRoute
   EventsSlugTranslationsRoute: typeof EventsSlugTranslationsRoute
+  EventsSlugTransportRoute: typeof EventsSlugTransportRoute
   EventsSlugTributeRoute: typeof EventsSlugTributeRoute
   EventsSlugVendorsHubRoute: typeof EventsSlugVendorsHubRoute
   EventsSlugVipRoute: typeof EventsSlugVipRoute
@@ -4604,6 +4645,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugTipsJarRoute: EventsSlugTipsJarRoute,
   EventsSlugToastRoute: EventsSlugToastRoute,
   EventsSlugTranslationsRoute: EventsSlugTranslationsRoute,
+  EventsSlugTransportRoute: EventsSlugTransportRoute,
   EventsSlugTributeRoute: EventsSlugTributeRoute,
   EventsSlugVendorsHubRoute: EventsSlugVendorsHubRoute,
   EventsSlugVipRoute: EventsSlugVipRoute,
