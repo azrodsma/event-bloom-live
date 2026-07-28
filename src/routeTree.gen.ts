@@ -65,6 +65,7 @@ import { Route as AppJournalRouteImport } from './routes/app.journal'
 import { Route as AppInvestorsRouteImport } from './routes/app.investors'
 import { Route as AppInternationalRouteImport } from './routes/app.international'
 import { Route as AppIntegrationsRouteImport } from './routes/app.integrations'
+import { Route as AppInsuranceRouteImport } from './routes/app.insurance'
 import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
 import { Route as AppInboxRouteImport } from './routes/app.inbox'
 import { Route as AppImpactRouteImport } from './routes/app.impact'
@@ -142,6 +143,7 @@ import { Route as EventsSlugRitualsRouteImport } from './routes/events.$slug.rit
 import { Route as EventsSlugRingsRouteImport } from './routes/events.$slug.rings'
 import { Route as EventsSlugRingBearerRouteImport } from './routes/events.$slug.ring-bearer'
 import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
+import { Route as EventsSlugReligiousRouteImport } from './routes/events.$slug.religious'
 import { Route as EventsSlugRehearsalRouteImport } from './routes/events.$slug.rehearsal'
 import { Route as EventsSlugRegistryRouteImport } from './routes/events.$slug.registry'
 import { Route as EventsSlugProcessionRouteImport } from './routes/events.$slug.procession'
@@ -219,6 +221,7 @@ import { Route as EventsSlugConfettiRouteImport } from './routes/events.$slug.co
 import { Route as EventsSlugComfortRouteImport } from './routes/events.$slug.comfort'
 import { Route as EventsSlugCoffeeBarRouteImport } from './routes/events.$slug.coffee-bar'
 import { Route as EventsSlugCocktailRouteImport } from './routes/events.$slug.cocktail'
+import { Route as EventsSlugCivilRouteImport } from './routes/events.$slug.civil'
 import { Route as EventsSlugCityGuideRouteImport } from './routes/events.$slug.city-guide'
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
 import { Route as EventsSlugCheckinRouteImport } from './routes/events.$slug.checkin'
@@ -530,6 +533,11 @@ const AppInternationalRoute = AppInternationalRouteImport.update({
 const AppIntegrationsRoute = AppIntegrationsRouteImport.update({
   id: '/integrations',
   path: '/integrations',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInsuranceRoute = AppInsuranceRouteImport.update({
+  id: '/insurance',
+  path: '/insurance',
   getParentRoute: () => AppRoute,
 } as any)
 const AppInspirationsRoute = AppInspirationsRouteImport.update({
@@ -916,6 +924,11 @@ const EventsSlugRingBearerRoute = EventsSlugRingBearerRouteImport.update({
 const EventsSlugReplayRoute = EventsSlugReplayRouteImport.update({
   id: '/replay',
   path: '/replay',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugReligiousRoute = EventsSlugReligiousRouteImport.update({
+  id: '/religious',
+  path: '/religious',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugRehearsalRoute = EventsSlugRehearsalRouteImport.update({
@@ -1306,6 +1319,11 @@ const EventsSlugCocktailRoute = EventsSlugCocktailRouteImport.update({
   path: '/cocktail',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugCivilRoute = EventsSlugCivilRouteImport.update({
+  id: '/civil',
+  path: '/civil',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugCityGuideRoute = EventsSlugCityGuideRouteImport.update({
   id: '/city-guide',
   path: '/city-guide',
@@ -1503,6 +1521,7 @@ export interface FileRoutesByFullPath {
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/insurance': typeof AppInsuranceRoute
   '/app/integrations': typeof AppIntegrationsRoute
   '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
@@ -1581,6 +1600,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
+  '/events/$slug/civil': typeof EventsSlugCivilRoute
   '/events/$slug/cocktail': typeof EventsSlugCocktailRoute
   '/events/$slug/coffee-bar': typeof EventsSlugCoffeeBarRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
@@ -1658,6 +1678,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/procession': typeof EventsSlugProcessionRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
+  '/events/$slug/religious': typeof EventsSlugReligiousRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rings': typeof EventsSlugRingsRoute
@@ -1745,6 +1766,7 @@ export interface FileRoutesByTo {
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/insurance': typeof AppInsuranceRoute
   '/app/integrations': typeof AppIntegrationsRoute
   '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
@@ -1822,6 +1844,7 @@ export interface FileRoutesByTo {
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
+  '/events/$slug/civil': typeof EventsSlugCivilRoute
   '/events/$slug/cocktail': typeof EventsSlugCocktailRoute
   '/events/$slug/coffee-bar': typeof EventsSlugCoffeeBarRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
@@ -1899,6 +1922,7 @@ export interface FileRoutesByTo {
   '/events/$slug/procession': typeof EventsSlugProcessionRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
+  '/events/$slug/religious': typeof EventsSlugReligiousRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rings': typeof EventsSlugRingsRoute
@@ -1988,6 +2012,7 @@ export interface FileRoutesById {
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/insurance': typeof AppInsuranceRoute
   '/app/integrations': typeof AppIntegrationsRoute
   '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
@@ -2066,6 +2091,7 @@ export interface FileRoutesById {
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
+  '/events/$slug/civil': typeof EventsSlugCivilRoute
   '/events/$slug/cocktail': typeof EventsSlugCocktailRoute
   '/events/$slug/coffee-bar': typeof EventsSlugCoffeeBarRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
@@ -2143,6 +2169,7 @@ export interface FileRoutesById {
   '/events/$slug/procession': typeof EventsSlugProcessionRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
+  '/events/$slug/religious': typeof EventsSlugReligiousRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rings': typeof EventsSlugRingsRoute
@@ -2233,6 +2260,7 @@ export interface FileRouteTypes {
     | '/app/impact'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/insurance'
     | '/app/integrations'
     | '/app/international'
     | '/app/investors'
@@ -2311,6 +2339,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
+    | '/events/$slug/civil'
     | '/events/$slug/cocktail'
     | '/events/$slug/coffee-bar'
     | '/events/$slug/comfort'
@@ -2388,6 +2417,7 @@ export interface FileRouteTypes {
     | '/events/$slug/procession'
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
+    | '/events/$slug/religious'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
     | '/events/$slug/rings'
@@ -2475,6 +2505,7 @@ export interface FileRouteTypes {
     | '/app/impact'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/insurance'
     | '/app/integrations'
     | '/app/international'
     | '/app/investors'
@@ -2552,6 +2583,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
+    | '/events/$slug/civil'
     | '/events/$slug/cocktail'
     | '/events/$slug/coffee-bar'
     | '/events/$slug/comfort'
@@ -2629,6 +2661,7 @@ export interface FileRouteTypes {
     | '/events/$slug/procession'
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
+    | '/events/$slug/religious'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
     | '/events/$slug/rings'
@@ -2717,6 +2750,7 @@ export interface FileRouteTypes {
     | '/app/impact'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/insurance'
     | '/app/integrations'
     | '/app/international'
     | '/app/investors'
@@ -2795,6 +2829,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
+    | '/events/$slug/civil'
     | '/events/$slug/cocktail'
     | '/events/$slug/coffee-bar'
     | '/events/$slug/comfort'
@@ -2872,6 +2907,7 @@ export interface FileRouteTypes {
     | '/events/$slug/procession'
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
+    | '/events/$slug/religious'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
     | '/events/$slug/rings'
@@ -3325,6 +3361,13 @@ declare module '@tanstack/react-router' {
       path: '/integrations'
       fullPath: '/app/integrations'
       preLoaderRoute: typeof AppIntegrationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/insurance': {
+      id: '/app/insurance'
+      path: '/insurance'
+      fullPath: '/app/insurance'
+      preLoaderRoute: typeof AppInsuranceRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/inspirations': {
@@ -3866,6 +3909,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugReplayRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/religious': {
+      id: '/events/$slug/religious'
+      path: '/religious'
+      fullPath: '/events/$slug/religious'
+      preLoaderRoute: typeof EventsSlugReligiousRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/rehearsal': {
       id: '/events/$slug/rehearsal'
       path: '/rehearsal'
@@ -4405,6 +4455,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugCocktailRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/civil': {
+      id: '/events/$slug/civil'
+      path: '/civil'
+      fullPath: '/events/$slug/civil'
+      preLoaderRoute: typeof EventsSlugCivilRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/city-guide': {
       id: '/events/$slug/city-guide'
       path: '/city-guide'
@@ -4682,6 +4739,7 @@ interface AppRouteChildren {
   AppImpactRoute: typeof AppImpactRoute
   AppInboxRoute: typeof AppInboxRoute
   AppInspirationsRoute: typeof AppInspirationsRoute
+  AppInsuranceRoute: typeof AppInsuranceRoute
   AppIntegrationsRoute: typeof AppIntegrationsRoute
   AppInternationalRoute: typeof AppInternationalRoute
   AppInvestorsRoute: typeof AppInvestorsRoute
@@ -4767,6 +4825,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppImpactRoute: AppImpactRoute,
   AppInboxRoute: AppInboxRoute,
   AppInspirationsRoute: AppInspirationsRoute,
+  AppInsuranceRoute: AppInsuranceRoute,
   AppIntegrationsRoute: AppIntegrationsRoute,
   AppInternationalRoute: AppInternationalRoute,
   AppInvestorsRoute: AppInvestorsRoute,
@@ -4871,6 +4930,7 @@ interface EventsSlugRouteChildren {
   EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
   EventsSlugCityGuideRoute: typeof EventsSlugCityGuideRoute
+  EventsSlugCivilRoute: typeof EventsSlugCivilRoute
   EventsSlugCocktailRoute: typeof EventsSlugCocktailRoute
   EventsSlugCoffeeBarRoute: typeof EventsSlugCoffeeBarRoute
   EventsSlugComfortRoute: typeof EventsSlugComfortRoute
@@ -4948,6 +5008,7 @@ interface EventsSlugRouteChildren {
   EventsSlugProcessionRoute: typeof EventsSlugProcessionRoute
   EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
   EventsSlugRehearsalRoute: typeof EventsSlugRehearsalRoute
+  EventsSlugReligiousRoute: typeof EventsSlugReligiousRoute
   EventsSlugReplayRoute: typeof EventsSlugReplayRoute
   EventsSlugRingBearerRoute: typeof EventsSlugRingBearerRoute
   EventsSlugRingsRoute: typeof EventsSlugRingsRoute
@@ -5020,6 +5081,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugCheckinRoute: EventsSlugCheckinRoute,
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
   EventsSlugCityGuideRoute: EventsSlugCityGuideRoute,
+  EventsSlugCivilRoute: EventsSlugCivilRoute,
   EventsSlugCocktailRoute: EventsSlugCocktailRoute,
   EventsSlugCoffeeBarRoute: EventsSlugCoffeeBarRoute,
   EventsSlugComfortRoute: EventsSlugComfortRoute,
@@ -5097,6 +5159,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugProcessionRoute: EventsSlugProcessionRoute,
   EventsSlugRegistryRoute: EventsSlugRegistryRoute,
   EventsSlugRehearsalRoute: EventsSlugRehearsalRoute,
+  EventsSlugReligiousRoute: EventsSlugReligiousRoute,
   EventsSlugReplayRoute: EventsSlugReplayRoute,
   EventsSlugRingBearerRoute: EventsSlugRingBearerRoute,
   EventsSlugRingsRoute: EventsSlugRingsRoute,
