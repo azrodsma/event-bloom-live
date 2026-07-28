@@ -41,6 +41,7 @@ import { Route as AppMoodGeneratorRouteImport } from './routes/app.mood-generato
 import { Route as AppMomentsRouteImport } from './routes/app.moments'
 import { Route as AppMessagesRouteImport } from './routes/app.messages'
 import { Route as AppMemoriesMapRouteImport } from './routes/app.memories-map'
+import { Route as AppLoyaltyRouteImport } from './routes/app.loyalty'
 import { Route as AppLeaderboardRouteImport } from './routes/app.leaderboard'
 import { Route as AppJournalRouteImport } from './routes/app.journal'
 import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
@@ -94,6 +95,7 @@ import { Route as EventsSlugPodcastRouteImport } from './routes/events.$slug.pod
 import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.playlist'
 import { Route as EventsSlugPhotoshootRouteImport } from './routes/events.$slug.photoshoot'
 import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.photobooth'
+import { Route as EventsSlugPhotoSpotsRouteImport } from './routes/events.$slug.photo-spots'
 import { Route as EventsSlugPhotoChallengesRouteImport } from './routes/events.$slug.photo-challenges'
 import { Route as EventsSlugPetsRouteImport } from './routes/events.$slug.pets'
 import { Route as EventsSlugNameBadgesRouteImport } from './routes/events.$slug.name-badges'
@@ -311,6 +313,11 @@ const AppMessagesRoute = AppMessagesRouteImport.update({
 const AppMemoriesMapRoute = AppMemoriesMapRouteImport.update({
   id: '/memories-map',
   path: '/memories-map',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLoyaltyRoute = AppLoyaltyRouteImport.update({
+  id: '/loyalty',
+  path: '/loyalty',
   getParentRoute: () => AppRoute,
 } as any)
 const AppLeaderboardRoute = AppLeaderboardRouteImport.update({
@@ -576,6 +583,11 @@ const EventsSlugPhotoshootRoute = EventsSlugPhotoshootRouteImport.update({
 const EventsSlugPhotoboothRoute = EventsSlugPhotoboothRouteImport.update({
   id: '/photobooth',
   path: '/photobooth',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugPhotoSpotsRoute = EventsSlugPhotoSpotsRouteImport.update({
+  id: '/photo-spots',
+  path: '/photo-spots',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugPhotoChallengesRoute =
@@ -899,6 +911,7 @@ export interface FileRoutesByFullPath {
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
+  '/app/loyalty': typeof AppLoyaltyRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
@@ -980,6 +993,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
+  '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/photoshoot': typeof EventsSlugPhotoshootRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
@@ -1043,6 +1057,7 @@ export interface FileRoutesByTo {
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
+  '/app/loyalty': typeof AppLoyaltyRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
@@ -1123,6 +1138,7 @@ export interface FileRoutesByTo {
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
+  '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/photoshoot': typeof EventsSlugPhotoshootRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
@@ -1188,6 +1204,7 @@ export interface FileRoutesById {
   '/app/inspirations': typeof AppInspirationsRoute
   '/app/journal': typeof AppJournalRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
+  '/app/loyalty': typeof AppLoyaltyRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
@@ -1269,6 +1286,7 @@ export interface FileRoutesById {
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
+  '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/photoshoot': typeof EventsSlugPhotoshootRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
@@ -1335,6 +1353,7 @@ export interface FileRouteTypes {
     | '/app/inspirations'
     | '/app/journal'
     | '/app/leaderboard'
+    | '/app/loyalty'
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
@@ -1416,6 +1435,7 @@ export interface FileRouteTypes {
     | '/events/$slug/name-badges'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
+    | '/events/$slug/photo-spots'
     | '/events/$slug/photobooth'
     | '/events/$slug/photoshoot'
     | '/events/$slug/playlist'
@@ -1479,6 +1499,7 @@ export interface FileRouteTypes {
     | '/app/inspirations'
     | '/app/journal'
     | '/app/leaderboard'
+    | '/app/loyalty'
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
@@ -1559,6 +1580,7 @@ export interface FileRouteTypes {
     | '/events/$slug/name-badges'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
+    | '/events/$slug/photo-spots'
     | '/events/$slug/photobooth'
     | '/events/$slug/photoshoot'
     | '/events/$slug/playlist'
@@ -1623,6 +1645,7 @@ export interface FileRouteTypes {
     | '/app/inspirations'
     | '/app/journal'
     | '/app/leaderboard'
+    | '/app/loyalty'
     | '/app/memories-map'
     | '/app/messages'
     | '/app/moments'
@@ -1704,6 +1727,7 @@ export interface FileRouteTypes {
     | '/events/$slug/name-badges'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
+    | '/events/$slug/photo-spots'
     | '/events/$slug/photobooth'
     | '/events/$slug/photoshoot'
     | '/events/$slug/playlist'
@@ -1975,6 +1999,13 @@ declare module '@tanstack/react-router' {
       path: '/memories-map'
       fullPath: '/app/memories-map'
       preLoaderRoute: typeof AppMemoriesMapRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/loyalty': {
+      id: '/app/loyalty'
+      path: '/loyalty'
+      fullPath: '/app/loyalty'
+      preLoaderRoute: typeof AppLoyaltyRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/leaderboard': {
@@ -2346,6 +2377,13 @@ declare module '@tanstack/react-router' {
       path: '/photobooth'
       fullPath: '/events/$slug/photobooth'
       preLoaderRoute: typeof EventsSlugPhotoboothRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/photo-spots': {
+      id: '/events/$slug/photo-spots'
+      path: '/photo-spots'
+      fullPath: '/events/$slug/photo-spots'
+      preLoaderRoute: typeof EventsSlugPhotoSpotsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/photo-challenges': {
@@ -2804,6 +2842,7 @@ interface AppRouteChildren {
   AppInspirationsRoute: typeof AppInspirationsRoute
   AppJournalRoute: typeof AppJournalRoute
   AppLeaderboardRoute: typeof AppLeaderboardRoute
+  AppLoyaltyRoute: typeof AppLoyaltyRoute
   AppMemoriesMapRoute: typeof AppMemoriesMapRoute
   AppMessagesRoute: typeof AppMessagesRouteWithChildren
   AppMomentsRoute: typeof AppMomentsRoute
@@ -2855,6 +2894,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppInspirationsRoute: AppInspirationsRoute,
   AppJournalRoute: AppJournalRoute,
   AppLeaderboardRoute: AppLeaderboardRoute,
+  AppLoyaltyRoute: AppLoyaltyRoute,
   AppMemoriesMapRoute: AppMemoriesMapRoute,
   AppMessagesRoute: AppMessagesRouteWithChildren,
   AppMomentsRoute: AppMomentsRoute,
@@ -2962,6 +3002,7 @@ interface EventsSlugRouteChildren {
   EventsSlugNameBadgesRoute: typeof EventsSlugNameBadgesRoute
   EventsSlugPetsRoute: typeof EventsSlugPetsRoute
   EventsSlugPhotoChallengesRoute: typeof EventsSlugPhotoChallengesRoute
+  EventsSlugPhotoSpotsRoute: typeof EventsSlugPhotoSpotsRoute
   EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
   EventsSlugPhotoshootRoute: typeof EventsSlugPhotoshootRoute
   EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
@@ -3047,6 +3088,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugNameBadgesRoute: EventsSlugNameBadgesRoute,
   EventsSlugPetsRoute: EventsSlugPetsRoute,
   EventsSlugPhotoChallengesRoute: EventsSlugPhotoChallengesRoute,
+  EventsSlugPhotoSpotsRoute: EventsSlugPhotoSpotsRoute,
   EventsSlugPhotoboothRoute: EventsSlugPhotoboothRoute,
   EventsSlugPhotoshootRoute: EventsSlugPhotoshootRoute,
   EventsSlugPlaylistRoute: EventsSlugPlaylistRoute,
