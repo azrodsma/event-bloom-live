@@ -36,6 +36,7 @@ import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppQuestsRouteImport } from './routes/app.quests'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
+import { Route as AppPerformanceRouteImport } from './routes/app.performance'
 import { Route as AppOfficiantsRouteImport } from './routes/app.officiants'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
 import { Route as AppMoodGeneratorRouteImport } from './routes/app.mood-generator'
@@ -292,6 +293,11 @@ const AppProfileRoute = AppProfileRouteImport.update({
 const AppPremiumRoute = AppPremiumRouteImport.update({
   id: '/premium',
   path: '/premium',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPerformanceRoute = AppPerformanceRouteImport.update({
+  id: '/performance',
+  path: '/performance',
   getParentRoute: () => AppRoute,
 } as any)
 const AppOfficiantsRoute = AppOfficiantsRouteImport.update({
@@ -943,6 +949,7 @@ export interface FileRoutesByFullPath {
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/officiants': typeof AppOfficiantsRoute
+  '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
@@ -1093,6 +1100,7 @@ export interface FileRoutesByTo {
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/officiants': typeof AppOfficiantsRoute
+  '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
@@ -1244,6 +1252,7 @@ export interface FileRoutesById {
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/officiants': typeof AppOfficiantsRoute
+  '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
@@ -1397,6 +1406,7 @@ export interface FileRouteTypes {
     | '/app/mood-generator'
     | '/app/notifications'
     | '/app/officiants'
+    | '/app/performance'
     | '/app/premium'
     | '/app/profile'
     | '/app/quests'
@@ -1547,6 +1557,7 @@ export interface FileRouteTypes {
     | '/app/mood-generator'
     | '/app/notifications'
     | '/app/officiants'
+    | '/app/performance'
     | '/app/premium'
     | '/app/profile'
     | '/app/quests'
@@ -1697,6 +1708,7 @@ export interface FileRouteTypes {
     | '/app/mood-generator'
     | '/app/notifications'
     | '/app/officiants'
+    | '/app/performance'
     | '/app/premium'
     | '/app/profile'
     | '/app/quests'
@@ -2013,6 +2025,13 @@ declare module '@tanstack/react-router' {
       path: '/premium'
       fullPath: '/app/premium'
       preLoaderRoute: typeof AppPremiumRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/performance': {
+      id: '/app/performance'
+      path: '/performance'
+      fullPath: '/app/performance'
+      preLoaderRoute: typeof AppPerformanceRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/officiants': {
@@ -2926,6 +2945,7 @@ interface AppRouteChildren {
   AppMoodGeneratorRoute: typeof AppMoodGeneratorRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppOfficiantsRoute: typeof AppOfficiantsRoute
+  AppPerformanceRoute: typeof AppPerformanceRoute
   AppPremiumRoute: typeof AppPremiumRoute
   AppProfileRoute: typeof AppProfileRoute
   AppQuestsRoute: typeof AppQuestsRoute
@@ -2979,6 +2999,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppMoodGeneratorRoute: AppMoodGeneratorRoute,
   AppNotificationsRoute: AppNotificationsRoute,
   AppOfficiantsRoute: AppOfficiantsRoute,
+  AppPerformanceRoute: AppPerformanceRoute,
   AppPremiumRoute: AppPremiumRoute,
   AppProfileRoute: AppProfileRoute,
   AppQuestsRoute: AppQuestsRoute,
