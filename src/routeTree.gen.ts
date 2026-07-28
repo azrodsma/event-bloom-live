@@ -99,6 +99,7 @@ import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
 import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries'
 import { Route as AppAmbassadorsRouteImport } from './routes/app.ambassadors'
 import { Route as AppAiStudioRouteImport } from './routes/app.ai-studio'
+import { Route as AppAiStoryRouteImport } from './routes/app.ai-story'
 import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as AppAccessibilityRouteImport } from './routes/app.accessibility'
@@ -729,6 +730,11 @@ const AppAmbassadorsRoute = AppAmbassadorsRouteImport.update({
 const AppAiStudioRoute = AppAiStudioRouteImport.update({
   id: '/ai-studio',
   path: '/ai-studio',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiStoryRoute = AppAiStoryRouteImport.update({
+  id: '/ai-story',
+  path: '/ai-story',
   getParentRoute: () => AppRoute,
 } as any)
 const AppAgendaRoute = AppAgendaRouteImport.update({
@@ -1654,6 +1660,7 @@ export interface FileRoutesByFullPath {
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
+  '/app/ai-story': typeof AppAiStoryRoute
   '/app/ai-studio': typeof AppAiStudioRoute
   '/app/ambassadors': typeof AppAmbassadorsRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
@@ -1925,6 +1932,7 @@ export interface FileRoutesByTo {
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
+  '/app/ai-story': typeof AppAiStoryRoute
   '/app/ai-studio': typeof AppAiStudioRoute
   '/app/ambassadors': typeof AppAmbassadorsRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
@@ -2197,6 +2205,7 @@ export interface FileRoutesById {
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
+  '/app/ai-story': typeof AppAiStoryRoute
   '/app/ai-studio': typeof AppAiStudioRoute
   '/app/ambassadors': typeof AppAmbassadorsRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
@@ -2471,6 +2480,7 @@ export interface FileRouteTypes {
     | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
+    | '/app/ai-story'
     | '/app/ai-studio'
     | '/app/ambassadors'
     | '/app/anniversaries'
@@ -2742,6 +2752,7 @@ export interface FileRouteTypes {
     | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
+    | '/app/ai-story'
     | '/app/ai-studio'
     | '/app/ambassadors'
     | '/app/anniversaries'
@@ -3013,6 +3024,7 @@ export interface FileRouteTypes {
     | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
+    | '/app/ai-story'
     | '/app/ai-studio'
     | '/app/ambassadors'
     | '/app/anniversaries'
@@ -3915,6 +3927,13 @@ declare module '@tanstack/react-router' {
       path: '/ai-studio'
       fullPath: '/app/ai-studio'
       preLoaderRoute: typeof AppAiStudioRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ai-story': {
+      id: '/app/ai-story'
+      path: '/ai-story'
+      fullPath: '/app/ai-story'
+      preLoaderRoute: typeof AppAiStoryRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/agenda': {
@@ -5210,6 +5229,7 @@ interface AppRouteChildren {
   AppAccessibilityRoute: typeof AppAccessibilityRoute
   AppAchievementsRoute: typeof AppAchievementsRoute
   AppAgendaRoute: typeof AppAgendaRoute
+  AppAiStoryRoute: typeof AppAiStoryRoute
   AppAiStudioRoute: typeof AppAiStudioRoute
   AppAmbassadorsRoute: typeof AppAmbassadorsRoute
   AppAnniversariesRoute: typeof AppAnniversariesRoute
@@ -5302,6 +5322,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAccessibilityRoute: AppAccessibilityRoute,
   AppAchievementsRoute: AppAchievementsRoute,
   AppAgendaRoute: AppAgendaRoute,
+  AppAiStoryRoute: AppAiStoryRoute,
   AppAiStudioRoute: AppAiStudioRoute,
   AppAmbassadorsRoute: AppAmbassadorsRoute,
   AppAnniversariesRoute: AppAnniversariesRoute,
@@ -5774,3 +5795,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
