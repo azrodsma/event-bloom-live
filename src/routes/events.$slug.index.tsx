@@ -95,8 +95,9 @@ function useCountdown(iso: string) {
 }
 
 function EventPage() {
-  const { event } = Route.useLoaderData();
+  const { event, dbId } = Route.useLoaderData();
   const cd = useCountdown(event.date);
+
   return (
     <div className="min-h-screen bg-background pb-16">
       {/* Hero */}
