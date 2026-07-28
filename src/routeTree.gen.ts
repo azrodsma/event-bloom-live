@@ -24,6 +24,7 @@ import { Route as AppWellnessRouteImport } from './routes/app.wellness'
 import { Route as AppWalletRouteImport } from './routes/app.wallet'
 import { Route as AppVenuesRouteImport } from './routes/app.venues'
 import { Route as AppVendorsRouteImport } from './routes/app.vendors'
+import { Route as AppTrendsRouteImport } from './routes/app.trends'
 import { Route as AppTipsRouteImport } from './routes/app.tips'
 import { Route as AppTimeCapsuleRouteImport } from './routes/app.time-capsule'
 import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
@@ -229,6 +230,11 @@ const AppVenuesRoute = AppVenuesRouteImport.update({
 const AppVendorsRoute = AppVendorsRouteImport.update({
   id: '/vendors',
   path: '/vendors',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTrendsRoute = AppTrendsRouteImport.update({
+  id: '/trends',
+  path: '/trends',
   getParentRoute: () => AppRoute,
 } as any)
 const AppTipsRoute = AppTipsRouteImport.update({
@@ -935,6 +941,7 @@ export interface FileRoutesByFullPath {
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
+  '/app/trends': typeof AppTrendsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/wallet': typeof AppWalletRoute
@@ -1082,6 +1089,7 @@ export interface FileRoutesByTo {
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
+  '/app/trends': typeof AppTrendsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/wallet': typeof AppWalletRoute
@@ -1230,6 +1238,7 @@ export interface FileRoutesById {
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
+  '/app/trends': typeof AppTrendsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/wallet': typeof AppWalletRoute
@@ -1380,6 +1389,7 @@ export interface FileRouteTypes {
     | '/app/story-composer'
     | '/app/time-capsule'
     | '/app/tips'
+    | '/app/trends'
     | '/app/vendors'
     | '/app/venues'
     | '/app/wallet'
@@ -1527,6 +1537,7 @@ export interface FileRouteTypes {
     | '/app/story-composer'
     | '/app/time-capsule'
     | '/app/tips'
+    | '/app/trends'
     | '/app/vendors'
     | '/app/venues'
     | '/app/wallet'
@@ -1674,6 +1685,7 @@ export interface FileRouteTypes {
     | '/app/story-composer'
     | '/app/time-capsule'
     | '/app/tips'
+    | '/app/trends'
     | '/app/vendors'
     | '/app/venues'
     | '/app/wallet'
@@ -1892,6 +1904,13 @@ declare module '@tanstack/react-router' {
       path: '/vendors'
       fullPath: '/app/vendors'
       preLoaderRoute: typeof AppVendorsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/trends': {
+      id: '/app/trends'
+      path: '/trends'
+      fullPath: '/app/trends'
+      preLoaderRoute: typeof AppTrendsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/tips': {
@@ -2879,6 +2898,7 @@ interface AppRouteChildren {
   AppStoryComposerRoute: typeof AppStoryComposerRoute
   AppTimeCapsuleRoute: typeof AppTimeCapsuleRoute
   AppTipsRoute: typeof AppTipsRoute
+  AppTrendsRoute: typeof AppTrendsRoute
   AppVendorsRoute: typeof AppVendorsRouteWithChildren
   AppVenuesRoute: typeof AppVenuesRoute
   AppWalletRoute: typeof AppWalletRoute
@@ -2931,6 +2951,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppStoryComposerRoute: AppStoryComposerRoute,
   AppTimeCapsuleRoute: AppTimeCapsuleRoute,
   AppTipsRoute: AppTipsRoute,
+  AppTrendsRoute: AppTrendsRoute,
   AppVendorsRoute: AppVendorsRouteWithChildren,
   AppVenuesRoute: AppVenuesRoute,
   AppWalletRoute: AppWalletRoute,
