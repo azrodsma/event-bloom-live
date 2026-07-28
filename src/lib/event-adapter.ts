@@ -38,6 +38,7 @@ export function adaptEvent(e: DbEvent): MockEvent {
   const days = Math.max(0, Math.ceil((new Date(eventDate).getTime() - Date.now()) / 86400000));
   const [city = e.location ?? ""] = (e.location ?? "").split(",").reverse();
   const platform: "YouTube" | "Twitch" = (e.live_url ?? "").includes("twitch") ? "Twitch" : "YouTube";
+  const embedUrl = e.live_url ? toEmbedUrl(e.live_url) : undefined;
   return {
     id: e.id,
     slug: e.slug,
