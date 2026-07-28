@@ -1,10 +1,11 @@
-import { createFileRoute, Link, useParams } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Share2, Bell, Sparkles, Calendar, MapPin, Heart } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { findEvent } from "@/lib/mock-data";
+import { getEventBySlug } from "@/lib/events.functions";
+import { adaptEvent } from "@/lib/event-adapter";
+import { getEventStats } from "@/lib/stats.functions";
 
 export const Route = createFileRoute("/events/$slug/countdown")({
-  component: Countdown,
   head: () => ({
     meta: [
       { title: "Compte à rebours · Memento Live" },
@@ -15,6 +16,13 @@ export const Route = createFileRoute("/events/$slug/countdown")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
+  loader: async ({ params }) => {
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) throw notFound();
+    const stats = await getEventStats({ data: { eventId: db.id } });
+    return { event: adaptEvent(db), targetIso: db.event_date, stats };
+  },
+  component: Countdown,
 });
 
 type Theme = "rose" | "gold" | "night";
@@ -40,13 +48,6 @@ const themes: Record<Theme, { bg: string; accent: string; text: string; subtext:
   },
 };
 
-function computeTarget() {
-  const t = new Date();
-  t.setDate(t.getDate() + 34);
-  t.setHours(15, 30, 0, 0);
-  return t;
-}
-
 function useCountdown(target: Date) {
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
@@ -62,12 +63,26 @@ function useCountdown(target: Date) {
 }
 
 function Countdown() {
-  const { slug } = useParams({ from: "/events/$slug/countdown" });
-  const event = useMemo(() => findEvent(slug), [slug]);
-  const target = useMemo(computeTarget, []);
+  const { event, targetIso, stats } = Route.useLoaderData();
+  const target = useMemo(() => (targetIso ? new Date(targetIso) : new Date(Date.now() + 86_400_000 * 30)), [targetIso]);
   const { days, hours, minutes, seconds } = useCountdown(target);
   const [theme, setTheme] = useState<Theme>("rose");
   const t = themes[theme];
+
+  const dateLabel = targetIso
+    ? target.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })
+      + " · " + target.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+    : "Date à confirmer";
+
+  const share = async () => {
+    const url = typeof window !== "undefined" ? window.location.origin + "/events/" + event.slug : "";
+    if (navigator.share) {
+      try { await navigator.share({ title: event.title, url }); } catch {}
+    } else {
+      navigator.clipboard?.writeText(url);
+    }
+  };
+
 
   return (
     <div className="fixed inset-0 overflow-hidden" style={{ background: t.bg }}>
@@ -75,17 +90,14 @@ function Countdown() {
         <div className="flex items-center justify-between px-4 py-3">
           <Link
             to="/events/$slug"
-            params={{ slug }}
+            params={{ slug: event.slug }}
             className="grid h-10 w-10 place-items-center rounded-full bg-white/15 backdrop-blur"
             aria-label="Retour"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div className="flex gap-2">
-            <button className="grid h-10 w-10 place-items-center rounded-full bg-white/15 backdrop-blur" aria-label="Notifications">
-              <Bell className="h-4 w-4" />
-            </button>
-            <button className="grid h-10 w-10 place-items-center rounded-full bg-white/15 backdrop-blur" aria-label="Partager">
+            <button onClick={share} className="grid h-10 w-10 place-items-center rounded-full bg-white/15 backdrop-blur" aria-label="Partager">
               <Share2 className="h-4 w-4" />
             </button>
           </div>
@@ -96,16 +108,20 @@ function Countdown() {
             <Sparkles className="h-3 w-3" /> Save the date
           </div>
           <h1 className="mt-4 font-serif text-4xl leading-tight">
-            {event?.title ?? "Sarah & Thomas"}
+            {event.title}
           </h1>
           <div className={`mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs ${t.subtext}`}>
-            <span className="inline-flex items-center gap-1">
-              <Calendar className="h-3 w-3" /> Samedi 14 juin 2026 · 15 h 30
+            <span className="inline-flex items-center gap-1 capitalize">
+              <Calendar className="h-3 w-3" /> {dateLabel}
             </span>
-            <span className="hidden sm:inline">·</span>
-            <span className="inline-flex items-center gap-1">
-              <MapPin className="h-3 w-3" /> {event?.venue ?? "Château de Villette"}
-            </span>
+            {event.venue && (
+              <>
+                <span className="hidden sm:inline">·</span>
+                <span className="inline-flex items-center gap-1">
+                  <MapPin className="h-3 w-3" /> {event.venue}
+                </span>
+              </>
+            )}
           </div>
 
           <div className="mt-10 grid grid-cols-4 gap-2 sm:gap-4">
@@ -122,13 +138,13 @@ function Countdown() {
             ))}
           </div>
 
-          <p className={`mt-8 max-w-xs text-sm italic ${t.subtext}`}>
-            « Le bonheur n'est réel que lorsqu'il est partagé. »
-          </p>
+          {event.description && (
+            <p className={`mt-8 max-w-xs text-sm italic ${t.subtext}`}>« {event.description} »</p>
+          )}
 
           <div className="mt-8 flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-semibold backdrop-blur">
-              <Heart className="h-3 w-3" style={{ color: t.accent }} /> 68 invités confirmés
+              <Heart className="h-3 w-3" style={{ color: t.accent }} /> {stats.guestsConfirmed} invités confirmés
             </span>
           </div>
         </div>
