@@ -33,6 +33,7 @@ import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSecurityRouteImport } from './routes/app.security'
 import { Route as AppSavedRouteImport } from './routes/app.saved'
+import { Route as AppRewardsRouteImport } from './routes/app.rewards'
 import { Route as AppRemindersRouteImport } from './routes/app.reminders'
 import { Route as AppReferralsRouteImport } from './routes/app.referrals'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
@@ -144,6 +145,7 @@ import { Route as EventsSlugLiveAnalyticsRouteImport } from './routes/events.$sl
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugLightPlanRouteImport } from './routes/events.$slug.light-plan'
 import { Route as EventsSlugLeftoversRouteImport } from './routes/events.$slug.leftovers'
+import { Route as EventsSlugKidsCornerRouteImport } from './routes/events.$slug.kids-corner'
 import { Route as EventsSlugKidsRouteImport } from './routes/events.$slug.kids'
 import { Route as EventsSlugKeysRouteImport } from './routes/events.$slug.keys'
 import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invite'
@@ -189,6 +191,7 @@ import { Route as EventsSlugCakeRouteImport } from './routes/events.$slug.cake'
 import { Route as EventsSlugBudgetRouteImport } from './routes/events.$slug.budget'
 import { Route as EventsSlugBrunchRouteImport } from './routes/events.$slug.brunch'
 import { Route as EventsSlugBroadcastRouteImport } from './routes/events.$slug.broadcast'
+import { Route as EventsSlugBouquetRouteImport } from './routes/events.$slug.bouquet'
 import { Route as EventsSlugBarRouteImport } from './routes/events.$slug.bar'
 import { Route as EventsSlugBackupPlanRouteImport } from './routes/events.$slug.backup-plan'
 import { Route as EventsSlugAuctionRouteImport } from './routes/events.$slug.auction'
@@ -325,6 +328,11 @@ const AppSecurityRoute = AppSecurityRouteImport.update({
 const AppSavedRoute = AppSavedRouteImport.update({
   id: '/saved',
   path: '/saved',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRewardsRoute = AppRewardsRouteImport.update({
+  id: '/rewards',
+  path: '/rewards',
   getParentRoute: () => AppRoute,
 } as any)
 const AppRemindersRoute = AppRemindersRouteImport.update({
@@ -885,6 +893,11 @@ const EventsSlugLeftoversRoute = EventsSlugLeftoversRouteImport.update({
   path: '/leftovers',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugKidsCornerRoute = EventsSlugKidsCornerRouteImport.update({
+  id: '/kids-corner',
+  path: '/kids-corner',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugKidsRoute = EventsSlugKidsRouteImport.update({
   id: '/kids',
   path: '/kids',
@@ -1111,6 +1124,11 @@ const EventsSlugBroadcastRoute = EventsSlugBroadcastRouteImport.update({
   path: '/broadcast',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugBouquetRoute = EventsSlugBouquetRouteImport.update({
+  id: '/bouquet',
+  path: '/bouquet',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugBarRoute = EventsSlugBarRouteImport.update({
   id: '/bar',
   path: '/bar',
@@ -1251,6 +1269,7 @@ export interface FileRoutesByFullPath {
   '/app/referral': typeof AppReferralRoute
   '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
+  '/app/rewards': typeof AppRewardsRoute
   '/app/saved': typeof AppSavedRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1283,6 +1302,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
+  '/events/$slug/bouquet': typeof EventsSlugBouquetRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
@@ -1328,6 +1348,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/keys': typeof EventsSlugKeysRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
+  '/events/$slug/kids-corner': typeof EventsSlugKidsCornerRoute
   '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -1449,6 +1470,7 @@ export interface FileRoutesByTo {
   '/app/referral': typeof AppReferralRoute
   '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
+  '/app/rewards': typeof AppRewardsRoute
   '/app/saved': typeof AppSavedRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1480,6 +1502,7 @@ export interface FileRoutesByTo {
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
+  '/events/$slug/bouquet': typeof EventsSlugBouquetRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
@@ -1525,6 +1548,7 @@ export interface FileRoutesByTo {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/keys': typeof EventsSlugKeysRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
+  '/events/$slug/kids-corner': typeof EventsSlugKidsCornerRoute
   '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -1648,6 +1672,7 @@ export interface FileRoutesById {
   '/app/referral': typeof AppReferralRoute
   '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
+  '/app/rewards': typeof AppRewardsRoute
   '/app/saved': typeof AppSavedRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1680,6 +1705,7 @@ export interface FileRoutesById {
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
+  '/events/$slug/bouquet': typeof EventsSlugBouquetRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
   '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
@@ -1725,6 +1751,7 @@ export interface FileRoutesById {
   '/events/$slug/invite': typeof EventsSlugInviteRoute
   '/events/$slug/keys': typeof EventsSlugKeysRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
+  '/events/$slug/kids-corner': typeof EventsSlugKidsCornerRoute
   '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -1849,6 +1876,7 @@ export interface FileRouteTypes {
     | '/app/referral'
     | '/app/referrals'
     | '/app/reminders'
+    | '/app/rewards'
     | '/app/saved'
     | '/app/security'
     | '/app/settings'
@@ -1881,6 +1909,7 @@ export interface FileRouteTypes {
     | '/events/$slug/auction'
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
+    | '/events/$slug/bouquet'
     | '/events/$slug/broadcast'
     | '/events/$slug/brunch'
     | '/events/$slug/budget'
@@ -1926,6 +1955,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/keys'
     | '/events/$slug/kids'
+    | '/events/$slug/kids-corner'
     | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
@@ -2047,6 +2077,7 @@ export interface FileRouteTypes {
     | '/app/referral'
     | '/app/referrals'
     | '/app/reminders'
+    | '/app/rewards'
     | '/app/saved'
     | '/app/security'
     | '/app/settings'
@@ -2078,6 +2109,7 @@ export interface FileRouteTypes {
     | '/events/$slug/auction'
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
+    | '/events/$slug/bouquet'
     | '/events/$slug/broadcast'
     | '/events/$slug/brunch'
     | '/events/$slug/budget'
@@ -2123,6 +2155,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/keys'
     | '/events/$slug/kids'
+    | '/events/$slug/kids-corner'
     | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
@@ -2245,6 +2278,7 @@ export interface FileRouteTypes {
     | '/app/referral'
     | '/app/referrals'
     | '/app/reminders'
+    | '/app/rewards'
     | '/app/saved'
     | '/app/security'
     | '/app/settings'
@@ -2277,6 +2311,7 @@ export interface FileRouteTypes {
     | '/events/$slug/auction'
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
+    | '/events/$slug/bouquet'
     | '/events/$slug/broadcast'
     | '/events/$slug/brunch'
     | '/events/$slug/budget'
@@ -2322,6 +2357,7 @@ export interface FileRouteTypes {
     | '/events/$slug/invite'
     | '/events/$slug/keys'
     | '/events/$slug/kids'
+    | '/events/$slug/kids-corner'
     | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
@@ -2570,6 +2606,13 @@ declare module '@tanstack/react-router' {
       path: '/saved'
       fullPath: '/app/saved'
       preLoaderRoute: typeof AppSavedRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/rewards': {
+      id: '/app/rewards'
+      path: '/rewards'
+      fullPath: '/app/rewards'
+      preLoaderRoute: typeof AppRewardsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/reminders': {
@@ -3349,6 +3392,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugLeftoversRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/kids-corner': {
+      id: '/events/$slug/kids-corner'
+      path: '/kids-corner'
+      fullPath: '/events/$slug/kids-corner'
+      preLoaderRoute: typeof EventsSlugKidsCornerRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/kids': {
       id: '/events/$slug/kids'
       path: '/kids'
@@ -3664,6 +3714,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugBroadcastRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/bouquet': {
+      id: '/events/$slug/bouquet'
+      path: '/bouquet'
+      fullPath: '/events/$slug/bouquet'
+      preLoaderRoute: typeof EventsSlugBouquetRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/bar': {
       id: '/events/$slug/bar'
       path: '/bar'
@@ -3858,6 +3915,7 @@ interface AppRouteChildren {
   AppReferralRoute: typeof AppReferralRoute
   AppReferralsRoute: typeof AppReferralsRoute
   AppRemindersRoute: typeof AppRemindersRoute
+  AppRewardsRoute: typeof AppRewardsRoute
   AppSavedRoute: typeof AppSavedRoute
   AppSecurityRoute: typeof AppSecurityRoute
   AppSettingsRoute: typeof AppSettingsRoute
@@ -3926,6 +3984,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppReferralRoute: AppReferralRoute,
   AppReferralsRoute: AppReferralsRoute,
   AppRemindersRoute: AppRemindersRoute,
+  AppRewardsRoute: AppRewardsRoute,
   AppSavedRoute: AppSavedRoute,
   AppSecurityRoute: AppSecurityRoute,
   AppSettingsRoute: AppSettingsRoute,
@@ -3984,6 +4043,7 @@ interface EventsSlugRouteChildren {
   EventsSlugAuctionRoute: typeof EventsSlugAuctionRoute
   EventsSlugBackupPlanRoute: typeof EventsSlugBackupPlanRoute
   EventsSlugBarRoute: typeof EventsSlugBarRoute
+  EventsSlugBouquetRoute: typeof EventsSlugBouquetRoute
   EventsSlugBroadcastRoute: typeof EventsSlugBroadcastRoute
   EventsSlugBrunchRoute: typeof EventsSlugBrunchRoute
   EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
@@ -4029,6 +4089,7 @@ interface EventsSlugRouteChildren {
   EventsSlugInviteRoute: typeof EventsSlugInviteRoute
   EventsSlugKeysRoute: typeof EventsSlugKeysRoute
   EventsSlugKidsRoute: typeof EventsSlugKidsRoute
+  EventsSlugKidsCornerRoute: typeof EventsSlugKidsCornerRoute
   EventsSlugLeftoversRoute: typeof EventsSlugLeftoversRoute
   EventsSlugLightPlanRoute: typeof EventsSlugLightPlanRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRouteWithChildren
@@ -4106,6 +4167,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugAuctionRoute: EventsSlugAuctionRoute,
   EventsSlugBackupPlanRoute: EventsSlugBackupPlanRoute,
   EventsSlugBarRoute: EventsSlugBarRoute,
+  EventsSlugBouquetRoute: EventsSlugBouquetRoute,
   EventsSlugBroadcastRoute: EventsSlugBroadcastRoute,
   EventsSlugBrunchRoute: EventsSlugBrunchRoute,
   EventsSlugBudgetRoute: EventsSlugBudgetRoute,
@@ -4151,6 +4213,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugInviteRoute: EventsSlugInviteRoute,
   EventsSlugKeysRoute: EventsSlugKeysRoute,
   EventsSlugKidsRoute: EventsSlugKidsRoute,
+  EventsSlugKidsCornerRoute: EventsSlugKidsCornerRoute,
   EventsSlugLeftoversRoute: EventsSlugLeftoversRoute,
   EventsSlugLightPlanRoute: EventsSlugLightPlanRoute,
   EventsSlugLiveRoute: EventsSlugLiveRouteWithChildren,
