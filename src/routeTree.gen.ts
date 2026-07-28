@@ -36,6 +36,7 @@ import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppQuestsRouteImport } from './routes/app.quests'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
+import { Route as AppPerformanceRouteImport } from './routes/app.performance'
 import { Route as AppOfficiantsRouteImport } from './routes/app.officiants'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
 import { Route as AppMoodGeneratorRouteImport } from './routes/app.mood-generator'
@@ -82,6 +83,7 @@ import { Route as EventsSlugSurprisesRouteImport } from './routes/events.$slug.s
 import { Route as EventsSlugSpeechesRouteImport } from './routes/events.$slug.speeches'
 import { Route as EventsSlugSpeechBuilderRouteImport } from './routes/events.$slug.speech-builder'
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
+import { Route as EventsSlugSongDedicationsRouteImport } from './routes/events.$slug.song-dedications'
 import { Route as EventsSlugShuttleRouteImport } from './routes/events.$slug.shuttle'
 import { Route as EventsSlugSecurityRouteImport } from './routes/events.$slug.security'
 import { Route as EventsSlugSeatingRouteImport } from './routes/events.$slug.seating'
@@ -148,6 +150,7 @@ import { Route as EventsSlugArchiveRouteImport } from './routes/events.$slug.arc
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
 import { Route as EventsSlugAiPortraitsRouteImport } from './routes/events.$slug.ai-portraits'
 import { Route as EventsSlugAfterpartyRouteImport } from './routes/events.$slug.afterparty'
+import { Route as EventsSlugAfterPartyRouteImport } from './routes/events.$slug.after-party'
 import { Route as EventsSlugActivityRouteImport } from './routes/events.$slug.activity'
 import { Route as AppVendorsIdRouteImport } from './routes/app.vendors.$id'
 import { Route as AppUsersIdRouteImport } from './routes/app.users.$id'
@@ -290,6 +293,11 @@ const AppProfileRoute = AppProfileRouteImport.update({
 const AppPremiumRoute = AppPremiumRouteImport.update({
   id: '/premium',
   path: '/premium',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPerformanceRoute = AppPerformanceRouteImport.update({
+  id: '/performance',
+  path: '/performance',
   getParentRoute: () => AppRoute,
 } as any)
 const AppOfficiantsRoute = AppOfficiantsRouteImport.update({
@@ -522,6 +530,12 @@ const EventsSlugSouvenirRoute = EventsSlugSouvenirRouteImport.update({
   path: '/souvenir',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugSongDedicationsRoute =
+  EventsSlugSongDedicationsRouteImport.update({
+    id: '/song-dedications',
+    path: '/song-dedications',
+    getParentRoute: () => EventsSlugRoute,
+  } as any)
 const EventsSlugShuttleRoute = EventsSlugShuttleRouteImport.update({
   id: '/shuttle',
   path: '/shuttle',
@@ -853,6 +867,11 @@ const EventsSlugAfterpartyRoute = EventsSlugAfterpartyRouteImport.update({
   path: '/afterparty',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugAfterPartyRoute = EventsSlugAfterPartyRouteImport.update({
+  id: '/after-party',
+  path: '/after-party',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugActivityRoute = EventsSlugActivityRouteImport.update({
   id: '/activity',
   path: '/activity',
@@ -930,6 +949,7 @@ export interface FileRoutesByFullPath {
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/officiants': typeof AppOfficiantsRoute
+  '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
@@ -956,6 +976,7 @@ export interface FileRoutesByFullPath {
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
+  '/events/$slug/after-party': typeof EventsSlugAfterPartyRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
@@ -1022,6 +1043,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
+  '/events/$slug/song-dedications': typeof EventsSlugSongDedicationsRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
@@ -1078,6 +1100,7 @@ export interface FileRoutesByTo {
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/officiants': typeof AppOfficiantsRoute
+  '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
@@ -1103,6 +1126,7 @@ export interface FileRoutesByTo {
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
+  '/events/$slug/after-party': typeof EventsSlugAfterPartyRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
@@ -1169,6 +1193,7 @@ export interface FileRoutesByTo {
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
+  '/events/$slug/song-dedications': typeof EventsSlugSongDedicationsRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
@@ -1227,6 +1252,7 @@ export interface FileRoutesById {
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/officiants': typeof AppOfficiantsRoute
+  '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
@@ -1253,6 +1279,7 @@ export interface FileRoutesById {
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
+  '/events/$slug/after-party': typeof EventsSlugAfterPartyRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
@@ -1319,6 +1346,7 @@ export interface FileRoutesById {
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/security': typeof EventsSlugSecurityRoute
   '/events/$slug/shuttle': typeof EventsSlugShuttleRoute
+  '/events/$slug/song-dedications': typeof EventsSlugSongDedicationsRoute
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
@@ -1378,6 +1406,7 @@ export interface FileRouteTypes {
     | '/app/mood-generator'
     | '/app/notifications'
     | '/app/officiants'
+    | '/app/performance'
     | '/app/premium'
     | '/app/profile'
     | '/app/quests'
@@ -1404,6 +1433,7 @@ export interface FileRouteTypes {
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/activity'
+    | '/events/$slug/after-party'
     | '/events/$slug/afterparty'
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
@@ -1470,6 +1500,7 @@ export interface FileRouteTypes {
     | '/events/$slug/seating'
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
+    | '/events/$slug/song-dedications'
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
@@ -1526,6 +1557,7 @@ export interface FileRouteTypes {
     | '/app/mood-generator'
     | '/app/notifications'
     | '/app/officiants'
+    | '/app/performance'
     | '/app/premium'
     | '/app/profile'
     | '/app/quests'
@@ -1551,6 +1583,7 @@ export interface FileRouteTypes {
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/activity'
+    | '/events/$slug/after-party'
     | '/events/$slug/afterparty'
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
@@ -1617,6 +1650,7 @@ export interface FileRouteTypes {
     | '/events/$slug/seating'
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
+    | '/events/$slug/song-dedications'
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
@@ -1674,6 +1708,7 @@ export interface FileRouteTypes {
     | '/app/mood-generator'
     | '/app/notifications'
     | '/app/officiants'
+    | '/app/performance'
     | '/app/premium'
     | '/app/profile'
     | '/app/quests'
@@ -1700,6 +1735,7 @@ export interface FileRouteTypes {
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/activity'
+    | '/events/$slug/after-party'
     | '/events/$slug/afterparty'
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
@@ -1766,6 +1802,7 @@ export interface FileRouteTypes {
     | '/events/$slug/seating'
     | '/events/$slug/security'
     | '/events/$slug/shuttle'
+    | '/events/$slug/song-dedications'
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
@@ -1988,6 +2025,13 @@ declare module '@tanstack/react-router' {
       path: '/premium'
       fullPath: '/app/premium'
       preLoaderRoute: typeof AppPremiumRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/performance': {
+      id: '/app/performance'
+      path: '/performance'
+      fullPath: '/app/performance'
+      preLoaderRoute: typeof AppPerformanceRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/officiants': {
@@ -2310,6 +2354,13 @@ declare module '@tanstack/react-router' {
       path: '/souvenir'
       fullPath: '/events/$slug/souvenir'
       preLoaderRoute: typeof EventsSlugSouvenirRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/song-dedications': {
+      id: '/events/$slug/song-dedications'
+      path: '/song-dedications'
+      fullPath: '/events/$slug/song-dedications'
+      preLoaderRoute: typeof EventsSlugSongDedicationsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/shuttle': {
@@ -2774,6 +2825,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugAfterpartyRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/after-party': {
+      id: '/events/$slug/after-party'
+      path: '/after-party'
+      fullPath: '/events/$slug/after-party'
+      preLoaderRoute: typeof EventsSlugAfterPartyRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/activity': {
       id: '/events/$slug/activity'
       path: '/activity'
@@ -2887,6 +2945,7 @@ interface AppRouteChildren {
   AppMoodGeneratorRoute: typeof AppMoodGeneratorRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppOfficiantsRoute: typeof AppOfficiantsRoute
+  AppPerformanceRoute: typeof AppPerformanceRoute
   AppPremiumRoute: typeof AppPremiumRoute
   AppProfileRoute: typeof AppProfileRoute
   AppQuestsRoute: typeof AppQuestsRoute
@@ -2940,6 +2999,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppMoodGeneratorRoute: AppMoodGeneratorRoute,
   AppNotificationsRoute: AppNotificationsRoute,
   AppOfficiantsRoute: AppOfficiantsRoute,
+  AppPerformanceRoute: AppPerformanceRoute,
   AppPremiumRoute: AppPremiumRoute,
   AppProfileRoute: AppProfileRoute,
   AppQuestsRoute: AppQuestsRoute,
@@ -2992,6 +3052,7 @@ const EventsSlugLiveRouteWithChildren = EventsSlugLiveRoute._addFileChildren(
 
 interface EventsSlugRouteChildren {
   EventsSlugActivityRoute: typeof EventsSlugActivityRoute
+  EventsSlugAfterPartyRoute: typeof EventsSlugAfterPartyRoute
   EventsSlugAfterpartyRoute: typeof EventsSlugAfterpartyRoute
   EventsSlugAiPortraitsRoute: typeof EventsSlugAiPortraitsRoute
   EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
@@ -3058,6 +3119,7 @@ interface EventsSlugRouteChildren {
   EventsSlugSeatingRoute: typeof EventsSlugSeatingRoute
   EventsSlugSecurityRoute: typeof EventsSlugSecurityRoute
   EventsSlugShuttleRoute: typeof EventsSlugShuttleRoute
+  EventsSlugSongDedicationsRoute: typeof EventsSlugSongDedicationsRoute
   EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
   EventsSlugSpeechBuilderRoute: typeof EventsSlugSpeechBuilderRoute
   EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
@@ -3079,6 +3141,7 @@ interface EventsSlugRouteChildren {
 
 const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugActivityRoute: EventsSlugActivityRoute,
+  EventsSlugAfterPartyRoute: EventsSlugAfterPartyRoute,
   EventsSlugAfterpartyRoute: EventsSlugAfterpartyRoute,
   EventsSlugAiPortraitsRoute: EventsSlugAiPortraitsRoute,
   EventsSlugAlbumRoute: EventsSlugAlbumRoute,
@@ -3145,6 +3208,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugSeatingRoute: EventsSlugSeatingRoute,
   EventsSlugSecurityRoute: EventsSlugSecurityRoute,
   EventsSlugShuttleRoute: EventsSlugShuttleRoute,
+  EventsSlugSongDedicationsRoute: EventsSlugSongDedicationsRoute,
   EventsSlugSouvenirRoute: EventsSlugSouvenirRoute,
   EventsSlugSpeechBuilderRoute: EventsSlugSpeechBuilderRoute,
   EventsSlugSpeechesRoute: EventsSlugSpeechesRoute,
