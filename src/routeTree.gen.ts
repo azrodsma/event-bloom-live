@@ -93,6 +93,7 @@ import { Route as AppAiStudioRouteImport } from './routes/app.ai-studio'
 import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as AppAccessibilityRouteImport } from './routes/app.accessibility'
+import { Route as AppAcademyRouteImport } from './routes/app.academy'
 import { Route as EventsSlugIndexRouteImport } from './routes/events.$slug.index'
 import { Route as EventsSlugWitnessesRouteImport } from './routes/events.$slug.witnesses'
 import { Route as EventsSlugWinePairingsRouteImport } from './routes/events.$slug.wine-pairings'
@@ -197,6 +198,7 @@ import { Route as EventsSlugEntranceRouteImport } from './routes/events.$slug.en
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugEcoRouteImport } from './routes/events.$slug.eco'
 import { Route as EventsSlugDresscodeRouteImport } from './routes/events.$slug.dresscode'
+import { Route as EventsSlugDressCodeRouteImport } from './routes/events.$slug.dress-code'
 import { Route as EventsSlugDjRequestsRouteImport } from './routes/events.$slug.dj-requests'
 import { Route as EventsSlugDisposableCamsRouteImport } from './routes/events.$slug.disposable-cams'
 import { Route as EventsSlugDisplayRouteImport } from './routes/events.$slug.display'
@@ -660,6 +662,11 @@ const AppAchievementsRoute = AppAchievementsRouteImport.update({
 const AppAccessibilityRoute = AppAccessibilityRouteImport.update({
   id: '/accessibility',
   path: '/accessibility',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAcademyRoute = AppAcademyRouteImport.update({
+  id: '/academy',
+  path: '/academy',
   getParentRoute: () => AppRoute,
 } as any)
 const EventsSlugIndexRoute = EventsSlugIndexRouteImport.update({
@@ -1184,6 +1191,11 @@ const EventsSlugDresscodeRoute = EventsSlugDresscodeRouteImport.update({
   path: '/dresscode',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugDressCodeRoute = EventsSlugDressCodeRouteImport.update({
+  id: '/dress-code',
+  path: '/dress-code',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugDjRequestsRoute = EventsSlugDjRequestsRouteImport.update({
   id: '/dj-requests',
   path: '/dj-requests',
@@ -1410,6 +1422,7 @@ export interface FileRoutesByFullPath {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/academy': typeof AppAcademyRoute
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
@@ -1528,6 +1541,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/disposable-cams': typeof EventsSlugDisposableCamsRoute
   '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
+  '/events/$slug/dress-code': typeof EventsSlugDressCodeRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
@@ -1642,6 +1656,7 @@ export interface FileRoutesByTo {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/academy': typeof AppAcademyRoute
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
@@ -1759,6 +1774,7 @@ export interface FileRoutesByTo {
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/disposable-cams': typeof EventsSlugDisposableCamsRoute
   '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
+  '/events/$slug/dress-code': typeof EventsSlugDressCodeRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
@@ -1875,6 +1891,7 @@ export interface FileRoutesById {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/academy': typeof AppAcademyRoute
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
@@ -1993,6 +2010,7 @@ export interface FileRoutesById {
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/disposable-cams': typeof EventsSlugDisposableCamsRoute
   '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
+  '/events/$slug/dress-code': typeof EventsSlugDressCodeRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
@@ -2110,6 +2128,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/app/academy'
     | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
@@ -2228,6 +2247,7 @@ export interface FileRouteTypes {
     | '/events/$slug/display'
     | '/events/$slug/disposable-cams'
     | '/events/$slug/dj-requests'
+    | '/events/$slug/dress-code'
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
@@ -2342,6 +2362,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/app/academy'
     | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
@@ -2459,6 +2480,7 @@ export interface FileRouteTypes {
     | '/events/$slug/display'
     | '/events/$slug/disposable-cams'
     | '/events/$slug/dj-requests'
+    | '/events/$slug/dress-code'
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
@@ -2574,6 +2596,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/app/academy'
     | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
@@ -2692,6 +2715,7 @@ export interface FileRouteTypes {
     | '/events/$slug/display'
     | '/events/$slug/disposable-cams'
     | '/events/$slug/dj-requests'
+    | '/events/$slug/dress-code'
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
     | '/events/$slug/edit'
@@ -3400,6 +3424,13 @@ declare module '@tanstack/react-router' {
       path: '/accessibility'
       fullPath: '/app/accessibility'
       preLoaderRoute: typeof AppAccessibilityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/academy': {
+      id: '/app/academy'
+      path: '/academy'
+      fullPath: '/app/academy'
+      preLoaderRoute: typeof AppAcademyRouteImport
       parentRoute: typeof AppRoute
     }
     '/events/$slug/': {
@@ -4130,6 +4161,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugDresscodeRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/dress-code': {
+      id: '/events/$slug/dress-code'
+      path: '/dress-code'
+      fullPath: '/events/$slug/dress-code'
+      preLoaderRoute: typeof EventsSlugDressCodeRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/dj-requests': {
       id: '/events/$slug/dj-requests'
       path: '/dj-requests'
@@ -4459,6 +4497,7 @@ const AppVendorsRouteWithChildren = AppVendorsRoute._addFileChildren(
 )
 
 interface AppRouteChildren {
+  AppAcademyRoute: typeof AppAcademyRoute
   AppAccessibilityRoute: typeof AppAccessibilityRoute
   AppAchievementsRoute: typeof AppAchievementsRoute
   AppAgendaRoute: typeof AppAgendaRoute
@@ -4540,6 +4579,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAcademyRoute: AppAcademyRoute,
   AppAccessibilityRoute: AppAccessibilityRoute,
   AppAchievementsRoute: AppAchievementsRoute,
   AppAgendaRoute: AppAgendaRoute,
@@ -4684,6 +4724,7 @@ interface EventsSlugRouteChildren {
   EventsSlugDisplayRoute: typeof EventsSlugDisplayRoute
   EventsSlugDisposableCamsRoute: typeof EventsSlugDisposableCamsRoute
   EventsSlugDjRequestsRoute: typeof EventsSlugDjRequestsRoute
+  EventsSlugDressCodeRoute: typeof EventsSlugDressCodeRoute
   EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
   EventsSlugEcoRoute: typeof EventsSlugEcoRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
@@ -4827,6 +4868,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugDisplayRoute: EventsSlugDisplayRoute,
   EventsSlugDisposableCamsRoute: EventsSlugDisposableCamsRoute,
   EventsSlugDjRequestsRoute: EventsSlugDjRequestsRoute,
+  EventsSlugDressCodeRoute: EventsSlugDressCodeRoute,
   EventsSlugDresscodeRoute: EventsSlugDresscodeRoute,
   EventsSlugEcoRoute: EventsSlugEcoRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
