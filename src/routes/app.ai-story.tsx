@@ -1,10 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Sparkles, Wand2, Loader2, Copy, Check } from "lucide-react";
+import { ArrowLeft, Sparkles, Wand2, Loader2, Copy, Check, Upload, X, Image as ImageIcon, Film } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { composeStory } from "@/lib/story.functions";
+
+type MediaItem = {
+  id: string;
+  file: File;
+  kind: "image" | "video";
+  url: string;
+  duration?: number;
+  caption: string;
+};
+
+const fmtSize = (b: number) => (b < 1024 * 1024 ? `${Math.round(b / 1024)} Ko` : `${(b / 1024 / 1024).toFixed(1)} Mo`);
+const fmtDur = (s?: number) => (s ? `${Math.round(s)}s` : "");
 
 export const Route = createFileRoute("/app/ai-story")({
   component: AIStory,
@@ -37,13 +49,66 @@ function AIStory() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [media, setMedia] = useState<MediaItem[]>([]);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => () => { media.forEach((m) => URL.revokeObjectURL(m.url)); }, [media]);
+
+  const mediaDescriptor = (list: MediaItem[]) =>
+    list.length
+      ? "\n\nMédias fournis (" + list.length + ") :\n" +
+        list.map((m, i) => `#${i + 1} ${m.kind === "image" ? "photo" : "clip " + fmtDur(m.duration)} — ${m.file.name}${m.caption ? " · " + m.caption : ""}`).join("\n")
+      : "";
+
+  const promptForModel = () => moments + mediaDescriptor(media);
+
+  const addFiles = async (files: FileList | null) => {
+    if (!files) return;
+    const next: MediaItem[] = [];
+    for (const file of Array.from(files)) {
+      const isImg = file.type.startsWith("image/");
+      const isVid = file.type.startsWith("video/");
+      if (!isImg && !isVid) continue;
+      const url = URL.createObjectURL(file);
+      const item: MediaItem = {
+        id: crypto.randomUUID(),
+        file,
+        kind: isImg ? "image" : "video",
+        url,
+        caption: "",
+      };
+      if (isVid) {
+        item.duration = await new Promise<number | undefined>((resolve) => {
+          const v = document.createElement("video");
+          v.preload = "metadata";
+          v.onloadedmetadata = () => resolve(isFinite(v.duration) ? v.duration : undefined);
+          v.onerror = () => resolve(undefined);
+          v.src = url;
+        });
+      }
+      next.push(item);
+    }
+    setMedia((m) => [...m, ...next]);
+    if (fileRef.current) fileRef.current.value = "";
+  };
+
+  const removeMedia = (id: string) => {
+    setMedia((m) => {
+      const item = m.find((x) => x.id === id);
+      if (item) URL.revokeObjectURL(item.url);
+      return m.filter((x) => x.id !== id);
+    });
+  };
+
+  const updateCaption = (id: string, caption: string) =>
+    setMedia((m) => m.map((x) => (x.id === id ? { ...x, caption } : x)));
 
   const onGenerate = async () => {
     setLoading(true);
     setError(null);
     setResult(null);
     try {
-      const r = await compose({ data: { eventType, eventName, tone, moments, language: "fr" } });
+      const r = await compose({ data: { eventType, eventName, tone, moments: promptForModel(), language: "fr" } });
       setResult(r.markdown);
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Erreur inconnue";
@@ -132,6 +197,72 @@ function AIStory() {
               className="mt-2 w-full rounded-xl border border-border/50 bg-background px-4 py-3 text-sm resize-y font-mono leading-relaxed"
             />
             <p className="mt-1 text-[10px] text-muted-foreground">{moments.length} / 4000 caractères</p>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between">
+              <label className="text-xs uppercase tracking-wider text-muted-foreground">Photos & clips</label>
+              <span className="text-[10px] text-muted-foreground">{media.length} fichier{media.length > 1 ? "s" : ""}</span>
+            </div>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/*,video/*"
+              multiple
+              className="hidden"
+              onChange={(e) => addFiles(e.target.files)}
+            />
+            <button
+              type="button"
+              onClick={() => fileRef.current?.click()}
+              className="mt-2 w-full rounded-xl border-2 border-dashed border-border bg-cream/50 px-4 py-6 flex flex-col items-center gap-1.5 text-sm text-muted-foreground hover:border-primary hover:bg-primary/5 transition"
+            >
+              <Upload className="h-5 w-5 text-primary" />
+              <span className="font-medium text-foreground">Importer photos & clips</span>
+              <span className="text-[11px]">JPG, PNG, HEIC, MP4, MOV — jusqu'à 20 Mo / fichier</span>
+            </button>
+
+            {media.length > 0 && (
+              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {media.map((m, i) => (
+                  <div key={m.id} className="rounded-xl border border-border/50 bg-background overflow-hidden">
+                    <div className="relative aspect-video bg-foreground/5">
+                      {m.kind === "image" ? (
+                        <img src={m.url} alt="" className="h-full w-full object-cover" />
+                      ) : (
+                        <video src={m.url} className="h-full w-full object-cover" muted playsInline />
+                      )}
+                      <span className="absolute top-1.5 left-1.5 rounded-full bg-black/60 text-white text-[10px] px-1.5 py-0.5 flex items-center gap-1">
+                        {m.kind === "image" ? <ImageIcon className="h-2.5 w-2.5" /> : <Film className="h-2.5 w-2.5" />}
+                        #{i + 1}{m.duration ? ` · ${fmtDur(m.duration)}` : ""}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => removeMedia(m.id)}
+                        className="absolute top-1.5 right-1.5 rounded-full bg-black/60 text-white p-1"
+                        aria-label="Retirer"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                    <div className="p-2">
+                      <input
+                        value={m.caption}
+                        onChange={(e) => updateCaption(m.id, e.target.value)}
+                        placeholder="Décrivez ce moment…"
+                        className="w-full bg-transparent text-xs outline-none placeholder:text-muted-foreground"
+                      />
+                      <p className="text-[9px] text-muted-foreground mt-0.5 truncate">{m.file.name} · {fmtSize(m.file.size)}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {media.length > 0 && (
+              <p className="mt-2 text-[10px] text-muted-foreground">
+                L'IA reçoit le contexte de chaque média (numéro, type, durée, légende) pour tisser le storyboard.
+              </p>
+            )}
           </div>
 
           <button
