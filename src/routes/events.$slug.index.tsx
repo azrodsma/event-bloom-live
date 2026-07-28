@@ -65,13 +65,20 @@ export const Route = createFileRoute("/events/$slug/")({
       ],
     };
   },
-  loader: ({ params }) => {
-    const e = findEvent(params.slug);
-    if (!e) throw notFound();
-    return { event: e };
+  loader: async ({ params }) => {
+    const { getEventBySlug } = await import("@/lib/events.functions");
+    const { adaptEvent } = await import("@/lib/event-adapter");
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) {
+      const e = findEvent(params.slug);
+      if (!e) throw notFound();
+      return { event: e, dbId: null as string | null };
+    }
+    return { event: adaptEvent(db), dbId: db.id };
   },
   component: EventPage,
 });
+
 
 function useCountdown(iso: string) {
   const [now, setNow] = useState(() => Date.now());
