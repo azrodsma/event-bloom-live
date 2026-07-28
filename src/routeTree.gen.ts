@@ -25,6 +25,7 @@ import { Route as AppWalletRouteImport } from './routes/app.wallet'
 import { Route as AppVenuesMapRouteImport } from './routes/app.venues-map'
 import { Route as AppVenuesRouteImport } from './routes/app.venues'
 import { Route as AppVendorsRouteImport } from './routes/app.vendors'
+import { Route as AppVaultRouteImport } from './routes/app.vault'
 import { Route as AppTrendsRouteImport } from './routes/app.trends'
 import { Route as AppTipsRouteImport } from './routes/app.tips'
 import { Route as AppTimeCapsuleRouteImport } from './routes/app.time-capsule'
@@ -114,6 +115,7 @@ import { Route as EventsSlugVoicemailsRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugVipRouteImport } from './routes/events.$slug.vip'
 import { Route as EventsSlugVideographerRouteImport } from './routes/events.$slug.videographer'
 import { Route as EventsSlugVendorsHubRouteImport } from './routes/events.$slug.vendors-hub'
+import { Route as EventsSlugVendorMealsRouteImport } from './routes/events.$slug.vendor-meals'
 import { Route as EventsSlugTributeRouteImport } from './routes/events.$slug.tribute'
 import { Route as EventsSlugTransportRouteImport } from './routes/events.$slug.transport'
 import { Route as EventsSlugTranslationsRouteImport } from './routes/events.$slug.translations'
@@ -262,6 +264,7 @@ import { Route as EventsSlugBachelorPartyRouteImport } from './routes/events.$sl
 import { Route as EventsSlugAudioGuestbookRouteImport } from './routes/events.$slug.audio-guestbook'
 import { Route as EventsSlugAuctionRouteImport } from './routes/events.$slug.auction'
 import { Route as EventsSlugArchiveRouteImport } from './routes/events.$slug.archive'
+import { Route as EventsSlugAnniversaryTimelineRouteImport } from './routes/events.$slug.anniversary-timeline'
 import { Route as EventsSlugAllergiesRouteImport } from './routes/events.$slug.allergies'
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
 import { Route as EventsSlugAiPortraitsRouteImport } from './routes/events.$slug.ai-portraits'
@@ -355,6 +358,11 @@ const AppVenuesRoute = AppVenuesRouteImport.update({
 const AppVendorsRoute = AppVendorsRouteImport.update({
   id: '/vendors',
   path: '/vendors',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVaultRoute = AppVaultRouteImport.update({
+  id: '/vault',
+  path: '/vault',
   getParentRoute: () => AppRoute,
 } as any)
 const AppTrendsRoute = AppTrendsRouteImport.update({
@@ -801,6 +809,11 @@ const EventsSlugVideographerRoute = EventsSlugVideographerRouteImport.update({
 const EventsSlugVendorsHubRoute = EventsSlugVendorsHubRouteImport.update({
   id: '/vendors-hub',
   path: '/vendors-hub',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugVendorMealsRoute = EventsSlugVendorMealsRouteImport.update({
+  id: '/vendor-meals',
+  path: '/vendor-meals',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugTributeRoute = EventsSlugTributeRouteImport.update({
@@ -1551,6 +1564,12 @@ const EventsSlugArchiveRoute = EventsSlugArchiveRouteImport.update({
   path: '/archive',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugAnniversaryTimelineRoute =
+  EventsSlugAnniversaryTimelineRouteImport.update({
+    id: '/anniversary-timeline',
+    path: '/anniversary-timeline',
+    getParentRoute: () => EventsSlugRoute,
+  } as any)
 const EventsSlugAllergiesRoute = EventsSlugAllergiesRouteImport.update({
   id: '/allergies',
   path: '/allergies',
@@ -1708,6 +1727,7 @@ export interface FileRoutesByFullPath {
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
   '/app/trends': typeof AppTrendsRoute
+  '/app/vault': typeof AppVaultRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/venues-map': typeof AppVenuesMapRoute
@@ -1729,6 +1749,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/allergies': typeof EventsSlugAllergiesRoute
+  '/events/$slug/anniversary-timeline': typeof EventsSlugAnniversaryTimelineRoute
   '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/audio-guestbook': typeof EventsSlugAudioGuestbookRoute
@@ -1877,6 +1898,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/transport': typeof EventsSlugTransportRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
+  '/events/$slug/vendor-meals': typeof EventsSlugVendorMealsRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/videographer': typeof EventsSlugVideographerRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -1976,6 +1998,7 @@ export interface FileRoutesByTo {
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
   '/app/trends': typeof AppTrendsRoute
+  '/app/vault': typeof AppVaultRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/venues-map': typeof AppVenuesMapRoute
@@ -1996,6 +2019,7 @@ export interface FileRoutesByTo {
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/allergies': typeof EventsSlugAllergiesRoute
+  '/events/$slug/anniversary-timeline': typeof EventsSlugAnniversaryTimelineRoute
   '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/audio-guestbook': typeof EventsSlugAudioGuestbookRoute
@@ -2144,6 +2168,7 @@ export interface FileRoutesByTo {
   '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/transport': typeof EventsSlugTransportRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
+  '/events/$slug/vendor-meals': typeof EventsSlugVendorMealsRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/videographer': typeof EventsSlugVideographerRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -2245,6 +2270,7 @@ export interface FileRoutesById {
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
   '/app/trends': typeof AppTrendsRoute
+  '/app/vault': typeof AppVaultRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/venues-map': typeof AppVenuesMapRoute
@@ -2266,6 +2292,7 @@ export interface FileRoutesById {
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
   '/events/$slug/allergies': typeof EventsSlugAllergiesRoute
+  '/events/$slug/anniversary-timeline': typeof EventsSlugAnniversaryTimelineRoute
   '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/audio-guestbook': typeof EventsSlugAudioGuestbookRoute
@@ -2414,6 +2441,7 @@ export interface FileRoutesById {
   '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/transport': typeof EventsSlugTransportRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
+  '/events/$slug/vendor-meals': typeof EventsSlugVendorMealsRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/videographer': typeof EventsSlugVideographerRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -2516,6 +2544,7 @@ export interface FileRouteTypes {
     | '/app/time-capsule'
     | '/app/tips'
     | '/app/trends'
+    | '/app/vault'
     | '/app/vendors'
     | '/app/venues'
     | '/app/venues-map'
@@ -2537,6 +2566,7 @@ export interface FileRouteTypes {
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
     | '/events/$slug/allergies'
+    | '/events/$slug/anniversary-timeline'
     | '/events/$slug/archive'
     | '/events/$slug/auction'
     | '/events/$slug/audio-guestbook'
@@ -2685,6 +2715,7 @@ export interface FileRouteTypes {
     | '/events/$slug/translations'
     | '/events/$slug/transport'
     | '/events/$slug/tribute'
+    | '/events/$slug/vendor-meals'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/videographer'
     | '/events/$slug/vip'
@@ -2784,6 +2815,7 @@ export interface FileRouteTypes {
     | '/app/time-capsule'
     | '/app/tips'
     | '/app/trends'
+    | '/app/vault'
     | '/app/vendors'
     | '/app/venues'
     | '/app/venues-map'
@@ -2804,6 +2836,7 @@ export interface FileRouteTypes {
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
     | '/events/$slug/allergies'
+    | '/events/$slug/anniversary-timeline'
     | '/events/$slug/archive'
     | '/events/$slug/auction'
     | '/events/$slug/audio-guestbook'
@@ -2952,6 +2985,7 @@ export interface FileRouteTypes {
     | '/events/$slug/translations'
     | '/events/$slug/transport'
     | '/events/$slug/tribute'
+    | '/events/$slug/vendor-meals'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/videographer'
     | '/events/$slug/vip'
@@ -3052,6 +3086,7 @@ export interface FileRouteTypes {
     | '/app/time-capsule'
     | '/app/tips'
     | '/app/trends'
+    | '/app/vault'
     | '/app/vendors'
     | '/app/venues'
     | '/app/venues-map'
@@ -3073,6 +3108,7 @@ export interface FileRouteTypes {
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
     | '/events/$slug/allergies'
+    | '/events/$slug/anniversary-timeline'
     | '/events/$slug/archive'
     | '/events/$slug/auction'
     | '/events/$slug/audio-guestbook'
@@ -3221,6 +3257,7 @@ export interface FileRouteTypes {
     | '/events/$slug/translations'
     | '/events/$slug/transport'
     | '/events/$slug/tribute'
+    | '/events/$slug/vendor-meals'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/videographer'
     | '/events/$slug/vip'
@@ -3360,6 +3397,13 @@ declare module '@tanstack/react-router' {
       path: '/vendors'
       fullPath: '/app/vendors'
       preLoaderRoute: typeof AppVendorsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/vault': {
+      id: '/app/vault'
+      path: '/vault'
+      fullPath: '/app/vault'
+      preLoaderRoute: typeof AppVaultRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/trends': {
@@ -3983,6 +4027,13 @@ declare module '@tanstack/react-router' {
       path: '/vendors-hub'
       fullPath: '/events/$slug/vendors-hub'
       preLoaderRoute: typeof EventsSlugVendorsHubRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/vendor-meals': {
+      id: '/events/$slug/vendor-meals'
+      path: '/vendor-meals'
+      fullPath: '/events/$slug/vendor-meals'
+      preLoaderRoute: typeof EventsSlugVendorMealsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/tribute': {
@@ -5021,6 +5072,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugArchiveRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/anniversary-timeline': {
+      id: '/events/$slug/anniversary-timeline'
+      path: '/anniversary-timeline'
+      fullPath: '/events/$slug/anniversary-timeline'
+      preLoaderRoute: typeof EventsSlugAnniversaryTimelineRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/allergies': {
       id: '/events/$slug/allergies'
       path: '/allergies'
@@ -5225,6 +5283,7 @@ interface AppRouteChildren {
   AppTimeCapsuleRoute: typeof AppTimeCapsuleRoute
   AppTipsRoute: typeof AppTipsRoute
   AppTrendsRoute: typeof AppTrendsRoute
+  AppVaultRoute: typeof AppVaultRoute
   AppVendorsRoute: typeof AppVendorsRouteWithChildren
   AppVenuesRoute: typeof AppVenuesRoute
   AppVenuesMapRoute: typeof AppVenuesMapRoute
@@ -5316,6 +5375,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppTimeCapsuleRoute: AppTimeCapsuleRoute,
   AppTipsRoute: AppTipsRoute,
   AppTrendsRoute: AppTrendsRoute,
+  AppVaultRoute: AppVaultRoute,
   AppVendorsRoute: AppVendorsRouteWithChildren,
   AppVenuesRoute: AppVenuesRoute,
   AppVenuesMapRoute: AppVenuesMapRoute,
@@ -5363,6 +5423,7 @@ interface EventsSlugRouteChildren {
   EventsSlugAiPortraitsRoute: typeof EventsSlugAiPortraitsRoute
   EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
   EventsSlugAllergiesRoute: typeof EventsSlugAllergiesRoute
+  EventsSlugAnniversaryTimelineRoute: typeof EventsSlugAnniversaryTimelineRoute
   EventsSlugArchiveRoute: typeof EventsSlugArchiveRoute
   EventsSlugAuctionRoute: typeof EventsSlugAuctionRoute
   EventsSlugAudioGuestbookRoute: typeof EventsSlugAudioGuestbookRoute
@@ -5511,6 +5572,7 @@ interface EventsSlugRouteChildren {
   EventsSlugTranslationsRoute: typeof EventsSlugTranslationsRoute
   EventsSlugTransportRoute: typeof EventsSlugTransportRoute
   EventsSlugTributeRoute: typeof EventsSlugTributeRoute
+  EventsSlugVendorMealsRoute: typeof EventsSlugVendorMealsRoute
   EventsSlugVendorsHubRoute: typeof EventsSlugVendorsHubRoute
   EventsSlugVideographerRoute: typeof EventsSlugVideographerRoute
   EventsSlugVipRoute: typeof EventsSlugVipRoute
@@ -5532,6 +5594,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugAiPortraitsRoute: EventsSlugAiPortraitsRoute,
   EventsSlugAlbumRoute: EventsSlugAlbumRoute,
   EventsSlugAllergiesRoute: EventsSlugAllergiesRoute,
+  EventsSlugAnniversaryTimelineRoute: EventsSlugAnniversaryTimelineRoute,
   EventsSlugArchiveRoute: EventsSlugArchiveRoute,
   EventsSlugAuctionRoute: EventsSlugAuctionRoute,
   EventsSlugAudioGuestbookRoute: EventsSlugAudioGuestbookRoute,
@@ -5680,6 +5743,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugTranslationsRoute: EventsSlugTranslationsRoute,
   EventsSlugTransportRoute: EventsSlugTransportRoute,
   EventsSlugTributeRoute: EventsSlugTributeRoute,
+  EventsSlugVendorMealsRoute: EventsSlugVendorMealsRoute,
   EventsSlugVendorsHubRoute: EventsSlugVendorsHubRoute,
   EventsSlugVideographerRoute: EventsSlugVideographerRoute,
   EventsSlugVipRoute: EventsSlugVipRoute,
