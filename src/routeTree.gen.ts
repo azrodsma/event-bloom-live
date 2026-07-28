@@ -58,6 +58,7 @@ import { Route as AppMessagesRouteImport } from './routes/app.messages'
 import { Route as AppMemoriesMapRouteImport } from './routes/app.memories-map'
 import { Route as AppMasterclassesRouteImport } from './routes/app.masterclasses'
 import { Route as AppLoyaltyRouteImport } from './routes/app.loyalty'
+import { Route as AppLoveStoriesRouteImport } from './routes/app.love-stories'
 import { Route as AppLegalRouteImport } from './routes/app.legal'
 import { Route as AppLeaderboardRouteImport } from './routes/app.leaderboard'
 import { Route as AppLanguagesRouteImport } from './routes/app.languages'
@@ -229,6 +230,7 @@ import { Route as EventsSlugDeliveriesRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugDecorRouteImport } from './routes/events.$slug.decor'
 import { Route as EventsSlugDayBeforeRouteImport } from './routes/events.$slug.day-before'
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
+import { Route as EventsSlugCrisisRouteImport } from './routes/events.$slug.crisis'
 import { Route as EventsSlugCoupleShootRouteImport } from './routes/events.$slug.couple-shoot'
 import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.countdown'
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
@@ -254,6 +256,7 @@ import { Route as EventsSlugBrunchRouteImport } from './routes/events.$slug.brun
 import { Route as EventsSlugBroadcastRouteImport } from './routes/events.$slug.broadcast'
 import { Route as EventsSlugBouquetRouteImport } from './routes/events.$slug.bouquet'
 import { Route as EventsSlugBarRouteImport } from './routes/events.$slug.bar'
+import { Route as EventsSlugBaptismLiturgyRouteImport } from './routes/events.$slug.baptism-liturgy'
 import { Route as EventsSlugBackupPlanRouteImport } from './routes/events.$slug.backup-plan'
 import { Route as EventsSlugBachelorPartyRouteImport } from './routes/events.$slug.bachelor-party'
 import { Route as EventsSlugAudioGuestbookRouteImport } from './routes/events.$slug.audio-guestbook'
@@ -518,6 +521,11 @@ const AppMasterclassesRoute = AppMasterclassesRouteImport.update({
 const AppLoyaltyRoute = AppLoyaltyRouteImport.update({
   id: '/loyalty',
   path: '/loyalty',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLoveStoriesRoute = AppLoveStoriesRouteImport.update({
+  id: '/love-stories',
+  path: '/love-stories',
   getParentRoute: () => AppRoute,
 } as any)
 const AppLegalRoute = AppLegalRouteImport.update({
@@ -1380,6 +1388,11 @@ const EventsSlugDashboardRoute = EventsSlugDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugCrisisRoute = EventsSlugCrisisRouteImport.update({
+  id: '/crisis',
+  path: '/crisis',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugCoupleShootRoute = EventsSlugCoupleShootRouteImport.update({
   id: '/couple-shoot',
   path: '/couple-shoot',
@@ -1506,6 +1519,12 @@ const EventsSlugBarRoute = EventsSlugBarRouteImport.update({
   path: '/bar',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugBaptismLiturgyRoute =
+  EventsSlugBaptismLiturgyRouteImport.update({
+    id: '/baptism-liturgy',
+    path: '/baptism-liturgy',
+    getParentRoute: () => EventsSlugRoute,
+  } as any)
 const EventsSlugBackupPlanRoute = EventsSlugBackupPlanRouteImport.update({
   id: '/backup-plan',
   path: '/backup-plan',
@@ -1655,6 +1674,7 @@ export interface FileRoutesByFullPath {
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
   '/app/legal': typeof AppLegalRoute
+  '/app/love-stories': typeof AppLoveStoriesRoute
   '/app/loyalty': typeof AppLoyaltyRoute
   '/app/masterclasses': typeof AppMasterclassesRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
@@ -1714,6 +1734,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/audio-guestbook': typeof EventsSlugAudioGuestbookRoute
   '/events/$slug/bachelor-party': typeof EventsSlugBachelorPartyRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
+  '/events/$slug/baptism-liturgy': typeof EventsSlugBaptismLiturgyRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/bouquet': typeof EventsSlugBouquetRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
@@ -1739,6 +1760,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
+  '/events/$slug/crisis': typeof EventsSlugCrisisRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/day-before': typeof EventsSlugDayBeforeRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
@@ -1920,6 +1942,7 @@ export interface FileRoutesByTo {
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
   '/app/legal': typeof AppLegalRoute
+  '/app/love-stories': typeof AppLoveStoriesRoute
   '/app/loyalty': typeof AppLoyaltyRoute
   '/app/masterclasses': typeof AppMasterclassesRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
@@ -1978,6 +2001,7 @@ export interface FileRoutesByTo {
   '/events/$slug/audio-guestbook': typeof EventsSlugAudioGuestbookRoute
   '/events/$slug/bachelor-party': typeof EventsSlugBachelorPartyRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
+  '/events/$slug/baptism-liturgy': typeof EventsSlugBaptismLiturgyRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/bouquet': typeof EventsSlugBouquetRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
@@ -2003,6 +2027,7 @@ export interface FileRoutesByTo {
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
+  '/events/$slug/crisis': typeof EventsSlugCrisisRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/day-before': typeof EventsSlugDayBeforeRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
@@ -2186,6 +2211,7 @@ export interface FileRoutesById {
   '/app/languages': typeof AppLanguagesRoute
   '/app/leaderboard': typeof AppLeaderboardRoute
   '/app/legal': typeof AppLegalRoute
+  '/app/love-stories': typeof AppLoveStoriesRoute
   '/app/loyalty': typeof AppLoyaltyRoute
   '/app/masterclasses': typeof AppMasterclassesRoute
   '/app/memories-map': typeof AppMemoriesMapRoute
@@ -2245,6 +2271,7 @@ export interface FileRoutesById {
   '/events/$slug/audio-guestbook': typeof EventsSlugAudioGuestbookRoute
   '/events/$slug/bachelor-party': typeof EventsSlugBachelorPartyRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
+  '/events/$slug/baptism-liturgy': typeof EventsSlugBaptismLiturgyRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/bouquet': typeof EventsSlugBouquetRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
@@ -2270,6 +2297,7 @@ export interface FileRoutesById {
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
+  '/events/$slug/crisis': typeof EventsSlugCrisisRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/day-before': typeof EventsSlugDayBeforeRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
@@ -2454,6 +2482,7 @@ export interface FileRouteTypes {
     | '/app/languages'
     | '/app/leaderboard'
     | '/app/legal'
+    | '/app/love-stories'
     | '/app/loyalty'
     | '/app/masterclasses'
     | '/app/memories-map'
@@ -2513,6 +2542,7 @@ export interface FileRouteTypes {
     | '/events/$slug/audio-guestbook'
     | '/events/$slug/bachelor-party'
     | '/events/$slug/backup-plan'
+    | '/events/$slug/baptism-liturgy'
     | '/events/$slug/bar'
     | '/events/$slug/bouquet'
     | '/events/$slug/broadcast'
@@ -2538,6 +2568,7 @@ export interface FileRouteTypes {
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/couple-shoot'
+    | '/events/$slug/crisis'
     | '/events/$slug/dashboard'
     | '/events/$slug/day-before'
     | '/events/$slug/decor'
@@ -2719,6 +2750,7 @@ export interface FileRouteTypes {
     | '/app/languages'
     | '/app/leaderboard'
     | '/app/legal'
+    | '/app/love-stories'
     | '/app/loyalty'
     | '/app/masterclasses'
     | '/app/memories-map'
@@ -2777,6 +2809,7 @@ export interface FileRouteTypes {
     | '/events/$slug/audio-guestbook'
     | '/events/$slug/bachelor-party'
     | '/events/$slug/backup-plan'
+    | '/events/$slug/baptism-liturgy'
     | '/events/$slug/bar'
     | '/events/$slug/bouquet'
     | '/events/$slug/broadcast'
@@ -2802,6 +2835,7 @@ export interface FileRouteTypes {
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/couple-shoot'
+    | '/events/$slug/crisis'
     | '/events/$slug/dashboard'
     | '/events/$slug/day-before'
     | '/events/$slug/decor'
@@ -2984,6 +3018,7 @@ export interface FileRouteTypes {
     | '/app/languages'
     | '/app/leaderboard'
     | '/app/legal'
+    | '/app/love-stories'
     | '/app/loyalty'
     | '/app/masterclasses'
     | '/app/memories-map'
@@ -3043,6 +3078,7 @@ export interface FileRouteTypes {
     | '/events/$slug/audio-guestbook'
     | '/events/$slug/bachelor-party'
     | '/events/$slug/backup-plan'
+    | '/events/$slug/baptism-liturgy'
     | '/events/$slug/bar'
     | '/events/$slug/bouquet'
     | '/events/$slug/broadcast'
@@ -3068,6 +3104,7 @@ export interface FileRouteTypes {
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/couple-shoot'
+    | '/events/$slug/crisis'
     | '/events/$slug/dashboard'
     | '/events/$slug/day-before'
     | '/events/$slug/decor'
@@ -3554,6 +3591,13 @@ declare module '@tanstack/react-router' {
       path: '/loyalty'
       fullPath: '/app/loyalty'
       preLoaderRoute: typeof AppLoyaltyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/love-stories': {
+      id: '/app/love-stories'
+      path: '/love-stories'
+      fullPath: '/app/love-stories'
+      preLoaderRoute: typeof AppLoveStoriesRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/legal': {
@@ -4753,6 +4797,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugDashboardRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/crisis': {
+      id: '/events/$slug/crisis'
+      path: '/crisis'
+      fullPath: '/events/$slug/crisis'
+      preLoaderRoute: typeof EventsSlugCrisisRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/couple-shoot': {
       id: '/events/$slug/couple-shoot'
       path: '/couple-shoot'
@@ -4926,6 +4977,13 @@ declare module '@tanstack/react-router' {
       path: '/bar'
       fullPath: '/events/$slug/bar'
       preLoaderRoute: typeof EventsSlugBarRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/baptism-liturgy': {
+      id: '/events/$slug/baptism-liturgy'
+      path: '/baptism-liturgy'
+      fullPath: '/events/$slug/baptism-liturgy'
+      preLoaderRoute: typeof EventsSlugBaptismLiturgyRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/backup-plan': {
@@ -5133,6 +5191,7 @@ interface AppRouteChildren {
   AppLanguagesRoute: typeof AppLanguagesRoute
   AppLeaderboardRoute: typeof AppLeaderboardRoute
   AppLegalRoute: typeof AppLegalRoute
+  AppLoveStoriesRoute: typeof AppLoveStoriesRoute
   AppLoyaltyRoute: typeof AppLoyaltyRoute
   AppMasterclassesRoute: typeof AppMasterclassesRoute
   AppMemoriesMapRoute: typeof AppMemoriesMapRoute
@@ -5223,6 +5282,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppLanguagesRoute: AppLanguagesRoute,
   AppLeaderboardRoute: AppLeaderboardRoute,
   AppLegalRoute: AppLegalRoute,
+  AppLoveStoriesRoute: AppLoveStoriesRoute,
   AppLoyaltyRoute: AppLoyaltyRoute,
   AppMasterclassesRoute: AppMasterclassesRoute,
   AppMemoriesMapRoute: AppMemoriesMapRoute,
@@ -5308,6 +5368,7 @@ interface EventsSlugRouteChildren {
   EventsSlugAudioGuestbookRoute: typeof EventsSlugAudioGuestbookRoute
   EventsSlugBachelorPartyRoute: typeof EventsSlugBachelorPartyRoute
   EventsSlugBackupPlanRoute: typeof EventsSlugBackupPlanRoute
+  EventsSlugBaptismLiturgyRoute: typeof EventsSlugBaptismLiturgyRoute
   EventsSlugBarRoute: typeof EventsSlugBarRoute
   EventsSlugBouquetRoute: typeof EventsSlugBouquetRoute
   EventsSlugBroadcastRoute: typeof EventsSlugBroadcastRoute
@@ -5333,6 +5394,7 @@ interface EventsSlugRouteChildren {
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
   EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
   EventsSlugCoupleShootRoute: typeof EventsSlugCoupleShootRoute
+  EventsSlugCrisisRoute: typeof EventsSlugCrisisRoute
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
   EventsSlugDayBeforeRoute: typeof EventsSlugDayBeforeRoute
   EventsSlugDecorRoute: typeof EventsSlugDecorRoute
@@ -5475,6 +5537,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugAudioGuestbookRoute: EventsSlugAudioGuestbookRoute,
   EventsSlugBachelorPartyRoute: EventsSlugBachelorPartyRoute,
   EventsSlugBackupPlanRoute: EventsSlugBackupPlanRoute,
+  EventsSlugBaptismLiturgyRoute: EventsSlugBaptismLiturgyRoute,
   EventsSlugBarRoute: EventsSlugBarRoute,
   EventsSlugBouquetRoute: EventsSlugBouquetRoute,
   EventsSlugBroadcastRoute: EventsSlugBroadcastRoute,
@@ -5500,6 +5563,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
   EventsSlugCountdownRoute: EventsSlugCountdownRoute,
   EventsSlugCoupleShootRoute: EventsSlugCoupleShootRoute,
+  EventsSlugCrisisRoute: EventsSlugCrisisRoute,
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
   EventsSlugDayBeforeRoute: EventsSlugDayBeforeRoute,
   EventsSlugDecorRoute: EventsSlugDecorRoute,
