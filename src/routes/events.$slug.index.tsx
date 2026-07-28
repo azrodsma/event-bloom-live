@@ -42,7 +42,7 @@ import { CagnotteCard } from "@/components/CagnotteCard";
 
 
 export const Route = createFileRoute("/events/$slug/")({
-  head: ({ loaderData }) => {
+  head: ({ loaderData }: { loaderData?: { event?: { title?: string; description?: string; cover?: string } } }) => {
     const e = loaderData?.event;
     const title = e?.title ?? "Événement";
     const description = e?.description ?? "Consultez les détails de votre événement privé Memento Live.";
