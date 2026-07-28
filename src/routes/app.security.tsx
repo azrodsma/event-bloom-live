@@ -1,184 +1,88 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ShieldCheck, Fingerprint, Key, Smartphone, Eye, EyeOff, Bell, Lock } from "lucide-react";
-import { useState } from "react";
+import { ArrowLeft, Shield, Lock, Eye, Server } from "lucide-react";
 
 export const Route = createFileRoute("/app/security")({
   component: Security,
   head: () => ({
     meta: [
-      { title: "Sécurité du compte · Memento Live" },
-      { name: "description", content: "Protégez vos souvenirs : mot de passe, biométrie, appareils connectés, sessions actives." },
+      { title: "Sécurité · Memento Live" },
+      { name: "description", content: "Chiffrement, souveraineté et transparence de la plateforme." },
       { property: "og:title", content: "Sécurité · Memento Live" },
-      { property: "og:description", content: "Vos souvenirs, sous double protection." },
+      { property: "og:description", content: "Vos souvenirs sont sacrés. Notre stack aussi." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
 
+const pillars = [
+  { icon: Lock, l: "Chiffrement bout en bout", d: "AES-256 au repos, TLS 1.3 en transit. Clés rotatives 90 jours." },
+  { icon: Server, l: "Hébergement UE souverain", d: "OVHcloud Gravelines (France) & Frankfurt. Aucun transfert extra-UE." },
+  { icon: Eye, l: "Zéro traçage tiers", d: "Pas de Google Analytics, pas de Meta Pixel. Analytics maison anonyme." },
+  { icon: Shield, l: "Bug bounty permanent", d: "YesWeHack · récompenses jusqu'à 8 000 € pour les vulnérabilités critiques." },
+];
+
+const audits = [
+  { l: "ISO 27001", date: "Certifié · Mars 2026", by: "Bureau Veritas" },
+  { l: "SecNumCloud (en cours)", date: "Audit ANSSI Q4 2026", by: "ANSSI" },
+  { l: "Pentest annuel", date: "Rapport Nov 2026", by: "Synacktiv" },
+  { l: "HDS santé (option)", date: "Certifié · Juin 2026", by: "AFNOR" },
+];
+
 function Security() {
-  const [twofa, setTwofa] = useState(true);
-  const [bio, setBio] = useState(true);
-  const [alerts, setAlerts] = useState(true);
-  const [privateMode, setPrivateMode] = useState(false);
-  const [showKey, setShowKey] = useState(false);
-
   return (
-    <div className="min-h-screen bg-background pb-24">
-      <div className="sticky top-0 z-20 flex items-center justify-between border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
-        <Link to="/app" className="grid h-9 w-9 place-items-center rounded-full hover:bg-muted" aria-label="Retour">
-          <ArrowLeft className="h-5 w-5" />
-        </Link>
-        <p className="font-serif text-lg">Sécurité</p>
-        <span className="grid h-9 w-9 place-items-center rounded-full bg-emerald-100">
-          <ShieldCheck className="h-4 w-4 text-emerald-700" />
-        </span>
-      </div>
-
-      <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50 via-accent/30 to-background px-4 pb-6 pt-6">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          <Lock className="h-3.5 w-3.5 text-emerald-700" /> Score de protection
+    <div className="min-h-screen bg-background pb-20">
+      <header className="sticky top-0 z-40 border-b border-border/50 bg-background/90 backdrop-blur">
+        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
+          <Link to="/app" className="rounded-full bg-cream p-2">
+            <ArrowLeft className="h-4 w-4" />
+          </Link>
+          <div className="flex-1">
+            <h1 className="font-display text-xl">Sécurité</h1>
+            <p className="text-xs text-muted-foreground">Transparence continue</p>
+          </div>
+          <Shield className="h-5 w-5 text-primary" />
         </div>
-        <div className="mt-3 flex items-end gap-3">
-          <p className="font-serif text-5xl leading-none text-emerald-700">92</p>
-          <p className="pb-1 text-xs text-muted-foreground">/100 · Excellent</p>
-        </div>
-        <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary">
-          <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400" style={{ width: "92%" }} />
-        </div>
-        <p className="mt-2 text-[11px] text-muted-foreground">
-          Reste : activer les codes de secours pour atteindre 100.
-        </p>
-      </section>
+      </header>
 
-      <section className="px-4 pt-6">
-        <h2 className="mb-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Authentification</h2>
-        <ul className="space-y-2">
-          {[
-            { icon: Key, label: "Mot de passe", value: "Modifié il y a 2 mois", action: "Modifier" },
-            { icon: Fingerprint, label: "Biométrie · Face ID", value: bio ? "Actif" : "Désactivé", toggle: bio, set: setBio },
-            { icon: Smartphone, label: "Double authentification", value: twofa ? "SMS + App" : "Désactivé", toggle: twofa, set: setTwofa },
-          ].map((r) => {
-            const Icon = r.icon;
-            return (
-              <li key={r.label} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card p-3">
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary">
-                  <Icon className="h-4 w-4 text-primary" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="font-serif text-[14px] leading-tight">{r.label}</p>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground">{r.value}</p>
-                </div>
-                {"toggle" in r ? (
-                  <button
-                    onClick={() => r.set!(!r.toggle)}
-                    className={`relative h-6 w-11 shrink-0 rounded-full transition ${r.toggle ? "bg-primary" : "bg-border"}`}
-                    aria-label={r.label}
-                  >
-                    <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition ${r.toggle ? "left-[22px]" : "left-0.5"}`} />
-                  </button>
-                ) : (
-                  <button className="shrink-0 rounded-full bg-secondary px-3 py-1.5 text-[11px] font-semibold">
-                    {r.action}
-                  </button>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </section>
+      <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
+        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+          <p className="text-xs uppercase tracking-widest opacity-70">Notre engagement</p>
+          <h2 className="mt-2 font-display text-2xl">Vos souvenirs sont sacrés. Notre stack aussi.</h2>
+          <p className="mt-2 text-sm opacity-90">Souveraineté française · chiffrement systématique · audits indépendants publiés chaque année.</p>
+        </section>
 
-      <section className="px-4 pt-6">
-        <h2 className="mb-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Confidentialité</h2>
-        <ul className="space-y-2">
-          {[
-            { icon: EyeOff, label: "Mode privé global", value: "Masque profils publics, désactive les liens de partage.", toggle: privateMode, set: setPrivateMode },
-            { icon: Bell, label: "Alertes de connexion", value: "Notification lors d'une connexion inhabituelle.", toggle: alerts, set: setAlerts },
-          ].map((r) => {
-            const Icon = r.icon;
-            return (
-              <li key={r.label} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card p-3">
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary">
-                  <Icon className="h-4 w-4 text-primary" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="font-serif text-[14px] leading-tight">{r.label}</p>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground">{r.value}</p>
-                </div>
-                <button
-                  onClick={() => r.set(!r.toggle)}
-                  className={`relative h-6 w-11 shrink-0 rounded-full transition ${r.toggle ? "bg-primary" : "bg-border"}`}
-                  aria-label={r.label}
-                >
-                  <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition ${r.toggle ? "left-[22px]" : "left-0.5"}`} />
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-
-      <section className="px-4 pt-6">
-        <h2 className="mb-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Appareils connectés · 3</h2>
-        <ul className="space-y-2">
-          {[
-            { name: "iPhone 15 · Sarah", city: "Paris · maintenant", current: true },
-            { name: "MacBook Pro", city: "Paris · il y a 2h" },
-            { name: "iPad · Salon", city: "Paris · il y a 3j" },
-          ].map((d) => (
-            <li key={d.name} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card p-3">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary">
-                <Smartphone className="h-4 w-4 text-primary" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="flex items-center gap-1.5 font-serif text-[14px] leading-tight">
-                  {d.name}
-                  {d.current && (
-                    <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[9px] font-bold uppercase text-emerald-700">
-                      Actuel
-                    </span>
-                  )}
-                </p>
-                <p className="mt-0.5 text-[11px] text-muted-foreground">{d.city}</p>
-              </div>
-              {!d.current && (
-                <button className="shrink-0 rounded-full bg-primary/10 px-3 py-1.5 text-[11px] font-semibold text-primary">
-                  Déconnecter
-                </button>
-              )}
-            </li>
+        <section className="grid gap-3 sm:grid-cols-2">
+          {pillars.map((p) => (
+            <div key={p.l} className="rounded-2xl border border-border/50 bg-card p-5">
+              <div className="rounded-full bg-primary/10 p-2 w-fit"><p.icon className="h-4 w-4 text-primary" /></div>
+              <p className="mt-2 font-display text-lg">{p.l}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{p.d}</p>
+            </div>
           ))}
-        </ul>
-      </section>
+        </section>
 
-      <section className="mx-4 mt-6 rounded-3xl border-2 border-dashed border-primary/40 bg-primary/5 p-4">
-        <p className="text-xs font-bold uppercase tracking-wider text-primary">Codes de secours</p>
-        <p className="mt-1 text-[11px] text-muted-foreground">
-          En cas de perte d'appareil, ces 8 codes vous permettent de récupérer votre compte. À imprimer.
-        </p>
-        <div className="mt-3 grid grid-cols-2 gap-2">
-          {["A4F9-2K7L", "M2N7-4X8P", "R9T3-6L2Q", "B5V1-8W3E", "C7H4-9J6D", "S3P8-2A5U", "N6M9-4B7C", "K1L5-3F9G"].map((c) => (
-            <span
-              key={c}
-              className={`rounded-lg border border-border/60 bg-background py-2 text-center font-mono text-[11px] tracking-wider ${
-                showKey ? "" : "blur-sm select-none"
-              }`}
-            >
-              {c}
-            </span>
-          ))}
-        </div>
-        <button
-          onClick={() => setShowKey((v) => !v)}
-          className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-full bg-foreground py-2 text-xs font-bold text-background"
-        >
-          {showKey ? <><EyeOff className="h-3.5 w-3.5" /> Masquer</> : <><Eye className="h-3.5 w-3.5" /> Révéler & imprimer</>}
-        </button>
-      </section>
+        <section>
+          <h3 className="font-display text-lg mb-3">Certifications & audits</h3>
+          <div className="space-y-3">
+            {audits.map((a) => (
+              <div key={a.l} className="rounded-2xl border border-border/50 bg-card p-4 flex items-center justify-between gap-3">
+                <div>
+                  <p className="font-medium">{a.l}</p>
+                  <p className="text-xs text-muted-foreground">{a.by}</p>
+                </div>
+                <span className="rounded-full bg-primary/10 px-3 py-1 text-xs text-primary whitespace-nowrap">{a.date}</span>
+              </div>
+            ))}
+          </div>
+        </section>
 
-      <button className="mx-4 mt-4 w-[calc(100%-2rem)] rounded-full border border-rose-200 bg-rose-50 py-3 text-xs font-bold text-rose-700">
-        Déconnecter toutes les sessions
-      </button>
+        <section className="rounded-2xl bg-cream p-5">
+          <p className="font-display text-lg">Trust Center</p>
+          <p className="text-xs text-muted-foreground mt-1">Rapports d'incidents, uptime temps réel, sous-traitants, PIA RGPD.</p>
+          <button className="mt-3 rounded-full bg-foreground px-5 py-2.5 text-sm text-white">Consulter</button>
+        </section>
+      </main>
     </div>
   );
 }

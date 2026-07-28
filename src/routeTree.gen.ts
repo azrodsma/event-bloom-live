@@ -112,6 +112,7 @@ import { Route as EventsSlugThankYouCardsRouteImport } from './routes/events.$sl
 import { Route as EventsSlugTastingsRouteImport } from './routes/events.$slug.tastings'
 import { Route as EventsSlugSurprisesRouteImport } from './routes/events.$slug.surprises'
 import { Route as EventsSlugSunsetRouteImport } from './routes/events.$slug.sunset'
+import { Route as EventsSlugStationeryRouteImport } from './routes/events.$slug.stationery'
 import { Route as EventsSlugSponsorsRouteImport } from './routes/events.$slug.sponsors'
 import { Route as EventsSlugSplitCostsRouteImport } from './routes/events.$slug.split-costs'
 import { Route as EventsSlugSpeechesRouteImport } from './routes/events.$slug.speeches'
@@ -223,6 +224,7 @@ import { Route as EventsSlugAiPortraitsRouteImport } from './routes/events.$slug
 import { Route as EventsSlugAfterpartyRouteImport } from './routes/events.$slug.afterparty'
 import { Route as EventsSlugAfterPartyRouteImport } from './routes/events.$slug.after-party'
 import { Route as EventsSlugActivityRouteImport } from './routes/events.$slug.activity'
+import { Route as EventsSlugAccommodationsRouteImport } from './routes/events.$slug.accommodations'
 import { Route as AppVendorsIdRouteImport } from './routes/app.vendors.$id'
 import { Route as AppUsersIdRouteImport } from './routes/app.users.$id'
 import { Route as AppPostsIdRouteImport } from './routes/app.posts.$id'
@@ -745,6 +747,11 @@ const EventsSlugSurprisesRoute = EventsSlugSurprisesRouteImport.update({
 const EventsSlugSunsetRoute = EventsSlugSunsetRouteImport.update({
   id: '/sunset',
   path: '/sunset',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugStationeryRoute = EventsSlugStationeryRouteImport.update({
+  id: '/stationery',
+  path: '/stationery',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugSponsorsRoute = EventsSlugSponsorsRouteImport.update({
@@ -1306,6 +1313,12 @@ const EventsSlugActivityRoute = EventsSlugActivityRouteImport.update({
   path: '/activity',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugAccommodationsRoute =
+  EventsSlugAccommodationsRouteImport.update({
+    id: '/accommodations',
+    path: '/accommodations',
+    getParentRoute: () => EventsSlugRoute,
+  } as any)
 const AppVendorsIdRoute = AppVendorsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -1427,6 +1440,7 @@ export interface FileRoutesByFullPath {
   '/app/posts/$id': typeof AppPostsIdRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
+  '/events/$slug/accommodations': typeof EventsSlugAccommodationsRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/after-party': typeof EventsSlugAfterPartyRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
@@ -1538,6 +1552,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/split-costs': typeof EventsSlugSplitCostsRoute
   '/events/$slug/sponsors': typeof EventsSlugSponsorsRoute
+  '/events/$slug/stationery': typeof EventsSlugStationeryRoute
   '/events/$slug/sunset': typeof EventsSlugSunsetRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
@@ -1648,6 +1663,7 @@ export interface FileRoutesByTo {
   '/app/posts/$id': typeof AppPostsIdRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
+  '/events/$slug/accommodations': typeof EventsSlugAccommodationsRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/after-party': typeof EventsSlugAfterPartyRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
@@ -1759,6 +1775,7 @@ export interface FileRoutesByTo {
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/split-costs': typeof EventsSlugSplitCostsRoute
   '/events/$slug/sponsors': typeof EventsSlugSponsorsRoute
+  '/events/$slug/stationery': typeof EventsSlugStationeryRoute
   '/events/$slug/sunset': typeof EventsSlugSunsetRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
@@ -1872,6 +1889,7 @@ export interface FileRoutesById {
   '/app/posts/$id': typeof AppPostsIdRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
+  '/events/$slug/accommodations': typeof EventsSlugAccommodationsRoute
   '/events/$slug/activity': typeof EventsSlugActivityRoute
   '/events/$slug/after-party': typeof EventsSlugAfterPartyRoute
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
@@ -1983,6 +2001,7 @@ export interface FileRoutesById {
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/split-costs': typeof EventsSlugSplitCostsRoute
   '/events/$slug/sponsors': typeof EventsSlugSponsorsRoute
+  '/events/$slug/stationery': typeof EventsSlugStationeryRoute
   '/events/$slug/sunset': typeof EventsSlugSunsetRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
@@ -2097,6 +2116,7 @@ export interface FileRouteTypes {
     | '/app/posts/$id'
     | '/app/users/$id'
     | '/app/vendors/$id'
+    | '/events/$slug/accommodations'
     | '/events/$slug/activity'
     | '/events/$slug/after-party'
     | '/events/$slug/afterparty'
@@ -2208,6 +2228,7 @@ export interface FileRouteTypes {
     | '/events/$slug/speeches'
     | '/events/$slug/split-costs'
     | '/events/$slug/sponsors'
+    | '/events/$slug/stationery'
     | '/events/$slug/sunset'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
@@ -2318,6 +2339,7 @@ export interface FileRouteTypes {
     | '/app/posts/$id'
     | '/app/users/$id'
     | '/app/vendors/$id'
+    | '/events/$slug/accommodations'
     | '/events/$slug/activity'
     | '/events/$slug/after-party'
     | '/events/$slug/afterparty'
@@ -2429,6 +2451,7 @@ export interface FileRouteTypes {
     | '/events/$slug/speeches'
     | '/events/$slug/split-costs'
     | '/events/$slug/sponsors'
+    | '/events/$slug/stationery'
     | '/events/$slug/sunset'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
@@ -2541,6 +2564,7 @@ export interface FileRouteTypes {
     | '/app/posts/$id'
     | '/app/users/$id'
     | '/app/vendors/$id'
+    | '/events/$slug/accommodations'
     | '/events/$slug/activity'
     | '/events/$slug/after-party'
     | '/events/$slug/afterparty'
@@ -2652,6 +2676,7 @@ export interface FileRouteTypes {
     | '/events/$slug/speeches'
     | '/events/$slug/split-costs'
     | '/events/$slug/sponsors'
+    | '/events/$slug/stationery'
     | '/events/$slug/sunset'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
@@ -3412,6 +3437,13 @@ declare module '@tanstack/react-router' {
       path: '/sunset'
       fullPath: '/events/$slug/sunset'
       preLoaderRoute: typeof EventsSlugSunsetRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/stationery': {
+      id: '/events/$slug/stationery'
+      path: '/stationery'
+      fullPath: '/events/$slug/stationery'
+      preLoaderRoute: typeof EventsSlugStationeryRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/sponsors': {
@@ -4191,6 +4223,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugActivityRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/accommodations': {
+      id: '/events/$slug/accommodations'
+      path: '/accommodations'
+      fullPath: '/events/$slug/accommodations'
+      preLoaderRoute: typeof EventsSlugAccommodationsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/app/vendors/$id': {
       id: '/app/vendors/$id'
       path: '/$id'
@@ -4449,6 +4488,7 @@ const EventsSlugLiveRouteWithChildren = EventsSlugLiveRoute._addFileChildren(
 )
 
 interface EventsSlugRouteChildren {
+  EventsSlugAccommodationsRoute: typeof EventsSlugAccommodationsRoute
   EventsSlugActivityRoute: typeof EventsSlugActivityRoute
   EventsSlugAfterPartyRoute: typeof EventsSlugAfterPartyRoute
   EventsSlugAfterpartyRoute: typeof EventsSlugAfterpartyRoute
@@ -4560,6 +4600,7 @@ interface EventsSlugRouteChildren {
   EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
   EventsSlugSplitCostsRoute: typeof EventsSlugSplitCostsRoute
   EventsSlugSponsorsRoute: typeof EventsSlugSponsorsRoute
+  EventsSlugStationeryRoute: typeof EventsSlugStationeryRoute
   EventsSlugSunsetRoute: typeof EventsSlugSunsetRoute
   EventsSlugSurprisesRoute: typeof EventsSlugSurprisesRoute
   EventsSlugTastingsRoute: typeof EventsSlugTastingsRoute
@@ -4586,6 +4627,7 @@ interface EventsSlugRouteChildren {
 }
 
 const EventsSlugRouteChildren: EventsSlugRouteChildren = {
+  EventsSlugAccommodationsRoute: EventsSlugAccommodationsRoute,
   EventsSlugActivityRoute: EventsSlugActivityRoute,
   EventsSlugAfterPartyRoute: EventsSlugAfterPartyRoute,
   EventsSlugAfterpartyRoute: EventsSlugAfterpartyRoute,
@@ -4697,6 +4739,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugSpeechesRoute: EventsSlugSpeechesRoute,
   EventsSlugSplitCostsRoute: EventsSlugSplitCostsRoute,
   EventsSlugSponsorsRoute: EventsSlugSponsorsRoute,
+  EventsSlugStationeryRoute: EventsSlugStationeryRoute,
   EventsSlugSunsetRoute: EventsSlugSunsetRoute,
   EventsSlugSurprisesRoute: EventsSlugSurprisesRoute,
   EventsSlugTastingsRoute: EventsSlugTastingsRoute,
