@@ -32,6 +32,7 @@ import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSecurityRouteImport } from './routes/app.security'
 import { Route as AppRemindersRouteImport } from './routes/app.reminders'
+import { Route as AppReferralsRouteImport } from './routes/app.referrals'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppQuestsRouteImport } from './routes/app.quests'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
@@ -274,6 +275,11 @@ const AppSecurityRoute = AppSecurityRouteImport.update({
 const AppRemindersRoute = AppRemindersRouteImport.update({
   id: '/reminders',
   path: '/reminders',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReferralsRoute = AppReferralsRouteImport.update({
+  id: '/referrals',
+  path: '/referrals',
   getParentRoute: () => AppRoute,
 } as any)
 const AppReferralRoute = AppReferralRouteImport.update({
@@ -960,6 +966,7 @@ export interface FileRoutesByFullPath {
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
+  '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1112,6 +1119,7 @@ export interface FileRoutesByTo {
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
+  '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1265,6 +1273,7 @@ export interface FileRoutesById {
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
+  '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1420,6 +1429,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/quests'
     | '/app/referral'
+    | '/app/referrals'
     | '/app/reminders'
     | '/app/security'
     | '/app/settings'
@@ -1572,6 +1582,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/quests'
     | '/app/referral'
+    | '/app/referrals'
     | '/app/reminders'
     | '/app/security'
     | '/app/settings'
@@ -1724,6 +1735,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/quests'
     | '/app/referral'
+    | '/app/referrals'
     | '/app/reminders'
     | '/app/security'
     | '/app/settings'
@@ -2009,6 +2021,13 @@ declare module '@tanstack/react-router' {
       path: '/reminders'
       fullPath: '/app/reminders'
       preLoaderRoute: typeof AppRemindersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/referrals': {
+      id: '/app/referrals'
+      path: '/referrals'
+      fullPath: '/app/referrals'
+      preLoaderRoute: typeof AppReferralsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/referral': {
@@ -2969,6 +2988,7 @@ interface AppRouteChildren {
   AppProfileRoute: typeof AppProfileRoute
   AppQuestsRoute: typeof AppQuestsRoute
   AppReferralRoute: typeof AppReferralRoute
+  AppReferralsRoute: typeof AppReferralsRoute
   AppRemindersRoute: typeof AppRemindersRoute
   AppSecurityRoute: typeof AppSecurityRoute
   AppSettingsRoute: typeof AppSettingsRoute
@@ -3023,6 +3043,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppProfileRoute: AppProfileRoute,
   AppQuestsRoute: AppQuestsRoute,
   AppReferralRoute: AppReferralRoute,
+  AppReferralsRoute: AppReferralsRoute,
   AppRemindersRoute: AppRemindersRoute,
   AppSecurityRoute: AppSecurityRoute,
   AppSettingsRoute: AppSettingsRoute,
