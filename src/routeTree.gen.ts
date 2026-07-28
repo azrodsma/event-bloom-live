@@ -161,6 +161,7 @@ import { Route as EventsSlugPodcastRouteImport } from './routes/events.$slug.pod
 import { Route as EventsSlugPlaylistRouteImport } from './routes/events.$slug.playlist'
 import { Route as EventsSlugPhotoshootRouteImport } from './routes/events.$slug.photoshoot'
 import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.photobooth'
+import { Route as EventsSlugPhotoTimelineRouteImport } from './routes/events.$slug.photo-timeline'
 import { Route as EventsSlugPhotoSpotsRouteImport } from './routes/events.$slug.photo-spots'
 import { Route as EventsSlugPhotoChallengesRouteImport } from './routes/events.$slug.photo-challenges'
 import { Route as EventsSlugPetsRouteImport } from './routes/events.$slug.pets'
@@ -228,6 +229,7 @@ import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.d
 import { Route as EventsSlugCoupleShootRouteImport } from './routes/events.$slug.couple-shoot'
 import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.countdown'
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
+import { Route as EventsSlugContractHubRouteImport } from './routes/events.$slug.contract-hub'
 import { Route as EventsSlugConfettiRouteImport } from './routes/events.$slug.confetti'
 import { Route as EventsSlugComfortRouteImport } from './routes/events.$slug.comfort'
 import { Route as EventsSlugCoffeeBarRouteImport } from './routes/events.$slug.coffee-bar'
@@ -1030,6 +1032,11 @@ const EventsSlugPhotoboothRoute = EventsSlugPhotoboothRouteImport.update({
   path: '/photobooth',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugPhotoTimelineRoute = EventsSlugPhotoTimelineRouteImport.update({
+  id: '/photo-timeline',
+  path: '/photo-timeline',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugPhotoSpotsRoute = EventsSlugPhotoSpotsRouteImport.update({
   id: '/photo-spots',
   path: '/photo-spots',
@@ -1368,6 +1375,11 @@ const EventsSlugContributorsRoute = EventsSlugContributorsRouteImport.update({
   path: '/contributors',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugContractHubRoute = EventsSlugContractHubRouteImport.update({
+  id: '/contract-hub',
+  path: '/contract-hub',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugConfettiRoute = EventsSlugConfettiRouteImport.update({
   id: '/confetti',
   path: '/confetti',
@@ -1696,6 +1708,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/coffee-bar': typeof EventsSlugCoffeeBarRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
+  '/events/$slug/contract-hub': typeof EventsSlugContractHubRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
@@ -1763,6 +1776,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
+  '/events/$slug/photo-timeline': typeof EventsSlugPhotoTimelineRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/photoshoot': typeof EventsSlugPhotoshootRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
@@ -1954,6 +1968,7 @@ export interface FileRoutesByTo {
   '/events/$slug/coffee-bar': typeof EventsSlugCoffeeBarRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
+  '/events/$slug/contract-hub': typeof EventsSlugContractHubRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
@@ -2021,6 +2036,7 @@ export interface FileRoutesByTo {
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
+  '/events/$slug/photo-timeline': typeof EventsSlugPhotoTimelineRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/photoshoot': typeof EventsSlugPhotoshootRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
@@ -2215,6 +2231,7 @@ export interface FileRoutesById {
   '/events/$slug/coffee-bar': typeof EventsSlugCoffeeBarRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
+  '/events/$slug/contract-hub': typeof EventsSlugContractHubRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
@@ -2282,6 +2299,7 @@ export interface FileRoutesById {
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
+  '/events/$slug/photo-timeline': typeof EventsSlugPhotoTimelineRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
   '/events/$slug/photoshoot': typeof EventsSlugPhotoshootRoute
   '/events/$slug/playlist': typeof EventsSlugPlaylistRoute
@@ -2477,6 +2495,7 @@ export interface FileRouteTypes {
     | '/events/$slug/coffee-bar'
     | '/events/$slug/comfort'
     | '/events/$slug/confetti'
+    | '/events/$slug/contract-hub'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/couple-shoot'
@@ -2544,6 +2563,7 @@ export interface FileRouteTypes {
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photo-spots'
+    | '/events/$slug/photo-timeline'
     | '/events/$slug/photobooth'
     | '/events/$slug/photoshoot'
     | '/events/$slug/playlist'
@@ -2735,6 +2755,7 @@ export interface FileRouteTypes {
     | '/events/$slug/coffee-bar'
     | '/events/$slug/comfort'
     | '/events/$slug/confetti'
+    | '/events/$slug/contract-hub'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/couple-shoot'
@@ -2802,6 +2823,7 @@ export interface FileRouteTypes {
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photo-spots'
+    | '/events/$slug/photo-timeline'
     | '/events/$slug/photobooth'
     | '/events/$slug/photoshoot'
     | '/events/$slug/playlist'
@@ -2995,6 +3017,7 @@ export interface FileRouteTypes {
     | '/events/$slug/coffee-bar'
     | '/events/$slug/comfort'
     | '/events/$slug/confetti'
+    | '/events/$slug/contract-hub'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
     | '/events/$slug/couple-shoot'
@@ -3062,6 +3085,7 @@ export interface FileRouteTypes {
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photo-spots'
+    | '/events/$slug/photo-timeline'
     | '/events/$slug/photobooth'
     | '/events/$slug/photoshoot'
     | '/events/$slug/playlist'
@@ -4203,6 +4227,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugPhotoboothRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/photo-timeline': {
+      id: '/events/$slug/photo-timeline'
+      path: '/photo-timeline'
+      fullPath: '/events/$slug/photo-timeline'
+      preLoaderRoute: typeof EventsSlugPhotoTimelineRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/photo-spots': {
       id: '/events/$slug/photo-spots'
       path: '/photo-spots'
@@ -4670,6 +4701,13 @@ declare module '@tanstack/react-router' {
       path: '/contributors'
       fullPath: '/events/$slug/contributors'
       preLoaderRoute: typeof EventsSlugContributorsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/contract-hub': {
+      id: '/events/$slug/contract-hub'
+      path: '/contract-hub'
+      fullPath: '/events/$slug/contract-hub'
+      preLoaderRoute: typeof EventsSlugContractHubRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/confetti': {
@@ -5212,6 +5250,7 @@ interface EventsSlugRouteChildren {
   EventsSlugCoffeeBarRoute: typeof EventsSlugCoffeeBarRoute
   EventsSlugComfortRoute: typeof EventsSlugComfortRoute
   EventsSlugConfettiRoute: typeof EventsSlugConfettiRoute
+  EventsSlugContractHubRoute: typeof EventsSlugContractHubRoute
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
   EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
   EventsSlugCoupleShootRoute: typeof EventsSlugCoupleShootRoute
@@ -5279,6 +5318,7 @@ interface EventsSlugRouteChildren {
   EventsSlugPetsRoute: typeof EventsSlugPetsRoute
   EventsSlugPhotoChallengesRoute: typeof EventsSlugPhotoChallengesRoute
   EventsSlugPhotoSpotsRoute: typeof EventsSlugPhotoSpotsRoute
+  EventsSlugPhotoTimelineRoute: typeof EventsSlugPhotoTimelineRoute
   EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
   EventsSlugPhotoshootRoute: typeof EventsSlugPhotoshootRoute
   EventsSlugPlaylistRoute: typeof EventsSlugPlaylistRoute
@@ -5373,6 +5413,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugCoffeeBarRoute: EventsSlugCoffeeBarRoute,
   EventsSlugComfortRoute: EventsSlugComfortRoute,
   EventsSlugConfettiRoute: EventsSlugConfettiRoute,
+  EventsSlugContractHubRoute: EventsSlugContractHubRoute,
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
   EventsSlugCountdownRoute: EventsSlugCountdownRoute,
   EventsSlugCoupleShootRoute: EventsSlugCoupleShootRoute,
@@ -5440,6 +5481,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugPetsRoute: EventsSlugPetsRoute,
   EventsSlugPhotoChallengesRoute: EventsSlugPhotoChallengesRoute,
   EventsSlugPhotoSpotsRoute: EventsSlugPhotoSpotsRoute,
+  EventsSlugPhotoTimelineRoute: EventsSlugPhotoTimelineRoute,
   EventsSlugPhotoboothRoute: EventsSlugPhotoboothRoute,
   EventsSlugPhotoshootRoute: EventsSlugPhotoshootRoute,
   EventsSlugPlaylistRoute: EventsSlugPlaylistRoute,
