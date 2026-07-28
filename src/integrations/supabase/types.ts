@@ -372,12 +372,14 @@ export type Database = {
       }
       guests: {
         Row: {
+          checked_in_at: string | null
           created_at: string
           dietary: string | null
           email: string | null
           event_id: string
           full_name: string
           id: string
+          invite_token: string | null
           notes: string | null
           phone: string | null
           plus_ones: number
@@ -386,12 +388,14 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          checked_in_at?: string | null
           created_at?: string
           dietary?: string | null
           email?: string | null
           event_id: string
           full_name: string
           id?: string
+          invite_token?: string | null
           notes?: string | null
           phone?: string | null
           plus_ones?: number
@@ -400,12 +404,14 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          checked_in_at?: string | null
           created_at?: string
           dietary?: string | null
           email?: string | null
           event_id?: string
           full_name?: string
           id?: string
+          invite_token?: string | null
           notes?: string | null
           phone?: string | null
           plus_ones?: number
