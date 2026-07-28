@@ -56,8 +56,8 @@ function AIStory() {
 
   const mediaDescriptor = (list: MediaItem[]) =>
     list.length
-      ? "\n\nMédias fournis (" + list.length + ") :\n" +
-        list.map((m, i) => `#${i + 1} ${m.kind === "image" ? "photo" : "clip " + fmtDur(m.duration)} — ${m.file.name}${m.caption ? " · " + m.caption : ""}`).join("\n")
+      ? "\n\nMédias fournis dans l'ordre voulu par l'utilisateur (respecte cette séquence pour le storyboard et les légendes) :\n" +
+        list.map((m, i) => `${i + 1}. ${m.kind === "image" ? "photo" : "clip " + fmtDur(m.duration)} — ${m.file.name}${m.caption ? " · " + m.caption : ""}`).join("\n")
       : "";
 
   const promptForModel = () => moments + mediaDescriptor(media);
