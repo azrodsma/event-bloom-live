@@ -103,6 +103,21 @@ function AIStory() {
   const updateCaption = (id: string, caption: string) =>
     setMedia((m) => m.map((x) => (x.id === id ? { ...x, caption } : x)));
 
+  const [dragId, setDragId] = useState<string | null>(null);
+  const [overId, setOverId] = useState<string | null>(null);
+  const reorder = (fromId: string, toId: string) => {
+    if (fromId === toId) return;
+    setMedia((m) => {
+      const from = m.findIndex((x) => x.id === fromId);
+      const to = m.findIndex((x) => x.id === toId);
+      if (from < 0 || to < 0) return m;
+      const next = m.slice();
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      return next;
+    });
+  };
+
   const onGenerate = async () => {
     setLoading(true);
     setError(null);
