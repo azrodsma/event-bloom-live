@@ -2,6 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 import { EventCard } from "@/components/EventCard";
 import { mockEvents, eventTypes, eventTypeIcons } from "@/lib/mock-data";
+import { listPublicEvents } from "@/lib/events.functions";
+import { adaptEvent, type DbEvent } from "@/lib/event-adapter";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import {
   Radio,
   Gift,
