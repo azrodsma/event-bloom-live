@@ -91,9 +91,10 @@ function Profile() {
         </div>
       </div>
 
-      <button className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium text-danger">
+      <button onClick={handleSignOut} className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium text-danger">
         <LogOut className="h-4 w-4" /> Se déconnecter
       </button>
+
     </div>
   );
 }
