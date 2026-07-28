@@ -102,6 +102,7 @@ import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugPhotoSpotsRouteImport } from './routes/events.$slug.photo-spots'
 import { Route as EventsSlugPhotoChallengesRouteImport } from './routes/events.$slug.photo-challenges'
 import { Route as EventsSlugPetsRouteImport } from './routes/events.$slug.pets'
+import { Route as EventsSlugPerksRouteImport } from './routes/events.$slug.perks'
 import { Route as EventsSlugNameBadgesRouteImport } from './routes/events.$slug.name-badges'
 import { Route as EventsSlugModerationRouteImport } from './routes/events.$slug.moderation'
 import { Route as EventsSlugMenuRouteImport } from './routes/events.$slug.menu'
@@ -627,6 +628,11 @@ const EventsSlugPetsRoute = EventsSlugPetsRouteImport.update({
   path: '/pets',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugPerksRoute = EventsSlugPerksRouteImport.update({
+  id: '/perks',
+  path: '/perks',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugNameBadgesRoute = EventsSlugNameBadgesRouteImport.update({
   id: '/name-badges',
   path: '/name-badges',
@@ -1025,6 +1031,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
+  '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
@@ -1175,6 +1182,7 @@ export interface FileRoutesByTo {
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
+  '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
@@ -1328,6 +1336,7 @@ export interface FileRoutesById {
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
+  '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
@@ -1482,6 +1491,7 @@ export interface FileRouteTypes {
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
+    | '/events/$slug/perks'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photo-spots'
@@ -1632,6 +1642,7 @@ export interface FileRouteTypes {
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
+    | '/events/$slug/perks'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photo-spots'
@@ -1784,6 +1795,7 @@ export interface FileRouteTypes {
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
+    | '/events/$slug/perks'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photo-spots'
@@ -2489,6 +2501,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugPetsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/perks': {
+      id: '/events/$slug/perks'
+      path: '/perks'
+      fullPath: '/events/$slug/perks'
+      preLoaderRoute: typeof EventsSlugPerksRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/name-badges': {
       id: '/events/$slug/name-badges'
       path: '/name-badges'
@@ -3101,6 +3120,7 @@ interface EventsSlugRouteChildren {
   EventsSlugMenuRoute: typeof EventsSlugMenuRoute
   EventsSlugModerationRoute: typeof EventsSlugModerationRoute
   EventsSlugNameBadgesRoute: typeof EventsSlugNameBadgesRoute
+  EventsSlugPerksRoute: typeof EventsSlugPerksRoute
   EventsSlugPetsRoute: typeof EventsSlugPetsRoute
   EventsSlugPhotoChallengesRoute: typeof EventsSlugPhotoChallengesRoute
   EventsSlugPhotoSpotsRoute: typeof EventsSlugPhotoSpotsRoute
@@ -3190,6 +3210,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugMenuRoute: EventsSlugMenuRoute,
   EventsSlugModerationRoute: EventsSlugModerationRoute,
   EventsSlugNameBadgesRoute: EventsSlugNameBadgesRoute,
+  EventsSlugPerksRoute: EventsSlugPerksRoute,
   EventsSlugPetsRoute: EventsSlugPetsRoute,
   EventsSlugPhotoChallengesRoute: EventsSlugPhotoChallengesRoute,
   EventsSlugPhotoSpotsRoute: EventsSlugPhotoSpotsRoute,
