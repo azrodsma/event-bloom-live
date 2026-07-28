@@ -55,6 +55,7 @@ import { Route as AppGiftIdeasRouteImport } from './routes/app.gift-ideas'
 import { Route as AppFriendsRouteImport } from './routes/app.friends'
 import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
 import { Route as AppFamilyRouteImport } from './routes/app.family'
+import { Route as AppExportRouteImport } from './routes/app.export'
 import { Route as AppExploreRouteImport } from './routes/app.explore'
 import { Route as AppDraftsRouteImport } from './routes/app.drafts'
 import { Route as AppDiscoverRouteImport } from './routes/app.discover'
@@ -85,6 +86,7 @@ import { Route as EventsSlugThanksRouteImport } from './routes/events.$slug.than
 import { Route as EventsSlugThankYouCardsRouteImport } from './routes/events.$slug.thank-you-cards'
 import { Route as EventsSlugTastingsRouteImport } from './routes/events.$slug.tastings'
 import { Route as EventsSlugSurprisesRouteImport } from './routes/events.$slug.surprises'
+import { Route as EventsSlugSponsorsRouteImport } from './routes/events.$slug.sponsors'
 import { Route as EventsSlugSplitCostsRouteImport } from './routes/events.$slug.split-costs'
 import { Route as EventsSlugSpeechesRouteImport } from './routes/events.$slug.speeches'
 import { Route as EventsSlugSpeechBuilderRouteImport } from './routes/events.$slug.speech-builder'
@@ -130,6 +132,7 @@ import { Route as EventsSlugHallOfFameRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugGuidesRouteImport } from './routes/events.$slug.guides'
 import { Route as EventsSlugGuestsRouteImport } from './routes/events.$slug.guests'
 import { Route as EventsSlugGuestbookRouteImport } from './routes/events.$slug.guestbook'
+import { Route as EventsSlugGratitudeWallRouteImport } from './routes/events.$slug.gratitude-wall'
 import { Route as EventsSlugGiftsReceivedRouteImport } from './routes/events.$slug.gifts-received'
 import { Route as EventsSlugGamesRouteImport } from './routes/events.$slug.games'
 import { Route as EventsSlugFlowersRouteImport } from './routes/events.$slug.flowers'
@@ -404,6 +407,11 @@ const AppFamilyRoute = AppFamilyRouteImport.update({
   path: '/family',
   getParentRoute: () => AppRoute,
 } as any)
+const AppExportRoute = AppExportRouteImport.update({
+  id: '/export',
+  path: '/export',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppExploreRoute = AppExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
@@ -552,6 +560,11 @@ const EventsSlugTastingsRoute = EventsSlugTastingsRouteImport.update({
 const EventsSlugSurprisesRoute = EventsSlugSurprisesRouteImport.update({
   id: '/surprises',
   path: '/surprises',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugSponsorsRoute = EventsSlugSponsorsRouteImport.update({
+  id: '/sponsors',
+  path: '/sponsors',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugSplitCostsRoute = EventsSlugSplitCostsRouteImport.update({
@@ -779,6 +792,11 @@ const EventsSlugGuestsRoute = EventsSlugGuestsRouteImport.update({
 const EventsSlugGuestbookRoute = EventsSlugGuestbookRouteImport.update({
   id: '/guestbook',
   path: '/guestbook',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugGratitudeWallRoute = EventsSlugGratitudeWallRouteImport.update({
+  id: '/gratitude-wall',
+  path: '/gratitude-wall',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugGiftsReceivedRoute = EventsSlugGiftsReceivedRouteImport.update({
@@ -1019,6 +1037,7 @@ export interface FileRoutesByFullPath {
   '/app/discover': typeof AppDiscoverRoute
   '/app/drafts': typeof AppDraftsRoute
   '/app/explore': typeof AppExploreRoute
+  '/app/export': typeof AppExportRoute
   '/app/family': typeof AppFamilyRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/friends': typeof AppFriendsRoute
@@ -1099,6 +1118,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
+  '/events/$slug/gratitude-wall': typeof EventsSlugGratitudeWallRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
@@ -1144,6 +1164,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/split-costs': typeof EventsSlugSplitCostsRoute
+  '/events/$slug/sponsors': typeof EventsSlugSponsorsRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
@@ -1184,6 +1205,7 @@ export interface FileRoutesByTo {
   '/app/discover': typeof AppDiscoverRoute
   '/app/drafts': typeof AppDraftsRoute
   '/app/explore': typeof AppExploreRoute
+  '/app/export': typeof AppExportRoute
   '/app/family': typeof AppFamilyRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/friends': typeof AppFriendsRoute
@@ -1263,6 +1285,7 @@ export interface FileRoutesByTo {
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
+  '/events/$slug/gratitude-wall': typeof EventsSlugGratitudeWallRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
@@ -1308,6 +1331,7 @@ export interface FileRoutesByTo {
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/split-costs': typeof EventsSlugSplitCostsRoute
+  '/events/$slug/sponsors': typeof EventsSlugSponsorsRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
@@ -1350,6 +1374,7 @@ export interface FileRoutesById {
   '/app/discover': typeof AppDiscoverRoute
   '/app/drafts': typeof AppDraftsRoute
   '/app/explore': typeof AppExploreRoute
+  '/app/export': typeof AppExportRoute
   '/app/family': typeof AppFamilyRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/friends': typeof AppFriendsRoute
@@ -1430,6 +1455,7 @@ export interface FileRoutesById {
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
+  '/events/$slug/gratitude-wall': typeof EventsSlugGratitudeWallRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
@@ -1475,6 +1501,7 @@ export interface FileRoutesById {
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
   '/events/$slug/split-costs': typeof EventsSlugSplitCostsRoute
+  '/events/$slug/sponsors': typeof EventsSlugSponsorsRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
@@ -1518,6 +1545,7 @@ export interface FileRouteTypes {
     | '/app/discover'
     | '/app/drafts'
     | '/app/explore'
+    | '/app/export'
     | '/app/family'
     | '/app/favorites'
     | '/app/friends'
@@ -1598,6 +1626,7 @@ export interface FileRouteTypes {
     | '/events/$slug/flowers'
     | '/events/$slug/games'
     | '/events/$slug/gifts-received'
+    | '/events/$slug/gratitude-wall'
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/guides'
@@ -1643,6 +1672,7 @@ export interface FileRouteTypes {
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
     | '/events/$slug/split-costs'
+    | '/events/$slug/sponsors'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
     | '/events/$slug/thank-you-cards'
@@ -1683,6 +1713,7 @@ export interface FileRouteTypes {
     | '/app/discover'
     | '/app/drafts'
     | '/app/explore'
+    | '/app/export'
     | '/app/family'
     | '/app/favorites'
     | '/app/friends'
@@ -1762,6 +1793,7 @@ export interface FileRouteTypes {
     | '/events/$slug/flowers'
     | '/events/$slug/games'
     | '/events/$slug/gifts-received'
+    | '/events/$slug/gratitude-wall'
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/guides'
@@ -1807,6 +1839,7 @@ export interface FileRouteTypes {
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
     | '/events/$slug/split-costs'
+    | '/events/$slug/sponsors'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
     | '/events/$slug/thank-you-cards'
@@ -1848,6 +1881,7 @@ export interface FileRouteTypes {
     | '/app/discover'
     | '/app/drafts'
     | '/app/explore'
+    | '/app/export'
     | '/app/family'
     | '/app/favorites'
     | '/app/friends'
@@ -1928,6 +1962,7 @@ export interface FileRouteTypes {
     | '/events/$slug/flowers'
     | '/events/$slug/games'
     | '/events/$slug/gifts-received'
+    | '/events/$slug/gratitude-wall'
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/guides'
@@ -1973,6 +2008,7 @@ export interface FileRouteTypes {
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
     | '/events/$slug/split-costs'
+    | '/events/$slug/sponsors'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
     | '/events/$slug/thank-you-cards'
@@ -2328,6 +2364,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppFamilyRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/export': {
+      id: '/app/export'
+      path: '/export'
+      fullPath: '/app/export'
+      preLoaderRoute: typeof AppExportRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/explore': {
       id: '/app/explore'
       path: '/explore'
@@ -2536,6 +2579,13 @@ declare module '@tanstack/react-router' {
       path: '/surprises'
       fullPath: '/events/$slug/surprises'
       preLoaderRoute: typeof EventsSlugSurprisesRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/sponsors': {
+      id: '/events/$slug/sponsors'
+      path: '/sponsors'
+      fullPath: '/events/$slug/sponsors'
+      preLoaderRoute: typeof EventsSlugSponsorsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/split-costs': {
@@ -2851,6 +2901,13 @@ declare module '@tanstack/react-router' {
       path: '/guestbook'
       fullPath: '/events/$slug/guestbook'
       preLoaderRoute: typeof EventsSlugGuestbookRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/gratitude-wall': {
+      id: '/events/$slug/gratitude-wall'
+      path: '/gratitude-wall'
+      fullPath: '/events/$slug/gratitude-wall'
+      preLoaderRoute: typeof EventsSlugGratitudeWallRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/gifts-received': {
@@ -3197,6 +3254,7 @@ interface AppRouteChildren {
   AppDiscoverRoute: typeof AppDiscoverRoute
   AppDraftsRoute: typeof AppDraftsRoute
   AppExploreRoute: typeof AppExploreRoute
+  AppExportRoute: typeof AppExportRoute
   AppFamilyRoute: typeof AppFamilyRoute
   AppFavoritesRoute: typeof AppFavoritesRoute
   AppFriendsRoute: typeof AppFriendsRoute
@@ -3255,6 +3313,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppDiscoverRoute: AppDiscoverRoute,
   AppDraftsRoute: AppDraftsRoute,
   AppExploreRoute: AppExploreRoute,
+  AppExportRoute: AppExportRoute,
   AppFamilyRoute: AppFamilyRoute,
   AppFavoritesRoute: AppFavoritesRoute,
   AppFriendsRoute: AppFriendsRoute,
@@ -3361,6 +3420,7 @@ interface EventsSlugRouteChildren {
   EventsSlugFlowersRoute: typeof EventsSlugFlowersRoute
   EventsSlugGamesRoute: typeof EventsSlugGamesRoute
   EventsSlugGiftsReceivedRoute: typeof EventsSlugGiftsReceivedRoute
+  EventsSlugGratitudeWallRoute: typeof EventsSlugGratitudeWallRoute
   EventsSlugGuestbookRoute: typeof EventsSlugGuestbookRouteWithChildren
   EventsSlugGuestsRoute: typeof EventsSlugGuestsRoute
   EventsSlugGuidesRoute: typeof EventsSlugGuidesRoute
@@ -3406,6 +3466,7 @@ interface EventsSlugRouteChildren {
   EventsSlugSpeechBuilderRoute: typeof EventsSlugSpeechBuilderRoute
   EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
   EventsSlugSplitCostsRoute: typeof EventsSlugSplitCostsRoute
+  EventsSlugSponsorsRoute: typeof EventsSlugSponsorsRoute
   EventsSlugSurprisesRoute: typeof EventsSlugSurprisesRoute
   EventsSlugTastingsRoute: typeof EventsSlugTastingsRoute
   EventsSlugThankYouCardsRoute: typeof EventsSlugThankYouCardsRoute
@@ -3460,6 +3521,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugFlowersRoute: EventsSlugFlowersRoute,
   EventsSlugGamesRoute: EventsSlugGamesRoute,
   EventsSlugGiftsReceivedRoute: EventsSlugGiftsReceivedRoute,
+  EventsSlugGratitudeWallRoute: EventsSlugGratitudeWallRoute,
   EventsSlugGuestbookRoute: EventsSlugGuestbookRouteWithChildren,
   EventsSlugGuestsRoute: EventsSlugGuestsRoute,
   EventsSlugGuidesRoute: EventsSlugGuidesRoute,
@@ -3505,6 +3567,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugSpeechBuilderRoute: EventsSlugSpeechBuilderRoute,
   EventsSlugSpeechesRoute: EventsSlugSpeechesRoute,
   EventsSlugSplitCostsRoute: EventsSlugSplitCostsRoute,
+  EventsSlugSponsorsRoute: EventsSlugSponsorsRoute,
   EventsSlugSurprisesRoute: EventsSlugSurprisesRoute,
   EventsSlugTastingsRoute: EventsSlugTastingsRoute,
   EventsSlugThankYouCardsRoute: EventsSlugThankYouCardsRoute,
@@ -3539,13 +3602,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
