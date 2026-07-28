@@ -28,6 +28,11 @@ export const Route = createFileRoute("/events/$slug/invite")({
 function Invite() {
   const { event } = Route.useLoaderData();
   const [copied, setCopied] = useState(false);
+  const [personalName, setPersonalName] = useState("");
+  const [personalEmail, setPersonalEmail] = useState("");
+  const [personalLink, setPersonalLink] = useState<string | null>(null);
+  const [personalCopied, setPersonalCopied] = useState(false);
+  const createInvite = useServerFn(createGuestInvite);
 
   const origin = typeof window !== "undefined" ? window.location.origin : "https://memento.live";
   const rsvpUrl = `${origin}/rsvp/${event.slug}`;
@@ -41,6 +46,23 @@ function Invite() {
     navigator.clipboard?.writeText(rsvpUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 1600);
+  };
+
+  const genMut = useMutation({
+    mutationFn: () => createInvite({ data: { eventId: event.id, full_name: personalName.trim(), email: personalEmail.trim() || null } }),
+    onSuccess: (row) => {
+      const link = `${origin}/i/${row.invite_token}`;
+      setPersonalLink(link);
+      toast.success("Lien personnel créé");
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const copyPersonal = () => {
+    if (!personalLink) return;
+    navigator.clipboard?.writeText(personalLink);
+    setPersonalCopied(true);
+    setTimeout(() => setPersonalCopied(false), 1600);
   };
 
   const shareText = `Vous êtes invité(e) à ${event.title}. RSVP : ${rsvpUrl}`;
