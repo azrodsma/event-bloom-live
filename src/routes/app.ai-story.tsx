@@ -240,16 +240,26 @@ function AIStory() {
             {media.length > 0 && (
               <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
                 {media.map((m, i) => (
-                  <div key={m.id} className="rounded-xl border border-border/50 bg-background overflow-hidden">
+                  <div
+                    key={m.id}
+                    draggable
+                    onDragStart={(e) => { setDragId(m.id); e.dataTransfer.effectAllowed = "move"; }}
+                    onDragOver={(e) => { e.preventDefault(); e.dataTransfer.dropEffect = "move"; if (overId !== m.id) setOverId(m.id); }}
+                    onDragLeave={() => { if (overId === m.id) setOverId(null); }}
+                    onDrop={(e) => { e.preventDefault(); if (dragId) reorder(dragId, m.id); setDragId(null); setOverId(null); }}
+                    onDragEnd={() => { setDragId(null); setOverId(null); }}
+                    className={`rounded-xl border bg-background overflow-hidden transition ${overId === m.id && dragId !== m.id ? "border-primary ring-2 ring-primary/30" : "border-border/50"} ${dragId === m.id ? "opacity-40" : ""}`}
+                  >
                     <div className="relative aspect-video bg-foreground/5">
                       {m.kind === "image" ? (
-                        <img src={m.url} alt="" className="h-full w-full object-cover" />
+                        <img src={m.url} alt="" className="h-full w-full object-cover pointer-events-none" />
                       ) : (
-                        <video src={m.url} className="h-full w-full object-cover" muted playsInline />
+                        <video src={m.url} className="h-full w-full object-cover pointer-events-none" muted playsInline />
                       )}
                       <span className="absolute top-1.5 left-1.5 rounded-full bg-black/60 text-white text-[10px] px-1.5 py-0.5 flex items-center gap-1">
+                        <GripVertical className="h-2.5 w-2.5" />
                         {m.kind === "image" ? <ImageIcon className="h-2.5 w-2.5" /> : <Film className="h-2.5 w-2.5" />}
-                        #{i + 1}{m.duration ? ` · ${fmtDur(m.duration)}` : ""}
+                        {i + 1}{m.duration ? ` · ${fmtDur(m.duration)}` : ""}
                       </span>
                       <button
                         type="button"
@@ -260,14 +270,18 @@ function AIStory() {
                         <X className="h-3 w-3" />
                       </button>
                     </div>
-                    <div className="p-2">
-                      <input
-                        value={m.caption}
-                        onChange={(e) => updateCaption(m.id, e.target.value)}
-                        placeholder="Décrivez ce moment…"
-                        className="w-full bg-transparent text-xs outline-none placeholder:text-muted-foreground"
-                      />
-                      <p className="text-[9px] text-muted-foreground mt-0.5 truncate">{m.file.name} · {fmtSize(m.file.size)}</p>
+                    <div className="p-2 flex items-center gap-1.5">
+                      <GripVertical className="h-3 w-3 text-muted-foreground shrink-0 cursor-grab" />
+                      <div className="flex-1 min-w-0">
+                        <input
+                          value={m.caption}
+                          onChange={(e) => updateCaption(m.id, e.target.value)}
+                          onDragStart={(e) => e.preventDefault()}
+                          placeholder="Décrivez ce moment…"
+                          className="w-full bg-transparent text-xs outline-none placeholder:text-muted-foreground"
+                        />
+                        <p className="text-[9px] text-muted-foreground mt-0.5 truncate">{m.file.name} · {fmtSize(m.file.size)}</p>
+                      </div>
                     </div>
                   </div>
                 ))}
