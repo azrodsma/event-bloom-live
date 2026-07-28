@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Users, Heart, Sparkles, MessageCircle } from "lucide-react";
+import { ArrowLeft, Users, MessageCircle, Heart } from "lucide-react";
 
 export const Route = createFileRoute("/app/community")({
   component: Community,
   head: () => ({
     meta: [
       { title: "Communauté · Memento Live" },
-      { name: "description", content: "Rencontrez d'autres organisateurs, échangez conseils, prestataires et inspirations." },
+      { name: "description", content: "Échangez avec d'autres organisateurs passionnés." },
       { property: "og:title", content: "Communauté · Memento Live" },
-      { property: "og:description", content: "Vous n'organisez plus seul(e)." },
+      { property: "og:description", content: "Le cercle bienveillant de ceux qui préparent." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -16,25 +16,17 @@ export const Route = createFileRoute("/app/community")({
 });
 
 const circles = [
-  { name: "Mariés été 2026", members: 1240, active: 87, tone: "from-primary to-primary-dark", emoji: "💍" },
-  { name: "Baptêmes bohèmes", members: 320, active: 12, tone: "from-gold to-primary", emoji: "🕊️" },
-  { name: "40 ans mémorable", members: 480, active: 34, tone: "from-primary-dark to-foreground", emoji: "🎂" },
-  { name: "Éco-célébrations", members: 890, active: 61, tone: "from-success to-primary", emoji: "🌿" },
+  { l: "Mariages 2026", members: 3241, active: 128, color: "from-primary to-primary-dark" },
+  { l: "Cérémonies laïques", members: 892, active: 41, color: "from-gold to-primary" },
+  { l: "Baptêmes et naissances", members: 1156, active: 62, color: "from-primary-dark to-foreground" },
+  { l: "DIY et écoresponsable", members: 2078, active: 94, color: "from-foreground to-primary-dark" },
 ];
 
-const threads = [
-  { author: "Élodie", tone: "Astuce", title: "Notre plan B pluie qui a sauvé la journée", replies: 42, likes: 128 },
-  { author: "Karim", tone: "Question", title: "Un traiteur casher-friendly sur Lyon ?", replies: 18, likes: 24 },
-  { author: "Nour", tone: "Inspiration", title: "Palette pêche & terracotta — feedback ?", replies: 63, likes: 210 },
-  { author: "Julien", tone: "Retour d'exp.", title: "Le live YouTube a bluffé mes grands-parents", replies: 27, likes: 96 },
+const posts = [
+  { author: "Camille · mariée juin 26", msg: "Quel photographe pour un mariage intime en Bretagne ? Budget 2 000€.", likes: 24, replies: 18, tag: "Prestataires" },
+  { author: "Adèle · organisatrice", msg: "Astuce plan de table : j'ai codé chaque nappe par couleur, plus jamais de casse-tête !", likes: 87, replies: 32, tag: "Astuces" },
+  { author: "Théo · marié en 3 mois", msg: "Retour d'expérience : préparer un mariage express en 90j, c'est possible.", likes: 156, replies: 41, tag: "Témoignage" },
 ];
-
-const toneColor: Record<string, string> = {
-  Astuce: "bg-primary text-white",
-  Question: "bg-gold text-foreground",
-  Inspiration: "bg-cream text-primary-dark",
-  "Retour d'exp.": "bg-foreground text-background",
-};
 
 function Community() {
   return (
@@ -45,65 +37,57 @@ function Community() {
         </Link>
         <div>
           <p className="font-serif text-lg leading-tight">Communauté</p>
-          <p className="text-xs text-muted-foreground">3 240 membres actifs cette semaine</p>
+          <p className="text-xs text-muted-foreground">Cercles bienveillants d'organisateurs</p>
         </div>
       </header>
 
       <main className="mx-auto max-w-2xl space-y-5 px-4 py-5">
-        <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-gold p-6 text-white shadow-card">
-          <Users className="h-6 w-6" />
-          <p className="mt-3 font-serif text-3xl leading-tight">Vous n'organisez plus seul(e)</p>
-          <p className="mt-2 text-sm opacity-90">
-            Cercles thématiques, entraide bienveillante, prestataires recommandés par la communauté.
+        <section className="rounded-3xl bg-gradient-to-br from-primary/25 via-cream to-gold/25 p-6 shadow-card">
+          <Users className="h-6 w-6 text-primary-dark" />
+          <p className="mt-3 font-serif text-3xl leading-tight">On prépare mieux à plusieurs</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Rejoignez des cercles thématiques modérés. Charte anti-jugement, entraide vraie, pas de démarchage prestataires.
           </p>
         </section>
 
         <section>
-          <p className="mb-3 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Cercles pour vous</p>
+          <p className="mb-3 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Vos cercles</p>
           <div className="grid grid-cols-2 gap-2">
             {circles.map((c) => (
-              <button key={c.name} className="text-left">
-                <div className={`rounded-2xl bg-gradient-to-br ${c.tone} p-4 text-white shadow-soft`}>
-                  <div className="text-2xl">{c.emoji}</div>
-                  <p className="mt-2 text-sm font-semibold leading-tight">{c.name}</p>
-                  <p className="mt-2 text-[10px] uppercase opacity-80">{c.members} membres</p>
-                  <p className="mt-1 flex items-center gap-1 text-[11px]">
-                    <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" /> {c.active} en ligne
-                  </p>
-                </div>
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <p className="mb-3 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Conversations chaudes</p>
-          <div className="space-y-2">
-            {threads.map((t) => (
-              <article key={t.title} className="rounded-2xl bg-surface p-3.5 shadow-soft">
-                <div className="flex items-center gap-2">
-                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${toneColor[t.tone]}`}>
-                    {t.tone}
-                  </span>
-                  <span className="text-[11px] text-muted-foreground">{t.author}</span>
-                </div>
-                <p className="mt-2 text-sm font-semibold leading-tight">{t.title}</p>
-                <div className="mt-2 flex items-center gap-3 text-[11px] text-muted-foreground">
-                  <span className="flex items-center gap-1"><MessageCircle className="h-3 w-3" /> {t.replies}</span>
-                  <span className="flex items-center gap-1"><Heart className="h-3 w-3 text-primary" /> {t.likes}</span>
+              <article key={c.l} className={`overflow-hidden rounded-2xl bg-gradient-to-br ${c.color} p-4 text-white shadow-soft`}>
+                <p className="font-serif text-lg leading-tight">{c.l}</p>
+                <p className="mt-2 text-[11px] opacity-90">{c.members.toLocaleString("fr")} membres</p>
+                <div className="mt-2 inline-flex items-center gap-1 rounded-full bg-white/25 px-2 py-0.5 text-[10px] font-bold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                  {c.active} en ligne
                 </div>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="rounded-3xl bg-cream p-5">
-          <Sparkles className="h-5 w-5 text-primary-dark" />
-          <p className="mt-2 font-serif text-lg leading-tight">Charte bienveillance</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Modération humaine + IA · zéro tolérance haine · verified pros identifiés d'un liseré doré.
+        <section>
+          <p className="mb-3 flex items-center gap-2 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <MessageCircle className="h-3.5 w-3.5" /> Discussions du jour
           </p>
+          <div className="space-y-2">
+            {posts.map((p) => (
+              <article key={p.msg} className="rounded-2xl bg-surface p-4 shadow-soft">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-semibold">{p.author}</p>
+                  <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase text-primary-dark">{p.tag}</span>
+                </div>
+                <p className="mt-2 text-sm text-foreground">{p.msg}</p>
+                <div className="mt-3 flex items-center gap-4 text-[11px] text-muted-foreground">
+                  <span className="flex items-center gap-1"><Heart className="h-3.5 w-3.5" /> {p.likes}</span>
+                  <span className="flex items-center gap-1"><MessageCircle className="h-3.5 w-3.5" /> {p.replies}</span>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
+
+        <button className="w-full rounded-full bg-foreground py-3 text-sm font-semibold text-background">Ouvrir une discussion</button>
       </main>
     </div>
   );
