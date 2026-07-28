@@ -145,6 +145,7 @@ import { Route as EventsSlugRitualsRouteImport } from './routes/events.$slug.rit
 import { Route as EventsSlugRingsRouteImport } from './routes/events.$slug.rings'
 import { Route as EventsSlugRingBearerRouteImport } from './routes/events.$slug.ring-bearer'
 import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
+import { Route as EventsSlugRemindersRouteImport } from './routes/events.$slug.reminders'
 import { Route as EventsSlugReligiousRouteImport } from './routes/events.$slug.religious'
 import { Route as EventsSlugRehearsalRouteImport } from './routes/events.$slug.rehearsal'
 import { Route as EventsSlugRegistryRouteImport } from './routes/events.$slug.registry'
@@ -230,6 +231,7 @@ import { Route as EventsSlugCityGuideRouteImport } from './routes/events.$slug.c
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
 import { Route as EventsSlugCheckinRouteImport } from './routes/events.$slug.checkin'
 import { Route as EventsSlugCeremonyBookletRouteImport } from './routes/events.$slug.ceremony-booklet'
+import { Route as EventsSlugCenterpiecesRouteImport } from './routes/events.$slug.centerpieces'
 import { Route as EventsSlugCellarRouteImport } from './routes/events.$slug.cellar'
 import { Route as EventsSlugCarpoolRouteImport } from './routes/events.$slug.carpool'
 import { Route as EventsSlugCarbonRouteImport } from './routes/events.$slug.carbon'
@@ -942,6 +944,11 @@ const EventsSlugReplayRoute = EventsSlugReplayRouteImport.update({
   path: '/replay',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugRemindersRoute = EventsSlugRemindersRouteImport.update({
+  id: '/reminders',
+  path: '/reminders',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugReligiousRoute = EventsSlugReligiousRouteImport.update({
   id: '/religious',
   path: '/religious',
@@ -1371,6 +1378,11 @@ const EventsSlugCeremonyBookletRoute =
     path: '/ceremony-booklet',
     getParentRoute: () => EventsSlugRoute,
   } as any)
+const EventsSlugCenterpiecesRoute = EventsSlugCenterpiecesRouteImport.update({
+  id: '/centerpieces',
+  path: '/centerpieces',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugCellarRoute = EventsSlugCellarRouteImport.update({
   id: '/cellar',
   path: '/cellar',
@@ -1636,6 +1648,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/cellar': typeof EventsSlugCellarRoute
+  '/events/$slug/centerpieces': typeof EventsSlugCenterpiecesRoute
   '/events/$slug/ceremony-booklet': typeof EventsSlugCeremonyBookletRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
@@ -1721,6 +1734,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/religious': typeof EventsSlugReligiousRoute
+  '/events/$slug/reminders': typeof EventsSlugRemindersRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rings': typeof EventsSlugRingsRoute
@@ -1886,6 +1900,7 @@ export interface FileRoutesByTo {
   '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/cellar': typeof EventsSlugCellarRoute
+  '/events/$slug/centerpieces': typeof EventsSlugCenterpiecesRoute
   '/events/$slug/ceremony-booklet': typeof EventsSlugCeremonyBookletRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
@@ -1971,6 +1986,7 @@ export interface FileRoutesByTo {
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/religious': typeof EventsSlugReligiousRoute
+  '/events/$slug/reminders': typeof EventsSlugRemindersRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rings': typeof EventsSlugRingsRoute
@@ -2139,6 +2155,7 @@ export interface FileRoutesById {
   '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
   '/events/$slug/cellar': typeof EventsSlugCellarRoute
+  '/events/$slug/centerpieces': typeof EventsSlugCenterpiecesRoute
   '/events/$slug/ceremony-booklet': typeof EventsSlugCeremonyBookletRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
@@ -2224,6 +2241,7 @@ export interface FileRoutesById {
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/religious': typeof EventsSlugReligiousRoute
+  '/events/$slug/reminders': typeof EventsSlugRemindersRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
   '/events/$slug/rings': typeof EventsSlugRingsRoute
@@ -2393,6 +2411,7 @@ export interface FileRouteTypes {
     | '/events/$slug/carbon'
     | '/events/$slug/carpool'
     | '/events/$slug/cellar'
+    | '/events/$slug/centerpieces'
     | '/events/$slug/ceremony-booklet'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
@@ -2478,6 +2497,7 @@ export interface FileRouteTypes {
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/religious'
+    | '/events/$slug/reminders'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
     | '/events/$slug/rings'
@@ -2643,6 +2663,7 @@ export interface FileRouteTypes {
     | '/events/$slug/carbon'
     | '/events/$slug/carpool'
     | '/events/$slug/cellar'
+    | '/events/$slug/centerpieces'
     | '/events/$slug/ceremony-booklet'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
@@ -2728,6 +2749,7 @@ export interface FileRouteTypes {
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/religious'
+    | '/events/$slug/reminders'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
     | '/events/$slug/rings'
@@ -2895,6 +2917,7 @@ export interface FileRouteTypes {
     | '/events/$slug/carbon'
     | '/events/$slug/carpool'
     | '/events/$slug/cellar'
+    | '/events/$slug/centerpieces'
     | '/events/$slug/ceremony-booklet'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
@@ -2980,6 +3003,7 @@ export interface FileRouteTypes {
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/religious'
+    | '/events/$slug/reminders'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
     | '/events/$slug/rings'
@@ -3995,6 +4019,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugReplayRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/reminders': {
+      id: '/events/$slug/reminders'
+      path: '/reminders'
+      fullPath: '/events/$slug/reminders'
+      preLoaderRoute: typeof EventsSlugRemindersRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/religious': {
       id: '/events/$slug/religious'
       path: '/religious'
@@ -4590,6 +4621,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugCeremonyBookletRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/centerpieces': {
+      id: '/events/$slug/centerpieces'
+      path: '/centerpieces'
+      fullPath: '/events/$slug/centerpieces'
+      preLoaderRoute: typeof EventsSlugCenterpiecesRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/cellar': {
       id: '/events/$slug/cellar'
       path: '/cellar'
@@ -5046,6 +5084,7 @@ interface EventsSlugRouteChildren {
   EventsSlugCarbonRoute: typeof EventsSlugCarbonRoute
   EventsSlugCarpoolRoute: typeof EventsSlugCarpoolRoute
   EventsSlugCellarRoute: typeof EventsSlugCellarRoute
+  EventsSlugCenterpiecesRoute: typeof EventsSlugCenterpiecesRoute
   EventsSlugCeremonyBookletRoute: typeof EventsSlugCeremonyBookletRoute
   EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
@@ -5131,6 +5170,7 @@ interface EventsSlugRouteChildren {
   EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
   EventsSlugRehearsalRoute: typeof EventsSlugRehearsalRoute
   EventsSlugReligiousRoute: typeof EventsSlugReligiousRoute
+  EventsSlugRemindersRoute: typeof EventsSlugRemindersRoute
   EventsSlugReplayRoute: typeof EventsSlugReplayRoute
   EventsSlugRingBearerRoute: typeof EventsSlugRingBearerRoute
   EventsSlugRingsRoute: typeof EventsSlugRingsRoute
@@ -5201,6 +5241,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugCarbonRoute: EventsSlugCarbonRoute,
   EventsSlugCarpoolRoute: EventsSlugCarpoolRoute,
   EventsSlugCellarRoute: EventsSlugCellarRoute,
+  EventsSlugCenterpiecesRoute: EventsSlugCenterpiecesRoute,
   EventsSlugCeremonyBookletRoute: EventsSlugCeremonyBookletRoute,
   EventsSlugCheckinRoute: EventsSlugCheckinRoute,
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
@@ -5286,6 +5327,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugRegistryRoute: EventsSlugRegistryRoute,
   EventsSlugRehearsalRoute: EventsSlugRehearsalRoute,
   EventsSlugReligiousRoute: EventsSlugReligiousRoute,
+  EventsSlugRemindersRoute: EventsSlugRemindersRoute,
   EventsSlugReplayRoute: EventsSlugReplayRoute,
   EventsSlugRingBearerRoute: EventsSlugRingBearerRoute,
   EventsSlugRingsRoute: EventsSlugRingsRoute,
