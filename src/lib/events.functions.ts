@@ -32,6 +32,33 @@ export const listPublicEvents = createServerFn({ method: "GET" }).handler(async 
   return data ?? [];
 });
 
+export const listMyEvents = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data: owned, error: e1 } = await context.supabase
+      .from("events")
+      .select("id, slug, title, type, visibility, status, event_date, location, cover_url, cagnotte_current, cagnotte_goal, owner_id")
+      .eq("owner_id", context.userId)
+      .order("event_date", { ascending: true });
+    if (e1) throw new Error(e1.message);
+
+    const { data: memberships, error: e2 } = await context.supabase
+      .from("event_members")
+      .select("role, events:event_id ( id, slug, title, type, visibility, status, event_date, location, cover_url, cagnotte_current, cagnotte_goal, owner_id )")
+      .eq("user_id", context.userId);
+    if (e2) throw new Error(e2.message);
+
+    const ownedIds = new Set((owned ?? []).map((e) => e.id));
+    const joined = (memberships ?? [])
+      .map((m: any) => ({ ...m.events, memberRole: m.role }))
+      .filter((e: any) => e && !ownedIds.has(e.id));
+
+    return [
+      ...(owned ?? []).map((e) => ({ ...e, memberRole: "owner" as const })),
+      ...joined,
+    ];
+  });
+
 export const getEventBySlug = createServerFn({ method: "GET" })
   .inputValidator((input) => z.object({ slug: z.string().min(1) }).parse(input))
   .handler(async ({ data }) => {
