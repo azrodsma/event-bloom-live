@@ -28,6 +28,7 @@ import { Route as AppTrendsRouteImport } from './routes/app.trends'
 import { Route as AppTipsRouteImport } from './routes/app.tips'
 import { Route as AppTimeCapsuleRouteImport } from './routes/app.time-capsule'
 import { Route as AppThemeStudioRouteImport } from './routes/app.theme-studio'
+import { Route as AppSupportRouteImport } from './routes/app.support'
 import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
 import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
@@ -146,6 +147,7 @@ import { Route as EventsSlugLiveAnalyticsRouteImport } from './routes/events.$sl
 import { Route as EventsSlugLiveRouteImport } from './routes/events.$slug.live'
 import { Route as EventsSlugLightPlanRouteImport } from './routes/events.$slug.light-plan'
 import { Route as EventsSlugLeftoversRouteImport } from './routes/events.$slug.leftovers'
+import { Route as EventsSlugLateNightRouteImport } from './routes/events.$slug.late-night'
 import { Route as EventsSlugKidsCornerRouteImport } from './routes/events.$slug.kids-corner'
 import { Route as EventsSlugKidsRouteImport } from './routes/events.$slug.kids'
 import { Route as EventsSlugKeysRouteImport } from './routes/events.$slug.keys'
@@ -153,6 +155,7 @@ import { Route as EventsSlugInviteRouteImport } from './routes/events.$slug.invi
 import { Route as EventsSlugInvitationsRouteImport } from './routes/events.$slug.invitations'
 import { Route as EventsSlugInsightsRouteImport } from './routes/events.$slug.insights'
 import { Route as EventsSlugIcebreakersRouteImport } from './routes/events.$slug.icebreakers'
+import { Route as EventsSlugHoneymoonRouteImport } from './routes/events.$slug.honeymoon'
 import { Route as EventsSlugHighlightReelRouteImport } from './routes/events.$slug.highlight-reel'
 import { Route as EventsSlugHallOfFameRouteImport } from './routes/events.$slug.hall-of-fame'
 import { Route as EventsSlugGuidesRouteImport } from './routes/events.$slug.guides'
@@ -305,6 +308,11 @@ const AppTimeCapsuleRoute = AppTimeCapsuleRouteImport.update({
 const AppThemeStudioRoute = AppThemeStudioRouteImport.update({
   id: '/theme-studio',
   path: '/theme-studio',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSupportRoute = AppSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
   getParentRoute: () => AppRoute,
 } as any)
 const AppStoryComposerRoute = AppStoryComposerRouteImport.update({
@@ -900,6 +908,11 @@ const EventsSlugLeftoversRoute = EventsSlugLeftoversRouteImport.update({
   path: '/leftovers',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugLateNightRoute = EventsSlugLateNightRouteImport.update({
+  id: '/late-night',
+  path: '/late-night',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugKidsCornerRoute = EventsSlugKidsCornerRouteImport.update({
   id: '/kids-corner',
   path: '/kids-corner',
@@ -933,6 +946,11 @@ const EventsSlugInsightsRoute = EventsSlugInsightsRouteImport.update({
 const EventsSlugIcebreakersRoute = EventsSlugIcebreakersRouteImport.update({
   id: '/icebreakers',
   path: '/icebreakers',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugHoneymoonRoute = EventsSlugHoneymoonRouteImport.update({
+  id: '/honeymoon',
+  path: '/honeymoon',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugHighlightReelRoute = EventsSlugHighlightReelRouteImport.update({
@@ -1287,6 +1305,7 @@ export interface FileRoutesByFullPath {
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
+  '/app/support': typeof AppSupportRoute
   '/app/theme-studio': typeof AppThemeStudioRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
@@ -1355,6 +1374,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
   '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
+  '/events/$slug/honeymoon': typeof EventsSlugHoneymoonRoute
   '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
@@ -1362,6 +1382,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/keys': typeof EventsSlugKeysRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/kids-corner': typeof EventsSlugKidsCornerRoute
+  '/events/$slug/late-night': typeof EventsSlugLateNightRoute
   '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -1490,6 +1511,7 @@ export interface FileRoutesByTo {
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
+  '/app/support': typeof AppSupportRoute
   '/app/theme-studio': typeof AppThemeStudioRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
@@ -1557,6 +1579,7 @@ export interface FileRoutesByTo {
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
   '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
+  '/events/$slug/honeymoon': typeof EventsSlugHoneymoonRoute
   '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
@@ -1564,6 +1587,7 @@ export interface FileRoutesByTo {
   '/events/$slug/keys': typeof EventsSlugKeysRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/kids-corner': typeof EventsSlugKidsCornerRoute
+  '/events/$slug/late-night': typeof EventsSlugLateNightRoute
   '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -1694,6 +1718,7 @@ export interface FileRoutesById {
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
   '/app/story-composer': typeof AppStoryComposerRoute
+  '/app/support': typeof AppSupportRoute
   '/app/theme-studio': typeof AppThemeStudioRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
@@ -1762,6 +1787,7 @@ export interface FileRoutesById {
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
   '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
+  '/events/$slug/honeymoon': typeof EventsSlugHoneymoonRoute
   '/events/$slug/icebreakers': typeof EventsSlugIcebreakersRoute
   '/events/$slug/insights': typeof EventsSlugInsightsRoute
   '/events/$slug/invitations': typeof EventsSlugInvitationsRoute
@@ -1769,6 +1795,7 @@ export interface FileRoutesById {
   '/events/$slug/keys': typeof EventsSlugKeysRoute
   '/events/$slug/kids': typeof EventsSlugKidsRoute
   '/events/$slug/kids-corner': typeof EventsSlugKidsCornerRoute
+  '/events/$slug/late-night': typeof EventsSlugLateNightRoute
   '/events/$slug/leftovers': typeof EventsSlugLeftoversRoute
   '/events/$slug/light-plan': typeof EventsSlugLightPlanRoute
   '/events/$slug/live': typeof EventsSlugLiveRouteWithChildren
@@ -1900,6 +1927,7 @@ export interface FileRouteTypes {
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
+    | '/app/support'
     | '/app/theme-studio'
     | '/app/time-capsule'
     | '/app/tips'
@@ -1968,6 +1996,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
     | '/events/$slug/highlight-reel'
+    | '/events/$slug/honeymoon'
     | '/events/$slug/icebreakers'
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
@@ -1975,6 +2004,7 @@ export interface FileRouteTypes {
     | '/events/$slug/keys'
     | '/events/$slug/kids'
     | '/events/$slug/kids-corner'
+    | '/events/$slug/late-night'
     | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
@@ -2103,6 +2133,7 @@ export interface FileRouteTypes {
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
+    | '/app/support'
     | '/app/theme-studio'
     | '/app/time-capsule'
     | '/app/tips'
@@ -2170,6 +2201,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
     | '/events/$slug/highlight-reel'
+    | '/events/$slug/honeymoon'
     | '/events/$slug/icebreakers'
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
@@ -2177,6 +2209,7 @@ export interface FileRouteTypes {
     | '/events/$slug/keys'
     | '/events/$slug/kids'
     | '/events/$slug/kids-corner'
+    | '/events/$slug/late-night'
     | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
@@ -2306,6 +2339,7 @@ export interface FileRouteTypes {
     | '/app/settings'
     | '/app/sounds'
     | '/app/story-composer'
+    | '/app/support'
     | '/app/theme-studio'
     | '/app/time-capsule'
     | '/app/tips'
@@ -2374,6 +2408,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guides'
     | '/events/$slug/hall-of-fame'
     | '/events/$slug/highlight-reel'
+    | '/events/$slug/honeymoon'
     | '/events/$slug/icebreakers'
     | '/events/$slug/insights'
     | '/events/$slug/invitations'
@@ -2381,6 +2416,7 @@ export interface FileRouteTypes {
     | '/events/$slug/keys'
     | '/events/$slug/kids'
     | '/events/$slug/kids-corner'
+    | '/events/$slug/late-night'
     | '/events/$slug/leftovers'
     | '/events/$slug/light-plan'
     | '/events/$slug/live'
@@ -2595,6 +2631,13 @@ declare module '@tanstack/react-router' {
       path: '/theme-studio'
       fullPath: '/app/theme-studio'
       preLoaderRoute: typeof AppThemeStudioRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/support': {
+      id: '/app/support'
+      path: '/support'
+      fullPath: '/app/support'
+      preLoaderRoute: typeof AppSupportRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/story-composer': {
@@ -3423,6 +3466,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugLeftoversRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/late-night': {
+      id: '/events/$slug/late-night'
+      path: '/late-night'
+      fullPath: '/events/$slug/late-night'
+      preLoaderRoute: typeof EventsSlugLateNightRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/kids-corner': {
       id: '/events/$slug/kids-corner'
       path: '/kids-corner'
@@ -3470,6 +3520,13 @@ declare module '@tanstack/react-router' {
       path: '/icebreakers'
       fullPath: '/events/$slug/icebreakers'
       preLoaderRoute: typeof EventsSlugIcebreakersRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/honeymoon': {
+      id: '/events/$slug/honeymoon'
+      path: '/honeymoon'
+      fullPath: '/events/$slug/honeymoon'
+      preLoaderRoute: typeof EventsSlugHoneymoonRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/highlight-reel': {
@@ -3959,6 +4016,7 @@ interface AppRouteChildren {
   AppSettingsRoute: typeof AppSettingsRoute
   AppSoundsRoute: typeof AppSoundsRoute
   AppStoryComposerRoute: typeof AppStoryComposerRoute
+  AppSupportRoute: typeof AppSupportRoute
   AppThemeStudioRoute: typeof AppThemeStudioRoute
   AppTimeCapsuleRoute: typeof AppTimeCapsuleRoute
   AppTipsRoute: typeof AppTipsRoute
@@ -4028,6 +4086,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppSettingsRoute: AppSettingsRoute,
   AppSoundsRoute: AppSoundsRoute,
   AppStoryComposerRoute: AppStoryComposerRoute,
+  AppSupportRoute: AppSupportRoute,
   AppThemeStudioRoute: AppThemeStudioRoute,
   AppTimeCapsuleRoute: AppTimeCapsuleRoute,
   AppTipsRoute: AppTipsRoute,
@@ -4122,6 +4181,7 @@ interface EventsSlugRouteChildren {
   EventsSlugGuidesRoute: typeof EventsSlugGuidesRoute
   EventsSlugHallOfFameRoute: typeof EventsSlugHallOfFameRoute
   EventsSlugHighlightReelRoute: typeof EventsSlugHighlightReelRoute
+  EventsSlugHoneymoonRoute: typeof EventsSlugHoneymoonRoute
   EventsSlugIcebreakersRoute: typeof EventsSlugIcebreakersRoute
   EventsSlugInsightsRoute: typeof EventsSlugInsightsRoute
   EventsSlugInvitationsRoute: typeof EventsSlugInvitationsRoute
@@ -4129,6 +4189,7 @@ interface EventsSlugRouteChildren {
   EventsSlugKeysRoute: typeof EventsSlugKeysRoute
   EventsSlugKidsRoute: typeof EventsSlugKidsRoute
   EventsSlugKidsCornerRoute: typeof EventsSlugKidsCornerRoute
+  EventsSlugLateNightRoute: typeof EventsSlugLateNightRoute
   EventsSlugLeftoversRoute: typeof EventsSlugLeftoversRoute
   EventsSlugLightPlanRoute: typeof EventsSlugLightPlanRoute
   EventsSlugLiveRoute: typeof EventsSlugLiveRouteWithChildren
@@ -4248,6 +4309,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugGuidesRoute: EventsSlugGuidesRoute,
   EventsSlugHallOfFameRoute: EventsSlugHallOfFameRoute,
   EventsSlugHighlightReelRoute: EventsSlugHighlightReelRoute,
+  EventsSlugHoneymoonRoute: EventsSlugHoneymoonRoute,
   EventsSlugIcebreakersRoute: EventsSlugIcebreakersRoute,
   EventsSlugInsightsRoute: EventsSlugInsightsRoute,
   EventsSlugInvitationsRoute: EventsSlugInvitationsRoute,
@@ -4255,6 +4317,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugKeysRoute: EventsSlugKeysRoute,
   EventsSlugKidsRoute: EventsSlugKidsRoute,
   EventsSlugKidsCornerRoute: EventsSlugKidsCornerRoute,
+  EventsSlugLateNightRoute: EventsSlugLateNightRoute,
   EventsSlugLeftoversRoute: EventsSlugLeftoversRoute,
   EventsSlugLightPlanRoute: EventsSlugLightPlanRoute,
   EventsSlugLiveRoute: EventsSlugLiveRouteWithChildren,
