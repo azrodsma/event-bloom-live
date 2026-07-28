@@ -1,7 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Calendar, ChevronLeft, ChevronRight, MapPin, Clock, Radio, Bell, Plus, Filter } from "lucide-react";
+import { ArrowLeft, Calendar, ChevronLeft, ChevronRight, MapPin, Clock, Radio, Bell, Plus, Filter, LogIn } from "lucide-react";
 import { useMemo, useState } from "react";
-import { mockEvents as events, eventTypeIcons, type MockEvent } from "@/lib/mock-data";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
+import { listMyEvents } from "@/lib/events.functions";
+import { eventTypeIcons } from "@/lib/mock-data";
+import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/app/agenda")({
   component: Agenda,
@@ -22,9 +26,7 @@ interface AgendaItem {
   title: string;
   type: string;
   date: Date;
-  time: string;
   venue: string;
-  city: string;
   role: "host" | "guest";
   status: "confirmed" | "pending" | "live";
   cover: string;
@@ -42,41 +44,43 @@ function fmtMonth(d: Date) {
 function fmtDay(d: Date) {
   return d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
 }
-
-function buildAgenda(): AgendaItem[] {
-  const now = new Date();
-  const roles: Array<AgendaItem["role"]> = ["host", "guest", "guest", "host", "guest", "guest"];
-  const statuses: Array<AgendaItem["status"]> = ["confirmed", "confirmed", "pending", "live", "confirmed", "confirmed"];
-  const offsets = [1, 12, 34, 0, -14, 62];
-  return events.slice(0, 6).map((e: MockEvent, i: number) => {
-    const d = new Date(now);
-    d.setDate(now.getDate() + offsets[i]);
-    return {
-      slug: e.slug,
-      title: e.title,
-      type: e.type,
-      date: d,
-      time: "14 h 30",
-      venue: e.venue,
-      city: e.city,
-      role: roles[i],
-      status: statuses[i],
-      cover: e.cover,
-    };
-  });
+function fmtTime(d: Date) {
+  return d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
 }
 
 function Agenda() {
+  const { user } = useAuth();
   const [view, setView] = useState<"list" | "month">("list");
   const [filter, setFilter] = useState<"all" | "host" | "guest">("all");
   const [cursor, setCursor] = useState(() => startOfMonth(new Date()));
 
-  const items = useMemo(buildAgenda, []);
+  const list = useServerFn(listMyEvents);
+  const { data: rows = [], isLoading } = useQuery({
+    queryKey: ["my-events"],
+    enabled: !!user,
+    queryFn: () => list(),
+  });
+
+  const items: AgendaItem[] = useMemo(() => {
+    return (rows as any[])
+      .filter((e) => e.event_date)
+      .map((e) => ({
+        slug: e.slug,
+        title: e.title,
+        type: e.type,
+        date: new Date(e.event_date),
+        venue: e.location ?? "",
+        role: e.memberRole === "owner" ? "host" : "guest",
+        status: e.status === "live" ? "live" : "confirmed",
+        cover: e.cover_url ?? "",
+      }));
+  }, [rows]);
+
   const filtered = filter === "all" ? items : items.filter((i) => i.role === filter);
   const now = new Date();
 
   const upcoming = filtered
-    .filter((i) => i.status !== "confirmed" || i.date >= new Date(now.getTime() - 86400000))
+    .filter((i) => i.date >= new Date(now.getTime() - 86400000) || i.status === "live")
     .sort((a, b) => a.date.getTime() - b.date.getTime());
   const past = filtered.filter((i) => i.date < new Date(now.getTime() - 86400000)).sort((a, b) => b.date.getTime() - a.date.getTime());
   const nextLive = upcoming.find((i) => i.status === "live");
@@ -89,9 +93,9 @@ function Agenda() {
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <p className="font-serif text-lg">Mon agenda</p>
-        <button className="grid h-9 w-9 place-items-center rounded-full hover:bg-muted" aria-label="Notifications">
+        <Link to="/app/notifications" className="grid h-9 w-9 place-items-center rounded-full hover:bg-muted" aria-label="Notifications">
           <Bell className="h-4 w-4" />
-        </button>
+        </Link>
       </div>
 
       <section className="bg-gradient-to-b from-accent/40 to-transparent px-4 pb-6 pt-6">
@@ -106,15 +110,27 @@ function Agenda() {
             params={{ slug: nextItem.slug }}
             className="mt-5 flex items-stretch gap-3 overflow-hidden rounded-3xl bg-card shadow-card"
           >
-            <img src={nextItem.cover} alt="" className="h-24 w-24 shrink-0 object-cover" />
+            {nextItem.cover ? (
+              <img src={nextItem.cover} alt="" className="h-24 w-24 shrink-0 object-cover" />
+            ) : (
+              <div className="grid h-24 w-24 shrink-0 place-items-center bg-secondary text-3xl">
+                {eventTypeIcons[nextItem.type as keyof typeof eventTypeIcons] ?? "🎉"}
+              </div>
+            )}
             <div className="flex min-w-0 flex-1 flex-col justify-center py-3 pr-4">
               <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
-                {nextItem.status === "live" ? "En direct maintenant" : daysBetween(now, nextItem.date) <= 0 ? "Aujourd'hui" : `Dans ${daysBetween(now, nextItem.date)} jours`}
+                {nextItem.status === "live"
+                  ? "En direct maintenant"
+                  : daysBetween(now, nextItem.date) <= 0
+                  ? "Aujourd'hui"
+                  : `Dans ${daysBetween(now, nextItem.date)} jours`}
               </span>
               <p className="mt-0.5 truncate font-serif text-lg">{nextItem.title}</p>
-              <p className="mt-0.5 flex items-center gap-1 truncate text-[11px] text-muted-foreground">
-                <MapPin className="h-3 w-3 shrink-0" /> {nextItem.venue} · {nextItem.city}
-              </p>
+              {nextItem.venue && (
+                <p className="mt-0.5 flex items-center gap-1 truncate text-[11px] text-muted-foreground">
+                  <MapPin className="h-3 w-3 shrink-0" /> {nextItem.venue}
+                </p>
+              )}
             </div>
           </Link>
         )}
@@ -154,7 +170,13 @@ function Agenda() {
         </div>
       </div>
 
-      {view === "list" ? (
+      {!user ? (
+        <div className="mx-4 mt-6 flex items-center gap-3 rounded-3xl bg-surface p-5 shadow-card">
+          <LogIn className="h-5 w-5 text-primary" />
+          <p className="flex-1 text-sm">Connectez-vous pour retrouver votre agenda.</p>
+          <Link to="/auth" className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground">Connexion</Link>
+        </div>
+      ) : view === "list" ? (
         <div className="px-4 pt-4">
           {nextLive && (
             <div className="mb-4 flex items-center gap-3 rounded-3xl border border-destructive/40 bg-destructive/5 p-3.5">
@@ -176,11 +198,19 @@ function Agenda() {
           )}
 
           <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">À venir ({upcoming.length})</p>
-          <ul className="space-y-2">
-            {upcoming.map((it) => (
-              <AgendaCard key={it.slug} item={it} now={now} />
-            ))}
-          </ul>
+          {isLoading ? (
+            <p className="rounded-3xl bg-surface py-8 text-center text-sm text-muted-foreground">Chargement…</p>
+          ) : upcoming.length === 0 ? (
+            <p className="rounded-3xl border border-dashed border-border py-8 text-center text-sm text-muted-foreground">
+              Aucun événement à venir.
+            </p>
+          ) : (
+            <ul className="space-y-2">
+              {upcoming.map((it) => (
+                <AgendaCard key={it.slug} item={it} now={now} />
+              ))}
+            </ul>
+          )}
 
           {past.length > 0 && (
             <>
@@ -228,9 +258,7 @@ function Agenda() {
               for (let i = 0; i < startWeekday; i++) cells.push(<div key={`e${i}`} />);
               for (let d = 1; d <= daysInMonth; d++) {
                 const day = new Date(cursor.getFullYear(), cursor.getMonth(), d);
-                const dayEvents = items.filter(
-                  (e) => e.date.toDateString() === day.toDateString(),
-                );
+                const dayEvents = items.filter((e) => e.date.toDateString() === day.toDateString());
                 const isToday = day.toDateString() === now.toDateString();
                 cells.push(
                   <div
@@ -308,18 +336,13 @@ function AgendaCard({ item, now }: { item: AgendaItem; now: Date }) {
                 <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" /> Live
               </span>
             )}
-            {item.status === "pending" && (
-              <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-amber-700">
-                RSVP à faire
-              </span>
-            )}
           </div>
           <p className="mt-1 truncate text-sm font-semibold">{item.title}</p>
           <p className="mt-0.5 flex items-center gap-2 truncate text-[11px] text-muted-foreground">
             <span className="capitalize">{fmtDay(item.date)}</span>
             <span>·</span>
             <Clock className="h-3 w-3" />
-            {item.time}
+            {fmtTime(item.date)}
           </p>
         </div>
         <div className="text-right">
