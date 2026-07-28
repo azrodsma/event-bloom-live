@@ -57,6 +57,7 @@ import { Route as AppCreateRouteImport } from './routes/app.create'
 import { Route as AppConciergeRouteImport } from './routes/app.concierge'
 import { Route as AppCommunityRouteImport } from './routes/app.community'
 import { Route as AppCollectionsRouteImport } from './routes/app.collections'
+import { Route as AppCoOrganizersRouteImport } from './routes/app.co-organizers'
 import { Route as AppCareRouteImport } from './routes/app.care'
 import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
 import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries'
@@ -390,6 +391,11 @@ const AppCommunityRoute = AppCommunityRouteImport.update({
 const AppCollectionsRoute = AppCollectionsRouteImport.update({
   id: '/collections',
   path: '/collections',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCoOrganizersRoute = AppCoOrganizersRouteImport.update({
+  id: '/co-organizers',
+  path: '/co-organizers',
   getParentRoute: () => AppRoute,
 } as any)
 const AppCareRoute = AppCareRouteImport.update({
@@ -876,6 +882,7 @@ export interface FileRoutesByFullPath {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/care': typeof AppCareRoute
+  '/app/co-organizers': typeof AppCoOrganizersRoute
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
   '/app/concierge': typeof AppConciergeRoute
@@ -1019,6 +1026,7 @@ export interface FileRoutesByTo {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/care': typeof AppCareRoute
+  '/app/co-organizers': typeof AppCoOrganizersRoute
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
   '/app/concierge': typeof AppConciergeRoute
@@ -1163,6 +1171,7 @@ export interface FileRoutesById {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/care': typeof AppCareRoute
+  '/app/co-organizers': typeof AppCoOrganizersRoute
   '/app/collections': typeof AppCollectionsRoute
   '/app/community': typeof AppCommunityRoute
   '/app/concierge': typeof AppConciergeRoute
@@ -1309,6 +1318,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/care'
+    | '/app/co-organizers'
     | '/app/collections'
     | '/app/community'
     | '/app/concierge'
@@ -1452,6 +1462,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/care'
+    | '/app/co-organizers'
     | '/app/collections'
     | '/app/community'
     | '/app/concierge'
@@ -1595,6 +1606,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/care'
+    | '/app/co-organizers'
     | '/app/collections'
     | '/app/community'
     | '/app/concierge'
@@ -2075,6 +2087,13 @@ declare module '@tanstack/react-router' {
       path: '/collections'
       fullPath: '/app/collections'
       preLoaderRoute: typeof AppCollectionsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/co-organizers': {
+      id: '/app/co-organizers'
+      path: '/co-organizers'
+      fullPath: '/app/co-organizers'
+      preLoaderRoute: typeof AppCoOrganizersRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/care': {
@@ -2768,6 +2787,7 @@ interface AppRouteChildren {
   AppAnniversariesRoute: typeof AppAnniversariesRoute
   AppAppearanceRoute: typeof AppAppearanceRoute
   AppCareRoute: typeof AppCareRoute
+  AppCoOrganizersRoute: typeof AppCoOrganizersRoute
   AppCollectionsRoute: typeof AppCollectionsRoute
   AppCommunityRoute: typeof AppCommunityRoute
   AppConciergeRoute: typeof AppConciergeRoute
@@ -2818,6 +2838,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAnniversariesRoute: AppAnniversariesRoute,
   AppAppearanceRoute: AppAppearanceRoute,
   AppCareRoute: AppCareRoute,
+  AppCoOrganizersRoute: AppCoOrganizersRoute,
   AppCollectionsRoute: AppCollectionsRoute,
   AppCommunityRoute: AppCommunityRoute,
   AppConciergeRoute: AppConciergeRoute,
