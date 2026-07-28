@@ -31,6 +31,7 @@ import { Route as AppStoryComposerRouteImport } from './routes/app.story-compose
 import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSecurityRouteImport } from './routes/app.security'
+import { Route as AppSavedRouteImport } from './routes/app.saved'
 import { Route as AppRemindersRouteImport } from './routes/app.reminders'
 import { Route as AppReferralsRouteImport } from './routes/app.referrals'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
@@ -151,6 +152,7 @@ import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugEcoRouteImport } from './routes/events.$slug.eco'
 import { Route as EventsSlugDresscodeRouteImport } from './routes/events.$slug.dresscode'
 import { Route as EventsSlugDjRequestsRouteImport } from './routes/events.$slug.dj-requests'
+import { Route as EventsSlugDisposableCamsRouteImport } from './routes/events.$slug.disposable-cams'
 import { Route as EventsSlugDisplayRouteImport } from './routes/events.$slug.display'
 import { Route as EventsSlugDeliveriesRouteImport } from './routes/events.$slug.deliveries'
 import { Route as EventsSlugDecorRouteImport } from './routes/events.$slug.decor'
@@ -170,6 +172,7 @@ import { Route as EventsSlugBarRouteImport } from './routes/events.$slug.bar'
 import { Route as EventsSlugBackupPlanRouteImport } from './routes/events.$slug.backup-plan'
 import { Route as EventsSlugAuctionRouteImport } from './routes/events.$slug.auction'
 import { Route as EventsSlugArchiveRouteImport } from './routes/events.$slug.archive'
+import { Route as EventsSlugAllergiesRouteImport } from './routes/events.$slug.allergies'
 import { Route as EventsSlugAlbumRouteImport } from './routes/events.$slug.album'
 import { Route as EventsSlugAiPortraitsRouteImport } from './routes/events.$slug.ai-portraits'
 import { Route as EventsSlugAfterpartyRouteImport } from './routes/events.$slug.afterparty'
@@ -291,6 +294,11 @@ const AppSettingsRoute = AppSettingsRouteImport.update({
 const AppSecurityRoute = AppSecurityRouteImport.update({
   id: '/security',
   path: '/security',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSavedRoute = AppSavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
   getParentRoute: () => AppRoute,
 } as any)
 const AppRemindersRoute = AppRemindersRouteImport.update({
@@ -895,6 +903,12 @@ const EventsSlugDjRequestsRoute = EventsSlugDjRequestsRouteImport.update({
   path: '/dj-requests',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugDisposableCamsRoute =
+  EventsSlugDisposableCamsRouteImport.update({
+    id: '/disposable-cams',
+    path: '/disposable-cams',
+    getParentRoute: () => EventsSlugRoute,
+  } as any)
 const EventsSlugDisplayRoute = EventsSlugDisplayRouteImport.update({
   id: '/display',
   path: '/display',
@@ -988,6 +1002,11 @@ const EventsSlugAuctionRoute = EventsSlugAuctionRouteImport.update({
 const EventsSlugArchiveRoute = EventsSlugArchiveRouteImport.update({
   id: '/archive',
   path: '/archive',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugAllergiesRoute = EventsSlugAllergiesRouteImport.update({
+  id: '/allergies',
+  path: '/allergies',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugAlbumRoute = EventsSlugAlbumRouteImport.update({
@@ -1100,6 +1119,7 @@ export interface FileRoutesByFullPath {
   '/app/referral': typeof AppReferralRoute
   '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
+  '/app/saved': typeof AppSavedRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
@@ -1125,6 +1145,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/allergies': typeof EventsSlugAllergiesRoute
   '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
@@ -1144,6 +1165,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
+  '/events/$slug/disposable-cams': typeof EventsSlugDisposableCamsRoute
   '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
@@ -1274,6 +1296,7 @@ export interface FileRoutesByTo {
   '/app/referral': typeof AppReferralRoute
   '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
+  '/app/saved': typeof AppSavedRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
@@ -1298,6 +1321,7 @@ export interface FileRoutesByTo {
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/allergies': typeof EventsSlugAllergiesRoute
   '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
@@ -1317,6 +1341,7 @@ export interface FileRoutesByTo {
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
+  '/events/$slug/disposable-cams': typeof EventsSlugDisposableCamsRoute
   '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
@@ -1449,6 +1474,7 @@ export interface FileRoutesById {
   '/app/referral': typeof AppReferralRoute
   '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
+  '/app/saved': typeof AppSavedRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
@@ -1474,6 +1500,7 @@ export interface FileRoutesById {
   '/events/$slug/afterparty': typeof EventsSlugAfterpartyRoute
   '/events/$slug/ai-portraits': typeof EventsSlugAiPortraitsRoute
   '/events/$slug/album': typeof EventsSlugAlbumRoute
+  '/events/$slug/allergies': typeof EventsSlugAllergiesRoute
   '/events/$slug/archive': typeof EventsSlugArchiveRoute
   '/events/$slug/auction': typeof EventsSlugAuctionRoute
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
@@ -1493,6 +1520,7 @@ export interface FileRoutesById {
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
+  '/events/$slug/disposable-cams': typeof EventsSlugDisposableCamsRoute
   '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
   '/events/$slug/eco': typeof EventsSlugEcoRoute
@@ -1626,6 +1654,7 @@ export interface FileRouteTypes {
     | '/app/referral'
     | '/app/referrals'
     | '/app/reminders'
+    | '/app/saved'
     | '/app/security'
     | '/app/settings'
     | '/app/sounds'
@@ -1651,6 +1680,7 @@ export interface FileRouteTypes {
     | '/events/$slug/afterparty'
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
+    | '/events/$slug/allergies'
     | '/events/$slug/archive'
     | '/events/$slug/auction'
     | '/events/$slug/backup-plan'
@@ -1670,6 +1700,7 @@ export interface FileRouteTypes {
     | '/events/$slug/decor'
     | '/events/$slug/deliveries'
     | '/events/$slug/display'
+    | '/events/$slug/disposable-cams'
     | '/events/$slug/dj-requests'
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
@@ -1800,6 +1831,7 @@ export interface FileRouteTypes {
     | '/app/referral'
     | '/app/referrals'
     | '/app/reminders'
+    | '/app/saved'
     | '/app/security'
     | '/app/settings'
     | '/app/sounds'
@@ -1824,6 +1856,7 @@ export interface FileRouteTypes {
     | '/events/$slug/afterparty'
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
+    | '/events/$slug/allergies'
     | '/events/$slug/archive'
     | '/events/$slug/auction'
     | '/events/$slug/backup-plan'
@@ -1843,6 +1876,7 @@ export interface FileRouteTypes {
     | '/events/$slug/decor'
     | '/events/$slug/deliveries'
     | '/events/$slug/display'
+    | '/events/$slug/disposable-cams'
     | '/events/$slug/dj-requests'
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
@@ -1974,6 +2008,7 @@ export interface FileRouteTypes {
     | '/app/referral'
     | '/app/referrals'
     | '/app/reminders'
+    | '/app/saved'
     | '/app/security'
     | '/app/settings'
     | '/app/sounds'
@@ -1999,6 +2034,7 @@ export interface FileRouteTypes {
     | '/events/$slug/afterparty'
     | '/events/$slug/ai-portraits'
     | '/events/$slug/album'
+    | '/events/$slug/allergies'
     | '/events/$slug/archive'
     | '/events/$slug/auction'
     | '/events/$slug/backup-plan'
@@ -2018,6 +2054,7 @@ export interface FileRouteTypes {
     | '/events/$slug/decor'
     | '/events/$slug/deliveries'
     | '/events/$slug/display'
+    | '/events/$slug/disposable-cams'
     | '/events/$slug/dj-requests'
     | '/events/$slug/dresscode'
     | '/events/$slug/eco'
@@ -2266,6 +2303,13 @@ declare module '@tanstack/react-router' {
       path: '/security'
       fullPath: '/app/security'
       preLoaderRoute: typeof AppSecurityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/saved': {
+      id: '/app/saved'
+      path: '/saved'
+      fullPath: '/app/saved'
+      preLoaderRoute: typeof AppSavedRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/reminders': {
@@ -3108,6 +3152,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugDjRequestsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/disposable-cams': {
+      id: '/events/$slug/disposable-cams'
+      path: '/disposable-cams'
+      fullPath: '/events/$slug/disposable-cams'
+      preLoaderRoute: typeof EventsSlugDisposableCamsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/display': {
       id: '/events/$slug/display'
       path: '/display'
@@ -3239,6 +3290,13 @@ declare module '@tanstack/react-router' {
       path: '/archive'
       fullPath: '/events/$slug/archive'
       preLoaderRoute: typeof EventsSlugArchiveRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/allergies': {
+      id: '/events/$slug/allergies'
+      path: '/allergies'
+      fullPath: '/events/$slug/allergies'
+      preLoaderRoute: typeof EventsSlugAllergiesRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/album': {
@@ -3395,6 +3453,7 @@ interface AppRouteChildren {
   AppReferralRoute: typeof AppReferralRoute
   AppReferralsRoute: typeof AppReferralsRoute
   AppRemindersRoute: typeof AppRemindersRoute
+  AppSavedRoute: typeof AppSavedRoute
   AppSecurityRoute: typeof AppSecurityRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppSoundsRoute: typeof AppSoundsRoute
@@ -3456,6 +3515,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppReferralRoute: AppReferralRoute,
   AppReferralsRoute: AppReferralsRoute,
   AppRemindersRoute: AppRemindersRoute,
+  AppSavedRoute: AppSavedRoute,
   AppSecurityRoute: AppSecurityRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppSoundsRoute: AppSoundsRoute,
@@ -3507,6 +3567,7 @@ interface EventsSlugRouteChildren {
   EventsSlugAfterpartyRoute: typeof EventsSlugAfterpartyRoute
   EventsSlugAiPortraitsRoute: typeof EventsSlugAiPortraitsRoute
   EventsSlugAlbumRoute: typeof EventsSlugAlbumRoute
+  EventsSlugAllergiesRoute: typeof EventsSlugAllergiesRoute
   EventsSlugArchiveRoute: typeof EventsSlugArchiveRoute
   EventsSlugAuctionRoute: typeof EventsSlugAuctionRoute
   EventsSlugBackupPlanRoute: typeof EventsSlugBackupPlanRoute
@@ -3526,6 +3587,7 @@ interface EventsSlugRouteChildren {
   EventsSlugDecorRoute: typeof EventsSlugDecorRoute
   EventsSlugDeliveriesRoute: typeof EventsSlugDeliveriesRoute
   EventsSlugDisplayRoute: typeof EventsSlugDisplayRoute
+  EventsSlugDisposableCamsRoute: typeof EventsSlugDisposableCamsRoute
   EventsSlugDjRequestsRoute: typeof EventsSlugDjRequestsRoute
   EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
   EventsSlugEcoRoute: typeof EventsSlugEcoRoute
@@ -3612,6 +3674,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugAfterpartyRoute: EventsSlugAfterpartyRoute,
   EventsSlugAiPortraitsRoute: EventsSlugAiPortraitsRoute,
   EventsSlugAlbumRoute: EventsSlugAlbumRoute,
+  EventsSlugAllergiesRoute: EventsSlugAllergiesRoute,
   EventsSlugArchiveRoute: EventsSlugArchiveRoute,
   EventsSlugAuctionRoute: EventsSlugAuctionRoute,
   EventsSlugBackupPlanRoute: EventsSlugBackupPlanRoute,
@@ -3631,6 +3694,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugDecorRoute: EventsSlugDecorRoute,
   EventsSlugDeliveriesRoute: EventsSlugDeliveriesRoute,
   EventsSlugDisplayRoute: EventsSlugDisplayRoute,
+  EventsSlugDisposableCamsRoute: EventsSlugDisposableCamsRoute,
   EventsSlugDjRequestsRoute: EventsSlugDjRequestsRoute,
   EventsSlugDresscodeRoute: EventsSlugDresscodeRoute,
   EventsSlugEcoRoute: EventsSlugEcoRoute,
