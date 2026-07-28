@@ -158,6 +158,7 @@ import { Route as EventsSlugGamesRouteImport } from './routes/events.$slug.games
 import { Route as EventsSlugFlowersRouteImport } from './routes/events.$slug.flowers'
 import { Route as EventsSlugFloralsRouteImport } from './routes/events.$slug.florals'
 import { Route as EventsSlugFirstDanceRouteImport } from './routes/events.$slug.first-dance'
+import { Route as EventsSlugFireworksRouteImport } from './routes/events.$slug.fireworks'
 import { Route as EventsSlugFiltersRouteImport } from './routes/events.$slug.filters'
 import { Route as EventsSlugFavorsRouteImport } from './routes/events.$slug.favors'
 import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
@@ -183,6 +184,7 @@ import { Route as EventsSlugCarpoolRouteImport } from './routes/events.$slug.car
 import { Route as EventsSlugCamerasRouteImport } from './routes/events.$slug.cameras'
 import { Route as EventsSlugCakeRouteImport } from './routes/events.$slug.cake'
 import { Route as EventsSlugBudgetRouteImport } from './routes/events.$slug.budget'
+import { Route as EventsSlugBrunchRouteImport } from './routes/events.$slug.brunch'
 import { Route as EventsSlugBroadcastRouteImport } from './routes/events.$slug.broadcast'
 import { Route as EventsSlugBarRouteImport } from './routes/events.$slug.bar'
 import { Route as EventsSlugBackupPlanRouteImport } from './routes/events.$slug.backup-plan'
@@ -950,6 +952,11 @@ const EventsSlugFirstDanceRoute = EventsSlugFirstDanceRouteImport.update({
   path: '/first-dance',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugFireworksRoute = EventsSlugFireworksRouteImport.update({
+  id: '/fireworks',
+  path: '/fireworks',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugFiltersRoute = EventsSlugFiltersRouteImport.update({
   id: '/filters',
   path: '/filters',
@@ -1074,6 +1081,11 @@ const EventsSlugCakeRoute = EventsSlugCakeRouteImport.update({
 const EventsSlugBudgetRoute = EventsSlugBudgetRouteImport.update({
   id: '/budget',
   path: '/budget',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugBrunchRoute = EventsSlugBrunchRouteImport.update({
+  id: '/brunch',
+  path: '/brunch',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugBroadcastRoute = EventsSlugBroadcastRouteImport.update({
@@ -1253,6 +1265,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
+  '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
@@ -1278,6 +1291,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/favors': typeof EventsSlugFavorsRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
+  '/events/$slug/fireworks': typeof EventsSlugFireworksRoute
   '/events/$slug/first-dance': typeof EventsSlugFirstDanceRoute
   '/events/$slug/florals': typeof EventsSlugFloralsRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
@@ -1445,6 +1459,7 @@ export interface FileRoutesByTo {
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
+  '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
@@ -1470,6 +1485,7 @@ export interface FileRoutesByTo {
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/favors': typeof EventsSlugFavorsRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
+  '/events/$slug/fireworks': typeof EventsSlugFireworksRoute
   '/events/$slug/first-dance': typeof EventsSlugFirstDanceRoute
   '/events/$slug/florals': typeof EventsSlugFloralsRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
@@ -1640,6 +1656,7 @@ export interface FileRoutesById {
   '/events/$slug/backup-plan': typeof EventsSlugBackupPlanRoute
   '/events/$slug/bar': typeof EventsSlugBarRoute
   '/events/$slug/broadcast': typeof EventsSlugBroadcastRoute
+  '/events/$slug/brunch': typeof EventsSlugBrunchRoute
   '/events/$slug/budget': typeof EventsSlugBudgetRoute
   '/events/$slug/cake': typeof EventsSlugCakeRoute
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
@@ -1665,6 +1682,7 @@ export interface FileRoutesById {
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/favors': typeof EventsSlugFavorsRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
+  '/events/$slug/fireworks': typeof EventsSlugFireworksRoute
   '/events/$slug/first-dance': typeof EventsSlugFirstDanceRoute
   '/events/$slug/florals': typeof EventsSlugFloralsRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
@@ -1836,6 +1854,7 @@ export interface FileRouteTypes {
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
     | '/events/$slug/broadcast'
+    | '/events/$slug/brunch'
     | '/events/$slug/budget'
     | '/events/$slug/cake'
     | '/events/$slug/cameras'
@@ -1861,6 +1880,7 @@ export interface FileRouteTypes {
     | '/events/$slug/faq'
     | '/events/$slug/favors'
     | '/events/$slug/filters'
+    | '/events/$slug/fireworks'
     | '/events/$slug/first-dance'
     | '/events/$slug/florals'
     | '/events/$slug/flowers'
@@ -2028,6 +2048,7 @@ export interface FileRouteTypes {
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
     | '/events/$slug/broadcast'
+    | '/events/$slug/brunch'
     | '/events/$slug/budget'
     | '/events/$slug/cake'
     | '/events/$slug/cameras'
@@ -2053,6 +2074,7 @@ export interface FileRouteTypes {
     | '/events/$slug/faq'
     | '/events/$slug/favors'
     | '/events/$slug/filters'
+    | '/events/$slug/fireworks'
     | '/events/$slug/first-dance'
     | '/events/$slug/florals'
     | '/events/$slug/flowers'
@@ -2222,6 +2244,7 @@ export interface FileRouteTypes {
     | '/events/$slug/backup-plan'
     | '/events/$slug/bar'
     | '/events/$slug/broadcast'
+    | '/events/$slug/brunch'
     | '/events/$slug/budget'
     | '/events/$slug/cake'
     | '/events/$slug/cameras'
@@ -2247,6 +2270,7 @@ export interface FileRouteTypes {
     | '/events/$slug/faq'
     | '/events/$slug/favors'
     | '/events/$slug/filters'
+    | '/events/$slug/fireworks'
     | '/events/$slug/first-dance'
     | '/events/$slug/florals'
     | '/events/$slug/flowers'
@@ -3387,6 +3411,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugFirstDanceRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/fireworks': {
+      id: '/events/$slug/fireworks'
+      path: '/fireworks'
+      fullPath: '/events/$slug/fireworks'
+      preLoaderRoute: typeof EventsSlugFireworksRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/filters': {
       id: '/events/$slug/filters'
       path: '/filters'
@@ -3560,6 +3591,13 @@ declare module '@tanstack/react-router' {
       path: '/budget'
       fullPath: '/events/$slug/budget'
       preLoaderRoute: typeof EventsSlugBudgetRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/brunch': {
+      id: '/events/$slug/brunch'
+      path: '/brunch'
+      fullPath: '/events/$slug/brunch'
+      preLoaderRoute: typeof EventsSlugBrunchRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/broadcast': {
@@ -3888,6 +3926,7 @@ interface EventsSlugRouteChildren {
   EventsSlugBackupPlanRoute: typeof EventsSlugBackupPlanRoute
   EventsSlugBarRoute: typeof EventsSlugBarRoute
   EventsSlugBroadcastRoute: typeof EventsSlugBroadcastRoute
+  EventsSlugBrunchRoute: typeof EventsSlugBrunchRoute
   EventsSlugBudgetRoute: typeof EventsSlugBudgetRoute
   EventsSlugCakeRoute: typeof EventsSlugCakeRoute
   EventsSlugCamerasRoute: typeof EventsSlugCamerasRoute
@@ -3913,6 +3952,7 @@ interface EventsSlugRouteChildren {
   EventsSlugFaqRoute: typeof EventsSlugFaqRoute
   EventsSlugFavorsRoute: typeof EventsSlugFavorsRoute
   EventsSlugFiltersRoute: typeof EventsSlugFiltersRoute
+  EventsSlugFireworksRoute: typeof EventsSlugFireworksRoute
   EventsSlugFirstDanceRoute: typeof EventsSlugFirstDanceRoute
   EventsSlugFloralsRoute: typeof EventsSlugFloralsRoute
   EventsSlugFlowersRoute: typeof EventsSlugFlowersRoute
@@ -4006,6 +4046,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugBackupPlanRoute: EventsSlugBackupPlanRoute,
   EventsSlugBarRoute: EventsSlugBarRoute,
   EventsSlugBroadcastRoute: EventsSlugBroadcastRoute,
+  EventsSlugBrunchRoute: EventsSlugBrunchRoute,
   EventsSlugBudgetRoute: EventsSlugBudgetRoute,
   EventsSlugCakeRoute: EventsSlugCakeRoute,
   EventsSlugCamerasRoute: EventsSlugCamerasRoute,
@@ -4031,6 +4072,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugFaqRoute: EventsSlugFaqRoute,
   EventsSlugFavorsRoute: EventsSlugFavorsRoute,
   EventsSlugFiltersRoute: EventsSlugFiltersRoute,
+  EventsSlugFireworksRoute: EventsSlugFireworksRoute,
   EventsSlugFirstDanceRoute: EventsSlugFirstDanceRoute,
   EventsSlugFloralsRoute: EventsSlugFloralsRoute,
   EventsSlugFlowersRoute: EventsSlugFlowersRoute,
