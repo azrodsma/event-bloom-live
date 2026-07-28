@@ -7,6 +7,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getEventBySlug } from "@/lib/events.functions";
 import { adaptEvent } from "@/lib/event-adapter";
 import { listLiveMessages, sendLiveMessage, sendLiveReaction } from "@/lib/live.functions";
+import { listAlbumMedia } from "@/lib/album.functions";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 
