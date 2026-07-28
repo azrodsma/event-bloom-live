@@ -41,6 +41,7 @@ import { Route as AppProDirectoryRouteImport } from './routes/app.pro-directory'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
 import { Route as AppPerformanceRouteImport } from './routes/app.performance'
 import { Route as AppOfficiantsRouteImport } from './routes/app.officiants'
+import { Route as AppNotificationsSettingsRouteImport } from './routes/app.notifications-settings'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
 import { Route as AppMoodGeneratorRouteImport } from './routes/app.mood-generator'
 import { Route as AppMomentsRouteImport } from './routes/app.moments'
@@ -76,6 +77,7 @@ import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as AppAccessibilityRouteImport } from './routes/app.accessibility'
 import { Route as EventsSlugIndexRouteImport } from './routes/events.$slug.index'
+import { Route as EventsSlugWinePairingsRouteImport } from './routes/events.$slug.wine-pairings'
 import { Route as EventsSlugWelcomeBagRouteImport } from './routes/events.$slug.welcome-bag'
 import { Route as EventsSlugWeatherRouteImport } from './routes/events.$slug.weather'
 import { Route as EventsSlugVowsRouteImport } from './routes/events.$slug.vows'
@@ -108,6 +110,7 @@ import { Route as EventsSlugRitualsRouteImport } from './routes/events.$slug.rit
 import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
 import { Route as EventsSlugRehearsalRouteImport } from './routes/events.$slug.rehearsal'
 import { Route as EventsSlugRegistryRouteImport } from './routes/events.$slug.registry'
+import { Route as EventsSlugProcessionRouteImport } from './routes/events.$slug.procession'
 import { Route as EventsSlugPrintShopRouteImport } from './routes/events.$slug.print-shop'
 import { Route as EventsSlugPressRouteImport } from './routes/events.$slug.press'
 import { Route as EventsSlugPollsRouteImport } from './routes/events.$slug.polls'
@@ -349,6 +352,12 @@ const AppOfficiantsRoute = AppOfficiantsRouteImport.update({
   path: '/officiants',
   getParentRoute: () => AppRoute,
 } as any)
+const AppNotificationsSettingsRoute =
+  AppNotificationsSettingsRouteImport.update({
+    id: '/notifications-settings',
+    path: '/notifications-settings',
+    getParentRoute: () => AppRoute,
+  } as any)
 const AppNotificationsRoute = AppNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
@@ -524,6 +533,11 @@ const EventsSlugIndexRoute = EventsSlugIndexRouteImport.update({
   path: '/',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugWinePairingsRoute = EventsSlugWinePairingsRouteImport.update({
+  id: '/wine-pairings',
+  path: '/wine-pairings',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugWelcomeBagRoute = EventsSlugWelcomeBagRouteImport.update({
   id: '/welcome-bag',
   path: '/welcome-bag',
@@ -683,6 +697,11 @@ const EventsSlugRehearsalRoute = EventsSlugRehearsalRouteImport.update({
 const EventsSlugRegistryRoute = EventsSlugRegistryRouteImport.update({
   id: '/registry',
   path: '/registry',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugProcessionRoute = EventsSlugProcessionRouteImport.update({
+  id: '/procession',
+  path: '/procession',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugPrintShopRoute = EventsSlugPrintShopRouteImport.update({
@@ -1129,6 +1148,7 @@ export interface FileRoutesByFullPath {
   '/app/moments': typeof AppMomentsRoute
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
+  '/app/notifications-settings': typeof AppNotificationsSettingsRoute
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
@@ -1232,6 +1252,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
   '/events/$slug/print-shop': typeof EventsSlugPrintShopRoute
+  '/events/$slug/procession': typeof EventsSlugProcessionRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
@@ -1264,6 +1285,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
   '/events/$slug/welcome-bag': typeof EventsSlugWelcomeBagRoute
+  '/events/$slug/wine-pairings': typeof EventsSlugWinePairingsRoute
   '/events/$slug/': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -1309,6 +1331,7 @@ export interface FileRoutesByTo {
   '/app/moments': typeof AppMomentsRoute
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
+  '/app/notifications-settings': typeof AppNotificationsSettingsRoute
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
@@ -1411,6 +1434,7 @@ export interface FileRoutesByTo {
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
   '/events/$slug/print-shop': typeof EventsSlugPrintShopRoute
+  '/events/$slug/procession': typeof EventsSlugProcessionRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
@@ -1443,6 +1467,7 @@ export interface FileRoutesByTo {
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
   '/events/$slug/welcome-bag': typeof EventsSlugWelcomeBagRoute
+  '/events/$slug/wine-pairings': typeof EventsSlugWinePairingsRoute
   '/events/$slug': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -1490,6 +1515,7 @@ export interface FileRoutesById {
   '/app/moments': typeof AppMomentsRoute
   '/app/mood-generator': typeof AppMoodGeneratorRoute
   '/app/notifications': typeof AppNotificationsRoute
+  '/app/notifications-settings': typeof AppNotificationsSettingsRoute
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
@@ -1593,6 +1619,7 @@ export interface FileRoutesById {
   '/events/$slug/polls': typeof EventsSlugPollsRoute
   '/events/$slug/press': typeof EventsSlugPressRoute
   '/events/$slug/print-shop': typeof EventsSlugPrintShopRoute
+  '/events/$slug/procession': typeof EventsSlugProcessionRoute
   '/events/$slug/registry': typeof EventsSlugRegistryRoute
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
@@ -1625,6 +1652,7 @@ export interface FileRoutesById {
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
   '/events/$slug/welcome-bag': typeof EventsSlugWelcomeBagRoute
+  '/events/$slug/wine-pairings': typeof EventsSlugWinePairingsRoute
   '/events/$slug/': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -1673,6 +1701,7 @@ export interface FileRouteTypes {
     | '/app/moments'
     | '/app/mood-generator'
     | '/app/notifications'
+    | '/app/notifications-settings'
     | '/app/officiants'
     | '/app/performance'
     | '/app/premium'
@@ -1776,6 +1805,7 @@ export interface FileRouteTypes {
     | '/events/$slug/polls'
     | '/events/$slug/press'
     | '/events/$slug/print-shop'
+    | '/events/$slug/procession'
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
@@ -1808,6 +1838,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vows'
     | '/events/$slug/weather'
     | '/events/$slug/welcome-bag'
+    | '/events/$slug/wine-pairings'
     | '/events/$slug/'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
@@ -1853,6 +1884,7 @@ export interface FileRouteTypes {
     | '/app/moments'
     | '/app/mood-generator'
     | '/app/notifications'
+    | '/app/notifications-settings'
     | '/app/officiants'
     | '/app/performance'
     | '/app/premium'
@@ -1955,6 +1987,7 @@ export interface FileRouteTypes {
     | '/events/$slug/polls'
     | '/events/$slug/press'
     | '/events/$slug/print-shop'
+    | '/events/$slug/procession'
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
@@ -1987,6 +2020,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vows'
     | '/events/$slug/weather'
     | '/events/$slug/welcome-bag'
+    | '/events/$slug/wine-pairings'
     | '/events/$slug'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
@@ -2033,6 +2067,7 @@ export interface FileRouteTypes {
     | '/app/moments'
     | '/app/mood-generator'
     | '/app/notifications'
+    | '/app/notifications-settings'
     | '/app/officiants'
     | '/app/performance'
     | '/app/premium'
@@ -2136,6 +2171,7 @@ export interface FileRouteTypes {
     | '/events/$slug/polls'
     | '/events/$slug/press'
     | '/events/$slug/print-shop'
+    | '/events/$slug/procession'
     | '/events/$slug/registry'
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
@@ -2168,6 +2204,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vows'
     | '/events/$slug/weather'
     | '/events/$slug/welcome-bag'
+    | '/events/$slug/wine-pairings'
     | '/events/$slug/'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
@@ -2409,6 +2446,13 @@ declare module '@tanstack/react-router' {
       path: '/officiants'
       fullPath: '/app/officiants'
       preLoaderRoute: typeof AppOfficiantsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/notifications-settings': {
+      id: '/app/notifications-settings'
+      path: '/notifications-settings'
+      fullPath: '/app/notifications-settings'
+      preLoaderRoute: typeof AppNotificationsSettingsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/notifications': {
@@ -2656,6 +2700,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugIndexRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/wine-pairings': {
+      id: '/events/$slug/wine-pairings'
+      path: '/wine-pairings'
+      fullPath: '/events/$slug/wine-pairings'
+      preLoaderRoute: typeof EventsSlugWinePairingsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/welcome-bag': {
       id: '/events/$slug/welcome-bag'
       path: '/welcome-bag'
@@ -2878,6 +2929,13 @@ declare module '@tanstack/react-router' {
       path: '/registry'
       fullPath: '/events/$slug/registry'
       preLoaderRoute: typeof EventsSlugRegistryRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/procession': {
+      id: '/events/$slug/procession'
+      path: '/procession'
+      fullPath: '/events/$slug/procession'
+      preLoaderRoute: typeof EventsSlugProcessionRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/print-shop': {
@@ -3502,6 +3560,7 @@ interface AppRouteChildren {
   AppMomentsRoute: typeof AppMomentsRoute
   AppMoodGeneratorRoute: typeof AppMoodGeneratorRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
+  AppNotificationsSettingsRoute: typeof AppNotificationsSettingsRoute
   AppOfficiantsRoute: typeof AppOfficiantsRoute
   AppPerformanceRoute: typeof AppPerformanceRoute
   AppPremiumRoute: typeof AppPremiumRoute
@@ -3565,6 +3624,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppMomentsRoute: AppMomentsRoute,
   AppMoodGeneratorRoute: AppMoodGeneratorRoute,
   AppNotificationsRoute: AppNotificationsRoute,
+  AppNotificationsSettingsRoute: AppNotificationsSettingsRoute,
   AppOfficiantsRoute: AppOfficiantsRoute,
   AppPerformanceRoute: AppPerformanceRoute,
   AppPremiumRoute: AppPremiumRoute,
@@ -3694,6 +3754,7 @@ interface EventsSlugRouteChildren {
   EventsSlugPollsRoute: typeof EventsSlugPollsRoute
   EventsSlugPressRoute: typeof EventsSlugPressRoute
   EventsSlugPrintShopRoute: typeof EventsSlugPrintShopRoute
+  EventsSlugProcessionRoute: typeof EventsSlugProcessionRoute
   EventsSlugRegistryRoute: typeof EventsSlugRegistryRoute
   EventsSlugRehearsalRoute: typeof EventsSlugRehearsalRoute
   EventsSlugReplayRoute: typeof EventsSlugReplayRoute
@@ -3726,6 +3787,7 @@ interface EventsSlugRouteChildren {
   EventsSlugVowsRoute: typeof EventsSlugVowsRoute
   EventsSlugWeatherRoute: typeof EventsSlugWeatherRoute
   EventsSlugWelcomeBagRoute: typeof EventsSlugWelcomeBagRoute
+  EventsSlugWinePairingsRoute: typeof EventsSlugWinePairingsRoute
   EventsSlugIndexRoute: typeof EventsSlugIndexRoute
 }
 
@@ -3803,6 +3865,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugPollsRoute: EventsSlugPollsRoute,
   EventsSlugPressRoute: EventsSlugPressRoute,
   EventsSlugPrintShopRoute: EventsSlugPrintShopRoute,
+  EventsSlugProcessionRoute: EventsSlugProcessionRoute,
   EventsSlugRegistryRoute: EventsSlugRegistryRoute,
   EventsSlugRehearsalRoute: EventsSlugRehearsalRoute,
   EventsSlugReplayRoute: EventsSlugReplayRoute,
@@ -3835,6 +3898,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugVowsRoute: EventsSlugVowsRoute,
   EventsSlugWeatherRoute: EventsSlugWeatherRoute,
   EventsSlugWelcomeBagRoute: EventsSlugWelcomeBagRoute,
+  EventsSlugWinePairingsRoute: EventsSlugWinePairingsRoute,
   EventsSlugIndexRoute: EventsSlugIndexRoute,
 }
 
