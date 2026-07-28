@@ -1,252 +1,135 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Mail, AtSign, Heart, Users, Sparkles, CheckCheck, Filter, Search, Archive } from "lucide-react";
+import { ArrowLeft, Inbox, Star, Reply, Trash2, Search } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/app/inbox")({
-  component: Inbox,
+  component: InboxRoute,
   head: () => ({
     meta: [
-      { title: "Boîte de réception · Memento Live" },
-      { name: "description", content: "Invitations, mentions, réponses et messages : tout au même endroit." },
-      { property: "og:title", content: "Boîte de réception · Memento Live" },
-      { property: "og:description", content: "Toute votre vie sociale, réunie." },
+      { title: "Messages · Memento Live" },
+      { name: "description", content: "Conversations privées avec vos proches, prestataires et l'équipe Memento." },
+      { property: "og:title", content: "Messages · Memento Live" },
+      { property: "og:description", content: "Toutes vos conversations en un seul endroit." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
 
-type Filter = "all" | "invites" | "mentions" | "replies" | "cagnottes";
-
-const filters: { id: Filter; label: string; count?: number }[] = [
-  { id: "all", label: "Tout", count: 24 },
-  { id: "invites", label: "Invitations", count: 3 },
-  { id: "mentions", label: "Mentions", count: 8 },
-  { id: "replies", label: "Réponses", count: 12 },
-  { id: "cagnottes", label: "Cagnottes", count: 1 },
-];
-
-type Message = {
+type Msg = {
   id: string;
-  type: "invite" | "mention" | "reply" | "cagnotte" | "like";
-  avatar: string;
-  from: string;
-  action: string;
-  target?: string;
+  sender: string;
+  role: string;
+  preview: string;
   time: string;
-  preview?: string;
-  eventLabel?: string;
   unread?: boolean;
-  cta?: string;
+  starred?: boolean;
+  avatar: string;
+  tag: "Invité" | "Prestataire" | "Équipe" | "Famille";
 };
 
-const messages: Message[] = [
-  {
-    id: "1",
-    type: "invite",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100",
-    from: "Sarah & Thomas",
-    action: "vous ont invité·e à leur mariage",
-    eventLabel: "12 sept. · Domaine des Roses",
-    time: "il y a 12 min",
-    unread: true,
-    cta: "Répondre",
-  },
-  {
-    id: "2",
-    type: "cagnotte",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100",
-    from: "Baptême de Gabriel",
-    action: "a atteint 78 % de la cagnotte",
-    eventLabel: "Objectif 1 200 €",
-    time: "il y a 45 min",
-    unread: true,
-    cta: "Contribuer",
-  },
-  {
-    id: "3",
-    type: "mention",
-    avatar: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100",
-    from: "Camille Vidal",
-    action: "vous a mentionné·e",
-    target: "dans le livre d'or",
-    preview: "« @louise tu te souviens du fou rire à Bandol ? Faut absolument le raconter aux mariés ! »",
-    time: "il y a 1 h",
-    unread: true,
-    eventLabel: "Mariage Sarah & Thomas",
-  },
-  {
-    id: "4",
-    type: "reply",
-    avatar: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=100",
-    from: "Julien Roux",
-    action: "a répondu à votre message",
-    preview: "« Franchement magique, merci pour l'ambiance. On remet ça à la crémaillère ? »",
-    time: "il y a 3 h",
-    eventLabel: "EVJF Léa",
-  },
-  {
-    id: "5",
-    type: "like",
-    avatar: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=100",
-    from: "Anaïs Dubois + 8 autres",
-    action: "ont aimé votre photo",
-    time: "il y a 5 h",
-    eventLabel: "Album — 30 ans de Clara",
-  },
-  {
-    id: "6",
-    type: "mention",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100",
-    from: "Léa Moreau",
-    action: "vous a taggé·e dans un moment",
-    preview: "Photo du toast · 22 h 45",
-    time: "hier",
-    eventLabel: "Mariage Sarah & Thomas",
-  },
-  {
-    id: "7",
-    type: "invite",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100",
-    from: "Emma & Paul",
-    action: "vous ont invité·e à leur baby-shower",
-    eventLabel: "5 oct. · À la maison",
-    time: "hier",
-    cta: "Répondre",
-  },
+const messages: Msg[] = [
+  { id: "m1", sender: "Camille (témoin)", role: "Témoin de Sarah", preview: "J'ai commencé mon discours, tu veux le relire ?", time: "il y a 12 min", unread: true, avatar: "https://i.pravatar.cc/80?img=47", tag: "Famille" },
+  { id: "m2", sender: "Fleuriste Camille", role: "Prestataire fleurs", preview: "La pivoine blanche est confirmée pour le 25.", time: "il y a 1 h", unread: true, avatar: "https://i.pravatar.cc/80?img=25", tag: "Prestataire" },
+  { id: "m3", sender: "Support Memento", role: "Équipe", preview: "Votre replay a bien été archivé, voici le lien…", time: "Hier", starred: true, avatar: "https://i.pravatar.cc/80?img=68", tag: "Équipe" },
+  { id: "m4", sender: "Julien & Léa", role: "Invités", preview: "On confirme notre venue avec les enfants !", time: "Hier", avatar: "https://i.pravatar.cc/80?img=12", tag: "Invité" },
+  { id: "m5", sender: "Traiteur Épicure", role: "Prestataire repas", preview: "Menu végétarien validé pour 8 personnes.", time: "Lun.", avatar: "https://i.pravatar.cc/80?img=8", tag: "Prestataire" },
+  { id: "m6", sender: "Grand-mère Odile", role: "Famille", preview: "Ma chérie, je suis si fière de toi 💐", time: "Dim.", starred: true, avatar: "https://i.pravatar.cc/80?img=1", tag: "Famille" },
 ];
 
-const typeMeta = {
-  invite: { icon: Mail, tint: "bg-primary/10 text-primary" },
-  mention: { icon: AtSign, tint: "bg-sky-50 text-sky-700" },
-  reply: { icon: Mail, tint: "bg-secondary text-foreground" },
-  cagnotte: { icon: Sparkles, tint: "bg-amber-50 text-amber-700" },
-  like: { icon: Heart, tint: "bg-rose-50 text-rose-700" },
-} as const;
+const tagColor: Record<Msg["tag"], string> = {
+  Famille: "bg-primary/15 text-primary",
+  Prestataire: "bg-gold/20 text-gold",
+  Équipe: "bg-primary-dark/15 text-primary-dark",
+  Invité: "bg-success/15 text-success",
+};
 
-function Inbox() {
-  const [filter, setFilter] = useState<Filter>("all");
-  const [readAll, setReadAll] = useState(false);
+const filters = ["Tous", "Non lus", "Étoilés"] as const;
 
-  const filtered = messages.filter((m) => {
-    if (filter === "all") return true;
-    if (filter === "invites") return m.type === "invite";
-    if (filter === "mentions") return m.type === "mention";
-    if (filter === "replies") return m.type === "reply" || m.type === "like";
-    if (filter === "cagnottes") return m.type === "cagnotte";
-    return true;
-  });
-
-  const unreadCount = messages.filter((m) => m.unread).length;
+function InboxRoute() {
+  const [filter, setFilter] = useState<(typeof filters)[number]>("Tous");
+  const list = messages.filter((m) =>
+    filter === "Non lus" ? m.unread : filter === "Étoilés" ? m.starred : true
+  );
+  const unread = messages.filter((m) => m.unread).length;
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <div className="sticky top-0 z-20 flex items-center justify-between border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
-        <Link to="/app" className="grid h-9 w-9 place-items-center rounded-full hover:bg-muted" aria-label="Retour">
-          <ArrowLeft className="h-5 w-5" />
-        </Link>
-        <p className="font-serif text-lg">Boîte de réception</p>
-        <button className="grid h-9 w-9 place-items-center rounded-full hover:bg-muted" aria-label="Recherche">
-          <Search className="h-4 w-4" />
-        </button>
-      </div>
-
-      <section className="bg-gradient-to-b from-primary/10 to-transparent px-4 pb-5 pt-6">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          <Users className="h-3.5 w-3.5 text-primary" /> {unreadCount} non lus · 5 événements actifs
+      <header className="sticky top-0 z-20 border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
+        <div className="flex items-center gap-3">
+          <Link to="/app" className="grid h-9 w-9 place-items-center rounded-full bg-surface">
+            <ArrowLeft className="h-5 w-5" />
+          </Link>
+          <div className="flex-1">
+            <p className="font-serif text-lg leading-tight">Messages</p>
+            <p className="text-xs text-muted-foreground">{unread} non lus · {messages.length} conversations</p>
+          </div>
+          <Inbox className="h-5 w-5 text-primary" />
         </div>
-        <h1 className="mt-2 font-serif text-3xl leading-tight">Toute votre vie<br />sociale, réunie</h1>
-      </section>
-
-      <div className="sticky top-14 z-10 space-y-3 border-b border-border/60 bg-background/95 px-4 py-3 backdrop-blur">
-        <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-0.5">
-          {filters.map((f) => {
-            const active = filter === f.id;
-            return (
-              <button
-                key={f.id}
-                onClick={() => setFilter(f.id)}
-                className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold ${
-                  active ? "bg-foreground text-background" : "bg-secondary text-muted-foreground"
-                }`}
-              >
-                {f.label}
-                {f.count ? <span className={`ml-1 ${active ? "text-background/70" : "text-primary"}`}>{f.count}</span> : null}
-              </button>
-            );
-          })}
+        <div className="relative mt-3">
+          <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <input
+            placeholder="Rechercher un contact, un mot…"
+            className="w-full rounded-full bg-surface pl-10 pr-4 py-2.5 text-sm outline-none"
+          />
         </div>
-        <div className="flex items-center justify-between text-[10px] text-muted-foreground">
-          <button
-            onClick={() => setReadAll(true)}
-            className="inline-flex items-center gap-1 font-semibold text-primary"
-          >
-            <CheckCheck className="h-3 w-3" /> Tout marquer comme lu
-          </button>
-          <button className="inline-flex items-center gap-1 font-semibold">
-            <Filter className="h-3 w-3" /> Trier
-          </button>
+        <div className="mt-3 flex gap-2 overflow-x-auto">
+          {filters.map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`flex-shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold transition ${
+                filter === f ? "bg-primary text-white" : "bg-surface text-muted-foreground"
+              }`}
+            >
+              {f}
+            </button>
+          ))}
         </div>
-      </div>
+      </header>
 
-      <ul className="divide-y divide-border/60">
-        {filtered.map((m) => {
-          const meta = typeMeta[m.type];
-          const Icon = meta.icon;
-          const unread = m.unread && !readAll;
-          return (
-            <li key={m.id} className={`relative px-4 py-3 transition-colors ${unread ? "bg-primary/[0.03]" : ""}`}>
-              {unread && <span className="absolute left-1.5 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-primary" />}
-              <div className="flex items-start gap-3">
-                <div className="relative shrink-0">
-                  <img src={m.avatar} alt="" className="h-11 w-11 rounded-full object-cover" />
-                  <span className={`absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-full ring-2 ring-background ${meta.tint}`}>
-                    <Icon className="h-2.5 w-2.5" />
-                  </span>
+      <main className="mx-auto max-w-2xl">
+        <div className="divide-y divide-border/60">
+          {list.map((m) => (
+            <button key={m.id} className="flex w-full items-start gap-3 p-4 text-left transition hover:bg-surface">
+              <div className="relative flex-shrink-0">
+                <img src={m.avatar} alt="" className="h-12 w-12 rounded-full object-cover" />
+                {m.unread && (
+                  <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-background bg-primary" />
+                )}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-2">
+                  <p className={`truncate text-sm ${m.unread ? "font-bold" : "font-semibold"}`}>{m.sender}</p>
+                  <span className="flex-shrink-0 text-[11px] text-muted-foreground">{m.time}</span>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[13px] leading-snug">
-                    <span className="font-bold">{m.from}</span> {m.action}
-                    {m.target ? <span className="text-muted-foreground"> {m.target}</span> : null}
-                  </p>
-                  {m.preview && (
-                    <p className="mt-1 line-clamp-2 rounded-xl bg-secondary/50 px-2.5 py-1.5 font-serif text-[11px] italic text-muted-foreground">
-                      {m.preview}
-                    </p>
-                  )}
-                  <div className="mt-1 flex items-center gap-2 text-[10px] text-muted-foreground">
-                    <span>{m.time}</span>
-                    {m.eventLabel && (
-                      <>
-                        <span>·</span>
-                        <span className="truncate">{m.eventLabel}</span>
-                      </>
-                    )}
-                  </div>
-                  {m.cta && (
-                    <div className="mt-2 flex gap-2">
-                      <button className="rounded-full bg-primary px-3 py-1.5 text-[11px] font-bold text-primary-foreground">
-                        {m.cta}
-                      </button>
-                      <button className="rounded-full border border-border bg-background px-3 py-1.5 text-[11px] font-semibold">
-                        Plus tard
-                      </button>
-                    </div>
-                  )}
+                <p className="truncate text-xs text-muted-foreground">{m.role}</p>
+                <p className={`mt-1 truncate text-sm ${m.unread ? "text-foreground" : "text-muted-foreground"}`}>
+                  {m.preview}
+                </p>
+                <div className="mt-2 flex items-center gap-2">
+                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${tagColor[m.tag]}`}>
+                    {m.tag}
+                  </span>
+                  {m.starred && <Star className="h-3.5 w-3.5 fill-gold text-gold" />}
                 </div>
               </div>
-            </li>
-          );
-        })}
-      </ul>
-
-      <div className="mx-4 mt-6 flex items-center justify-between rounded-3xl bg-card p-4 ring-1 ring-border/60">
-        <div className="min-w-0">
-          <p className="text-sm font-semibold">Voir les archives</p>
-          <p className="text-[10px] text-muted-foreground">Messages plus anciens qu'un mois</p>
+            </button>
+          ))}
         </div>
-        <Archive className="h-4 w-4 text-muted-foreground" />
-      </div>
+
+        <div className="flex items-center justify-around border-t border-border/60 bg-surface/50 p-3">
+          <button className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
+            <Reply className="h-4 w-4" /> Répondre
+          </button>
+          <button className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
+            <Star className="h-4 w-4" /> Étoiler
+          </button>
+          <button className="flex items-center gap-1 text-xs font-semibold text-destructive">
+            <Trash2 className="h-4 w-4" /> Archiver
+          </button>
+        </div>
+      </main>
     </div>
   );
 }
