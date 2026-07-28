@@ -1,5 +1,28 @@
 import type { EventType, MockEvent } from "@/lib/mock-data";
 
+export function toEmbedUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+    if (host === "youtu.be") return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
+    if (host.endsWith("youtube.com")) {
+      if (u.pathname.startsWith("/embed/") || u.pathname.startsWith("/live/")) return url.replace("/live/", "/embed/");
+      const v = u.searchParams.get("v");
+      if (v) return `https://www.youtube.com/embed/${v}`;
+    }
+    if (host.endsWith("twitch.tv")) {
+      const channel = u.pathname.split("/").filter(Boolean)[0];
+      if (channel) {
+        const parent = typeof window !== "undefined" ? window.location.hostname : "lovable.app";
+        return `https://player.twitch.tv/?channel=${channel}&parent=${parent}`;
+      }
+    }
+    return url;
+  } catch {
+    return url;
+  }
+}
+
 type DbEventType = "wedding" | "baptism" | "birthday" | "anniversary" | "engagement" | "babyshower" | "other";
 
 export const dbTypeToLabel: Record<DbEventType, EventType> = {
