@@ -38,7 +38,15 @@ export const Route = createFileRoute("/")({
 });
 
 function Landing() {
-  const liveEvents = mockEvents.filter((e) => e.isLive);
+  const fetchPublic = useServerFn(listPublicEvents);
+  const { data: publicEvents } = useQuery({
+    queryKey: ["public-events"],
+    queryFn: () => fetchPublic(),
+  });
+  const realEvents = (publicEvents ?? []).map((e) => adaptEvent(e as unknown as DbEvent));
+  const showcase = realEvents.length > 0 ? realEvents : mockEvents;
+  const liveEvents = showcase.filter((e) => e.isLive);
+  const featured = liveEvents.concat(showcase).slice(0, 3);
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
