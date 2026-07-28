@@ -127,7 +127,7 @@ export const updateBudgetItem = createServerFn({ method: "POST" })
     }).parse(i),
   )
   .handler(async ({ data, context }) => {
-    const patch: Record<string, unknown> = {};
+    const patch: { actual?: number; paid?: boolean } = {};
     if (data.actual !== undefined) patch.actual = data.actual;
     if (data.paid !== undefined) patch.paid = data.paid;
     const { error } = await context.supabase.from("budget_items").update(patch).eq("id", data.id);
