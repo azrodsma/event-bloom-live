@@ -50,6 +50,7 @@ import { Route as AppPartnersRouteImport } from './routes/app.partners'
 import { Route as AppOfficiantsRouteImport } from './routes/app.officiants'
 import { Route as AppNotificationsSettingsRouteImport } from './routes/app.notifications-settings'
 import { Route as AppNotificationsRouteImport } from './routes/app.notifications'
+import { Route as AppNewsroomRouteImport } from './routes/app.newsroom'
 import { Route as AppMoodGeneratorRouteImport } from './routes/app.mood-generator'
 import { Route as AppMomentsRouteImport } from './routes/app.moments'
 import { Route as AppMessagesRouteImport } from './routes/app.messages'
@@ -203,6 +204,7 @@ import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.c
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
 import { Route as EventsSlugConfettiRouteImport } from './routes/events.$slug.confetti'
 import { Route as EventsSlugComfortRouteImport } from './routes/events.$slug.comfort'
+import { Route as EventsSlugCocktailRouteImport } from './routes/events.$slug.cocktail'
 import { Route as EventsSlugCityGuideRouteImport } from './routes/events.$slug.city-guide'
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
 import { Route as EventsSlugCheckinRouteImport } from './routes/events.$slug.checkin'
@@ -438,6 +440,11 @@ const AppNotificationsSettingsRoute =
 const AppNotificationsRoute = AppNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNewsroomRoute = AppNewsroomRouteImport.update({
+  id: '/newsroom',
+  path: '/newsroom',
   getParentRoute: () => AppRoute,
 } as any)
 const AppMoodGeneratorRoute = AppMoodGeneratorRouteImport.update({
@@ -1208,6 +1215,11 @@ const EventsSlugComfortRoute = EventsSlugComfortRouteImport.update({
   path: '/comfort',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugCocktailRoute = EventsSlugCocktailRouteImport.update({
+  id: '/cocktail',
+  path: '/cocktail',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugCityGuideRoute = EventsSlugCityGuideRouteImport.update({
   id: '/city-guide',
   path: '/city-guide',
@@ -1408,6 +1420,7 @@ export interface FileRoutesByFullPath {
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
   '/app/mood-generator': typeof AppMoodGeneratorRoute
+  '/app/newsroom': typeof AppNewsroomRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/notifications-settings': typeof AppNotificationsSettingsRoute
   '/app/officiants': typeof AppOfficiantsRoute
@@ -1470,6 +1483,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
+  '/events/$slug/cocktail': typeof EventsSlugCocktailRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
@@ -1633,6 +1647,7 @@ export interface FileRoutesByTo {
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
   '/app/mood-generator': typeof AppMoodGeneratorRoute
+  '/app/newsroom': typeof AppNewsroomRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/notifications-settings': typeof AppNotificationsSettingsRoute
   '/app/officiants': typeof AppOfficiantsRoute
@@ -1694,6 +1709,7 @@ export interface FileRoutesByTo {
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
+  '/events/$slug/cocktail': typeof EventsSlugCocktailRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
@@ -1859,6 +1875,7 @@ export interface FileRoutesById {
   '/app/messages': typeof AppMessagesRouteWithChildren
   '/app/moments': typeof AppMomentsRoute
   '/app/mood-generator': typeof AppMoodGeneratorRoute
+  '/app/newsroom': typeof AppNewsroomRoute
   '/app/notifications': typeof AppNotificationsRoute
   '/app/notifications-settings': typeof AppNotificationsSettingsRoute
   '/app/officiants': typeof AppOfficiantsRoute
@@ -1921,6 +1938,7 @@ export interface FileRoutesById {
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
+  '/events/$slug/cocktail': typeof EventsSlugCocktailRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
@@ -2087,6 +2105,7 @@ export interface FileRouteTypes {
     | '/app/messages'
     | '/app/moments'
     | '/app/mood-generator'
+    | '/app/newsroom'
     | '/app/notifications'
     | '/app/notifications-settings'
     | '/app/officiants'
@@ -2149,6 +2168,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
+    | '/events/$slug/cocktail'
     | '/events/$slug/comfort'
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
@@ -2312,6 +2332,7 @@ export interface FileRouteTypes {
     | '/app/messages'
     | '/app/moments'
     | '/app/mood-generator'
+    | '/app/newsroom'
     | '/app/notifications'
     | '/app/notifications-settings'
     | '/app/officiants'
@@ -2373,6 +2394,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
+    | '/events/$slug/cocktail'
     | '/events/$slug/comfort'
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
@@ -2537,6 +2559,7 @@ export interface FileRouteTypes {
     | '/app/messages'
     | '/app/moments'
     | '/app/mood-generator'
+    | '/app/newsroom'
     | '/app/notifications'
     | '/app/notifications-settings'
     | '/app/officiants'
@@ -2599,6 +2622,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
+    | '/events/$slug/cocktail'
     | '/events/$slug/comfort'
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
@@ -3015,6 +3039,13 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/app/notifications'
       preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/newsroom': {
+      id: '/app/newsroom'
+      path: '/newsroom'
+      fullPath: '/app/newsroom'
+      preLoaderRoute: typeof AppNewsroomRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/mood-generator': {
@@ -4088,6 +4119,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugComfortRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/cocktail': {
+      id: '/events/$slug/cocktail'
+      path: '/cocktail'
+      fullPath: '/events/$slug/cocktail'
+      preLoaderRoute: typeof EventsSlugCocktailRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/city-guide': {
       id: '/events/$slug/city-guide'
       path: '/city-guide'
@@ -4366,6 +4404,7 @@ interface AppRouteChildren {
   AppMessagesRoute: typeof AppMessagesRouteWithChildren
   AppMomentsRoute: typeof AppMomentsRoute
   AppMoodGeneratorRoute: typeof AppMoodGeneratorRoute
+  AppNewsroomRoute: typeof AppNewsroomRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppNotificationsSettingsRoute: typeof AppNotificationsSettingsRoute
   AppOfficiantsRoute: typeof AppOfficiantsRoute
@@ -4444,6 +4483,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppMessagesRoute: AppMessagesRouteWithChildren,
   AppMomentsRoute: AppMomentsRoute,
   AppMoodGeneratorRoute: AppMoodGeneratorRoute,
+  AppNewsroomRoute: AppNewsroomRoute,
   AppNotificationsRoute: AppNotificationsRoute,
   AppNotificationsSettingsRoute: AppNotificationsSettingsRoute,
   AppOfficiantsRoute: AppOfficiantsRoute,
@@ -4532,6 +4572,7 @@ interface EventsSlugRouteChildren {
   EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
   EventsSlugCityGuideRoute: typeof EventsSlugCityGuideRoute
+  EventsSlugCocktailRoute: typeof EventsSlugCocktailRoute
   EventsSlugComfortRoute: typeof EventsSlugComfortRoute
   EventsSlugConfettiRoute: typeof EventsSlugConfettiRoute
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
@@ -4671,6 +4712,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugCheckinRoute: EventsSlugCheckinRoute,
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
   EventsSlugCityGuideRoute: EventsSlugCityGuideRoute,
+  EventsSlugCocktailRoute: EventsSlugCocktailRoute,
   EventsSlugComfortRoute: EventsSlugComfortRoute,
   EventsSlugConfettiRoute: EventsSlugConfettiRoute,
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
