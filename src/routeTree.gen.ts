@@ -124,6 +124,7 @@ import { Route as EventsSlugGuestbookRouteImport } from './routes/events.$slug.g
 import { Route as EventsSlugGiftsReceivedRouteImport } from './routes/events.$slug.gifts-received'
 import { Route as EventsSlugGamesRouteImport } from './routes/events.$slug.games'
 import { Route as EventsSlugFlowersRouteImport } from './routes/events.$slug.flowers'
+import { Route as EventsSlugFirstDanceRouteImport } from './routes/events.$slug.first-dance'
 import { Route as EventsSlugFiltersRouteImport } from './routes/events.$slug.filters'
 import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
 import { Route as EventsSlugFamilyTreeRouteImport } from './routes/events.$slug.family-tree'
@@ -133,6 +134,7 @@ import { Route as EventsSlugEcoRouteImport } from './routes/events.$slug.eco'
 import { Route as EventsSlugDresscodeRouteImport } from './routes/events.$slug.dresscode'
 import { Route as EventsSlugDjRequestsRouteImport } from './routes/events.$slug.dj-requests'
 import { Route as EventsSlugDisplayRouteImport } from './routes/events.$slug.display'
+import { Route as EventsSlugDeliveriesRouteImport } from './routes/events.$slug.deliveries'
 import { Route as EventsSlugDecorRouteImport } from './routes/events.$slug.decor'
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
 import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.countdown'
@@ -739,6 +741,11 @@ const EventsSlugFlowersRoute = EventsSlugFlowersRouteImport.update({
   path: '/flowers',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugFirstDanceRoute = EventsSlugFirstDanceRouteImport.update({
+  id: '/first-dance',
+  path: '/first-dance',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugFiltersRoute = EventsSlugFiltersRouteImport.update({
   id: '/filters',
   path: '/filters',
@@ -782,6 +789,11 @@ const EventsSlugDjRequestsRoute = EventsSlugDjRequestsRouteImport.update({
 const EventsSlugDisplayRoute = EventsSlugDisplayRouteImport.update({
   id: '/display',
   path: '/display',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugDeliveriesRoute = EventsSlugDeliveriesRouteImport.update({
+  id: '/deliveries',
+  path: '/deliveries',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugDecorRoute = EventsSlugDecorRouteImport.update({
@@ -1009,6 +1021,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
+  '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
@@ -1018,6 +1031,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
+  '/events/$slug/first-dance': typeof EventsSlugFirstDanceRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
@@ -1161,6 +1175,7 @@ export interface FileRoutesByTo {
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
+  '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
@@ -1170,6 +1185,7 @@ export interface FileRoutesByTo {
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
+  '/events/$slug/first-dance': typeof EventsSlugFirstDanceRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
@@ -1316,6 +1332,7 @@ export interface FileRoutesById {
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
+  '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
   '/events/$slug/display': typeof EventsSlugDisplayRoute
   '/events/$slug/dj-requests': typeof EventsSlugDjRequestsRoute
   '/events/$slug/dresscode': typeof EventsSlugDresscodeRoute
@@ -1325,6 +1342,7 @@ export interface FileRoutesById {
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
   '/events/$slug/filters': typeof EventsSlugFiltersRoute
+  '/events/$slug/first-dance': typeof EventsSlugFirstDanceRoute
   '/events/$slug/flowers': typeof EventsSlugFlowersRoute
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
@@ -1472,6 +1490,7 @@ export interface FileRouteTypes {
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
     | '/events/$slug/decor'
+    | '/events/$slug/deliveries'
     | '/events/$slug/display'
     | '/events/$slug/dj-requests'
     | '/events/$slug/dresscode'
@@ -1481,6 +1500,7 @@ export interface FileRouteTypes {
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/filters'
+    | '/events/$slug/first-dance'
     | '/events/$slug/flowers'
     | '/events/$slug/games'
     | '/events/$slug/gifts-received'
@@ -1624,6 +1644,7 @@ export interface FileRouteTypes {
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
     | '/events/$slug/decor'
+    | '/events/$slug/deliveries'
     | '/events/$slug/display'
     | '/events/$slug/dj-requests'
     | '/events/$slug/dresscode'
@@ -1633,6 +1654,7 @@ export interface FileRouteTypes {
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/filters'
+    | '/events/$slug/first-dance'
     | '/events/$slug/flowers'
     | '/events/$slug/games'
     | '/events/$slug/gifts-received'
@@ -1778,6 +1800,7 @@ export interface FileRouteTypes {
     | '/events/$slug/countdown'
     | '/events/$slug/dashboard'
     | '/events/$slug/decor'
+    | '/events/$slug/deliveries'
     | '/events/$slug/display'
     | '/events/$slug/dj-requests'
     | '/events/$slug/dresscode'
@@ -1787,6 +1810,7 @@ export interface FileRouteTypes {
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
     | '/events/$slug/filters'
+    | '/events/$slug/first-dance'
     | '/events/$slug/flowers'
     | '/events/$slug/games'
     | '/events/$slug/gifts-received'
@@ -2667,6 +2691,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugFlowersRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/first-dance': {
+      id: '/events/$slug/first-dance'
+      path: '/first-dance'
+      fullPath: '/events/$slug/first-dance'
+      preLoaderRoute: typeof EventsSlugFirstDanceRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/filters': {
       id: '/events/$slug/filters'
       path: '/filters'
@@ -2728,6 +2759,13 @@ declare module '@tanstack/react-router' {
       path: '/display'
       fullPath: '/events/$slug/display'
       preLoaderRoute: typeof EventsSlugDisplayRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/deliveries': {
+      id: '/events/$slug/deliveries'
+      path: '/deliveries'
+      fullPath: '/events/$slug/deliveries'
+      preLoaderRoute: typeof EventsSlugDeliveriesRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/decor': {
@@ -3112,6 +3150,7 @@ interface EventsSlugRouteChildren {
   EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
   EventsSlugDecorRoute: typeof EventsSlugDecorRoute
+  EventsSlugDeliveriesRoute: typeof EventsSlugDeliveriesRoute
   EventsSlugDisplayRoute: typeof EventsSlugDisplayRoute
   EventsSlugDjRequestsRoute: typeof EventsSlugDjRequestsRoute
   EventsSlugDresscodeRoute: typeof EventsSlugDresscodeRoute
@@ -3121,6 +3160,7 @@ interface EventsSlugRouteChildren {
   EventsSlugFamilyTreeRoute: typeof EventsSlugFamilyTreeRoute
   EventsSlugFaqRoute: typeof EventsSlugFaqRoute
   EventsSlugFiltersRoute: typeof EventsSlugFiltersRoute
+  EventsSlugFirstDanceRoute: typeof EventsSlugFirstDanceRoute
   EventsSlugFlowersRoute: typeof EventsSlugFlowersRoute
   EventsSlugGamesRoute: typeof EventsSlugGamesRoute
   EventsSlugGiftsReceivedRoute: typeof EventsSlugGiftsReceivedRoute
@@ -3202,6 +3242,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugCountdownRoute: EventsSlugCountdownRoute,
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
   EventsSlugDecorRoute: EventsSlugDecorRoute,
+  EventsSlugDeliveriesRoute: EventsSlugDeliveriesRoute,
   EventsSlugDisplayRoute: EventsSlugDisplayRoute,
   EventsSlugDjRequestsRoute: EventsSlugDjRequestsRoute,
   EventsSlugDresscodeRoute: EventsSlugDresscodeRoute,
@@ -3211,6 +3252,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugFamilyTreeRoute: EventsSlugFamilyTreeRoute,
   EventsSlugFaqRoute: EventsSlugFaqRoute,
   EventsSlugFiltersRoute: EventsSlugFiltersRoute,
+  EventsSlugFirstDanceRoute: EventsSlugFirstDanceRoute,
   EventsSlugFlowersRoute: EventsSlugFlowersRoute,
   EventsSlugGamesRoute: EventsSlugGamesRoute,
   EventsSlugGiftsReceivedRoute: EventsSlugGiftsReceivedRoute,
