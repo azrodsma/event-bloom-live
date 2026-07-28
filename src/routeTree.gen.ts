@@ -32,6 +32,7 @@ import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSecurityRouteImport } from './routes/app.security'
 import { Route as AppRemindersRouteImport } from './routes/app.reminders'
+import { Route as AppReferralsRouteImport } from './routes/app.referrals'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppQuestsRouteImport } from './routes/app.quests'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
@@ -102,6 +103,7 @@ import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugPhotoSpotsRouteImport } from './routes/events.$slug.photo-spots'
 import { Route as EventsSlugPhotoChallengesRouteImport } from './routes/events.$slug.photo-challenges'
 import { Route as EventsSlugPetsRouteImport } from './routes/events.$slug.pets'
+import { Route as EventsSlugPerksRouteImport } from './routes/events.$slug.perks'
 import { Route as EventsSlugNameBadgesRouteImport } from './routes/events.$slug.name-badges'
 import { Route as EventsSlugModerationRouteImport } from './routes/events.$slug.moderation'
 import { Route as EventsSlugMenuRouteImport } from './routes/events.$slug.menu'
@@ -273,6 +275,11 @@ const AppSecurityRoute = AppSecurityRouteImport.update({
 const AppRemindersRoute = AppRemindersRouteImport.update({
   id: '/reminders',
   path: '/reminders',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReferralsRoute = AppReferralsRouteImport.update({
+  id: '/referrals',
+  path: '/referrals',
   getParentRoute: () => AppRoute,
 } as any)
 const AppReferralRoute = AppReferralRouteImport.update({
@@ -627,6 +634,11 @@ const EventsSlugPetsRoute = EventsSlugPetsRouteImport.update({
   path: '/pets',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugPerksRoute = EventsSlugPerksRouteImport.update({
+  id: '/perks',
+  path: '/perks',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugNameBadgesRoute = EventsSlugNameBadgesRouteImport.update({
   id: '/name-badges',
   path: '/name-badges',
@@ -954,6 +966,7 @@ export interface FileRoutesByFullPath {
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
+  '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1025,6 +1038,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
+  '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
@@ -1105,6 +1119,7 @@ export interface FileRoutesByTo {
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
+  '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1175,6 +1190,7 @@ export interface FileRoutesByTo {
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
+  '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
@@ -1257,6 +1273,7 @@ export interface FileRoutesById {
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
+  '/app/referrals': typeof AppReferralsRoute
   '/app/reminders': typeof AppRemindersRoute
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
@@ -1328,6 +1345,7 @@ export interface FileRoutesById {
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
+  '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photo-spots': typeof EventsSlugPhotoSpotsRoute
@@ -1411,6 +1429,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/quests'
     | '/app/referral'
+    | '/app/referrals'
     | '/app/reminders'
     | '/app/security'
     | '/app/settings'
@@ -1482,6 +1501,7 @@ export interface FileRouteTypes {
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
+    | '/events/$slug/perks'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photo-spots'
@@ -1562,6 +1582,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/quests'
     | '/app/referral'
+    | '/app/referrals'
     | '/app/reminders'
     | '/app/security'
     | '/app/settings'
@@ -1632,6 +1653,7 @@ export interface FileRouteTypes {
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
+    | '/events/$slug/perks'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photo-spots'
@@ -1713,6 +1735,7 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/quests'
     | '/app/referral'
+    | '/app/referrals'
     | '/app/reminders'
     | '/app/security'
     | '/app/settings'
@@ -1784,6 +1807,7 @@ export interface FileRouteTypes {
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
+    | '/events/$slug/perks'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photo-spots'
@@ -1997,6 +2021,13 @@ declare module '@tanstack/react-router' {
       path: '/reminders'
       fullPath: '/app/reminders'
       preLoaderRoute: typeof AppRemindersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/referrals': {
+      id: '/app/referrals'
+      path: '/referrals'
+      fullPath: '/app/referrals'
+      preLoaderRoute: typeof AppReferralsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/referral': {
@@ -2489,6 +2520,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugPetsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/perks': {
+      id: '/events/$slug/perks'
+      path: '/perks'
+      fullPath: '/events/$slug/perks'
+      preLoaderRoute: typeof EventsSlugPerksRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/name-badges': {
       id: '/events/$slug/name-badges'
       path: '/name-badges'
@@ -2950,6 +2988,7 @@ interface AppRouteChildren {
   AppProfileRoute: typeof AppProfileRoute
   AppQuestsRoute: typeof AppQuestsRoute
   AppReferralRoute: typeof AppReferralRoute
+  AppReferralsRoute: typeof AppReferralsRoute
   AppRemindersRoute: typeof AppRemindersRoute
   AppSecurityRoute: typeof AppSecurityRoute
   AppSettingsRoute: typeof AppSettingsRoute
@@ -3004,6 +3043,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppProfileRoute: AppProfileRoute,
   AppQuestsRoute: AppQuestsRoute,
   AppReferralRoute: AppReferralRoute,
+  AppReferralsRoute: AppReferralsRoute,
   AppRemindersRoute: AppRemindersRoute,
   AppSecurityRoute: AppSecurityRoute,
   AppSettingsRoute: AppSettingsRoute,
@@ -3101,6 +3141,7 @@ interface EventsSlugRouteChildren {
   EventsSlugMenuRoute: typeof EventsSlugMenuRoute
   EventsSlugModerationRoute: typeof EventsSlugModerationRoute
   EventsSlugNameBadgesRoute: typeof EventsSlugNameBadgesRoute
+  EventsSlugPerksRoute: typeof EventsSlugPerksRoute
   EventsSlugPetsRoute: typeof EventsSlugPetsRoute
   EventsSlugPhotoChallengesRoute: typeof EventsSlugPhotoChallengesRoute
   EventsSlugPhotoSpotsRoute: typeof EventsSlugPhotoSpotsRoute
@@ -3190,6 +3231,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugMenuRoute: EventsSlugMenuRoute,
   EventsSlugModerationRoute: EventsSlugModerationRoute,
   EventsSlugNameBadgesRoute: EventsSlugNameBadgesRoute,
+  EventsSlugPerksRoute: EventsSlugPerksRoute,
   EventsSlugPetsRoute: EventsSlugPetsRoute,
   EventsSlugPhotoChallengesRoute: EventsSlugPhotoChallengesRoute,
   EventsSlugPhotoSpotsRoute: EventsSlugPhotoSpotsRoute,

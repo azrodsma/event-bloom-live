@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Search, MessageCircle, Mail, BookOpen, Sparkles, Shield, CreditCard, Video, Users, ChevronDown } from "lucide-react";
+import { ArrowLeft, HelpCircle, MessageCircle, Book, Video, Search, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/app/help")({
@@ -7,147 +7,125 @@ export const Route = createFileRoute("/app/help")({
   head: () => ({
     meta: [
       { title: "Centre d'aide · Memento Live" },
-      { name: "description", content: "Trouvez des réponses à toutes vos questions sur Memento Live : événements, live, cagnotte, livre d'or." },
+      { name: "description", content: "Réponses, tutoriels vidéo et support humain 7j/7 pour vos événements." },
       { property: "og:title", content: "Centre d'aide · Memento Live" },
-      { property: "og:description", content: "Guides, FAQ et support Memento Live." },
+      { property: "og:description", content: "Une équipe humaine pour vous accompagner." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
 
-const categories = [
-  { icon: Sparkles, label: "Premiers pas", count: 8, tone: "bg-primary/10 text-primary" },
-  { icon: Video, label: "Diffusion Live", count: 12, tone: "bg-accent/20 text-foreground" },
-  { icon: CreditCard, label: "Cagnotte", count: 6, tone: "bg-secondary text-foreground" },
-  { icon: Users, label: "Invités & accès", count: 9, tone: "bg-primary/10 text-primary" },
-  { icon: BookOpen, label: "Livre d'or", count: 5, tone: "bg-accent/20 text-foreground" },
-  { icon: Shield, label: "Confidentialité", count: 7, tone: "bg-secondary text-foreground" },
+const topics = [
+  { icon: "🎥", label: "Configurer un live", articles: 12 },
+  { icon: "💌", label: "Faire-part & invitations", articles: 8 },
+  { icon: "💰", label: "Cagnotte externe", articles: 5 },
+  { icon: "📸", label: "Album collaboratif", articles: 9 },
+  { icon: "🎊", label: "Le jour J", articles: 14 },
+  { icon: "🔒", label: "Sécurité & vie privée", articles: 6 },
 ];
 
 const faqs = [
-  {
-    q: "Comment inviter mes proches à l'événement ?",
-    a: "Depuis la page de votre événement, cliquez sur « Inviter ». Vous pouvez partager un lien, un QR code ou envoyer un faire-part par email. Un code d'accès à 6 caractères protège les événements privés.",
-  },
-  {
-    q: "Memento Live gère-t-il l'argent de la cagnotte ?",
-    a: "Non. La cagnotte est toujours hébergée sur une plateforme externe (Leetchi, Lydia, Le Pot Commun…). Memento affiche uniquement la progression et redirige vos invités vers la plateforme choisie. Aucun frais n'est prélevé par Memento.",
-  },
-  {
-    q: "Sur quelles plateformes puis-je diffuser mon live ?",
-    a: "Vous pouvez encapsuler un flux YouTube Live ou Twitch. Collez simplement l'URL de diffusion dans les paramètres de l'événement. Le chat interne Memento reste disponible en parallèle du live.",
-  },
-  {
-    q: "Qui peut voir mon événement ?",
-    a: "Vous choisissez : événement privé (accessible uniquement via code d'invitation), semi-privé (accessible aux abonnés Memento invités) ou public (visible dans l'onglet Explorer).",
-  },
-  {
-    q: "Comment fonctionnent les messages vocaux du livre d'or ?",
-    a: "Vos invités peuvent enregistrer jusqu'à 3 minutes de vocal directement depuis le livre d'or. Les messages sont conservés à vie sur votre compte et peuvent être ajoutés au livre imprimé souvenir.",
-  },
-  {
-    q: "Puis-je annuler mon abonnement Premium ?",
-    a: "Oui, à tout moment depuis Réglages › Abonnement. Vous conservez l'accès aux fonctionnalités Premium jusqu'à la fin de la période en cours.",
-  },
+  { q: "Memento Live gère-t-il l'argent de la cagnotte ?", a: "Non. Nous encapsulons votre cagnotte externe (Leetchi, Lydia, PayPal Pool…). Les fonds ne transitent jamais par nos serveurs." },
+  { q: "Le live est-il hébergé chez vous ?", a: "Non. Nous encapsulons YouTube Live ou Twitch pour éviter les coûts et vous offrir la meilleure qualité." },
+  { q: "Puis-je limiter l'accès à mes proches ?", a: "Oui. Chaque événement dispose d'un code invité, d'un QR code et d'une whitelist optionnelle." },
+  { q: "Que devient mon événement après la date ?", a: "Il devient un souvenir vivant : replay, livre d'or, album, rétrospective. Archive cloud illimitée offerte 1 an." },
 ];
 
 function Help() {
-  const [open, setOpen] = useState<string | null>(faqs[0].q);
-  const [query, setQuery] = useState("");
-  const filtered = faqs.filter((f) => f.q.toLowerCase().includes(query.toLowerCase()) || f.a.toLowerCase().includes(query.toLowerCase()));
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="pb-24">
-      <div className="sticky top-[57px] z-20 flex items-center justify-between border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
-        <Link to="/app/settings" className="grid h-9 w-9 place-items-center rounded-full hover:bg-muted" aria-label="Retour">
+    <div className="min-h-screen bg-background pb-24">
+      <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
+        <Link to="/app" className="grid h-9 w-9 place-items-center rounded-full bg-surface">
           <ArrowLeft className="h-5 w-5" />
         </Link>
-        <p className="font-serif text-lg">Centre d'aide</p>
-        <span className="w-9" />
-      </div>
-
-      <section className="bg-gradient-to-b from-secondary/60 to-transparent px-4 pb-8 pt-6">
-        <h1 className="font-serif text-3xl leading-tight">Comment pouvons-nous vous aider ?</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Retrouvez guides pas à pas, réponses aux questions fréquentes et contact direct avec notre équipe.</p>
-        <div className="mt-5 flex items-center gap-2 rounded-full border border-border bg-background px-4 py-3 shadow-sm">
-          <Search className="h-4 w-4 text-muted-foreground" />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Rechercher une question…"
-            className="flex-1 bg-transparent text-sm outline-none"
-          />
+        <div>
+          <p className="font-serif text-lg leading-tight">Centre d'aide</p>
+          <p className="text-xs text-muted-foreground">Réponses en 2 min · humains en 15 min</p>
         </div>
-      </section>
+      </header>
 
-      <section className="px-4">
-        <h2 className="font-serif text-xl">Catégories</h2>
-        <div className="mt-3 grid grid-cols-2 gap-3">
-          {categories.map((c) => {
-            const Icon = c.icon;
-            return (
-              <button key={c.label} className="flex flex-col items-start gap-3 rounded-2xl border border-border/60 bg-card p-4 text-left hover:border-primary/40">
-                <span className={`grid h-10 w-10 place-items-center rounded-full ${c.tone}`}>
-                  <Icon className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="text-sm font-medium">{c.label}</p>
-                  <p className="text-xs text-muted-foreground">{c.count} articles</p>
+      <main className="mx-auto max-w-2xl space-y-5 px-4 py-5">
+        <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-gold p-6 text-white shadow-card">
+          <HelpCircle className="h-6 w-6" />
+          <p className="mt-3 font-serif text-2xl leading-tight">Comment pouvons-nous vous aider ?</p>
+          <div className="relative mt-4">
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <input
+              placeholder="Rechercher une question…"
+              className="w-full rounded-full bg-white pl-11 pr-4 py-3 text-sm text-foreground outline-none"
+            />
+          </div>
+        </section>
+
+        <section className="grid grid-cols-3 gap-2">
+          <button className="rounded-2xl bg-surface p-4 text-center shadow-soft transition hover:shadow-card">
+            <MessageCircle className="mx-auto h-5 w-5 text-primary" />
+            <p className="mt-2 text-xs font-semibold">Chat live</p>
+          </button>
+          <button className="rounded-2xl bg-surface p-4 text-center shadow-soft transition hover:shadow-card">
+            <Video className="mx-auto h-5 w-5 text-primary-dark" />
+            <p className="mt-2 text-xs font-semibold">Tutoriels</p>
+          </button>
+          <button className="rounded-2xl bg-surface p-4 text-center shadow-soft transition hover:shadow-card">
+            <Book className="mx-auto h-5 w-5 text-gold" />
+            <p className="mt-2 text-xs font-semibold">Guides</p>
+          </button>
+        </section>
+
+        <section>
+          <p className="mb-3 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Thématiques</p>
+          <div className="grid grid-cols-2 gap-2">
+            {topics.map((t) => (
+              <button key={t.label} className="flex items-center gap-3 rounded-2xl bg-surface p-3 text-left shadow-soft transition hover:shadow-card">
+                <span className="text-2xl">{t.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="truncate text-sm font-semibold">{t.label}</p>
+                  <p className="text-[10px] text-muted-foreground">{t.articles} articles</p>
                 </div>
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
               </button>
-            );
-          })}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
 
-      <section className="mt-8 px-4">
-        <h2 className="font-serif text-xl">Questions fréquentes</h2>
-        <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border/60 bg-card">
-          {filtered.map((f) => {
-            const isOpen = open === f.q;
-            return (
-              <li key={f.q}>
+        <section>
+          <p className="mb-3 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Questions fréquentes</p>
+          <div className="space-y-2">
+            {faqs.map((f, i) => (
+              <div key={i} className="overflow-hidden rounded-2xl bg-surface shadow-soft">
                 <button
-                  onClick={() => setOpen(isOpen ? null : f.q)}
-                  className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left"
+                  onClick={() => setOpen(open === i ? null : i)}
+                  className="flex w-full items-center justify-between gap-3 p-4 text-left"
                 >
-                  <span className="text-sm font-medium">{f.q}</span>
-                  <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                  <p className="text-sm font-semibold">{f.q}</p>
+                  <ChevronRight
+                    className={`h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform ${
+                      open === i ? "rotate-90" : ""
+                    }`}
+                  />
                 </button>
-                {isOpen && <p className="px-4 pb-4 text-sm text-muted-foreground">{f.a}</p>}
-              </li>
-            );
-          })}
-          {filtered.length === 0 && (
-            <li className="px-4 py-8 text-center text-sm text-muted-foreground">Aucun résultat pour « {query} ».</li>
-          )}
-        </ul>
-      </section>
+                {open === i && (
+                  <p className="border-t border-border/60 bg-cream p-4 text-sm leading-relaxed text-muted-foreground">
+                    {f.a}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
 
-      <section className="mt-8 px-4">
-        <h2 className="font-serif text-xl">Un besoin particulier ?</h2>
-        <div className="mt-3 grid gap-3">
-          <Link to="/app/messages" className="flex items-center gap-4 rounded-2xl border border-border/60 bg-card p-4 hover:border-primary/40">
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-primary/10 text-primary">
-              <MessageCircle className="h-5 w-5" />
-            </span>
-            <div className="flex-1">
-              <p className="text-sm font-medium">Chat en direct</p>
-              <p className="text-xs text-muted-foreground">Réponse en moins de 5 min · 7j/7</p>
-            </div>
-          </Link>
-          <a href="mailto:support@memento.live" className="flex items-center gap-4 rounded-2xl border border-border/60 bg-card p-4 hover:border-primary/40">
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-accent/20">
-              <Mail className="h-5 w-5" />
-            </span>
-            <div className="flex-1">
-              <p className="text-sm font-medium">support@memento.live</p>
-              <p className="text-xs text-muted-foreground">Réponse sous 24 h</p>
-            </div>
-          </a>
-        </div>
-      </section>
+        <section className="rounded-3xl bg-foreground p-5 text-background">
+          <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Toujours coincé·e ?</p>
+          <p className="mt-2 font-serif text-xl leading-tight">Écrivez à notre équipe humaine.</p>
+          <p className="mt-1 text-xs opacity-70">Temps de réponse moyen : 12 minutes.</p>
+          <button className="mt-3 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-white">
+            Contacter l'équipe
+          </button>
+        </section>
+      </main>
     </div>
   );
 }
