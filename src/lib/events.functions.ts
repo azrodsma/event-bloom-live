@@ -2,6 +2,8 @@ import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+
 
 function serverPublic() {
   const url = process.env.SUPABASE_URL!;
@@ -54,4 +56,104 @@ export const listActiveStories = createServerFn({ method: "GET" }).handler(async
     .limit(30);
   if (error) throw new Error(error.message);
   return data ?? [];
-});
+  });
+
+const eventTypeEnum = z.enum(["wedding", "baptism", "birthday", "anniversary", "engagement", "babyshower", "other"]);
+const visibilityEnum = z.enum(["private", "unlisted", "public"]);
+
+function slugify(s: string) {
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60) || "event";
+}
+
+export const createEvent = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input) =>
+    z
+      .object({
+        title: z.string().trim().min(2).max(120),
+        type: eventTypeEnum,
+        event_date: z.string().datetime().optional().nullable(),
+        location: z.string().trim().max(200).optional().nullable(),
+        description: z.string().trim().max(2000).optional().nullable(),
+        cover_url: z.string().url().optional().nullable(),
+        visibility: visibilityEnum,
+        cagnotte_url: z.string().url().optional().nullable(),
+        cagnotte_goal: z.number().nonnegative().optional().nullable(),
+        live_url: z.string().url().optional().nullable(),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const base = slugify(data.title);
+    let slug = base;
+    for (let i = 0; i < 6; i++) {
+      const { data: existing } = await context.supabase.from("events").select("id").eq("slug", slug).maybeSingle();
+      if (!existing) break;
+      slug = `${base}-${Math.random().toString(36).slice(2, 6)}`;
+    }
+    const { data: ev, error } = await context.supabase
+      .from("events")
+      .insert({
+        owner_id: context.userId,
+        slug,
+        title: data.title,
+        type: data.type,
+        event_date: data.event_date ?? null,
+        location: data.location ?? null,
+        description: data.description ?? null,
+        cover_url: data.cover_url ?? null,
+        visibility: data.visibility,
+        status: "upcoming",
+        is_demo: false,
+        cagnotte_url: data.cagnotte_url ?? null,
+        cagnotte_goal: data.cagnotte_goal ?? null,
+        cagnotte_current: 0,
+        live_url: data.live_url ?? null,
+      })
+      .select("id, slug")
+      .single();
+    if (error) throw new Error(error.message);
+    await context.supabase.from("event_members").insert({
+      event_id: ev.id,
+      user_id: context.userId,
+      role: "owner",
+    });
+    return ev;
+  });
+
+export const updateCagnotte = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input) =>
+    z
+      .object({
+        eventId: z.string().uuid(),
+        cagnotte_url: z.string().url().nullable(),
+        cagnotte_goal: z.number().nonnegative().nullable(),
+        cagnotte_current: z.number().nonnegative().nullable(),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { data: allowed } = await context.supabase.rpc("is_event_organizer", {
+      _event_id: data.eventId,
+      _user_id: context.userId,
+    });
+    if (!allowed) throw new Error("Non autorisé");
+    const { error } = await context.supabase
+      .from("events")
+      .update({
+        cagnotte_url: data.cagnotte_url,
+        cagnotte_goal: data.cagnotte_goal,
+        cagnotte_current: data.cagnotte_current,
+      })
+      .eq("id", data.eventId);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
