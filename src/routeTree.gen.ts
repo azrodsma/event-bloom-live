@@ -76,6 +76,7 @@ import { Route as AppCommunityRouteImport } from './routes/app.community'
 import { Route as AppCollectionsRouteImport } from './routes/app.collections'
 import { Route as AppCoOrganizersRouteImport } from './routes/app.co-organizers'
 import { Route as AppChangelogRouteImport } from './routes/app.changelog'
+import { Route as AppCareersRouteImport } from './routes/app.careers'
 import { Route as AppCareRouteImport } from './routes/app.care'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
@@ -138,6 +139,7 @@ import { Route as EventsSlugPhotoChallengesRouteImport } from './routes/events.$
 import { Route as EventsSlugPetsRouteImport } from './routes/events.$slug.pets'
 import { Route as EventsSlugPerksRouteImport } from './routes/events.$slug.perks'
 import { Route as EventsSlugParkingRouteImport } from './routes/events.$slug.parking'
+import { Route as EventsSlugOpenBarRouteImport } from './routes/events.$slug.open-bar'
 import { Route as EventsSlugNurseryRouteImport } from './routes/events.$slug.nursery'
 import { Route as EventsSlugNameBadgesRouteImport } from './routes/events.$slug.name-badges'
 import { Route as EventsSlugModerationRouteImport } from './routes/events.$slug.moderation'
@@ -186,6 +188,7 @@ import { Route as EventsSlugDisplayRouteImport } from './routes/events.$slug.dis
 import { Route as EventsSlugDeliveriesRouteImport } from './routes/events.$slug.deliveries'
 import { Route as EventsSlugDecorRouteImport } from './routes/events.$slug.decor'
 import { Route as EventsSlugDashboardRouteImport } from './routes/events.$slug.dashboard'
+import { Route as EventsSlugCoupleShootRouteImport } from './routes/events.$slug.couple-shoot'
 import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.countdown'
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
 import { Route as EventsSlugConfettiRouteImport } from './routes/events.$slug.confetti'
@@ -554,6 +557,11 @@ const AppChangelogRoute = AppChangelogRouteImport.update({
   path: '/changelog',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCareersRoute = AppCareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCareRoute = AppCareRouteImport.update({
   id: '/care',
   path: '/care',
@@ -866,6 +874,11 @@ const EventsSlugParkingRoute = EventsSlugParkingRouteImport.update({
   path: '/parking',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugOpenBarRoute = EventsSlugOpenBarRouteImport.update({
+  id: '/open-bar',
+  path: '/open-bar',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugNurseryRoute = EventsSlugNurseryRouteImport.update({
   id: '/nursery',
   path: '/nursery',
@@ -1107,6 +1120,11 @@ const EventsSlugDashboardRoute = EventsSlugDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugCoupleShootRoute = EventsSlugCoupleShootRouteImport.update({
+  id: '/couple-shoot',
+  path: '/couple-shoot',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugCountdownRoute = EventsSlugCountdownRouteImport.update({
   id: '/countdown',
   path: '/countdown',
@@ -1277,6 +1295,7 @@ export interface FileRoutesByFullPath {
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
   '/app/care': typeof AppCareRoute
+  '/app/careers': typeof AppCareersRoute
   '/app/changelog': typeof AppChangelogRoute
   '/app/co-organizers': typeof AppCoOrganizersRoute
   '/app/collections': typeof AppCollectionsRoute
@@ -1366,6 +1385,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
+  '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
@@ -1414,6 +1434,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/nursery': typeof EventsSlugNurseryRoute
+  '/events/$slug/open-bar': typeof EventsSlugOpenBarRoute
   '/events/$slug/parking': typeof EventsSlugParkingRoute
   '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
@@ -1486,6 +1507,7 @@ export interface FileRoutesByTo {
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
   '/app/care': typeof AppCareRoute
+  '/app/careers': typeof AppCareersRoute
   '/app/changelog': typeof AppChangelogRoute
   '/app/co-organizers': typeof AppCoOrganizersRoute
   '/app/collections': typeof AppCollectionsRoute
@@ -1574,6 +1596,7 @@ export interface FileRoutesByTo {
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
+  '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
@@ -1622,6 +1645,7 @@ export interface FileRoutesByTo {
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/nursery': typeof EventsSlugNurseryRoute
+  '/events/$slug/open-bar': typeof EventsSlugOpenBarRoute
   '/events/$slug/parking': typeof EventsSlugParkingRoute
   '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
@@ -1696,6 +1720,7 @@ export interface FileRoutesById {
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
   '/app/care': typeof AppCareRoute
+  '/app/careers': typeof AppCareersRoute
   '/app/changelog': typeof AppChangelogRoute
   '/app/co-organizers': typeof AppCoOrganizersRoute
   '/app/collections': typeof AppCollectionsRoute
@@ -1785,6 +1810,7 @@ export interface FileRoutesById {
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
   '/events/$slug/countdown': typeof EventsSlugCountdownRoute
+  '/events/$slug/couple-shoot': typeof EventsSlugCoupleShootRoute
   '/events/$slug/dashboard': typeof EventsSlugDashboardRoute
   '/events/$slug/decor': typeof EventsSlugDecorRoute
   '/events/$slug/deliveries': typeof EventsSlugDeliveriesRoute
@@ -1833,6 +1859,7 @@ export interface FileRoutesById {
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/nursery': typeof EventsSlugNurseryRoute
+  '/events/$slug/open-bar': typeof EventsSlugOpenBarRoute
   '/events/$slug/parking': typeof EventsSlugParkingRoute
   '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
@@ -1908,6 +1935,7 @@ export interface FileRouteTypes {
     | '/app/appearance'
     | '/app/billing'
     | '/app/care'
+    | '/app/careers'
     | '/app/changelog'
     | '/app/co-organizers'
     | '/app/collections'
@@ -1997,6 +2025,7 @@ export interface FileRouteTypes {
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
+    | '/events/$slug/couple-shoot'
     | '/events/$slug/dashboard'
     | '/events/$slug/decor'
     | '/events/$slug/deliveries'
@@ -2045,6 +2074,7 @@ export interface FileRouteTypes {
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
     | '/events/$slug/nursery'
+    | '/events/$slug/open-bar'
     | '/events/$slug/parking'
     | '/events/$slug/perks'
     | '/events/$slug/pets'
@@ -2117,6 +2147,7 @@ export interface FileRouteTypes {
     | '/app/appearance'
     | '/app/billing'
     | '/app/care'
+    | '/app/careers'
     | '/app/changelog'
     | '/app/co-organizers'
     | '/app/collections'
@@ -2205,6 +2236,7 @@ export interface FileRouteTypes {
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
+    | '/events/$slug/couple-shoot'
     | '/events/$slug/dashboard'
     | '/events/$slug/decor'
     | '/events/$slug/deliveries'
@@ -2253,6 +2285,7 @@ export interface FileRouteTypes {
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
     | '/events/$slug/nursery'
+    | '/events/$slug/open-bar'
     | '/events/$slug/parking'
     | '/events/$slug/perks'
     | '/events/$slug/pets'
@@ -2326,6 +2359,7 @@ export interface FileRouteTypes {
     | '/app/appearance'
     | '/app/billing'
     | '/app/care'
+    | '/app/careers'
     | '/app/changelog'
     | '/app/co-organizers'
     | '/app/collections'
@@ -2415,6 +2449,7 @@ export interface FileRouteTypes {
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
     | '/events/$slug/countdown'
+    | '/events/$slug/couple-shoot'
     | '/events/$slug/dashboard'
     | '/events/$slug/decor'
     | '/events/$slug/deliveries'
@@ -2463,6 +2498,7 @@ export interface FileRouteTypes {
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
     | '/events/$slug/nursery'
+    | '/events/$slug/open-bar'
     | '/events/$slug/parking'
     | '/events/$slug/perks'
     | '/events/$slug/pets'
@@ -3005,6 +3041,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppChangelogRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/careers': {
+      id: '/app/careers'
+      path: '/careers'
+      fullPath: '/app/careers'
+      preLoaderRoute: typeof AppCareersRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/care': {
       id: '/app/care'
       path: '/care'
@@ -3439,6 +3482,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugParkingRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/open-bar': {
+      id: '/events/$slug/open-bar'
+      path: '/open-bar'
+      fullPath: '/events/$slug/open-bar'
+      preLoaderRoute: typeof EventsSlugOpenBarRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/nursery': {
       id: '/events/$slug/nursery'
       path: '/nursery'
@@ -3775,6 +3825,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugDashboardRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/couple-shoot': {
+      id: '/events/$slug/couple-shoot'
+      path: '/couple-shoot'
+      fullPath: '/events/$slug/couple-shoot'
+      preLoaderRoute: typeof EventsSlugCoupleShootRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/countdown': {
       id: '/events/$slug/countdown'
       path: '/countdown'
@@ -4027,6 +4084,7 @@ interface AppRouteChildren {
   AppAppearanceRoute: typeof AppAppearanceRoute
   AppBillingRoute: typeof AppBillingRoute
   AppCareRoute: typeof AppCareRoute
+  AppCareersRoute: typeof AppCareersRoute
   AppChangelogRoute: typeof AppChangelogRoute
   AppCoOrganizersRoute: typeof AppCoOrganizersRoute
   AppCollectionsRoute: typeof AppCollectionsRoute
@@ -4098,6 +4156,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAppearanceRoute: AppAppearanceRoute,
   AppBillingRoute: AppBillingRoute,
   AppCareRoute: AppCareRoute,
+  AppCareersRoute: AppCareersRoute,
   AppChangelogRoute: AppChangelogRoute,
   AppCoOrganizersRoute: AppCoOrganizersRoute,
   AppCollectionsRoute: AppCollectionsRoute,
@@ -4213,6 +4272,7 @@ interface EventsSlugRouteChildren {
   EventsSlugConfettiRoute: typeof EventsSlugConfettiRoute
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
   EventsSlugCountdownRoute: typeof EventsSlugCountdownRoute
+  EventsSlugCoupleShootRoute: typeof EventsSlugCoupleShootRoute
   EventsSlugDashboardRoute: typeof EventsSlugDashboardRoute
   EventsSlugDecorRoute: typeof EventsSlugDecorRoute
   EventsSlugDeliveriesRoute: typeof EventsSlugDeliveriesRoute
@@ -4261,6 +4321,7 @@ interface EventsSlugRouteChildren {
   EventsSlugModerationRoute: typeof EventsSlugModerationRoute
   EventsSlugNameBadgesRoute: typeof EventsSlugNameBadgesRoute
   EventsSlugNurseryRoute: typeof EventsSlugNurseryRoute
+  EventsSlugOpenBarRoute: typeof EventsSlugOpenBarRoute
   EventsSlugParkingRoute: typeof EventsSlugParkingRoute
   EventsSlugPerksRoute: typeof EventsSlugPerksRoute
   EventsSlugPetsRoute: typeof EventsSlugPetsRoute
@@ -4343,6 +4404,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugConfettiRoute: EventsSlugConfettiRoute,
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
   EventsSlugCountdownRoute: EventsSlugCountdownRoute,
+  EventsSlugCoupleShootRoute: EventsSlugCoupleShootRoute,
   EventsSlugDashboardRoute: EventsSlugDashboardRoute,
   EventsSlugDecorRoute: EventsSlugDecorRoute,
   EventsSlugDeliveriesRoute: EventsSlugDeliveriesRoute,
@@ -4391,6 +4453,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugModerationRoute: EventsSlugModerationRoute,
   EventsSlugNameBadgesRoute: EventsSlugNameBadgesRoute,
   EventsSlugNurseryRoute: EventsSlugNurseryRoute,
+  EventsSlugOpenBarRoute: EventsSlugOpenBarRoute,
   EventsSlugParkingRoute: EventsSlugParkingRoute,
   EventsSlugPerksRoute: EventsSlugPerksRoute,
   EventsSlugPetsRoute: EventsSlugPetsRoute,
