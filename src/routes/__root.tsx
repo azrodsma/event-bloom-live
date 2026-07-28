@@ -146,27 +146,18 @@ function RootComponent() {
 // Refetch queries + navigate on identity transitions.
 function AuthEffects() {
   const router = useRouter();
-  const queryClient = useQueryClientLike();
+  const queryClient = useQueryClient();
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((event) => {
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
       router.invalidate();
-      if (event !== "SIGNED_OUT") queryClient?.invalidateQueries();
+      if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
     });
     return () => sub.subscription.unsubscribe();
   }, [router, queryClient]);
   return null;
 }
 
-function useQueryClientLike() {
-  try {
-    // Lazy require to avoid SSR issues if unavailable
-    const { useQueryClient } = require("@tanstack/react-query");
-    return useQueryClient();
-  } catch {
-    return null;
-  }
-}
 
 // Client-side gate: redirect /app/* and /events/* to /auth when not signed in.
 function RouteGuard() {
