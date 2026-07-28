@@ -87,7 +87,7 @@ export function adaptEvent(e: DbEvent): MockEvent {
         }
       : undefined,
     livestream: e.live_url
-      ? { platform, url: e.live_url, embedUrl: e.live_url }
+      ? { platform, url: e.live_url, embedUrl: embedUrl ?? e.live_url }
       : undefined,
     guestbookCount: 0,
     photosCount: 0,
