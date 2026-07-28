@@ -6,8 +6,11 @@ export const getEventStats = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const eid = data.eventId;
-    const q = (table: string, filter: Record<string, unknown> = {}) =>
-      supabaseAdmin.from(table).select("*", { count: "exact", head: true }).match({ event_id: eid, ...filter });
+    const q = (table: string, extra?: { column: string; value: unknown }) => {
+      let b = (supabaseAdmin as any).from(table).select("*", { count: "exact", head: true }).eq("event_id", eid);
+      if (extra) b = b.eq(extra.column, extra.value);
+      return b as Promise<{ count: number | null }>;
+    };
 
     const [gb, al, pl, seat, bud, ck, gv, gs, gc] = await Promise.all([
       q("guestbook_entries"),
@@ -16,9 +19,9 @@ export const getEventStats = createServerFn({ method: "GET" })
       q("tables_seating"),
       q("budget_items"),
       q("checklist_items"),
-      q("checklist_items", { is_done: true }),
+      q("checklist_items", { column: "is_done", value: true }),
       q("guests"),
-      q("guests", { rsvp: "confirmed" }),
+      q("guests", { column: "rsvp", value: "confirmed" }),
     ]);
 
     return {
