@@ -24,6 +24,7 @@ import { Route as AppWellnessRouteImport } from './routes/app.wellness'
 import { Route as AppWalletRouteImport } from './routes/app.wallet'
 import { Route as AppVenuesRouteImport } from './routes/app.venues'
 import { Route as AppVendorsRouteImport } from './routes/app.vendors'
+import { Route as AppTrendsRouteImport } from './routes/app.trends'
 import { Route as AppTipsRouteImport } from './routes/app.tips'
 import { Route as AppTimeCapsuleRouteImport } from './routes/app.time-capsule'
 import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
@@ -71,6 +72,7 @@ import { Route as EventsSlugVowsRouteImport } from './routes/events.$slug.vows'
 import { Route as EventsSlugVipRouteImport } from './routes/events.$slug.vip'
 import { Route as EventsSlugVendorsHubRouteImport } from './routes/events.$slug.vendors-hub'
 import { Route as EventsSlugTributeRouteImport } from './routes/events.$slug.tribute'
+import { Route as EventsSlugTranslationsRouteImport } from './routes/events.$slug.translations'
 import { Route as EventsSlugToastRouteImport } from './routes/events.$slug.toast'
 import { Route as EventsSlugTimelineRouteImport } from './routes/events.$slug.timeline'
 import { Route as EventsSlugThanksRouteImport } from './routes/events.$slug.thanks'
@@ -228,6 +230,11 @@ const AppVenuesRoute = AppVenuesRouteImport.update({
 const AppVendorsRoute = AppVendorsRouteImport.update({
   id: '/vendors',
   path: '/vendors',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTrendsRoute = AppTrendsRouteImport.update({
+  id: '/trends',
+  path: '/trends',
   getParentRoute: () => AppRoute,
 } as any)
 const AppTipsRoute = AppTipsRouteImport.update({
@@ -463,6 +470,11 @@ const EventsSlugVendorsHubRoute = EventsSlugVendorsHubRouteImport.update({
 const EventsSlugTributeRoute = EventsSlugTributeRouteImport.update({
   id: '/tribute',
   path: '/tribute',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugTranslationsRoute = EventsSlugTranslationsRouteImport.update({
+  id: '/translations',
+  path: '/translations',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugToastRoute = EventsSlugToastRouteImport.update({
@@ -929,6 +941,7 @@ export interface FileRoutesByFullPath {
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
+  '/app/trends': typeof AppTrendsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/wallet': typeof AppWalletRoute
@@ -1018,6 +1031,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
+  '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -1075,6 +1089,7 @@ export interface FileRoutesByTo {
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
+  '/app/trends': typeof AppTrendsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/wallet': typeof AppWalletRoute
@@ -1163,6 +1178,7 @@ export interface FileRoutesByTo {
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
+  '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -1222,6 +1238,7 @@ export interface FileRoutesById {
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/time-capsule': typeof AppTimeCapsuleRoute
   '/app/tips': typeof AppTipsRoute
+  '/app/trends': typeof AppTrendsRoute
   '/app/vendors': typeof AppVendorsRouteWithChildren
   '/app/venues': typeof AppVenuesRoute
   '/app/wallet': typeof AppWalletRoute
@@ -1311,6 +1328,7 @@ export interface FileRoutesById {
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
+  '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -1371,6 +1389,7 @@ export interface FileRouteTypes {
     | '/app/story-composer'
     | '/app/time-capsule'
     | '/app/tips'
+    | '/app/trends'
     | '/app/vendors'
     | '/app/venues'
     | '/app/wallet'
@@ -1460,6 +1479,7 @@ export interface FileRouteTypes {
     | '/events/$slug/thanks'
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
+    | '/events/$slug/translations'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
@@ -1517,6 +1537,7 @@ export interface FileRouteTypes {
     | '/app/story-composer'
     | '/app/time-capsule'
     | '/app/tips'
+    | '/app/trends'
     | '/app/vendors'
     | '/app/venues'
     | '/app/wallet'
@@ -1605,6 +1626,7 @@ export interface FileRouteTypes {
     | '/events/$slug/thanks'
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
+    | '/events/$slug/translations'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
@@ -1663,6 +1685,7 @@ export interface FileRouteTypes {
     | '/app/story-composer'
     | '/app/time-capsule'
     | '/app/tips'
+    | '/app/trends'
     | '/app/vendors'
     | '/app/venues'
     | '/app/wallet'
@@ -1752,6 +1775,7 @@ export interface FileRouteTypes {
     | '/events/$slug/thanks'
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
+    | '/events/$slug/translations'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
@@ -1880,6 +1904,13 @@ declare module '@tanstack/react-router' {
       path: '/vendors'
       fullPath: '/app/vendors'
       preLoaderRoute: typeof AppVendorsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/trends': {
+      id: '/app/trends'
+      path: '/trends'
+      fullPath: '/app/trends'
+      preLoaderRoute: typeof AppTrendsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/tips': {
@@ -2209,6 +2240,13 @@ declare module '@tanstack/react-router' {
       path: '/tribute'
       fullPath: '/events/$slug/tribute'
       preLoaderRoute: typeof EventsSlugTributeRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/translations': {
+      id: '/events/$slug/translations'
+      path: '/translations'
+      fullPath: '/events/$slug/translations'
+      preLoaderRoute: typeof EventsSlugTranslationsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/toast': {
@@ -2860,6 +2898,7 @@ interface AppRouteChildren {
   AppStoryComposerRoute: typeof AppStoryComposerRoute
   AppTimeCapsuleRoute: typeof AppTimeCapsuleRoute
   AppTipsRoute: typeof AppTipsRoute
+  AppTrendsRoute: typeof AppTrendsRoute
   AppVendorsRoute: typeof AppVendorsRouteWithChildren
   AppVenuesRoute: typeof AppVenuesRoute
   AppWalletRoute: typeof AppWalletRoute
@@ -2912,6 +2951,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppStoryComposerRoute: AppStoryComposerRoute,
   AppTimeCapsuleRoute: AppTimeCapsuleRoute,
   AppTipsRoute: AppTipsRoute,
+  AppTrendsRoute: AppTrendsRoute,
   AppVendorsRoute: AppVendorsRouteWithChildren,
   AppVenuesRoute: AppVenuesRoute,
   AppWalletRoute: AppWalletRoute,
@@ -3027,6 +3067,7 @@ interface EventsSlugRouteChildren {
   EventsSlugThanksRoute: typeof EventsSlugThanksRoute
   EventsSlugTimelineRoute: typeof EventsSlugTimelineRoute
   EventsSlugToastRoute: typeof EventsSlugToastRoute
+  EventsSlugTranslationsRoute: typeof EventsSlugTranslationsRoute
   EventsSlugTributeRoute: typeof EventsSlugTributeRoute
   EventsSlugVendorsHubRoute: typeof EventsSlugVendorsHubRoute
   EventsSlugVipRoute: typeof EventsSlugVipRoute
@@ -3113,6 +3154,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugThanksRoute: EventsSlugThanksRoute,
   EventsSlugTimelineRoute: EventsSlugTimelineRoute,
   EventsSlugToastRoute: EventsSlugToastRoute,
+  EventsSlugTranslationsRoute: EventsSlugTranslationsRoute,
   EventsSlugTributeRoute: EventsSlugTributeRoute,
   EventsSlugVendorsHubRoute: EventsSlugVendorsHubRoute,
   EventsSlugVipRoute: EventsSlugVipRoute,
