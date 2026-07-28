@@ -93,6 +93,7 @@ import { Route as EventsSlugPhotoshootRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugPhotoboothRouteImport } from './routes/events.$slug.photobooth'
 import { Route as EventsSlugPhotoChallengesRouteImport } from './routes/events.$slug.photo-challenges'
 import { Route as EventsSlugPetsRouteImport } from './routes/events.$slug.pets'
+import { Route as EventsSlugNameBadgesRouteImport } from './routes/events.$slug.name-badges'
 import { Route as EventsSlugModerationRouteImport } from './routes/events.$slug.moderation'
 import { Route as EventsSlugMenuRouteImport } from './routes/events.$slug.menu'
 import { Route as EventsSlugMapRouteImport } from './routes/events.$slug.map'
@@ -568,6 +569,11 @@ const EventsSlugPetsRoute = EventsSlugPetsRouteImport.update({
   path: '/pets',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugNameBadgesRoute = EventsSlugNameBadgesRouteImport.update({
+  id: '/name-badges',
+  path: '/name-badges',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugModerationRoute = EventsSlugModerationRouteImport.update({
   id: '/moderation',
   path: '/moderation',
@@ -937,6 +943,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
+  '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
@@ -1074,6 +1081,7 @@ export interface FileRoutesByTo {
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
+  '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
@@ -1214,6 +1222,7 @@ export interface FileRoutesById {
   '/events/$slug/map': typeof EventsSlugMapRoute
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
+  '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
   '/events/$slug/photobooth': typeof EventsSlugPhotoboothRoute
@@ -1355,6 +1364,7 @@ export interface FileRouteTypes {
     | '/events/$slug/map'
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
+    | '/events/$slug/name-badges'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photobooth'
@@ -1492,6 +1502,7 @@ export interface FileRouteTypes {
     | '/events/$slug/map'
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
+    | '/events/$slug/name-badges'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photobooth'
@@ -1631,6 +1642,7 @@ export interface FileRouteTypes {
     | '/events/$slug/map'
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
+    | '/events/$slug/name-badges'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
     | '/events/$slug/photobooth'
@@ -2269,6 +2281,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugPetsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/name-badges': {
+      id: '/events/$slug/name-badges'
+      path: '/name-badges'
+      fullPath: '/events/$slug/name-badges'
+      preLoaderRoute: typeof EventsSlugNameBadgesRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/moderation': {
       id: '/events/$slug/moderation'
       path: '/moderation'
@@ -2839,6 +2858,7 @@ interface EventsSlugRouteChildren {
   EventsSlugMapRoute: typeof EventsSlugMapRoute
   EventsSlugMenuRoute: typeof EventsSlugMenuRoute
   EventsSlugModerationRoute: typeof EventsSlugModerationRoute
+  EventsSlugNameBadgesRoute: typeof EventsSlugNameBadgesRoute
   EventsSlugPetsRoute: typeof EventsSlugPetsRoute
   EventsSlugPhotoChallengesRoute: typeof EventsSlugPhotoChallengesRoute
   EventsSlugPhotoboothRoute: typeof EventsSlugPhotoboothRoute
@@ -2920,6 +2940,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugMapRoute: EventsSlugMapRoute,
   EventsSlugMenuRoute: EventsSlugMenuRoute,
   EventsSlugModerationRoute: EventsSlugModerationRoute,
+  EventsSlugNameBadgesRoute: EventsSlugNameBadgesRoute,
   EventsSlugPetsRoute: EventsSlugPetsRoute,
   EventsSlugPhotoChallengesRoute: EventsSlugPhotoChallengesRoute,
   EventsSlugPhotoboothRoute: EventsSlugPhotoboothRoute,
@@ -2971,13 +2992,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
