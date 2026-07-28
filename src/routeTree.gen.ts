@@ -62,6 +62,7 @@ import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries
 import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as EventsSlugIndexRouteImport } from './routes/events.$slug.index'
+import { Route as EventsSlugWelcomeBagRouteImport } from './routes/events.$slug.welcome-bag'
 import { Route as EventsSlugWeatherRouteImport } from './routes/events.$slug.weather'
 import { Route as EventsSlugVowsRouteImport } from './routes/events.$slug.vows'
 import { Route as EventsSlugVipRouteImport } from './routes/events.$slug.vip'
@@ -411,6 +412,11 @@ const AppAchievementsRoute = AppAchievementsRouteImport.update({
 const EventsSlugIndexRoute = EventsSlugIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugWelcomeBagRoute = EventsSlugWelcomeBagRouteImport.update({
+  id: '/welcome-bag',
+  path: '/welcome-bag',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugWeatherRoute = EventsSlugWeatherRouteImport.update({
@@ -975,6 +981,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug/welcome-bag': typeof EventsSlugWelcomeBagRoute
   '/events/$slug/': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -1113,6 +1120,7 @@ export interface FileRoutesByTo {
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug/welcome-bag': typeof EventsSlugWelcomeBagRoute
   '/events/$slug': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -1254,6 +1262,7 @@ export interface FileRoutesById {
   '/events/$slug/vip': typeof EventsSlugVipRoute
   '/events/$slug/vows': typeof EventsSlugVowsRoute
   '/events/$slug/weather': typeof EventsSlugWeatherRoute
+  '/events/$slug/welcome-bag': typeof EventsSlugWelcomeBagRoute
   '/events/$slug/': typeof EventsSlugIndexRoute
   '/events/$slug/guestbook/$id': typeof EventsSlugGuestbookIdRoute
   '/events/$slug/guestbook/new': typeof EventsSlugGuestbookNewRoute
@@ -1396,6 +1405,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
+    | '/events/$slug/welcome-bag'
     | '/events/$slug/'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
@@ -1534,6 +1544,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
+    | '/events/$slug/welcome-bag'
     | '/events/$slug'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
@@ -1674,6 +1685,7 @@ export interface FileRouteTypes {
     | '/events/$slug/vip'
     | '/events/$slug/vows'
     | '/events/$slug/weather'
+    | '/events/$slug/welcome-bag'
     | '/events/$slug/'
     | '/events/$slug/guestbook/$id'
     | '/events/$slug/guestbook/new'
@@ -2062,6 +2074,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/events/$slug/'
       preLoaderRoute: typeof EventsSlugIndexRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/welcome-bag': {
+      id: '/events/$slug/welcome-bag'
+      path: '/welcome-bag'
+      fullPath: '/events/$slug/welcome-bag'
+      preLoaderRoute: typeof EventsSlugWelcomeBagRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/weather': {
@@ -2890,6 +2909,7 @@ interface EventsSlugRouteChildren {
   EventsSlugVipRoute: typeof EventsSlugVipRoute
   EventsSlugVowsRoute: typeof EventsSlugVowsRoute
   EventsSlugWeatherRoute: typeof EventsSlugWeatherRoute
+  EventsSlugWelcomeBagRoute: typeof EventsSlugWelcomeBagRoute
   EventsSlugIndexRoute: typeof EventsSlugIndexRoute
 }
 
@@ -2972,6 +2992,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugVipRoute: EventsSlugVipRoute,
   EventsSlugVowsRoute: EventsSlugVowsRoute,
   EventsSlugWeatherRoute: EventsSlugWeatherRoute,
+  EventsSlugWelcomeBagRoute: EventsSlugWelcomeBagRoute,
   EventsSlugIndexRoute: EventsSlugIndexRoute,
 }
 
