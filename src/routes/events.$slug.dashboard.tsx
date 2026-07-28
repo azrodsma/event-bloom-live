@@ -9,10 +9,18 @@ export const Route = createFileRoute("/events/$slug/dashboard")({
       { name: "description", content: `Statistiques de l'événement ${params.slug}.` },
     ],
   }),
-  loader: ({ params }) => {
-    const e = findEvent(params.slug);
-    if (!e) throw notFound();
-    return { event: e };
+  loader: async ({ params }) => {
+    const { getEventBySlug } = await import("@/lib/events.functions");
+    const { adaptEvent } = await import("@/lib/event-adapter");
+    const { getEventStats } = await import("@/lib/stats.functions");
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) {
+      const e = findEvent(params.slug);
+      if (!e) throw notFound();
+      return { event: e, stats: null as Awaited<ReturnType<typeof getEventStats>> | null };
+    }
+    const stats = await getEventStats({ data: { eventId: db.id } });
+    return { event: adaptEvent(db), stats };
   },
   component: Dashboard,
 });
@@ -20,7 +28,7 @@ export const Route = createFileRoute("/events/$slug/dashboard")({
 const chartData = [12, 24, 38, 52, 70, 95, 120, 148, 172, 190, 205, 220];
 
 function Dashboard() {
-  const { event } = Route.useLoaderData();
+  const { event, stats } = Route.useLoaderData();
   const max = Math.max(...chartData);
   const potPercent = event.moneyPot
     ? Math.min(100, (event.moneyPot.current / event.moneyPot.target) * 100)
@@ -69,10 +77,10 @@ function Dashboard() {
         {/* KPI grid */}
         <section className="grid grid-cols-2 gap-3">
           {[
-            { icon: Users, label: "Invités confirmés", value: "124", trend: "+8", tone: "primary" },
-            { icon: Heart, label: "Réactions", value: "2,4k", trend: "+320", tone: "live" },
-            { icon: Camera, label: "Photos partagées", value: event.photosCount, trend: "+42", tone: "gold" },
-            { icon: MessageCircle, label: "Mots du livre d'or", value: event.guestbookCount, trend: "+11", tone: "primary" },
+            { icon: Users, label: "Invités confirmés", value: String(stats?.guestsConfirmed ?? 0), trend: `${stats?.guestsTotal ?? 0} total`, tone: "primary" as const },
+            { icon: Heart, label: "Réactions live", value: "—", trend: "24h", tone: "live" as const },
+            { icon: Camera, label: "Photos album", value: String(stats?.photos ?? 0), trend: "en direct", tone: "gold" as const },
+            { icon: MessageCircle, label: "Mots du livre d'or", value: String(stats?.guestbook ?? 0), trend: "en direct", tone: "primary" as const },
           ].map((k) => (
             <div key={k.label} className="rounded-3xl bg-surface p-4 shadow-card">
               <div className="flex items-center justify-between">
