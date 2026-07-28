@@ -67,6 +67,7 @@ import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
 import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries'
 import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
+import { Route as AppAccessibilityRouteImport } from './routes/app.accessibility'
 import { Route as EventsSlugIndexRouteImport } from './routes/events.$slug.index'
 import { Route as EventsSlugWelcomeBagRouteImport } from './routes/events.$slug.welcome-bag'
 import { Route as EventsSlugWeatherRouteImport } from './routes/events.$slug.weather'
@@ -81,6 +82,7 @@ import { Route as EventsSlugThanksRouteImport } from './routes/events.$slug.than
 import { Route as EventsSlugThankYouCardsRouteImport } from './routes/events.$slug.thank-you-cards'
 import { Route as EventsSlugTastingsRouteImport } from './routes/events.$slug.tastings'
 import { Route as EventsSlugSurprisesRouteImport } from './routes/events.$slug.surprises'
+import { Route as EventsSlugSplitCostsRouteImport } from './routes/events.$slug.split-costs'
 import { Route as EventsSlugSpeechesRouteImport } from './routes/events.$slug.speeches'
 import { Route as EventsSlugSpeechBuilderRouteImport } from './routes/events.$slug.speech-builder'
 import { Route as EventsSlugSouvenirRouteImport } from './routes/events.$slug.souvenir'
@@ -454,6 +456,11 @@ const AppAchievementsRoute = AppAchievementsRouteImport.update({
   path: '/achievements',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAccessibilityRoute = AppAccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
+  getParentRoute: () => AppRoute,
+} as any)
 const EventsSlugIndexRoute = EventsSlugIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -522,6 +529,11 @@ const EventsSlugTastingsRoute = EventsSlugTastingsRouteImport.update({
 const EventsSlugSurprisesRoute = EventsSlugSurprisesRouteImport.update({
   id: '/surprises',
   path: '/surprises',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugSplitCostsRoute = EventsSlugSplitCostsRouteImport.update({
+  id: '/split-costs',
+  path: '/split-costs',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugSpeechesRoute = EventsSlugSpeechesRouteImport.update({
@@ -944,6 +956,7 @@ export interface FileRoutesByFullPath {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
@@ -1075,6 +1088,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
+  '/events/$slug/split-costs': typeof EventsSlugSplitCostsRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
@@ -1099,6 +1113,7 @@ export interface FileRoutesByTo {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
@@ -1229,6 +1244,7 @@ export interface FileRoutesByTo {
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
+  '/events/$slug/split-costs': typeof EventsSlugSplitCostsRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
@@ -1255,6 +1271,7 @@ export interface FileRoutesById {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/agenda': typeof AppAgendaRoute
   '/app/anniversaries': typeof AppAnniversariesRoute
@@ -1386,6 +1403,7 @@ export interface FileRoutesById {
   '/events/$slug/souvenir': typeof EventsSlugSouvenirRoute
   '/events/$slug/speech-builder': typeof EventsSlugSpeechBuilderRoute
   '/events/$slug/speeches': typeof EventsSlugSpeechesRoute
+  '/events/$slug/split-costs': typeof EventsSlugSplitCostsRoute
   '/events/$slug/surprises': typeof EventsSlugSurprisesRoute
   '/events/$slug/tastings': typeof EventsSlugTastingsRoute
   '/events/$slug/thank-you-cards': typeof EventsSlugThankYouCardsRoute
@@ -1413,6 +1431,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
     | '/app/anniversaries'
@@ -1544,6 +1563,7 @@ export interface FileRouteTypes {
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
+    | '/events/$slug/split-costs'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
     | '/events/$slug/thank-you-cards'
@@ -1568,6 +1588,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
     | '/app/anniversaries'
@@ -1698,6 +1719,7 @@ export interface FileRouteTypes {
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
+    | '/events/$slug/split-costs'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
     | '/events/$slug/thank-you-cards'
@@ -1723,6 +1745,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/app/accessibility'
     | '/app/achievements'
     | '/app/agenda'
     | '/app/anniversaries'
@@ -1854,6 +1877,7 @@ export interface FileRouteTypes {
     | '/events/$slug/souvenir'
     | '/events/$slug/speech-builder'
     | '/events/$slug/speeches'
+    | '/events/$slug/split-costs'
     | '/events/$slug/surprises'
     | '/events/$slug/tastings'
     | '/events/$slug/thank-you-cards'
@@ -2292,6 +2316,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAchievementsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/accessibility': {
+      id: '/app/accessibility'
+      path: '/accessibility'
+      fullPath: '/app/accessibility'
+      preLoaderRoute: typeof AppAccessibilityRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/events/$slug/': {
       id: '/events/$slug/'
       path: '/'
@@ -2388,6 +2419,13 @@ declare module '@tanstack/react-router' {
       path: '/surprises'
       fullPath: '/events/$slug/surprises'
       preLoaderRoute: typeof EventsSlugSurprisesRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/split-costs': {
+      id: '/events/$slug/split-costs'
+      path: '/split-costs'
+      fullPath: '/events/$slug/split-costs'
+      preLoaderRoute: typeof EventsSlugSplitCostsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/speeches': {
@@ -2992,6 +3030,7 @@ const AppVendorsRouteWithChildren = AppVendorsRoute._addFileChildren(
 )
 
 interface AppRouteChildren {
+  AppAccessibilityRoute: typeof AppAccessibilityRoute
   AppAchievementsRoute: typeof AppAchievementsRoute
   AppAgendaRoute: typeof AppAgendaRoute
   AppAnniversariesRoute: typeof AppAnniversariesRoute
@@ -3047,6 +3086,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAccessibilityRoute: AppAccessibilityRoute,
   AppAchievementsRoute: AppAchievementsRoute,
   AppAgendaRoute: AppAgendaRoute,
   AppAnniversariesRoute: AppAnniversariesRoute,
@@ -3204,6 +3244,7 @@ interface EventsSlugRouteChildren {
   EventsSlugSouvenirRoute: typeof EventsSlugSouvenirRoute
   EventsSlugSpeechBuilderRoute: typeof EventsSlugSpeechBuilderRoute
   EventsSlugSpeechesRoute: typeof EventsSlugSpeechesRoute
+  EventsSlugSplitCostsRoute: typeof EventsSlugSplitCostsRoute
   EventsSlugSurprisesRoute: typeof EventsSlugSurprisesRoute
   EventsSlugTastingsRoute: typeof EventsSlugTastingsRoute
   EventsSlugThankYouCardsRoute: typeof EventsSlugThankYouCardsRoute
@@ -3296,6 +3337,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugSouvenirRoute: EventsSlugSouvenirRoute,
   EventsSlugSpeechBuilderRoute: EventsSlugSpeechBuilderRoute,
   EventsSlugSpeechesRoute: EventsSlugSpeechesRoute,
+  EventsSlugSplitCostsRoute: EventsSlugSplitCostsRoute,
   EventsSlugSurprisesRoute: EventsSlugSurprisesRoute,
   EventsSlugTastingsRoute: EventsSlugTastingsRoute,
   EventsSlugThankYouCardsRoute: EventsSlugThankYouCardsRoute,
