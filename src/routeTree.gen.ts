@@ -63,6 +63,7 @@ import { Route as AppLanguagesRouteImport } from './routes/app.languages'
 import { Route as AppJournalRouteImport } from './routes/app.journal'
 import { Route as AppInvestorsRouteImport } from './routes/app.investors'
 import { Route as AppInternationalRouteImport } from './routes/app.international'
+import { Route as AppIntegrationsRouteImport } from './routes/app.integrations'
 import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
 import { Route as AppInboxRouteImport } from './routes/app.inbox'
 import { Route as AppImpactRouteImport } from './routes/app.impact'
@@ -207,6 +208,7 @@ import { Route as EventsSlugCountdownRouteImport } from './routes/events.$slug.c
 import { Route as EventsSlugContributorsRouteImport } from './routes/events.$slug.contributors'
 import { Route as EventsSlugConfettiRouteImport } from './routes/events.$slug.confetti'
 import { Route as EventsSlugComfortRouteImport } from './routes/events.$slug.comfort'
+import { Route as EventsSlugCoffeeBarRouteImport } from './routes/events.$slug.coffee-bar'
 import { Route as EventsSlugCocktailRouteImport } from './routes/events.$slug.cocktail'
 import { Route as EventsSlugCityGuideRouteImport } from './routes/events.$slug.city-guide'
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
@@ -508,6 +510,11 @@ const AppInvestorsRoute = AppInvestorsRouteImport.update({
 const AppInternationalRoute = AppInternationalRouteImport.update({
   id: '/international',
   path: '/international',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppIntegrationsRoute = AppIntegrationsRouteImport.update({
+  id: '/integrations',
+  path: '/integrations',
   getParentRoute: () => AppRoute,
 } as any)
 const AppInspirationsRoute = AppInspirationsRouteImport.update({
@@ -1233,6 +1240,11 @@ const EventsSlugComfortRoute = EventsSlugComfortRouteImport.update({
   path: '/comfort',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugCoffeeBarRoute = EventsSlugCoffeeBarRouteImport.update({
+  id: '/coffee-bar',
+  path: '/coffee-bar',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugCocktailRoute = EventsSlugCocktailRouteImport.update({
   id: '/cocktail',
   path: '/cocktail',
@@ -1427,6 +1439,7 @@ export interface FileRoutesByFullPath {
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/integrations': typeof AppIntegrationsRoute
   '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
@@ -1503,6 +1516,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
   '/events/$slug/cocktail': typeof EventsSlugCocktailRoute
+  '/events/$slug/coffee-bar': typeof EventsSlugCoffeeBarRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
@@ -1657,6 +1671,7 @@ export interface FileRoutesByTo {
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/integrations': typeof AppIntegrationsRoute
   '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
@@ -1732,6 +1747,7 @@ export interface FileRoutesByTo {
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
   '/events/$slug/cocktail': typeof EventsSlugCocktailRoute
+  '/events/$slug/coffee-bar': typeof EventsSlugCoffeeBarRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
@@ -1888,6 +1904,7 @@ export interface FileRoutesById {
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
   '/app/inspirations': typeof AppInspirationsRoute
+  '/app/integrations': typeof AppIntegrationsRoute
   '/app/international': typeof AppInternationalRoute
   '/app/investors': typeof AppInvestorsRoute
   '/app/journal': typeof AppJournalRoute
@@ -1964,6 +1981,7 @@ export interface FileRoutesById {
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
   '/events/$slug/city-guide': typeof EventsSlugCityGuideRoute
   '/events/$slug/cocktail': typeof EventsSlugCocktailRoute
+  '/events/$slug/coffee-bar': typeof EventsSlugCoffeeBarRoute
   '/events/$slug/comfort': typeof EventsSlugComfortRoute
   '/events/$slug/confetti': typeof EventsSlugConfettiRoute
   '/events/$slug/contributors': typeof EventsSlugContributorsRoute
@@ -2121,6 +2139,7 @@ export interface FileRouteTypes {
     | '/app/impact'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/integrations'
     | '/app/international'
     | '/app/investors'
     | '/app/journal'
@@ -2197,6 +2216,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
     | '/events/$slug/cocktail'
+    | '/events/$slug/coffee-bar'
     | '/events/$slug/comfort'
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
@@ -2351,6 +2371,7 @@ export interface FileRouteTypes {
     | '/app/impact'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/integrations'
     | '/app/international'
     | '/app/investors'
     | '/app/journal'
@@ -2426,6 +2447,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
     | '/events/$slug/cocktail'
+    | '/events/$slug/coffee-bar'
     | '/events/$slug/comfort'
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
@@ -2581,6 +2603,7 @@ export interface FileRouteTypes {
     | '/app/impact'
     | '/app/inbox'
     | '/app/inspirations'
+    | '/app/integrations'
     | '/app/international'
     | '/app/investors'
     | '/app/journal'
@@ -2657,6 +2680,7 @@ export interface FileRouteTypes {
     | '/events/$slug/checklist'
     | '/events/$slug/city-guide'
     | '/events/$slug/cocktail'
+    | '/events/$slug/coffee-bar'
     | '/events/$slug/comfort'
     | '/events/$slug/confetti'
     | '/events/$slug/contributors'
@@ -3166,6 +3190,13 @@ declare module '@tanstack/react-router' {
       path: '/international'
       fullPath: '/app/international'
       preLoaderRoute: typeof AppInternationalRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/integrations': {
+      id: '/app/integrations'
+      path: '/integrations'
+      fullPath: '/app/integrations'
+      preLoaderRoute: typeof AppIntegrationsRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/inspirations': {
@@ -4176,6 +4207,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugComfortRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/coffee-bar': {
+      id: '/events/$slug/coffee-bar'
+      path: '/coffee-bar'
+      fullPath: '/events/$slug/coffee-bar'
+      preLoaderRoute: typeof EventsSlugCoffeeBarRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/cocktail': {
       id: '/events/$slug/cocktail'
       path: '/cocktail'
@@ -4450,6 +4488,7 @@ interface AppRouteChildren {
   AppImpactRoute: typeof AppImpactRoute
   AppInboxRoute: typeof AppInboxRoute
   AppInspirationsRoute: typeof AppInspirationsRoute
+  AppIntegrationsRoute: typeof AppIntegrationsRoute
   AppInternationalRoute: typeof AppInternationalRoute
   AppInvestorsRoute: typeof AppInvestorsRoute
   AppJournalRoute: typeof AppJournalRoute
@@ -4530,6 +4569,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppImpactRoute: AppImpactRoute,
   AppInboxRoute: AppInboxRoute,
   AppInspirationsRoute: AppInspirationsRoute,
+  AppIntegrationsRoute: AppIntegrationsRoute,
   AppInternationalRoute: AppInternationalRoute,
   AppInvestorsRoute: AppInvestorsRoute,
   AppJournalRoute: AppJournalRoute,
@@ -4632,6 +4672,7 @@ interface EventsSlugRouteChildren {
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
   EventsSlugCityGuideRoute: typeof EventsSlugCityGuideRoute
   EventsSlugCocktailRoute: typeof EventsSlugCocktailRoute
+  EventsSlugCoffeeBarRoute: typeof EventsSlugCoffeeBarRoute
   EventsSlugComfortRoute: typeof EventsSlugComfortRoute
   EventsSlugConfettiRoute: typeof EventsSlugConfettiRoute
   EventsSlugContributorsRoute: typeof EventsSlugContributorsRoute
@@ -4774,6 +4815,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
   EventsSlugCityGuideRoute: EventsSlugCityGuideRoute,
   EventsSlugCocktailRoute: EventsSlugCocktailRoute,
+  EventsSlugCoffeeBarRoute: EventsSlugCoffeeBarRoute,
   EventsSlugComfortRoute: EventsSlugComfortRoute,
   EventsSlugConfettiRoute: EventsSlugConfettiRoute,
   EventsSlugContributorsRoute: EventsSlugContributorsRoute,
