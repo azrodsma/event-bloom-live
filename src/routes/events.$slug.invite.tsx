@@ -1,6 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ChevronLeft, Copy, Check, Mail, MessageCircle, Share2, QrCode } from "lucide-react";
+import { ChevronLeft, Copy, Check, Mail, MessageCircle, Share2, QrCode, UserPlus, Sparkles } from "lucide-react";
 import { getEventBySlug } from "@/lib/events.functions";
+import { createGuestInvite } from "@/lib/rsvp.functions";
+import { useServerFn } from "@tanstack/react-start";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { useMemo, useState } from "react";
 import { QrCodeSvg } from "@/components/QrCodeSvg";
 
@@ -24,6 +28,11 @@ export const Route = createFileRoute("/events/$slug/invite")({
 function Invite() {
   const { event } = Route.useLoaderData();
   const [copied, setCopied] = useState(false);
+  const [personalName, setPersonalName] = useState("");
+  const [personalEmail, setPersonalEmail] = useState("");
+  const [personalLink, setPersonalLink] = useState<string | null>(null);
+  const [personalCopied, setPersonalCopied] = useState(false);
+  const createInvite = useServerFn(createGuestInvite);
 
   const origin = typeof window !== "undefined" ? window.location.origin : "https://memento.live";
   const rsvpUrl = `${origin}/rsvp/${event.slug}`;
@@ -37,6 +46,23 @@ function Invite() {
     navigator.clipboard?.writeText(rsvpUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 1600);
+  };
+
+  const genMut = useMutation({
+    mutationFn: () => createInvite({ data: { eventId: event.id, full_name: personalName.trim(), email: personalEmail.trim() || null } }),
+    onSuccess: (row) => {
+      const link = `${origin}/i/${row.invite_token}`;
+      setPersonalLink(link);
+      toast.success("Lien personnel créé");
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const copyPersonal = () => {
+    if (!personalLink) return;
+    navigator.clipboard?.writeText(personalLink);
+    setPersonalCopied(true);
+    setTimeout(() => setPersonalCopied(false), 1600);
   };
 
   const shareText = `Vous êtes invité(e) à ${event.title}. RSVP : ${rsvpUrl}`;
@@ -117,6 +143,55 @@ function Invite() {
             ))}
           </div>
         </section>
+
+        <section className="rounded-3xl bg-surface p-5 shadow-card">
+          <div className="mb-3 flex items-center gap-2 text-primary">
+            <Sparkles className="h-4 w-4" />
+            <p className="text-xs font-semibold uppercase tracking-wider">Invitation personnelle</p>
+          </div>
+          <p className="mb-4 text-xs text-muted-foreground">
+            Générez un lien unique par invité : le nom est pré-rempli, la réponse peut être modifiée à tout moment, et vous retrouvez chaque personne dans la liste des invités.
+          </p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <input
+              value={personalName}
+              onChange={(e) => setPersonalName(e.target.value)}
+              placeholder="Nom de l'invité *"
+              className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
+            />
+            <input
+              value={personalEmail}
+              onChange={(e) => setPersonalEmail(e.target.value)}
+              placeholder="Email (facultatif)"
+              type="email"
+              className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
+            />
+          </div>
+          <button
+            disabled={genMut.isPending || !personalName.trim()}
+            onClick={() => genMut.mutate()}
+            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-primary px-5 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50"
+          >
+            <UserPlus className="h-4 w-4" /> {genMut.isPending ? "Création..." : "Créer un lien personnel"}
+          </button>
+          {personalLink && (
+            <div className="mt-4 space-y-3">
+              <div className="flex items-center gap-2 rounded-full bg-cream px-3 py-2">
+                <span className="truncate text-xs font-medium">{personalLink}</span>
+                <button onClick={copyPersonal} className="shrink-0 rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold text-white">
+                  {personalCopied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                </button>
+              </div>
+              <div className="flex gap-2">
+                <a href={`sms:?body=${encodeURIComponent(`Vous êtes invité(e) à ${event.title}. Votre lien : ${personalLink}`)}`} className="flex-1 rounded-full border border-border bg-background py-2 text-center text-xs font-semibold">SMS</a>
+                <a href={`mailto:${personalEmail}?subject=${encodeURIComponent(`Invitation — ${event.title}`)}&body=${encodeURIComponent(`Bonjour ${personalName},\n\nVous êtes cordialement invité(e) à ${event.title}. Merci de confirmer votre présence via ce lien personnel : ${personalLink}`)}`} className="flex-1 rounded-full border border-border bg-background py-2 text-center text-xs font-semibold">Email</a>
+                <a href={`https://wa.me/?text=${encodeURIComponent(`Vous êtes invité(e) à ${event.title}. Votre lien : ${personalLink}`)}`} target="_blank" rel="noopener noreferrer" className="flex-1 rounded-full border border-border bg-background py-2 text-center text-xs font-semibold">WhatsApp</a>
+              </div>
+              <p className="text-[11px] text-muted-foreground">Astuce : créez un lien par personne pour suivre les réponses nominativement.</p>
+            </div>
+          )}
+        </section>
+
 
         <section className="rounded-3xl bg-surface p-5 shadow-card">
           <div className="flex items-center justify-between">

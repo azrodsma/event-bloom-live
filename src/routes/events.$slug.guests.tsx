@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, useParams } from "@tanstack/react-router";
-import { ChevronLeft, Users, UserCheck, UserX, HelpCircle } from "lucide-react";
+import { ChevronLeft, Users, UserCheck, UserX, HelpCircle, Download, ScanLine } from "lucide-react";
 import { getEventBySlug } from "@/lib/events.functions";
 import { listGuests, getRsvpStats } from "@/lib/rsvp.functions";
 import { useServerFn } from "@tanstack/react-start";
@@ -38,6 +38,31 @@ function GuestsPage() {
     : r === "maybe" ? { label: "Peut-être", cls: "bg-gold-light text-gold" }
     : { label: "En attente", cls: "bg-secondary text-muted-foreground" };
 
+  function exportCsv() {
+    const rows = guests.data ?? [];
+    const headers = ["Nom", "Email", "Téléphone", "Statut", "Accompagnants", "Régime", "Table", "Check-in", "Notes"];
+    const esc = (v: unknown) => {
+      const s = v == null ? "" : String(v);
+      return /[",;\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    };
+    const csv = [
+      headers.join(","),
+      ...rows.map((g) => [
+        g.full_name, g.email ?? "", g.phone ?? "", g.rsvp,
+        g.plus_ones ?? 0, g.dietary ?? "", g.table_number ?? "",
+        g.checked_in_at ? new Date(g.checked_in_at).toLocaleString("fr-FR") : "",
+        g.notes ?? "",
+      ].map(esc).join(",")),
+    ].join("\n");
+    const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `invites-${event.slug}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <div className="min-h-screen bg-background pb-24">
       <header className="sticky top-0 z-20 border-b border-border/60 bg-background/95 backdrop-blur-xl">
@@ -45,10 +70,13 @@ function GuestsPage() {
           <Link to="/events/$slug" params={{ slug }} className="grid h-10 w-10 place-items-center rounded-full bg-surface">
             <ChevronLeft className="h-5 w-5" />
           </Link>
-          <div>
+          <div className="min-w-0 flex-1">
             <h1 className="font-serif text-xl">Invités & RSVP</h1>
-            <p className="text-xs text-muted-foreground">{event.title}</p>
+            <p className="truncate text-xs text-muted-foreground">{event.title}</p>
           </div>
+          <button onClick={exportCsv} disabled={!guests.data?.length} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold disabled:opacity-50">
+            <Download className="h-3.5 w-3.5" /> CSV
+          </button>
         </div>
       </header>
 
@@ -60,13 +88,18 @@ function GuestsPage() {
           <Stat icon={UserX} label="Non" value={stats.data?.declined ?? "—"} tone="danger" />
         </section>
 
-        <Link to="/events/$slug/invite" params={{ slug }} className="block rounded-2xl border border-dashed border-primary/40 bg-primary/5 p-4 text-center text-sm font-semibold text-primary">
-          Partager le lien RSVP →
-        </Link>
+        <div className="grid grid-cols-2 gap-3">
+          <Link to="/events/$slug/invite" params={{ slug }} className="rounded-2xl border border-dashed border-primary/40 bg-primary/5 p-4 text-center text-sm font-semibold text-primary">
+            Partager le lien RSVP
+          </Link>
+          <Link to="/events/$slug/checkin" params={{ slug }} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-primary p-4 text-center text-sm font-semibold text-white shadow-glow">
+            <ScanLine className="h-4 w-4" /> Check-in à l'accueil
+          </Link>
+        </div>
 
         <section className="space-y-2">
-          {guests.isLoading && <p className="text-sm text-muted-foreground">Chargement…</p>}
-          {guests.data?.length === 0 && (
+          {guests.isLoading && <p className="text-center text-sm text-muted-foreground">Chargement…</p>}
+          {!guests.isLoading && !guests.data?.length && (
             <p className="rounded-2xl bg-surface p-6 text-center text-sm text-muted-foreground">
               Aucun RSVP pour l'instant. Partagez le lien d'invitation pour recevoir les réponses.
             </p>
@@ -79,7 +112,10 @@ function GuestsPage() {
                   {g.full_name.slice(0, 2).toUpperCase()}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold">{g.full_name}{g.plus_ones ? ` +${g.plus_ones}` : ""}</p>
+                  <p className="truncate text-sm font-semibold">
+                    {g.full_name}{g.plus_ones ? ` +${g.plus_ones}` : ""}
+                    {g.checked_in_at && <span className="ml-2 rounded-full bg-success/15 px-1.5 py-0.5 text-[10px] font-semibold text-success">✓ Arrivé</span>}
+                  </p>
                   <p className="truncate text-xs text-muted-foreground">{g.email}{g.dietary ? ` · ${g.dietary}` : ""}</p>
                 </div>
                 <span className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold ${lbl.cls}`}>{lbl.label}</span>
