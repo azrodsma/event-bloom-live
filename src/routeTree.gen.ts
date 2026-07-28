@@ -18,6 +18,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
 import { Route as RsvpSlugRouteImport } from './routes/rsvp.$slug'
+import { Route as ITokenRouteImport } from './routes/i.$token'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as AppYearInReviewRouteImport } from './routes/app.year-in-review'
 import { Route as AppWishesRouteImport } from './routes/app.wishes'
@@ -326,6 +327,11 @@ const StoriesSlugRoute = StoriesSlugRouteImport.update({
 const RsvpSlugRoute = RsvpSlugRouteImport.update({
   id: '/rsvp/$slug',
   path: '/rsvp/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ITokenRoute = ITokenRouteImport.update({
+  id: '/i/$token',
+  path: '/i/$token',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsSlugRoute = EventsSlugRouteImport.update({
@@ -1755,6 +1761,7 @@ export interface FileRoutesByFullPath {
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
+  '/i/$token': typeof ITokenRoute
   '/rsvp/$slug': typeof RsvpSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
@@ -2028,6 +2035,7 @@ export interface FileRoutesByTo {
   '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
+  '/i/$token': typeof ITokenRoute
   '/rsvp/$slug': typeof RsvpSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/app': typeof AppIndexRoute
@@ -2304,6 +2312,7 @@ export interface FileRoutesById {
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
+  '/i/$token': typeof ITokenRoute
   '/rsvp/$slug': typeof RsvpSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
@@ -2581,6 +2590,7 @@ export interface FileRouteTypes {
     | '/app/wishes'
     | '/app/year-in-review'
     | '/events/$slug'
+    | '/i/$token'
     | '/rsvp/$slug'
     | '/stories/$slug'
     | '/app/'
@@ -2854,6 +2864,7 @@ export interface FileRouteTypes {
     | '/app/wellness'
     | '/app/wishes'
     | '/app/year-in-review'
+    | '/i/$token'
     | '/rsvp/$slug'
     | '/stories/$slug'
     | '/app'
@@ -3129,6 +3140,7 @@ export interface FileRouteTypes {
     | '/app/wishes'
     | '/app/year-in-review'
     | '/events/$slug'
+    | '/i/$token'
     | '/rsvp/$slug'
     | '/stories/$slug'
     | '/app/'
@@ -3318,6 +3330,7 @@ export interface RootRouteChildren {
   LegalRoute: typeof LegalRoute
   OnboardingRoute: typeof OnboardingRoute
   EventsSlugRoute: typeof EventsSlugRouteWithChildren
+  ITokenRoute: typeof ITokenRoute
   RsvpSlugRoute: typeof RsvpSlugRoute
   StoriesSlugRoute: typeof StoriesSlugRoute
 }
@@ -3385,6 +3398,13 @@ declare module '@tanstack/react-router' {
       path: '/rsvp/$slug'
       fullPath: '/rsvp/$slug'
       preLoaderRoute: typeof RsvpSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/i/$token': {
+      id: '/i/$token'
+      path: '/i/$token'
+      fullPath: '/i/$token'
+      preLoaderRoute: typeof ITokenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events/$slug': {
@@ -5831,6 +5851,7 @@ const rootRouteChildren: RootRouteChildren = {
   LegalRoute: LegalRoute,
   OnboardingRoute: OnboardingRoute,
   EventsSlugRoute: EventsSlugRouteWithChildren,
+  ITokenRoute: ITokenRoute,
   RsvpSlugRoute: RsvpSlugRoute,
   StoriesSlugRoute: StoriesSlugRoute,
 }
