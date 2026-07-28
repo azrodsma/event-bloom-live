@@ -1,45 +1,130 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { findEvent, liveChatMessages, paidInteractions } from "@/lib/mock-data";
-import { useState } from "react";
-import { X, Share2, Send, Heart, Gift, Users, ExternalLink } from "lucide-react";
+import { findEvent, paidInteractions } from "@/lib/mock-data";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { X, Share2, Send, Heart, Gift, Users, ExternalLink, LogIn } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getEventBySlug } from "@/lib/events.functions";
+import { adaptEvent } from "@/lib/event-adapter";
+import { listLiveMessages, sendLiveMessage, sendLiveReaction } from "@/lib/live.functions";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/events/$slug/live")({
-  head: ({ params }) => {
-    const e = findEvent(params.slug);
-    return {
-      meta: [
-        { title: e ? `Live · ${e.title} — Memento Live` : "Live — Memento Live" },
-        { name: "description", content: e?.description ?? "" },
-      ],
-    };
-  },
-  loader: ({ params }) => {
-    const e = findEvent(params.slug);
-    if (!e) throw notFound();
-    return { event: e };
+  head: ({ params }) => ({
+    meta: [
+      { title: `Live · ${params.slug} — Memento Live` },
+      { name: "description", content: "Diffusion en direct, chat et réactions." },
+    ],
+  }),
+  loader: async ({ params }) => {
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) {
+      const e = findEvent(params.slug);
+      if (!e) throw notFound();
+      return { event: e, dbId: null as string | null };
+    }
+    return { event: adaptEvent(db), dbId: db.id };
   },
   component: LivePage,
 });
 
 const tabs = ["Chat", "Cadeaux", "Cagnotte", "Photos"] as const;
 
-function LivePage() {
-  const { event } = Route.useLoaderData();
-  const [tab, setTab] = useState<(typeof tabs)[number]>("Chat");
-  const [msgs, setMsgs] = useState(liveChatMessages);
-  const [input, setInput] = useState("");
-  const [hearts, setHearts] = useState<{ id: number; left: number }[]>([]);
+type LiveMsg = { id: string; author_name: string | null; content: string; created_at: string };
 
-  const send = () => {
-    if (!input.trim()) return;
-    setMsgs([...msgs, { id: `n${Date.now()}`, user: "Vous", color: "#E85D8E", text: input, time: "maintenant" }]);
+function LivePage() {
+  const { event, dbId } = Route.useLoaderData();
+  const { user } = useAuth();
+  const qc = useQueryClient();
+  const [tab, setTab] = useState<(typeof tabs)[number]>("Chat");
+  const [input, setInput] = useState("");
+  const [hearts, setHearts] = useState<{ id: number; left: number; emoji: string }[]>([]);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  const list = useServerFn(listLiveMessages);
+  const send = useServerFn(sendLiveMessage);
+  const react = useServerFn(sendLiveReaction);
+
+  const key = ["live-msgs", dbId] as const;
+  const { data: msgs = [] } = useQuery({
+    queryKey: key,
+    enabled: !!dbId,
+    queryFn: async () => (await list({ data: { eventId: dbId! } })) as LiveMsg[],
+    refetchOnWindowFocus: false,
+  });
+
+  // Realtime subscription for chat + reactions
+  useEffect(() => {
+    if (!dbId) return;
+    const channel = supabase
+      .channel(`live-${dbId}`)
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "live_messages", filter: `event_id=eq.${dbId}` },
+        (payload) => {
+          qc.setQueryData<LiveMsg[]>(key, (prev = []) => [...prev, payload.new as LiveMsg]);
+        },
+      )
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "live_reactions", filter: `event_id=eq.${dbId}` },
+        (payload) => {
+          const emoji = (payload.new as { emoji: string }).emoji || "💖";
+          const id = Date.now() + Math.random();
+          setHearts((h) => [...h, { id, left: 20 + Math.random() * 60, emoji }]);
+          setTimeout(() => setHearts((h) => h.filter((x) => x.id !== id)), 2000);
+        },
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [dbId, qc]);
+
+  useEffect(() => {
+    if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
+  }, [msgs.length]);
+
+  const colorFor = useMemo(() => {
+    const palette = ["#E85D8E", "#D9A441", "#7EC8B8", "#F0A6C0", "#B58BC7", "#F6B26B"];
+    const cache = new Map<string, string>();
+    return (name: string) => {
+      if (cache.has(name)) return cache.get(name)!;
+      let h = 0;
+      for (const c of name) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+      const color = palette[h % palette.length];
+      cache.set(name, color);
+      return color;
+    };
+  }, []);
+
+  const submit = async () => {
+    if (!input.trim() || !dbId || !user) return;
+    const text = input.trim();
     setInput("");
+    try {
+      await send({ data: { eventId: dbId, content: text } });
+      // realtime will push it back; nothing else to do.
+    } catch (e) {
+      setInput(text);
+      console.error(e);
+    }
   };
 
-  const heart = () => {
-    const id = Date.now();
-    setHearts((h) => [...h, { id, left: 20 + Math.random() * 60 }]);
-    setTimeout(() => setHearts((h) => h.filter((x) => x.id !== id)), 2000);
+  const heart = async (emoji = "💖") => {
+    if (!dbId || !user) {
+      // local-only feedback for guests
+      const id = Date.now();
+      setHearts((h) => [...h, { id, left: 20 + Math.random() * 60, emoji }]);
+      setTimeout(() => setHearts((h) => h.filter((x) => x.id !== id)), 2000);
+      return;
+    }
+    try {
+      await react({ data: { eventId: dbId, emoji } });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -87,7 +172,7 @@ function LivePage() {
             className="pointer-events-none absolute bottom-4 animate-float-up text-3xl"
             style={{ left: `${h.left}%` }}
           >
-            💖
+            {h.emoji}
           </span>
         ))}
       </div>
@@ -111,28 +196,53 @@ function LivePage() {
       <div className="flex min-h-0 flex-1 flex-col">
         {tab === "Chat" && (
           <>
-            <div className="flex-1 space-y-2 overflow-y-auto px-4 py-3">
+            <div ref={listRef} className="flex-1 space-y-2 overflow-y-auto px-4 py-3">
+              {msgs.length === 0 && (
+                <p className="mt-6 text-center text-xs text-white/50">Sois le premier à écrire un message ✨</p>
+              )}
               {msgs.map((m) => (
                 <div key={m.id} className="flex items-start gap-2 text-sm">
-                  <span className="font-semibold" style={{ color: m.color }}>{m.user}</span>
-                  <span className="min-w-0 flex-1 break-words text-white/90">{m.text}</span>
+                  <span className="font-semibold" style={{ color: colorFor(m.author_name ?? "Invité") }}>
+                    {m.author_name ?? "Invité"}
+                  </span>
+                  <span className="min-w-0 flex-1 break-words text-white/90">{m.content}</span>
                 </div>
               ))}
             </div>
             <div className="flex shrink-0 items-center gap-2 border-t border-white/10 p-3">
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && send()}
-                placeholder="Envoyer un message..."
-                className="flex-1 rounded-full bg-white/10 px-4 py-2.5 text-sm outline-none placeholder:text-white/50"
-              />
-              <button onClick={heart} className="grid h-10 w-10 place-items-center rounded-full bg-live text-white">
-                <Heart className="h-4 w-4 fill-current" />
-              </button>
-              <button onClick={send} className="grid h-10 w-10 place-items-center rounded-full bg-gradient-primary">
-                <Send className="h-4 w-4" />
-              </button>
+              {user ? (
+                <>
+                  <input
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && submit()}
+                    placeholder="Envoyer un message..."
+                    className="flex-1 rounded-full bg-white/10 px-4 py-2.5 text-sm outline-none placeholder:text-white/50"
+                  />
+                  <button
+                    onClick={() => heart("💖")}
+                    className="grid h-10 w-10 place-items-center rounded-full bg-live text-white"
+                    aria-label="Envoyer un cœur"
+                  >
+                    <Heart className="h-4 w-4 fill-current" />
+                  </button>
+                  <button
+                    onClick={submit}
+                    disabled={!input.trim() || !dbId}
+                    className="grid h-10 w-10 place-items-center rounded-full bg-gradient-primary disabled:opacity-50"
+                    aria-label="Envoyer"
+                  >
+                    <Send className="h-4 w-4" />
+                  </button>
+                </>
+              ) : (
+                <Link
+                  to="/auth"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-primary py-2.5 text-sm font-semibold"
+                >
+                  <LogIn className="h-4 w-4" /> Se connecter pour discuter
+                </Link>
+              )}
             </div>
           </>
         )}
