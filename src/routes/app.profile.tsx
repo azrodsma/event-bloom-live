@@ -1,6 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Settings, LogOut, Calendar, MessageCircle, Image, Heart } from "lucide-react";
 import { mockEvents } from "@/lib/mock-data";
+import { useAuth } from "@/hooks/use-auth";
+import { useQueryClient } from "@tanstack/react-query";
+
 
 export const Route = createFileRoute("/app/profile")({
   head: () => ({
