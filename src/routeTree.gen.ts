@@ -72,6 +72,7 @@ import { Route as AppImpactRouteImport } from './routes/app.impact'
 import { Route as AppHelpRouteImport } from './routes/app.help'
 import { Route as AppGiftIdeasRouteImport } from './routes/app.gift-ideas'
 import { Route as AppFriendsRouteImport } from './routes/app.friends'
+import { Route as AppFoundationRouteImport } from './routes/app.foundation'
 import { Route as AppForestRouteImport } from './routes/app.forest'
 import { Route as AppFavoritesRouteImport } from './routes/app.favorites'
 import { Route as AppFamilyRouteImport } from './routes/app.family'
@@ -190,6 +191,7 @@ import { Route as EventsSlugGuidesRouteImport } from './routes/events.$slug.guid
 import { Route as EventsSlugGuestsRouteImport } from './routes/events.$slug.guests'
 import { Route as EventsSlugGuestbookRouteImport } from './routes/events.$slug.guestbook'
 import { Route as EventsSlugGratitudeWallRouteImport } from './routes/events.$slug.gratitude-wall'
+import { Route as EventsSlugGodparentsRouteImport } from './routes/events.$slug.godparents'
 import { Route as EventsSlugGiftsReceivedRouteImport } from './routes/events.$slug.gifts-received'
 import { Route as EventsSlugGettingReadyRouteImport } from './routes/events.$slug.getting-ready'
 import { Route as EventsSlugGamesRouteImport } from './routes/events.$slug.games'
@@ -226,6 +228,7 @@ import { Route as EventsSlugCityGuideRouteImport } from './routes/events.$slug.c
 import { Route as EventsSlugChecklistRouteImport } from './routes/events.$slug.checklist'
 import { Route as EventsSlugCheckinRouteImport } from './routes/events.$slug.checkin'
 import { Route as EventsSlugCeremonyBookletRouteImport } from './routes/events.$slug.ceremony-booklet'
+import { Route as EventsSlugCellarRouteImport } from './routes/events.$slug.cellar'
 import { Route as EventsSlugCarpoolRouteImport } from './routes/events.$slug.carpool'
 import { Route as EventsSlugCarbonRouteImport } from './routes/events.$slug.carbon'
 import { Route as EventsSlugCamerasRouteImport } from './routes/events.$slug.cameras'
@@ -568,6 +571,11 @@ const AppGiftIdeasRoute = AppGiftIdeasRouteImport.update({
 const AppFriendsRoute = AppFriendsRouteImport.update({
   id: '/friends',
   path: '/friends',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFoundationRoute = AppFoundationRouteImport.update({
+  id: '/foundation',
+  path: '/foundation',
   getParentRoute: () => AppRoute,
 } as any)
 const AppForestRoute = AppForestRouteImport.update({
@@ -1162,6 +1170,11 @@ const EventsSlugGratitudeWallRoute = EventsSlugGratitudeWallRouteImport.update({
   path: '/gratitude-wall',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugGodparentsRoute = EventsSlugGodparentsRouteImport.update({
+  id: '/godparents',
+  path: '/godparents',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugGiftsReceivedRoute = EventsSlugGiftsReceivedRouteImport.update({
   id: '/gifts-received',
   path: '/gifts-received',
@@ -1345,6 +1358,11 @@ const EventsSlugCeremonyBookletRoute =
     path: '/ceremony-booklet',
     getParentRoute: () => EventsSlugRoute,
   } as any)
+const EventsSlugCellarRoute = EventsSlugCellarRouteImport.update({
+  id: '/cellar',
+  path: '/cellar',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugCarpoolRoute = EventsSlugCarpoolRouteImport.update({
   id: '/carpool',
   path: '/carpool',
@@ -1515,6 +1533,7 @@ export interface FileRoutesByFullPath {
   '/app/family': typeof AppFamilyRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/forest': typeof AppForestRoute
+  '/app/foundation': typeof AppFoundationRoute
   '/app/friends': typeof AppFriendsRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
   '/app/help': typeof AppHelpRoute
@@ -1596,6 +1615,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
   '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
+  '/events/$slug/cellar': typeof EventsSlugCellarRoute
   '/events/$slug/ceremony-booklet': typeof EventsSlugCeremonyBookletRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
@@ -1632,6 +1652,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/getting-ready': typeof EventsSlugGettingReadyRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
+  '/events/$slug/godparents': typeof EventsSlugGodparentsRoute
   '/events/$slug/gratitude-wall': typeof EventsSlugGratitudeWallRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
@@ -1760,6 +1781,7 @@ export interface FileRoutesByTo {
   '/app/family': typeof AppFamilyRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/forest': typeof AppForestRoute
+  '/app/foundation': typeof AppFoundationRoute
   '/app/friends': typeof AppFriendsRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
   '/app/help': typeof AppHelpRoute
@@ -1840,6 +1862,7 @@ export interface FileRoutesByTo {
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
   '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
+  '/events/$slug/cellar': typeof EventsSlugCellarRoute
   '/events/$slug/ceremony-booklet': typeof EventsSlugCeremonyBookletRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
@@ -1876,6 +1899,7 @@ export interface FileRoutesByTo {
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/getting-ready': typeof EventsSlugGettingReadyRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
+  '/events/$slug/godparents': typeof EventsSlugGodparentsRoute
   '/events/$slug/gratitude-wall': typeof EventsSlugGratitudeWallRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
@@ -2006,6 +2030,7 @@ export interface FileRoutesById {
   '/app/family': typeof AppFamilyRoute
   '/app/favorites': typeof AppFavoritesRoute
   '/app/forest': typeof AppForestRoute
+  '/app/foundation': typeof AppFoundationRoute
   '/app/friends': typeof AppFriendsRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
   '/app/help': typeof AppHelpRoute
@@ -2087,6 +2112,7 @@ export interface FileRoutesById {
   '/events/$slug/cameras': typeof EventsSlugCamerasRoute
   '/events/$slug/carbon': typeof EventsSlugCarbonRoute
   '/events/$slug/carpool': typeof EventsSlugCarpoolRoute
+  '/events/$slug/cellar': typeof EventsSlugCellarRoute
   '/events/$slug/ceremony-booklet': typeof EventsSlugCeremonyBookletRoute
   '/events/$slug/checkin': typeof EventsSlugCheckinRoute
   '/events/$slug/checklist': typeof EventsSlugChecklistRoute
@@ -2123,6 +2149,7 @@ export interface FileRoutesById {
   '/events/$slug/games': typeof EventsSlugGamesRoute
   '/events/$slug/getting-ready': typeof EventsSlugGettingReadyRoute
   '/events/$slug/gifts-received': typeof EventsSlugGiftsReceivedRoute
+  '/events/$slug/godparents': typeof EventsSlugGodparentsRoute
   '/events/$slug/gratitude-wall': typeof EventsSlugGratitudeWallRoute
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
@@ -2254,6 +2281,7 @@ export interface FileRouteTypes {
     | '/app/family'
     | '/app/favorites'
     | '/app/forest'
+    | '/app/foundation'
     | '/app/friends'
     | '/app/gift-ideas'
     | '/app/help'
@@ -2335,6 +2363,7 @@ export interface FileRouteTypes {
     | '/events/$slug/cameras'
     | '/events/$slug/carbon'
     | '/events/$slug/carpool'
+    | '/events/$slug/cellar'
     | '/events/$slug/ceremony-booklet'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
@@ -2371,6 +2400,7 @@ export interface FileRouteTypes {
     | '/events/$slug/games'
     | '/events/$slug/getting-ready'
     | '/events/$slug/gifts-received'
+    | '/events/$slug/godparents'
     | '/events/$slug/gratitude-wall'
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
@@ -2499,6 +2529,7 @@ export interface FileRouteTypes {
     | '/app/family'
     | '/app/favorites'
     | '/app/forest'
+    | '/app/foundation'
     | '/app/friends'
     | '/app/gift-ideas'
     | '/app/help'
@@ -2579,6 +2610,7 @@ export interface FileRouteTypes {
     | '/events/$slug/cameras'
     | '/events/$slug/carbon'
     | '/events/$slug/carpool'
+    | '/events/$slug/cellar'
     | '/events/$slug/ceremony-booklet'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
@@ -2615,6 +2647,7 @@ export interface FileRouteTypes {
     | '/events/$slug/games'
     | '/events/$slug/getting-ready'
     | '/events/$slug/gifts-received'
+    | '/events/$slug/godparents'
     | '/events/$slug/gratitude-wall'
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
@@ -2744,6 +2777,7 @@ export interface FileRouteTypes {
     | '/app/family'
     | '/app/favorites'
     | '/app/forest'
+    | '/app/foundation'
     | '/app/friends'
     | '/app/gift-ideas'
     | '/app/help'
@@ -2825,6 +2859,7 @@ export interface FileRouteTypes {
     | '/events/$slug/cameras'
     | '/events/$slug/carbon'
     | '/events/$slug/carpool'
+    | '/events/$slug/cellar'
     | '/events/$slug/ceremony-booklet'
     | '/events/$slug/checkin'
     | '/events/$slug/checklist'
@@ -2861,6 +2896,7 @@ export interface FileRouteTypes {
     | '/events/$slug/games'
     | '/events/$slug/getting-ready'
     | '/events/$slug/gifts-received'
+    | '/events/$slug/godparents'
     | '/events/$slug/gratitude-wall'
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
@@ -3410,6 +3446,13 @@ declare module '@tanstack/react-router' {
       path: '/friends'
       fullPath: '/app/friends'
       preLoaderRoute: typeof AppFriendsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/foundation': {
+      id: '/app/foundation'
+      path: '/foundation'
+      fullPath: '/app/foundation'
+      preLoaderRoute: typeof AppFoundationRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/forest': {
@@ -4238,6 +4281,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugGratitudeWallRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/godparents': {
+      id: '/events/$slug/godparents'
+      path: '/godparents'
+      fullPath: '/events/$slug/godparents'
+      preLoaderRoute: typeof EventsSlugGodparentsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/gifts-received': {
       id: '/events/$slug/gifts-received'
       path: '/gifts-received'
@@ -4490,6 +4540,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugCeremonyBookletRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/cellar': {
+      id: '/events/$slug/cellar'
+      path: '/cellar'
+      fullPath: '/events/$slug/cellar'
+      preLoaderRoute: typeof EventsSlugCellarRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/carpool': {
       id: '/events/$slug/carpool'
       path: '/carpool'
@@ -4733,6 +4790,7 @@ interface AppRouteChildren {
   AppFamilyRoute: typeof AppFamilyRoute
   AppFavoritesRoute: typeof AppFavoritesRoute
   AppForestRoute: typeof AppForestRoute
+  AppFoundationRoute: typeof AppFoundationRoute
   AppFriendsRoute: typeof AppFriendsRoute
   AppGiftIdeasRoute: typeof AppGiftIdeasRoute
   AppHelpRoute: typeof AppHelpRoute
@@ -4819,6 +4877,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppFamilyRoute: AppFamilyRoute,
   AppFavoritesRoute: AppFavoritesRoute,
   AppForestRoute: AppForestRoute,
+  AppFoundationRoute: AppFoundationRoute,
   AppFriendsRoute: AppFriendsRoute,
   AppGiftIdeasRoute: AppGiftIdeasRoute,
   AppHelpRoute: AppHelpRoute,
@@ -4926,6 +4985,7 @@ interface EventsSlugRouteChildren {
   EventsSlugCamerasRoute: typeof EventsSlugCamerasRoute
   EventsSlugCarbonRoute: typeof EventsSlugCarbonRoute
   EventsSlugCarpoolRoute: typeof EventsSlugCarpoolRoute
+  EventsSlugCellarRoute: typeof EventsSlugCellarRoute
   EventsSlugCeremonyBookletRoute: typeof EventsSlugCeremonyBookletRoute
   EventsSlugCheckinRoute: typeof EventsSlugCheckinRoute
   EventsSlugChecklistRoute: typeof EventsSlugChecklistRoute
@@ -4962,6 +5022,7 @@ interface EventsSlugRouteChildren {
   EventsSlugGamesRoute: typeof EventsSlugGamesRoute
   EventsSlugGettingReadyRoute: typeof EventsSlugGettingReadyRoute
   EventsSlugGiftsReceivedRoute: typeof EventsSlugGiftsReceivedRoute
+  EventsSlugGodparentsRoute: typeof EventsSlugGodparentsRoute
   EventsSlugGratitudeWallRoute: typeof EventsSlugGratitudeWallRoute
   EventsSlugGuestbookRoute: typeof EventsSlugGuestbookRouteWithChildren
   EventsSlugGuestsRoute: typeof EventsSlugGuestsRoute
@@ -5077,6 +5138,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugCamerasRoute: EventsSlugCamerasRoute,
   EventsSlugCarbonRoute: EventsSlugCarbonRoute,
   EventsSlugCarpoolRoute: EventsSlugCarpoolRoute,
+  EventsSlugCellarRoute: EventsSlugCellarRoute,
   EventsSlugCeremonyBookletRoute: EventsSlugCeremonyBookletRoute,
   EventsSlugCheckinRoute: EventsSlugCheckinRoute,
   EventsSlugChecklistRoute: EventsSlugChecklistRoute,
@@ -5113,6 +5175,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugGamesRoute: EventsSlugGamesRoute,
   EventsSlugGettingReadyRoute: EventsSlugGettingReadyRoute,
   EventsSlugGiftsReceivedRoute: EventsSlugGiftsReceivedRoute,
+  EventsSlugGodparentsRoute: EventsSlugGodparentsRoute,
   EventsSlugGratitudeWallRoute: EventsSlugGratitudeWallRoute,
   EventsSlugGuestbookRoute: EventsSlugGuestbookRouteWithChildren,
   EventsSlugGuestsRoute: EventsSlugGuestsRoute,
