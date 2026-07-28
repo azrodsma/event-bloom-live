@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Sparkles, Wand2, Loader2, Copy, Check, Upload, X, Image as ImageIcon, Film } from "lucide-react";
+import { ArrowLeft, Sparkles, Wand2, Loader2, Copy, Check, Upload, X, Image as ImageIcon, Film, GripVertical } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { composeStory } from "@/lib/story.functions";
 
