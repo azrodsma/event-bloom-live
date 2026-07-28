@@ -100,6 +100,7 @@ import { Route as AppAgendaRouteImport } from './routes/app.agenda'
 import { Route as AppAchievementsRouteImport } from './routes/app.achievements'
 import { Route as AppAccessibilityRouteImport } from './routes/app.accessibility'
 import { Route as AppAcademyRouteImport } from './routes/app.academy'
+import { Route as AppAboutRouteImport } from './routes/app.about'
 import { Route as EventsSlugIndexRouteImport } from './routes/events.$slug.index'
 import { Route as EventsSlugWitnessesRouteImport } from './routes/events.$slug.witnesses'
 import { Route as EventsSlugWinePairingsRouteImport } from './routes/events.$slug.wine-pairings'
@@ -163,6 +164,7 @@ import { Route as EventsSlugPhotoChallengesRouteImport } from './routes/events.$
 import { Route as EventsSlugPetsRouteImport } from './routes/events.$slug.pets'
 import { Route as EventsSlugPerksRouteImport } from './routes/events.$slug.perks'
 import { Route as EventsSlugParkingRouteImport } from './routes/events.$slug.parking'
+import { Route as EventsSlugOutdoorRouteImport } from './routes/events.$slug.outdoor'
 import { Route as EventsSlugOpenBarRouteImport } from './routes/events.$slug.open-bar'
 import { Route as EventsSlugNurseryRouteImport } from './routes/events.$slug.nursery'
 import { Route as EventsSlugNameBadgesRouteImport } from './routes/events.$slug.name-badges'
@@ -208,6 +210,7 @@ import { Route as EventsSlugFavorsRouteImport } from './routes/events.$slug.favo
 import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
 import { Route as EventsSlugFamilyTreeRouteImport } from './routes/events.$slug.family-tree'
 import { Route as EventsSlugFamilyPortraitsRouteImport } from './routes/events.$slug.family-portraits'
+import { Route as EventsSlugExitRouteImport } from './routes/events.$slug.exit'
 import { Route as EventsSlugEntranceRouteImport } from './routes/events.$slug.entrance'
 import { Route as EventsSlugEditRouteImport } from './routes/events.$slug.edit'
 import { Route as EventsSlugEcoRouteImport } from './routes/events.$slug.eco'
@@ -718,6 +721,11 @@ const AppAcademyRoute = AppAcademyRouteImport.update({
   path: '/academy',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAboutRoute = AppAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => AppRoute,
+} as any)
 const EventsSlugIndexRoute = EventsSlugIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -1035,6 +1043,11 @@ const EventsSlugParkingRoute = EventsSlugParkingRouteImport.update({
   path: '/parking',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugOutdoorRoute = EventsSlugOutdoorRouteImport.update({
+  id: '/outdoor',
+  path: '/outdoor',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugOpenBarRoute = EventsSlugOpenBarRouteImport.update({
   id: '/open-bar',
   path: '/open-bar',
@@ -1261,6 +1274,11 @@ const EventsSlugFamilyPortraitsRoute =
     path: '/family-portraits',
     getParentRoute: () => EventsSlugRoute,
   } as any)
+const EventsSlugExitRoute = EventsSlugExitRouteImport.update({
+  id: '/exit',
+  path: '/exit',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugEntranceRoute = EventsSlugEntranceRouteImport.update({
   id: '/entrance',
   path: '/entrance',
@@ -1537,6 +1555,7 @@ export interface FileRoutesByFullPath {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/about': typeof AppAboutRoute
   '/app/academy': typeof AppAcademyRoute
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
@@ -1672,6 +1691,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
+  '/events/$slug/exit': typeof EventsSlugExitRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -1717,6 +1737,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/nursery': typeof EventsSlugNurseryRoute
   '/events/$slug/open-bar': typeof EventsSlugOpenBarRoute
+  '/events/$slug/outdoor': typeof EventsSlugOutdoorRoute
   '/events/$slug/parking': typeof EventsSlugParkingRoute
   '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
@@ -1790,6 +1811,7 @@ export interface FileRoutesByTo {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/about': typeof AppAboutRoute
   '/app/academy': typeof AppAcademyRoute
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
@@ -1924,6 +1946,7 @@ export interface FileRoutesByTo {
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
+  '/events/$slug/exit': typeof EventsSlugExitRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -1969,6 +1992,7 @@ export interface FileRoutesByTo {
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/nursery': typeof EventsSlugNurseryRoute
   '/events/$slug/open-bar': typeof EventsSlugOpenBarRoute
+  '/events/$slug/outdoor': typeof EventsSlugOutdoorRoute
   '/events/$slug/parking': typeof EventsSlugParkingRoute
   '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
@@ -2044,6 +2068,7 @@ export interface FileRoutesById {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/app/about': typeof AppAboutRoute
   '/app/academy': typeof AppAcademyRoute
   '/app/accessibility': typeof AppAccessibilityRoute
   '/app/achievements': typeof AppAchievementsRoute
@@ -2179,6 +2204,7 @@ export interface FileRoutesById {
   '/events/$slug/eco': typeof EventsSlugEcoRoute
   '/events/$slug/edit': typeof EventsSlugEditRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
+  '/events/$slug/exit': typeof EventsSlugExitRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -2224,6 +2250,7 @@ export interface FileRoutesById {
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
   '/events/$slug/nursery': typeof EventsSlugNurseryRoute
   '/events/$slug/open-bar': typeof EventsSlugOpenBarRoute
+  '/events/$slug/outdoor': typeof EventsSlugOutdoorRoute
   '/events/$slug/parking': typeof EventsSlugParkingRoute
   '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
@@ -2300,6 +2327,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/app/about'
     | '/app/academy'
     | '/app/accessibility'
     | '/app/achievements'
@@ -2435,6 +2463,7 @@ export interface FileRouteTypes {
     | '/events/$slug/eco'
     | '/events/$slug/edit'
     | '/events/$slug/entrance'
+    | '/events/$slug/exit'
     | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
@@ -2480,6 +2509,7 @@ export interface FileRouteTypes {
     | '/events/$slug/name-badges'
     | '/events/$slug/nursery'
     | '/events/$slug/open-bar'
+    | '/events/$slug/outdoor'
     | '/events/$slug/parking'
     | '/events/$slug/perks'
     | '/events/$slug/pets'
@@ -2553,6 +2583,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/app/about'
     | '/app/academy'
     | '/app/accessibility'
     | '/app/achievements'
@@ -2687,6 +2718,7 @@ export interface FileRouteTypes {
     | '/events/$slug/eco'
     | '/events/$slug/edit'
     | '/events/$slug/entrance'
+    | '/events/$slug/exit'
     | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
@@ -2732,6 +2764,7 @@ export interface FileRouteTypes {
     | '/events/$slug/name-badges'
     | '/events/$slug/nursery'
     | '/events/$slug/open-bar'
+    | '/events/$slug/outdoor'
     | '/events/$slug/parking'
     | '/events/$slug/perks'
     | '/events/$slug/pets'
@@ -2806,6 +2839,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/app/about'
     | '/app/academy'
     | '/app/accessibility'
     | '/app/achievements'
@@ -2941,6 +2975,7 @@ export interface FileRouteTypes {
     | '/events/$slug/eco'
     | '/events/$slug/edit'
     | '/events/$slug/entrance'
+    | '/events/$slug/exit'
     | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
@@ -2986,6 +3021,7 @@ export interface FileRouteTypes {
     | '/events/$slug/name-badges'
     | '/events/$slug/nursery'
     | '/events/$slug/open-bar'
+    | '/events/$slug/outdoor'
     | '/events/$slug/parking'
     | '/events/$slug/perks'
     | '/events/$slug/pets'
@@ -3704,6 +3740,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAcademyRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/about': {
+      id: '/app/about'
+      path: '/about'
+      fullPath: '/app/about'
+      preLoaderRoute: typeof AppAboutRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/events/$slug/': {
       id: '/events/$slug/'
       path: '/'
@@ -4145,6 +4188,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugParkingRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/outdoor': {
+      id: '/events/$slug/outdoor'
+      path: '/outdoor'
+      fullPath: '/events/$slug/outdoor'
+      preLoaderRoute: typeof EventsSlugOutdoorRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/open-bar': {
       id: '/events/$slug/open-bar'
       path: '/open-bar'
@@ -4458,6 +4508,13 @@ declare module '@tanstack/react-router' {
       path: '/family-portraits'
       fullPath: '/events/$slug/family-portraits'
       preLoaderRoute: typeof EventsSlugFamilyPortraitsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/exit': {
+      id: '/events/$slug/exit'
+      path: '/exit'
+      fullPath: '/events/$slug/exit'
+      preLoaderRoute: typeof EventsSlugExitRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/entrance': {
@@ -4859,6 +4916,7 @@ const AppVendorsRouteWithChildren = AppVendorsRoute._addFileChildren(
 )
 
 interface AppRouteChildren {
+  AppAboutRoute: typeof AppAboutRoute
   AppAcademyRoute: typeof AppAcademyRoute
   AppAccessibilityRoute: typeof AppAccessibilityRoute
   AppAchievementsRoute: typeof AppAchievementsRoute
@@ -4947,6 +5005,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAboutRoute: AppAboutRoute,
   AppAcademyRoute: AppAcademyRoute,
   AppAccessibilityRoute: AppAccessibilityRoute,
   AppAchievementsRoute: AppAchievementsRoute,
@@ -5108,6 +5167,7 @@ interface EventsSlugRouteChildren {
   EventsSlugEcoRoute: typeof EventsSlugEcoRoute
   EventsSlugEditRoute: typeof EventsSlugEditRoute
   EventsSlugEntranceRoute: typeof EventsSlugEntranceRoute
+  EventsSlugExitRoute: typeof EventsSlugExitRoute
   EventsSlugFamilyPortraitsRoute: typeof EventsSlugFamilyPortraitsRoute
   EventsSlugFamilyTreeRoute: typeof EventsSlugFamilyTreeRoute
   EventsSlugFaqRoute: typeof EventsSlugFaqRoute
@@ -5153,6 +5213,7 @@ interface EventsSlugRouteChildren {
   EventsSlugNameBadgesRoute: typeof EventsSlugNameBadgesRoute
   EventsSlugNurseryRoute: typeof EventsSlugNurseryRoute
   EventsSlugOpenBarRoute: typeof EventsSlugOpenBarRoute
+  EventsSlugOutdoorRoute: typeof EventsSlugOutdoorRoute
   EventsSlugParkingRoute: typeof EventsSlugParkingRoute
   EventsSlugPerksRoute: typeof EventsSlugPerksRoute
   EventsSlugPetsRoute: typeof EventsSlugPetsRoute
@@ -5265,6 +5326,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugEcoRoute: EventsSlugEcoRoute,
   EventsSlugEditRoute: EventsSlugEditRoute,
   EventsSlugEntranceRoute: EventsSlugEntranceRoute,
+  EventsSlugExitRoute: EventsSlugExitRoute,
   EventsSlugFamilyPortraitsRoute: EventsSlugFamilyPortraitsRoute,
   EventsSlugFamilyTreeRoute: EventsSlugFamilyTreeRoute,
   EventsSlugFaqRoute: EventsSlugFaqRoute,
@@ -5310,6 +5372,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugNameBadgesRoute: EventsSlugNameBadgesRoute,
   EventsSlugNurseryRoute: EventsSlugNurseryRoute,
   EventsSlugOpenBarRoute: EventsSlugOpenBarRoute,
+  EventsSlugOutdoorRoute: EventsSlugOutdoorRoute,
   EventsSlugParkingRoute: EventsSlugParkingRoute,
   EventsSlugPerksRoute: EventsSlugPerksRoute,
   EventsSlugPetsRoute: EventsSlugPetsRoute,
