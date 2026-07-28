@@ -41,6 +41,7 @@ import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppQuestsRouteImport } from './routes/app.quests'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppProDirectoryRouteImport } from './routes/app.pro-directory'
+import { Route as AppPressRouteImport } from './routes/app.press'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
 import { Route as AppPerformanceRouteImport } from './routes/app.performance'
 import { Route as AppOfficiantsRouteImport } from './routes/app.officiants'
@@ -118,6 +119,7 @@ import { Route as EventsSlugSaveTheDateRouteImport } from './routes/events.$slug
 import { Route as EventsSlugSafetyRouteImport } from './routes/events.$slug.safety'
 import { Route as EventsSlugRsvpRouteImport } from './routes/events.$slug.rsvp'
 import { Route as EventsSlugRitualsRouteImport } from './routes/events.$slug.rituals'
+import { Route as EventsSlugRingsRouteImport } from './routes/events.$slug.rings'
 import { Route as EventsSlugRingBearerRouteImport } from './routes/events.$slug.ring-bearer'
 import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
 import { Route as EventsSlugRehearsalRouteImport } from './routes/events.$slug.rehearsal'
@@ -158,6 +160,7 @@ import { Route as EventsSlugIcebreakersRouteImport } from './routes/events.$slug
 import { Route as EventsSlugHoneymoonRouteImport } from './routes/events.$slug.honeymoon'
 import { Route as EventsSlugHighlightReelRouteImport } from './routes/events.$slug.highlight-reel'
 import { Route as EventsSlugHallOfFameRouteImport } from './routes/events.$slug.hall-of-fame'
+import { Route as EventsSlugHairMakeupRouteImport } from './routes/events.$slug.hair-makeup'
 import { Route as EventsSlugGuidesRouteImport } from './routes/events.$slug.guides'
 import { Route as EventsSlugGuestsRouteImport } from './routes/events.$slug.guests'
 import { Route as EventsSlugGuestbookRouteImport } from './routes/events.$slug.guestbook'
@@ -373,6 +376,11 @@ const AppProfileRoute = AppProfileRouteImport.update({
 const AppProDirectoryRoute = AppProDirectoryRouteImport.update({
   id: '/pro-directory',
   path: '/pro-directory',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPressRoute = AppPressRouteImport.update({
+  id: '/press',
+  path: '/press',
   getParentRoute: () => AppRoute,
 } as any)
 const AppPremiumRoute = AppPremiumRouteImport.update({
@@ -762,6 +770,11 @@ const EventsSlugRitualsRoute = EventsSlugRitualsRouteImport.update({
   path: '/rituals',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugRingsRoute = EventsSlugRingsRouteImport.update({
+  id: '/rings',
+  path: '/rings',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugRingBearerRoute = EventsSlugRingBearerRouteImport.update({
   id: '/ring-bearer',
   path: '/ring-bearer',
@@ -961,6 +974,11 @@ const EventsSlugHighlightReelRoute = EventsSlugHighlightReelRouteImport.update({
 const EventsSlugHallOfFameRoute = EventsSlugHallOfFameRouteImport.update({
   id: '/hall-of-fame',
   path: '/hall-of-fame',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugHairMakeupRoute = EventsSlugHairMakeupRouteImport.update({
+  id: '/hair-makeup',
+  path: '/hair-makeup',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugGuidesRoute = EventsSlugGuidesRouteImport.update({
@@ -1293,6 +1311,7 @@ export interface FileRoutesByFullPath {
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
+  '/app/press': typeof AppPressRoute
   '/app/pro-directory': typeof AppProDirectoryRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
@@ -1372,6 +1391,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
+  '/events/$slug/hair-makeup': typeof EventsSlugHairMakeupRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
   '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
   '/events/$slug/honeymoon': typeof EventsSlugHoneymoonRoute
@@ -1412,6 +1432,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
+  '/events/$slug/rings': typeof EventsSlugRingsRoute
   '/events/$slug/rituals': typeof EventsSlugRitualsRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/safety': typeof EventsSlugSafetyRoute
@@ -1499,6 +1520,7 @@ export interface FileRoutesByTo {
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
+  '/app/press': typeof AppPressRoute
   '/app/pro-directory': typeof AppProDirectoryRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
@@ -1577,6 +1599,7 @@ export interface FileRoutesByTo {
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
+  '/events/$slug/hair-makeup': typeof EventsSlugHairMakeupRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
   '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
   '/events/$slug/honeymoon': typeof EventsSlugHoneymoonRoute
@@ -1617,6 +1640,7 @@ export interface FileRoutesByTo {
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
+  '/events/$slug/rings': typeof EventsSlugRingsRoute
   '/events/$slug/rituals': typeof EventsSlugRitualsRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/safety': typeof EventsSlugSafetyRoute
@@ -1706,6 +1730,7 @@ export interface FileRoutesById {
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
+  '/app/press': typeof AppPressRoute
   '/app/pro-directory': typeof AppProDirectoryRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
@@ -1785,6 +1810,7 @@ export interface FileRoutesById {
   '/events/$slug/guestbook': typeof EventsSlugGuestbookRouteWithChildren
   '/events/$slug/guests': typeof EventsSlugGuestsRoute
   '/events/$slug/guides': typeof EventsSlugGuidesRoute
+  '/events/$slug/hair-makeup': typeof EventsSlugHairMakeupRoute
   '/events/$slug/hall-of-fame': typeof EventsSlugHallOfFameRoute
   '/events/$slug/highlight-reel': typeof EventsSlugHighlightReelRoute
   '/events/$slug/honeymoon': typeof EventsSlugHoneymoonRoute
@@ -1825,6 +1851,7 @@ export interface FileRoutesById {
   '/events/$slug/rehearsal': typeof EventsSlugRehearsalRoute
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/ring-bearer': typeof EventsSlugRingBearerRoute
+  '/events/$slug/rings': typeof EventsSlugRingsRoute
   '/events/$slug/rituals': typeof EventsSlugRitualsRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
   '/events/$slug/safety': typeof EventsSlugSafetyRoute
@@ -1915,6 +1942,7 @@ export interface FileRouteTypes {
     | '/app/officiants'
     | '/app/performance'
     | '/app/premium'
+    | '/app/press'
     | '/app/pro-directory'
     | '/app/profile'
     | '/app/quests'
@@ -1994,6 +2022,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/guides'
+    | '/events/$slug/hair-makeup'
     | '/events/$slug/hall-of-fame'
     | '/events/$slug/highlight-reel'
     | '/events/$slug/honeymoon'
@@ -2034,6 +2063,7 @@ export interface FileRouteTypes {
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
+    | '/events/$slug/rings'
     | '/events/$slug/rituals'
     | '/events/$slug/rsvp'
     | '/events/$slug/safety'
@@ -2121,6 +2151,7 @@ export interface FileRouteTypes {
     | '/app/officiants'
     | '/app/performance'
     | '/app/premium'
+    | '/app/press'
     | '/app/pro-directory'
     | '/app/profile'
     | '/app/quests'
@@ -2199,6 +2230,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/guides'
+    | '/events/$slug/hair-makeup'
     | '/events/$slug/hall-of-fame'
     | '/events/$slug/highlight-reel'
     | '/events/$slug/honeymoon'
@@ -2239,6 +2271,7 @@ export interface FileRouteTypes {
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
+    | '/events/$slug/rings'
     | '/events/$slug/rituals'
     | '/events/$slug/rsvp'
     | '/events/$slug/safety'
@@ -2327,6 +2360,7 @@ export interface FileRouteTypes {
     | '/app/officiants'
     | '/app/performance'
     | '/app/premium'
+    | '/app/press'
     | '/app/pro-directory'
     | '/app/profile'
     | '/app/quests'
@@ -2406,6 +2440,7 @@ export interface FileRouteTypes {
     | '/events/$slug/guestbook'
     | '/events/$slug/guests'
     | '/events/$slug/guides'
+    | '/events/$slug/hair-makeup'
     | '/events/$slug/hall-of-fame'
     | '/events/$slug/highlight-reel'
     | '/events/$slug/honeymoon'
@@ -2446,6 +2481,7 @@ export interface FileRouteTypes {
     | '/events/$slug/rehearsal'
     | '/events/$slug/replay'
     | '/events/$slug/ring-bearer'
+    | '/events/$slug/rings'
     | '/events/$slug/rituals'
     | '/events/$slug/rsvp'
     | '/events/$slug/safety'
@@ -2722,6 +2758,13 @@ declare module '@tanstack/react-router' {
       path: '/pro-directory'
       fullPath: '/app/pro-directory'
       preLoaderRoute: typeof AppProDirectoryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/press': {
+      id: '/app/press'
+      path: '/press'
+      fullPath: '/app/press'
+      preLoaderRoute: typeof AppPressRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/premium': {
@@ -3263,6 +3306,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugRitualsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/rings': {
+      id: '/events/$slug/rings'
+      path: '/rings'
+      fullPath: '/events/$slug/rings'
+      preLoaderRoute: typeof EventsSlugRingsRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/ring-bearer': {
       id: '/events/$slug/ring-bearer'
       path: '/ring-bearer'
@@ -3541,6 +3591,13 @@ declare module '@tanstack/react-router' {
       path: '/hall-of-fame'
       fullPath: '/events/$slug/hall-of-fame'
       preLoaderRoute: typeof EventsSlugHallOfFameRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/hair-makeup': {
+      id: '/events/$slug/hair-makeup'
+      path: '/hair-makeup'
+      fullPath: '/events/$slug/hair-makeup'
+      preLoaderRoute: typeof EventsSlugHairMakeupRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/guides': {
@@ -4004,6 +4061,7 @@ interface AppRouteChildren {
   AppOfficiantsRoute: typeof AppOfficiantsRoute
   AppPerformanceRoute: typeof AppPerformanceRoute
   AppPremiumRoute: typeof AppPremiumRoute
+  AppPressRoute: typeof AppPressRoute
   AppProDirectoryRoute: typeof AppProDirectoryRoute
   AppProfileRoute: typeof AppProfileRoute
   AppQuestsRoute: typeof AppQuestsRoute
@@ -4074,6 +4132,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppOfficiantsRoute: AppOfficiantsRoute,
   AppPerformanceRoute: AppPerformanceRoute,
   AppPremiumRoute: AppPremiumRoute,
+  AppPressRoute: AppPressRoute,
   AppProDirectoryRoute: AppProDirectoryRoute,
   AppProfileRoute: AppProfileRoute,
   AppQuestsRoute: AppQuestsRoute,
@@ -4179,6 +4238,7 @@ interface EventsSlugRouteChildren {
   EventsSlugGuestbookRoute: typeof EventsSlugGuestbookRouteWithChildren
   EventsSlugGuestsRoute: typeof EventsSlugGuestsRoute
   EventsSlugGuidesRoute: typeof EventsSlugGuidesRoute
+  EventsSlugHairMakeupRoute: typeof EventsSlugHairMakeupRoute
   EventsSlugHallOfFameRoute: typeof EventsSlugHallOfFameRoute
   EventsSlugHighlightReelRoute: typeof EventsSlugHighlightReelRoute
   EventsSlugHoneymoonRoute: typeof EventsSlugHoneymoonRoute
@@ -4219,6 +4279,7 @@ interface EventsSlugRouteChildren {
   EventsSlugRehearsalRoute: typeof EventsSlugRehearsalRoute
   EventsSlugReplayRoute: typeof EventsSlugReplayRoute
   EventsSlugRingBearerRoute: typeof EventsSlugRingBearerRoute
+  EventsSlugRingsRoute: typeof EventsSlugRingsRoute
   EventsSlugRitualsRoute: typeof EventsSlugRitualsRoute
   EventsSlugRsvpRoute: typeof EventsSlugRsvpRoute
   EventsSlugSafetyRoute: typeof EventsSlugSafetyRoute
@@ -4307,6 +4368,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugGuestbookRoute: EventsSlugGuestbookRouteWithChildren,
   EventsSlugGuestsRoute: EventsSlugGuestsRoute,
   EventsSlugGuidesRoute: EventsSlugGuidesRoute,
+  EventsSlugHairMakeupRoute: EventsSlugHairMakeupRoute,
   EventsSlugHallOfFameRoute: EventsSlugHallOfFameRoute,
   EventsSlugHighlightReelRoute: EventsSlugHighlightReelRoute,
   EventsSlugHoneymoonRoute: EventsSlugHoneymoonRoute,
@@ -4347,6 +4409,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugRehearsalRoute: EventsSlugRehearsalRoute,
   EventsSlugReplayRoute: EventsSlugReplayRoute,
   EventsSlugRingBearerRoute: EventsSlugRingBearerRoute,
+  EventsSlugRingsRoute: EventsSlugRingsRoute,
   EventsSlugRitualsRoute: EventsSlugRitualsRoute,
   EventsSlugRsvpRoute: EventsSlugRsvpRoute,
   EventsSlugSafetyRoute: EventsSlugSafetyRoute,
