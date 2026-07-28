@@ -71,6 +71,7 @@ import { Route as EventsSlugVowsRouteImport } from './routes/events.$slug.vows'
 import { Route as EventsSlugVipRouteImport } from './routes/events.$slug.vip'
 import { Route as EventsSlugVendorsHubRouteImport } from './routes/events.$slug.vendors-hub'
 import { Route as EventsSlugTributeRouteImport } from './routes/events.$slug.tribute'
+import { Route as EventsSlugTranslationsRouteImport } from './routes/events.$slug.translations'
 import { Route as EventsSlugToastRouteImport } from './routes/events.$slug.toast'
 import { Route as EventsSlugTimelineRouteImport } from './routes/events.$slug.timeline'
 import { Route as EventsSlugThanksRouteImport } from './routes/events.$slug.thanks'
@@ -463,6 +464,11 @@ const EventsSlugVendorsHubRoute = EventsSlugVendorsHubRouteImport.update({
 const EventsSlugTributeRoute = EventsSlugTributeRouteImport.update({
   id: '/tribute',
   path: '/tribute',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugTranslationsRoute = EventsSlugTranslationsRouteImport.update({
+  id: '/translations',
+  path: '/translations',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugToastRoute = EventsSlugToastRouteImport.update({
@@ -1018,6 +1024,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
+  '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -1163,6 +1170,7 @@ export interface FileRoutesByTo {
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
+  '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -1311,6 +1319,7 @@ export interface FileRoutesById {
   '/events/$slug/thanks': typeof EventsSlugThanksRoute
   '/events/$slug/timeline': typeof EventsSlugTimelineRoute
   '/events/$slug/toast': typeof EventsSlugToastRoute
+  '/events/$slug/translations': typeof EventsSlugTranslationsRoute
   '/events/$slug/tribute': typeof EventsSlugTributeRoute
   '/events/$slug/vendors-hub': typeof EventsSlugVendorsHubRoute
   '/events/$slug/vip': typeof EventsSlugVipRoute
@@ -1460,6 +1469,7 @@ export interface FileRouteTypes {
     | '/events/$slug/thanks'
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
+    | '/events/$slug/translations'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
@@ -1605,6 +1615,7 @@ export interface FileRouteTypes {
     | '/events/$slug/thanks'
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
+    | '/events/$slug/translations'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
@@ -1752,6 +1763,7 @@ export interface FileRouteTypes {
     | '/events/$slug/thanks'
     | '/events/$slug/timeline'
     | '/events/$slug/toast'
+    | '/events/$slug/translations'
     | '/events/$slug/tribute'
     | '/events/$slug/vendors-hub'
     | '/events/$slug/vip'
@@ -2209,6 +2221,13 @@ declare module '@tanstack/react-router' {
       path: '/tribute'
       fullPath: '/events/$slug/tribute'
       preLoaderRoute: typeof EventsSlugTributeRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/translations': {
+      id: '/events/$slug/translations'
+      path: '/translations'
+      fullPath: '/events/$slug/translations'
+      preLoaderRoute: typeof EventsSlugTranslationsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/toast': {
@@ -3027,6 +3046,7 @@ interface EventsSlugRouteChildren {
   EventsSlugThanksRoute: typeof EventsSlugThanksRoute
   EventsSlugTimelineRoute: typeof EventsSlugTimelineRoute
   EventsSlugToastRoute: typeof EventsSlugToastRoute
+  EventsSlugTranslationsRoute: typeof EventsSlugTranslationsRoute
   EventsSlugTributeRoute: typeof EventsSlugTributeRoute
   EventsSlugVendorsHubRoute: typeof EventsSlugVendorsHubRoute
   EventsSlugVipRoute: typeof EventsSlugVipRoute
@@ -3113,6 +3133,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugThanksRoute: EventsSlugThanksRoute,
   EventsSlugTimelineRoute: EventsSlugTimelineRoute,
   EventsSlugToastRoute: EventsSlugToastRoute,
+  EventsSlugTranslationsRoute: EventsSlugTranslationsRoute,
   EventsSlugTributeRoute: EventsSlugTributeRoute,
   EventsSlugVendorsHubRoute: EventsSlugVendorsHubRoute,
   EventsSlugVipRoute: EventsSlugVipRoute,
