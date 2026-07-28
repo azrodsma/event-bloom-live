@@ -36,6 +36,8 @@ import {
 
 
 import { useEffect, useState } from "react";
+import { PostFeed } from "@/components/PostFeed";
+
 
 export const Route = createFileRoute("/events/$slug/")({
   head: ({ params }) => {
@@ -65,13 +67,20 @@ export const Route = createFileRoute("/events/$slug/")({
       ],
     };
   },
-  loader: ({ params }) => {
-    const e = findEvent(params.slug);
-    if (!e) throw notFound();
-    return { event: e };
+  loader: async ({ params }) => {
+    const { getEventBySlug } = await import("@/lib/events.functions");
+    const { adaptEvent } = await import("@/lib/event-adapter");
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) {
+      const e = findEvent(params.slug);
+      if (!e) throw notFound();
+      return { event: e, dbId: null as string | null };
+    }
+    return { event: adaptEvent(db), dbId: db.id };
   },
   component: EventPage,
 });
+
 
 function useCountdown(iso: string) {
   const [now, setNow] = useState(() => Date.now());
@@ -88,8 +97,9 @@ function useCountdown(iso: string) {
 }
 
 function EventPage() {
-  const { event } = Route.useLoaderData();
+  const { event, dbId } = Route.useLoaderData();
   const cd = useCountdown(event.date);
+
   return (
     <div className="min-h-screen bg-background pb-16">
       {/* Hero */}
@@ -144,6 +154,10 @@ function EventPage() {
         <section className="rounded-3xl bg-surface p-5 shadow-card">
           <p className="text-sm leading-relaxed text-foreground">{event.description}</p>
         </section>
+
+        {dbId && <PostFeed eventId={dbId} />}
+
+
 
         {/* Live block */}
         {event.livestream && (
