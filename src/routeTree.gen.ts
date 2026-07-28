@@ -36,6 +36,7 @@ import { Route as AppReferralsRouteImport } from './routes/app.referrals'
 import { Route as AppReferralRouteImport } from './routes/app.referral'
 import { Route as AppQuestsRouteImport } from './routes/app.quests'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
+import { Route as AppProDirectoryRouteImport } from './routes/app.pro-directory'
 import { Route as AppPremiumRouteImport } from './routes/app.premium'
 import { Route as AppPerformanceRouteImport } from './routes/app.performance'
 import { Route as AppOfficiantsRouteImport } from './routes/app.officiants'
@@ -93,6 +94,7 @@ import { Route as EventsSlugShuttleRouteImport } from './routes/events.$slug.shu
 import { Route as EventsSlugSecurityRouteImport } from './routes/events.$slug.security'
 import { Route as EventsSlugSeatingRouteImport } from './routes/events.$slug.seating'
 import { Route as EventsSlugScenographyRouteImport } from './routes/events.$slug.scenography'
+import { Route as EventsSlugSafetyRouteImport } from './routes/events.$slug.safety'
 import { Route as EventsSlugRsvpRouteImport } from './routes/events.$slug.rsvp'
 import { Route as EventsSlugRitualsRouteImport } from './routes/events.$slug.rituals'
 import { Route as EventsSlugReplayRouteImport } from './routes/events.$slug.replay'
@@ -109,6 +111,7 @@ import { Route as EventsSlugPhotoSpotsRouteImport } from './routes/events.$slug.
 import { Route as EventsSlugPhotoChallengesRouteImport } from './routes/events.$slug.photo-challenges'
 import { Route as EventsSlugPetsRouteImport } from './routes/events.$slug.pets'
 import { Route as EventsSlugPerksRouteImport } from './routes/events.$slug.perks'
+import { Route as EventsSlugNurseryRouteImport } from './routes/events.$slug.nursery'
 import { Route as EventsSlugNameBadgesRouteImport } from './routes/events.$slug.name-badges'
 import { Route as EventsSlugModerationRouteImport } from './routes/events.$slug.moderation'
 import { Route as EventsSlugMenuRouteImport } from './routes/events.$slug.menu'
@@ -304,6 +307,11 @@ const AppQuestsRoute = AppQuestsRouteImport.update({
 const AppProfileRoute = AppProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProDirectoryRoute = AppProDirectoryRouteImport.update({
+  id: '/pro-directory',
+  path: '/pro-directory',
   getParentRoute: () => AppRoute,
 } as any)
 const AppPremiumRoute = AppPremiumRouteImport.update({
@@ -592,6 +600,11 @@ const EventsSlugScenographyRoute = EventsSlugScenographyRouteImport.update({
   path: '/scenography',
   getParentRoute: () => EventsSlugRoute,
 } as any)
+const EventsSlugSafetyRoute = EventsSlugSafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugRsvpRoute = EventsSlugRsvpRouteImport.update({
   id: '/rsvp',
   path: '/rsvp',
@@ -671,6 +684,11 @@ const EventsSlugPetsRoute = EventsSlugPetsRouteImport.update({
 const EventsSlugPerksRoute = EventsSlugPerksRouteImport.update({
   id: '/perks',
   path: '/perks',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
+const EventsSlugNurseryRoute = EventsSlugNurseryRouteImport.update({
+  id: '/nursery',
+  path: '/nursery',
   getParentRoute: () => EventsSlugRoute,
 } as any)
 const EventsSlugNameBadgesRoute = EventsSlugNameBadgesRouteImport.update({
@@ -1019,6 +1037,7 @@ export interface FileRoutesByFullPath {
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
+  '/app/pro-directory': typeof AppProDirectoryRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
@@ -1098,6 +1117,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
+  '/events/$slug/nursery': typeof EventsSlugNurseryRoute
   '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
@@ -1114,6 +1134,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rituals': typeof EventsSlugRitualsRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
+  '/events/$slug/safety': typeof EventsSlugSafetyRoute
   '/events/$slug/scenography': typeof EventsSlugScenographyRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/security': typeof EventsSlugSecurityRoute
@@ -1181,6 +1202,7 @@ export interface FileRoutesByTo {
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
+  '/app/pro-directory': typeof AppProDirectoryRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
@@ -1259,6 +1281,7 @@ export interface FileRoutesByTo {
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
+  '/events/$slug/nursery': typeof EventsSlugNurseryRoute
   '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
@@ -1275,6 +1298,7 @@ export interface FileRoutesByTo {
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rituals': typeof EventsSlugRitualsRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
+  '/events/$slug/safety': typeof EventsSlugSafetyRoute
   '/events/$slug/scenography': typeof EventsSlugScenographyRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/security': typeof EventsSlugSecurityRoute
@@ -1344,6 +1368,7 @@ export interface FileRoutesById {
   '/app/officiants': typeof AppOfficiantsRoute
   '/app/performance': typeof AppPerformanceRoute
   '/app/premium': typeof AppPremiumRoute
+  '/app/pro-directory': typeof AppProDirectoryRoute
   '/app/profile': typeof AppProfileRoute
   '/app/quests': typeof AppQuestsRoute
   '/app/referral': typeof AppReferralRoute
@@ -1423,6 +1448,7 @@ export interface FileRoutesById {
   '/events/$slug/menu': typeof EventsSlugMenuRoute
   '/events/$slug/moderation': typeof EventsSlugModerationRoute
   '/events/$slug/name-badges': typeof EventsSlugNameBadgesRoute
+  '/events/$slug/nursery': typeof EventsSlugNurseryRoute
   '/events/$slug/perks': typeof EventsSlugPerksRoute
   '/events/$slug/pets': typeof EventsSlugPetsRoute
   '/events/$slug/photo-challenges': typeof EventsSlugPhotoChallengesRoute
@@ -1439,6 +1465,7 @@ export interface FileRoutesById {
   '/events/$slug/replay': typeof EventsSlugReplayRoute
   '/events/$slug/rituals': typeof EventsSlugRitualsRoute
   '/events/$slug/rsvp': typeof EventsSlugRsvpRoute
+  '/events/$slug/safety': typeof EventsSlugSafetyRoute
   '/events/$slug/scenography': typeof EventsSlugScenographyRoute
   '/events/$slug/seating': typeof EventsSlugSeatingRoute
   '/events/$slug/security': typeof EventsSlugSecurityRoute
@@ -1509,6 +1536,7 @@ export interface FileRouteTypes {
     | '/app/officiants'
     | '/app/performance'
     | '/app/premium'
+    | '/app/pro-directory'
     | '/app/profile'
     | '/app/quests'
     | '/app/referral'
@@ -1588,6 +1616,7 @@ export interface FileRouteTypes {
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
+    | '/events/$slug/nursery'
     | '/events/$slug/perks'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
@@ -1604,6 +1633,7 @@ export interface FileRouteTypes {
     | '/events/$slug/replay'
     | '/events/$slug/rituals'
     | '/events/$slug/rsvp'
+    | '/events/$slug/safety'
     | '/events/$slug/scenography'
     | '/events/$slug/seating'
     | '/events/$slug/security'
@@ -1671,6 +1701,7 @@ export interface FileRouteTypes {
     | '/app/officiants'
     | '/app/performance'
     | '/app/premium'
+    | '/app/pro-directory'
     | '/app/profile'
     | '/app/quests'
     | '/app/referral'
@@ -1749,6 +1780,7 @@ export interface FileRouteTypes {
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
+    | '/events/$slug/nursery'
     | '/events/$slug/perks'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
@@ -1765,6 +1797,7 @@ export interface FileRouteTypes {
     | '/events/$slug/replay'
     | '/events/$slug/rituals'
     | '/events/$slug/rsvp'
+    | '/events/$slug/safety'
     | '/events/$slug/scenography'
     | '/events/$slug/seating'
     | '/events/$slug/security'
@@ -1833,6 +1866,7 @@ export interface FileRouteTypes {
     | '/app/officiants'
     | '/app/performance'
     | '/app/premium'
+    | '/app/pro-directory'
     | '/app/profile'
     | '/app/quests'
     | '/app/referral'
@@ -1912,6 +1946,7 @@ export interface FileRouteTypes {
     | '/events/$slug/menu'
     | '/events/$slug/moderation'
     | '/events/$slug/name-badges'
+    | '/events/$slug/nursery'
     | '/events/$slug/perks'
     | '/events/$slug/pets'
     | '/events/$slug/photo-challenges'
@@ -1928,6 +1963,7 @@ export interface FileRouteTypes {
     | '/events/$slug/replay'
     | '/events/$slug/rituals'
     | '/events/$slug/rsvp'
+    | '/events/$slug/safety'
     | '/events/$slug/scenography'
     | '/events/$slug/seating'
     | '/events/$slug/security'
@@ -2157,6 +2193,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/app/profile'
       preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/pro-directory': {
+      id: '/app/pro-directory'
+      path: '/pro-directory'
+      fullPath: '/app/pro-directory'
+      preLoaderRoute: typeof AppProDirectoryRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/premium': {
@@ -2558,6 +2601,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugScenographyRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/safety': {
+      id: '/events/$slug/safety'
+      path: '/safety'
+      fullPath: '/events/$slug/safety'
+      preLoaderRoute: typeof EventsSlugSafetyRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/rsvp': {
       id: '/events/$slug/rsvp'
       path: '/rsvp'
@@ -2668,6 +2718,13 @@ declare module '@tanstack/react-router' {
       path: '/perks'
       fullPath: '/events/$slug/perks'
       preLoaderRoute: typeof EventsSlugPerksRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
+    '/events/$slug/nursery': {
+      id: '/events/$slug/nursery'
+      path: '/nursery'
+      fullPath: '/events/$slug/nursery'
+      preLoaderRoute: typeof EventsSlugNurseryRouteImport
       parentRoute: typeof EventsSlugRoute
     }
     '/events/$slug/name-badges': {
@@ -3158,6 +3215,7 @@ interface AppRouteChildren {
   AppOfficiantsRoute: typeof AppOfficiantsRoute
   AppPerformanceRoute: typeof AppPerformanceRoute
   AppPremiumRoute: typeof AppPremiumRoute
+  AppProDirectoryRoute: typeof AppProDirectoryRoute
   AppProfileRoute: typeof AppProfileRoute
   AppQuestsRoute: typeof AppQuestsRoute
   AppReferralRoute: typeof AppReferralRoute
@@ -3215,6 +3273,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppOfficiantsRoute: AppOfficiantsRoute,
   AppPerformanceRoute: AppPerformanceRoute,
   AppPremiumRoute: AppPremiumRoute,
+  AppProDirectoryRoute: AppProDirectoryRoute,
   AppProfileRoute: AppProfileRoute,
   AppQuestsRoute: AppQuestsRoute,
   AppReferralRoute: AppReferralRoute,
@@ -3320,6 +3379,7 @@ interface EventsSlugRouteChildren {
   EventsSlugMenuRoute: typeof EventsSlugMenuRoute
   EventsSlugModerationRoute: typeof EventsSlugModerationRoute
   EventsSlugNameBadgesRoute: typeof EventsSlugNameBadgesRoute
+  EventsSlugNurseryRoute: typeof EventsSlugNurseryRoute
   EventsSlugPerksRoute: typeof EventsSlugPerksRoute
   EventsSlugPetsRoute: typeof EventsSlugPetsRoute
   EventsSlugPhotoChallengesRoute: typeof EventsSlugPhotoChallengesRoute
@@ -3336,6 +3396,7 @@ interface EventsSlugRouteChildren {
   EventsSlugReplayRoute: typeof EventsSlugReplayRoute
   EventsSlugRitualsRoute: typeof EventsSlugRitualsRoute
   EventsSlugRsvpRoute: typeof EventsSlugRsvpRoute
+  EventsSlugSafetyRoute: typeof EventsSlugSafetyRoute
   EventsSlugScenographyRoute: typeof EventsSlugScenographyRoute
   EventsSlugSeatingRoute: typeof EventsSlugSeatingRoute
   EventsSlugSecurityRoute: typeof EventsSlugSecurityRoute
@@ -3417,6 +3478,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugMenuRoute: EventsSlugMenuRoute,
   EventsSlugModerationRoute: EventsSlugModerationRoute,
   EventsSlugNameBadgesRoute: EventsSlugNameBadgesRoute,
+  EventsSlugNurseryRoute: EventsSlugNurseryRoute,
   EventsSlugPerksRoute: EventsSlugPerksRoute,
   EventsSlugPetsRoute: EventsSlugPetsRoute,
   EventsSlugPhotoChallengesRoute: EventsSlugPhotoChallengesRoute,
@@ -3433,6 +3495,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugReplayRoute: EventsSlugReplayRoute,
   EventsSlugRitualsRoute: EventsSlugRitualsRoute,
   EventsSlugRsvpRoute: EventsSlugRsvpRoute,
+  EventsSlugSafetyRoute: EventsSlugSafetyRoute,
   EventsSlugScenographyRoute: EventsSlugScenographyRoute,
   EventsSlugSeatingRoute: EventsSlugSeatingRoute,
   EventsSlugSecurityRoute: EventsSlugSecurityRoute,
