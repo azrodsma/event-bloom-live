@@ -146,18 +146,22 @@ function Landing() {
                     </span>
                   </div>
                   <div className="absolute inset-x-4 bottom-4 text-white">
-                    <p className="text-xs opacity-80">Mariage · Bordeaux</p>
-                    <h3 className="font-serif text-3xl">Sarah & Thomas</h3>
+                    <p className="text-[11px] uppercase tracking-[0.18em] opacity-80">Mariage · Bordeaux</p>
+                    <h3 className="mt-1 font-serif text-3xl leading-tight">Sarah &amp; Thomas</h3>
                     <div className="mt-3 flex items-center gap-2">
-                      <div className="flex-1 rounded-full bg-white/20 p-1 text-center text-xs backdrop-blur">
-                        💬 Chat en direct
+                      <div className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-white/25 bg-white/15 py-1.5 text-xs font-medium backdrop-blur">
+                        <MessageCircle className="h-3.5 w-3.5" /> Chat en direct
                       </div>
-                      <div className="rounded-full bg-white/20 p-1 px-3 text-xs backdrop-blur">💖 128</div>
+                      <div className="flex items-center gap-1.5 rounded-full border border-white/25 bg-white/15 px-3 py-1.5 text-xs font-medium backdrop-blur">
+                        <Heart className="h-3.5 w-3.5 fill-current" /> 128
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="space-y-2 p-4">
-                  <p className="text-xs font-semibold text-muted-foreground">🎁 Voyage de noces</p>
+                <div className="space-y-2 border-t border-border/60 p-4">
+                  <p className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
+                    <Gift className="h-3.5 w-3.5 text-gold" /> Voyage de noces
+                  </p>
                   <div className="h-2 overflow-hidden rounded-full bg-primary-light">
                     <div className="h-full w-[60%] rounded-full bg-gradient-primary" />
                   </div>
