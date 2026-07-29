@@ -20,6 +20,7 @@ import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
 import { Route as RsvpSlugRouteImport } from './routes/rsvp.$slug'
 import { Route as ITokenRouteImport } from './routes/i.$token'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
+import { Route as AuthResetPasswordRouteImport } from './routes/auth.reset-password'
 import { Route as AppYearInReviewRouteImport } from './routes/app.year-in-review'
 import { Route as AppWishesRouteImport } from './routes/app.wishes'
 import { Route as AppWellnessRouteImport } from './routes/app.wellness'
@@ -339,6 +340,11 @@ const EventsSlugRoute = EventsSlugRouteImport.update({
   id: '/events/$slug',
   path: '/events/$slug',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthResetPasswordRoute = AuthResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => AuthRoute,
 } as any)
 const AppYearInReviewRoute = AppYearInReviewRouteImport.update({
   id: '/year-in-review',
@@ -1675,7 +1681,7 @@ const EventsSlugGuestbookIdRoute = EventsSlugGuestbookIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
@@ -1766,6 +1772,7 @@ export interface FileRoutesByFullPath {
   '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
+  '/auth/reset-password': typeof AuthResetPasswordRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/i/$token': typeof ITokenRoute
   '/rsvp/$slug': typeof RsvpSlugRoute
@@ -1951,7 +1958,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
@@ -2042,6 +2049,7 @@ export interface FileRoutesByTo {
   '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
+  '/auth/reset-password': typeof AuthResetPasswordRoute
   '/i/$token': typeof ITokenRoute
   '/rsvp/$slug': typeof RsvpSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
@@ -2228,7 +2236,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
@@ -2319,6 +2327,7 @@ export interface FileRoutesById {
   '/app/wellness': typeof AppWellnessRoute
   '/app/wishes': typeof AppWishesRoute
   '/app/year-in-review': typeof AppYearInReviewRoute
+  '/auth/reset-password': typeof AuthResetPasswordRoute
   '/events/$slug': typeof EventsSlugRouteWithChildren
   '/i/$token': typeof ITokenRoute
   '/rsvp/$slug': typeof RsvpSlugRoute
@@ -2598,6 +2607,7 @@ export interface FileRouteTypes {
     | '/app/wellness'
     | '/app/wishes'
     | '/app/year-in-review'
+    | '/auth/reset-password'
     | '/events/$slug'
     | '/i/$token'
     | '/rsvp/$slug'
@@ -2874,6 +2884,7 @@ export interface FileRouteTypes {
     | '/app/wellness'
     | '/app/wishes'
     | '/app/year-in-review'
+    | '/auth/reset-password'
     | '/i/$token'
     | '/rsvp/$slug'
     | '/stories/$slug'
@@ -3150,6 +3161,7 @@ export interface FileRouteTypes {
     | '/app/wellness'
     | '/app/wishes'
     | '/app/year-in-review'
+    | '/auth/reset-password'
     | '/events/$slug'
     | '/i/$token'
     | '/rsvp/$slug'
@@ -3337,7 +3349,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
-  AuthRoute: typeof AuthRoute
+  AuthRoute: typeof AuthRouteWithChildren
   JoinRoute: typeof JoinRoute
   LegalRoute: typeof LegalRoute
   OnboardingRoute: typeof OnboardingRoute
@@ -3425,6 +3437,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/events/$slug'
       preLoaderRoute: typeof EventsSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/auth/reset-password': {
+      id: '/auth/reset-password'
+      path: '/reset-password'
+      fullPath: '/auth/reset-password'
+      preLoaderRoute: typeof AuthResetPasswordRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/app/year-in-review': {
       id: '/app/year-in-review'
@@ -5489,6 +5508,16 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface AuthRouteChildren {
+  AuthResetPasswordRoute: typeof AuthResetPasswordRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthResetPasswordRoute: AuthResetPasswordRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 interface EventsSlugGuestbookRouteChildren {
   EventsSlugGuestbookIdRoute: typeof EventsSlugGuestbookIdRoute
   EventsSlugGuestbookNewRoute: typeof EventsSlugGuestbookNewRoute
@@ -5867,7 +5896,7 @@ const EventsSlugRouteWithChildren = EventsSlugRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
-  AuthRoute: AuthRoute,
+  AuthRoute: AuthRouteWithChildren,
   JoinRoute: JoinRoute,
   LegalRoute: LegalRoute,
   OnboardingRoute: OnboardingRoute,
@@ -5879,13 +5908,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

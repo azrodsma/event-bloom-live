@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "sonner";
+import { useServerFn } from "@tanstack/react-start";
+import { sendWelcomeEmail, sendPasswordReset } from "@/lib/auth-emails.functions";
 
 type Search = { redirect?: string };
 
@@ -33,6 +35,8 @@ function AuthPage() {
   const { redirect } = useSearch({ from: "/auth" });
 
   const safeRedirect = redirect && redirect.startsWith("/") ? redirect : "/app";
+  const sendWelcome = useServerFn(sendWelcomeEmail);
+  const sendReset = useServerFn(sendPasswordReset);
 
   useEffect(() => {
     if (!loading && user) {
@@ -46,18 +50,19 @@ function AuthPage() {
     setBusy(true);
     try {
       if (mode === "signup") {
+        const displayName = `${firstName} ${lastName}`.trim() || email.split("@")[0];
         const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             emailRedirectTo: window.location.origin,
-            data: {
-              display_name: `${firstName} ${lastName}`.trim() || email.split("@")[0],
-            },
+            data: { display_name: displayName },
           },
         });
         if (error) throw error;
-        toast.success("Compte créé", { description: "Vérifiez vos emails pour confirmer votre adresse." });
+        // Email de bienvenue brandé via Resend (non bloquant)
+        sendWelcome({ data: { email, displayName, appUrl: `${window.location.origin}/app` } }).catch(() => {});
+        toast.success("Compte créé ✨", { description: "Un email de bienvenue vient de vous être envoyé." });
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
@@ -147,6 +152,30 @@ function AuthPage() {
               {busy ? "…" : mode === "login" ? "Se connecter" : "Créer mon compte"}
             </button>
           </form>
+
+          {mode === "login" && (
+            <p className="mt-3 text-center text-xs">
+              <button
+                type="button"
+                disabled={busy}
+                onClick={async () => {
+                  if (!email) { toast.error("Entrez votre email d'abord"); return; }
+                  setBusy(true);
+                  try {
+                    await sendReset({ data: { email, redirectTo: `${window.location.origin}/auth/reset-password` } });
+                    toast.success("Email envoyé", { description: "Si un compte existe, un lien vient d'être envoyé." });
+                  } catch {
+                    toast.error("Impossible d'envoyer l'email");
+                  } finally {
+                    setBusy(false);
+                  }
+                }}
+                className="text-muted-foreground hover:text-primary hover:underline"
+              >
+                Mot de passe oublié ?
+              </button>
+            </p>
+          )}
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             {mode === "login" ? "Pas encore de compte ?" : "Déjà inscrit ?"}{" "}
