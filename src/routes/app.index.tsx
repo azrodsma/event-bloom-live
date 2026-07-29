@@ -80,16 +80,20 @@ function Home() {
           <p className="text-[11px] text-muted-foreground">Vos moments sauvegardés</p>
         </Link>
 
-        <Link to="/app/create" className="tap col-span-1 rounded-[28px] bg-surface p-5 shadow-card ring-1 ring-border transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-1 lg:p-6">
+        <Link to="/app/create" className="tap col-span-1 flex flex-col justify-between rounded-[28px] bg-surface p-5 shadow-card ring-1 ring-border transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-1 lg:p-6">
           <Calendar className="h-5 w-5 text-gold" />
-          <p className="mt-3 font-serif text-lg leading-tight lg:text-xl">Nouveau</p>
-          <p className="text-[11px] text-muted-foreground">Créer en 8 étapes</p>
+          <div className="mt-3">
+            <p className="font-serif text-lg leading-tight lg:text-xl">Nouveau</p>
+            <p className="text-[11px] text-muted-foreground">Créer en 8 étapes</p>
+          </div>
         </Link>
 
-        <Link to="/app/explore" className="tap col-span-2 rounded-[28px] bg-secondary-light p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-1 lg:p-6">
+        <Link to="/app/explore" className="tap col-span-1 flex flex-col justify-between rounded-[28px] bg-secondary-light p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-1 lg:p-6">
           <Camera className="h-5 w-5 text-primary-dark" />
-          <p className="mt-3 font-serif text-lg leading-tight lg:text-xl">Explorer</p>
-          <p className="text-[11px] text-muted-foreground">Événements publics</p>
+          <div className="mt-3">
+            <p className="font-serif text-lg leading-tight lg:text-xl">Explorer</p>
+            <p className="text-[11px] text-muted-foreground">Événements publics</p>
+          </div>
         </Link>
       </section>
 
