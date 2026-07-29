@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { findEvent, eventTypeIcons } from "@/lib/mock-data";
+import { findEvent } from "@/lib/mock-data";
 import {
   MapPin,
   Calendar,
@@ -533,6 +533,14 @@ function EventPage() {
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Lieu</p>
               <p className="mt-1 font-serif text-lg">{event.venue}</p>
               <p className="text-sm text-muted-foreground">{event.city}, {event.country}</p>
+              <a
+                href={`https://maps.google.com/?q=${encodeURIComponent(event.venue + " " + event.city)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold transition hover:bg-cream"
+              >
+                <MapPin className="h-3.5 w-3.5" /> Voir sur la carte
+              </a>
             </section>
           </div>
         </aside>
