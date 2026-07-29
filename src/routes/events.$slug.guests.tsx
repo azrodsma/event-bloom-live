@@ -23,6 +23,10 @@ function GuestsPage() {
   const { slug } = useParams({ from: "/events/$slug/guests" });
   const listFn = useServerFn(listGuests);
   const statsFn = useServerFn(getRsvpStats);
+  const remindFn = useServerFn(sendRsvpReminders);
+  const deleteFn = useServerFn(deleteGuest);
+  const qc = useQueryClient();
+  const [toast, setToast] = useState<string | null>(null);
 
   const guests = useQuery({
     queryKey: ["guests", event.id],
@@ -31,6 +35,24 @@ function GuestsPage() {
   const stats = useQuery({
     queryKey: ["rsvp-stats", event.id],
     queryFn: () => statsFn({ data: { eventId: event.id } }),
+  });
+
+  const remind = useMutation({
+    mutationFn: () => remindFn({ data: { eventId: event.id } }),
+    onSuccess: (r) => {
+      setToast(r.reason === "email_not_configured"
+        ? "Envoi d'email non configuré."
+        : `Rappels envoyés : ${r.sent} · ignorés : ${r.skipped}`);
+      setTimeout(() => setToast(null), 4000);
+    },
+  });
+
+  const del = useMutation({
+    mutationFn: (guestId: string) => deleteFn({ data: { guestId } }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["guests", event.id] });
+      qc.invalidateQueries({ queryKey: ["rsvp-stats", event.id] });
+    },
   });
 
   const labelFor = (r: string) =>
