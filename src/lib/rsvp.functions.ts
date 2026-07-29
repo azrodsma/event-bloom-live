@@ -93,7 +93,7 @@ export const submitRsvp = createServerFn({ method: "POST" })
             "X-Connection-Api-Key": resendKey,
           },
           body: JSON.stringify({
-            from: "Memento Live <onboarding@resend.dev>",
+            from: "Memento Live <mariage@bold-lab-agency.com>",
             to: [data.email],
             subject: `Votre réponse pour ${evFull.title}`,
             html,
