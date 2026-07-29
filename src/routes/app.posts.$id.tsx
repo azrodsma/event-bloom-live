@@ -1,7 +1,9 @@
-import { createFileRoute, Link, useParams } from "@tanstack/react-router";
+import { createFileRoute, Link, useParams, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Heart, MessageCircle, Send, Bookmark, Share2, Smile } from "lucide-react";
-import { useMemo, useState } from "react";
-import { mockEvents } from "@/lib/mock-data";
+import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { getPost, togglePostLike, listPostComments, createComment } from "@/lib/social.functions";
+import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/app/posts/$id")({
   component: PostDetail,
@@ -17,29 +19,78 @@ export const Route = createFileRoute("/app/posts/$id")({
   }),
 });
 
-const seedComments = [
-  { id: "c1", author: "Camille R.", avatar: "https://i.pravatar.cc/80?img=32", text: "Trop beau ce moment 😍 Merci de partager !", time: "il y a 12 min", likes: 8 },
-  { id: "c2", author: "Julien M.", avatar: "https://i.pravatar.cc/80?img=15", text: "La lumière est incroyable 🔥", time: "il y a 34 min", likes: 3 },
-  { id: "c3", author: "Aïcha B.", avatar: "https://i.pravatar.cc/80?img=47", text: "On aurait tellement voulu être là 💕", time: "il y a 1 h", likes: 12 },
-  { id: "c4", author: "Marc D.", avatar: "https://i.pravatar.cc/80?img=12", text: "Bravo aux mariés 🥂", time: "il y a 2 h", likes: 5 },
-];
+function timeAgo(iso: string) {
+  const diff = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (diff < 60) return "à l'instant";
+  if (diff < 3600) return `il y a ${Math.floor(diff / 60)} min`;
+  if (diff < 86400) return `il y a ${Math.floor(diff / 3600)} h`;
+  return `il y a ${Math.floor(diff / 86400)} j`;
+}
 
 function PostDetail() {
   const { id } = useParams({ from: "/app/posts/$id" });
-  const event = useMemo(() => mockEvents[parseInt(id, 10) % mockEvents.length] ?? mockEvents[0], [id]);
-  const [liked, setLiked] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [comments, setComments] = useState(seedComments);
-  const [draft, setDraft] = useState("");
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const fetchPost = useServerFn(getPost);
+  const fetchComments = useServerFn(listPostComments);
+  const like = useServerFn(togglePostLike);
+  const addComment = useServerFn(createComment);
 
-  function submit() {
+  const [data, setData] = useState<Awaited<ReturnType<typeof getPost>> | null>(null);
+  const [comments, setComments] = useState<Array<{ id: string; author_name: string | null; content: string; created_at: string }>>([]);
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [saved, setSaved] = useState(false);
+  const [draft, setDraft] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const res = await fetchPost({ data: { postId: id } });
+        if (!alive) return;
+        setData(res);
+        setLikeCount(res?.likeCount ?? 0);
+        const cs = await fetchComments({ data: { postId: id } });
+        if (alive) setComments(cs);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    })();
+    return () => { alive = false; };
+  }, [id, fetchPost, fetchComments]);
+
+  async function submit() {
     if (!draft.trim()) return;
-    setComments((prev) => [
-      { id: `c${Date.now()}`, author: "Vous", avatar: "https://i.pravatar.cc/80?img=5", text: draft.trim(), time: "à l'instant", likes: 0 },
-      ...prev,
-    ]);
+    if (!user) { navigate({ to: "/auth" }); return; }
+    const text = draft.trim();
     setDraft("");
+    const row = await addComment({ data: { postId: id, content: text } });
+    setComments((prev) => [...prev, { id: row.id, author_name: row.author_name, content: row.content, created_at: row.created_at }]);
   }
+
+  async function onLike() {
+    if (!user) { navigate({ to: "/auth" }); return; }
+    setLiked((v) => !v);
+    setLikeCount((n) => (liked ? n - 1 : n + 1));
+    try { await like({ data: { postId: id } }); } catch { setLiked((v) => !v); }
+  }
+
+  if (loading) {
+    return <div className="p-8 text-center text-muted-foreground">Chargement…</div>;
+  }
+  if (!data || !data.post) {
+    return (
+      <div className="p-8 text-center">
+        <p className="text-muted-foreground">Publication introuvable.</p>
+        <Link to="/app" className="mt-4 inline-block text-primary underline">Retour au feed</Link>
+      </div>
+    );
+  }
+
+  const { post, event } = data;
+  const cover = post.media_urls?.[0] ?? event?.cover_url ?? "";
 
   return (
     <div className="pb-32">
@@ -55,21 +106,31 @@ function PostDetail() {
 
       <article className="border-b border-border/60">
         <div className="flex items-center gap-3 px-4 py-3">
-          <img src={event.cover} alt="" className="h-10 w-10 rounded-full object-cover" />
+          {post.author_avatar ? (
+            <img src={post.author_avatar} alt="" className="h-10 w-10 rounded-full object-cover" />
+          ) : (
+            <div className="grid h-10 w-10 place-items-center rounded-full bg-primary/20 text-sm font-semibold text-primary">
+              {(post.author_name ?? "?").slice(0, 1)}
+            </div>
+          )}
           <div className="flex-1">
-            <Link to="/events/$slug" params={{ slug: event.slug }} className="text-sm font-medium hover:underline">
-              {event.organizers}
-            </Link>
-            <p className="text-xs text-muted-foreground">{event.venue} · {event.city}</p>
+            {event ? (
+              <Link to="/events/$slug" params={{ slug: event.slug }} className="text-sm font-medium hover:underline">
+                {post.author_name ?? "Invité"}
+              </Link>
+            ) : (
+              <p className="text-sm font-medium">{post.author_name ?? "Invité"}</p>
+            )}
+            {event && <p className="text-xs text-muted-foreground">{event.title}</p>}
           </div>
-          <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium">{event.type}</span>
+          {event && <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium">{event.type}</span>}
         </div>
 
-        <img src={event.cover} alt={event.title} className="aspect-square w-full object-cover" />
+        {cover && <img src={cover} alt="" className="aspect-square w-full object-cover" />}
 
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-4">
-            <button onClick={() => setLiked((v) => !v)} aria-label="J'aime" className="transition-transform active:scale-90">
+            <button onClick={onLike} aria-label="J'aime" className="transition-transform active:scale-90">
               <Heart className={`h-7 w-7 ${liked ? "fill-primary text-primary" : "text-foreground"}`} />
             </button>
             <button aria-label="Commenter">
@@ -85,37 +146,38 @@ function PostDetail() {
         </div>
 
         <div className="px-4 pb-4">
-          <p className="text-sm font-semibold">{liked ? 243 : 242} j'aime</p>
-          <p className="mt-2 text-sm">
-            <span className="font-semibold">{event.organizers}</span>{" "}
-            Un moment suspendu, gravé dans nos mémoires. Merci à toutes celles et ceux qui étaient présents 💕
-          </p>
-          <p className="mt-2 text-xs uppercase tracking-wide text-muted-foreground">il y a 3 heures</p>
+          <p className="text-sm font-semibold">{likeCount} j'aime</p>
+          {post.content && (
+            <p className="mt-2 text-sm">
+              <span className="font-semibold">{post.author_name ?? "Invité"}</span> <span className="text-foreground/90">{post.content}</span>
+            </p>
+          )}
+          <p className="mt-2 text-xs uppercase tracking-wide text-muted-foreground">{timeAgo(post.created_at)}</p>
         </div>
       </article>
 
       <section className="px-4 py-4">
         <h2 className="font-serif text-lg">Commentaires · {comments.length}</h2>
-        <ul className="mt-4 space-y-4">
-          {comments.map((c) => (
-            <li key={c.id} className="flex gap-3">
-              <img src={c.avatar} alt="" className="h-9 w-9 rounded-full object-cover" />
-              <div className="flex-1">
-                <p className="text-sm">
-                  <span className="font-semibold">{c.author}</span> <span className="text-foreground/90">{c.text}</span>
-                </p>
-                <div className="mt-1 flex items-center gap-4 text-xs text-muted-foreground">
-                  <span>{c.time}</span>
-                  <button className="hover:text-foreground">{c.likes} j'aime</button>
-                  <button className="hover:text-foreground">Répondre</button>
+        {comments.length === 0 ? (
+          <p className="mt-4 text-sm text-muted-foreground">Soyez le premier à commenter.</p>
+        ) : (
+          <ul className="mt-4 space-y-4">
+            {comments.map((c) => (
+              <li key={c.id} className="flex gap-3">
+                <div className="grid h-9 w-9 place-items-center rounded-full bg-primary/20 text-xs font-semibold text-primary">
+                  {(c.author_name ?? "?").slice(0, 1)}
                 </div>
-              </div>
-              <button aria-label="Aimer le commentaire">
-                <Heart className="h-4 w-4 text-muted-foreground" />
-              </button>
-            </li>
-          ))}
-        </ul>
+                <div className="flex-1">
+                  <p className="text-sm">
+                    <span className="font-semibold">{c.author_name ?? "Invité"}</span>{" "}
+                    <span className="text-foreground/90">{c.content}</span>
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">{timeAgo(c.created_at)}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <div className="fixed inset-x-0 bottom-20 z-30 border-t border-border/60 bg-background/95 px-4 py-3 backdrop-blur-xl">
@@ -127,7 +189,7 @@ function PostDetail() {
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && submit()}
-            placeholder="Ajouter un commentaire…"
+            placeholder={user ? "Ajouter un commentaire…" : "Connectez-vous pour commenter"}
             className="flex-1 rounded-full border border-border bg-secondary/40 px-4 py-2 text-sm outline-none focus:border-primary"
           />
           <button onClick={submit} disabled={!draft.trim()} className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-40">
