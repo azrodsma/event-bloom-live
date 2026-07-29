@@ -1,7 +1,8 @@
-import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { X, ChevronLeft, ChevronRight, Send, Heart } from "lucide-react";
-import { findEvent, stories } from "@/lib/mock-data";
 import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { getEventBySlug, listEventStories } from "@/lib/events.functions";
 
 export const Route = createFileRoute("/stories/$slug")({
   head: ({ params }) => ({
@@ -10,39 +11,87 @@ export const Route = createFileRoute("/stories/$slug")({
       { name: "description", content: "Story de l'événement." },
     ],
   }),
-  loader: ({ params }) => {
-    const event = findEvent(params.slug);
-    if (!event) throw notFound();
-    return { event };
-  },
   component: Story,
 });
 
-const slides = [
-  { url: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200", caption: "Le grand jour est arrivé ✨" },
-  { url: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200", caption: "La cérémonie commence" },
-  { url: "https://images.unsplash.com/photo-1530023367847-a683933f4172?w=1200", caption: "Les premiers mots" },
-  { url: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=1200", caption: "Le cocktail 🥂" },
-];
+type Slide = { id: string; url: string; media_type: string; author_name: string | null; author_avatar: string | null; created_at: string };
+
+function timeAgo(iso: string) {
+  const diff = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (diff < 60) return "à l'instant";
+  if (diff < 3600) return `il y a ${Math.floor(diff / 60)} min`;
+  if (diff < 86400) return `il y a ${Math.floor(diff / 3600)} h`;
+  return `il y a ${Math.floor(diff / 86400)} j`;
+}
 
 function Story() {
-  const { event } = Route.useLoaderData();
+  const { slug } = Route.useParams();
   const navigate = useNavigate();
+  const fetchEvent = useServerFn(getEventBySlug);
+  const fetchStories = useServerFn(listEventStories);
+
+  const [event, setEvent] = useState<Awaited<ReturnType<typeof getEventBySlug>> | null>(null);
+  const [slides, setSlides] = useState<Slide[]>([]);
+  const [loading, setLoading] = useState(true);
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    if (paused) return;
+    let alive = true;
+    (async () => {
+      setLoading(true);
+      const ev = await fetchEvent({ data: { slug } });
+      if (!alive) return;
+      setEvent(ev);
+      if (ev) {
+        const rows = await fetchStories({ data: { eventId: ev.id } });
+        if (!alive) return;
+        setSlides(rows.map((r) => ({
+          id: r.id,
+          url: r.media_url,
+          media_type: r.media_type,
+          author_name: r.author_name,
+          author_avatar: r.author_avatar,
+          created_at: r.created_at,
+        })));
+      }
+      setI(0);
+      setLoading(false);
+    })();
+    return () => { alive = false; };
+  }, [slug, fetchEvent, fetchStories]);
+
+  useEffect(() => {
+    if (paused || slides.length === 0) return;
     const t = setTimeout(() => {
       if (i < slides.length - 1) setI(i + 1);
-      else {
-        const idx = stories.findIndex((s) => s.event === event.slug);
-        const next = stories[(idx + 1) % stories.length];
-        navigate({ to: "/stories/$slug", params: { slug: next.event } });
-      }
+      else navigate({ to: "/app" });
     }, 4000);
     return () => clearTimeout(t);
-  }, [i, paused, event.slug, navigate]);
+  }, [i, paused, slides.length, navigate]);
+
+  if (loading) {
+    return <div className="fixed inset-0 z-50 grid place-items-center bg-black text-white">Chargement…</div>;
+  }
+  if (!event) {
+    return (
+      <div className="fixed inset-0 z-50 grid place-items-center bg-black text-white">
+        <div className="text-center">
+          <p>Événement introuvable.</p>
+          <Link to="/app" className="mt-4 inline-block text-primary underline">Retour</Link>
+        </div>
+      </div>
+    );
+  }
+  if (slides.length === 0) {
+    return (
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white">
+        <p className="font-serif text-2xl">Aucune story pour le moment</p>
+        <p className="mt-2 text-sm text-white/70">Les stories apparaissent ici pendant 24h.</p>
+        <Link to="/events/$slug" params={{ slug }} className="mt-6 rounded-full bg-primary px-6 py-2 text-sm">Voir l'événement</Link>
+      </div>
+    );
+  }
 
   const slide = slides[i];
 
@@ -64,10 +113,16 @@ function Story() {
 
       <header className="absolute inset-x-0 top-6 z-20 flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-2 text-white">
-          <img src={event.cover} alt="" className="h-9 w-9 rounded-full border-2 border-white object-cover" />
+          {slide.author_avatar ? (
+            <img src={slide.author_avatar} alt="" className="h-9 w-9 rounded-full border-2 border-white object-cover" />
+          ) : (
+            <div className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-white/10 text-xs font-semibold">
+              {(slide.author_name ?? "?").slice(0, 1)}
+            </div>
+          )}
           <div>
-            <p className="text-sm font-semibold">{event.title}</p>
-            <p className="text-[11px] text-white/70">{event.type} · il y a 2 h</p>
+            <p className="text-sm font-semibold">{slide.author_name ?? event.title}</p>
+            <p className="text-[11px] text-white/70">{event.type} · {timeAgo(slide.created_at)}</p>
           </div>
         </div>
         <Link to="/app" className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white backdrop-blur" aria-label="Fermer">
@@ -81,10 +136,11 @@ function Story() {
         onPointerUp={() => setPaused(false)}
         onPointerLeave={() => setPaused(false)}
       >
-        <img src={slide.url} alt="" className="h-full w-full object-cover" />
-        <div className="absolute inset-x-6 bottom-28 text-center">
-          <p className="font-serif text-2xl text-white drop-shadow">{slide.caption}</p>
-        </div>
+        {slide.media_type === "video" ? (
+          <video src={slide.url} className="h-full w-full object-cover" autoPlay muted playsInline />
+        ) : (
+          <img src={slide.url} alt="" className="h-full w-full object-cover" />
+        )}
 
         <button
           onClick={(e) => { e.stopPropagation(); setI(Math.max(0, i - 1)); }}
@@ -103,13 +159,14 @@ function Story() {
       </div>
 
       <div className="absolute inset-x-0 bottom-0 z-20 flex items-center gap-2 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
-        <div className="flex flex-1 items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-2 backdrop-blur">
-          <input
-            placeholder="Envoyer un message…"
-            className="flex-1 bg-transparent text-sm text-white placeholder:text-white/60 focus:outline-none"
-          />
-          <button className="text-white" aria-label="Envoyer"><Send className="h-4 w-4" /></button>
-        </div>
+        <Link
+          to="/events/$slug"
+          params={{ slug }}
+          className="flex flex-1 items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-2 text-sm text-white/80 backdrop-blur"
+        >
+          Répondre sur l'événement…
+          <Send className="ml-auto h-4 w-4" />
+        </Link>
         <button className="grid h-11 w-11 place-items-center rounded-full bg-primary text-white shadow-glow" aria-label="J'aime">
           <Heart className="h-5 w-5" fill="currentColor" />
         </button>
