@@ -163,26 +163,32 @@ function Dashboard() {
         {/* Top contributors */}
         <section className="rounded-3xl bg-surface p-5 shadow-card">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Invités les plus actifs</p>
-          <ul className="mt-3 space-y-2">
-            {[
-              { name: "Emma L.", role: "Témoin", posts: 42, avatar: 12 },
-              { name: "Lucas M.", role: "Frère", posts: 28, avatar: 25 },
-              { name: "Marie D.", role: "Amie", posts: 19, avatar: 47 },
-              { name: "Julien R.", role: "Cousin", posts: 15, avatar: 15 },
-            ].map((c, i) => (
-              <li key={c.name} className="flex items-center gap-3 rounded-2xl p-2 hover:bg-background">
-                <span className="w-4 text-center font-serif text-lg text-muted-foreground">{i + 1}</span>
-                <img src={`https://i.pravatar.cc/80?img=${c.avatar}`} alt="" className="h-9 w-9 rounded-full object-cover" />
-                <div className="flex-1">
-                  <p className="text-sm font-semibold">{c.name}</p>
-                  <p className="text-[11px] text-muted-foreground">{c.role}</p>
-                </div>
-                <span className="inline-flex items-center gap-1 rounded-full bg-primary-light px-2.5 py-1 text-[11px] font-semibold text-primary">
-                  <Camera className="h-3 w-3" /> {c.posts}
-                </span>
-              </li>
-            ))}
-          </ul>
+          {topContributors.length === 0 ? (
+            <p className="mt-3 text-sm text-muted-foreground">Aucune contribution pour le moment.</p>
+          ) : (
+            <ul className="mt-3 space-y-2">
+              {topContributors.map((c, i) => (
+                <li key={`${c.name}-${i}`} className="flex items-center gap-3 rounded-2xl p-2 hover:bg-background">
+                  <span className="w-4 text-center font-serif text-lg text-muted-foreground">{i + 1}</span>
+                  {c.avatar ? (
+                    <img src={c.avatar} alt="" className="h-9 w-9 rounded-full object-cover" />
+                  ) : (
+                    <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-primary font-serif text-sm text-white">
+                      {c.name.slice(0, 1).toUpperCase()}
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <p className="text-sm font-semibold">{c.name}</p>
+                    <p className="text-[11px] text-muted-foreground">Contributeur</p>
+                  </div>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-primary-light px-2.5 py-1 text-[11px] font-semibold text-primary">
+                    <Camera className="h-3 w-3" /> {c.count}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+
         </section>
 
         {/* Audience */}
