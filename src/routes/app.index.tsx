@@ -41,7 +41,7 @@ function Home() {
   return (
     <div className="w-full min-w-0 space-y-8 py-6 sm:space-y-10 lg:py-10">
       {/* Hero bento */}
-      <section className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-6">
+      <section className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-6 lg:auto-rows-[minmax(9.5rem,auto)]">
 
         <div className="col-span-2 relative overflow-hidden rounded-[32px] bg-foreground p-6 text-background md:col-span-4 md:p-8 lg:col-span-4 lg:row-span-2 lg:p-10">
           <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gradient-primary opacity-70 blur-2xl animate-blob lg:h-72 lg:w-72" />
@@ -67,29 +67,37 @@ function Home() {
           </div>
         </div>
 
-        <Link to="/app/ai-story" className="tap group col-span-2 relative overflow-hidden rounded-[28px] bg-gradient-primary p-5 text-white shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
+        <Link to="/app/ai-story" className="tap group col-span-2 relative flex flex-col justify-between overflow-hidden rounded-[28px] bg-gradient-primary p-5 text-white shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
           <Sparkles className="h-6 w-6 lg:h-7 lg:w-7" />
-          <p className="mt-4 font-serif text-2xl leading-tight lg:text-3xl">IA<br/>Story</p>
-          <p className="mt-1 text-[11px] opacity-90 lg:text-xs">Composez votre highlight reel</p>
+          <div className="mt-4">
+            <p className="font-serif text-2xl leading-tight lg:text-3xl">IA Story</p>
+            <p className="mt-1 text-[11px] opacity-90 lg:text-xs">Composez votre highlight reel</p>
+          </div>
           <ArrowUpRight className="absolute right-4 top-4 h-4 w-4 opacity-80 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
         </Link>
 
-        <Link to="/app/favorites" className="tap col-span-1 rounded-[28px] bg-cream p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
+        <Link to="/app/favorites" className="tap col-span-2 flex flex-col justify-between rounded-[28px] bg-cream p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
           <Heart className="h-5 w-5 text-primary" />
-          <p className="mt-3 font-serif text-lg leading-tight lg:text-xl">Favoris</p>
-          <p className="text-[11px] text-muted-foreground">Vos moments sauvegardés</p>
+          <div className="mt-3">
+            <p className="font-serif text-lg leading-tight lg:text-xl">Favoris</p>
+            <p className="text-[11px] text-muted-foreground">Vos moments sauvegardés</p>
+          </div>
         </Link>
 
-        <Link to="/app/create" className="tap col-span-1 rounded-[28px] bg-surface p-5 shadow-card ring-1 ring-border transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-1 lg:p-6">
+        <Link to="/app/create" className="tap col-span-1 flex flex-col justify-between rounded-[28px] bg-surface p-5 shadow-card ring-1 ring-border transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
           <Calendar className="h-5 w-5 text-gold" />
-          <p className="mt-3 font-serif text-lg leading-tight lg:text-xl">Nouveau</p>
-          <p className="text-[11px] text-muted-foreground">Créer en 8 étapes</p>
+          <div className="mt-3">
+            <p className="font-serif text-lg leading-tight lg:text-xl">Nouveau</p>
+            <p className="text-[11px] text-muted-foreground">Créer en 8 étapes</p>
+          </div>
         </Link>
 
-        <Link to="/app/explore" className="tap col-span-2 rounded-[28px] bg-secondary-light p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-1 lg:p-6">
+        <Link to="/app/explore" className="tap col-span-1 flex flex-col justify-between rounded-[28px] bg-secondary-light p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
           <Camera className="h-5 w-5 text-primary-dark" />
-          <p className="mt-3 font-serif text-lg leading-tight lg:text-xl">Explorer</p>
-          <p className="text-[11px] text-muted-foreground">Événements publics</p>
+          <div className="mt-3">
+            <p className="font-serif text-lg leading-tight lg:text-xl">Explorer</p>
+            <p className="text-[11px] text-muted-foreground">Événements publics</p>
+          </div>
         </Link>
       </section>
 
