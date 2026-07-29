@@ -20,23 +20,21 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-serif text-primary">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page introuvable</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Cette page n'existe pas ou a été déplacée.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-dark"
-          >
+    <StatusPage
+      code="404"
+      title="Page introuvable"
+      description="Cette page n'existe pas, a été déplacée, ou l'événement n'est plus accessible."
+      actions={
+        <>
+          <Link to="/" className={statusActionClasses.primary}>
             Retour à l'accueil
           </Link>
-        </div>
-      </div>
-    </div>
+          <Link to="/app" className={statusActionClasses.secondary}>
+            Mes événements
+          </Link>
+        </>
+      }
+    />
   );
 }
 
@@ -48,33 +46,27 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          Cette page n'a pas pu se charger
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Une erreur est survenue. Réessayez ou revenez à l'accueil.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+    <StatusPage
+      code="500"
+      title="Cette page n'a pas pu se charger"
+      description="Une erreur est survenue de notre côté. Réessayez dans un instant ou revenez à l'accueil."
+      actions={
+        <>
           <button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-dark"
+            className={statusActionClasses.primary}
           >
             Réessayer
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-full border border-input bg-background px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
+          <a href="/" className={statusActionClasses.secondary}>
             Accueil
           </a>
-        </div>
-      </div>
-    </div>
+        </>
+      }
+    />
   );
 }
 
