@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Heart, MessageCircle, Send } from "lucide-react";
+import { Heart, MessageCircle, Send, Bookmark } from "lucide-react";
 import { toast } from "sonner";
 import { listEventPosts, createPost, togglePostLike } from "@/lib/social.functions";
+import { toggleBookmark, listMyBookmarkIds } from "@/lib/bookmarks.functions";
 import { CommentThread } from "@/components/CommentThread";
 import { useAuth } from "@/hooks/use-auth";
 
