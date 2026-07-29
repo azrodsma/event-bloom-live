@@ -343,7 +343,7 @@ function EventPage() {
                   className="group flex flex-col gap-2 rounded-2xl bg-surface p-3.5 shadow-card ring-1 ring-border/40 transition hover:-translate-y-0.5 hover:shadow-glow sm:p-4"
                 >
                   <div className={`grid h-10 w-10 place-items-center rounded-xl ${toneCls}`}>
-                    <Icon className="h-4.5 w-4.5" />
+                    <Icon className="h-5 w-5" />
                   </div>
                   <p className="font-serif text-sm leading-tight">{m.label}</p>
                   <p className="line-clamp-1 text-[10px] text-muted-foreground">{m.hint}</p>
