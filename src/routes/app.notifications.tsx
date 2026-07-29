@@ -51,6 +51,22 @@ function Notifications() {
     enabled: !!user,
   });
 
+  useEffect(() => {
+    if (!user) return;
+    const ch = supabase
+      .channel(`notifs-${user.id}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "notifications", filter: `user_id=eq.${user.id}` },
+        () => {
+          qc.invalidateQueries({ queryKey: ["notifications"] });
+          qc.invalidateQueries({ queryKey: ["notifications-unread"] });
+        },
+      )
+      .subscribe();
+    return () => { supabase.removeChannel(ch); };
+  }, [user, qc]);
+
   if (loading) return null;
 
   if (!user) {
