@@ -209,11 +209,12 @@ function AuthPage() {
               <button
                 onClick={() => setMode(mode === "login" ? "signup" : "login")}
                 className="font-medium text-primary hover:underline"
+              >
+                {mode === "login" ? "Créer un compte" : "Se connecter"}
+              </button>
+            </p>
+          )}
 
-            >
-              {mode === "login" ? "Créer un compte" : "Se connecter"}
-            </button>
-          </p>
         </div>
       </div>
     </div>
