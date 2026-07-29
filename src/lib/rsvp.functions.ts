@@ -230,3 +230,82 @@ export const checkInGuest = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+export const deleteGuest = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input) => z.object({ guestId: z.string().uuid() }).parse(input))
+  .handler(async ({ data, context }) => {
+    const { error } = await context.supabase.from("guests").delete().eq("id", data.guestId);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const sendRsvpReminders = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input) => z.object({ eventId: z.string().uuid() }).parse(input))
+  .handler(async ({ data, context }) => {
+    const { data: ev, error: evErr } = await context.supabase
+      .from("events")
+      .select("id, title, slug, event_date, location")
+      .eq("id", data.eventId)
+      .maybeSingle();
+    if (evErr) throw new Error(evErr.message);
+    if (!ev) throw new Error("Événement introuvable");
+
+    const { data: rows, error } = await context.supabase
+      .from("guests")
+      .select("id, full_name, email, invite_token")
+      .eq("event_id", data.eventId)
+      .eq("rsvp", "pending");
+    if (error) throw new Error(error.message);
+
+    const targets = (rows ?? []).filter((r) => r.email);
+    const lovableKey = process.env.LOVABLE_API_KEY;
+    const resendKey = process.env.RESEND_API_KEY;
+    if (!lovableKey || !resendKey) {
+      return { sent: 0, skipped: targets.length, reason: "email_not_configured" };
+    }
+    const origin = process.env.PUBLIC_SITE_URL || "https://event-bloom-live.lovable.app";
+    const when = ev.event_date
+      ? new Date(ev.event_date).toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" })
+      : "Date à venir";
+
+    let sent = 0;
+    for (const g of targets) {
+      const link = g.invite_token
+        ? `${origin}/i/${g.invite_token}`
+        : `${origin}/rsvp/${ev.slug}`;
+      const html = `<div style="font-family:Inter,Arial,sans-serif;max-width:560px;margin:0 auto;padding:32px;background:#FFF8F4;color:#1a1a1a">
+        <h1 style="font-family:'Playfair Display',serif;color:#E85D8E;margin:0 0 8px">Un petit rappel, ${g.full_name} 💌</h1>
+        <p style="margin:0 0 12px">Nous serions ravis de recevoir votre réponse pour <strong>${ev.title}</strong>.</p>
+        <div style="background:#fff;border-radius:12px;padding:16px;margin:16px 0">
+          <p style="margin:4px 0"><strong>📅</strong> ${when}</p>
+          ${ev.location ? `<p style="margin:4px 0"><strong>📍</strong> ${ev.location}</p>` : ""}
+        </div>
+        <p style="text-align:center;margin:24px 0">
+          <a href="${link}" style="background:#E85D8E;color:#fff;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:600">Répondre à l'invitation</a>
+        </p>
+        <p style="color:#8a6b52;font-size:13px">Memento Live — Le réseau social privé de vos plus beaux événements.</p>
+      </div>`;
+      try {
+        const res = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${lovableKey}`,
+            "X-Connection-Api-Key": resendKey,
+          },
+          body: JSON.stringify({
+            from: "Memento Live <mariage@bold-lab-agency.com>",
+            to: [g.email],
+            subject: `Rappel : votre réponse pour ${ev.title}`,
+            html,
+          }),
+        });
+        if (res.ok) sent += 1;
+      } catch (e) {
+        console.error("[rsvp reminder]", e);
+      }
+    }
+    return { sent, skipped: targets.length - sent };
+  });
