@@ -93,15 +93,20 @@ function ResetPasswordPage() {
         <Logo />
         <h1 className="mt-4 font-serif text-3xl">Nouveau mot de passe</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {ready ? "Choisissez un nouveau mot de passe pour votre compte." : "Vérification de votre lien…"}
+          {status === "ready"
+            ? "Choisissez un nouveau mot de passe pour votre compte."
+            : status === "checking"
+              ? "Vérification de votre lien…"
+              : "Ce lien est invalide ou expiré."}
         </p>
 
-        {ready ? (
+        {status === "ready" ? (
           <form className="mt-6 space-y-3" onSubmit={handleSubmit}>
             <input
               type="password"
               required
               minLength={6}
+              autoComplete="new-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Nouveau mot de passe"
@@ -111,6 +116,7 @@ function ResetPasswordPage() {
               type="password"
               required
               minLength={6}
+              autoComplete="new-password"
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
               placeholder="Confirmez le mot de passe"
@@ -124,11 +130,26 @@ function ResetPasswordPage() {
               {busy ? "…" : "Mettre à jour"}
             </button>
           </form>
+        ) : status === "checking" ? (
+          <div className="mt-6 space-y-2">
+            <div className="h-12 w-full animate-pulse rounded-2xl bg-primary-light" />
+            <div className="h-12 w-full animate-pulse rounded-2xl bg-primary-light" />
+          </div>
         ) : (
-          <p className="mt-6 text-sm text-muted-foreground">
-            Si rien ne se passe, votre lien est peut-être expiré. <a href="/auth" className="text-primary hover:underline">Redemander un lien</a>.
-          </p>
+          <div className="mt-6 space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Les liens de réinitialisation sont valables 1 heure et à usage unique. Demandez-en un nouveau pour
+              continuer.
+            </p>
+            <a
+              href="/auth"
+              className="inline-flex w-full items-center justify-center rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow"
+            >
+              Redemander un lien
+            </a>
+          </div>
         )}
+
       </div>
     </div>
   );
