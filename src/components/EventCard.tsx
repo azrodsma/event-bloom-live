@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Heart, MapPin, Users, Radio, ArrowUpRight } from "lucide-react";
+import { Heart, MapPin, Users, Radio, ArrowUpRight, Gift } from "lucide-react";
 import { useState } from "react";
 import type { MockEvent } from "@/lib/mock-data";
 import { eventIcon } from "@/lib/event-icons";
@@ -73,7 +73,7 @@ export function EventCard({ event }: { event: MockEvent }) {
         <div className="flex items-center justify-between gap-3 px-5 py-4">
           <div className="min-w-0 flex-1">
             <p className="truncate text-xs font-medium text-muted-foreground">
-              🎁 {event.moneyPot.title}
+              <Gift className="h-3.5 w-3.5 text-gold" /> {event.moneyPot.title}
             </p>
             <div className="mt-2 flex items-center gap-2">
               <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-primary-light">

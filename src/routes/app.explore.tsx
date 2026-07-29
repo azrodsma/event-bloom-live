@@ -50,7 +50,7 @@ function Explore() {
       <div className="scrollbar-hide -mx-4 flex gap-2 overflow-x-auto px-4">
         <button
           onClick={() => setFilter(null)}
-          className={`shrink-0 rounded-full px-4 py-2 text-xs font-medium ${
+          className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-xs font-medium ${
             !filter ? "bg-foreground text-background" : "bg-surface text-muted-foreground"
           }`}
         >
@@ -60,7 +60,7 @@ function Explore() {
           <button
             key={t}
             onClick={() => setFilter(t === filter ? null : t)}
-            className={`shrink-0 rounded-full px-4 py-2 text-xs font-medium ${
+            className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-xs font-medium ${
               t === filter ? "bg-primary text-primary-foreground" : "bg-surface text-muted-foreground"
             }`}
           >
