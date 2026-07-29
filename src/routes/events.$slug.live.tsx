@@ -1,5 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { findEvent, paidInteractions } from "@/lib/mock-data";
+import { findEvent } from "@/lib/mock-data";
+import { listRegistryItems } from "@/lib/registry.functions";
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import { X, Share2, Send, Heart, Gift, Users, ExternalLink, LogIn } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
