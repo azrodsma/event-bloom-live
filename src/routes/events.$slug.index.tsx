@@ -128,8 +128,8 @@ function EventPage() {
           <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
             <div className="container-app">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold">
-                  {eventTypeIcons[event.type as keyof typeof eventTypeIcons]} {event.type}
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold capitalize shadow-sm">
+                  <Sparkles className="h-3 w-3 text-gold" /> {event.type}
                 </span>
                 {event.isLive && (
                   <span className="animate-pulse-live rounded-full bg-live px-3 py-1 text-xs font-bold uppercase text-white">
