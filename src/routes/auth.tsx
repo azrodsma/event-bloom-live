@@ -24,7 +24,9 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [mode, setMode] = useState<"login" | "signup" | "forgot">("login");
+  const [resetSent, setResetSent] = useState(false);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -76,6 +78,23 @@ function AuthPage() {
     }
   }
 
+  async function handleForgotSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (busy) return;
+    const value = email.trim();
+    if (!value) { toast.error("Entrez votre email"); return; }
+    setBusy(true);
+    try {
+      await sendReset({ data: { email: value, redirectTo: `${window.location.origin}/auth/reset-password` } });
+      setResetSent(true);
+    } catch {
+      toast.error("Impossible d'envoyer l'email", { description: "Réessayez dans quelques instants." });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+
 
   return (
     <div className="relative grid min-h-screen overflow-x-hidden bg-gradient-mesh md:grid-cols-2">
@@ -110,47 +129,92 @@ function AuthPage() {
             <Logo />
           </div>
           <h1 className="mt-4 font-serif text-4xl leading-tight">
-            {mode === "login" ? "Ravi de vous revoir" : "Créez votre compte"}
+            {mode === "forgot" ? "Mot de passe oublié" : mode === "login" ? "Ravi de vous revoir" : "Créez votre compte"}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            {mode === "login" ? "Connectez-vous pour rejoindre vos événements." : "Commencez à créer et partager vos moments."}
+            {mode === "forgot"
+              ? "Entrez votre email : nous vous envoyons un lien sécurisé pour créer un nouveau mot de passe."
+              : mode === "login"
+                ? "Connectez-vous pour rejoindre vos événements."
+                : "Commencez à créer et partager vos moments."}
           </p>
 
-          <form className="mt-6 space-y-3" onSubmit={handleEmailSubmit}>
-            {mode === "signup" && (
-              <div className="grid grid-cols-2 gap-3">
-                <input value={firstName} onChange={(e) => setFirstName(e.target.value)} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Prénom" />
-                <input value={lastName} onChange={(e) => setLastName(e.target.value)} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Nom" />
+          {mode === "forgot" ? (
+            resetSent ? (
+              <div className="mt-6 space-y-4">
+                <div className="rounded-2xl bg-primary-light px-4 py-4 text-sm text-foreground">
+                  <p className="font-medium">Email envoyé ✨</p>
+                  <p className="mt-1 text-muted-foreground">
+                    Si un compte existe pour <span className="font-medium text-foreground">{email}</span>, un lien de
+                    réinitialisation vient d'être envoyé. Le lien est valable 1 heure.
+                  </p>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Pensez à vérifier vos spams. Vous pouvez{" "}
+                  <button type="button" className="text-primary hover:underline" onClick={() => setResetSent(false)}>
+                    renvoyer un lien
+                  </button>
+                  .
+                </p>
+                <button
+                  type="button"
+                  onClick={() => { setMode("login"); setResetSent(false); }}
+                  className="inline-flex w-full items-center justify-center rounded-full border border-border px-5 py-3 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+                >
+                  Retour à la connexion
+                </button>
               </div>
-            )}
-            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Email" />
-            <input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Mot de passe (min. 6 caractères)" />
-            <button
-              type="submit"
-              disabled={busy}
-              className="inline-flex w-full items-center justify-center rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60"
-            >
-              {busy ? "…" : mode === "login" ? "Se connecter" : "Créer mon compte"}
-            </button>
-          </form>
+            ) : (
+              <form className="mt-6 space-y-3" onSubmit={handleForgotSubmit}>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface"
+                  placeholder="Votre email"
+                />
+                <button
+                  type="submit"
+                  disabled={busy}
+                  className="inline-flex w-full items-center justify-center rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+                >
+                  {busy ? "…" : "Envoyer le lien"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMode("login")}
+                  className="w-full text-center text-xs text-muted-foreground hover:text-primary hover:underline"
+                >
+                  Retour à la connexion
+                </button>
+              </form>
+            )
+          ) : (
+            <form className="mt-6 space-y-3" onSubmit={handleEmailSubmit}>
+              {mode === "signup" && (
+                <div className="grid grid-cols-2 gap-3">
+                  <input value={firstName} onChange={(e) => setFirstName(e.target.value)} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Prénom" />
+                  <input value={lastName} onChange={(e) => setLastName(e.target.value)} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Nom" />
+                </div>
+              )}
+              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Email" />
+              <input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Mot de passe (min. 6 caractères)" />
+              <button
+                type="submit"
+                disabled={busy}
+                className="inline-flex w-full items-center justify-center rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+              >
+                {busy ? "…" : mode === "login" ? "Se connecter" : "Créer mon compte"}
+              </button>
+            </form>
+          )}
 
           {mode === "login" && (
             <p className="mt-3 text-center text-xs">
               <button
                 type="button"
-                disabled={busy}
-                onClick={async () => {
-                  if (!email) { toast.error("Entrez votre email d'abord"); return; }
-                  setBusy(true);
-                  try {
-                    await sendReset({ data: { email, redirectTo: `${window.location.origin}/auth/reset-password` } });
-                    toast.success("Email envoyé", { description: "Si un compte existe, un lien vient d'être envoyé." });
-                  } catch {
-                    toast.error("Impossible d'envoyer l'email");
-                  } finally {
-                    setBusy(false);
-                  }
-                }}
+                onClick={() => { setResetSent(false); setMode("forgot"); }}
                 className="text-muted-foreground hover:text-primary hover:underline"
               >
                 Mot de passe oublié ?
@@ -158,15 +222,18 @@ function AuthPage() {
             </p>
           )}
 
-          <p className="mt-6 text-center text-sm text-muted-foreground">
-            {mode === "login" ? "Pas encore de compte ?" : "Déjà inscrit ?"}{" "}
-            <button
-              onClick={() => setMode(mode === "login" ? "signup" : "login")}
-              className="font-medium text-primary hover:underline"
-            >
-              {mode === "login" ? "Créer un compte" : "Se connecter"}
-            </button>
-          </p>
+          {mode !== "forgot" && (
+            <p className="mt-6 text-center text-sm text-muted-foreground">
+              {mode === "login" ? "Pas encore de compte ?" : "Déjà inscrit ?"}{" "}
+              <button
+                onClick={() => setMode(mode === "login" ? "signup" : "login")}
+                className="font-medium text-primary hover:underline"
+              >
+                {mode === "login" ? "Créer un compte" : "Se connecter"}
+              </button>
+            </p>
+          )}
+
         </div>
       </div>
     </div>
