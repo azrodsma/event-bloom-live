@@ -36,6 +36,7 @@ import { Route as AppThemeStudioRouteImport } from './routes/app.theme-studio'
 import { Route as AppTemplatesRouteImport } from './routes/app.templates'
 import { Route as AppSupportRouteImport } from './routes/app.support'
 import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
+import { Route as AppStoriesRouteImport } from './routes/app.stories'
 import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSecurityRouteImport } from './routes/app.security'
@@ -76,6 +77,7 @@ import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
 import { Route as AppInboxRouteImport } from './routes/app.inbox'
 import { Route as AppImpactRouteImport } from './routes/app.impact'
 import { Route as AppHelpRouteImport } from './routes/app.help'
+import { Route as AppGuestbookRouteImport } from './routes/app.guestbook'
 import { Route as AppGiftIdeasRouteImport } from './routes/app.gift-ideas'
 import { Route as AppFriendsRouteImport } from './routes/app.friends'
 import { Route as AppFoundationRouteImport } from './routes/app.foundation'
@@ -422,6 +424,11 @@ const AppStoryComposerRoute = AppStoryComposerRouteImport.update({
   path: '/story-composer',
   getParentRoute: () => AppRoute,
 } as any)
+const AppStoriesRoute = AppStoriesRouteImport.update({
+  id: '/stories',
+  path: '/stories',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSoundsRoute = AppSoundsRouteImport.update({
   id: '/sounds',
   path: '/sounds',
@@ -621,6 +628,11 @@ const AppImpactRoute = AppImpactRouteImport.update({
 const AppHelpRoute = AppHelpRouteImport.update({
   id: '/help',
   path: '/help',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGuestbookRoute = AppGuestbookRouteImport.update({
+  id: '/guestbook',
+  path: '/guestbook',
   getParentRoute: () => AppRoute,
 } as any)
 const AppGiftIdeasRoute = AppGiftIdeasRouteImport.update({
@@ -1723,6 +1735,7 @@ export interface FileRoutesByFullPath {
   '/app/foundation': typeof AppFoundationRoute
   '/app/friends': typeof AppFriendsRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
+  '/app/guestbook': typeof AppGuestbookRoute
   '/app/help': typeof AppHelpRoute
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
@@ -1763,6 +1776,7 @@ export interface FileRoutesByFullPath {
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
+  '/app/stories': typeof AppStoriesRoute
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/support': typeof AppSupportRoute
   '/app/templates': typeof AppTemplatesRoute
@@ -2001,6 +2015,7 @@ export interface FileRoutesByTo {
   '/app/foundation': typeof AppFoundationRoute
   '/app/friends': typeof AppFriendsRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
+  '/app/guestbook': typeof AppGuestbookRoute
   '/app/help': typeof AppHelpRoute
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
@@ -2041,6 +2056,7 @@ export interface FileRoutesByTo {
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
+  '/app/stories': typeof AppStoriesRoute
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/support': typeof AppSupportRoute
   '/app/templates': typeof AppTemplatesRoute
@@ -2280,6 +2296,7 @@ export interface FileRoutesById {
   '/app/foundation': typeof AppFoundationRoute
   '/app/friends': typeof AppFriendsRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
+  '/app/guestbook': typeof AppGuestbookRoute
   '/app/help': typeof AppHelpRoute
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
@@ -2320,6 +2337,7 @@ export interface FileRoutesById {
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
+  '/app/stories': typeof AppStoriesRoute
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/support': typeof AppSupportRoute
   '/app/templates': typeof AppTemplatesRoute
@@ -2561,6 +2579,7 @@ export interface FileRouteTypes {
     | '/app/foundation'
     | '/app/friends'
     | '/app/gift-ideas'
+    | '/app/guestbook'
     | '/app/help'
     | '/app/impact'
     | '/app/inbox'
@@ -2601,6 +2620,7 @@ export interface FileRouteTypes {
     | '/app/security'
     | '/app/settings'
     | '/app/sounds'
+    | '/app/stories'
     | '/app/story-composer'
     | '/app/support'
     | '/app/templates'
@@ -2839,6 +2859,7 @@ export interface FileRouteTypes {
     | '/app/foundation'
     | '/app/friends'
     | '/app/gift-ideas'
+    | '/app/guestbook'
     | '/app/help'
     | '/app/impact'
     | '/app/inbox'
@@ -2879,6 +2900,7 @@ export interface FileRouteTypes {
     | '/app/security'
     | '/app/settings'
     | '/app/sounds'
+    | '/app/stories'
     | '/app/story-composer'
     | '/app/support'
     | '/app/templates'
@@ -3117,6 +3139,7 @@ export interface FileRouteTypes {
     | '/app/foundation'
     | '/app/friends'
     | '/app/gift-ideas'
+    | '/app/guestbook'
     | '/app/help'
     | '/app/impact'
     | '/app/inbox'
@@ -3157,6 +3180,7 @@ export interface FileRouteTypes {
     | '/app/security'
     | '/app/settings'
     | '/app/sounds'
+    | '/app/stories'
     | '/app/story-composer'
     | '/app/support'
     | '/app/templates'
@@ -3562,6 +3586,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppStoryComposerRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/stories': {
+      id: '/app/stories'
+      path: '/stories'
+      fullPath: '/app/stories'
+      preLoaderRoute: typeof AppStoriesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/sounds': {
       id: '/app/sounds'
       path: '/sounds'
@@ -3840,6 +3871,13 @@ declare module '@tanstack/react-router' {
       path: '/help'
       fullPath: '/app/help'
       preLoaderRoute: typeof AppHelpRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/guestbook': {
+      id: '/app/guestbook'
+      path: '/guestbook'
+      fullPath: '/app/guestbook'
+      preLoaderRoute: typeof AppGuestbookRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/gift-ideas': {
@@ -5372,6 +5410,7 @@ interface AppRouteChildren {
   AppFoundationRoute: typeof AppFoundationRoute
   AppFriendsRoute: typeof AppFriendsRoute
   AppGiftIdeasRoute: typeof AppGiftIdeasRoute
+  AppGuestbookRoute: typeof AppGuestbookRoute
   AppHelpRoute: typeof AppHelpRoute
   AppImpactRoute: typeof AppImpactRoute
   AppInboxRoute: typeof AppInboxRoute
@@ -5412,6 +5451,7 @@ interface AppRouteChildren {
   AppSecurityRoute: typeof AppSecurityRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppSoundsRoute: typeof AppSoundsRoute
+  AppStoriesRoute: typeof AppStoriesRoute
   AppStoryComposerRoute: typeof AppStoryComposerRoute
   AppSupportRoute: typeof AppSupportRoute
   AppTemplatesRoute: typeof AppTemplatesRoute
@@ -5466,6 +5506,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppFoundationRoute: AppFoundationRoute,
   AppFriendsRoute: AppFriendsRoute,
   AppGiftIdeasRoute: AppGiftIdeasRoute,
+  AppGuestbookRoute: AppGuestbookRoute,
   AppHelpRoute: AppHelpRoute,
   AppImpactRoute: AppImpactRoute,
   AppInboxRoute: AppInboxRoute,
@@ -5506,6 +5547,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppSecurityRoute: AppSecurityRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppSoundsRoute: AppSoundsRoute,
+  AppStoriesRoute: AppStoriesRoute,
   AppStoryComposerRoute: AppStoryComposerRoute,
   AppSupportRoute: AppSupportRoute,
   AppTemplatesRoute: AppTemplatesRoute,
