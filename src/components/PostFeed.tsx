@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Heart, MessageCircle, Send } from "lucide-react";
@@ -20,6 +21,27 @@ export function PostFeed({ eventId }: { eventId: string }) {
     queryKey: ["posts", eventId],
     queryFn: () => fetchPosts({ data: { eventId } }),
   });
+
+  useEffect(() => {
+    if (!eventId) return;
+    const channel = supabase
+      .channel(`posts-${eventId}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "posts", filter: `event_id=eq.${eventId}` },
+        () => qc.invalidateQueries({ queryKey: ["posts", eventId] }),
+      )
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "post_likes" },
+        () => qc.invalidateQueries({ queryKey: ["posts", eventId] }),
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [eventId, qc]);
+
 
   const postMut = useMutation({
     mutationFn: (text: string) => addPost({ data: { eventId, content: text } }),
