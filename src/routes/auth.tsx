@@ -78,7 +78,7 @@ function AuthPage() {
 
 
   return (
-    <div className="relative grid min-h-screen bg-gradient-mesh md:grid-cols-2">
+    <div className="relative grid min-h-screen overflow-x-hidden bg-gradient-mesh md:grid-cols-2">
       <div className="pointer-events-none absolute -left-20 top-20 h-96 w-96 rounded-full bg-primary/20 blur-3xl animate-blob" />
       <div className="pointer-events-none absolute -right-24 bottom-10 h-96 w-96 rounded-full bg-gold/20 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
 
