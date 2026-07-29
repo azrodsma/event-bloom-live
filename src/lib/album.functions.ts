@@ -61,3 +61,30 @@ export const createAlbumMedia = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return row;
   });
+
+export const deleteAlbumMedia = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i) => z.object({ id: z.string().uuid() }).parse(i))
+  .handler(async ({ data, context }) => {
+    const { data: row } = await context.supabase
+      .from("album_media").select("uploader_id").eq("id", data.id).maybeSingle();
+    if (!row) throw new Error("Média introuvable");
+    if (row.uploader_id !== context.userId) throw new Error("Non autorisé");
+    const { error } = await context.supabase.from("album_media").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const updateAlbumCaption = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i) => z.object({ id: z.string().uuid(), caption: z.string().max(500) }).parse(i))
+  .handler(async ({ data, context }) => {
+    const { data: row } = await context.supabase
+      .from("album_media").select("uploader_id").eq("id", data.id).maybeSingle();
+    if (!row) throw new Error("Média introuvable");
+    if (row.uploader_id !== context.userId) throw new Error("Non autorisé");
+    const { error } = await context.supabase
+      .from("album_media").update({ caption: data.caption }).eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });

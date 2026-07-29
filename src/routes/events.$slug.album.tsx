@@ -1,15 +1,16 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ChevronLeft, Camera, Upload, Download, Grid3x3, Play, LogIn } from "lucide-react";
+import { ChevronLeft, Camera, Upload, Download, Grid3x3, Play, LogIn, Trash2, Pencil, Check, X } from "lucide-react";
 import { findEvent } from "@/lib/mock-data";
 import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getEventBySlug } from "@/lib/events.functions";
 import { adaptEvent } from "@/lib/event-adapter";
-import { listAlbumMedia, createAlbumMedia } from "@/lib/album.functions";
+import { listAlbumMedia, createAlbumMedia, deleteAlbumMedia, updateAlbumCaption } from "@/lib/album.functions";
 import { uploadEventMedia } from "@/lib/storage";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/events/$slug/album")({
   head: ({ params }) => ({
@@ -32,6 +33,7 @@ export const Route = createFileRoute("/events/$slug/album")({
 
 type Media = {
   id: string;
+  uploader_id: string | null;
   uploader_name: string | null;
   url: string;
   media_type: string;
@@ -47,10 +49,15 @@ function Album() {
   const [filter, setFilter] = useState<"all" | "image" | "video">("all");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [pendingCaption, setPendingCaption] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
   const list = useServerFn(listAlbumMedia);
   const create = useServerFn(createAlbumMedia);
+  const del = useServerFn(deleteAlbumMedia);
+  const updateCap = useServerFn(updateAlbumCaption);
 
   const key = ["album", dbId] as const;
   const { data: photos = [] } = useQuery({
@@ -89,17 +96,43 @@ function Album() {
     setError(null);
     setUploading(true);
     try {
+      const cap = pendingCaption.trim();
       for (const file of files) {
         const mediaType: "image" | "video" = file.type.startsWith("video") ? "video" : "image";
         const { url } = await uploadEventMedia({ eventId: dbId, file, userId: user.id });
-        await create({ data: { eventId: dbId, url, mediaType } });
+        await create({ data: { eventId: dbId, url, mediaType, caption: cap || undefined } });
       }
+      setPendingCaption("");
+      toast.success(files.length > 1 ? `${files.length} médias ajoutés` : "Média ajouté");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Échec de l'envoi");
     } finally {
       setUploading(false);
     }
   };
+
+  async function onDelete(id: string) {
+    if (!confirm("Supprimer ce média ?")) return;
+    try {
+      await del({ data: { id } });
+      qc.setQueryData<Media[]>(key, (prev = []) => prev.filter((p) => p.id !== id));
+      setSelected(null);
+      toast.success("Média supprimé");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Échec");
+    }
+  }
+
+  async function onSaveCaption(id: string) {
+    try {
+      await updateCap({ data: { id, caption: editValue } });
+      qc.setQueryData<Media[]>(key, (prev = []) => prev.map((p) => (p.id === id ? { ...p, caption: editValue } : p)));
+      setEditingId(null);
+      toast.success("Légende mise à jour");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Échec");
+    }
+  }
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -153,6 +186,18 @@ function Album() {
             </Link>
           )}
         </div>
+
+        {user && (
+          <div className="mb-3">
+            <input
+              value={pendingCaption}
+              onChange={(e) => setPendingCaption(e.target.value)}
+              placeholder="Ajouter une légende à vos prochains envois (optionnel)…"
+              maxLength={500}
+              className="w-full rounded-2xl border border-border/60 bg-card px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+            />
+          </div>
+        )}
 
         <div className="mb-3 flex items-center gap-2 text-xs">
           <button
@@ -214,18 +259,55 @@ function Album() {
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <div className="flex flex-1 items-center justify-center">
+          <div className="flex flex-1 items-center justify-center" onClick={(e) => e.stopPropagation()}>
             {active.media_type === "video" ? (
               <video src={active.url} controls className="max-h-full max-w-full rounded-2xl" />
             ) : (
-              <img src={active.url} alt="" className="max-h-full max-w-full rounded-2xl object-contain" />
+              <img src={active.url} alt={active.caption ?? ""} className="max-h-full max-w-full rounded-2xl object-contain" />
             )}
           </div>
-          <div className="mx-auto flex w-full max-w-md items-center justify-between rounded-2xl bg-white/10 p-3 text-white backdrop-blur">
-            <div>
-              <p className="text-sm font-semibold">Partagé par {active.uploader_name ?? "Invité"}</p>
-              <p className="text-xs text-white/70">{new Date(active.created_at).toLocaleString("fr-FR")}</p>
+          <div className="mx-auto w-full max-w-md space-y-2 rounded-2xl bg-white/10 p-3 text-white backdrop-blur" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold">Partagé par {active.uploader_name ?? "Invité"}</p>
+                <p className="text-xs text-white/70">{new Date(active.created_at).toLocaleString("fr-FR")}</p>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <a href={active.url} target="_blank" rel="noopener noreferrer" className="grid h-9 w-9 place-items-center rounded-full bg-white/10" aria-label="Télécharger">
+                  <Download className="h-4 w-4" />
+                </a>
+                {user?.id && active.uploader_id === user.id && editingId !== active.id && (
+                  <>
+                    <button onClick={() => { setEditingId(active.id); setEditValue(active.caption ?? ""); }} className="grid h-9 w-9 place-items-center rounded-full bg-white/10" aria-label="Éditer">
+                      <Pencil className="h-4 w-4" />
+                    </button>
+                    <button onClick={() => onDelete(active.id)} className="grid h-9 w-9 place-items-center rounded-full bg-red-500/70" aria-label="Supprimer">
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
+            {editingId === active.id ? (
+              <div className="flex items-center gap-2">
+                <input
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  maxLength={500}
+                  autoFocus
+                  className="flex-1 rounded-full bg-white/10 px-3 py-1.5 text-xs text-white placeholder:text-white/50 focus:outline-none"
+                  placeholder="Légende…"
+                />
+                <button onClick={() => onSaveCaption(active.id)} className="grid h-8 w-8 place-items-center rounded-full bg-primary" aria-label="Enregistrer">
+                  <Check className="h-4 w-4" />
+                </button>
+                <button onClick={() => setEditingId(null)} className="grid h-8 w-8 place-items-center rounded-full bg-white/10" aria-label="Annuler">
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            ) : active.caption ? (
+              <p className="text-xs text-white/90">{active.caption}</p>
+            ) : null}
           </div>
         </div>
       )}
