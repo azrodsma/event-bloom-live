@@ -66,7 +66,7 @@ export const getUserProfile = createServerFn({ method: "GET" })
   .inputValidator((i) => z.object({ userId: z.string().uuid() }).parse(i))
   .handler(async ({ data }) => {
     const sb = serverPublic();
-    const [{ data: profile }, { data: posts }, { data: events }, { data: postCount }] = await Promise.all([
+    const [profileRes, postsRes, eventsRes, countRes] = await Promise.all([
       sb.from("profiles").select("id, display_name, avatar_url, bio, created_at").eq("id", data.userId).maybeSingle(),
       sb.from("posts")
         .select("id, content, media_urls, media_type, created_at, event_id, events!inner(slug, cover_url, visibility)")
@@ -83,10 +83,10 @@ export const getUserProfile = createServerFn({ method: "GET" })
       sb.from("posts").select("id", { count: "exact", head: true }).eq("author_id", data.userId),
     ]);
     return {
-      profile,
-      posts: posts ?? [],
-      events: events ?? [],
-      postCount: (postCount as unknown as { count?: number })?.count ?? (posts?.length ?? 0),
+      profile: profileRes.data,
+      posts: postsRes.data ?? [],
+      events: eventsRes.data ?? [],
+      postCount: countRes.count ?? (postsRes.data?.length ?? 0),
     };
   });
 
