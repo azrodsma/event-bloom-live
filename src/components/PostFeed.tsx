@@ -15,6 +15,8 @@ export function PostFeed({ eventId }: { eventId: string }) {
   const fetchPosts = useServerFn(listEventPosts);
   const addPost = useServerFn(createPost);
   const toggleLike = useServerFn(togglePostLike);
+  const toggleBm = useServerFn(toggleBookmark);
+  const fetchBmIds = useServerFn(listMyBookmarkIds);
   const [content, setContent] = useState("");
   const [openComments, setOpenComments] = useState<Record<string, boolean>>({});
 
