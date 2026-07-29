@@ -87,13 +87,14 @@ function Landing() {
 
         <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/70 px-3 py-1 text-xs font-semibold text-primary backdrop-blur">
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/70 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground backdrop-blur">
               <Sparkles className="h-3.5 w-3.5" /> Nouveau · Bêta privée
             </span>
-            <h1 className="mt-5 text-balance font-serif text-5xl leading-[1.05] text-foreground sm:text-6xl md:text-7xl">
-              Le réseau social privé de vos plus beaux <span className="italic text-primary">événements</span>.
+            <h1 className="mt-6 text-balance font-serif text-[2.75rem] leading-[1.03] text-foreground sm:text-6xl md:text-7xl">
+              Le réseau social privé de vos plus beaux <span className="italic text-gradient-primary">événements</span>.
             </h1>
-            <p className="mt-5 max-w-lg text-base text-muted-foreground sm:text-lg">
+            <span className="rule-gold mt-6 block max-w-[10rem]" />
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
               Créez votre événement, partagez votre live, recevez des messages, centralisez vos souvenirs et laissez vos proches participer, même à distance.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
