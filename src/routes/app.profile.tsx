@@ -109,17 +109,60 @@ function Profile() {
     <div className="space-y-6 px-4 py-4">
       <div className="rounded-3xl bg-gradient-primary p-6 text-white shadow-glow">
         <div className="flex items-center gap-4">
-          <img src={avatarUrl} className="h-16 w-16 rounded-full border-2 border-white" alt="" />
+          <img src={avatarUrl} className="h-16 w-16 rounded-full border-2 border-white object-cover" alt="" />
           <div className="min-w-0 flex-1">
-            <h1 className="font-serif text-2xl">{displayName}</h1>
-            <p className="text-sm text-white/80">{user?.email ?? "Non connecté"}</p>
+            <h1 className="font-serif text-2xl truncate">{displayName}</h1>
+            <p className="truncate text-sm text-white/80">{user?.email ?? "Non connecté"}</p>
+            {profile?.bio && !editing && (
+              <p className="mt-1 line-clamp-2 text-xs text-white/85">{profile.bio}</p>
+            )}
           </div>
-
+          {user && (
+            <button
+              onClick={() => setEditing((v) => !v)}
+              className="grid h-10 w-10 place-items-center rounded-full bg-white/20 backdrop-blur"
+              aria-label={editing ? "Annuler" : "Modifier le profil"}
+            >
+              {editing ? <X className="h-5 w-5" /> : <Pencil className="h-4 w-4" />}
+            </button>
+          )}
           <Link to="/app/settings" className="grid h-10 w-10 place-items-center rounded-full bg-white/20 backdrop-blur" aria-label="Paramètres">
             <Settings className="h-5 w-5" />
           </Link>
         </div>
+
+        {editing && user && (
+          <div className="mt-4 space-y-2">
+            <input
+              value={form.displayName}
+              onChange={(e) => setForm({ ...form, displayName: e.target.value })}
+              placeholder="Nom affiché"
+              className="w-full rounded-xl bg-white/15 px-3 py-2 text-sm text-white placeholder:text-white/60 outline-none focus:bg-white/25"
+            />
+            <input
+              value={form.avatarUrl}
+              onChange={(e) => setForm({ ...form, avatarUrl: e.target.value })}
+              placeholder="URL de l'avatar (https://…)"
+              className="w-full rounded-xl bg-white/15 px-3 py-2 text-sm text-white placeholder:text-white/60 outline-none focus:bg-white/25"
+            />
+            <textarea
+              value={form.bio}
+              onChange={(e) => setForm({ ...form, bio: e.target.value })}
+              placeholder="Une bio courte…"
+              rows={2}
+              className="w-full resize-none rounded-xl bg-white/15 px-3 py-2 text-sm text-white placeholder:text-white/60 outline-none focus:bg-white/25"
+            />
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-primary disabled:opacity-60"
+            >
+              <Check className="h-3.5 w-3.5" /> {saving ? "Enregistrement…" : "Enregistrer"}
+            </button>
+          </div>
+        )}
       </div>
+
 
       <div className="grid grid-cols-4 gap-2">
         {stats.map((s) => (
