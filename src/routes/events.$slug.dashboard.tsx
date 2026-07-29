@@ -79,7 +79,8 @@ function Dashboard() {
         <section className="grid grid-cols-2 gap-3">
           {[
             { icon: Users, label: "Invités confirmés", value: String(stats?.guestsConfirmed ?? 0), trend: `${stats?.guestsTotal ?? 0} total`, tone: "primary" as const },
-            { icon: Heart, label: "Réactions live", value: "—", trend: "24h", tone: "live" as const },
+            { icon: Heart, label: "Réactions live", value: String(stats?.reactions24h ?? 0), trend: "24h", tone: "live" as const },
+
             { icon: Camera, label: "Photos album", value: String(stats?.photos ?? 0), trend: "en direct", tone: "gold" as const },
             { icon: MessageCircle, label: "Mots du livre d'or", value: String(stats?.guestbook ?? 0), trend: "en direct", tone: "primary" as const },
           ].map((k) => (
