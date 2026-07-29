@@ -120,6 +120,20 @@ function GuestsPage() {
           </Link>
         </div>
 
+        <button
+          onClick={() => remind.mutate()}
+          disabled={remind.isPending || !(stats.data?.pending ?? 0)}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-border/60 bg-surface p-3 text-sm font-semibold disabled:opacity-50"
+        >
+          <MailPlus className="h-4 w-4 text-primary" />
+          {remind.isPending
+            ? "Envoi des rappels…"
+            : `Envoyer un rappel aux ${stats.data?.pending ?? 0} en attente`}
+        </button>
+        {toast && (
+          <p className="rounded-xl bg-primary/10 px-3 py-2 text-center text-xs text-primary">{toast}</p>
+        )}
+
         <section className="space-y-2">
           {guests.isLoading && <p className="text-center text-sm text-muted-foreground">Chargement…</p>}
           {!guests.isLoading && !guests.data?.length && (
@@ -142,6 +156,16 @@ function GuestsPage() {
                   <p className="truncate text-xs text-muted-foreground">{g.email}{g.dietary ? ` · ${g.dietary}` : ""}</p>
                 </div>
                 <span className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold ${lbl.cls}`}>{lbl.label}</span>
+                <button
+                  onClick={() => {
+                    if (confirm(`Retirer ${g.full_name} de la liste ?`)) del.mutate(g.id);
+                  }}
+                  disabled={del.isPending}
+                  aria-label="Supprimer l'invité"
+                  className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-muted-foreground hover:bg-destructive/10 hover:text-destructive disabled:opacity-40"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </button>
               </div>
             );
           })}
