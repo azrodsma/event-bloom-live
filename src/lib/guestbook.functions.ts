@@ -61,3 +61,15 @@ export const createGuestbookEntry = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return row;
   });
+
+export const listRecentGuestbookEntries = createServerFn({ method: "GET" }).handler(async () => {
+  const sb = serverPublic();
+  const { data, error } = await sb
+    .from("guestbook_entries")
+    .select("id, event_id, author_name, kind, content, media_url, created_at, events!inner(slug, title, visibility)")
+    .eq("events.visibility", "public")
+    .order("created_at", { ascending: false })
+    .limit(60);
+  if (error) throw new Error(error.message);
+  return data ?? [];
+});
