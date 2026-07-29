@@ -87,7 +87,7 @@ function Landing() {
 
         <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/70 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-gold backdrop-blur">
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/70 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground backdrop-blur">
               <Sparkles className="h-3.5 w-3.5" /> Nouveau · Bêta privée
             </span>
             <h1 className="mt-6 text-balance font-serif text-[2.75rem] leading-[1.03] text-foreground sm:text-6xl md:text-7xl">
