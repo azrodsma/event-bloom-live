@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { findEvent, eventTypeIcons } from "@/lib/mock-data";
+import { findEvent } from "@/lib/mock-data";
 import {
   MapPin,
   Calendar,
@@ -128,8 +128,8 @@ function EventPage() {
           <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
             <div className="container-app">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold">
-                  {eventTypeIcons[event.type as keyof typeof eventTypeIcons]} {event.type}
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold capitalize shadow-sm">
+                  <Sparkles className="h-3 w-3 text-gold" /> {event.type}
                 </span>
                 {event.isLive && (
                   <span className="animate-pulse-live rounded-full bg-live px-3 py-1 text-xs font-bold uppercase text-white">
@@ -160,11 +160,13 @@ function EventPage() {
 
 
         {event.moneyPot && (
-          <CagnotteCard
-            url={event.moneyPot.url}
-            goal={event.moneyPot.target}
-            current={event.moneyPot.current}
-          />
+          <div className="lg:hidden">
+            <CagnotteCard
+              url={event.moneyPot.url}
+              goal={event.moneyPot.target}
+              current={event.moneyPot.current}
+            />
+          </div>
         )}
 
 
@@ -175,7 +177,7 @@ function EventPage() {
           <Link
             to="/events/$slug/live"
             params={{ slug: event.slug }}
-            className="block overflow-hidden rounded-3xl bg-gradient-live p-5 text-white shadow-glow"
+            className="block overflow-hidden rounded-3xl bg-gradient-live p-5 text-white shadow-glow lg:hidden"
           >
             <div className="flex items-center gap-4">
               <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/20 backdrop-blur">
@@ -221,7 +223,8 @@ function EventPage() {
 
         {/* Money pot */}
         {event.moneyPot && (
-          <section className="rounded-3xl bg-surface p-5 shadow-card">
+          <section className="rounded-3xl bg-surface p-5 shadow-card lg:hidden">
+
             <div className="flex items-center gap-3">
               <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-light text-gold">
                 <Gift className="h-5 w-5" />
@@ -435,7 +438,7 @@ function EventPage() {
 
 
         {/* Venue */}
-        <section className="rounded-3xl bg-surface p-5 shadow-card">
+        <section className="rounded-3xl bg-surface p-5 shadow-card lg:hidden">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Lieu</p>
           <p className="mt-1 font-serif text-lg">{event.venue}</p>
           <p className="text-sm text-muted-foreground">{event.city}, {event.country}</p>
@@ -453,16 +456,16 @@ function EventPage() {
         <Link
           to="/events/$slug/souvenir"
           params={{ slug: event.slug }}
-          className="relative flex items-center gap-4 overflow-hidden rounded-3xl bg-gradient-primary p-5 text-white shadow-glow"
+          className="tap relative flex items-center gap-4 overflow-hidden rounded-3xl bg-gradient-primary p-5 text-white shadow-glow transition hover:-translate-y-0.5"
         >
           <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/20 backdrop-blur">
-            ✨
+            <Sparkles className="h-5 w-5" />
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-xs font-bold uppercase tracking-widest opacity-90">Le souvenir</p>
             <p className="font-serif text-xl">Revivez la journée en un clin d'œil</p>
           </div>
-          <span className="text-xl">→</span>
+          <ExternalLink className="h-4 w-4 shrink-0 opacity-90" />
         </Link>
 
         {/* Organizer actions */}
@@ -531,6 +534,14 @@ function EventPage() {
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Lieu</p>
               <p className="mt-1 font-serif text-lg">{event.venue}</p>
               <p className="text-sm text-muted-foreground">{event.city}, {event.country}</p>
+              <a
+                href={`https://maps.google.com/?q=${encodeURIComponent(event.venue + " " + event.city)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold transition hover:bg-cream"
+              >
+                <MapPin className="h-3.5 w-3.5" /> Voir sur la carte
+              </a>
             </section>
           </div>
         </aside>
