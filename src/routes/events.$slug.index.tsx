@@ -223,7 +223,8 @@ function EventPage() {
 
         {/* Money pot */}
         {event.moneyPot && (
-          <section className="rounded-3xl bg-surface p-5 shadow-card">
+          <section className="rounded-3xl bg-surface p-5 shadow-card lg:hidden">
+
             <div className="flex items-center gap-3">
               <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-light text-gold">
                 <Gift className="h-5 w-5" />
