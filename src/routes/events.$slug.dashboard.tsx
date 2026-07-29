@@ -30,7 +30,7 @@ function Dashboard() {
   const chartData: { label: string; value: number }[] = stats?.activity ?? Array.from({ length: 12 }, (_, i) => ({ label: `J-${11 - i}`, value: 0 }));
   const max = Math.max(1, ...chartData.map((d) => d.value));
 
-  const topContributors = stats?.topContributors ?? [];
+  const topContributors: { name: string; avatar: string | null; count: number }[] = stats?.topContributors ?? [];
   const potPercent = event.moneyPot
     ? Math.min(100, (event.moneyPot.current / event.moneyPot.target) * 100)
     : 0;
