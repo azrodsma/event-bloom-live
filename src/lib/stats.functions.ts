@@ -19,7 +19,7 @@ export const getEventStats = createServerFn({ method: "GET" })
       .eq("event_id", eid)
       .gte("created_at", since24h);
 
-    const [gb, al, pl, seat, bud, ck, gv, gs, gc, rx, postsList, mediaList, gbList] = await Promise.all([
+    const [gb, al, pl, seat, bud, ck, gv, gs, gc, rx, postsList, mediaList, gbList, budgetRows, giftsCount] = await Promise.all([
       q("guestbook_entries"),
       q("album_media"),
       q("playlist_songs"),
@@ -46,7 +46,17 @@ export const getEventStats = createServerFn({ method: "GET" })
         .select("author_id, author_name, created_at")
         .eq("event_id", eid)
         .limit(500),
+      (supabaseAdmin as any)
+        .from("budget_items")
+        .select("estimated, actual")
+        .eq("event_id", eid),
+      q("gift_registry_items"),
     ]);
+
+    const budgetTotal = ((budgetRows.data ?? []) as any[]).reduce(
+      (sum: number, row: any) => sum + Number(row.actual ?? row.estimated ?? 0),
+      0,
+    );
 
     // Top contributors — aggregate posts + album uploads + guestbook entries
     const bucket = new Map<string, { name: string; avatar: string | null; count: number }>();
