@@ -1,9 +1,10 @@
 import { createFileRoute, Link, notFound, useParams } from "@tanstack/react-router";
-import { ChevronLeft, Users, UserCheck, UserX, HelpCircle, Download, ScanLine } from "lucide-react";
+import { ChevronLeft, Users, UserCheck, UserX, HelpCircle, Download, ScanLine, MailPlus, Trash2 } from "lucide-react";
 import { getEventBySlug } from "@/lib/events.functions";
-import { listGuests, getRsvpStats } from "@/lib/rsvp.functions";
+import { listGuests, getRsvpStats, sendRsvpReminders, deleteGuest } from "@/lib/rsvp.functions";
 import { useServerFn } from "@tanstack/react-start";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 export const Route = createFileRoute("/events/$slug/guests")({
   head: () => ({ meta: [{ title: "Invités — Memento Live" }, { name: "description", content: "Suivez les RSVP en temps réel." }] }),
