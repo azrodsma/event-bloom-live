@@ -36,6 +36,7 @@ import { Route as AppThemeStudioRouteImport } from './routes/app.theme-studio'
 import { Route as AppTemplatesRouteImport } from './routes/app.templates'
 import { Route as AppSupportRouteImport } from './routes/app.support'
 import { Route as AppStoryComposerRouteImport } from './routes/app.story-composer'
+import { Route as AppStoriesRouteImport } from './routes/app.stories'
 import { Route as AppSoundsRouteImport } from './routes/app.sounds'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AppSecurityRouteImport } from './routes/app.security'
@@ -420,6 +421,11 @@ const AppSupportRoute = AppSupportRouteImport.update({
 const AppStoryComposerRoute = AppStoryComposerRouteImport.update({
   id: '/story-composer',
   path: '/story-composer',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppStoriesRoute = AppStoriesRouteImport.update({
+  id: '/stories',
+  path: '/stories',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSoundsRoute = AppSoundsRouteImport.update({
@@ -1763,6 +1769,7 @@ export interface FileRoutesByFullPath {
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
+  '/app/stories': typeof AppStoriesRoute
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/support': typeof AppSupportRoute
   '/app/templates': typeof AppTemplatesRoute
@@ -2041,6 +2048,7 @@ export interface FileRoutesByTo {
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
+  '/app/stories': typeof AppStoriesRoute
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/support': typeof AppSupportRoute
   '/app/templates': typeof AppTemplatesRoute
@@ -2320,6 +2328,7 @@ export interface FileRoutesById {
   '/app/security': typeof AppSecurityRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/sounds': typeof AppSoundsRoute
+  '/app/stories': typeof AppStoriesRoute
   '/app/story-composer': typeof AppStoryComposerRoute
   '/app/support': typeof AppSupportRoute
   '/app/templates': typeof AppTemplatesRoute
@@ -2601,6 +2610,7 @@ export interface FileRouteTypes {
     | '/app/security'
     | '/app/settings'
     | '/app/sounds'
+    | '/app/stories'
     | '/app/story-composer'
     | '/app/support'
     | '/app/templates'
@@ -2879,6 +2889,7 @@ export interface FileRouteTypes {
     | '/app/security'
     | '/app/settings'
     | '/app/sounds'
+    | '/app/stories'
     | '/app/story-composer'
     | '/app/support'
     | '/app/templates'
@@ -3157,6 +3168,7 @@ export interface FileRouteTypes {
     | '/app/security'
     | '/app/settings'
     | '/app/sounds'
+    | '/app/stories'
     | '/app/story-composer'
     | '/app/support'
     | '/app/templates'
@@ -3560,6 +3572,13 @@ declare module '@tanstack/react-router' {
       path: '/story-composer'
       fullPath: '/app/story-composer'
       preLoaderRoute: typeof AppStoryComposerRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/stories': {
+      id: '/app/stories'
+      path: '/stories'
+      fullPath: '/app/stories'
+      preLoaderRoute: typeof AppStoriesRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/sounds': {
@@ -5412,6 +5431,7 @@ interface AppRouteChildren {
   AppSecurityRoute: typeof AppSecurityRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppSoundsRoute: typeof AppSoundsRoute
+  AppStoriesRoute: typeof AppStoriesRoute
   AppStoryComposerRoute: typeof AppStoryComposerRoute
   AppSupportRoute: typeof AppSupportRoute
   AppTemplatesRoute: typeof AppTemplatesRoute
@@ -5506,6 +5526,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppSecurityRoute: AppSecurityRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppSoundsRoute: AppSoundsRoute,
+  AppStoriesRoute: AppStoriesRoute,
   AppStoryComposerRoute: AppStoryComposerRoute,
   AppSupportRoute: AppSupportRoute,
   AppTemplatesRoute: AppTemplatesRoute,
