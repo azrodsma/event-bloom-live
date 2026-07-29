@@ -108,6 +108,8 @@ export const getEventStats = createServerFn({ method: "GET" })
       songs: pl.count ?? 0,
       tables: seat.count ?? 0,
       budgetItems: bud.count ?? 0,
+      budgetTotal,
+      gifts: giftsCount.count ?? 0,
       checklistTotal: ck.count ?? 0,
       checklistDone: gv.count ?? 0,
       guestsTotal: gs.count ?? 0,
