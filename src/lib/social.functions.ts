@@ -62,6 +62,34 @@ export const getPost = createServerFn({ method: "GET" })
     return { post, likeCount: likes?.length ?? 0, event };
   });
 
+export const getUserProfile = createServerFn({ method: "GET" })
+  .inputValidator((i) => z.object({ userId: z.string().uuid() }).parse(i))
+  .handler(async ({ data }) => {
+    const sb = serverPublic();
+    const [profileRes, postsRes, eventsRes, countRes] = await Promise.all([
+      sb.from("profiles").select("id, display_name, avatar_url, bio, created_at").eq("id", data.userId).maybeSingle(),
+      sb.from("posts")
+        .select("id, content, media_urls, media_type, created_at, event_id, events!inner(slug, cover_url, visibility)")
+        .eq("author_id", data.userId)
+        .in("events.visibility", ["public", "unlisted"])
+        .order("created_at", { ascending: false })
+        .limit(24),
+      sb.from("events")
+        .select("id, slug, title, type, cover_url, event_date, status, visibility")
+        .eq("owner_id", data.userId)
+        .in("visibility", ["public", "unlisted"])
+        .order("event_date", { ascending: false, nullsFirst: false })
+        .limit(12),
+      sb.from("posts").select("id", { count: "exact", head: true }).eq("author_id", data.userId),
+    ]);
+    return {
+      profile: profileRes.data,
+      posts: postsRes.data ?? [],
+      events: eventsRes.data ?? [],
+      postCount: countRes.count ?? (postsRes.data?.length ?? 0),
+    };
+  });
+
 export const createPost = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i) =>
