@@ -94,26 +94,38 @@ function AuthPage() {
   }
 
   return (
-    <div className="grid min-h-screen bg-gradient-warm md:grid-cols-2">
-      <div className="hidden flex-col justify-between p-10 md:flex">
+    <div className="relative grid min-h-screen bg-gradient-mesh md:grid-cols-2">
+      <div className="pointer-events-none absolute -left-20 top-20 h-96 w-96 rounded-full bg-primary/20 blur-3xl animate-blob" />
+      <div className="pointer-events-none absolute -right-24 bottom-10 h-96 w-96 rounded-full bg-gold/20 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
+
+      <div className="relative hidden flex-col justify-between p-10 md:flex">
         <Logo />
         <div>
-          <h2 className="font-serif text-5xl leading-tight text-foreground">
-            Retrouvez vos <span className="italic text-primary">plus beaux moments</span>.
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-light px-3 py-1 text-[11px] font-medium uppercase tracking-widest text-primary">
+            ✦ Depuis 2026
+          </span>
+          <h2 className="mt-5 font-serif text-6xl leading-[0.95] text-foreground">
+            Retrouvez vos<br /><span className="italic text-gradient-primary">plus beaux</span><br />moments.
           </h2>
-          <p className="mt-4 max-w-md text-muted-foreground">
-            Vos événements, vos proches, vos souvenirs. Le tout, dans un espace privé et sécurisé.
+          <p className="mt-5 max-w-md text-muted-foreground">
+            Vos événements, vos proches, vos souvenirs. Dans un espace privé, doux, sans compromis.
           </p>
+          <div className="mt-8 flex items-center gap-4 text-xs text-muted-foreground">
+            <div className="flex -space-x-2">
+              {[1,2,3,4].map(i => <span key={i} className="h-8 w-8 rounded-full border-2 border-background bg-gradient-primary" style={{ opacity: 0.4 + i * 0.15 }} />)}
+            </div>
+            <span>Rejoint par 12 400+ hôtes</span>
+          </div>
         </div>
         <p className="text-xs text-muted-foreground">© Memento Live</p>
       </div>
 
-      <div className="flex items-center justify-center p-6 sm:p-10">
-        <div className="w-full max-w-md rounded-3xl bg-surface p-8 shadow-modal">
+      <div className="relative flex items-center justify-center p-6 sm:p-10">
+        <div className="w-full max-w-md rounded-[36px] bg-surface/80 p-8 shadow-modal ring-1 ring-border backdrop-blur-xl">
           <div className="md:hidden">
             <Logo />
           </div>
-          <h1 className="mt-4 font-serif text-3xl">
+          <h1 className="mt-4 font-serif text-4xl leading-tight">
             {mode === "login" ? "Ravi de vous revoir" : "Créez votre compte"}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -124,30 +136,30 @@ function AuthPage() {
             <button
               onClick={handleGoogle}
               disabled={busy}
-              className="flex items-center justify-center gap-3 rounded-full border border-border bg-surface px-4 py-3 text-sm font-medium hover:bg-muted disabled:opacity-60"
+              className="group flex items-center justify-center gap-3 rounded-full border border-border bg-surface px-4 py-3 text-sm font-medium transition-all hover:border-primary/40 hover:bg-primary-light disabled:opacity-60"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.4-1.7 4.1-5.5 4.1-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.7 3.5 14.6 2.5 12 2.5 6.8 2.5 2.5 6.8 2.5 12s4.3 9.5 9.5 9.5c5.5 0 9.1-3.9 9.1-9.3 0-.6-.1-1.1-.2-1.5H12z" /></svg>
               Continuer avec Google
             </button>
           </div>
 
-          <div className="my-6 flex items-center gap-3 text-xs text-muted-foreground">
+          <div className="my-6 flex items-center gap-3 text-xs uppercase tracking-widest text-muted-foreground">
             <div className="h-px flex-1 bg-border" />ou<div className="h-px flex-1 bg-border" />
           </div>
 
           <form className="space-y-3" onSubmit={handleEmailSubmit}>
             {mode === "signup" && (
               <div className="grid grid-cols-2 gap-3">
-                <input value={firstName} onChange={(e) => setFirstName(e.target.value)} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary" placeholder="Prénom" />
-                <input value={lastName} onChange={(e) => setLastName(e.target.value)} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary" placeholder="Nom" />
+                <input value={firstName} onChange={(e) => setFirstName(e.target.value)} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Prénom" />
+                <input value={lastName} onChange={(e) => setLastName(e.target.value)} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Nom" />
               </div>
             )}
-            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary" placeholder="Email" />
-            <input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary" placeholder="Mot de passe (min. 6 caractères)" />
+            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Email" />
+            <input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Mot de passe (min. 6 caractères)" />
             <button
               type="submit"
               disabled={busy}
-              className="inline-flex w-full items-center justify-center rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60"
             >
               {busy ? "…" : mode === "login" ? "Se connecter" : "Créer mon compte"}
             </button>

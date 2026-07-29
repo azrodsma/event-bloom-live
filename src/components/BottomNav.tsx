@@ -51,8 +51,9 @@ export function BottomNav() {
   }, [user, qc]);
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-surface/95 backdrop-blur-xl pb-[env(safe-area-inset-bottom)]">
-      <div className="mx-auto flex max-w-2xl items-center justify-around px-2 py-2">
+    <nav className="fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)]">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background via-background/80 to-transparent" />
+      <div className="relative mx-auto mb-3 flex max-w-md items-center justify-around gap-1 rounded-full border border-border/60 bg-surface/90 px-3 py-2 shadow-modal backdrop-blur-2xl">
         {items.map((item) => {
           const active = item.exact
             ? pathname === item.to
@@ -63,7 +64,7 @@ export function BottomNav() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="-mt-8 grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-primary text-white shadow-glow transition-transform active:scale-95"
+                className="-mt-8 grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-primary text-white shadow-glow ring-4 ring-background transition-transform active:scale-95 hover:rotate-90 duration-300"
                 aria-label={item.label}
               >
                 <Icon className="h-6 w-6" strokeWidth={2.5} />
@@ -75,19 +76,20 @@ export function BottomNav() {
             <Link
               key={item.to}
               to={item.to}
-              className={`flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl px-2 py-1.5 text-[10px] font-medium transition-colors ${
-                active ? "text-primary" : "text-muted-foreground"
+              className={`group relative flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-full px-2 py-1.5 text-[10px] font-medium transition-all ${
+                active ? "text-primary" : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <span className="relative">
-                <Icon className="h-5 w-5" strokeWidth={active ? 2.5 : 2} />
+                <Icon className={`h-5 w-5 transition-transform ${active ? "scale-110" : "group-hover:scale-105"}`} strokeWidth={active ? 2.5 : 2} />
                 {showBadge && (
-                  <span className="absolute -right-1.5 -top-1 grid min-w-[16px] place-items-center rounded-full bg-primary px-1 text-[9px] font-bold leading-none text-primary-foreground shadow-sm">
+                  <span className="absolute -right-1.5 -top-1 grid min-w-[16px] place-items-center rounded-full bg-primary px-1 text-[9px] font-bold leading-none text-primary-foreground shadow-sm ring-2 ring-surface">
                     {unread > 9 ? "9+" : unread}
                   </span>
                 )}
               </span>
-              <span>{item.label}</span>
+              <span className="tracking-wide">{item.label}</span>
+              {active && <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-primary" />}
             </Link>
           );
         })}
