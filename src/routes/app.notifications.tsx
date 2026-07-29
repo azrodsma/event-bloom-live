@@ -2,7 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, MessageCircle, Users, Gift, Video, Camera, Bell, LogIn, Check } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 import { listMyNotifications, markNotificationRead, markAllNotificationsRead } from "@/lib/notifications.functions";
 
 export const Route = createFileRoute("/app/notifications")({
@@ -48,6 +50,22 @@ function Notifications() {
     queryFn: () => list(),
     enabled: !!user,
   });
+
+  useEffect(() => {
+    if (!user) return;
+    const ch = supabase
+      .channel(`notifs-${user.id}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "notifications", filter: `user_id=eq.${user.id}` },
+        () => {
+          qc.invalidateQueries({ queryKey: ["notifications"] });
+          qc.invalidateQueries({ queryKey: ["notifications-unread"] });
+        },
+      )
+      .subscribe();
+    return () => { supabase.removeChannel(ch); };
+  }, [user, qc]);
 
   if (loading) return null;
 
