@@ -16,6 +16,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { StatusPage, statusActionClasses } from "@/components/StatusPage";
 
 
 function NotFoundComponent() {
