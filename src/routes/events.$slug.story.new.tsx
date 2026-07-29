@@ -55,7 +55,7 @@ function NewStory() {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="module-page">
       <header className="sticky top-0 z-30 border-b border-border/60 bg-background/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-2xl items-center gap-3 px-4 py-3">
           <Link
