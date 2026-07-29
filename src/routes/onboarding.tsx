@@ -13,7 +13,9 @@ export const Route = createFileRoute("/onboarding")({
       { property: "og:description", content: "Créez votre premier événement inoubliable." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-    ],
+          { property: "og:url", content: "https://event.bold-lab-agency.com/onboarding" },
+],
+    links: [{ rel: "canonical", href: "https://event.bold-lab-agency.com/onboarding" }],
   }),
 });
 

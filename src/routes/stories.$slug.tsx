@@ -9,7 +9,8 @@ export const Route = createFileRoute("/stories/$slug")({
     meta: [
       { title: `Story — ${params.slug} — Memento Live` },
       { name: "description", content: "Story de l'événement." },
-    ],
+          { name: "robots", content: "noindex" },
+],
   }),
   component: Story,
 });

@@ -32,7 +32,10 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Vos événements, en direct, en souvenirs.",
       },
-    ],
+          { property: "og:url", content: "https://event.bold-lab-agency.com/" },
+      { property: "og:type", content: "website" },
+],
+    links: [{ rel: "canonical", href: "https://event.bold-lab-agency.com/" }],
   }),
   component: Landing,
 });
