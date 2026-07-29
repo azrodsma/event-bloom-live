@@ -150,15 +150,17 @@ function Dashboard() {
             </div>
             <div className="mt-3 grid grid-cols-3 gap-3 text-center">
               <div>
-                <p className="font-serif text-lg">32</p>
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Contributeurs</p>
+                <p className="font-serif text-lg">{event.moneyPot.currency}</p>
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Devise</p>
               </div>
               <div>
-                <p className="font-serif text-lg">85 €</p>
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Don moyen</p>
+                <p className="font-serif text-lg">
+                  {Math.max(0, event.moneyPot.target - event.moneyPot.current).toLocaleString("fr-FR")} {event.moneyPot.currency}
+                </p>
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Reste à collecter</p>
               </div>
               <div>
-                <p className="font-serif text-lg">3</p>
+                <p className="font-serif text-lg">{daysLeft}</p>
                 <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Jours restants</p>
               </div>
             </div>
