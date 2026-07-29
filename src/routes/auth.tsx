@@ -78,6 +78,23 @@ function AuthPage() {
     }
   }
 
+  async function handleForgotSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (busy) return;
+    const value = email.trim();
+    if (!value) { toast.error("Entrez votre email"); return; }
+    setBusy(true);
+    try {
+      await sendReset({ data: { email: value, redirectTo: `${window.location.origin}/auth/reset-password` } });
+      setResetSent(true);
+    } catch {
+      toast.error("Impossible d'envoyer l'email", { description: "Réessayez dans quelques instants." });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+
 
   return (
     <div className="relative grid min-h-screen overflow-x-hidden bg-gradient-mesh md:grid-cols-2">
