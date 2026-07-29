@@ -621,7 +621,45 @@ function EventPage() {
           </Link>
 
         </div>
+        </div>
+        {/* Sidebar rail — sticky live/cagnotte widgets on desktop */}
+        <aside className="hidden lg:block">
+          <div className="sticky top-24 space-y-5">
+            {event.livestream && (
+              <Link
+                to="/events/$slug/live"
+                params={{ slug: event.slug }}
+                className="block overflow-hidden rounded-3xl bg-gradient-live p-5 text-white shadow-glow"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/20 backdrop-blur">
+                    <Radio className="h-6 w-6" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs font-bold uppercase tracking-widest">
+                      {event.isLive ? "En direct" : "Live prévu"}
+                    </p>
+                    <p className="mt-0.5 font-serif text-lg">Rejoindre</p>
+                  </div>
+                </div>
+              </Link>
+            )}
+            {event.moneyPot && (
+              <CagnotteCard
+                url={event.moneyPot.url}
+                goal={event.moneyPot.target}
+                current={event.moneyPot.current}
+              />
+            )}
+            <section className="rounded-3xl bg-surface p-5 shadow-card">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Lieu</p>
+              <p className="mt-1 font-serif text-lg">{event.venue}</p>
+              <p className="text-sm text-muted-foreground">{event.city}, {event.country}</p>
+            </section>
+          </div>
+        </aside>
       </main>
+
     </div>
   );
 }
