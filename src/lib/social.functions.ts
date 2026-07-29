@@ -44,6 +44,24 @@ export const listEventPosts = createServerFn({ method: "GET" })
     return { posts: posts ?? [], likeCounts, commentCounts };
   });
 
+export const getPost = createServerFn({ method: "GET" })
+  .inputValidator((i) => z.object({ postId: z.string().uuid() }).parse(i))
+  .handler(async ({ data }) => {
+    const sb = serverPublic();
+    const { data: post, error } = await sb
+      .from("posts")
+      .select("id, event_id, author_id, author_name, author_avatar, content, media_urls, media_type, created_at")
+      .eq("id", data.postId)
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+    if (!post) return null;
+    const [{ data: likes }, { data: event }] = await Promise.all([
+      sb.from("post_likes").select("user_id").eq("post_id", data.postId),
+      sb.from("events").select("id, slug, title, type, cover_url").eq("id", post.event_id).maybeSingle(),
+    ]);
+    return { post, likeCount: likes?.length ?? 0, event };
+  });
+
 export const createPost = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i) =>
