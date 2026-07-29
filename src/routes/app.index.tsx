@@ -39,9 +39,10 @@ function Home() {
   const liveCount = events.filter((e) => e.isLive).length;
 
   return (
-    <div className="container-app space-y-8 px-4 py-6 sm:px-6 lg:py-10">
+    <div className="w-full min-w-0 space-y-8 py-6 sm:space-y-10 lg:py-10">
       {/* Hero bento */}
       <section className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-6">
+
         <div className="col-span-2 relative overflow-hidden rounded-[32px] bg-foreground p-6 text-background md:col-span-4 md:p-8 lg:col-span-4 lg:row-span-2 lg:p-10">
           <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gradient-primary opacity-70 blur-2xl animate-blob lg:h-72 lg:w-72" />
           <div className="pointer-events-none absolute -bottom-20 -left-10 h-48 w-48 rounded-full bg-gold opacity-40 blur-3xl animate-blob lg:h-64 lg:w-64" style={{ animationDelay: "3s" }} />
