@@ -1,9 +1,10 @@
 import { createFileRoute, Link, notFound, useParams } from "@tanstack/react-router";
-import { ChevronLeft, Users, UserCheck, UserX, HelpCircle, Download, ScanLine } from "lucide-react";
+import { ChevronLeft, Users, UserCheck, UserX, HelpCircle, Download, ScanLine, MailPlus, Trash2 } from "lucide-react";
 import { getEventBySlug } from "@/lib/events.functions";
-import { listGuests, getRsvpStats } from "@/lib/rsvp.functions";
+import { listGuests, getRsvpStats, sendRsvpReminders, deleteGuest } from "@/lib/rsvp.functions";
 import { useServerFn } from "@tanstack/react-start";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 export const Route = createFileRoute("/events/$slug/guests")({
   head: () => ({ meta: [{ title: "Invités — Memento Live" }, { name: "description", content: "Suivez les RSVP en temps réel." }] }),
@@ -22,6 +23,10 @@ function GuestsPage() {
   const { slug } = useParams({ from: "/events/$slug/guests" });
   const listFn = useServerFn(listGuests);
   const statsFn = useServerFn(getRsvpStats);
+  const remindFn = useServerFn(sendRsvpReminders);
+  const deleteFn = useServerFn(deleteGuest);
+  const qc = useQueryClient();
+  const [toast, setToast] = useState<string | null>(null);
 
   const guests = useQuery({
     queryKey: ["guests", event.id],
@@ -30,6 +35,24 @@ function GuestsPage() {
   const stats = useQuery({
     queryKey: ["rsvp-stats", event.id],
     queryFn: () => statsFn({ data: { eventId: event.id } }),
+  });
+
+  const remind = useMutation({
+    mutationFn: () => remindFn({ data: { eventId: event.id } }),
+    onSuccess: (r) => {
+      setToast(r.reason === "email_not_configured"
+        ? "Envoi d'email non configuré."
+        : `Rappels envoyés : ${r.sent} · ignorés : ${r.skipped}`);
+      setTimeout(() => setToast(null), 4000);
+    },
+  });
+
+  const del = useMutation({
+    mutationFn: (guestId: string) => deleteFn({ data: { guestId } }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["guests", event.id] });
+      qc.invalidateQueries({ queryKey: ["rsvp-stats", event.id] });
+    },
   });
 
   const labelFor = (r: string) =>
@@ -97,6 +120,20 @@ function GuestsPage() {
           </Link>
         </div>
 
+        <button
+          onClick={() => remind.mutate()}
+          disabled={remind.isPending || !(stats.data?.pending ?? 0)}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-border/60 bg-surface p-3 text-sm font-semibold disabled:opacity-50"
+        >
+          <MailPlus className="h-4 w-4 text-primary" />
+          {remind.isPending
+            ? "Envoi des rappels…"
+            : `Envoyer un rappel aux ${stats.data?.pending ?? 0} en attente`}
+        </button>
+        {toast && (
+          <p className="rounded-xl bg-primary/10 px-3 py-2 text-center text-xs text-primary">{toast}</p>
+        )}
+
         <section className="space-y-2">
           {guests.isLoading && <p className="text-center text-sm text-muted-foreground">Chargement…</p>}
           {!guests.isLoading && !guests.data?.length && (
@@ -119,6 +156,16 @@ function GuestsPage() {
                   <p className="truncate text-xs text-muted-foreground">{g.email}{g.dietary ? ` · ${g.dietary}` : ""}</p>
                 </div>
                 <span className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold ${lbl.cls}`}>{lbl.label}</span>
+                <button
+                  onClick={() => {
+                    if (confirm(`Retirer ${g.full_name} de la liste ?`)) del.mutate(g.id);
+                  }}
+                  disabled={del.isPending}
+                  aria-label="Supprimer l'invité"
+                  className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-muted-foreground hover:bg-destructive/10 hover:text-destructive disabled:opacity-40"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </button>
               </div>
             );
           })}
