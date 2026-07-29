@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /app/
+Disallow: /events/
+Disallow: /i/
+Disallow: /rsvp/
+Disallow: /auth/reset-password
