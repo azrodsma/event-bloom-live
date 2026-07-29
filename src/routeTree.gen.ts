@@ -77,6 +77,7 @@ import { Route as AppInspirationsRouteImport } from './routes/app.inspirations'
 import { Route as AppInboxRouteImport } from './routes/app.inbox'
 import { Route as AppImpactRouteImport } from './routes/app.impact'
 import { Route as AppHelpRouteImport } from './routes/app.help'
+import { Route as AppGuestbookRouteImport } from './routes/app.guestbook'
 import { Route as AppGiftIdeasRouteImport } from './routes/app.gift-ideas'
 import { Route as AppFriendsRouteImport } from './routes/app.friends'
 import { Route as AppFoundationRouteImport } from './routes/app.foundation'
@@ -627,6 +628,11 @@ const AppImpactRoute = AppImpactRouteImport.update({
 const AppHelpRoute = AppHelpRouteImport.update({
   id: '/help',
   path: '/help',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGuestbookRoute = AppGuestbookRouteImport.update({
+  id: '/guestbook',
+  path: '/guestbook',
   getParentRoute: () => AppRoute,
 } as any)
 const AppGiftIdeasRoute = AppGiftIdeasRouteImport.update({
@@ -1729,6 +1735,7 @@ export interface FileRoutesByFullPath {
   '/app/foundation': typeof AppFoundationRoute
   '/app/friends': typeof AppFriendsRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
+  '/app/guestbook': typeof AppGuestbookRoute
   '/app/help': typeof AppHelpRoute
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
@@ -2008,6 +2015,7 @@ export interface FileRoutesByTo {
   '/app/foundation': typeof AppFoundationRoute
   '/app/friends': typeof AppFriendsRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
+  '/app/guestbook': typeof AppGuestbookRoute
   '/app/help': typeof AppHelpRoute
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
@@ -2288,6 +2296,7 @@ export interface FileRoutesById {
   '/app/foundation': typeof AppFoundationRoute
   '/app/friends': typeof AppFriendsRoute
   '/app/gift-ideas': typeof AppGiftIdeasRoute
+  '/app/guestbook': typeof AppGuestbookRoute
   '/app/help': typeof AppHelpRoute
   '/app/impact': typeof AppImpactRoute
   '/app/inbox': typeof AppInboxRoute
@@ -2570,6 +2579,7 @@ export interface FileRouteTypes {
     | '/app/foundation'
     | '/app/friends'
     | '/app/gift-ideas'
+    | '/app/guestbook'
     | '/app/help'
     | '/app/impact'
     | '/app/inbox'
@@ -2849,6 +2859,7 @@ export interface FileRouteTypes {
     | '/app/foundation'
     | '/app/friends'
     | '/app/gift-ideas'
+    | '/app/guestbook'
     | '/app/help'
     | '/app/impact'
     | '/app/inbox'
@@ -3128,6 +3139,7 @@ export interface FileRouteTypes {
     | '/app/foundation'
     | '/app/friends'
     | '/app/gift-ideas'
+    | '/app/guestbook'
     | '/app/help'
     | '/app/impact'
     | '/app/inbox'
@@ -3859,6 +3871,13 @@ declare module '@tanstack/react-router' {
       path: '/help'
       fullPath: '/app/help'
       preLoaderRoute: typeof AppHelpRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/guestbook': {
+      id: '/app/guestbook'
+      path: '/guestbook'
+      fullPath: '/app/guestbook'
+      preLoaderRoute: typeof AppGuestbookRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/gift-ideas': {
@@ -5391,6 +5410,7 @@ interface AppRouteChildren {
   AppFoundationRoute: typeof AppFoundationRoute
   AppFriendsRoute: typeof AppFriendsRoute
   AppGiftIdeasRoute: typeof AppGiftIdeasRoute
+  AppGuestbookRoute: typeof AppGuestbookRoute
   AppHelpRoute: typeof AppHelpRoute
   AppImpactRoute: typeof AppImpactRoute
   AppInboxRoute: typeof AppInboxRoute
@@ -5486,6 +5506,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppFoundationRoute: AppFoundationRoute,
   AppFriendsRoute: AppFriendsRoute,
   AppGiftIdeasRoute: AppGiftIdeasRoute,
+  AppGuestbookRoute: AppGuestbookRoute,
   AppHelpRoute: AppHelpRoute,
   AppImpactRoute: AppImpactRoute,
   AppInboxRoute: AppInboxRoute,

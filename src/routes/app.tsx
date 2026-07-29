@@ -1,7 +1,9 @@
 import { createFileRoute, Outlet, Link } from "@tanstack/react-router";
 import { BottomNav } from "@/components/BottomNav";
+import { AppTabs } from "@/components/AppTabs";
 import { Logo } from "@/components/Logo";
 import { Bell, MessageCircle } from "lucide-react";
+
 
 export const Route = createFileRoute("/app")({
   component: AppLayout,
