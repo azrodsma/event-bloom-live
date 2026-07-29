@@ -1,15 +1,16 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ChevronLeft, Camera, Upload, Download, Grid3x3, Play, LogIn } from "lucide-react";
+import { ChevronLeft, Camera, Upload, Download, Grid3x3, Play, LogIn, Trash2, Pencil, Check, X } from "lucide-react";
 import { findEvent } from "@/lib/mock-data";
 import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getEventBySlug } from "@/lib/events.functions";
 import { adaptEvent } from "@/lib/event-adapter";
-import { listAlbumMedia, createAlbumMedia } from "@/lib/album.functions";
+import { listAlbumMedia, createAlbumMedia, deleteAlbumMedia, updateAlbumCaption } from "@/lib/album.functions";
 import { uploadEventMedia } from "@/lib/storage";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/events/$slug/album")({
   head: ({ params }) => ({
