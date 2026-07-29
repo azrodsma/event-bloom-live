@@ -9,7 +9,7 @@ export const Route = createFileRoute("/app")({
 
 function AppLayout() {
   return (
-    <div className="relative min-h-screen bg-gradient-mesh pb-nav safe-x">
+    <div className="relative min-h-screen overflow-x-hidden bg-gradient-mesh pb-nav safe-x">
       <header className="sticky top-0 z-30 border-b border-border/40 bg-background/70 backdrop-blur-2xl safe-top">
         <div className="container-app flex items-center justify-between py-3">
           <Link to="/app" className="tap flex items-center"><Logo /></Link>
