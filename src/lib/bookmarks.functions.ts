@@ -52,12 +52,14 @@ export const listMyBookmarkedPosts = createServerFn({ method: "GET" })
       .limit(100);
     if (error) throw error;
     const ids = (bms ?? []).map((b) => b.post_id as string);
-    if (ids.length === 0) return [] as Array<Record<string, unknown>>;
+    if (ids.length === 0) return [];
     const { data: posts, error: e2 } = await supabase
       .from("posts")
       .select("id, event_id, author_id, author_name, author_avatar, content, media_urls, media_type, created_at, events(slug, title)")
       .in("id", ids);
     if (e2) throw e2;
     const byId = new Map((posts ?? []).map((p) => [p.id as string, p]));
-    return ids.map((id) => byId.get(id)).filter(Boolean) as Array<Record<string, unknown>>;
+    return ids
+      .map((id) => byId.get(id))
+      .filter((p): p is NonNullable<typeof p> => Boolean(p));
   });
