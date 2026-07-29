@@ -29,11 +29,16 @@ function Dashboard() {
   const { event, stats } = Route.useLoaderData();
   const chartData: { label: string; value: number }[] = stats?.activity ?? Array.from({ length: 12 }, (_, i) => ({ label: `J-${11 - i}`, value: 0 }));
   const max = Math.max(1, ...chartData.map((d) => d.value));
+  const half = Math.floor(chartData.length / 2);
+  const prev = chartData.slice(0, half).reduce((s, d) => s + d.value, 0);
+  const curr = chartData.slice(half).reduce((s, d) => s + d.value, 0);
+  const trendPct = prev === 0 ? (curr > 0 ? 100 : 0) : Math.round(((curr - prev) / prev) * 100);
 
   const topContributors: { name: string; avatar: string | null; count: number }[] = stats?.topContributors ?? [];
   const potPercent = event.moneyPot
     ? Math.min(100, (event.moneyPot.current / event.moneyPot.target) * 100)
     : 0;
+  const daysLeft = Math.max(0, Math.ceil((new Date(event.date).getTime() - Date.now()) / 86400000));
 
 
   return (
