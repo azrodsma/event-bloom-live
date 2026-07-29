@@ -259,18 +259,55 @@ function Album() {
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <div className="flex flex-1 items-center justify-center">
+          <div className="flex flex-1 items-center justify-center" onClick={(e) => e.stopPropagation()}>
             {active.media_type === "video" ? (
               <video src={active.url} controls className="max-h-full max-w-full rounded-2xl" />
             ) : (
-              <img src={active.url} alt="" className="max-h-full max-w-full rounded-2xl object-contain" />
+              <img src={active.url} alt={active.caption ?? ""} className="max-h-full max-w-full rounded-2xl object-contain" />
             )}
           </div>
-          <div className="mx-auto flex w-full max-w-md items-center justify-between rounded-2xl bg-white/10 p-3 text-white backdrop-blur">
-            <div>
-              <p className="text-sm font-semibold">Partagé par {active.uploader_name ?? "Invité"}</p>
-              <p className="text-xs text-white/70">{new Date(active.created_at).toLocaleString("fr-FR")}</p>
+          <div className="mx-auto w-full max-w-md space-y-2 rounded-2xl bg-white/10 p-3 text-white backdrop-blur" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold">Partagé par {active.uploader_name ?? "Invité"}</p>
+                <p className="text-xs text-white/70">{new Date(active.created_at).toLocaleString("fr-FR")}</p>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <a href={active.url} target="_blank" rel="noopener noreferrer" className="grid h-9 w-9 place-items-center rounded-full bg-white/10" aria-label="Télécharger">
+                  <Download className="h-4 w-4" />
+                </a>
+                {user?.id && active.uploader_id === user.id && editingId !== active.id && (
+                  <>
+                    <button onClick={() => { setEditingId(active.id); setEditValue(active.caption ?? ""); }} className="grid h-9 w-9 place-items-center rounded-full bg-white/10" aria-label="Éditer">
+                      <Pencil className="h-4 w-4" />
+                    </button>
+                    <button onClick={() => onDelete(active.id)} className="grid h-9 w-9 place-items-center rounded-full bg-red-500/70" aria-label="Supprimer">
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
+            {editingId === active.id ? (
+              <div className="flex items-center gap-2">
+                <input
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  maxLength={500}
+                  autoFocus
+                  className="flex-1 rounded-full bg-white/10 px-3 py-1.5 text-xs text-white placeholder:text-white/50 focus:outline-none"
+                  placeholder="Légende…"
+                />
+                <button onClick={() => onSaveCaption(active.id)} className="grid h-8 w-8 place-items-center rounded-full bg-primary" aria-label="Enregistrer">
+                  <Check className="h-4 w-4" />
+                </button>
+                <button onClick={() => setEditingId(null)} className="grid h-8 w-8 place-items-center rounded-full bg-white/10" aria-label="Annuler">
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            ) : active.caption ? (
+              <p className="text-xs text-white/90">{active.caption}</p>
+            ) : null}
           </div>
         </div>
       )}
