@@ -177,7 +177,7 @@ function EventPage() {
           <Link
             to="/events/$slug/live"
             params={{ slug: event.slug }}
-            className="block overflow-hidden rounded-3xl bg-gradient-live p-5 text-white shadow-glow"
+            className="block overflow-hidden rounded-3xl bg-gradient-live p-5 text-white shadow-glow lg:hidden"
           >
             <div className="flex items-center gap-4">
               <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/20 backdrop-blur">
