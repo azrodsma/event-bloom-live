@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "sonner";
+import { useServerFn } from "@tanstack/react-start";
+import { sendWelcomeEmail, sendPasswordReset } from "@/lib/auth-emails.functions";
 
 type Search = { redirect?: string };
 
