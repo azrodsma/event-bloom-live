@@ -25,14 +25,15 @@ export const Route = createFileRoute("/events/$slug/dashboard")({
   component: Dashboard,
 });
 
-const chartData = [12, 24, 38, 52, 70, 95, 120, 148, 172, 190, 205, 220];
-
 function Dashboard() {
   const { event, stats } = Route.useLoaderData();
-  const max = Math.max(...chartData);
+  const chartData = stats?.activity ?? Array.from({ length: 12 }, (_, i) => ({ label: `J-${11 - i}`, value: 0 }));
+  const max = Math.max(1, ...chartData.map((d) => d.value));
+  const topContributors = stats?.topContributors ?? [];
   const potPercent = event.moneyPot
     ? Math.min(100, (event.moneyPot.current / event.moneyPot.target) * 100)
     : 0;
+
 
   return (
     <div className="min-h-screen bg-background pb-16">
