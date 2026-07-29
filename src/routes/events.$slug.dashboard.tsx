@@ -112,15 +112,16 @@ function Dashboard() {
             <span className="rounded-full bg-primary-light px-3 py-1 text-[10px] font-bold uppercase text-primary">+68%</span>
           </div>
           <div className="mt-5 flex h-32 items-end gap-1.5">
-            {chartData.map((v, i) => (
+            {chartData.map((d, i) => (
               <div key={i} className="flex flex-1 flex-col items-center gap-1">
                 <div
                   className="w-full rounded-t-lg bg-gradient-primary transition-all"
-                  style={{ height: `${(v / max) * 100}%` }}
+                  style={{ height: `${(d.value / max) * 100}%` }}
                 />
-                <span className="text-[9px] text-muted-foreground">J-{12 - i}</span>
+                <span className="text-[9px] text-muted-foreground">{d.label}</span>
               </div>
             ))}
+
           </div>
         </section>
 
