@@ -64,6 +64,23 @@ function LivePage() {
     queryFn: async () => (await albumList({ data: { eventId: dbId! } })) as Array<{ id: string; url: string; media_type: string }>,
   });
 
+  const registryList = useServerFn(listRegistryItems);
+  const { data: gifts = [] } = useQuery({
+    queryKey: ["live-registry", dbId],
+    enabled: !!dbId && tab === "Cadeaux",
+    queryFn: async () =>
+      (await registryList({ data: { eventId: dbId! } })) as Array<{
+        id: string;
+        title: string;
+        description: string | null;
+        price: number | null;
+        image_url: string | null;
+        external_url: string | null;
+        is_reserved: boolean;
+      }>,
+  });
+
+
   // Realtime subscription for chat + reactions
   useEffect(() => {
     if (!dbId) return;
