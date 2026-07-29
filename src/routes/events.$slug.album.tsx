@@ -48,10 +48,15 @@ function Album() {
   const [filter, setFilter] = useState<"all" | "image" | "video">("all");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [pendingCaption, setPendingCaption] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
   const list = useServerFn(listAlbumMedia);
   const create = useServerFn(createAlbumMedia);
+  const del = useServerFn(deleteAlbumMedia);
+  const updateCap = useServerFn(updateAlbumCaption);
 
   const key = ["album", dbId] as const;
   const { data: photos = [] } = useQuery({
