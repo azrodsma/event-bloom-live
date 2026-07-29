@@ -263,24 +263,28 @@ function EventPage() {
           </section>
         )}
 
-        {/* Quick blocks */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+        {/* Highlights: livre d'or + album */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
           <Link
             to="/events/$slug/guestbook"
             params={{ slug: event.slug }}
-            className="rounded-3xl bg-surface p-5 shadow-card"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/15 via-surface to-surface p-5 shadow-card ring-1 ring-primary/10 transition hover:-translate-y-0.5 hover:shadow-glow"
           >
-            <BookHeart className="h-6 w-6 text-primary" />
-            <p className="mt-3 font-serif text-lg">Livre d'or</p>
+            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-primary/15 text-primary">
+              <BookHeart className="h-5 w-5" />
+            </div>
+            <p className="mt-3 font-serif text-lg leading-tight">Livre d'or</p>
             <p className="text-xs text-muted-foreground">{stats?.guestbook ?? event.guestbookCount} messages</p>
           </Link>
           <Link
             to="/events/$slug/album"
             params={{ slug: event.slug }}
-            className="rounded-3xl bg-surface p-5 shadow-card"
+            className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-accent/40 via-surface to-surface p-5 shadow-card ring-1 ring-accent/20 transition hover:-translate-y-0.5 hover:shadow-glow"
           >
-            <Camera className="h-6 w-6 text-primary" />
-            <p className="mt-3 font-serif text-lg">Album</p>
+            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/40 text-foreground">
+              <Camera className="h-5 w-5" />
+            </div>
+            <p className="mt-3 font-serif text-lg leading-tight">Album</p>
             <p className="text-xs text-muted-foreground">{stats?.photos ?? event.photosCount} photos</p>
           </Link>
         </div>
@@ -289,7 +293,7 @@ function EventPage() {
         <Link
           to="/events/$slug/timeline"
           params={{ slug: event.slug }}
-          className="flex items-center gap-4 rounded-3xl bg-surface p-5 shadow-card"
+          className="flex items-center gap-4 rounded-3xl bg-surface p-5 shadow-card transition hover:-translate-y-0.5 hover:shadow-glow"
         >
           <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary">
             <Clock className="h-5 w-5" />
@@ -301,249 +305,109 @@ function EventPage() {
           <span className="text-muted-foreground">→</span>
         </Link>
 
-        {/* Modules d'organisation */}
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
-          <Link
-            to="/events/$slug/checklist"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/10 text-primary">
-              <CheckSquare className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Checklist</p>
-            <p className="text-[10px] text-muted-foreground">{stats ? `${stats.checklistDone}/${stats.checklistTotal} faits` : "—"}</p>
-          </Link>
-          <Link
-            to="/events/$slug/playlist"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-accent/30 text-foreground">
-              <Music2 className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Playlist</p>
-            <p className="text-[10px] text-muted-foreground">{stats?.songs ?? 0} morceaux</p>
-          </Link>
-          <Link
-            to="/events/$slug/seating"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-secondary text-foreground">
-              <LayoutGrid className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Plan de table</p>
-            <p className="text-[10px] text-muted-foreground">{stats?.tables ?? 0} tables</p>
-          </Link>
-        </div>
+        {/* Modules — grille unifiée */}
+        <section className="space-y-3">
+          <div className="flex items-end justify-between">
+            <h2 className="font-serif text-xl">Organisation</h2>
+            <span className="text-[11px] uppercase tracking-widest text-muted-foreground">Tous les modules</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 xl:grid-cols-5">
+            {([
+              { to: "/events/$slug/checklist", icon: CheckSquare, label: "Checklist", hint: stats ? `${stats.checklistDone}/${stats.checklistTotal} faits` : "À faire", tone: "primary" },
+              { to: "/events/$slug/playlist", icon: Music2, label: "Playlist", hint: `${stats?.songs ?? 0} morceaux`, tone: "accent" },
+              { to: "/events/$slug/seating", icon: LayoutGrid, label: "Plan de table", hint: `${stats?.tables ?? 0} tables`, tone: "secondary" },
+              { to: "/events/$slug/budget", icon: Wallet, label: "Budget", hint: stats ? `${(stats.budgetTotal ?? 0).toLocaleString("fr-FR")} €` : "—", tone: "primary" },
+              { to: "/events/$slug/registry", icon: Gift, label: "Cadeaux", hint: `${stats?.gifts ?? 0} idées`, tone: "accent" },
+              { to: "/events/$slug/checkin", icon: QrCode, label: "Check-in", hint: "QR code", tone: "dark" },
+              { to: "/events/$slug/rsvp", icon: MailCheck, label: "RSVP", hint: "Confirmer", tone: "primary" },
+              { to: "/events/$slug/dresscode", icon: Shirt, label: "Dress code", hint: "Palette & tenues", tone: "accent" },
+              { to: "/events/$slug/map", icon: MapIcon, label: "Plan", hint: "Itinéraires", tone: "secondary" },
+              { to: "/events/$slug/carpool", icon: Car, label: "Covoiturage", hint: "4 trajets", tone: "primary" },
+              { to: "/events/$slug/speeches", icon: Mic2, label: "Discours", hint: "5 · 29 min", tone: "accent" },
+              { to: "/events/$slug/kids", icon: Baby, label: "Enfants", hint: "5 petits", tone: "secondary" },
+              { to: "/events/$slug/photobooth", icon: Sparkles, label: "Photobooth", hint: "Filtres & stickers", tone: "dark" },
+              { to: "/events/$slug/thanks", icon: Heart, label: "Remerciements", hint: "Cartes à envoyer", tone: "primary" },
+              { to: "/events/$slug/gifts-received", icon: PackageOpen, label: "Cadeaux reçus", hint: "Journal", tone: "accent" },
+            ] as const).map((m) => {
+              const Icon = m.icon;
+              const toneCls =
+                m.tone === "primary" ? "bg-primary/15 text-primary"
+                : m.tone === "accent" ? "bg-accent/40 text-foreground"
+                : m.tone === "dark" ? "bg-foreground text-background"
+                : "bg-secondary text-foreground";
+              return (
+                <Link
+                  key={m.to}
+                  to={m.to}
+                  params={{ slug: event.slug }}
+                  className="group flex flex-col gap-2 rounded-2xl bg-surface p-3.5 shadow-card ring-1 ring-border/40 transition hover:-translate-y-0.5 hover:shadow-glow sm:p-4"
+                >
+                  <div className={`grid h-10 w-10 place-items-center rounded-xl ${toneCls}`}>
+                    <Icon className="h-4.5 w-4.5" />
+                  </div>
+                  <p className="font-serif text-sm leading-tight">{m.label}</p>
+                  <p className="line-clamp-1 text-[10px] text-muted-foreground">{m.hint}</p>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
 
-
-
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
-          <Link
-            to="/events/$slug/budget"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/15 text-primary">
-              <Wallet className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Budget</p>
-            <p className="text-[10px] text-muted-foreground">{stats ? `${(stats.budgetTotal ?? 0).toLocaleString("fr-FR")} €` : "—"}</p>
-          </Link>
-          <Link
-            to="/events/$slug/registry"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-accent/40 text-foreground">
-              <Gift className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Cadeaux</p>
-            <p className="text-[10px] text-muted-foreground">{stats?.gifts ?? 0} idées</p>
-          </Link>
-          <Link
-            to="/events/$slug/checkin"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-foreground text-background">
-              <QrCode className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Check-in</p>
-            <p className="text-[10px] text-muted-foreground">QR code</p>
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
-          <Link
-            to="/events/$slug/rsvp"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/15 text-primary">
-              <MailCheck className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">RSVP</p>
-            <p className="text-[10px] text-muted-foreground">Confirmer</p>
-          </Link>
-          <Link
-            to="/events/$slug/dresscode"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-accent/40 text-foreground">
-              <Shirt className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Dress code</p>
-            <p className="text-[10px] text-muted-foreground">Palette & tenues</p>
-          </Link>
-          <Link
-            to="/events/$slug/map"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-secondary text-foreground">
-              <MapIcon className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Plan</p>
-            <p className="text-[10px] text-muted-foreground">Itinéraires</p>
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
-          <Link
-            to="/events/$slug/carpool"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/15 text-primary">
-              <Car className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Covoiturage</p>
-            <p className="text-[10px] text-muted-foreground">4 trajets</p>
-          </Link>
-          <Link
-            to="/events/$slug/speeches"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-accent/40 text-foreground">
-              <Mic2 className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Discours</p>
-            <p className="text-[10px] text-muted-foreground">5 · 29 min</p>
-          </Link>
-          <Link
-            to="/events/$slug/kids"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-secondary text-foreground">
-              <Baby className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Enfants</p>
-            <p className="text-[10px] text-muted-foreground">5 petits</p>
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
-          <Link
-            to="/events/$slug/photobooth"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-foreground text-background">
-              <Sparkles className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Photobooth</p>
-            <p className="text-[10px] text-muted-foreground">Filtres & stickers</p>
-          </Link>
-          <Link
-            to="/events/$slug/thanks"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/15 text-primary">
-              <Heart className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Remerciements</p>
-            <p className="text-[10px] text-muted-foreground">Cartes à envoyer</p>
-          </Link>
-          <Link
-            to="/events/$slug/gifts-received"
-            params={{ slug: event.slug }}
-            className="flex flex-col gap-2 rounded-3xl bg-surface p-4 shadow-card"
-          >
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-accent/40 text-foreground">
-              <PackageOpen className="h-5 w-5" />
-            </div>
-            <p className="font-serif text-sm leading-tight">Cadeaux reçus</p>
-            <p className="text-[10px] text-muted-foreground">Journal</p>
-          </Link>
-        </div>
-
-        {/* Info & assistance */}
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
-          <Link
-            to="/events/$slug/weather"
-            params={{ slug: event.slug }}
-            className="flex flex-col items-start gap-1.5 rounded-2xl bg-gradient-to-br from-sky-100 to-sky-50 p-3.5 text-xs font-semibold ring-1 ring-sky-200"
-          >
-            <CloudSun className="h-5 w-5 text-sky-600" />
-            <span>Météo</span>
-            <span className="text-[10px] font-medium text-sky-700/80">28° ensoleillé</span>
-          </Link>
-          <Link
-            to="/events/$slug/faq"
-            params={{ slug: event.slug }}
-            className="flex flex-col items-start gap-1.5 rounded-2xl bg-secondary p-3.5 text-xs font-semibold"
-          >
-            <HelpCircle className="h-5 w-5 text-primary" />
-            <span>FAQ</span>
-            <span className="text-[10px] font-medium text-muted-foreground">Réponses invités</span>
-          </Link>
-          <Link
-            to="/events/$slug/moderation"
-            params={{ slug: event.slug }}
-            className="flex flex-col items-start gap-1.5 rounded-2xl bg-destructive/5 p-3.5 text-xs font-semibold ring-1 ring-destructive/20"
-          >
-            <Shield className="h-5 w-5 text-destructive" />
-            <span>Modération</span>
-            <span className="text-[10px] font-medium text-destructive/80">2 à traiter</span>
-          </Link>
-        </div>
-
-        {/* Engagement & journal */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-          <Link
-            to="/events/$slug/polls"
-            params={{ slug: event.slug }}
-            className="relative flex items-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-br from-fuchsia-500/15 to-primary/10 p-4 ring-1 ring-primary/20"
-          >
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-primary text-primary-foreground">
-              <BarChart2 className="h-5 w-5" />
-            </span>
-            <div className="min-w-0">
-              <p className="text-sm font-semibold">Sondages live</p>
-              <p className="text-[11px] text-muted-foreground">2 en cours</p>
-            </div>
-          </Link>
-          <Link
-            to="/events/$slug/activity"
-            params={{ slug: event.slug }}
-            className="relative flex items-center gap-3 overflow-hidden rounded-2xl bg-card p-4 ring-1 ring-border/60"
-          >
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-secondary">
+        {/* Info & engagement */}
+        <section className="space-y-3">
+          <div className="flex items-end justify-between">
+            <h2 className="font-serif text-xl">En temps réel</h2>
+            <span className="text-[11px] uppercase tracking-widest text-muted-foreground">Info & engagement</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5">
+            <Link
+              to="/events/$slug/weather"
+              params={{ slug: event.slug }}
+              className="flex flex-col items-start gap-1.5 rounded-2xl bg-gradient-to-br from-sky-100 to-sky-50 p-3.5 text-xs font-semibold ring-1 ring-sky-200 transition hover:-translate-y-0.5"
+            >
+              <CloudSun className="h-5 w-5 text-sky-600" />
+              <span>Météo</span>
+              <span className="text-[10px] font-medium text-sky-700/80">28° ensoleillé</span>
+            </Link>
+            <Link
+              to="/events/$slug/faq"
+              params={{ slug: event.slug }}
+              className="flex flex-col items-start gap-1.5 rounded-2xl bg-secondary p-3.5 text-xs font-semibold transition hover:-translate-y-0.5"
+            >
+              <HelpCircle className="h-5 w-5 text-primary" />
+              <span>FAQ</span>
+              <span className="text-[10px] font-medium text-muted-foreground">Réponses invités</span>
+            </Link>
+            <Link
+              to="/events/$slug/moderation"
+              params={{ slug: event.slug }}
+              className="flex flex-col items-start gap-1.5 rounded-2xl bg-destructive/5 p-3.5 text-xs font-semibold ring-1 ring-destructive/20 transition hover:-translate-y-0.5"
+            >
+              <Shield className="h-5 w-5 text-destructive" />
+              <span>Modération</span>
+              <span className="text-[10px] font-medium text-destructive/80">2 à traiter</span>
+            </Link>
+            <Link
+              to="/events/$slug/polls"
+              params={{ slug: event.slug }}
+              className="flex flex-col items-start gap-1.5 rounded-2xl bg-gradient-to-br from-fuchsia-500/15 to-primary/10 p-3.5 text-xs font-semibold ring-1 ring-primary/20 transition hover:-translate-y-0.5"
+            >
+              <BarChart2 className="h-5 w-5 text-primary" />
+              <span>Sondages live</span>
+              <span className="text-[10px] font-medium text-muted-foreground">2 en cours</span>
+            </Link>
+            <Link
+              to="/events/$slug/activity"
+              params={{ slug: event.slug }}
+              className="flex flex-col items-start gap-1.5 rounded-2xl bg-card p-3.5 text-xs font-semibold ring-1 ring-border/60 transition hover:-translate-y-0.5"
+            >
               <Activity className="h-5 w-5 text-primary" />
-            </span>
-            <div className="min-w-0">
-              <p className="text-sm font-semibold">Journal</p>
-              <p className="text-[11px] text-muted-foreground">12 activités · 24 h</p>
-            </div>
-          </Link>
-        </div>
+              <span>Journal</span>
+              <span className="text-[10px] font-medium text-muted-foreground">12 activités · 24 h</span>
+            </Link>
+          </div>
+        </section>
+
 
 
 
