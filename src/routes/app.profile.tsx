@@ -1,9 +1,11 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Settings, LogOut, Calendar, MessageCircle, Image, Heart } from "lucide-react";
+import { Settings, LogOut, Calendar, MessageCircle, Image, Heart, Pencil, Check, X } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
+import { useEffect, useState } from "react";
 import { listMyEvents } from "@/lib/events.functions";
+import { getMyProfile, updateMyProfile } from "@/lib/profile.functions";
 
 export const Route = createFileRoute("/app/profile")({
   head: () => ({
@@ -32,11 +34,34 @@ function Profile() {
   const queryClient = useQueryClient();
 
   const list = useServerFn(listMyEvents);
+  const fetchProfile = useServerFn(getMyProfile);
+  const saveProfile = useServerFn(updateMyProfile);
+
   const { data: myEvents = [] } = useQuery({
     queryKey: ["my-events", user?.id],
     enabled: !!user,
     queryFn: async () => (await list()) as MyEvent[],
   });
+
+  const { data: profile } = useQuery({
+    queryKey: ["my-profile", user?.id],
+    enabled: !!user,
+    queryFn: () => fetchProfile(),
+  });
+
+  const [editing, setEditing] = useState(false);
+  const [form, setForm] = useState({ displayName: "", bio: "", avatarUrl: "" });
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (profile) {
+      setForm({
+        displayName: profile.display_name ?? "",
+        bio: profile.bio ?? "",
+        avatarUrl: profile.avatar_url ?? "",
+      });
+    }
+  }, [profile]);
 
   const stats = [
     { icon: Calendar, label: "Événements", value: myEvents.length },
@@ -52,29 +77,92 @@ function Profile() {
     navigate({ to: "/auth", replace: true });
   }
 
+  async function handleSave() {
+    setSaving(true);
+    try {
+      await saveProfile({
+        data: {
+          displayName: form.displayName.trim() || undefined,
+          bio: form.bio.trim() || null,
+          avatarUrl: form.avatarUrl.trim() || null,
+        },
+      });
+      await queryClient.invalidateQueries({ queryKey: ["my-profile", user?.id] });
+      setEditing(false);
+    } finally {
+      setSaving(false);
+    }
+  }
+
   const displayName =
+    profile?.display_name ??
     (user?.user_metadata?.display_name as string | undefined) ??
     user?.email?.split("@")[0] ??
     "Invité";
   const avatarUrl =
+    profile?.avatar_url ??
     (user?.user_metadata?.avatar_url as string | undefined) ??
     `https://i.pravatar.cc/150?u=${encodeURIComponent(user?.id ?? "guest")}`;
+
 
   return (
     <div className="space-y-6 px-4 py-4">
       <div className="rounded-3xl bg-gradient-primary p-6 text-white shadow-glow">
         <div className="flex items-center gap-4">
-          <img src={avatarUrl} className="h-16 w-16 rounded-full border-2 border-white" alt="" />
+          <img src={avatarUrl} className="h-16 w-16 rounded-full border-2 border-white object-cover" alt="" />
           <div className="min-w-0 flex-1">
-            <h1 className="font-serif text-2xl">{displayName}</h1>
-            <p className="text-sm text-white/80">{user?.email ?? "Non connecté"}</p>
+            <h1 className="font-serif text-2xl truncate">{displayName}</h1>
+            <p className="truncate text-sm text-white/80">{user?.email ?? "Non connecté"}</p>
+            {profile?.bio && !editing && (
+              <p className="mt-1 line-clamp-2 text-xs text-white/85">{profile.bio}</p>
+            )}
           </div>
-
+          {user && (
+            <button
+              onClick={() => setEditing((v) => !v)}
+              className="grid h-10 w-10 place-items-center rounded-full bg-white/20 backdrop-blur"
+              aria-label={editing ? "Annuler" : "Modifier le profil"}
+            >
+              {editing ? <X className="h-5 w-5" /> : <Pencil className="h-4 w-4" />}
+            </button>
+          )}
           <Link to="/app/settings" className="grid h-10 w-10 place-items-center rounded-full bg-white/20 backdrop-blur" aria-label="Paramètres">
             <Settings className="h-5 w-5" />
           </Link>
         </div>
+
+        {editing && user && (
+          <div className="mt-4 space-y-2">
+            <input
+              value={form.displayName}
+              onChange={(e) => setForm({ ...form, displayName: e.target.value })}
+              placeholder="Nom affiché"
+              className="w-full rounded-xl bg-white/15 px-3 py-2 text-sm text-white placeholder:text-white/60 outline-none focus:bg-white/25"
+            />
+            <input
+              value={form.avatarUrl}
+              onChange={(e) => setForm({ ...form, avatarUrl: e.target.value })}
+              placeholder="URL de l'avatar (https://…)"
+              className="w-full rounded-xl bg-white/15 px-3 py-2 text-sm text-white placeholder:text-white/60 outline-none focus:bg-white/25"
+            />
+            <textarea
+              value={form.bio}
+              onChange={(e) => setForm({ ...form, bio: e.target.value })}
+              placeholder="Une bio courte…"
+              rows={2}
+              className="w-full resize-none rounded-xl bg-white/15 px-3 py-2 text-sm text-white placeholder:text-white/60 outline-none focus:bg-white/25"
+            />
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-primary disabled:opacity-60"
+            >
+              <Check className="h-3.5 w-3.5" /> {saving ? "Enregistrement…" : "Enregistrer"}
+            </button>
+          </div>
+        )}
       </div>
+
 
       <div className="grid grid-cols-4 gap-2">
         {stats.map((s) => (
