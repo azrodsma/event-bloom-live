@@ -33,6 +33,7 @@ export const Route = createFileRoute("/events/$slug/album")({
 
 type Media = {
   id: string;
+  uploader_id: string | null;
   uploader_name: string | null;
   url: string;
   media_type: string;
