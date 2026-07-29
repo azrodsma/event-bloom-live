@@ -96,17 +96,43 @@ function Album() {
     setError(null);
     setUploading(true);
     try {
+      const cap = pendingCaption.trim();
       for (const file of files) {
         const mediaType: "image" | "video" = file.type.startsWith("video") ? "video" : "image";
         const { url } = await uploadEventMedia({ eventId: dbId, file, userId: user.id });
-        await create({ data: { eventId: dbId, url, mediaType } });
+        await create({ data: { eventId: dbId, url, mediaType, caption: cap || undefined } });
       }
+      setPendingCaption("");
+      toast.success(files.length > 1 ? `${files.length} médias ajoutés` : "Média ajouté");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Échec de l'envoi");
     } finally {
       setUploading(false);
     }
   };
+
+  async function onDelete(id: string) {
+    if (!confirm("Supprimer ce média ?")) return;
+    try {
+      await del({ data: { id } });
+      qc.setQueryData<Media[]>(key, (prev = []) => prev.filter((p) => p.id !== id));
+      setSelected(null);
+      toast.success("Média supprimé");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Échec");
+    }
+  }
+
+  async function onSaveCaption(id: string) {
+    try {
+      await updateCap({ data: { id, caption: editValue } });
+      qc.setQueryData<Media[]>(key, (prev = []) => prev.map((p) => (p.id === id ? { ...p, caption: editValue } : p)));
+      setEditingId(null);
+      toast.success("Légende mise à jour");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Échec");
+    }
+  }
 
   return (
     <div className="min-h-screen bg-background pb-24">
