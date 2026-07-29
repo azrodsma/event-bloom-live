@@ -187,6 +187,18 @@ function Album() {
           )}
         </div>
 
+        {user && (
+          <div className="mb-3">
+            <input
+              value={pendingCaption}
+              onChange={(e) => setPendingCaption(e.target.value)}
+              placeholder="Ajouter une légende à vos prochains envois (optionnel)…"
+              maxLength={500}
+              className="w-full rounded-2xl border border-border/60 bg-card px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+            />
+          </div>
+        )}
+
         <div className="mb-3 flex items-center gap-2 text-xs">
           <button
             onClick={() => setFilter("all")}
