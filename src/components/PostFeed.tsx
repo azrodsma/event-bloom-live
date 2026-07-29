@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Heart, MessageCircle, Send } from "lucide-react";
+import { Heart, MessageCircle, Send, Bookmark } from "lucide-react";
 import { toast } from "sonner";
 import { listEventPosts, createPost, togglePostLike } from "@/lib/social.functions";
+import { toggleBookmark, listMyBookmarkIds } from "@/lib/bookmarks.functions";
 import { CommentThread } from "@/components/CommentThread";
 import { useAuth } from "@/hooks/use-auth";
 
@@ -14,6 +15,8 @@ export function PostFeed({ eventId }: { eventId: string }) {
   const fetchPosts = useServerFn(listEventPosts);
   const addPost = useServerFn(createPost);
   const toggleLike = useServerFn(togglePostLike);
+  const toggleBm = useServerFn(toggleBookmark);
+  const fetchBmIds = useServerFn(listMyBookmarkIds);
   const [content, setContent] = useState("");
   const [openComments, setOpenComments] = useState<Record<string, boolean>>({});
 
@@ -56,6 +59,21 @@ export function PostFeed({ eventId }: { eventId: string }) {
   const likeMut = useMutation({
     mutationFn: (postId: string) => toggleLike({ data: { postId } }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["posts", eventId] }),
+  });
+
+  const { data: bmIds = [] } = useQuery({
+    queryKey: ["bookmark-ids", user?.id],
+    queryFn: () => fetchBmIds(),
+    enabled: !!user,
+  });
+  const bmSet = new Set(bmIds);
+  const bmMut = useMutation({
+    mutationFn: (postId: string) => toggleBm({ data: { postId } }),
+    onSuccess: (res) => {
+      qc.invalidateQueries({ queryKey: ["bookmark-ids", user?.id] });
+      qc.invalidateQueries({ queryKey: ["bookmarks", user?.id] });
+      toast.success(res.bookmarked ? "Ajouté aux favoris" : "Retiré des favoris");
+    },
   });
 
   return (
@@ -141,6 +159,14 @@ export function PostFeed({ eventId }: { eventId: string }) {
                     className="inline-flex items-center gap-1.5 transition hover:text-primary"
                   >
                     <MessageCircle className="h-4 w-4" /> {comments}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => (user ? bmMut.mutate(p.id) : toast.error("Connectez-vous pour sauvegarder"))}
+                    className={`ml-auto inline-flex items-center gap-1.5 transition hover:text-gold ${bmSet.has(p.id) ? "text-gold" : ""}`}
+                    aria-label="Sauvegarder"
+                  >
+                    <Bookmark className="h-4 w-4" fill={bmSet.has(p.id) ? "currentColor" : "none"} />
                   </button>
                 </footer>
                 {openComments[p.id] && <CommentThread postId={p.id} eventId={eventId} />}
