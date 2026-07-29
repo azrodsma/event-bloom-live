@@ -31,7 +31,7 @@ export const sendEmail = createServerFn({ method: "POST" })
     if (!resendKey) throw new Error("RESEND_API_KEY is not configured");
 
     const payload: Record<string, unknown> = {
-      from: data.from ?? "Memento Live <onboarding@resend.dev>",
+      from: data.from ?? "Memento Live <mariage@bold-lab-agency.com>",
       to: Array.isArray(data.to) ? data.to : [data.to],
       subject: data.subject,
       html: data.html,
