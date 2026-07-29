@@ -29,11 +29,16 @@ function Dashboard() {
   const { event, stats } = Route.useLoaderData();
   const chartData: { label: string; value: number }[] = stats?.activity ?? Array.from({ length: 12 }, (_, i) => ({ label: `J-${11 - i}`, value: 0 }));
   const max = Math.max(1, ...chartData.map((d) => d.value));
+  const half = Math.floor(chartData.length / 2);
+  const prev = chartData.slice(0, half).reduce((s, d) => s + d.value, 0);
+  const curr = chartData.slice(half).reduce((s, d) => s + d.value, 0);
+  const trendPct = prev === 0 ? (curr > 0 ? 100 : 0) : Math.round(((curr - prev) / prev) * 100);
 
   const topContributors: { name: string; avatar: string | null; count: number }[] = stats?.topContributors ?? [];
   const potPercent = event.moneyPot
     ? Math.min(100, (event.moneyPot.current / event.moneyPot.target) * 100)
     : 0;
+  const daysLeft = Math.max(0, Math.ceil((new Date(event.date).getTime() - Date.now()) / 86400000));
 
 
   return (
@@ -109,7 +114,7 @@ function Dashboard() {
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Engagement</p>
               <p className="font-serif text-2xl">Activité des 12 derniers jours</p>
             </div>
-            <span className="rounded-full bg-primary-light px-3 py-1 text-[10px] font-bold uppercase text-primary">+68%</span>
+            <span className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase ${trendPct >= 0 ? "bg-primary-light text-primary" : "bg-destructive/10 text-destructive"}`}>{trendPct >= 0 ? "+" : ""}{trendPct}%</span>
           </div>
           <div className="mt-5 flex h-32 items-end gap-1.5">
             {chartData.map((d, i) => (
@@ -145,15 +150,17 @@ function Dashboard() {
             </div>
             <div className="mt-3 grid grid-cols-3 gap-3 text-center">
               <div>
-                <p className="font-serif text-lg">32</p>
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Contributeurs</p>
+                <p className="font-serif text-lg">{event.moneyPot.currency}</p>
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Devise</p>
               </div>
               <div>
-                <p className="font-serif text-lg">85 €</p>
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Don moyen</p>
+                <p className="font-serif text-lg">
+                  {Math.max(0, event.moneyPot.target - event.moneyPot.current).toLocaleString("fr-FR")} {event.moneyPot.currency}
+                </p>
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Reste à collecter</p>
               </div>
               <div>
-                <p className="font-serif text-lg">3</p>
+                <p className="font-serif text-lg">{daysLeft}</p>
                 <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Jours restants</p>
               </div>
             </div>
@@ -192,38 +199,12 @@ function Dashboard() {
         </section>
 
         {/* Audience */}
-        <section className="rounded-3xl bg-surface p-5 shadow-card">
+        <section className="rounded-3xl border border-dashed border-border bg-surface p-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Audience du live</p>
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            <div className="rounded-2xl bg-background p-3">
-              <Eye className="h-4 w-4 text-primary" />
-              <p className="mt-2 font-serif text-xl">1 248</p>
-              <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Vues uniques</p>
-            </div>
-            <div className="rounded-2xl bg-background p-3">
-              <Users className="h-4 w-4 text-primary" />
-              <p className="mt-2 font-serif text-xl">14 min</p>
-              <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Temps moyen</p>
-            </div>
-          </div>
-          <div className="mt-3 space-y-2">
-            {[
-              { country: "🇫🇷 France", percent: 68 },
-              { country: "🇧🇪 Belgique", percent: 14 },
-              { country: "🇨🇦 Canada", percent: 9 },
-              { country: "🌍 Autres", percent: 9 },
-            ].map((r) => (
-              <div key={r.country}>
-                <div className="flex justify-between text-xs">
-                  <span>{r.country}</span>
-                  <span className="font-semibold">{r.percent}%</span>
-                </div>
-                <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-primary-light">
-                  <div className="h-full rounded-full bg-gradient-primary" style={{ width: `${r.percent}%` }} />
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="mt-2 font-serif text-lg">Statistiques détaillées bientôt disponibles</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Une fois votre live diffusé, retrouvez ici la durée d'écoute, les pays d'origine et les pics d'audience.
+          </p>
         </section>
       </main>
     </div>
