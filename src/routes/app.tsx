@@ -33,7 +33,11 @@ function AppLayout() {
             </Link>
           </div>
         </div>
+        <div className="container-app min-w-0 pb-3">
+          <AppTabs />
+        </div>
       </header>
+
       <main className="container-app min-w-0">
         <Outlet />
       </main>
