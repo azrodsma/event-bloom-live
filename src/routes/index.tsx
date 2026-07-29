@@ -223,6 +223,7 @@ function Landing() {
           <div className="text-center">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Fonctionnalités</p>
             <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Tout ce dont vous avez besoin</h2>
+            <div className="rule-gold mx-auto mt-5 w-24" />
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -233,12 +234,18 @@ function Landing() {
               { icon: Sparkles, title: "Stories & feed", desc: "Un fil d'actualité inspiré d'Instagram, en privé." },
               { icon: QrCode, title: "Codes & QR", desc: "Accès invités par code ou QR code, en toute simplicité." },
             ].map((f) => (
-              <div key={f.title} className="rounded-2xl bg-surface p-6 shadow-card">
-                <f.icon className="h-6 w-6 text-primary" />
+              <div
+                key={f.title}
+                className="group rounded-2xl border border-border/70 bg-surface p-6 shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-soft"
+              >
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary-light text-primary transition group-hover:bg-gradient-primary group-hover:text-white">
+                  <f.icon className="h-5 w-5" />
+                </div>
                 <h3 className="mt-4 font-serif text-xl">{f.title}</h3>
-                <p className="mt-1.5 text-sm text-muted-foreground">{f.desc}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
               </div>
             ))}
+          </div>
           </div>
         </div>
       </section>
