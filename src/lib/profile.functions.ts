@@ -27,7 +27,12 @@ export const updateMyProfile = createServerFn({ method: "POST" })
       .parse(i),
   )
   .handler(async ({ data, context }) => {
-    const patch: Record<string, unknown> = {};
+    const patch: {
+      display_name?: string;
+      bio?: string | null;
+      avatar_url?: string | null;
+      phone?: string | null;
+    } = {};
     if (data.displayName !== undefined) patch.display_name = data.displayName;
     if (data.bio !== undefined) patch.bio = data.bio;
     if (data.avatarUrl !== undefined) patch.avatar_url = data.avatarUrl;
