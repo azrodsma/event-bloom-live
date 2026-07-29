@@ -18,20 +18,57 @@ function ResetPasswordPage() {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [busy, setBusy] = useState(false);
-  const [ready, setReady] = useState(false);
+  const [status, setStatus] = useState<"checking" | "ready" | "invalid">("checking");
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Supabase place les tokens en fragment (#access_token=...) après clic sur le lien recovery.
-    // Le client détecte la session automatiquement (detectSessionInUrl).
-    supabase.auth.getSession().then(({ data }) => {
-      setReady(!!data.session);
-    });
+    let cancelled = false;
+
+    async function resolveSession() {
+      const url = new URL(window.location.href);
+      const hash = new URLSearchParams(url.hash.replace(/^#/, ""));
+
+      // 1) Lien PKCE : ?code=...
+      const code = url.searchParams.get("code");
+      // 2) Lien OTP : ?token_hash=...&type=recovery
+      const tokenHash = url.searchParams.get("token_hash");
+      // 3) Lien implicite : #access_token=...&refresh_token=...
+      const accessToken = hash.get("access_token");
+      const refreshToken = hash.get("refresh_token");
+      const errorDescription = url.searchParams.get("error_description") || hash.get("error_description");
+
+      try {
+        if (errorDescription) throw new Error(errorDescription);
+        if (code) {
+          const { error } = await supabase.auth.exchangeCodeForSession(code);
+          if (error) throw error;
+        } else if (tokenHash) {
+          const { error } = await supabase.auth.verifyOtp({ type: "recovery", token_hash: tokenHash });
+          if (error) throw error;
+        } else if (accessToken && refreshToken) {
+          const { error } = await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
+          if (error) throw error;
+        }
+      } catch {
+        // on retombe sur la vérification de session ci-dessous
+      }
+
+      // Nettoyage de l'URL (on ne laisse pas traîner les tokens)
+      window.history.replaceState({}, "", "/auth/reset-password");
+
+      const { data } = await supabase.auth.getSession();
+      if (cancelled) return;
+      setStatus(data.session ? "ready" : "invalid");
+    }
+
+    void resolveSession();
+
     const { data: sub } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") setReady(true);
+      if (event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") setStatus("ready");
     });
-    return () => sub.subscription.unsubscribe();
+    return () => { cancelled = true; sub.subscription.unsubscribe(); };
   }, []);
+
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
