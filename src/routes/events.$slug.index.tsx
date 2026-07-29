@@ -160,11 +160,13 @@ function EventPage() {
 
 
         {event.moneyPot && (
-          <CagnotteCard
-            url={event.moneyPot.url}
-            goal={event.moneyPot.target}
-            current={event.moneyPot.current}
-          />
+          <div className="lg:hidden">
+            <CagnotteCard
+              url={event.moneyPot.url}
+              goal={event.moneyPot.target}
+              current={event.moneyPot.current}
+            />
+          </div>
         )}
 
 
