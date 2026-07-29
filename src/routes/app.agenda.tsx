@@ -319,8 +319,8 @@ function AgendaCard({ item, now }: { item: AgendaItem; now: Date }) {
         params={{ slug: item.slug }}
         className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card p-3 shadow-sm"
       >
-        <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-secondary text-2xl">
-          {emoji}
+        <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-secondary text-primary">
+          <TypeIcon className="h-6 w-6" />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-1.5">
