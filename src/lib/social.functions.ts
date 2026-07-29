@@ -155,11 +155,24 @@ export const listPostComments = createServerFn({ method: "GET" })
     const sb = serverPublic();
     const { data: rows, error } = await sb
       .from("comments")
-      .select("id, post_id, author_name, content, created_at")
+      .select("id, post_id, author_id, author_name, content, created_at")
       .eq("post_id", data.postId)
       .order("created_at", { ascending: true });
     if (error) throw new Error(error.message);
     return rows ?? [];
+  });
+
+export const deleteComment = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i) => z.object({ id: z.string().uuid() }).parse(i))
+  .handler(async ({ data, context }) => {
+    const { data: row } = await context.supabase
+      .from("comments").select("author_id").eq("id", data.id).maybeSingle();
+    if (!row) throw new Error("Commentaire introuvable");
+    if (row.author_id !== context.userId) throw new Error("Non autorisé");
+    const { error } = await context.supabase.from("comments").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
   });
 
 export const createComment = createServerFn({ method: "POST" })
