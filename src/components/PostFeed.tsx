@@ -160,6 +160,14 @@ export function PostFeed({ eventId }: { eventId: string }) {
                   >
                     <MessageCircle className="h-4 w-4" /> {comments}
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => (user ? bmMut.mutate(p.id) : toast.error("Connectez-vous pour sauvegarder"))}
+                    className={`ml-auto inline-flex items-center gap-1.5 transition hover:text-gold ${bmSet.has(p.id) ? "text-gold" : ""}`}
+                    aria-label="Sauvegarder"
+                  >
+                    <Bookmark className="h-4 w-4" fill={bmSet.has(p.id) ? "currentColor" : "none"} />
+                  </button>
                 </footer>
                 {openComments[p.id] && <CommentThread postId={p.id} eventId={eventId} />}
               </article>
