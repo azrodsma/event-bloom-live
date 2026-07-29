@@ -25,14 +25,16 @@ export const Route = createFileRoute("/events/$slug/dashboard")({
   component: Dashboard,
 });
 
-const chartData = [12, 24, 38, 52, 70, 95, 120, 148, 172, 190, 205, 220];
-
 function Dashboard() {
   const { event, stats } = Route.useLoaderData();
-  const max = Math.max(...chartData);
+  const chartData: { label: string; value: number }[] = stats?.activity ?? Array.from({ length: 12 }, (_, i) => ({ label: `J-${11 - i}`, value: 0 }));
+  const max = Math.max(1, ...chartData.map((d) => d.value));
+
+  const topContributors: { name: string; avatar: string | null; count: number }[] = stats?.topContributors ?? [];
   const potPercent = event.moneyPot
     ? Math.min(100, (event.moneyPot.current / event.moneyPot.target) * 100)
     : 0;
+
 
   return (
     <div className="min-h-screen bg-background pb-16">
@@ -78,7 +80,8 @@ function Dashboard() {
         <section className="grid grid-cols-2 gap-3">
           {[
             { icon: Users, label: "Invités confirmés", value: String(stats?.guestsConfirmed ?? 0), trend: `${stats?.guestsTotal ?? 0} total`, tone: "primary" as const },
-            { icon: Heart, label: "Réactions live", value: "—", trend: "24h", tone: "live" as const },
+            { icon: Heart, label: "Réactions live", value: String(stats?.reactions24h ?? 0), trend: "24h", tone: "live" as const },
+
             { icon: Camera, label: "Photos album", value: String(stats?.photos ?? 0), trend: "en direct", tone: "gold" as const },
             { icon: MessageCircle, label: "Mots du livre d'or", value: String(stats?.guestbook ?? 0), trend: "en direct", tone: "primary" as const },
           ].map((k) => (
@@ -109,15 +112,16 @@ function Dashboard() {
             <span className="rounded-full bg-primary-light px-3 py-1 text-[10px] font-bold uppercase text-primary">+68%</span>
           </div>
           <div className="mt-5 flex h-32 items-end gap-1.5">
-            {chartData.map((v, i) => (
+            {chartData.map((d, i) => (
               <div key={i} className="flex flex-1 flex-col items-center gap-1">
                 <div
                   className="w-full rounded-t-lg bg-gradient-primary transition-all"
-                  style={{ height: `${(v / max) * 100}%` }}
+                  style={{ height: `${(d.value / max) * 100}%` }}
                 />
-                <span className="text-[9px] text-muted-foreground">J-{12 - i}</span>
+                <span className="text-[9px] text-muted-foreground">{d.label}</span>
               </div>
             ))}
+
           </div>
         </section>
 
@@ -159,26 +163,32 @@ function Dashboard() {
         {/* Top contributors */}
         <section className="rounded-3xl bg-surface p-5 shadow-card">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Invités les plus actifs</p>
-          <ul className="mt-3 space-y-2">
-            {[
-              { name: "Emma L.", role: "Témoin", posts: 42, avatar: 12 },
-              { name: "Lucas M.", role: "Frère", posts: 28, avatar: 25 },
-              { name: "Marie D.", role: "Amie", posts: 19, avatar: 47 },
-              { name: "Julien R.", role: "Cousin", posts: 15, avatar: 15 },
-            ].map((c, i) => (
-              <li key={c.name} className="flex items-center gap-3 rounded-2xl p-2 hover:bg-background">
-                <span className="w-4 text-center font-serif text-lg text-muted-foreground">{i + 1}</span>
-                <img src={`https://i.pravatar.cc/80?img=${c.avatar}`} alt="" className="h-9 w-9 rounded-full object-cover" />
-                <div className="flex-1">
-                  <p className="text-sm font-semibold">{c.name}</p>
-                  <p className="text-[11px] text-muted-foreground">{c.role}</p>
-                </div>
-                <span className="inline-flex items-center gap-1 rounded-full bg-primary-light px-2.5 py-1 text-[11px] font-semibold text-primary">
-                  <Camera className="h-3 w-3" /> {c.posts}
-                </span>
-              </li>
-            ))}
-          </ul>
+          {topContributors.length === 0 ? (
+            <p className="mt-3 text-sm text-muted-foreground">Aucune contribution pour le moment.</p>
+          ) : (
+            <ul className="mt-3 space-y-2">
+              {topContributors.map((c, i) => (
+                <li key={`${c.name}-${i}`} className="flex items-center gap-3 rounded-2xl p-2 hover:bg-background">
+                  <span className="w-4 text-center font-serif text-lg text-muted-foreground">{i + 1}</span>
+                  {c.avatar ? (
+                    <img src={c.avatar} alt="" className="h-9 w-9 rounded-full object-cover" />
+                  ) : (
+                    <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-primary font-serif text-sm text-white">
+                      {c.name.slice(0, 1).toUpperCase()}
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <p className="text-sm font-semibold">{c.name}</p>
+                    <p className="text-[11px] text-muted-foreground">Contributeur</p>
+                  </div>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-primary-light px-2.5 py-1 text-[11px] font-semibold text-primary">
+                    <Camera className="h-3 w-3" /> {c.count}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+
         </section>
 
         {/* Audience */}
