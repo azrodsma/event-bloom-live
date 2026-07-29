@@ -2,7 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, MessageCircle, Users, Gift, Video, Camera, Bell, LogIn, Check } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 import { listMyNotifications, markNotificationRead, markAllNotificationsRead } from "@/lib/notifications.functions";
 
 export const Route = createFileRoute("/app/notifications")({
