@@ -8,7 +8,12 @@ export const Route = createFileRoute("/join")({
     meta: [
       { title: "Rejoindre un événement — Memento Live" },
       { name: "description", content: "Entrez votre code d'invitation pour accéder à un événement privé." },
-    ],
+          { property: "og:title", content: "Rejoindre un événement — Memento Live" },
+      { property: "og:description", content: "Entrez votre code d'invitation." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://event.bold-lab-agency.com/join" },
+],
+    links: [{ rel: "canonical", href: "https://event.bold-lab-agency.com/join" }],
   }),
   component: JoinPage,
 });

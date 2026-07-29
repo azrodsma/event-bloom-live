@@ -9,7 +9,8 @@ export const Route = createFileRoute("/auth/reset-password")({
     meta: [
       { title: "Nouveau mot de passe — Memento Live" },
       { name: "description", content: "Choisissez un nouveau mot de passe pour votre compte Memento Live." },
-    ],
+          { name: "robots", content: "noindex" },
+],
   }),
   component: ResetPasswordPage,
 });

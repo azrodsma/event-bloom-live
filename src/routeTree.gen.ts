@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as JoinRouteImport } from './routes/join'
@@ -289,6 +290,11 @@ import { Route as EventsSlugLiveSetupRouteImport } from './routes/events.$slug.l
 import { Route as EventsSlugGuestbookNewRouteImport } from './routes/events.$slug.guestbook.new'
 import { Route as EventsSlugGuestbookIdRouteImport } from './routes/events.$slug.guestbook.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
@@ -1703,6 +1709,7 @@ export interface FileRoutesByFullPath {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/app/about': typeof AppAboutRoute
   '/app/academy': typeof AppAcademyRoute
   '/app/accessibility': typeof AppAccessibilityRoute
@@ -1983,6 +1990,7 @@ export interface FileRoutesByTo {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/app/about': typeof AppAboutRoute
   '/app/academy': typeof AppAcademyRoute
   '/app/accessibility': typeof AppAccessibilityRoute
@@ -2264,6 +2272,7 @@ export interface FileRoutesById {
   '/join': typeof JoinRoute
   '/legal': typeof LegalRoute
   '/onboarding': typeof OnboardingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/app/about': typeof AppAboutRoute
   '/app/academy': typeof AppAcademyRoute
   '/app/accessibility': typeof AppAccessibilityRoute
@@ -2547,6 +2556,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/sitemap.xml'
     | '/app/about'
     | '/app/academy'
     | '/app/accessibility'
@@ -2827,6 +2837,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/sitemap.xml'
     | '/app/about'
     | '/app/academy'
     | '/app/accessibility'
@@ -3107,6 +3118,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/legal'
     | '/onboarding'
+    | '/sitemap.xml'
     | '/app/about'
     | '/app/academy'
     | '/app/accessibility'
@@ -3389,6 +3401,7 @@ export interface RootRouteChildren {
   JoinRoute: typeof JoinRoute
   LegalRoute: typeof LegalRoute
   OnboardingRoute: typeof OnboardingRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   EventsSlugRoute: typeof EventsSlugRouteWithChildren
   ITokenRoute: typeof ITokenRoute
   RsvpSlugRoute: typeof RsvpSlugRoute
@@ -3397,6 +3410,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboarding': {
       id: '/onboarding'
       path: '/onboarding'
@@ -5963,6 +5983,7 @@ const rootRouteChildren: RootRouteChildren = {
   JoinRoute: JoinRoute,
   LegalRoute: LegalRoute,
   OnboardingRoute: OnboardingRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   EventsSlugRoute: EventsSlugRouteWithChildren,
   ITokenRoute: ITokenRoute,
   RsvpSlugRoute: RsvpSlugRoute,
@@ -5971,13 +5992,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -18,7 +18,12 @@ export const Route = createFileRoute("/auth")({
     meta: [
       { title: "Connexion — Memento Live" },
       { name: "description", content: "Connectez-vous ou créez votre compte Memento Live." },
-    ],
+          { property: "og:title", content: "Connexion — Memento Live" },
+      { property: "og:description", content: "Accédez à vos événements privés." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://event.bold-lab-agency.com/auth" },
+],
+    links: [{ rel: "canonical", href: "https://event.bold-lab-agency.com/auth" }],
   }),
   component: AuthPage,
 });

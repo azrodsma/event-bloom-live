@@ -11,7 +11,9 @@ export const Route = createFileRoute("/legal")({
       { property: "og:description", content: "Toutes les informations légales de Memento Live." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-    ],
+          { property: "og:url", content: "https://event.bold-lab-agency.com/legal" },
+],
+    links: [{ rel: "canonical", href: "https://event.bold-lab-agency.com/legal" }],
   }),
 });
 
