@@ -348,7 +348,7 @@ function EventPage() {
               <Wallet className="h-5 w-5" />
             </div>
             <p className="font-serif text-sm leading-tight">Budget</p>
-            <p className="text-[10px] text-muted-foreground">38 000 €</p>
+            <p className="text-[10px] text-muted-foreground">{stats ? `${(stats.budgetTotal ?? 0).toLocaleString("fr-FR")} €` : "—"}</p>
           </Link>
           <Link
             to="/events/$slug/registry"
@@ -359,7 +359,7 @@ function EventPage() {
               <Gift className="h-5 w-5" />
             </div>
             <p className="font-serif text-sm leading-tight">Cadeaux</p>
-            <p className="text-[10px] text-muted-foreground">5 idées</p>
+            <p className="text-[10px] text-muted-foreground">{stats?.gifts ?? 0} idées</p>
           </Link>
           <Link
             to="/events/$slug/checkin"
