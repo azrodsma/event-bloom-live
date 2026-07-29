@@ -84,7 +84,7 @@ function Home() {
           </div>
         </Link>
 
-        <Link to="/app/create" className="tap col-span-1 flex flex-col justify-between rounded-[28px] bg-surface p-5 shadow-card ring-1 ring-border transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-3 lg:p-6">
+        <Link to="/app/create" className="tap col-span-1 flex flex-col justify-between rounded-[28px] bg-surface p-5 shadow-card ring-1 ring-border transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
           <Calendar className="h-5 w-5 text-gold" />
           <div className="mt-3">
             <p className="font-serif text-lg leading-tight lg:text-xl">Nouveau</p>
@@ -92,7 +92,7 @@ function Home() {
           </div>
         </Link>
 
-        <Link to="/app/explore" className="tap col-span-1 flex flex-col justify-between rounded-[28px] bg-secondary-light p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-3 lg:p-6">
+        <Link to="/app/explore" className="tap col-span-1 flex flex-col justify-between rounded-[28px] bg-secondary-light p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
           <Camera className="h-5 w-5 text-primary-dark" />
           <div className="mt-3">
             <p className="font-serif text-lg leading-tight lg:text-xl">Explorer</p>
