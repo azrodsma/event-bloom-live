@@ -360,7 +360,7 @@ function EventPage() {
             <h2 className="font-serif text-xl">En temps réel</h2>
             <span className="text-[11px] uppercase tracking-widest text-muted-foreground">Info & engagement</span>
           </div>
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-2.5 min-[420px]:grid-cols-3 sm:gap-3 md:grid-cols-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
             <Link
               to="/events/$slug/weather"
               params={{ slug: event.slug }}
