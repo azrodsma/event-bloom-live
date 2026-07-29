@@ -199,38 +199,12 @@ function Dashboard() {
         </section>
 
         {/* Audience */}
-        <section className="rounded-3xl bg-surface p-5 shadow-card">
+        <section className="rounded-3xl border border-dashed border-border bg-surface p-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Audience du live</p>
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            <div className="rounded-2xl bg-background p-3">
-              <Eye className="h-4 w-4 text-primary" />
-              <p className="mt-2 font-serif text-xl">1 248</p>
-              <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Vues uniques</p>
-            </div>
-            <div className="rounded-2xl bg-background p-3">
-              <Users className="h-4 w-4 text-primary" />
-              <p className="mt-2 font-serif text-xl">14 min</p>
-              <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Temps moyen</p>
-            </div>
-          </div>
-          <div className="mt-3 space-y-2">
-            {[
-              { country: "🇫🇷 France", percent: 68 },
-              { country: "🇧🇪 Belgique", percent: 14 },
-              { country: "🇨🇦 Canada", percent: 9 },
-              { country: "🌍 Autres", percent: 9 },
-            ].map((r) => (
-              <div key={r.country}>
-                <div className="flex justify-between text-xs">
-                  <span>{r.country}</span>
-                  <span className="font-semibold">{r.percent}%</span>
-                </div>
-                <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-primary-light">
-                  <div className="h-full rounded-full bg-gradient-primary" style={{ width: `${r.percent}%` }} />
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="mt-2 font-serif text-lg">Statistiques détaillées bientôt disponibles</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Une fois votre live diffusé, retrouvez ici la durée d'écoute, les pays d'origine et les pics d'audience.
+          </p>
         </section>
       </main>
     </div>
