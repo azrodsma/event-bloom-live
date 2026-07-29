@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router"
 import { Logo } from "@/components/Logo";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
+
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
@@ -76,22 +76,6 @@ function AuthPage() {
     }
   }
 
-  async function handleGoogle() {
-    if (busy) return;
-    setBusy(true);
-    try {
-      const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
-      });
-      if (result.error) {
-        const msg = result.error instanceof Error ? result.error.message : String(result.error);
-        toast.error("Connexion Google impossible", { description: msg });
-      }
-      // If redirected: browser will leave. Otherwise session is set → useEffect above navigates.
-    } finally {
-      setBusy(false);
-    }
-  }
 
   return (
     <div className="relative grid min-h-screen bg-gradient-mesh md:grid-cols-2">
