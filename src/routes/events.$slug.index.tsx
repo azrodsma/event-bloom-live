@@ -264,7 +264,7 @@ function EventPage() {
         )}
 
         {/* Quick blocks */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           <Link
             to="/events/$slug/guestbook"
             params={{ slug: event.slug }}
@@ -302,7 +302,7 @@ function EventPage() {
         </Link>
 
         {/* Modules d'organisation */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
           <Link
             to="/events/$slug/checklist"
             params={{ slug: event.slug }}
@@ -340,7 +340,7 @@ function EventPage() {
 
 
 
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
           <Link
             to="/events/$slug/budget"
             params={{ slug: event.slug }}
@@ -376,7 +376,7 @@ function EventPage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
           <Link
             to="/events/$slug/rsvp"
             params={{ slug: event.slug }}
@@ -412,7 +412,7 @@ function EventPage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
           <Link
             to="/events/$slug/carpool"
             params={{ slug: event.slug }}
@@ -448,7 +448,7 @@ function EventPage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
           <Link
             to="/events/$slug/photobooth"
             params={{ slug: event.slug }}
@@ -485,7 +485,7 @@ function EventPage() {
         </div>
 
         {/* Info & assistance */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
           <Link
             to="/events/$slug/weather"
             params={{ slug: event.slug }}
@@ -516,7 +516,7 @@ function EventPage() {
         </div>
 
         {/* Engagement & journal */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           <Link
             to="/events/$slug/polls"
             params={{ slug: event.slug }}
