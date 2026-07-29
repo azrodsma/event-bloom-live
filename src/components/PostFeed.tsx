@@ -61,6 +61,21 @@ export function PostFeed({ eventId }: { eventId: string }) {
     onSuccess: () => qc.invalidateQueries({ queryKey: ["posts", eventId] }),
   });
 
+  const { data: bmIds = [] } = useQuery({
+    queryKey: ["bookmark-ids", user?.id],
+    queryFn: () => fetchBmIds(),
+    enabled: !!user,
+  });
+  const bmSet = new Set(bmIds);
+  const bmMut = useMutation({
+    mutationFn: (postId: string) => toggleBm({ data: { postId } }),
+    onSuccess: (res) => {
+      qc.invalidateQueries({ queryKey: ["bookmark-ids", user?.id] });
+      qc.invalidateQueries({ queryKey: ["bookmarks", user?.id] });
+      toast.success(res.bookmarked ? "Ajouté aux favoris" : "Retiré des favoris");
+    },
+  });
+
   return (
     <section className="space-y-4">
       <h2 className="font-serif text-xl">Fil de l'événement</h2>
