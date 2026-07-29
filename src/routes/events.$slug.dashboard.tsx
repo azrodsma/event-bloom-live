@@ -114,7 +114,7 @@ function Dashboard() {
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Engagement</p>
               <p className="font-serif text-2xl">Activité des 12 derniers jours</p>
             </div>
-            <span className="rounded-full bg-primary-light px-3 py-1 text-[10px] font-bold uppercase text-primary">+68%</span>
+            <span className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase ${trendPct >= 0 ? "bg-primary-light text-primary" : "bg-destructive/10 text-destructive"}`}>{trendPct >= 0 ? "+" : ""}{trendPct}%</span>
           </div>
           <div className="mt-5 flex h-32 items-end gap-1.5">
             {chartData.map((d, i) => (
