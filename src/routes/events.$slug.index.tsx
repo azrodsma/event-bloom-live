@@ -437,7 +437,7 @@ function EventPage() {
 
 
         {/* Venue */}
-        <section className="rounded-3xl bg-surface p-5 shadow-card">
+        <section className="rounded-3xl bg-surface p-5 shadow-card lg:hidden">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Lieu</p>
           <p className="mt-1 font-serif text-lg">{event.venue}</p>
           <p className="text-sm text-muted-foreground">{event.city}, {event.country}</p>
@@ -455,16 +455,16 @@ function EventPage() {
         <Link
           to="/events/$slug/souvenir"
           params={{ slug: event.slug }}
-          className="relative flex items-center gap-4 overflow-hidden rounded-3xl bg-gradient-primary p-5 text-white shadow-glow"
+          className="tap relative flex items-center gap-4 overflow-hidden rounded-3xl bg-gradient-primary p-5 text-white shadow-glow transition hover:-translate-y-0.5"
         >
           <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/20 backdrop-blur">
-            ✨
+            <Sparkles className="h-5 w-5" />
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-xs font-bold uppercase tracking-widest opacity-90">Le souvenir</p>
             <p className="font-serif text-xl">Revivez la journée en un clin d'œil</p>
           </div>
-          <span className="text-xl">→</span>
+          <ExternalLink className="h-4 w-4 shrink-0 opacity-90" />
         </Link>
 
         {/* Organizer actions */}
