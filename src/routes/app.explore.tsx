@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { EventCard } from "@/components/EventCard";
-import { eventTypes, eventTypeIcons } from "@/lib/mock-data";
+import { eventTypes } from "@/lib/mock-data";
+import { eventIcon } from "@/lib/event-icons";
 import { Search, Sparkles, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -49,7 +50,7 @@ function Explore() {
       <div className="scrollbar-hide -mx-4 flex gap-2 overflow-x-auto px-4">
         <button
           onClick={() => setFilter(null)}
-          className={`shrink-0 rounded-full px-4 py-2 text-xs font-medium ${
+          className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-xs font-medium ${
             !filter ? "bg-foreground text-background" : "bg-surface text-muted-foreground"
           }`}
         >
@@ -59,11 +60,11 @@ function Explore() {
           <button
             key={t}
             onClick={() => setFilter(t === filter ? null : t)}
-            className={`shrink-0 rounded-full px-4 py-2 text-xs font-medium ${
+            className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-xs font-medium ${
               t === filter ? "bg-primary text-primary-foreground" : "bg-surface text-muted-foreground"
             }`}
           >
-            {eventTypeIcons[t]} {t}
+            {(() => { const I = eventIcon(t); return <I className="h-3.5 w-3.5" />; })()} {t}
           </button>
         ))}
       </div>

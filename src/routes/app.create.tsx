@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { eventTypes, eventTypeIcons } from "@/lib/mock-data";
+import { eventTypes } from "@/lib/mock-data";
+import { eventIcon } from "@/lib/event-icons";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Gift, Radio, Sparkles } from "lucide-react";
 import { createEvent } from "@/lib/events.functions";
@@ -99,7 +100,7 @@ function CreatePage() {
             {eventTypes.map((t) => (
               <button key={t} onClick={() => setSelectedType(t)}
                 className={`rounded-2xl border p-4 text-left transition ${selectedType === t ? "border-primary bg-primary-light shadow-glow" : "border-border bg-background hover:border-primary/40"}`}>
-                <div className="text-2xl">{eventTypeIcons[t]}</div>
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-cream text-primary">{(() => { const I = eventIcon(t); return <I className="h-5 w-5" />; })()}</div>
                 <div className="mt-2 text-sm font-semibold">{t}</div>
               </button>
             ))}
