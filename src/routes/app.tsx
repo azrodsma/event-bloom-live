@@ -32,7 +32,7 @@ function AppLayout() {
           </div>
         </div>
       </header>
-      <main className="container-app">
+      <main className="container-app min-w-0">
         <Outlet />
       </main>
       <BottomNav />
