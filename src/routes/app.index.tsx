@@ -50,10 +50,10 @@ function Home() {
             <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium uppercase tracking-widest text-background/90 backdrop-blur">
               <Sparkles className="h-3 w-3" /> Bonjour
             </span>
-            <h1 className="mt-4 font-serif text-[2.25rem] leading-[1] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+            <h1 className="mt-4 max-w-[15ch] text-balance font-serif text-[clamp(2rem,7vw,2.75rem)] leading-[1.02] tracking-tight md:text-5xl xl:text-6xl">
               Vos souvenirs,<br /><span className="italic text-primary">en direct</span>.
             </h1>
-            <p className="mt-3 max-w-md text-sm text-background/70 lg:text-base">
+            <p className="mt-3 max-w-[48ch] text-sm text-background/70 lg:text-base">
               {events.length} événement{events.length > 1 ? "s" : ""} · {liveCount} en live maintenant.
             </p>
             <div className="mt-6 flex flex-wrap gap-2 lg:mt-auto lg:pt-8">
@@ -74,19 +74,19 @@ function Home() {
           <ArrowUpRight className="absolute right-4 top-4 h-4 w-4 opacity-80 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
         </Link>
 
-        <Link to="/app/favorites" className="tap col-span-1 rounded-[28px] bg-cream p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-1 lg:col-span-2 lg:p-6">
+        <Link to="/app/favorites" className="tap col-span-1 rounded-[28px] bg-cream p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
           <Heart className="h-5 w-5 text-primary" />
           <p className="mt-3 font-serif text-lg leading-tight lg:text-xl">Favoris</p>
           <p className="text-[11px] text-muted-foreground">Vos moments sauvegardés</p>
         </Link>
 
-        <Link to="/app/create" className="tap col-span-1 rounded-[28px] bg-surface p-5 shadow-card ring-1 ring-border transition hover:-translate-y-1 hover:shadow-glow md:col-span-1 lg:col-span-1 lg:p-6">
+        <Link to="/app/create" className="tap col-span-1 rounded-[28px] bg-surface p-5 shadow-card ring-1 ring-border transition hover:-translate-y-1 hover:shadow-glow md:col-span-4 lg:col-span-1 lg:p-6">
           <Calendar className="h-5 w-5 text-gold" />
           <p className="mt-3 font-serif text-lg leading-tight lg:text-xl">Nouveau</p>
           <p className="text-[11px] text-muted-foreground">Créer en 8 étapes</p>
         </Link>
 
-        <Link to="/app/explore" className="tap col-span-2 rounded-[28px] bg-secondary-light p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-1 lg:p-6">
+        <Link to="/app/explore" className="tap col-span-2 rounded-[28px] bg-secondary-light p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-4 lg:col-span-1 lg:p-6">
           <Camera className="h-5 w-5 text-primary-dark" />
           <p className="mt-3 font-serif text-lg leading-tight lg:text-xl">Explorer</p>
           <p className="text-[11px] text-muted-foreground">Événements publics</p>
@@ -126,7 +126,7 @@ function Home() {
             ))}
           </div>
           {isLoading ? (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
               {[0, 1, 2, 3].map((i) => (
                 <div key={i} className="relative h-72 overflow-hidden rounded-[32px] bg-muted">
                   <div className="animate-shimmer absolute inset-0" />
@@ -142,7 +142,7 @@ function Home() {
               </Link>
             </div>
           ) : (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
               {filtered.map((e) => (
                 <EventCard key={e.id} event={e} />
               ))}
