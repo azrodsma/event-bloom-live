@@ -1,5 +1,11 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Home, Search, Plus, Heart, User } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
+import { countUnread } from "@/lib/notifications.functions";
 
 type NavItem = {
   to: "/app" | "/app/explore" | "/app/create" | "/app/favorites" | "/app/profile";
@@ -19,6 +25,30 @@ const items: NavItem[] = [
 
 export function BottomNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { user } = useAuth();
+  const qc = useQueryClient();
+  const fetchUnread = useServerFn(countUnread);
+
+  const { data: unreadData } = useQuery({
+    queryKey: ["notifications-unread"],
+    queryFn: () => fetchUnread(),
+    enabled: !!user,
+    refetchOnWindowFocus: true,
+  });
+  const unread = unreadData?.count ?? 0;
+
+  useEffect(() => {
+    if (!user) return;
+    const ch = supabase
+      .channel(`nav-notifs-${user.id}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "notifications", filter: `user_id=eq.${user.id}` },
+        () => qc.invalidateQueries({ queryKey: ["notifications-unread"] }),
+      )
+      .subscribe();
+    return () => { supabase.removeChannel(ch); };
+  }, [user, qc]);
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-surface/95 backdrop-blur-xl pb-[env(safe-area-inset-bottom)]">
@@ -40,6 +70,7 @@ export function BottomNav() {
               </Link>
             );
           }
+          const showBadge = item.to === "/app/profile" && unread > 0;
           return (
             <Link
               key={item.to}
@@ -48,7 +79,14 @@ export function BottomNav() {
                 active ? "text-primary" : "text-muted-foreground"
               }`}
             >
-              <Icon className="h-5 w-5" strokeWidth={active ? 2.5 : 2} />
+              <span className="relative">
+                <Icon className="h-5 w-5" strokeWidth={active ? 2.5 : 2} />
+                {showBadge && (
+                  <span className="absolute -right-1.5 -top-1 grid min-w-[16px] place-items-center rounded-full bg-primary px-1 text-[9px] font-bold leading-none text-primary-foreground shadow-sm">
+                    {unread > 9 ? "9+" : unread}
+                  </span>
+                )}
+              </span>
               <span>{item.label}</span>
             </Link>
           );
