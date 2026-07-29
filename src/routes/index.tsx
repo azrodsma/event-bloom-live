@@ -16,6 +16,8 @@ import {
   Check,
   QrCode,
   Users,
+  MessageCircle,
+  Heart,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
