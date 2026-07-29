@@ -311,7 +311,7 @@ function EventPage() {
             <h2 className="font-serif text-xl">Organisation</h2>
             <span className="text-[11px] uppercase tracking-widest text-muted-foreground">Tous les modules</span>
           </div>
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-2.5 min-[420px]:grid-cols-3 sm:gap-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             {([
               { to: "/events/$slug/checklist", icon: CheckSquare, label: "Checklist", hint: stats ? `${stats.checklistDone}/${stats.checklistTotal} faits` : "À faire", tone: "primary" },
               { to: "/events/$slug/playlist", icon: Music2, label: "Playlist", hint: `${stats?.songs ?? 0} morceaux`, tone: "accent" },
@@ -340,10 +340,11 @@ function EventPage() {
                   key={m.to}
                   to={m.to}
                   params={{ slug: event.slug }}
-                  className="group flex flex-col gap-2 rounded-2xl bg-surface p-3.5 shadow-card ring-1 ring-border/40 transition hover:-translate-y-0.5 hover:shadow-glow sm:p-4"
+                  className="tap group flex min-h-[104px] flex-col gap-2 rounded-2xl bg-surface p-3 shadow-card ring-1 ring-border/40 transition active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-glow sm:min-h-[120px] sm:p-4"
                 >
-                  <div className={`grid h-10 w-10 place-items-center rounded-xl ${toneCls}`}>
+                  <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl sm:h-10 sm:w-10 ${toneCls}`}>
                     <Icon className="h-5 w-5" />
+
                   </div>
                   <p className="font-serif text-sm leading-tight">{m.label}</p>
                   <p className="line-clamp-1 text-[10px] text-muted-foreground">{m.hint}</p>
