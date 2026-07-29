@@ -279,6 +279,7 @@ import { Route as EventsSlugActivityRouteImport } from './routes/events.$slug.ac
 import { Route as EventsSlugAccommodationsRouteImport } from './routes/events.$slug.accommodations'
 import { Route as AppVendorsIdRouteImport } from './routes/app.vendors.$id'
 import { Route as AppUsersIdRouteImport } from './routes/app.users.$id'
+import { Route as AppStoryNewRouteImport } from './routes/app.story.new'
 import { Route as AppPostsIdRouteImport } from './routes/app.posts.$id'
 import { Route as AppMessagesIdRouteImport } from './routes/app.messages.$id'
 import { Route as EventsSlugStoryNewRouteImport } from './routes/events.$slug.story.new'
@@ -1647,6 +1648,11 @@ const AppUsersIdRoute = AppUsersIdRouteImport.update({
   path: '/users/$id',
   getParentRoute: () => AppRoute,
 } as any)
+const AppStoryNewRoute = AppStoryNewRouteImport.update({
+  id: '/story/new',
+  path: '/story/new',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppPostsIdRoute = AppPostsIdRouteImport.update({
   id: '/posts/$id',
   path: '/posts/$id',
@@ -1780,6 +1786,7 @@ export interface FileRoutesByFullPath {
   '/app/': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
   '/app/posts/$id': typeof AppPostsIdRoute
+  '/app/story/new': typeof AppStoryNewRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/accommodations': typeof EventsSlugAccommodationsRoute
@@ -2056,6 +2063,7 @@ export interface FileRoutesByTo {
   '/app': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
   '/app/posts/$id': typeof AppPostsIdRoute
+  '/app/story/new': typeof AppStoryNewRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/accommodations': typeof EventsSlugAccommodationsRoute
@@ -2335,6 +2343,7 @@ export interface FileRoutesById {
   '/app/': typeof AppIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
   '/app/posts/$id': typeof AppPostsIdRoute
+  '/app/story/new': typeof AppStoryNewRoute
   '/app/users/$id': typeof AppUsersIdRoute
   '/app/vendors/$id': typeof AppVendorsIdRoute
   '/events/$slug/accommodations': typeof EventsSlugAccommodationsRoute
@@ -2615,6 +2624,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/app/messages/$id'
     | '/app/posts/$id'
+    | '/app/story/new'
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/accommodations'
@@ -2891,6 +2901,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/messages/$id'
     | '/app/posts/$id'
+    | '/app/story/new'
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/accommodations'
@@ -3169,6 +3180,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/app/messages/$id'
     | '/app/posts/$id'
+    | '/app/story/new'
     | '/app/users/$id'
     | '/app/vendors/$id'
     | '/events/$slug/accommodations'
@@ -5251,6 +5263,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppUsersIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/story/new': {
+      id: '/app/story/new'
+      path: '/story/new'
+      fullPath: '/app/story/new'
+      preLoaderRoute: typeof AppStoryNewRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/posts/$id': {
       id: '/app/posts/$id'
       path: '/posts/$id'
@@ -5410,6 +5429,7 @@ interface AppRouteChildren {
   AppYearInReviewRoute: typeof AppYearInReviewRoute
   AppIndexRoute: typeof AppIndexRoute
   AppPostsIdRoute: typeof AppPostsIdRoute
+  AppStoryNewRoute: typeof AppStoryNewRoute
   AppUsersIdRoute: typeof AppUsersIdRoute
 }
 
@@ -5503,6 +5523,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppYearInReviewRoute: AppYearInReviewRoute,
   AppIndexRoute: AppIndexRoute,
   AppPostsIdRoute: AppPostsIdRoute,
+  AppStoryNewRoute: AppStoryNewRoute,
   AppUsersIdRoute: AppUsersIdRoute,
 }
 

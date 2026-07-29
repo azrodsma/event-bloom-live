@@ -16,7 +16,7 @@ export function StoryRail() {
 
   return (
     <div className="scrollbar-hide -mx-4 flex gap-4 overflow-x-auto px-4 pb-2">
-      <Link to="/app/create" className="flex w-16 shrink-0 flex-col items-center gap-1.5">
+      <Link to="/app/story/new" className="flex w-16 shrink-0 flex-col items-center gap-1.5">
         <div className="grid h-16 w-16 place-items-center rounded-full border-2 border-dashed border-primary/60 bg-primary-light text-primary">
           <Plus className="h-6 w-6" />
         </div>
