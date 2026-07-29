@@ -5,5 +5,9 @@ export const Route = createFileRoute("/events/$slug")({
 });
 
 function EventLayout() {
-  return <Outlet />;
+  return (
+    <div className="safe-x">
+      <Outlet />
+    </div>
+  );
 }
