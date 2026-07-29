@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Heart, MapPin, Users, Radio, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import type { MockEvent } from "@/lib/mock-data";
-import { eventTypeIcons } from "@/lib/mock-data";
+import { eventIcon } from "@/lib/event-icons";
 
 export function EventCard({ event }: { event: MockEvent }) {
   const [fav, setFav] = useState(false);
@@ -23,8 +23,8 @@ export function EventCard({ event }: { event: MockEvent }) {
         <div className="pointer-events-none absolute -inset-1 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-100" />
 
         <div className="absolute left-4 top-4 flex items-center gap-2">
-          <span className="glass rounded-full px-3 py-1 text-[11px] font-semibold text-foreground">
-            {eventTypeIcons[event.type]} {event.type}
+          <span className="glass inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold text-foreground">
+            {(() => { const I = eventIcon(event.type); return <I className="h-3 w-3 text-primary" />; })()} {event.type}
           </span>
           {event.isLive ? (
             <span className="animate-pulse-live inline-flex items-center gap-1.5 rounded-full bg-live px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white">

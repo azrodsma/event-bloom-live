@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 import { EventCard } from "@/components/EventCard";
-import { mockEvents, eventTypes, eventTypeIcons } from "@/lib/mock-data";
+import { mockEvents, eventTypes } from "@/lib/mock-data";
+import { eventIcon } from "@/lib/event-icons";
 import { listPublicEvents } from "@/lib/events.functions";
 import { adaptEvent, type DbEvent } from "@/lib/event-adapter";
 import { useServerFn } from "@tanstack/react-start";
@@ -259,9 +260,9 @@ function Landing() {
           {eventTypes.map((t) => (
             <span
               key={t}
-              className="rounded-full border border-border bg-surface px-5 py-2.5 text-sm font-medium text-foreground shadow-card"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-2.5 text-sm font-medium text-foreground shadow-card"
             >
-              {eventTypeIcons[t]} {t}
+              {(() => { const I = eventIcon(t); return <I className="h-4 w-4 text-gold" />; })()} {t}
             </span>
           ))}
         </div>

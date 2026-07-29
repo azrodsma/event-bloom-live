@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { listMyEvents } from "@/lib/events.functions";
-import { eventTypeIcons } from "@/lib/mock-data";
+import { eventIcon } from "@/lib/event-icons";
 import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/app/agenda")({
@@ -113,8 +113,8 @@ function Agenda() {
             {nextItem.cover ? (
               <img src={nextItem.cover} alt="" className="h-24 w-24 shrink-0 object-cover" />
             ) : (
-              <div className="grid h-24 w-24 shrink-0 place-items-center bg-secondary text-3xl">
-                {eventTypeIcons[nextItem.type as keyof typeof eventTypeIcons] ?? "🎉"}
+              <div className="grid h-24 w-24 shrink-0 place-items-center bg-secondary text-primary">
+                {(() => { const I = eventIcon(nextItem.type); return <I className="h-8 w-8" />; })()}
               </div>
             )}
             <div className="flex min-w-0 flex-1 flex-col justify-center py-3 pr-4">
@@ -307,7 +307,7 @@ function Agenda() {
 }
 
 function AgendaCard({ item, now }: { item: AgendaItem; now: Date }) {
-  const emoji = eventTypeIcons[item.type as keyof typeof eventTypeIcons] ?? "🎉";
+  const TypeIcon = eventIcon(item.type);
   const diff = daysBetween(now, item.date);
   const isPast = diff < 0;
   const isLive = item.status === "live";

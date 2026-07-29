@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { EventCard } from "@/components/EventCard";
-import { eventTypes, eventTypeIcons } from "@/lib/mock-data";
+import { eventTypes } from "@/lib/mock-data";
+import { eventIcon } from "@/lib/event-icons";
 import { Search, Sparkles, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -63,7 +64,7 @@ function Explore() {
               t === filter ? "bg-primary text-primary-foreground" : "bg-surface text-muted-foreground"
             }`}
           >
-            {eventTypeIcons[t]} {t}
+            {(() => { const I = eventIcon(t); return <I className="h-3.5 w-3.5" />; })()} {t}
           </button>
         ))}
       </div>
