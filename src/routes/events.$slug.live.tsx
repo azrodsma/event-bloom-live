@@ -275,22 +275,51 @@ function LivePage() {
         )}
 
         {tab === "Cadeaux" && (
-          <div className="grid flex-1 grid-cols-2 gap-3 overflow-y-auto p-4">
-            {paidInteractions.map((p) => (
-              <button
-                key={p.id}
-                className="rounded-2xl border border-white/10 bg-white/5 p-4 text-left backdrop-blur transition hover:border-primary"
-              >
-                <div className="text-4xl">{p.emoji}</div>
-                <p className="mt-2 text-sm font-semibold">{p.label}</p>
-                <p className="text-xs text-white/60">{p.price} €</p>
-              </button>
-            ))}
-            <p className="col-span-2 mt-2 rounded-2xl bg-white/5 p-3 text-center text-[11px] text-white/60">
-              Interactions payantes — paiement sécurisé (Stripe). Une partie soutient les créateurs.
-            </p>
+          <div className="flex-1 space-y-3 overflow-y-auto p-4">
+            {gifts.length === 0 ? (
+              <p className="rounded-2xl bg-white/5 p-6 text-center text-sm text-white/60">
+                Aucune idée cadeau pour le moment.
+              </p>
+            ) : (
+              <div className="grid grid-cols-2 gap-3">
+                {gifts.map((g) => (
+                  <a
+                    key={g.id}
+                    href={g.external_url ?? "#"}
+                    target={g.external_url ? "_blank" : undefined}
+                    rel={g.external_url ? "noopener noreferrer" : undefined}
+                    className="group rounded-2xl border border-white/10 bg-white/5 p-3 text-left backdrop-blur transition hover:border-primary"
+                  >
+                    {g.image_url ? (
+                      <img src={g.image_url} alt="" className="aspect-square w-full rounded-xl object-cover" />
+                    ) : (
+                      <div className="grid aspect-square w-full place-items-center rounded-xl bg-white/5 text-4xl">🎁</div>
+                    )}
+                    <p className="mt-2 line-clamp-2 text-sm font-semibold">{g.title}</p>
+                    <div className="mt-1 flex items-center justify-between text-xs">
+                      <span className="text-white/70">
+                        {typeof g.price === "number" ? `${g.price.toLocaleString("fr-FR")} €` : "—"}
+                      </span>
+                      {g.is_reserved ? (
+                        <span className="rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-semibold text-gold">Réservé</span>
+                      ) : (
+                        <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[10px] font-semibold text-primary">Disponible</span>
+                      )}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
+            <Link
+              to="/events/$slug/gift-registry"
+              params={{ slug: event.slug }}
+              className="block rounded-2xl bg-white/10 p-3 text-center text-xs font-semibold text-white/90 backdrop-blur"
+            >
+              Voir toute la liste de cadeaux →
+            </Link>
           </div>
         )}
+
 
         {tab === "Cagnotte" && event.moneyPot && (
           <div className="flex-1 space-y-4 overflow-y-auto p-4">
