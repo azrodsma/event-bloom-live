@@ -42,7 +42,7 @@ function Dashboard() {
 
 
   return (
-    <div className="min-h-screen bg-background pb-16">
+    <div className="module-page">
       <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-border bg-background/95 px-4 py-3 backdrop-blur">
         <Link
           to="/events/$slug"

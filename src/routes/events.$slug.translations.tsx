@@ -34,7 +34,7 @@ function Translations() {
     setEnabled((e) => (e.includes(c) ? e.filter((x) => x !== c) : [...e, c]));
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="module-page">
       <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
         <Link to="/events/$slug" params={{ slug }} className="grid h-9 w-9 place-items-center rounded-full bg-surface">
           <ArrowLeft className="h-5 w-5" />

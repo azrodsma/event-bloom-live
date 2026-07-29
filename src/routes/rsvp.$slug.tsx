@@ -86,7 +86,7 @@ function RsvpPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="module-page">
       <header className="relative h-56">
         {event.cover_url && <img src={event.cover_url} alt="" className="h-full w-full object-cover" />}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/70" />

@@ -29,7 +29,7 @@ const cats = [
 function Rentals() {
   const total = cats.reduce((a, c) => a + parseInt(c.cost.replace(/\D/g, "")), 0);
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="module-page">
       <header className="sticky top-0 z-40 border-b border-border/50 bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
           <Link to="/events/$slug" params={{ slug: "mariage-lea-thomas" }} className="rounded-full bg-cream p-2">

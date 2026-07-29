@@ -96,7 +96,7 @@ function EventPage() {
   const cd = useCountdown(event.date);
 
   return (
-    <div className="min-h-screen bg-background pb-16">
+    <div className="module-page">
       {/* Hero */}
       <header className="relative">
         <div className="relative h-[45vh] min-h-[340px] w-full overflow-hidden sm:h-[55vh] sm:min-h-[420px] lg:h-[62vh] lg:max-h-[640px]">

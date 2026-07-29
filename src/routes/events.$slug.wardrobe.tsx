@@ -28,7 +28,7 @@ const palette = ["#E85D8E", "#FFF8F4", "#D9A441", "#F2C4B7", "#B5895C"];
 function Wardrobe() {
   const { slug } = useParams({ from: "/events/$slug/wardrobe" });
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="module-page">
       <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
         <Link to="/events/$slug" params={{ slug }} className="grid h-9 w-9 place-items-center rounded-full bg-surface">
           <ArrowLeft className="h-5 w-5" />

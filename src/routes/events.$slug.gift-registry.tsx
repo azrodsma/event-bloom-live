@@ -86,7 +86,7 @@ function GiftRegistry() {
   const reserved = items.filter((i) => i.is_reserved).reduce((a, it) => a + Number(it.price ?? 0), 0);
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="module-page">
       <header className="sticky top-0 z-40 border-b border-border/50 bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
           <Link to="/events/$slug" params={{ slug }} className="rounded-full bg-cream p-2">
