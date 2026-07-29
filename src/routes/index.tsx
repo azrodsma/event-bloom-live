@@ -16,6 +16,8 @@ import {
   Check,
   QrCode,
   Users,
+  MessageCircle,
+  Heart,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -146,18 +148,22 @@ function Landing() {
                     </span>
                   </div>
                   <div className="absolute inset-x-4 bottom-4 text-white">
-                    <p className="text-xs opacity-80">Mariage · Bordeaux</p>
-                    <h3 className="font-serif text-3xl">Sarah & Thomas</h3>
+                    <p className="text-[11px] uppercase tracking-[0.18em] opacity-80">Mariage · Bordeaux</p>
+                    <h3 className="mt-1 font-serif text-3xl leading-tight">Sarah &amp; Thomas</h3>
                     <div className="mt-3 flex items-center gap-2">
-                      <div className="flex-1 rounded-full bg-white/20 p-1 text-center text-xs backdrop-blur">
-                        💬 Chat en direct
+                      <div className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-white/25 bg-white/15 py-1.5 text-xs font-medium backdrop-blur">
+                        <MessageCircle className="h-3.5 w-3.5" /> Chat en direct
                       </div>
-                      <div className="rounded-full bg-white/20 p-1 px-3 text-xs backdrop-blur">💖 128</div>
+                      <div className="flex items-center gap-1.5 rounded-full border border-white/25 bg-white/15 px-3 py-1.5 text-xs font-medium backdrop-blur">
+                        <Heart className="h-3.5 w-3.5 fill-current" /> 128
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="space-y-2 p-4">
-                  <p className="text-xs font-semibold text-muted-foreground">🎁 Voyage de noces</p>
+                <div className="space-y-2 border-t border-border/60 p-4">
+                  <p className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
+                    <Gift className="h-3.5 w-3.5 text-gold" /> Voyage de noces
+                  </p>
                   <div className="h-2 overflow-hidden rounded-full bg-primary-light">
                     <div className="h-full w-[60%] rounded-full bg-gradient-primary" />
                   </div>
@@ -217,6 +223,7 @@ function Landing() {
           <div className="text-center">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Fonctionnalités</p>
             <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Tout ce dont vous avez besoin</h2>
+            <div className="rule-gold mx-auto mt-5 w-24" />
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -227,10 +234,15 @@ function Landing() {
               { icon: Sparkles, title: "Stories & feed", desc: "Un fil d'actualité inspiré d'Instagram, en privé." },
               { icon: QrCode, title: "Codes & QR", desc: "Accès invités par code ou QR code, en toute simplicité." },
             ].map((f) => (
-              <div key={f.title} className="rounded-2xl bg-surface p-6 shadow-card">
-                <f.icon className="h-6 w-6 text-primary" />
+              <div
+                key={f.title}
+                className="group rounded-2xl border border-border/70 bg-surface p-6 shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-soft"
+              >
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary-light text-primary transition group-hover:bg-gradient-primary group-hover:text-white">
+                  <f.icon className="h-5 w-5" />
+                </div>
                 <h3 className="mt-4 font-serif text-xl">{f.title}</h3>
-                <p className="mt-1.5 text-sm text-muted-foreground">{f.desc}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -278,8 +290,9 @@ function Landing() {
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Tarifs</p>
           <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Simple et transparent</h2>
+          <div className="rule-gold mx-auto mt-5 w-24" />
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid items-start gap-6 md:grid-cols-3">
           {[
             { name: "Gratuit", price: "0 €", features: ["1 événement", "Live externe", "Livre d'or basique", "50 photos"], primary: false },
             { name: "Essentiel", price: "29 €", note: "par événement", features: ["Événements illimités", "Cagnotte externe", "Album collaboratif", "Photos illimitées", "Espace caméraman"], primary: true },
@@ -287,10 +300,19 @@ function Landing() {
           ].map((p) => (
             <div
               key={p.name}
-              className={`rounded-3xl border p-8 shadow-card ${p.primary ? "border-primary bg-gradient-primary text-white" : "border-border bg-surface"}`}
+              className={`relative rounded-3xl border p-8 transition duration-300 ${
+                p.primary
+                  ? "border-primary bg-gradient-primary text-white shadow-glow md:-mt-4 md:pb-10"
+                  : "border-border bg-surface shadow-card hover:-translate-y-1 hover:shadow-soft"
+              }`}
             >
+              {p.primary && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-gold px-4 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-dark shadow-card">
+                  Le plus choisi
+                </span>
+              )}
               <h3 className="font-serif text-2xl">{p.name}</h3>
-              <p className="mt-3 text-4xl font-bold">{p.price}</p>
+              <p className="mt-3 font-serif text-4xl font-bold">{p.price}</p>
               {p.note && <p className={`text-xs ${p.primary ? "text-white/80" : "text-muted-foreground"}`}>{p.note}</p>}
               <ul className="mt-6 space-y-2 text-sm">
                 {p.features.map((f) => (
