@@ -1,12 +1,18 @@
-import { createFileRoute, Link, useParams } from "@tanstack/react-router";
-import { ArrowLeft, Plus, Users, UtensilsCrossed, Baby, Wine, Wheat } from "lucide-react";
+import { createFileRoute, Link, notFound, useParams } from "@tanstack/react-router";
+import { ArrowLeft, Plus, Users, UtensilsCrossed, Trash2, LogIn } from "lucide-react";
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getEventBySlug } from "@/lib/events.functions";
+import { adaptEvent } from "@/lib/event-adapter";
+import { listSeating, createTable, deleteTable, assignGuest } from "@/lib/seating.functions";
+import { useAuth } from "@/hooks/use-auth";
+import { findEvent } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/events/$slug/seating")({
-  component: Seating,
-  head: () => ({
+  head: ({ params }) => ({
     meta: [
-      { title: "Plan de table · Memento Live" },
+      { title: `Plan de table · ${params.slug} — Memento Live` },
       { name: "description", content: "Organisez visuellement vos tables et attribuez chaque invité à sa place." },
       { property: "og:title", content: "Plan de table · Memento Live" },
       { property: "og:description", content: "Composez visuellement votre plan de table." },
@@ -14,136 +20,78 @@ export const Route = createFileRoute("/events/$slug/seating")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
+  loader: async ({ params }) => {
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) {
+      const e = findEvent(params.slug);
+      if (!e) throw notFound();
+      return { event: e, dbId: null as string | null };
+    }
+    return { event: adaptEvent(db), dbId: db.id };
+  },
+  component: Seating,
 });
 
-type Diet = "std" | "veg" | "sansGluten" | "enfant";
+type Guest = { id: string; full_name: string; dietary: string | null; table_number: number | null; rsvp: string; plus_ones: number };
+type TableRow = { id: string; table_number: number; label: string | null; capacity: number };
 
-interface Guest {
-  id: string;
-  name: string;
-  diet: Diet;
-}
-
-interface TableData {
-  id: string;
-  name: string;
-  capacity: number;
-  guests: Guest[];
-}
-
-const dietMeta: Record<Diet, { label: string; icon: typeof UtensilsCrossed; className: string }> = {
-  std: { label: "Standard", icon: UtensilsCrossed, className: "text-muted-foreground" },
-  veg: { label: "Végétarien", icon: Wheat, className: "text-primary" },
-  sansGluten: { label: "Sans gluten", icon: Wine, className: "text-accent-foreground" },
-  enfant: { label: "Enfant", icon: Baby, className: "text-primary" },
-};
-
-const initialTables: TableData[] = [
-  {
-    id: "th",
-    name: "Table d'honneur",
-    capacity: 10,
-    guests: [
-      { id: "g1", name: "Sarah Bernard", diet: "std" },
-      { id: "g2", name: "Thomas Bernard", diet: "std" },
-      { id: "g3", name: "Camille Rousseau", diet: "veg" },
-      { id: "g4", name: "Julien Mercier", diet: "std" },
-      { id: "g5", name: "Nadia Ouali", diet: "sansGluten" },
-      { id: "g6", name: "Antoine Kessler", diet: "std" },
-    ],
-  },
-  {
-    id: "t1",
-    name: "Table 1 · Famille de Sarah",
-    capacity: 8,
-    guests: [
-      { id: "g7", name: "Isabelle Bernard", diet: "std" },
-      { id: "g8", name: "Marc Bernard", diet: "std" },
-      { id: "g9", name: "Emma Bernard", diet: "enfant" },
-      { id: "g10", name: "Lucas Bernard", diet: "enfant" },
-      { id: "g11", name: "Céline Aubry", diet: "veg" },
-    ],
-  },
-  {
-    id: "t2",
-    name: "Table 2 · Famille de Thomas",
-    capacity: 8,
-    guests: [
-      { id: "g12", name: "Michel Durand", diet: "std" },
-      { id: "g13", name: "Françoise Durand", diet: "sansGluten" },
-      { id: "g14", name: "Léa Durand", diet: "std" },
-      { id: "g15", name: "Adrien Durand", diet: "std" },
-    ],
-  },
-  {
-    id: "t3",
-    name: "Table 3 · Amis d'enfance",
-    capacity: 8,
-    guests: [
-      { id: "g16", name: "Paul Vasseur", diet: "std" },
-      { id: "g17", name: "Mathilde Roux", diet: "veg" },
-      { id: "g18", name: "Yanis Belkacem", diet: "std" },
-      { id: "g19", name: "Sofia Marchetti", diet: "std" },
-      { id: "g20", name: "Hugo Prévost", diet: "std" },
-      { id: "g21", name: "Alice Perrin", diet: "veg" },
-      { id: "g22", name: "Théo Lambert", diet: "std" },
-      { id: "g23", name: "Manon Lefèvre", diet: "std" },
-    ],
-  },
-  {
-    id: "t4",
-    name: "Table 4 · Collègues",
-    capacity: 8,
-    guests: [
-      { id: "g24", name: "Karim Sabri", diet: "std" },
-      { id: "g25", name: "Julie Torres", diet: "veg" },
-      { id: "g26", name: "Ben Halloun", diet: "std" },
-    ],
-  },
-];
-
-const unassigned: Guest[] = [
-  { id: "u1", name: "Marie-Ange Colin", diet: "std" },
-  { id: "u2", name: "Fabien Roques", diet: "std" },
-  { id: "u3", name: "Anna Petit", diet: "enfant" },
-  { id: "u4", name: "Salomé Ferrer", diet: "veg" },
-];
-
-function TableCard({ table, active, onSelect }: { table: TableData; active: boolean; onSelect: () => void }) {
-  const percent = Math.round((table.guests.length / table.capacity) * 100);
-  return (
-    <button
-      onClick={onSelect}
-      className={`group relative flex flex-col items-center gap-2 rounded-3xl border-2 p-4 transition-all ${
-        active
-          ? "border-primary bg-primary/5 shadow-glow"
-          : "border-border/60 bg-card hover:border-primary/40"
-      }`}
-    >
-      <div className="relative">
-        <div className={`grid h-24 w-24 place-items-center rounded-full border-2 border-dashed ${active ? "border-primary" : "border-border"}`}>
-          <div className="grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-accent/40 to-primary/20 font-serif text-lg">
-            {table.guests.length}
-            <span className="text-[9px] uppercase tracking-wider text-muted-foreground">/{table.capacity}</span>
-          </div>
-        </div>
-      </div>
-      <p className="line-clamp-2 text-center text-xs font-medium leading-tight">{table.name}</p>
-      <div className="h-1 w-full overflow-hidden rounded-full bg-secondary">
-        <div className={`h-full ${percent >= 100 ? "bg-danger" : "bg-primary"}`} style={{ width: `${Math.min(percent, 100)}%` }} />
-      </div>
-    </button>
-  );
+function initials(name: string) {
+  return name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
 }
 
 function Seating() {
+  const { dbId } = Route.useLoaderData();
   const { slug } = useParams({ from: "/events/$slug/seating" });
-  const [tables] = useState(initialTables);
-  const [selectedId, setSelectedId] = useState(initialTables[0].id);
-  const selected = tables.find((t) => t.id === selectedId) ?? tables[0];
+  const { user } = useAuth();
+  const qc = useQueryClient();
+  const list = useServerFn(listSeating);
+  const addTable = useServerFn(createTable);
+  const removeTable = useServerFn(deleteTable);
+  const assign = useServerFn(assignGuest);
 
-  const totalSeated = tables.reduce((acc, t) => acc + t.guests.length, 0);
-  const totalCapacity = tables.reduce((acc, t) => acc + t.capacity, 0);
+  const { data } = useQuery({
+    queryKey: ["seating", dbId],
+    queryFn: () =>
+      dbId
+        ? list({ data: { eventId: dbId } })
+        : Promise.resolve({ tables: [] as TableRow[], guests: [] as Guest[] }),
+    enabled: !!dbId,
+  });
+
+  const tables = (data?.tables ?? []) as TableRow[];
+  const guests = (data?.guests ?? []) as Guest[];
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selected = tables.find((t) => t.id === selectedId) ?? tables[0] ?? null;
+  const [form, setForm] = useState({ label: "", capacity: "8" });
+  const [busy, setBusy] = useState(false);
+
+  const invalidate = () => qc.invalidateQueries({ queryKey: ["seating", dbId] });
+
+  const seatedByTable = (n: number) => guests.filter((g) => g.table_number === n);
+  const unassigned = guests.filter((g) => g.table_number == null);
+  const totalSeated = guests.filter((g) => g.table_number != null).length;
+  const totalCapacity = tables.reduce((a, t) => a + t.capacity, 0);
+
+  async function onCreate(e: React.FormEvent) {
+    e.preventDefault();
+    if (!dbId) return;
+    setBusy(true);
+    try {
+      const next = (tables.reduce((m, t) => Math.max(m, t.table_number), 0) || 0) + 1;
+      await addTable({
+        data: {
+          eventId: dbId,
+          tableNumber: next,
+          label: form.label.trim() || `Table ${next}`,
+          capacity: Math.max(1, Number(form.capacity) || 8),
+        },
+      });
+      setForm({ label: "", capacity: "8" });
+      await invalidate();
+    } finally {
+      setBusy(false);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -152,9 +100,9 @@ function Seating() {
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <p className="font-serif text-lg">Plan de table</p>
-        <button className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground" aria-label="Nouvelle table">
-          <Plus className="h-5 w-5" />
-        </button>
+        <span className="grid h-9 w-9 place-items-center rounded-full bg-primary/10">
+          <Users className="h-4 w-4 text-primary" />
+        </span>
       </div>
 
       <section className="grid grid-cols-3 gap-3 border-b border-border/60 bg-secondary/40 px-4 py-4 text-center">
@@ -163,7 +111,10 @@ function Seating() {
           <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Tables</p>
         </div>
         <div>
-          <p className="font-serif text-2xl leading-none">{totalSeated}<span className="text-muted-foreground">/{totalCapacity}</span></p>
+          <p className="font-serif text-2xl leading-none">
+            {totalSeated}
+            <span className="text-muted-foreground">/{totalCapacity || "—"}</span>
+          </p>
           <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Placés</p>
         </div>
         <div>
@@ -172,77 +123,182 @@ function Seating() {
         </div>
       </section>
 
+      {user && dbId ? (
+        <form onSubmit={onCreate} className="mx-4 mt-4 flex flex-wrap items-center gap-2 rounded-2xl border border-border/60 bg-card p-3">
+          <input
+            value={form.label}
+            onChange={(e) => setForm({ ...form, label: e.target.value })}
+            placeholder="Nom de la table (ex. Amis)"
+            className="min-w-0 flex-1 rounded-lg border border-border/60 bg-background px-3 py-2 text-sm"
+          />
+          <input
+            type="number"
+            min={1}
+            max={30}
+            value={form.capacity}
+            onChange={(e) => setForm({ ...form, capacity: e.target.value })}
+            className="w-20 rounded-lg border border-border/60 bg-background px-3 py-2 text-sm"
+            aria-label="Capacité"
+          />
+          <button
+            disabled={busy}
+            className="inline-flex items-center gap-1 rounded-full bg-foreground px-4 py-2 text-xs font-bold text-background disabled:opacity-60"
+          >
+            <Plus className="h-4 w-4" /> Nouvelle table
+          </button>
+        </form>
+      ) : !user ? (
+        <div className="mx-4 mt-4 flex items-center justify-between rounded-2xl border border-dashed border-border/60 p-4 text-sm">
+          <span className="text-muted-foreground">Connectez-vous pour gérer les tables.</span>
+          <Link to="/auth" className="flex items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground"><LogIn className="h-3 w-3" /> Se connecter</Link>
+        </div>
+      ) : null}
+
       <section className="px-4 pt-6">
         <h2 className="mb-3 font-serif text-lg">Salle de réception</h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {tables.map((t) => (
-            <TableCard key={t.id} table={t} active={t.id === selectedId} onSelect={() => setSelectedId(t.id)} />
-          ))}
-          <button className="flex min-h-[180px] flex-col items-center justify-center gap-2 rounded-3xl border-2 border-dashed border-border p-4 text-muted-foreground hover:border-primary hover:text-primary">
-            <Plus className="h-6 w-6" />
-            <span className="text-xs font-medium">Nouvelle table</span>
-          </button>
-        </div>
+        {tables.length === 0 ? (
+          <p className="rounded-2xl border border-dashed border-border/60 p-6 text-center text-sm text-muted-foreground">
+            Aucune table pour l'instant. {user ? "Créez la première ci-dessus." : ""}
+          </p>
+        ) : (
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {tables.map((t) => {
+              const seated = seatedByTable(t.table_number).length;
+              const percent = Math.round((seated / t.capacity) * 100);
+              const active = (selected?.id ?? tables[0].id) === t.id;
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => setSelectedId(t.id)}
+                  className={`group relative flex flex-col items-center gap-2 rounded-3xl border-2 p-4 transition-all ${
+                    active ? "border-primary bg-primary/5 shadow-glow" : "border-border/60 bg-card hover:border-primary/40"
+                  }`}
+                >
+                  <div className={`grid h-24 w-24 place-items-center rounded-full border-2 border-dashed ${active ? "border-primary" : "border-border"}`}>
+                    <div className="grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-accent/40 to-primary/20 font-serif text-lg">
+                      {seated}
+                      <span className="text-[9px] uppercase tracking-wider text-muted-foreground">/{t.capacity}</span>
+                    </div>
+                  </div>
+                  <p className="line-clamp-2 text-center text-xs font-medium leading-tight">
+                    {t.label ?? `Table ${t.table_number}`}
+                  </p>
+                  <div className="h-1 w-full overflow-hidden rounded-full bg-secondary">
+                    <div className={`h-full ${percent >= 100 ? "bg-danger" : "bg-primary"}`} style={{ width: `${Math.min(percent, 100)}%` }} />
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        )}
       </section>
 
-      <section className="mt-8 border-t border-border/60 px-4 pt-6">
-        <div className="flex items-baseline justify-between">
-          <h2 className="font-serif text-xl">{selected.name}</h2>
-          <span className="text-xs text-muted-foreground">{selected.guests.length}/{selected.capacity}</span>
-        </div>
-        <ul className="mt-3 grid grid-cols-2 gap-2">
-          {selected.guests.map((g) => {
-            const meta = dietMeta[g.diet];
-            const Icon = meta.icon;
-            return (
+      {selected && (
+        <section className="mt-8 border-t border-border/60 px-4 pt-6">
+          <div className="flex items-baseline justify-between">
+            <h2 className="font-serif text-xl">{selected.label ?? `Table ${selected.table_number}`}</h2>
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-muted-foreground">
+                {seatedByTable(selected.table_number).length}/{selected.capacity}
+              </span>
+              {user && (
+                <button
+                  onClick={async () => {
+                    if (!confirm("Supprimer cette table ? Les invités seront libérés.")) return;
+                    await removeTable({ data: { id: selected.id, eventId: dbId!, tableNumber: selected.table_number } });
+                    setSelectedId(null);
+                    await invalidate();
+                  }}
+                  className="grid h-8 w-8 place-items-center rounded-full text-muted-foreground hover:bg-secondary"
+                  aria-label="Supprimer la table"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </button>
+              )}
+            </div>
+          </div>
+          <ul className="mt-3 grid grid-cols-2 gap-2">
+            {seatedByTable(selected.table_number).map((g) => (
               <li key={g.id} className="flex items-center gap-2 rounded-2xl border border-border/60 bg-card px-3 py-2.5">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary/20 to-accent/20 text-[10px] font-semibold">
-                  {g.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                  {initials(g.full_name)}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-xs font-medium">{g.name}</p>
-                  <p className={`inline-flex items-center gap-1 text-[10px] ${meta.className}`}>
-                    <Icon className="h-2.5 w-2.5" /> {meta.label}
-                  </p>
+                  <p className="truncate text-xs font-medium">{g.full_name}</p>
+                  {g.dietary && (
+                    <p className="inline-flex items-center gap-1 text-[10px] text-muted-foreground">
+                      <UtensilsCrossed className="h-2.5 w-2.5" /> {g.dietary}
+                    </p>
+                  )}
                 </div>
+                {user && (
+                  <button
+                    onClick={async () => {
+                      await assign({ data: { guestId: g.id, tableNumber: null } });
+                      await invalidate();
+                    }}
+                    className="text-[10px] text-muted-foreground hover:text-primary"
+                  >
+                    Libérer
+                  </button>
+                )}
               </li>
-            );
-          })}
-          {Array.from({ length: Math.max(0, selected.capacity - selected.guests.length) }).map((_, i) => (
-            <li key={`empty-${i}`} className="flex items-center justify-center rounded-2xl border-2 border-dashed border-border/60 px-3 py-2.5 text-[11px] text-muted-foreground">
-              Place libre
-            </li>
-          ))}
-        </ul>
-      </section>
+            ))}
+            {Array.from({ length: Math.max(0, selected.capacity - seatedByTable(selected.table_number).length) }).map((_, i) => (
+              <li key={`empty-${i}`} className="flex items-center justify-center rounded-2xl border-2 border-dashed border-border/60 px-3 py-2.5 text-[11px] text-muted-foreground">
+                Place libre
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section className="mt-8 border-t border-border/60 px-4 pt-6">
         <div className="mb-3 flex items-center gap-2">
           <Users className="h-4 w-4 text-primary" />
           <h2 className="font-serif text-lg">Invités sans table · {unassigned.length}</h2>
         </div>
-        <ul className="space-y-2">
-          {unassigned.map((g) => {
-            const meta = dietMeta[g.diet];
-            const Icon = meta.icon;
-            return (
+        {unassigned.length === 0 ? (
+          <p className="rounded-2xl border border-dashed border-border/60 p-4 text-center text-sm text-muted-foreground">
+            Tous les invités ont une place attribuée.
+          </p>
+        ) : (
+          <ul className="space-y-2">
+            {unassigned.map((g) => (
               <li key={g.id} className="flex items-center gap-3 rounded-2xl border border-dashed border-border bg-background p-3">
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary/20 to-accent/20 text-xs font-semibold">
-                  {g.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                  {initials(g.full_name)}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium">{g.name}</p>
-                  <p className={`inline-flex items-center gap-1 text-[10px] ${meta.className}`}>
-                    <Icon className="h-2.5 w-2.5" /> {meta.label}
+                  <p className="truncate text-sm font-medium">{g.full_name}</p>
+                  <p className="text-[10px] text-muted-foreground">
+                    {g.rsvp === "confirmed" ? "Confirmé" : g.rsvp === "maybe" ? "Peut-être" : g.rsvp === "declined" ? "Décliné" : "En attente"}
+                    {g.dietary ? ` · ${g.dietary}` : ""}
                   </p>
                 </div>
-                <button className="rounded-full bg-primary px-3 py-1.5 text-[11px] font-semibold text-primary-foreground">
-                  Placer
-                </button>
+                {user && tables.length > 0 ? (
+                  <select
+                    defaultValue=""
+                    onChange={async (e) => {
+                      const n = Number(e.target.value);
+                      if (!Number.isFinite(n)) return;
+                      await assign({ data: { guestId: g.id, tableNumber: n } });
+                      await invalidate();
+                    }}
+                    className="rounded-full border border-border/60 bg-background px-3 py-1.5 text-[11px]"
+                  >
+                    <option value="" disabled>Placer…</option>
+                    {tables.map((t) => (
+                      <option key={t.id} value={t.table_number}>
+                        {t.label ?? `Table ${t.table_number}`} ({seatedByTable(t.table_number).length}/{t.capacity})
+                      </option>
+                    ))}
+                  </select>
+                ) : null}
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+        )}
       </section>
     </div>
   );
