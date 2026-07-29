@@ -120,9 +120,58 @@ function Favorites() {
               <Bookmark className="h-4 w-4" fill="currentColor" />
               <h2 className="font-serif text-xl text-foreground">Souvenirs sauvegardés</h2>
             </div>
-            <div className="rounded-3xl border border-dashed border-border bg-surface p-6 text-center text-xs text-muted-foreground">
-              Bientôt : épinglez vos moments préférés du livre d'or et de l'album.
-            </div>
+            {bookmarks.length === 0 ? (
+              <div className="rounded-3xl border border-dashed border-border bg-surface p-6 text-center text-xs text-muted-foreground">
+                Touchez l'icône marque-page sur une publication pour la retrouver ici.
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {bookmarks.map((p) => {
+                  const post = p as {
+                    id: string;
+                    content: string | null;
+                    media_urls: string[] | null;
+                    author_name: string | null;
+                    author_avatar: string | null;
+                    created_at: string;
+                    events: { slug: string; title: string } | null;
+                  };
+                  return (
+                    <Link
+                      key={post.id}
+                      to="/app/posts/$id"
+                      params={{ id: post.id }}
+                      className="block rounded-3xl bg-surface p-4 shadow-card"
+                    >
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={post.author_avatar ?? `https://i.pravatar.cc/80?u=${post.id}`}
+                          alt=""
+                          className="h-9 w-9 rounded-full object-cover"
+                        />
+                        <div className="min-w-0 flex-1">
+                          <p className="truncate text-sm font-semibold">{post.author_name ?? "Invité"}</p>
+                          <p className="truncate text-[11px] text-muted-foreground">
+                            {post.events?.title ?? "Événement"} ·{" "}
+                            {new Date(post.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
+                          </p>
+                        </div>
+                      </div>
+                      {post.content && (
+                        <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">{post.content}</p>
+                      )}
+                      {Array.isArray(post.media_urls) && post.media_urls.length > 0 && (
+                        <div className="mt-2 grid grid-cols-3 gap-1.5">
+                          {post.media_urls.slice(0, 3).map((u, i) => (
+                            <img key={i} src={u} alt="" className="aspect-square w-full rounded-xl object-cover" />
+                          ))}
+                        </div>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
           </section>
         </>
       )}
