@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { EventCard } from "@/components/EventCard";
 import { adaptEvent, type DbEvent } from "@/lib/event-adapter";
 import { listMyFavorites } from "@/lib/favorites.functions";
+import { listMyBookmarkedPosts } from "@/lib/bookmarks.functions";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
