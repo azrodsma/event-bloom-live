@@ -306,12 +306,15 @@ function EventPage() {
         </Link>
 
         {/* Modules — grille unifiée */}
-        <section className="space-y-3">
+        <section className="space-y-4">
           <div className="flex items-end justify-between">
-            <h2 className="font-serif text-xl">Organisation</h2>
-            <span className="text-[11px] uppercase tracking-widest text-muted-foreground">Tous les modules</span>
+            <div>
+              <h2 className="font-serif text-2xl leading-tight">Organisation</h2>
+              <p className="text-xs text-muted-foreground">Tout ce dont vous avez besoin pour orchestrer le jour J</p>
+            </div>
+            <span className="hidden text-[11px] uppercase tracking-widest text-muted-foreground sm:block">Tous les modules</span>
           </div>
-          <div className="grid grid-cols-2 gap-2.5 min-[420px]:grid-cols-3 sm:gap-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 min-[420px]:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             {([
               { to: "/events/$slug/checklist", icon: CheckSquare, label: "Checklist", hint: stats ? `${stats.checklistDone}/${stats.checklistTotal} faits` : "À faire", tone: "primary" },
               { to: "/events/$slug/playlist", icon: Music2, label: "Playlist", hint: `${stats?.songs ?? 0} morceaux`, tone: "accent" },
@@ -330,24 +333,32 @@ function EventPage() {
               { to: "/events/$slug/gifts-received", icon: PackageOpen, label: "Cadeaux reçus", hint: "Journal", tone: "accent" },
             ] as const).map((m) => {
               const Icon = m.icon;
-              const toneCls =
-                m.tone === "primary" ? "bg-primary/15 text-primary"
-                : m.tone === "accent" ? "bg-accent/40 text-foreground"
-                : m.tone === "dark" ? "bg-foreground text-background"
-                : "bg-secondary text-foreground";
+              const tile =
+                m.tone === "primary" ? "bg-gradient-to-br from-primary/12 via-surface to-surface ring-primary/15"
+                : m.tone === "accent" ? "bg-gradient-to-br from-accent/50 via-surface to-surface ring-accent/30"
+                : m.tone === "dark" ? "bg-gradient-to-br from-foreground/95 to-foreground/80 text-background ring-foreground/20"
+                : "bg-gradient-to-br from-secondary via-surface to-surface ring-border/60";
+              const icon =
+                m.tone === "primary" ? "bg-primary/15 text-primary ring-primary/20"
+                : m.tone === "accent" ? "bg-white/70 text-foreground ring-white/60"
+                : m.tone === "dark" ? "bg-white/15 text-background ring-white/25"
+                : "bg-white text-foreground ring-border/60";
+              const hint =
+                m.tone === "dark" ? "text-background/70" : "text-muted-foreground";
               return (
                 <Link
                   key={m.to}
                   to={m.to}
                   params={{ slug: event.slug }}
-                  className="tap group flex min-h-[104px] flex-col gap-2 rounded-2xl bg-surface p-3 shadow-card ring-1 ring-border/40 transition active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-glow sm:min-h-[120px] sm:p-4"
+                  className={`tap group relative flex aspect-square flex-col items-center justify-center gap-2.5 rounded-3xl p-3 text-center shadow-card ring-1 transition active:scale-[0.97] hover:-translate-y-1 hover:shadow-glow sm:gap-3 sm:p-4 ${tile}`}
                 >
-                  <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl sm:h-10 sm:w-10 ${toneCls}`}>
-                    <Icon className="h-5 w-5" />
-
+                  <div className={`grid h-12 w-12 place-items-center rounded-2xl ring-1 shadow-sm transition group-hover:scale-110 sm:h-14 sm:w-14 ${icon}`}>
+                    <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
                   </div>
-                  <p className="font-serif text-sm leading-tight">{m.label}</p>
-                  <p className="line-clamp-1 text-[10px] text-muted-foreground">{m.hint}</p>
+                  <div className="space-y-0.5">
+                    <p className="font-serif text-sm leading-tight sm:text-[15px]">{m.label}</p>
+                    <p className={`line-clamp-1 text-[10.5px] font-medium sm:text-[11px] ${hint}`}>{m.hint}</p>
+                  </div>
                 </Link>
               );
             })}
@@ -355,59 +366,59 @@ function EventPage() {
         </section>
 
         {/* Info & engagement */}
-        <section className="space-y-3">
+        <section className="space-y-4">
           <div className="flex items-end justify-between">
-            <h2 className="font-serif text-xl">En temps réel</h2>
-            <span className="text-[11px] uppercase tracking-widest text-muted-foreground">Info & engagement</span>
+            <div>
+              <h2 className="font-serif text-2xl leading-tight">En temps réel</h2>
+              <p className="text-xs text-muted-foreground">Ce qui se passe autour de votre événement</p>
+            </div>
+            <span className="hidden text-[11px] uppercase tracking-widest text-muted-foreground sm:block">Info & engagement</span>
           </div>
-          <div className="grid grid-cols-2 gap-2.5 min-[420px]:grid-cols-3 sm:gap-3 md:grid-cols-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
-            <Link
-              to="/events/$slug/weather"
-              params={{ slug: event.slug }}
-              className="flex flex-col items-start gap-1.5 rounded-2xl bg-gradient-to-br from-sky-100 to-sky-50 p-3.5 text-xs font-semibold ring-1 ring-sky-200 transition hover:-translate-y-0.5"
-            >
-              <CloudSun className="h-5 w-5 text-sky-600" />
-              <span>Météo</span>
-              <span className="text-[10px] font-medium text-sky-700/80">28° ensoleillé</span>
-            </Link>
-            <Link
-              to="/events/$slug/faq"
-              params={{ slug: event.slug }}
-              className="flex flex-col items-start gap-1.5 rounded-2xl bg-secondary p-3.5 text-xs font-semibold transition hover:-translate-y-0.5"
-            >
-              <HelpCircle className="h-5 w-5 text-primary" />
-              <span>FAQ</span>
-              <span className="text-[10px] font-medium text-muted-foreground">Réponses invités</span>
-            </Link>
-            <Link
-              to="/events/$slug/moderation"
-              params={{ slug: event.slug }}
-              className="flex flex-col items-start gap-1.5 rounded-2xl bg-destructive/5 p-3.5 text-xs font-semibold ring-1 ring-destructive/20 transition hover:-translate-y-0.5"
-            >
-              <Shield className="h-5 w-5 text-destructive" />
-              <span>Modération</span>
-              <span className="text-[10px] font-medium text-destructive/80">2 à traiter</span>
-            </Link>
-            <Link
-              to="/events/$slug/polls"
-              params={{ slug: event.slug }}
-              className="flex flex-col items-start gap-1.5 rounded-2xl bg-gradient-to-br from-fuchsia-500/15 to-primary/10 p-3.5 text-xs font-semibold ring-1 ring-primary/20 transition hover:-translate-y-0.5"
-            >
-              <BarChart2 className="h-5 w-5 text-primary" />
-              <span>Sondages live</span>
-              <span className="text-[10px] font-medium text-muted-foreground">2 en cours</span>
-            </Link>
-            <Link
-              to="/events/$slug/activity"
-              params={{ slug: event.slug }}
-              className="flex flex-col items-start gap-1.5 rounded-2xl bg-card p-3.5 text-xs font-semibold ring-1 ring-border/60 transition hover:-translate-y-0.5"
-            >
-              <Activity className="h-5 w-5 text-primary" />
-              <span>Journal</span>
-              <span className="text-[10px] font-medium text-muted-foreground">12 activités · 24 h</span>
-            </Link>
+          <div className="grid grid-cols-2 gap-3 min-[420px]:grid-cols-3 sm:gap-4 md:grid-cols-5 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+            {([
+              { to: "/events/$slug/weather", icon: CloudSun, label: "Météo", hint: "28° ensoleillé", tint: "sky" },
+              { to: "/events/$slug/faq", icon: HelpCircle, label: "FAQ", hint: "Réponses invités", tint: "cream" },
+              { to: "/events/$slug/moderation", icon: Shield, label: "Modération", hint: "2 à traiter", tint: "danger" },
+              { to: "/events/$slug/polls", icon: BarChart2, label: "Sondages live", hint: "2 en cours", tint: "primary" },
+              { to: "/events/$slug/activity", icon: Activity, label: "Journal", hint: "12 activités · 24 h", tint: "neutral" },
+            ] as const).map((m) => {
+              const Icon = m.icon;
+              const tile =
+                m.tint === "sky" ? "bg-gradient-to-br from-sky-100 via-sky-50 to-surface ring-sky-200/70"
+                : m.tint === "cream" ? "bg-gradient-to-br from-secondary via-surface to-surface ring-border/60"
+                : m.tint === "danger" ? "bg-gradient-to-br from-destructive/10 via-surface to-surface ring-destructive/25"
+                : m.tint === "primary" ? "bg-gradient-to-br from-primary/12 via-surface to-surface ring-primary/20"
+                : "bg-gradient-to-br from-muted via-surface to-surface ring-border/60";
+              const iconCls =
+                m.tint === "sky" ? "bg-white text-sky-600 ring-sky-200"
+                : m.tint === "cream" ? "bg-white text-primary ring-border/60"
+                : m.tint === "danger" ? "bg-white text-destructive ring-destructive/30"
+                : m.tint === "primary" ? "bg-white text-primary ring-primary/20"
+                : "bg-white text-primary ring-border/60";
+              const hintCls =
+                m.tint === "danger" ? "text-destructive/80"
+                : m.tint === "sky" ? "text-sky-700/80"
+                : "text-muted-foreground";
+              return (
+                <Link
+                  key={m.to}
+                  to={m.to}
+                  params={{ slug: event.slug }}
+                  className={`tap group flex aspect-square flex-col items-center justify-center gap-2.5 rounded-3xl p-3 text-center shadow-card ring-1 transition active:scale-[0.97] hover:-translate-y-1 hover:shadow-glow sm:gap-3 sm:p-4 ${tile}`}
+                >
+                  <div className={`grid h-12 w-12 place-items-center rounded-2xl ring-1 shadow-sm transition group-hover:scale-110 sm:h-14 sm:w-14 ${iconCls}`}>
+                    <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
+                  </div>
+                  <div className="space-y-0.5">
+                    <p className="font-serif text-sm leading-tight sm:text-[15px]">{m.label}</p>
+                    <p className={`line-clamp-1 text-[10.5px] font-medium sm:text-[11px] ${hintCls}`}>{m.hint}</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
+
 
 
 
