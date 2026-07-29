@@ -45,6 +45,11 @@ export const submitRsvp = createServerFn({ method: "POST" })
     if (!["public", "unlisted"].includes(ev.visibility)) {
       throw new Error("Cet événement n'accepte pas les RSVP publics");
     }
+    const { data: evFull } = await sb
+      .from("events")
+      .select("title, event_date, location, slug")
+      .eq("id", ev.id)
+      .maybeSingle();
     const { error } = await sb.from("guests").insert({
       event_id: ev.id,
       full_name: data.full_name,
@@ -56,6 +61,48 @@ export const submitRsvp = createServerFn({ method: "POST" })
       notes: data.notes ?? null,
     });
     if (error) throw new Error(error.message);
+
+    // Fire-and-forget confirmation email via Resend
+    try {
+      const lovableKey = process.env.LOVABLE_API_KEY;
+      const resendKey = process.env.RESEND_API_KEY;
+      if (lovableKey && resendKey && evFull) {
+        const statusLabel =
+          data.rsvp === "confirmed" ? "confirmée ✨"
+          : data.rsvp === "declined" ? "déclinée"
+          : data.rsvp === "maybe" ? "en attente (peut-être)"
+          : "en attente";
+        const when = evFull.event_date
+          ? new Date(evFull.event_date).toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" })
+          : "Date à venir";
+        const html = `<div style="font-family:Inter,Arial,sans-serif;max-width:560px;margin:0 auto;padding:32px;background:#FFF8F4;color:#1a1a1a">
+          <h1 style="font-family:'Playfair Display',serif;color:#E85D8E;margin:0 0 8px">Merci ${data.full_name} !</h1>
+          <p style="margin:0 0 16px">Votre réponse pour <strong>${evFull.title}</strong> est <strong>${statusLabel}</strong>.</p>
+          <div style="background:#fff;border-radius:12px;padding:16px;margin:16px 0">
+            <p style="margin:4px 0"><strong>📅</strong> ${when}</p>
+            ${evFull.location ? `<p style="margin:4px 0"><strong>📍</strong> ${evFull.location}</p>` : ""}
+            <p style="margin:4px 0"><strong>👥</strong> ${data.plus_ones} accompagnant(s)</p>
+          </div>
+          <p style="color:#8a6b52;font-size:13px">Memento Live — Le réseau social privé de vos plus beaux événements.</p>
+        </div>`;
+        await fetch("https://connector-gateway.lovable.dev/resend/emails", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${lovableKey}`,
+            "X-Connection-Api-Key": resendKey,
+          },
+          body: JSON.stringify({
+            from: "Memento Live <onboarding@resend.dev>",
+            to: [data.email],
+            subject: `Votre réponse pour ${evFull.title}`,
+            html,
+          }),
+        }).catch((e) => console.error("[rsvp email]", e));
+      }
+    } catch (e) {
+      console.error("[rsvp email] non-fatal", e);
+    }
     return { ok: true };
   });
 
