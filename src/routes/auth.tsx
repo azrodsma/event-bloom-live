@@ -153,6 +153,30 @@ function AuthPage() {
             </button>
           </form>
 
+          {mode === "login" && (
+            <p className="mt-3 text-center text-xs">
+              <button
+                type="button"
+                disabled={busy}
+                onClick={async () => {
+                  if (!email) { toast.error("Entrez votre email d'abord"); return; }
+                  setBusy(true);
+                  try {
+                    await sendReset({ data: { email, redirectTo: `${window.location.origin}/auth/reset-password` } });
+                    toast.success("Email envoyé", { description: "Si un compte existe, un lien vient d'être envoyé." });
+                  } catch {
+                    toast.error("Impossible d'envoyer l'email");
+                  } finally {
+                    setBusy(false);
+                  }
+                }}
+                className="text-muted-foreground hover:text-primary hover:underline"
+              >
+                Mot de passe oublié ?
+              </button>
+            </p>
+          )}
+
           <p className="mt-6 text-center text-sm text-muted-foreground">
             {mode === "login" ? "Pas encore de compte ?" : "Déjà inscrit ?"}{" "}
             <button
