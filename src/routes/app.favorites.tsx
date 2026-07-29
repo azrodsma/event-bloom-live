@@ -26,9 +26,15 @@ function Favorites() {
   const [tab, setTab] = useState<Tab>("Tous");
   const { user, loading } = useAuth();
   const fetchFavs = useServerFn(listMyFavorites);
+  const fetchBookmarks = useServerFn(listMyBookmarkedPosts);
   const { data, isLoading } = useQuery({
     queryKey: ["favorites", user?.id],
     queryFn: () => fetchFavs(),
+    enabled: !!user,
+  });
+  const { data: bookmarks = [] } = useQuery({
+    queryKey: ["bookmarks", user?.id],
+    queryFn: () => fetchBookmarks(),
     enabled: !!user,
   });
 
