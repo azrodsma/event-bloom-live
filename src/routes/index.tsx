@@ -290,8 +290,9 @@ function Landing() {
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Tarifs</p>
           <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Simple et transparent</h2>
+          <div className="rule-gold mx-auto mt-5 w-24" />
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid items-start gap-6 md:grid-cols-3">
           {[
             { name: "Gratuit", price: "0 €", features: ["1 événement", "Live externe", "Livre d'or basique", "50 photos"], primary: false },
             { name: "Essentiel", price: "29 €", note: "par événement", features: ["Événements illimités", "Cagnotte externe", "Album collaboratif", "Photos illimitées", "Espace caméraman"], primary: true },
@@ -299,10 +300,19 @@ function Landing() {
           ].map((p) => (
             <div
               key={p.name}
-              className={`rounded-3xl border p-8 shadow-card ${p.primary ? "border-primary bg-gradient-primary text-white" : "border-border bg-surface"}`}
+              className={`relative rounded-3xl border p-8 transition duration-300 ${
+                p.primary
+                  ? "border-primary bg-gradient-primary text-white shadow-glow md:-mt-4 md:pb-10"
+                  : "border-border bg-surface shadow-card hover:-translate-y-1 hover:shadow-soft"
+              }`}
             >
+              {p.primary && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-gold px-4 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-dark shadow-card">
+                  Le plus choisi
+                </span>
+              )}
               <h3 className="font-serif text-2xl">{p.name}</h3>
-              <p className="mt-3 text-4xl font-bold">{p.price}</p>
+              <p className="mt-3 font-serif text-4xl font-bold">{p.price}</p>
               {p.note && <p className={`text-xs ${p.primary ? "text-white/80" : "text-muted-foreground"}`}>{p.note}</p>}
               <ul className="mt-6 space-y-2 text-sm">
                 {p.features.map((f) => (
