@@ -99,18 +99,18 @@ function EventPage() {
     <div className="min-h-screen bg-background pb-16">
       {/* Hero */}
       <header className="relative">
-        <div className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
+        <div className="relative h-[45vh] min-h-[340px] w-full overflow-hidden sm:h-[55vh] sm:min-h-[420px] lg:h-[62vh] lg:max-h-[640px]">
           <img src={event.cover} alt={event.title} className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/50" />
-          <div className="absolute inset-x-0 top-0 flex items-center justify-between p-4">
-            <Link to="/app" className="grid h-10 w-10 place-items-center rounded-full bg-white/90 backdrop-blur">
+          <div className="absolute inset-x-0 top-0 flex items-center justify-between p-4 safe-top">
+            <Link to="/app" className="tap grid place-items-center rounded-full bg-white/90 backdrop-blur active:scale-95" aria-label="Retour">
               <ChevronLeft className="h-5 w-5" />
             </Link>
             <div className="flex gap-2">
               <Link
                 to="/events/$slug/story/new"
                 params={{ slug: event.slug }}
-                className="grid h-10 w-10 place-items-center rounded-full bg-white/90 backdrop-blur"
+                className="tap grid place-items-center rounded-full bg-white/90 backdrop-blur active:scale-95"
                 aria-label="Publier une story"
               >
                 <Camera className="h-4 w-4" />
@@ -118,7 +118,7 @@ function EventPage() {
               <Link
                 to="/events/$slug/invite"
                 params={{ slug: event.slug }}
-                className="grid h-10 w-10 place-items-center rounded-full bg-white/90 backdrop-blur"
+                className="tap grid place-items-center rounded-full bg-white/90 backdrop-blur active:scale-95"
                 aria-label="Partager"
               >
                 <Share2 className="h-4 w-4" />
@@ -126,7 +126,7 @@ function EventPage() {
             </div>
           </div>
           <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
-            <div className="mx-auto max-w-2xl">
+            <div className="container-app">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold">
                   {eventTypeIcons[event.type as keyof typeof eventTypeIcons]} {event.type}
@@ -137,7 +137,7 @@ function EventPage() {
                   </span>
                 )}
               </div>
-              <h1 className="mt-3 font-serif text-4xl leading-tight text-foreground sm:text-6xl">{event.title}</h1>
+              <h1 className="mt-3 font-serif text-fluid-hero text-balance text-foreground">{event.title}</h1>
               <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-foreground/80">
                 <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4" />{event.venue}, {event.city}</span>
                 <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4" />
@@ -149,13 +149,15 @@ function EventPage() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-2xl space-y-5 px-4 py-6">
+      <main className="container-app grid gap-5 py-6 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-8 lg:py-10">
+        <div className="min-w-0 space-y-5">
         {/* Description */}
         <section className="rounded-3xl bg-surface p-5 shadow-card">
           <p className="text-sm leading-relaxed text-foreground">{event.description}</p>
         </section>
 
         {dbId && <PostFeed eventId={dbId} />}
+
 
         {event.moneyPot && (
           <CagnotteCard
