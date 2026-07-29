@@ -169,6 +169,63 @@
   .container-app { max-width: 80rem; }
 }
 
+/* ---------------------------------------------------------------
+   Module pages (event sub-modules: espace enfants, dress code, ...)
+   One global shell that makes every module page responsive:
+   mobile-first legibility, centered & denser on tablet/laptop/desktop.
+   --------------------------------------------------------------- */
+@utility module-page {
+  min-height: 100vh;
+  min-height: 100svh;
+  width: 100%;
+  margin-inline: auto;
+  background-color: var(--background);
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+}
+
+/* Legibility floor: micro type is unreadable on phones */
+.module-page .text-\[9px\] { font-size: 0.6875rem; line-height: 1rem; }
+.module-page .text-\[10px\] { font-size: 0.75rem; line-height: 1.05rem; }
+.module-page .text-\[11px\] { font-size: 0.8125rem; line-height: 1.15rem; }
+.module-page .text-\[12px\],
+.module-page .text-\[13px\] { line-height: 1.35rem; }
+
+/* Comfortable tap targets on touch screens */
+@media (max-width: 767px) and (pointer: coarse) {
+  .module-page button:not([class*="h-"]),
+  .module-page a[aria-label]:not([class*="h-"]) { min-height: 2.5rem; }
+}
+
+/* Tablet: breathe */
+@media (min-width: 768px) {
+  .module-page { max-width: 46rem; }
+  .module-page .px-4 { padding-inline: 1.5rem; }
+  .module-page .mx-4 { margin-inline: 1.5rem; }
+  .module-page > section,
+  .module-page > div:not(:first-child) { margin-top: 1.75rem; }
+}
+
+/* Laptop */
+@media (min-width: 1024px) {
+  .module-page { max-width: 64rem; }
+  .module-page .px-4 { padding-inline: 2rem; }
+  .module-page .mx-4 { margin-inline: 2rem; }
+  .module-page > section,
+  .module-page > div:not(:first-child) { margin-top: 2.25rem; }
+  .module-page .grid-cols-2 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .module-page .grid-cols-1 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Desktop */
+@media (min-width: 1440px) {
+  .module-page { max-width: 76rem; }
+  .module-page .px-4 { padding-inline: 2.5rem; }
+  .module-page .mx-4 { margin-inline: 2.5rem; }
+  .module-page .grid-cols-2 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+
+
 /* Safe areas for iOS/Android notches (Capacitor-ready) */
 @utility safe-top {
   padding-top: env(safe-area-inset-top);
