@@ -10,9 +10,10 @@ export function EventCard({ event }: { event: MockEvent }) {
     <Link
       to="/events/$slug"
       params={{ slug: event.slug }}
-      className="group relative block overflow-hidden rounded-[32px] bg-surface shadow-card ring-1 ring-border/60 transition-all duration-500 hover:-translate-y-1 hover:shadow-modal hover:ring-primary/30"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[32px] bg-surface shadow-card ring-1 ring-border/60 transition-all duration-500 hover:-translate-y-1 hover:shadow-modal hover:ring-primary/30"
     >
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted sm:aspect-[16/10]">
+      <div className="relative aspect-[4/5] w-full flex-1 overflow-hidden bg-muted sm:aspect-[16/10]">
+
         <img
           src={event.cover}
           alt={event.title}
@@ -69,7 +70,7 @@ export function EventCard({ event }: { event: MockEvent }) {
         </div>
       </div>
 
-      {event.moneyPot && (
+      {event.moneyPot ? (
         <div className="flex items-center justify-between gap-3 px-5 py-4">
           <div className="min-w-0 flex-1">
             <p className="flex items-center gap-1.5 truncate text-xs font-medium text-muted-foreground">
@@ -93,7 +94,21 @@ export function EventCard({ event }: { event: MockEvent }) {
             Rejoindre <ArrowUpRight className="h-3.5 w-3.5" />
           </span>
         </div>
+      ) : (
+        <div className="flex items-center justify-between gap-3 px-5 py-4">
+          <div className="min-w-0">
+            <p className="flex items-center gap-1.5 truncate text-xs font-medium text-muted-foreground">
+              {(() => { const I = eventIcon(event.type); return <I className="h-3.5 w-3.5 shrink-0 text-gold" />; })()}
+              <span className="truncate">{event.isLive ? "En direct maintenant" : "Bientôt en direct"}</span>
+            </p>
+            <p className="mt-2 truncate text-[11px] text-muted-foreground/80">Page événement · souvenirs partagés</p>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-foreground px-3.5 py-2 text-[11px] font-semibold text-background transition-transform group-hover:translate-x-0.5">
+            Rejoindre <ArrowUpRight className="h-3.5 w-3.5" />
+          </span>
+        </div>
       )}
+
     </Link>
   );
 }
