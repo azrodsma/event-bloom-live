@@ -10,9 +10,10 @@ export function EventCard({ event }: { event: MockEvent }) {
     <Link
       to="/events/$slug"
       params={{ slug: event.slug }}
-      className="group relative block overflow-hidden rounded-[32px] bg-surface shadow-card ring-1 ring-border/60 transition-all duration-500 hover:-translate-y-1 hover:shadow-modal hover:ring-primary/30"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[32px] bg-surface shadow-card ring-1 ring-border/60 transition-all duration-500 hover:-translate-y-1 hover:shadow-modal hover:ring-primary/30"
     >
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted sm:aspect-[16/10]">
+      <div className="relative aspect-[4/5] w-full flex-1 overflow-hidden bg-muted sm:aspect-[16/10]">
+
         <img
           src={event.cover}
           alt={event.title}
