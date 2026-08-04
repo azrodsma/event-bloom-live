@@ -325,14 +325,17 @@ function Landing() {
                   </li>
                 ))}
               </ul>
-              <Link
-                to="/app/create"
-                className={`mt-auto inline-flex w-full items-center justify-center rounded-full px-5 py-3 pt-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
-                  p.primary ? "bg-white text-primary" : "bg-foreground text-background"
-                } mt-8`}
-              >
-                Commencer
-              </Link>
+              <div className="mt-auto pt-8">
+                <Link
+                  to="/app/create"
+                  className={`inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
+                    p.primary ? "bg-white text-primary" : "bg-foreground text-background"
+                  }`}
+                >
+                  Commencer
+                </Link>
+              </div>
+
             </div>
           ))}
         </div>
