@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/podcast")({
   component: Podcast,
   head: () => ({
     meta: [
-      { title: "Podcast de l'événement · Memento Live" },
+      { title: "Podcast de l'événement · MaFeliza" },
       { name: "description", content: "Écoutez et partagez les moments audio marquants sous forme d'épisodes." },
-      { property: "og:title", content: "Podcast · Memento Live" },
+      { property: "og:title", content: "Podcast · MaFeliza" },
       { property: "og:description", content: "Vos souvenirs à réécouter, comme une émission." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -7,9 +7,9 @@ import { BookHeart, Image as ImageIcon, Mic, Video } from "lucide-react";
 export const Route = createFileRoute("/app/guestbook")({
   head: () => ({
     meta: [
-      { title: "Livre d'or — Memento Live" },
+      { title: "Livre d'or — MaFeliza" },
       { name: "description", content: "Tous les messages, photos et vocaux laissés par vos invités." },
-      { property: "og:title", content: "Livre d'or — Memento Live" },
+      { property: "og:title", content: "Livre d'or — MaFeliza" },
       { property: "og:description", content: "Tous les messages, photos et vocaux laissés par vos invités." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

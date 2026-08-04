@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/centerpieces")({
   component: Centerpieces,
   head: () => ({
     meta: [
-      { title: "Centres de table · Memento Live" },
+      { title: "Centres de table · MaFeliza" },
       { name: "description", content: "Design floral des centres de table, table par table." },
-      { property: "og:title", content: "Centres de table · Memento Live" },
+      { property: "og:title", content: "Centres de table · MaFeliza" },
       { property: "og:description", content: "18 tables, 18 respirations florales." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

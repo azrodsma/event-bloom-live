@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/academy")({
   component: Academy,
   head: () => ({
     meta: [
-      { title: "Memento Academy · Memento Live" },
+      { title: "MaFeliza Academy · MaFeliza" },
       { name: "description", content: "Formations gratuites pour organiser un événement inoubliable." },
-      { property: "og:title", content: "Academy · Memento Live" },
+      { property: "og:title", content: "Academy · MaFeliza" },
       { property: "og:description", content: "Apprenez des meilleurs, gratuitement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/menu")({
   component: Menu,
   head: () => ({
     meta: [
-      { title: "Menu du dîner · Memento Live" },
+      { title: "Menu du dîner · MaFeliza" },
       { name: "description", content: "Menu 5 services signé par le chef, accords et alternatives." },
-      { property: "og:title", content: "Menu du dîner · Memento Live" },
+      { property: "og:title", content: "Menu du dîner · MaFeliza" },
       { property: "og:description", content: "Une carte du cœur, une carte du terroir." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

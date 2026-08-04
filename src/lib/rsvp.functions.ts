@@ -83,7 +83,7 @@ export const submitRsvp = createServerFn({ method: "POST" })
             ${evFull.location ? `<p style="margin:4px 0"><strong>📍</strong> ${evFull.location}</p>` : ""}
             <p style="margin:4px 0"><strong>👥</strong> ${data.plus_ones} accompagnant(s)</p>
           </div>
-          <p style="color:#8a6b52;font-size:13px">Memento Live — Le réseau social privé de vos plus beaux événements.</p>
+          <p style="color:#8a6b52;font-size:13px">MaFeliza — Le réseau social privé de vos plus beaux événements.</p>
         </div>`;
         await fetch("https://connector-gateway.lovable.dev/resend/emails", {
           method: "POST",
@@ -93,7 +93,7 @@ export const submitRsvp = createServerFn({ method: "POST" })
             "X-Connection-Api-Key": resendKey,
           },
           body: JSON.stringify({
-            from: "Memento Live <mariage@bold-lab-agency.com>",
+            from: "MaFeliza <mariage@bold-lab-agency.com>",
             to: [data.email],
             subject: `Votre réponse pour ${evFull.title}`,
             html,
@@ -285,7 +285,7 @@ export const sendRsvpReminders = createServerFn({ method: "POST" })
         <p style="text-align:center;margin:24px 0">
           <a href="${link}" style="background:#E85D8E;color:#fff;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:600">Répondre à l'invitation</a>
         </p>
-        <p style="color:#8a6b52;font-size:13px">Memento Live — Le réseau social privé de vos plus beaux événements.</p>
+        <p style="color:#8a6b52;font-size:13px">MaFeliza — Le réseau social privé de vos plus beaux événements.</p>
       </div>`;
       try {
         const res = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
@@ -296,7 +296,7 @@ export const sendRsvpReminders = createServerFn({ method: "POST" })
             "X-Connection-Api-Key": resendKey,
           },
           body: JSON.stringify({
-            from: "Memento Live <mariage@bold-lab-agency.com>",
+            from: "MaFeliza <mariage@bold-lab-agency.com>",
             to: [g.email],
             subject: `Rappel : votre réponse pour ${ev.title}`,
             html,

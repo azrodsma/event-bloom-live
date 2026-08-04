@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/sounds")({
   component: Sounds,
   head: () => ({
     meta: [
-      { title: "Bibliothèque sonore · Memento Live" },
+      { title: "Bibliothèque sonore · MaFeliza" },
       { name: "description", content: "Ambiances, jingles et musiques libres de droits pour habiller vos événements." },
-      { property: "og:title", content: "Bibliothèque sonore · Memento Live" },
+      { property: "og:title", content: "Bibliothèque sonore · MaFeliza" },
       { property: "og:description", content: "Le bon son pour chaque instant." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -38,7 +38,7 @@ const categories = [
 ];
 
 const featured: Track[] = [
-  { id: "t1", title: "Marche nuptiale piano", author: "Studio Memento", mood: "Solennel", duration: "3:12", bpm: 62, color: "from-rose-200 to-rose-400", new: true },
+  { id: "t1", title: "Marche nuptiale piano", author: "Studio MaFeliza", mood: "Solennel", duration: "3:12", bpm: 62, color: "from-rose-200 to-rose-400", new: true },
   { id: "t2", title: "Cocktail lounge sunset", author: "Neon Days", mood: "Chic & détendu", duration: "4:08", bpm: 96, color: "from-amber-200 to-amber-400" },
   { id: "t3", title: "Explosion de feu d'artifice", author: "Foley Studio", mood: "Grand final", duration: "0:18", bpm: 0, color: "from-fuchsia-300 to-fuchsia-500" },
 ];
@@ -46,7 +46,7 @@ const featured: Track[] = [
 const tracks: Track[] = [
   { id: "l1", title: "Entrée des mariés · violons", author: "Ensemble Étoile", mood: "Émouvant", duration: "2:48", bpm: 68, color: "from-rose-300 to-rose-500" },
   { id: "l2", title: "Ouverture de bal jazz", author: "Trio Belleville", mood: "Élégant", duration: "3:52", bpm: 104, color: "from-amber-300 to-amber-500", pro: true },
-  { id: "l3", title: "Ambiance apéritif Provence", author: "Studio Memento", mood: "Ensoleillé", duration: "5:12", bpm: 88, color: "from-orange-300 to-orange-500" },
+  { id: "l3", title: "Ambiance apéritif Provence", author: "Studio MaFeliza", mood: "Ensoleillé", duration: "5:12", bpm: 88, color: "from-orange-300 to-orange-500" },
   { id: "l4", title: "Discours · nappe piano", author: "Nordic Keys", mood: "Neutre & doux", duration: "4:22", bpm: 60, color: "from-sky-300 to-sky-500" },
   { id: "l5", title: "Piste de danse disco 70s", author: "Fever Nights", mood: "Festif", duration: "3:34", bpm: 122, color: "from-fuchsia-400 to-fuchsia-600", pro: true },
   { id: "l6", title: "Applaudissements chaleureux", author: "Foley Studio", mood: "Ovation", duration: "0:12", bpm: 0, color: "from-emerald-300 to-emerald-500" },

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/reminders")({
   component: Reminders,
   head: () => ({
     meta: [
-      { title: "Relances invités · Memento Live" },
+      { title: "Relances invités · MaFeliza" },
       { name: "description", content: "Relances RSVP automatiques et personnalisées." },
-      { property: "og:title", content: "Relances invités · Memento Live" },
+      { property: "og:title", content: "Relances invités · MaFeliza" },
       { property: "og:description", content: "Sans harceler. Avec tact." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

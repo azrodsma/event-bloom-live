@@ -5,10 +5,10 @@ export const Route = createFileRoute("/legal")({
   component: Legal,
   head: () => ({
     meta: [
-      { title: "Centre légal · Memento Live" },
-      { name: "description", content: "Conditions générales, politique de confidentialité, gestion des cookies et mentions légales de Memento Live." },
-      { property: "og:title", content: "Centre légal · Memento Live" },
-      { property: "og:description", content: "Toutes les informations légales de Memento Live." },
+      { title: "Centre légal · MaFeliza" },
+      { name: "description", content: "Conditions générales, politique de confidentialité, gestion des cookies et mentions légales de MaFeliza." },
+      { property: "og:title", content: "Centre légal · MaFeliza" },
+      { property: "og:description", content: "Toutes les informations légales de MaFeliza." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
           { property: "og:url", content: "https://event.bold-lab-agency.com/legal" },
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/legal")({
 });
 
 const docs = [
-  { icon: FileText, title: "Conditions générales", desc: "Vos droits et obligations en utilisant Memento", updated: "12 mars 2026", href: "#cgu" },
+  { icon: FileText, title: "Conditions générales", desc: "Vos droits et obligations en utilisant MaFeliza", updated: "12 mars 2026", href: "#cgu" },
   { icon: Lock, title: "Politique de confidentialité", desc: "Comment nous traitons vos données personnelles", updated: "12 mars 2026", href: "#privacy" },
   { icon: Cookie, title: "Cookies", desc: "Cookies techniques et analytiques utilisés", updated: "01 février 2026", href: "#cookies" },
   { icon: Scale, title: "Mentions légales", desc: "Éditeur, hébergeur, propriété intellectuelle", updated: "01 janvier 2026", href: "#mentions" },
@@ -51,7 +51,7 @@ function Legal() {
         </div>
         <h1 className="mt-4 font-serif text-3xl leading-tight">Votre confiance,<br />notre engagement</h1>
         <p className="mx-auto mt-3 max-w-xs text-sm text-muted-foreground">
-          Memento est conçu autour du respect de votre vie privée. Vos souvenirs vous appartiennent.
+          MaFeliza est conçu autour du respect de votre vie privée. Vos souvenirs vous appartiennent.
         </p>
       </section>
 
@@ -135,7 +135,7 @@ function Legal() {
       </section>
 
       <p className="mt-10 px-4 text-center text-[11px] text-muted-foreground">
-        Memento SAS · RCS Paris 984 621 730 · Siège : 12 rue de la Roquette, 75011 Paris
+        MaFeliza SAS · RCS Paris 984 621 730 · Siège : 12 rue de la Roquette, 75011 Paris
       </p>
     </div>
   );

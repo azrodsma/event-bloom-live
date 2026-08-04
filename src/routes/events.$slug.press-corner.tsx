@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/press-corner")({
   component: PressCorner,
   head: () => ({
     meta: [
-      { title: "Coin presse · Memento Live" },
+      { title: "Coin presse · MaFeliza" },
       { name: "description", content: "Kit média prêt pour la presse et les créateurs de contenu." },
-      { property: "og:title", content: "Coin presse · Memento Live" },
+      { property: "og:title", content: "Coin presse · MaFeliza" },
       { property: "og:description", content: "Communiqué, visuels, accréditations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

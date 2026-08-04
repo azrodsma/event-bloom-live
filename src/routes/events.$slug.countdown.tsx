@@ -8,9 +8,9 @@ import { getEventStats } from "@/lib/stats.functions";
 export const Route = createFileRoute("/events/$slug/countdown")({
   head: () => ({
     meta: [
-      { title: "Compte à rebours · Memento Live" },
+      { title: "Compte à rebours · MaFeliza" },
       { name: "description", content: "Compte à rebours immersif plein écran vers votre événement, à partager avec vos proches." },
-      { property: "og:title", content: "Compte à rebours · Memento Live" },
+      { property: "og:title", content: "Compte à rebours · MaFeliza" },
       { property: "og:description", content: "Le grand jour approche." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

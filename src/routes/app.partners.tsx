@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/partners")({
   component: Partners,
   head: () => ({
     meta: [
-      { title: "Partenaires · Memento Live" },
+      { title: "Partenaires · MaFeliza" },
       { name: "description", content: "Programme partenaires : distributeurs, marques et prestataires." },
-      { property: "og:title", content: "Partenaires · Memento Live" },
+      { property: "og:title", content: "Partenaires · MaFeliza" },
       { property: "og:description", content: "Grandir ensemble." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/app/partners")({
 const tracks = [
   { l: "Wedding planners", desc: "20% de commission récurrente · onboarding client en 24h", n: "312 pros" },
   { l: "Marques lifestyle", desc: "Placement dans notre catalogue récompenses (1,8 M invités actifs)", n: "48 marques" },
-  { l: "Lieux de réception", desc: "Widget Memento intégré à votre site · pré-remplissage événement", n: "620 lieux" },
+  { l: "Lieux de réception", desc: "Widget MaFeliza intégré à votre site · pré-remplissage événement", n: "620 lieux" },
   { l: "Créateurs & médias", desc: "Programme d'affiliation 15% + kit contenus", n: "1 240 créateurs" },
 ];
 

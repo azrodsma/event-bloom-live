@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/inspirations")({
   component: Inspirations,
   head: () => ({
     meta: [
-      { title: "Inspirations d'événements · Memento Live" },
+      { title: "Inspirations d'événements · MaFeliza" },
       { name: "description", content: "Explorez des moodboards, thèmes et mises en scène pour imaginer votre prochain événement." },
-      { property: "og:title", content: "Inspirations · Memento Live" },
+      { property: "og:title", content: "Inspirations · MaFeliza" },
       { property: "og:description", content: "Des idées visuelles pour composer un événement inoubliable." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

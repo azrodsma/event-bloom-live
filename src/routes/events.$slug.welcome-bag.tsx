@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/welcome-bag")({
   component: WelcomeBag,
   head: () => ({
     meta: [
-      { title: "Sac de bienvenue · Memento Live" },
+      { title: "Sac de bienvenue · MaFeliza" },
       { name: "description", content: "Composez le welcome bag de vos invités : produits locaux, souvenirs et douceurs." },
-      { property: "og:title", content: "Sac de bienvenue · Memento Live" },
+      { property: "og:title", content: "Sac de bienvenue · MaFeliza" },
       { property: "og:description", content: "L'accueil parfait, dès l'arrivée." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

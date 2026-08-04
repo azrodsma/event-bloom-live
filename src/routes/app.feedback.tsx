@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/feedback")({
   component: Feedback,
   head: () => ({
     meta: [
-      { title: "Votre avis · Memento Live" },
-      { name: "description", content: "Partagez votre retour d'expérience et aidez-nous à améliorer Memento." },
-      { property: "og:title", content: "Votre avis · Memento Live" },
+      { title: "Votre avis · MaFeliza" },
+      { name: "description", content: "Partagez votre retour d'expérience et aidez-nous à améliorer MaFeliza." },
+      { property: "og:title", content: "Votre avis · MaFeliza" },
       { property: "og:description", content: "Nous répondons personnellement à chaque retour sous 48h." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

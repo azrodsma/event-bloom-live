@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/florals")({
   component: Florals,
   head: () => ({
     meta: [
-      { title: "Fleurs & compositions · Memento Live" },
+      { title: "Fleurs & compositions · MaFeliza" },
       { name: "description", content: "Composez bouquets, centres de table et arche florale avec votre fleuriste." },
-      { property: "og:title", content: "Fleurs & compositions · Memento Live" },
+      { property: "og:title", content: "Fleurs & compositions · MaFeliza" },
       { property: "og:description", content: "L'âme végétale de votre événement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

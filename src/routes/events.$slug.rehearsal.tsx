@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/rehearsal")({
   component: Rehearsal,
   head: () => ({
     meta: [
-      { title: "Répétition · Memento Live" },
+      { title: "Répétition · MaFeliza" },
       { name: "description", content: "Chorégraphie de l'entrée, placements et timing — répétez la cérémonie sereinement." },
-      { property: "og:title", content: "Répétition · Memento Live" },
+      { property: "og:title", content: "Répétition · MaFeliza" },
       { property: "og:description", content: "Le jour J, tout coule de source." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -105,7 +105,7 @@ function Rehearsal() {
 
         <section className="rounded-3xl bg-cream p-5">
           <div className="flex items-center gap-2 text-xs font-semibold text-primary-dark">
-            <Sparkles className="h-4 w-4" /> Astuce Memento
+            <Sparkles className="h-4 w-4" /> Astuce MaFeliza
           </div>
           <p className="mt-2 font-serif text-lg leading-tight">
             Enregistrez la répétition en vidéo, l'IA détecte les temps morts et propose des ajustements.

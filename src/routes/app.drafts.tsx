@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/drafts")({
   component: Drafts,
   head: () => ({
     meta: [
-      { title: "Brouillons · Memento Live" },
+      { title: "Brouillons · MaFeliza" },
       { name: "description", content: "Reprenez la création de vos événements là où vous vous êtes arrêté·e." },
-      { property: "og:title", content: "Brouillons · Memento Live" },
+      { property: "og:title", content: "Brouillons · MaFeliza" },
       { property: "og:description", content: "Vos événements en préparation." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

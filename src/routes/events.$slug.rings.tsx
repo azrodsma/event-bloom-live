@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/rings")({
   component: Rings,
   head: () => ({
     meta: [
-      { title: "Alliances · Memento Live" },
+      { title: "Alliances · MaFeliza" },
       { name: "description", content: "Suivez, assurez et gravez vos alliances." },
-      { property: "og:title", content: "Alliances · Memento Live" },
+      { property: "og:title", content: "Alliances · MaFeliza" },
       { property: "og:description", content: "Le symbole le plus précieux, sécurisé." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

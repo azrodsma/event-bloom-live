@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/heirlooms")({
   component: Heirlooms,
   head: () => ({
     meta: [
-      { title: "Objets de famille · Memento Live" },
+      { title: "Objets de famille · MaFeliza" },
       { name: "description", content: "Inventaire des objets de famille utilisés le jour J." },
-      { property: "og:title", content: "Objets de famille · Memento Live" },
+      { property: "og:title", content: "Objets de famille · MaFeliza" },
       { property: "og:description", content: "Le voile de grand-mère, la broche de tante Éliane. Chaque histoire tracée." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/religious")({
   component: Religious,
   head: () => ({
     meta: [
-      { title: "Cérémonie religieuse · Memento Live" },
+      { title: "Cérémonie religieuse · MaFeliza" },
       { name: "description", content: "Coordination avec l'officiant, préparation spirituelle et logistique." },
-      { property: "og:title", content: "Cérémonie religieuse · Memento Live" },
+      { property: "og:title", content: "Cérémonie religieuse · MaFeliza" },
       { property: "og:description", content: "Respecter le rite, préparer le cœur." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

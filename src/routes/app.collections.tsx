@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/collections")({
   component: Collections,
   head: () => ({
     meta: [
-      { title: "Mes collections · Memento Live" },
+      { title: "Mes collections · MaFeliza" },
       { name: "description", content: "Rassemblez vos souvenirs préférés en collections thématiques : voyages, famille, jours heureux." },
-      { property: "og:title", content: "Mes collections · Memento Live" },
+      { property: "og:title", content: "Mes collections · MaFeliza" },
       { property: "og:description", content: "Souvenirs, rangés avec soin." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

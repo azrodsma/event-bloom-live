@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/bar")({
   component: BarConfig,
   head: () => ({
     meta: [
-      { title: "Bar & cocktails · Memento Live" },
+      { title: "Bar & cocktails · MaFeliza" },
       { name: "description", content: "Composez votre carte de bar : cocktails signature, softs et estimation des quantités." },
-      { property: "og:title", content: "Bar & cocktails · Memento Live" },
+      { property: "og:title", content: "Bar & cocktails · MaFeliza" },
       { property: "og:description", content: "La carte parfaite pour vos invités." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

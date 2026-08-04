@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/family-portraits")({
   component: FamilyPortraits,
   head: () => ({
     meta: [
-      { title: "Photos de famille · Memento Live" },
+      { title: "Photos de famille · MaFeliza" },
       { name: "description", content: "Liste chronométrée des portraits de famille pour ne rater personne." },
-      { property: "og:title", content: "Photos de famille · Memento Live" },
+      { property: "og:title", content: "Photos de famille · MaFeliza" },
       { property: "og:description", content: "22 combinaisons, 25 minutes, zéro oubli." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

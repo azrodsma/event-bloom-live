@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/weather")({
   component: Weather,
   head: () => ({
     meta: [
-      { title: "Météo du jour J · Memento Live" },
+      { title: "Météo du jour J · MaFeliza" },
       { name: "description", content: "Prévisions détaillées et plan de repli intelligent." },
-      { property: "og:title", content: "Météo · Memento Live" },
+      { property: "og:title", content: "Météo · MaFeliza" },
       { property: "og:description", content: "Anticiper, adapter, sourire." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

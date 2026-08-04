@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/officiants")({
   component: Officiants,
   head: () => ({
     meta: [
-      { title: "Officiants de cérémonie · Memento Live" },
+      { title: "Officiants de cérémonie · MaFeliza" },
       { name: "description", content: "Trouvez l'officiant idéal pour votre cérémonie laïque : profils, styles, disponibilités." },
-      { property: "og:title", content: "Officiants · Memento Live" },
+      { property: "og:title", content: "Officiants · MaFeliza" },
       { property: "og:description", content: "L'orateur qui portera vos vœux." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -65,7 +65,7 @@ function Officiants() {
         </div>
         <h1 className="mt-2 font-serif text-3xl leading-tight">L'orateur<br />qui portera vos vœux</h1>
         <p className="mt-2 max-w-md text-sm text-muted-foreground">
-          Chaque profil est certifié Memento — écriture, style de voix, éthique.
+          Chaque profil est certifié MaFeliza — écriture, style de voix, éthique.
         </p>
 
         <div className="mt-4 flex items-center gap-2 rounded-full border border-border/60 bg-card px-4 py-2.5">

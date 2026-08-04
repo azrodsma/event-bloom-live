@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/pets")({
   component: Pets,
   head: () => ({
     meta: [
-      { title: "Animaux de compagnie · Memento Live" },
+      { title: "Animaux de compagnie · MaFeliza" },
       { name: "description", content: "Accueil des animaux : gardiennage, brief et kit confort." },
-      { property: "og:title", content: "Animaux · Memento Live" },
+      { property: "og:title", content: "Animaux · MaFeliza" },
       { property: "og:description", content: "Nos compagnons méritent aussi la fête." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

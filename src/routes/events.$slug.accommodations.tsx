@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/accommodations")({
   component: Accommodations,
   head: () => ({
     meta: [
-      { title: "Hébergements invités · Memento Live" },
+      { title: "Hébergements invités · MaFeliza" },
       { name: "description", content: "Sélection d'hébergements proches, tarifs négociés et disponibilités." },
-      { property: "og:title", content: "Hébergements · Memento Live" },
+      { property: "og:title", content: "Hébergements · MaFeliza" },
       { property: "og:description", content: "Chaque invité dort bien, à deux pas de la fête." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

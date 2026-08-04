@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/live-analytics")({
   component: LiveAnalytics,
   head: () => ({
     meta: [
-      { title: "Analytics du live · Memento Live" },
+      { title: "Analytics du live · MaFeliza" },
       { name: "description", content: "Statistiques en temps réel de votre diffusion : audience, engagement, qualité du signal et pics d'émotions." },
-      { property: "og:title", content: "Analytics du live · Memento Live" },
+      { property: "og:title", content: "Analytics du live · MaFeliza" },
       { property: "og:description", content: "Pilotez votre diffusion en direct." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/photo-challenges")({
   component: PhotoChallenges,
   head: () => ({
     meta: [
-      { title: "Défis photo · Memento Live" },
+      { title: "Défis photo · MaFeliza" },
       { name: "description", content: "Une chasse aux souvenirs à travers la soirée. Débloquez, capturez, gagnez." },
-      { property: "og:title", content: "Défis photo · Memento Live" },
+      { property: "og:title", content: "Défis photo · MaFeliza" },
       { property: "og:description", content: "La chasse aux souvenirs de la soirée." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

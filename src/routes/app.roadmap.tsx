@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/roadmap")({
   component: Roadmap,
   head: () => ({
     meta: [
-      { title: "Roadmap publique · Memento Live" },
+      { title: "Roadmap publique · MaFeliza" },
       { name: "description", content: "Ce que nous construisons, ce que nous préparons." },
-      { property: "og:title", content: "Roadmap publique · Memento Live" },
+      { property: "og:title", content: "Roadmap publique · MaFeliza" },
       { property: "og:description", content: "Nous construisons devant vous." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

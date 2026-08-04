@@ -30,7 +30,7 @@ export function CagnotteCard({ url, goal, current, compact }: Props) {
         </div>
       )}
       <p className="mt-2 text-[11px] text-muted-foreground">
-        Memento Live ne collecte pas les fonds. Les contributions se font directement chez notre partenaire.
+        MaFeliza ne collecte pas les fonds. Les contributions se font directement chez notre partenaire.
       </p>
       {url && (
         <a

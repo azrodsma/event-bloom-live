@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/scenography")({
   component: Scenography,
   head: () => ({
     meta: [
-      { title: "Scénographie · Memento Live" },
+      { title: "Scénographie · MaFeliza" },
       { name: "description", content: "Lumières, brume, confettis : chorégraphiez chaque effet minute par minute." },
-      { property: "og:title", content: "Scénographie · Memento Live" },
+      { property: "og:title", content: "Scénographie · MaFeliza" },
       { property: "og:description", content: "Le spectacle derrière l'émotion." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/security")({
   component: Security,
   head: () => ({
     meta: [
-      { title: "Sécurité · Memento Live" },
+      { title: "Sécurité · MaFeliza" },
       { name: "description", content: "Chiffrement, souveraineté et transparence de la plateforme." },
-      { property: "og:title", content: "Sécurité · Memento Live" },
+      { property: "og:title", content: "Sécurité · MaFeliza" },
       { property: "og:description", content: "Vos souvenirs sont sacrés. Notre stack aussi." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

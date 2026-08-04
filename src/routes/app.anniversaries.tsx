@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/anniversaries")({
   component: Anniversaries,
   head: () => ({
     meta: [
-      { title: "Anniversaires · Memento Live" },
+      { title: "Anniversaires · MaFeliza" },
       { name: "description", content: "Ne manquez plus les dates qui comptent : mariages, baptêmes, anniversaires marquants." },
-      { property: "og:title", content: "Anniversaires · Memento Live" },
+      { property: "og:title", content: "Anniversaires · MaFeliza" },
       { property: "og:description", content: "Les dates qui comptent." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

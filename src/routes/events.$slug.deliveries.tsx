@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/deliveries")({
   component: Deliveries,
   head: () => ({
     meta: [
-      { title: "Livraisons · Memento Live" },
+      { title: "Livraisons · MaFeliza" },
       { name: "description", content: "Suivez chaque colis et livraison prestataire jusqu'au jour J." },
-      { property: "og:title", content: "Livraisons · Memento Live" },
+      { property: "og:title", content: "Livraisons · MaFeliza" },
       { property: "og:description", content: "Rien ne se perd, rien n'arrive en retard." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

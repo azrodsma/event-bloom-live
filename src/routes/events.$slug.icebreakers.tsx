@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/icebreakers")({
   component: Icebreakers,
   head: () => ({
     meta: [
-      { title: "Brise-glace · Memento Live" },
+      { title: "Brise-glace · MaFeliza" },
       { name: "description", content: "Des questions et défis pour que vos invités se rencontrent vraiment." },
-      { property: "og:title", content: "Brise-glace · Memento Live" },
+      { property: "og:title", content: "Brise-glace · MaFeliza" },
       { property: "og:description", content: "Que personne ne reste seul dans un coin." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

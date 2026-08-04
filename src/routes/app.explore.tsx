@@ -12,7 +12,7 @@ import { adaptEvent, type DbEvent } from "@/lib/event-adapter";
 export const Route = createFileRoute("/app/explore")({
   head: () => ({
     meta: [
-      { title: "Explorer — Memento Live" },
+      { title: "Explorer — MaFeliza" },
       { name: "description", content: "Découvrez des événements en direct et à venir." },
     ],
   }),

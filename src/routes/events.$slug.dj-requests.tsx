@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/dj-requests")({
   component: DJRequests,
   head: () => ({
     meta: [
-      { title: "Demandes au DJ · Memento Live" },
+      { title: "Demandes au DJ · MaFeliza" },
       { name: "description", content: "Les invités votent en direct pour les prochains morceaux — le DJ pilote sa piste en temps réel." },
-      { property: "og:title", content: "Demandes au DJ · Memento Live" },
+      { property: "og:title", content: "Demandes au DJ · MaFeliza" },
       { property: "og:description", content: "La foule choisit, la piste s'enflamme." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

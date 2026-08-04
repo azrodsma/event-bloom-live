@@ -7,9 +7,9 @@ import { Plus, Sparkles } from "lucide-react";
 export const Route = createFileRoute("/app/stories")({
   head: () => ({
     meta: [
-      { title: "Stories — Memento Live" },
+      { title: "Stories — MaFeliza" },
       { name: "description", content: "Les stories éphémères de vos événements, visibles 24 h." },
-      { property: "og:title", content: "Stories — Memento Live" },
+      { property: "og:title", content: "Stories — MaFeliza" },
       { property: "og:description", content: "Les stories éphémères de vos événements, visibles 24 h." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

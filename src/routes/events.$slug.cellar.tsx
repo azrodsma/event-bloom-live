@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/cellar")({
   component: Cellar,
   head: () => ({
     meta: [
-      { title: "Cave · Memento Live" },
+      { title: "Cave · MaFeliza" },
       { name: "description", content: "Sélection des vins servis, quantités et températures de service." },
-      { property: "og:title", content: "Cave · Memento Live" },
+      { property: "og:title", content: "Cave · MaFeliza" },
       { property: "og:description", content: "Cave livrée, cave dégustée, cave partagée." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

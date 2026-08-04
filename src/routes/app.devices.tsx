@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/devices")({
   component: Devices,
   head: () => ({
     meta: [
-      { title: "Appareils connectés · Memento Live" },
+      { title: "Appareils connectés · MaFeliza" },
       { name: "description", content: "Contrôlez et sécurisez tous les appareils liés à votre compte." },
-      { property: "og:title", content: "Appareils · Memento Live" },
+      { property: "og:title", content: "Appareils · MaFeliza" },
       { property: "og:description", content: "La souveraineté sur vos sessions." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

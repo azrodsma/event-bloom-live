@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/export")({
   component: ExportPage,
   head: () => ({
     meta: [
-      { title: "Exporter mes données · Memento Live" },
+      { title: "Exporter mes données · MaFeliza" },
       { name: "description", content: "Téléchargez tous vos souvenirs, contacts et médias dans un format ouvert." },
-      { property: "og:title", content: "Export RGPD · Memento Live" },
+      { property: "og:title", content: "Export RGPD · MaFeliza" },
       { property: "og:description", content: "Vos souvenirs, à emporter." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

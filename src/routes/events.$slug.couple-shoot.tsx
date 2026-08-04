@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/couple-shoot")({
   component: CoupleShoot,
   head: () => ({
     meta: [
-      { title: "Séance couple · Memento Live" },
+      { title: "Séance couple · MaFeliza" },
       { name: "description", content: "Le moment volé à deux, mis en scène." },
-      { property: "og:title", content: "Séance couple · Memento Live" },
+      { property: "og:title", content: "Séance couple · MaFeliza" },
       { property: "og:description", content: "20 minutes qui deviennent vos plus belles photos." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -12,9 +12,9 @@ export const Route = createFileRoute("/events/$slug/budget")({
   component: Budget,
   head: () => ({
     meta: [
-      { title: "Budget · Memento Live" },
+      { title: "Budget · MaFeliza" },
       { name: "description", content: "Suivez chaque dépense de votre événement, catégorie par catégorie." },
-      { property: "og:title", content: "Budget · Memento Live" },
+      { property: "og:title", content: "Budget · MaFeliza" },
       { property: "og:description", content: "Un suivi budgétaire clair et partagé." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

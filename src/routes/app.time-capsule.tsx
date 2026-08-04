@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/time-capsule")({
   component: TimeCapsule,
   head: () => ({
     meta: [
-      { title: "Capsule temporelle · Memento Live" },
+      { title: "Capsule temporelle · MaFeliza" },
       { name: "description", content: "Scellez un message aujourd'hui, ouvrez-le dans 1, 5 ou 10 ans." },
-      { property: "og:title", content: "Capsule temporelle · Memento Live" },
+      { property: "og:title", content: "Capsule temporelle · MaFeliza" },
       { property: "og:description", content: "Écrire au futur, se souvenir en couleur." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

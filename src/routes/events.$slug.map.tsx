@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/map")({
   component: EventMap,
   head: () => ({
     meta: [
-      { title: "Plan & itinéraires · Memento Live" },
+      { title: "Plan & itinéraires · MaFeliza" },
       { name: "description", content: "Retrouvez tous les lieux clés de l'événement, itinéraires, hébergements et bonnes adresses aux alentours." },
-      { property: "og:title", content: "Plan & itinéraires · Memento Live" },
+      { property: "og:title", content: "Plan & itinéraires · MaFeliza" },
       { property: "og:description", content: "La carte interactive de l'événement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

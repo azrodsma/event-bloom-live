@@ -17,9 +17,9 @@ import { findEvent } from "@/lib/mock-data";
 export const Route = createFileRoute("/events/$slug/vendors-hub")({
   head: ({ params }) => ({
     meta: [
-      { title: `Prestataires · ${params.slug} — Memento Live` },
+      { title: `Prestataires · ${params.slug} — MaFeliza` },
       { name: "description", content: "Le hub central de tous vos prestataires : statut, contact, devis, contrats." },
-      { property: "og:title", content: "Prestataires · Memento Live" },
+      { property: "og:title", content: "Prestataires · MaFeliza" },
       { property: "og:description", content: "Un seul endroit pour orchestrer votre équipe." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

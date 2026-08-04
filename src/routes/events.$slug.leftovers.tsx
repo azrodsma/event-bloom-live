@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/leftovers")({
   component: Leftovers,
   head: () => ({
     meta: [
-      { title: "Anti-gaspi · Memento Live" },
+      { title: "Anti-gaspi · MaFeliza" },
       { name: "description", content: "Redonnez une seconde vie à chaque plat, fleur et bouteille." },
-      { property: "og:title", content: "Anti-gaspi · Memento Live" },
+      { property: "og:title", content: "Anti-gaspi · MaFeliza" },
       { property: "og:description", content: "Le lendemain compte autant que le jour J." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/theme-studio")({
   component: ThemeStudio,
   head: () => ({
     meta: [
-      { title: "Studio de thèmes · Memento Live" },
+      { title: "Studio de thèmes · MaFeliza" },
       { name: "description", content: "Créez le thème visuel de votre événement en quelques gestes." },
-      { property: "og:title", content: "Studio de thèmes · Memento Live" },
+      { property: "og:title", content: "Studio de thèmes · MaFeliza" },
       { property: "og:description", content: "Une identité graphique cousue main." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

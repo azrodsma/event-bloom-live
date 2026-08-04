@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/rewards")({
   component: Rewards,
   head: () => ({
     meta: [
-      { title: "Récompenses · Memento Live" },
+      { title: "Récompenses · MaFeliza" },
       { name: "description", content: "Cumulez des étoiles, débloquez des expériences uniques." },
-      { property: "og:title", content: "Récompenses · Memento Live" },
+      { property: "og:title", content: "Récompenses · MaFeliza" },
       { property: "og:description", content: "Vos souvenirs valent de l'or." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -39,7 +39,7 @@ function Rewards() {
         </Link>
         <div>
           <p className="font-serif text-lg leading-tight">Récompenses</p>
-          <p className="text-xs text-muted-foreground">Vos étoiles Memento</p>
+          <p className="text-xs text-muted-foreground">Vos étoiles MaFeliza</p>
         </div>
       </header>
 

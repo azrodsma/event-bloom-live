@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/split-costs")({
   component: SplitCosts,
   head: () => ({
     meta: [
-      { title: "Partage des frais · Memento Live" },
+      { title: "Partage des frais · MaFeliza" },
       { name: "description", content: "Répartissez les dépenses entre témoins, familles et amis, sans manipuler d'argent." },
-      { property: "og:title", content: "Partage des frais · Memento Live" },
+      { property: "og:title", content: "Partage des frais · MaFeliza" },
       { property: "og:description", content: "Une comptabilité juste, entre proches." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -58,7 +58,7 @@ function SplitCosts() {
             Chacun voit sa part et rembourse via son moyen préféré (Lydia, virement, PayPal).
           </p>
           <div className="mt-4 flex items-center gap-2 text-xs opacity-90">
-            <Sparkles className="h-3.5 w-3.5" /> Memento Live n'encaisse aucun euro.
+            <Sparkles className="h-3.5 w-3.5" /> MaFeliza n'encaisse aucun euro.
           </div>
         </section>
 

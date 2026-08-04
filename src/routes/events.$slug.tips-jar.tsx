@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/tips-jar")({
   component: TipsJar,
   head: () => ({
     meta: [
-      { title: "Pourboires équipe · Memento Live" },
+      { title: "Pourboires équipe · MaFeliza" },
       { name: "description", content: "Un pot commun transparent pour remercier les équipes." },
-      { property: "og:title", content: "Pourboires équipe · Memento Live" },
+      { property: "og:title", content: "Pourboires équipe · MaFeliza" },
       { property: "og:description", content: "Merci en actes, pas seulement en mots." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

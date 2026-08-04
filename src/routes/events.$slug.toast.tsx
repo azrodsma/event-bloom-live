@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/toast")({
   component: Toast,
   head: () => ({
     meta: [
-      { title: "Enregistrer un vœu · Memento Live" },
+      { title: "Enregistrer un vœu · MaFeliza" },
       { name: "description", content: "Absent·e le jour J ? Enregistrez un message vidéo ou vocal qui sera diffusé pendant la cérémonie." },
-      { property: "og:title", content: "Enregistrer un vœu · Memento Live" },
+      { property: "og:title", content: "Enregistrer un vœu · MaFeliza" },
       { property: "og:description", content: "Un message qui traverse la distance." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

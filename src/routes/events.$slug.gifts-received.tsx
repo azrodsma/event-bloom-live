@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/gifts-received")({
   component: GiftsReceived,
   head: () => ({
     meta: [
-      { title: "Cadeaux reçus · Memento Live" },
+      { title: "Cadeaux reçus · MaFeliza" },
       { name: "description", content: "Retrouvez chaque cadeau reçu, gardez la trace des donateurs et cochez les remerciements envoyés." },
-      { property: "og:title", content: "Cadeaux reçus · Memento Live" },
+      { property: "og:title", content: "Cadeaux reçus · MaFeliza" },
       { property: "og:description", content: "Le journal de vos cadeaux post-événement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

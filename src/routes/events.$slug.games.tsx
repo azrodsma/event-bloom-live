@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/games")({
   component: Games,
   head: () => ({
     meta: [
-      { title: "Animations & jeux · Memento Live" },
+      { title: "Animations & jeux · MaFeliza" },
       { name: "description", content: "Blind test, quiz des mariés, chasse au trésor : brise-glaces sur mesure." },
-      { property: "og:title", content: "Animations · Memento Live" },
+      { property: "og:title", content: "Animations · MaFeliza" },
       { property: "og:description", content: "L'ambiance ne tient pas à un fil : elle s'orchestre." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

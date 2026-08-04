@@ -3,7 +3,7 @@ import { z } from "zod";
 import { welcomeEmail, passwordResetEmail } from "./email-templates";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/resend";
-const FROM = "Memento Live <mariage@bold-lab-agency.com>";
+const FROM = "MaFeliza <mariage@bold-lab-agency.com>";
 
 async function sendViaResend(payload: { to: string; subject: string; html: string }) {
   const lovableKey = process.env.LOVABLE_API_KEY;

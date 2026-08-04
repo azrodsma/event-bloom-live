@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/speeches")({
   component: Speeches,
   head: () => ({
     meta: [
-      { title: "Discours · Memento Live" },
+      { title: "Discours · MaFeliza" },
       { name: "description", content: "Ordre de passage, minutages et coach IA pour les discours." },
-      { property: "og:title", content: "Discours · Memento Live" },
+      { property: "og:title", content: "Discours · MaFeliza" },
       { property: "og:description", content: "Chaque mot compte. Chaque minute aussi." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

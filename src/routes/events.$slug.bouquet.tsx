@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/bouquet")({
   component: Bouquet,
   head: () => ({
     meta: [
-      { title: "Bouquet · Memento Live" },
+      { title: "Bouquet · MaFeliza" },
       { name: "description", content: "Composez le bouquet parfait, tige par tige." },
-      { property: "og:title", content: "Bouquet · Memento Live" },
+      { property: "og:title", content: "Bouquet · MaFeliza" },
       { property: "og:description", content: "Le bouquet raconte votre histoire." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

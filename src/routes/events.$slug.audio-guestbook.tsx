@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/audio-guestbook")({
   component: AudioGuestbook,
   head: () => ({
     meta: [
-      { title: "Livre d'or vocal · Memento Live" },
+      { title: "Livre d'or vocal · MaFeliza" },
       { name: "description", content: "Un téléphone vintage, des voix qui restent pour toujours." },
-      { property: "og:title", content: "Livre d'or vocal · Memento Live" },
+      { property: "og:title", content: "Livre d'or vocal · MaFeliza" },
       { property: "og:description", content: "Combiné bakélite années 60, 214 messages déjà déposés." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

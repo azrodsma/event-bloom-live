@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/integrations")({
   component: Integrations,
   head: () => ({
     meta: [
-      { title: "Intégrations · Memento Live" },
-      { name: "description", content: "Connectez Memento Live à vos outils : Google, Spotify, Notion et plus." },
-      { property: "og:title", content: "Intégrations · Memento Live" },
+      { title: "Intégrations · MaFeliza" },
+      { name: "description", content: "Connectez MaFeliza à vos outils : Google, Spotify, Notion et plus." },
+      { property: "og:title", content: "Intégrations · MaFeliza" },
       { property: "og:description", content: "Un événement branché à votre vie." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

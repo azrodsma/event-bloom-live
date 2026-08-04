@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/cocktail")({
   component: Cocktail,
   head: () => ({
     meta: [
-      { title: "Vin d'honneur · Memento Live" },
+      { title: "Vin d'honneur · MaFeliza" },
       { name: "description", content: "Bouchées signature, ateliers gourmands et animations du cocktail." },
-      { property: "og:title", content: "Vin d'honneur · Memento Live" },
+      { property: "og:title", content: "Vin d'honneur · MaFeliza" },
       { property: "og:description", content: "Le moment où la fête décolle." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/tastings")({
   component: Tastings,
   head: () => ({
     meta: [
-      { title: "Dégustations · Memento Live" },
+      { title: "Dégustations · MaFeliza" },
       { name: "description", content: "Planifiez et notez vos dégustations traiteur, vins et pâtisseries avant le grand jour." },
-      { property: "og:title", content: "Dégustations · Memento Live" },
+      { property: "og:title", content: "Dégustations · MaFeliza" },
       { property: "og:description", content: "Choisir en confiance." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -128,7 +128,7 @@ function Tastings() {
         <p className="text-xs font-bold uppercase tracking-wider text-primary">Rapport final</p>
         <p className="mt-2 font-serif text-lg leading-tight">Synthèse & recommandations</p>
         <p className="mt-1 text-[12px] text-muted-foreground">
-          Une fois les 4 sessions notées, Memento génère un PDF récapitulatif à envoyer à vos prestataires.
+          Une fois les 4 sessions notées, MaFeliza génère un PDF récapitulatif à envoyer à vos prestataires.
         </p>
         <button className="mt-3 rounded-full bg-foreground px-5 py-2 text-xs font-bold text-background">
           Aperçu du rapport

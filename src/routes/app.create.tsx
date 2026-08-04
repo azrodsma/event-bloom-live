@@ -12,7 +12,7 @@ import { useAuth } from "@/hooks/use-auth";
 export const Route = createFileRoute("/app/create")({
   head: () => ({
     meta: [
-      { title: "Créer un événement — Memento Live" },
+      { title: "Créer un événement — MaFeliza" },
       { name: "description", content: "Créez votre événement en quelques étapes." },
     ],
   }),
@@ -147,7 +147,7 @@ function CreatePage() {
           <div className="space-y-3">
             <div className="flex items-start gap-3 rounded-2xl bg-gold-light p-4 text-sm">
               <Gift className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
-              <p><strong>Cagnotte externe.</strong> Memento Live ne collecte pas les fonds. Collez le lien Leetchi, Lydia, PayPal Pool…</p>
+              <p><strong>Cagnotte externe.</strong> MaFeliza ne collecte pas les fonds. Collez le lien Leetchi, Lydia, PayPal Pool…</p>
             </div>
             <Field label="Lien de la cagnotte" value={cagnotteUrl} onChange={setCagnotteUrl} placeholder="https://leetchi.com/..." />
             <Field label="Objectif (€)" type="number" value={cagnotteGoal} onChange={setCagnotteGoal} placeholder="7000" />

@@ -11,7 +11,7 @@ import { Sparkles, Radio, Calendar, Camera, Heart, ArrowUpRight, Compass, Plus }
 export const Route = createFileRoute("/app/")({
   head: () => ({
     meta: [
-      { title: "Accueil — Memento Live" },
+      { title: "Accueil — MaFeliza" },
       { name: "description", content: "Vos événements, vos proches, en un fil unique." },
     ],
   }),

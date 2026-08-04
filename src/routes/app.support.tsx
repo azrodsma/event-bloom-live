@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/support")({
   component: Support,
   head: () => ({
     meta: [
-      { title: "Support · Memento Live" },
+      { title: "Support · MaFeliza" },
       { name: "description", content: "Une équipe humaine, disponible 7j/7." },
-      { property: "og:title", content: "Support · Memento Live" },
+      { property: "og:title", content: "Support · MaFeliza" },
       { property: "og:description", content: "Un humain vous répond en moins de 3 minutes." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

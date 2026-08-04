@@ -45,9 +45,9 @@ export const Route = createFileRoute("/events/$slug/")({
   head: ({ loaderData }: { loaderData?: { event?: { title?: string; description?: string; cover?: string } } }) => {
     const e = loaderData?.event;
     const title = e?.title ?? "Événement";
-    const description = e?.description ?? "Consultez les détails de votre événement privé Memento Live.";
+    const description = e?.description ?? "Consultez les détails de votre événement privé MaFeliza.";
     const meta: Array<Record<string, string>> = [
-      { title: `${title} — Memento Live` },
+      { title: `${title} — MaFeliza` },
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
@@ -261,7 +261,7 @@ function EventPage() {
               Participer à la cagnotte <ExternalLink className="h-4 w-4" />
             </a>
             <p className="mt-2 text-center text-[11px] text-muted-foreground">
-              Cette cagnotte est gérée par une plateforme externe. Memento Live ne collecte pas et ne conserve pas les fonds.
+              Cette cagnotte est gérée par une plateforme externe. MaFeliza ne collecte pas et ne conserve pas les fonds.
             </p>
           </section>
         )}

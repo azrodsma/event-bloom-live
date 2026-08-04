@@ -10,7 +10,7 @@ import { useAuth } from "@/hooks/use-auth";
 export const Route = createFileRoute("/events/$slug/edit")({
   head: ({ params }) => ({
     meta: [
-      { title: `Modifier l'événement — Memento Live` },
+      { title: `Modifier l'événement — MaFeliza` },
       { name: "description", content: `Modifier les paramètres de ${params.slug}` },
     ],
   }),
@@ -137,7 +137,7 @@ function EditEvent() {
             disabled={!canEdit}
           />
           <p className="text-[11px] text-muted-foreground">
-            Memento Live encapsule votre live externe — aucun coût d'hébergement vidéo côté plateforme.
+            MaFeliza encapsule votre live externe — aucun coût d'hébergement vidéo côté plateforme.
           </p>
         </section>
 

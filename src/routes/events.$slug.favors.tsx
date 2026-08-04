@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/favors")({
   component: Favors,
   head: () => ({
     meta: [
-      { title: "Cadeaux invités · Memento Live" },
+      { title: "Cadeaux invités · MaFeliza" },
       { name: "description", content: "Petites attentions à remettre en fin de soirée." },
-      { property: "og:title", content: "Cadeaux invités · Memento Live" },
+      { property: "og:title", content: "Cadeaux invités · MaFeliza" },
       { property: "og:description", content: "Un souvenir à emporter." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

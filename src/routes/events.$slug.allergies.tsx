@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/allergies")({
   component: Allergies,
   head: () => ({
     meta: [
-      { title: "Allergies & régimes · Memento Live" },
+      { title: "Allergies & régimes · MaFeliza" },
       { name: "description", content: "Cartographie des allergies et régimes pour un service sans stress." },
-      { property: "og:title", content: "Allergies · Memento Live" },
+      { property: "og:title", content: "Allergies · MaFeliza" },
       { property: "og:description", content: "Aucun invité oublié." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

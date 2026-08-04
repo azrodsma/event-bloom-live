@@ -7,7 +7,7 @@ import { getEventBySlug, listEventStories } from "@/lib/events.functions";
 export const Route = createFileRoute("/stories/$slug")({
   head: ({ params }) => ({
     meta: [
-      { title: `Story — ${params.slug} — Memento Live` },
+      { title: `Story — ${params.slug} — MaFeliza` },
       { name: "description", content: "Story de l'événement." },
           { name: "robots", content: "noindex" },
 ],

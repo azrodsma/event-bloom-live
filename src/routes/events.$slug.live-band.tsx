@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/live-band")({
   component: LiveBand,
   head: () => ({
     meta: [
-      { title: "Groupe live · Memento Live" },
+      { title: "Groupe live · MaFeliza" },
       { name: "description", content: "Set list, fiche technique et déroulé du groupe live." },
-      { property: "og:title", content: "Groupe live · Memento Live" },
+      { property: "og:title", content: "Groupe live · MaFeliza" },
       { property: "og:description", content: "The Velvet Session · trio jazz-soul." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

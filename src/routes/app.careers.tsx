@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/careers")({
   component: Careers,
   head: () => ({
     meta: [
-      { title: "Carrières · Memento Live" },
+      { title: "Carrières · MaFeliza" },
       { name: "description", content: "Rejoignez l'équipe qui préserve la mémoire des moments." },
-      { property: "og:title", content: "Carrières · Memento Live" },
+      { property: "og:title", content: "Carrières · MaFeliza" },
       { property: "og:description", content: "Construisez avec nous la mémoire des célébrations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

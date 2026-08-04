@@ -15,7 +15,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/events/$slug/album")({
   head: ({ params }) => ({
     meta: [
-      { title: `Album — ${params.slug} — Memento Live` },
+      { title: `Album — ${params.slug} — MaFeliza` },
       { name: "description", content: "Album photo collaboratif de l'événement." },
     ],
   }),

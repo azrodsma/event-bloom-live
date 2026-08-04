@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/fireworks")({
   component: Fireworks,
   head: () => ({
     meta: [
-      { title: "Feu d'artifice · Memento Live" },
+      { title: "Feu d'artifice · MaFeliza" },
       { name: "description", content: "Chorégraphiez le bouquet final à la seconde près." },
-      { property: "og:title", content: "Feu d'artifice · Memento Live" },
+      { property: "og:title", content: "Feu d'artifice · MaFeliza" },
       { property: "og:description", content: "Le ciel comme signature." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/archive")({
   component: Archive,
   head: () => ({
     meta: [
-      { title: "Archivage & sauvegarde · Memento Live" },
+      { title: "Archivage & sauvegarde · MaFeliza" },
       { name: "description", content: "Sauvegardez vos souvenirs sur plusieurs supports — cloud, disque physique, coffret." },
-      { property: "og:title", content: "Archivage · Memento Live" },
+      { property: "og:title", content: "Archivage · MaFeliza" },
       { property: "og:description", content: "Pour transmettre à vos enfants." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

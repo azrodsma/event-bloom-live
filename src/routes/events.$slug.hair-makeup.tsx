@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/hair-makeup")({
   component: HairMakeup,
   head: () => ({
     meta: [
-      { title: "Coiffure & maquillage · Memento Live" },
+      { title: "Coiffure & maquillage · MaFeliza" },
       { name: "description", content: "Séances d'essai, timing du jour J, look book." },
-      { property: "og:title", content: "Coiffure & maquillage · Memento Live" },
+      { property: "og:title", content: "Coiffure & maquillage · MaFeliza" },
       { property: "og:description", content: "Vous, sublimé·e — sans artifice." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

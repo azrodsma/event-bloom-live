@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/procession")({
   component: Procession,
   head: () => ({
     meta: [
-      { title: "Cortège · Memento Live" },
+      { title: "Cortège · MaFeliza" },
       { name: "description", content: "Orchestrez le cortège nuptial minute par minute." },
-      { property: "og:title", content: "Cortège · Memento Live" },
+      { property: "og:title", content: "Cortège · MaFeliza" },
       { property: "og:description", content: "L'entrée qui donne le ton." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/witnesses")({
   component: Witnesses,
   head: () => ({
     meta: [
-      { title: "Témoins · Memento Live" },
+      { title: "Témoins · MaFeliza" },
       { name: "description", content: "Coordonnez vos témoins et leurs missions." },
-      { property: "og:title", content: "Témoins · Memento Live" },
+      { property: "og:title", content: "Témoins · MaFeliza" },
       { property: "og:description", content: "Ceux qui tiennent le fil du grand jour." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

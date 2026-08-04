@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/tips")({
   component: Tips,
   head: () => ({
     meta: [
-      { title: "Conseils Memento · Astuces d'organisation" },
+      { title: "Conseils MaFeliza · Astuces d'organisation" },
       { name: "description", content: "Guides pratiques, checklists et retours d'expérience pour préparer un événement inoubliable." },
-      { property: "og:title", content: "Conseils Memento" },
+      { property: "og:title", content: "Conseils MaFeliza" },
       { property: "og:description", content: "L'école secrète des grands organisateurs." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -63,7 +63,7 @@ function Tips() {
 
       <section className="px-4 pb-4 pt-6">
         <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          <Lightbulb className="h-3.5 w-3.5 text-primary" /> École Memento
+          <Lightbulb className="h-3.5 w-3.5 text-primary" /> École MaFeliza
         </div>
         <h1 className="mt-2 font-serif text-3xl leading-tight">L'organisation sans stress</h1>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -135,7 +135,7 @@ function Tips() {
       <section className="mx-4 mt-6 rounded-3xl bg-gradient-to-br from-primary/10 via-accent/20 to-primary/5 p-5">
         <div className="flex items-center gap-2">
           <Sparkles className="h-4 w-4 text-primary" />
-          <p className="text-xs font-bold uppercase tracking-wider text-primary">Coach IA Memento</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-primary">Coach IA MaFeliza</p>
         </div>
         <p className="mt-2 font-serif text-lg leading-tight">Une question précise ?</p>
         <p className="mt-1 text-[12px] text-muted-foreground">Décrivez votre situation, notre coach répond en 30 secondes avec des recommandations sur-mesure.</p>

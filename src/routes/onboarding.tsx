@@ -7,9 +7,9 @@ export const Route = createFileRoute("/onboarding")({
   component: Onboarding,
   head: () => ({
     meta: [
-      { title: "Bienvenue · Memento Live" },
-      { name: "description", content: "Personnalisez votre expérience Memento Live en quelques secondes." },
-      { property: "og:title", content: "Bienvenue sur Memento Live" },
+      { title: "Bienvenue · MaFeliza" },
+      { name: "description", content: "Personnalisez votre expérience MaFeliza en quelques secondes." },
+      { property: "og:title", content: "Bienvenue sur MaFeliza" },
       { property: "og:description", content: "Créez votre premier événement inoubliable." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -159,7 +159,7 @@ function Onboarding() {
               Enchanté{name ? `, ${name}` : ""}&nbsp;!
             </h1>
             <p className="mt-3 text-sm text-muted-foreground">
-              Votre espace Memento Live est prêt. Créez votre premier événement en quelques secondes ou explorez les inspirations de la communauté.
+              Votre espace MaFeliza est prêt. Créez votre premier événement en quelques secondes ou explorez les inspirations de la communauté.
             </p>
             <div className="mt-8 space-y-2">
               <Link

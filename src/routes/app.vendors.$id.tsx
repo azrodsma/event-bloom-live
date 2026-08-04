@@ -11,12 +11,12 @@ export const Route = createFileRoute("/app/vendors/$id")({
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: `${loaderData?.vendor.name} · Prestataire Memento Live` },
+      { title: `${loaderData?.vendor.name} · Prestataire MaFeliza` },
       {
         name: "description",
         content: `${loaderData?.vendor.name} — ${loaderData?.vendor.category} à ${loaderData?.vendor.city}. ${loaderData?.vendor.bio.slice(0, 120)}`,
       },
-      { property: "og:title", content: `${loaderData?.vendor.name} · Memento Live` },
+      { property: "og:title", content: `${loaderData?.vendor.name} · MaFeliza` },
       { property: "og:description", content: loaderData?.vendor.bio ?? "" },
       { property: "og:type", content: "profile" },
       ...(loaderData?.vendor.cover
@@ -115,7 +115,7 @@ function VendorDetail() {
               "Rendez-vous découverte offert",
               "Devis personnalisé sous 48 h",
               "Contrat signé électroniquement",
-              "Support Memento Live en cas de litige",
+              "Support MaFeliza en cas de litige",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
                 <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">

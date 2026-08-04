@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/getting-ready")({
   component: GettingReady,
   head: () => ({
     meta: [
-      { title: "Préparatifs · Memento Live" },
+      { title: "Préparatifs · MaFeliza" },
       { name: "description", content: "Le matin du grand jour, minute par minute." },
-      { property: "og:title", content: "Préparatifs · Memento Live" },
+      { property: "og:title", content: "Préparatifs · MaFeliza" },
       { property: "og:description", content: "Un matin fluide, doux, sans oubli." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

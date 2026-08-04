@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/translations")({
   component: Translations,
   head: () => ({
     meta: [
-      { title: "Traductions live · Memento Live" },
+      { title: "Traductions live · MaFeliza" },
       { name: "description", content: "Sous-titres et traductions en direct pour vos invités internationaux." },
-      { property: "og:title", content: "Traductions live · Memento Live" },
+      { property: "og:title", content: "Traductions live · MaFeliza" },
       { property: "og:description", content: "Un événement compris de tous." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

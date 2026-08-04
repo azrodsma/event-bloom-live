@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/thanks")({
   component: Thanks,
   head: () => ({
     meta: [
-      { title: "Cartes de remerciement · Memento Live" },
+      { title: "Cartes de remerciement · MaFeliza" },
       { name: "description", content: "Personnalisez et envoyez une carte de remerciement à chacun de vos invités en quelques clics." },
-      { property: "og:title", content: "Cartes de remerciement · Memento Live" },
+      { property: "og:title", content: "Cartes de remerciement · MaFeliza" },
       { property: "og:description", content: "Envoyez vos remerciements post-événement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -177,7 +177,7 @@ function Thanks() {
           className="mt-1.5 min-h-[140px] w-full resize-none rounded-2xl border border-border bg-card px-4 py-3 font-serif text-sm leading-relaxed outline-none focus:border-primary"
         />
         <button className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-primary hover:underline">
-          <Sparkles className="h-3.5 w-3.5" /> Suggestions Memento
+          <Sparkles className="h-3.5 w-3.5" /> Suggestions MaFeliza
         </button>
       </section>
 

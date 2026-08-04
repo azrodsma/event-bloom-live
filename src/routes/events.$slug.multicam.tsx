@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/multicam")({
   component: MultiCam,
   head: () => ({
     meta: [
-      { title: "Régie multi-caméras · Memento Live" },
+      { title: "Régie multi-caméras · MaFeliza" },
       { name: "description", content: "6 flux vidéo simultanés, un seul director." },
-      { property: "og:title", content: "Multi-cam · Memento Live" },
+      { property: "og:title", content: "Multi-cam · MaFeliza" },
       { property: "og:description", content: "Switch live entre 6 angles pour un rendu TV." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -65,7 +65,7 @@ function MultiCam() {
 
         <div className="rounded-2xl bg-cream p-5 text-sm">
           <p className="font-medium">Diffusion multi-plateformes</p>
-          <p className="text-xs text-muted-foreground mt-1">Restream vers YouTube · Twitch · lecteur intégré Memento. Aucun frais d'hébergement vidéo : nous encapsulons.</p>
+          <p className="text-xs text-muted-foreground mt-1">Restream vers YouTube · Twitch · lecteur intégré MaFeliza. Aucun frais d'hébergement vidéo : nous encapsulons.</p>
         </div>
       </main>
     </div>

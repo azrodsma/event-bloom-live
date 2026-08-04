@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/hall-of-fame")({
   component: HallOfFame,
   head: () => ({
     meta: [
-      { title: "Palmarès des invités · Memento Live" },
+      { title: "Palmarès des invités · MaFeliza" },
       { name: "description", content: "Les vedettes discrètes et bruyantes de la soirée : super-fan, meilleure danse, plus belle tenue…" },
-      { property: "og:title", content: "Palmarès des invités · Memento Live" },
+      { property: "og:title", content: "Palmarès des invités · MaFeliza" },
       { property: "og:description", content: "Le palmarès de la soirée." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

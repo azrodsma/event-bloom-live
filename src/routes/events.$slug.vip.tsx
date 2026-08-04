@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/vip")({
   component: VipLounge,
   head: () => ({
     meta: [
-      { title: "Salon VIP témoins · Memento Live" },
+      { title: "Salon VIP témoins · MaFeliza" },
       { name: "description", content: "L'espace privé de vos témoins et proches : brief, rôles, discours et surprises." },
-      { property: "og:title", content: "Salon VIP témoins · Memento Live" },
+      { property: "og:title", content: "Salon VIP témoins · MaFeliza" },
       { property: "og:description", content: "Le cercle intime, coordonné." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

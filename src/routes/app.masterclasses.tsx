@@ -5,10 +5,10 @@ export const Route = createFileRoute("/app/masterclasses")({
   component: Masterclasses,
   head: () => ({
     meta: [
-      { title: "Masterclass · Memento Live" },
+      { title: "Masterclass · MaFeliza" },
       { name: "description", content: "Apprenez auprès des meilleurs experts de l'événementiel." },
-      { property: "og:title", content: "Masterclass · Memento Live" },
-      { property: "og:description", content: "L'école Memento — savoir-faire d'exception." },
+      { property: "og:title", content: "Masterclass · MaFeliza" },
+      { property: "og:description", content: "L'école MaFeliza — savoir-faire d'exception." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -36,7 +36,7 @@ function Masterclasses() {
         </Link>
         <div>
           <p className="font-serif text-lg leading-tight">Masterclass</p>
-          <p className="text-xs text-muted-foreground">L'école Memento</p>
+          <p className="text-xs text-muted-foreground">L'école MaFeliza</p>
         </div>
       </header>
 

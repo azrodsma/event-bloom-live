@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/first-look")({
   component: FirstLook,
   head: () => ({
     meta: [
-      { title: "First look · Memento Live" },
+      { title: "First look · MaFeliza" },
       { name: "description", content: "Orchestration de la première rencontre entre les mariés." },
-      { property: "og:title", content: "First look · Memento Live" },
+      { property: "og:title", content: "First look · MaFeliza" },
       { property: "og:description", content: "Ce moment suspendu, avant les autres." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

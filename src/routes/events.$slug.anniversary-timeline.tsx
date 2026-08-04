@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/anniversary-timeline")({
   component: AnnivTimeline,
   head: () => ({
     meta: [
-      { title: "Timeline anniversaire · Memento Live" },
+      { title: "Timeline anniversaire · MaFeliza" },
       { name: "description", content: "Scénographie minute par minute d'un 40 ans mémorable." },
-      { property: "og:title", content: "Anniversaire · Memento Live" },
+      { property: "og:title", content: "Anniversaire · MaFeliza" },
       { property: "og:description", content: "18h → 04h : le rythme d'une nuit sans faux temps mort." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

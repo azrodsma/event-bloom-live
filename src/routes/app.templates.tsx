@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/templates")({
   component: Templates,
   head: () => ({
     meta: [
-      { title: "Modèles d'événement · Memento Live" },
+      { title: "Modèles d'événement · MaFeliza" },
       { name: "description", content: "Démarrez en 3 clics avec un modèle inspirant." },
-      { property: "og:title", content: "Modèles d'événement · Memento Live" },
+      { property: "og:title", content: "Modèles d'événement · MaFeliza" },
       { property: "og:description", content: "Chaque célébration a son décor." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

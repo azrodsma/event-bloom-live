@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/ceremony-booklet")({
   component: CeremonyBooklet,
   head: () => ({
     meta: [
-      { title: "Livret de cérémonie · Memento Live" },
+      { title: "Livret de cérémonie · MaFeliza" },
       { name: "description", content: "Composez le livret imprimé et sa version numérique." },
-      { property: "og:title", content: "Livret de cérémonie · Memento Live" },
+      { property: "og:title", content: "Livret de cérémonie · MaFeliza" },
       { property: "og:description", content: "Chaque instant a son texte, sa musique, son émotion." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

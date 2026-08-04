@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/performance")({
   component: Performance,
   head: () => ({
     meta: [
-      { title: "Performance & données · Memento Live" },
+      { title: "Performance & données · MaFeliza" },
       { name: "description", content: "Économisez batterie et données mobiles pendant vos événements." },
-      { property: "og:title", content: "Performance & données · Memento Live" },
+      { property: "og:title", content: "Performance & données · MaFeliza" },
       { property: "og:description", content: "Une app fluide, même en 4G." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/name-badges")({
   component: NameBadges,
   head: () => ({
     meta: [
-      { title: "Badges nominatifs · Memento Live" },
+      { title: "Badges nominatifs · MaFeliza" },
       { name: "description", content: "Créez et imprimez des étiquettes élégantes pour chaque invité, avec table, régime et rôle." },
-      { property: "og:title", content: "Badges nominatifs · Memento Live" },
+      { property: "og:title", content: "Badges nominatifs · MaFeliza" },
       { property: "og:description", content: "Chaque invité, reconnu au premier regard." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -123,7 +123,7 @@ function NameBadges() {
                 <div className={`absolute right-3 top-3 grid h-6 w-6 place-items-center rounded-full ${on ? "bg-primary text-white" : "bg-background/60"}`}>
                   {on && <Check className="h-3.5 w-3.5" />}
                 </div>
-                <p className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${active.accent}`}>Memento · {b.role}</p>
+                <p className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${active.accent}`}>MaFeliza · {b.role}</p>
                 <p className="mt-2 font-serif text-2xl leading-tight">{b.first}</p>
                 <p className="font-serif text-lg opacity-90">{b.last}</p>
                 <div className={`my-3 h-px w-10 ${dark ? "bg-gold" : "bg-foreground/30"}`} />

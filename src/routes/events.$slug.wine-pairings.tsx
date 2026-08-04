@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/wine-pairings")({
   component: WinePairings,
   head: () => ({
     meta: [
-      { title: "Accords mets & vins · Memento Live" },
+      { title: "Accords mets & vins · MaFeliza" },
       { name: "description", content: "Une carte des vins pensée plat par plat." },
-      { property: "og:title", content: "Accords mets & vins · Memento Live" },
+      { property: "og:title", content: "Accords mets & vins · MaFeliza" },
       { property: "og:description", content: "L'art de sublimer chaque bouchée." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

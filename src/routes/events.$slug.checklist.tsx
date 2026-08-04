@@ -17,9 +17,9 @@ export const Route = createFileRoute("/events/$slug/checklist")({
   component: Checklist,
   head: () => ({
     meta: [
-      { title: "Checklist · Memento Live" },
+      { title: "Checklist · MaFeliza" },
       { name: "description", content: "Une checklist collaborative pour ne rien oublier." },
-      { property: "og:title", content: "Checklist · Memento Live" },
+      { property: "og:title", content: "Checklist · MaFeliza" },
       { property: "og:description", content: "Cochez chaque étape de votre organisation." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

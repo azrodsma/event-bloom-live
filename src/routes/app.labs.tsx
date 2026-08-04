@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/labs")({
   component: Labs,
   head: () => ({
     meta: [
-      { title: "Labs · Memento Live" },
+      { title: "Labs · MaFeliza" },
       { name: "description", content: "Testez en avant-première nos expérimentations : AR, hologrammes, IA vocale." },
-      { property: "og:title", content: "Labs · Memento Live" },
+      { property: "og:title", content: "Labs · MaFeliza" },
       { property: "og:description", content: "Les fonctionnalités de demain, activables aujourd'hui." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -33,7 +33,7 @@ function Labs() {
             <ArrowLeft className="h-4 w-4" />
           </Link>
           <div className="flex-1">
-            <h1 className="font-display text-xl">Memento Labs</h1>
+            <h1 className="font-display text-xl">MaFeliza Labs</h1>
             <p className="text-xs text-muted-foreground">6 expérimentations · rejoignez la beta</p>
           </div>
           <Beaker className="h-5 w-5 text-primary" />
@@ -44,7 +44,7 @@ function Labs() {
         <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-foreground p-6 text-white">
           <Sparkles className="h-6 w-6" />
           <h2 className="mt-2 font-display text-3xl leading-tight">Le futur des célébrations. En bêta.</h2>
-          <p className="mt-3 text-sm opacity-90">Les Labs Memento sont notre terrain de jeu R&D. Testez, cassez, dites-nous tout : on itère chaque semaine.</p>
+          <p className="mt-3 text-sm opacity-90">Les Labs MaFeliza sont notre terrain de jeu R&D. Testez, cassez, dites-nous tout : on itère chaque semaine.</p>
         </section>
 
         <section className="space-y-3">

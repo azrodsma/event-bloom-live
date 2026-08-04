@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/surprises")({
   component: Surprises,
   head: () => ({
     meta: [
-      { title: "Surprises · Memento Live" },
+      { title: "Surprises · MaFeliza" },
       { name: "description", content: "Coordonnez les surprises pour les mariés en toute discrétion : flashmob, vidéo, chorale, cadeau collectif." },
-      { property: "og:title", content: "Surprises · Memento Live" },
+      { property: "og:title", content: "Surprises · MaFeliza" },
       { property: "og:description", content: "Ce que les hôtes ne doivent surtout pas voir." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -228,7 +228,7 @@ function Surprises() {
           <p className="text-xs font-bold uppercase tracking-wider text-primary">Créer une surprise</p>
         </div>
         <p className="mt-2 font-serif text-lg leading-tight">Une idée à orchestrer ?</p>
-        <p className="mt-1 text-[12px] text-muted-foreground">Choisissez qui peut voir, invitez les complices, et laissez Memento verrouiller le secret jusqu'au jour J.</p>
+        <p className="mt-1 text-[12px] text-muted-foreground">Choisissez qui peut voir, invitez les complices, et laissez MaFeliza verrouiller le secret jusqu'au jour J.</p>
         <button className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-foreground px-5 py-2 text-xs font-bold text-background">
           <Gift className="h-3.5 w-3.5" /> Nouvelle surprise
         </button>

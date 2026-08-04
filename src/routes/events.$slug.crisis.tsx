@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/crisis")({
   component: Crisis,
   head: () => ({
     meta: [
-      { title: "Cellule de crise · Memento Live" },
+      { title: "Cellule de crise · MaFeliza" },
       { name: "description", content: "Numéros d'urgence, protocoles, rôle de chacun." },
-      { property: "og:title", content: "Crise · Memento Live" },
+      { property: "og:title", content: "Crise · MaFeliza" },
       { property: "og:description", content: "Prévu, écrit, entraîné : chaque scénario a sa parade." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -5,9 +5,9 @@ import { useState } from "react";
 export const Route = createFileRoute("/app/premium")({
   head: () => ({
     meta: [
-      { title: "Passer en Premium — Memento Live" },
-      { name: "description", content: "Débloquez tous les modules et créez des souvenirs sans limite avec Memento Live Premium." },
-      { property: "og:title", content: "Memento Live Premium" },
+      { title: "Passer en Premium — MaFeliza" },
+      { name: "description", content: "Débloquez tous les modules et créez des souvenirs sans limite avec MaFeliza Premium." },
+      { property: "og:title", content: "MaFeliza Premium" },
       { property: "og:description", content: "Événements illimités, live HD, livre souvenir imprimé et bien plus." },
     ],
   }),
@@ -70,7 +70,7 @@ function Premium() {
         <Link to="/app/settings" className="grid h-9 w-9 place-items-center rounded-full hover:bg-surface">
           <ChevronLeft className="h-5 w-5" />
         </Link>
-        <h1 className="flex-1 font-serif text-xl">Memento Premium</h1>
+        <h1 className="flex-1 font-serif text-xl">MaFeliza Premium</h1>
       </header>
 
       <main className="mx-auto max-w-2xl space-y-6 px-4 py-6">
@@ -190,7 +190,7 @@ function Premium() {
         <section className="rounded-3xl bg-surface p-5 shadow-card">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Ils nous ont fait confiance</p>
           <p className="mt-3 font-serif text-lg leading-relaxed">
-            « Grâce à Memento Live, ma grand-mère a pu assister au mariage depuis l'hôpital. Un cadeau inestimable. »
+            « Grâce à MaFeliza, ma grand-mère a pu assister au mariage depuis l'hôpital. Un cadeau inestimable. »
           </p>
           <div className="mt-3 flex items-center gap-2">
             <img src="https://i.pravatar.cc/40?img=47" alt="" className="h-8 w-8 rounded-full" />
@@ -206,8 +206,8 @@ function Premium() {
           <h3 className="font-serif text-2xl">Questions fréquentes</h3>
           {[
             { q: "Puis-je annuler à tout moment ?", a: "Oui, sans engagement. Vous conservez l'accès jusqu'à la fin de la période." },
-            { q: "Les cagnottes sont-elles incluses ?", a: "Memento Live ne gère pas les fonds. Les cagnottes sont hébergées par Leetchi, Lydia, etc." },
-            { q: "Le live consomme-t-il des crédits ?", a: "Non, Memento Live encapsule votre live YouTube ou Twitch existant, sans surcoût vidéo." },
+            { q: "Les cagnottes sont-elles incluses ?", a: "MaFeliza ne gère pas les fonds. Les cagnottes sont hébergées par Leetchi, Lydia, etc." },
+            { q: "Le live consomme-t-il des crédits ?", a: "Non, MaFeliza encapsule votre live YouTube ou Twitch existant, sans surcoût vidéo." },
           ].map((f) => (
             <details key={f.q} className="group rounded-2xl border border-border bg-background p-4">
               <summary className="cursor-pointer list-none text-sm font-semibold">

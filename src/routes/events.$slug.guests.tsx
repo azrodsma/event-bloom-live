@@ -7,7 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 export const Route = createFileRoute("/events/$slug/guests")({
-  head: () => ({ meta: [{ title: "Invités — Memento Live" }, { name: "description", content: "Suivez les RSVP en temps réel." }] }),
+  head: () => ({ meta: [{ title: "Invités — MaFeliza" }, { name: "description", content: "Suivez les RSVP en temps réel." }] }),
   loader: async ({ params }) => {
     const ev = await getEventBySlug({ data: { slug: params.slug } });
     if (!ev) throw notFound();

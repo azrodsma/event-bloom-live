@@ -8,7 +8,7 @@ import { useAuth } from "@/hooks/use-auth";
 export const Route = createFileRoute("/app/story/new")({
   head: () => ({
     meta: [
-      { title: "Nouvelle story — Memento Live" },
+      { title: "Nouvelle story — MaFeliza" },
       { name: "description", content: "Choisissez l'événement pour lequel publier une story éphémère." },
     ],
   }),

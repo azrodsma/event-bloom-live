@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/shuttle")({
   component: Shuttle,
   head: () => ({
     meta: [
-      { title: "Navettes · Memento Live" },
+      { title: "Navettes · MaFeliza" },
       { name: "description", content: "Réservez votre place dans les navettes collectives affrétées pour l'événement." },
-      { property: "og:title", content: "Navettes · Memento Live" },
+      { property: "og:title", content: "Navettes · MaFeliza" },
       { property: "og:description", content: "Aller-retour organisé, sans stress ni voiture." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

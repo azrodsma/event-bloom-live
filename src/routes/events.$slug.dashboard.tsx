@@ -5,7 +5,7 @@ import { ChevronLeft, TrendingUp, Users, Heart, MessageCircle, Camera, Gift, Rad
 export const Route = createFileRoute("/events/$slug/dashboard")({
   head: ({ params }) => ({
     meta: [
-      { title: "Tableau de bord — Memento Live" },
+      { title: "Tableau de bord — MaFeliza" },
       { name: "description", content: `Statistiques de l'événement ${params.slug}.` },
     ],
   }),

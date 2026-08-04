@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/civil")({
   component: Civil,
   head: () => ({
     meta: [
-      { title: "Mairie · Memento Live" },
+      { title: "Mairie · MaFeliza" },
       { name: "description", content: "Dossier civil, témoins et coordination avec la mairie." },
-      { property: "og:title", content: "Cérémonie civile · Memento Live" },
+      { property: "og:title", content: "Cérémonie civile · MaFeliza" },
       { property: "og:description", content: "Le vrai début. Signé, tamponné, célébré." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/ring-bearer")({
   component: RingBearer,
   head: () => ({
     meta: [
-      { title: "Porteur d'alliances · Memento Live" },
+      { title: "Porteur d'alliances · MaFeliza" },
       { name: "description", content: "Confiez les alliances à un enfant, un chien ou un drone." },
-      { property: "og:title", content: "Porteur d'alliances · Memento Live" },
+      { property: "og:title", content: "Porteur d'alliances · MaFeliza" },
       { property: "og:description", content: "Le moment le plus attendu de la cérémonie." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

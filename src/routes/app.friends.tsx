@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/friends")({
   component: Friends,
   head: () => ({
     meta: [
-      { title: "Mes amis · Memento Live" },
+      { title: "Mes amis · MaFeliza" },
       { name: "description", content: "Votre carnet d'invités : cercles, souvenirs partagés, prochaines célébrations." },
-      { property: "og:title", content: "Mes amis · Memento Live" },
+      { property: "og:title", content: "Mes amis · MaFeliza" },
       { property: "og:description", content: "Le cercle qui compte." },
       { property: "og:type", content: "profile" },
       { name: "twitter:card", content: "summary" },

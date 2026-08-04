@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/family-tree")({
   component: FamilyTree,
   head: () => ({
     meta: [
-      { title: "Arbre généalogique · Memento Live" },
+      { title: "Arbre généalogique · MaFeliza" },
       { name: "description", content: "Visualisez et enrichissez l'arbre des familles réunies pour l'événement." },
-      { property: "og:title", content: "Arbre généalogique · Memento Live" },
+      { property: "og:title", content: "Arbre généalogique · MaFeliza" },
       { property: "og:description", content: "Deux familles, une seule histoire." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -161,7 +161,7 @@ function FamilyTree() {
         </div>
         <p className="mt-2 font-serif text-lg leading-tight">Détecter les liens manquants</p>
         <p className="mt-1 text-[12px] text-muted-foreground">
-          Memento analyse les prénoms, dates de naissance et photos partagées pour proposer les branches manquantes.
+          MaFeliza analyse les prénoms, dates de naissance et photos partagées pour proposer les branches manquantes.
         </p>
         <button className="mt-3 rounded-full bg-foreground px-5 py-2 text-xs font-bold text-background">
           Lancer l'analyse

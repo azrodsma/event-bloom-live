@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/kids")({
   component: KidsCorner,
   head: () => ({
     meta: [
-      { title: "Espace enfants · Memento Live" },
+      { title: "Espace enfants · MaFeliza" },
       { name: "description", content: "Un coin dédié aux petits invités : activités, garderie, coloriages et chasse au trésor." },
-      { property: "og:title", content: "Espace enfants · Memento Live" },
+      { property: "og:title", content: "Espace enfants · MaFeliza" },
       { property: "og:description", content: "Les petits aussi ont leur fête." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

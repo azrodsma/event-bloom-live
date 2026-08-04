@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/ai-portraits")({
   component: AIPortraits,
   head: () => ({
     meta: [
-      { title: "Portraits IA · Memento Live" },
+      { title: "Portraits IA · MaFeliza" },
       { name: "description", content: "Transformez vos photos de mariage en tableaux d'artistes : aquarelle, huile, croquis." },
-      { property: "og:title", content: "Portraits IA · Memento Live" },
+      { property: "og:title", content: "Portraits IA · MaFeliza" },
       { property: "og:description", content: "Vos souvenirs en œuvres d'art." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

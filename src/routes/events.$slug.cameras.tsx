@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/cameras")({
   component: Cameras,
   head: () => ({
     meta: [
-      { title: "Caméras du direct · Memento Live" },
+      { title: "Caméras du direct · MaFeliza" },
       { name: "description", content: "Basculez entre plusieurs points de vue en direct : cérémonie, cocktail, piste de danse." },
-      { property: "og:title", content: "Caméras du direct · Memento Live" },
+      { property: "og:title", content: "Caméras du direct · MaFeliza" },
       { property: "og:description", content: "Multi-caméras en direct." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

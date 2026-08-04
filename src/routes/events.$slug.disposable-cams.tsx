@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/disposable-cams")({
   component: DisposableCams,
   head: () => ({
     meta: [
-      { title: "Appareils jetables · Memento Live" },
+      { title: "Appareils jetables · MaFeliza" },
       { name: "description", content: "L'esprit argentique retrouvé — sans le développement à l'aveugle." },
-      { property: "og:title", content: "Appareils jetables · Memento Live" },
+      { property: "og:title", content: "Appareils jetables · MaFeliza" },
       { property: "og:description", content: "Grain argentique, souvenirs nets." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

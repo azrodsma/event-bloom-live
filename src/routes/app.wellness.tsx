@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/wellness")({
   component: Wellness,
   head: () => ({
     meta: [
-      { title: "Bien-être organisateur · Memento Live" },
+      { title: "Bien-être organisateur · MaFeliza" },
       { name: "description", content: "Préservez votre énergie pendant la préparation : sommeil, respiration, micro-pauses et rituels doux." },
-      { property: "og:title", content: "Bien-être organisateur · Memento Live" },
+      { property: "og:title", content: "Bien-être organisateur · MaFeliza" },
       { property: "og:description", content: "Un événement inoubliable commence par vous, en forme." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -117,7 +117,7 @@ function Wellness() {
         <section className="rounded-3xl bg-surface p-5 shadow-card">
           <div className="flex items-center gap-2 text-primary">
             <Sparkles className="h-4 w-4" />
-            <p className="text-xs font-semibold uppercase tracking-wider">Message de l'IA Memento</p>
+            <p className="text-xs font-semibold uppercase tracking-wider">Message de l'IA MaFeliza</p>
           </div>
           <p className="mt-2 text-sm text-muted-foreground">
             « Vous avez délégué 3 tâches à votre wedding-planner cette semaine. Bravo. Ce soir, on lâche le téléphone à 22h. »

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/notifications-settings")({
   component: NotificationsSettings,
   head: () => ({
     meta: [
-      { title: "Notifications · Memento Live" },
+      { title: "Notifications · MaFeliza" },
       { name: "description", content: "Choisissez exactement ce qui mérite votre attention." },
-      { property: "og:title", content: "Notifications · Memento Live" },
+      { property: "og:title", content: "Notifications · MaFeliza" },
       { property: "og:description", content: "Le silence quand vous voulez." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

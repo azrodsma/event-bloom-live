@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/moderation")({
   component: Moderation,
   head: () => ({
     meta: [
-      { title: "Modération du Live · Memento Live" },
+      { title: "Modération du Live · MaFeliza" },
       { name: "description", content: "Validez ou masquez messages et médias en direct, gérez les avertissements et gardez le chat bienveillant." },
-      { property: "og:title", content: "Modération du Live · Memento Live" },
+      { property: "og:title", content: "Modération du Live · MaFeliza" },
       { property: "og:description", content: "Tableau de bord de modération en temps réel." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

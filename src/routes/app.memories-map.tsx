@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/memories-map")({
   component: MemoriesMap,
   head: () => ({
     meta: [
-      { title: "Carte des souvenirs · Memento Live" },
+      { title: "Carte des souvenirs · MaFeliza" },
       { name: "description", content: "Toutes les villes et pays où vous avez célébré, réunis sur une même carte." },
-      { property: "og:title", content: "Carte des souvenirs · Memento Live" },
+      { property: "og:title", content: "Carte des souvenirs · MaFeliza" },
       { property: "og:description", content: "Le monde vu à travers vos moments." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -187,7 +187,7 @@ function MemoriesMap() {
       </section>
 
       <div className="mx-4 mt-6 flex items-center gap-2 rounded-3xl bg-secondary/40 p-4 text-[11px] text-muted-foreground">
-        <Sparkles className="h-4 w-4 shrink-0 text-primary" /> Astuce : imprimez cette carte en poster grand format (30 × 40 cm) depuis Memento.
+        <Sparkles className="h-4 w-4 shrink-0 text-primary" /> Astuce : imprimez cette carte en poster grand format (30 × 40 cm) depuis MaFeliza.
       </div>
     </div>
   );

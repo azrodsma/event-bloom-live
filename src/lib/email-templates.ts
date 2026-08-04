@@ -1,5 +1,5 @@
 /**
- * Branded HTML email templates for Memento Live.
+ * Branded HTML email templates for MaFeliza.
  * Design: rose #E85D8E, cream #FFF8F4, dark #1A1A1A, gold #D9A441
  * Fonts: Playfair Display (headings), Inter (body) — loaded via Google Fonts CDN with system fallback.
  */
@@ -28,7 +28,7 @@ function shell(opts: { preview: string; title: string; intro: string; cta?: { la
     <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border-radius:24px;overflow:hidden;box-shadow:0 8px 32px rgba(232,93,142,0.08);">
       <tr><td style="padding:40px 40px 24px 40px;text-align:center;background:linear-gradient(135deg,#FFF8F4 0%,#FDEEF3 100%);">
         <div style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:600;color:${BRAND.ink};letter-spacing:-0.5px;">
-          Memento <span style="color:${BRAND.primary};font-style:italic;">Live</span>
+          MaFeliza <span style="color:${BRAND.primary};font-style:italic;">Live</span>
         </div>
         <div style="width:40px;height:2px;background:${BRAND.gold};margin:12px auto 0;"></div>
       </td></tr>
@@ -52,7 +52,7 @@ function shell(opts: { preview: string; title: string; intro: string; cta?: { la
           Vos plus beaux moments, précieusement préservés.
         </p>
         <p style="margin:0;font-size:11px;color:${BRAND.muted};">
-          © ${new Date().getFullYear()} Memento Live · <a href="mailto:mariage@bold-lab-agency.com" style="color:${BRAND.muted};">mariage@bold-lab-agency.com</a>
+          © ${new Date().getFullYear()} MaFeliza · <a href="mailto:mariage@bold-lab-agency.com" style="color:${BRAND.muted};">mariage@bold-lab-agency.com</a>
         </p>
       </td></tr>
     </table>
@@ -69,11 +69,11 @@ function escape(s: string) {
 export function welcomeEmail(input: { displayName?: string; appUrl: string }) {
   const name = input.displayName?.trim() || "vous";
   return {
-    subject: "Bienvenue sur Memento Live ✨",
+    subject: "Bienvenue sur MaFeliza ✨",
     html: shell({
-      preview: "Votre compte Memento Live est prêt.",
+      preview: "Votre compte MaFeliza est prêt.",
       title: `Bienvenue, ${name} !`,
-      intro: `Votre compte Memento Live est prêt. Vous pouvez dès maintenant créer vos événements, inviter vos proches et rassembler vos plus beaux souvenirs en un seul endroit.`,
+      intro: `Votre compte MaFeliza est prêt. Vous pouvez dès maintenant créer vos événements, inviter vos proches et rassembler vos plus beaux souvenirs en un seul endroit.`,
       cta: { label: "Accéder à mon espace", url: input.appUrl },
       footer: `<strong>Prochaine étape</strong> — Créez votre premier événement ou rejoignez-en un avec un code d'invitation. Chaque moment devient un souvenir partagé.`,
     }),
@@ -82,7 +82,7 @@ export function welcomeEmail(input: { displayName?: string; appUrl: string }) {
 
 export function passwordResetEmail(input: { resetUrl: string }) {
   return {
-    subject: "Réinitialisez votre mot de passe Memento Live",
+    subject: "Réinitialisez votre mot de passe MaFeliza",
     html: shell({
       preview: "Un lien sécurisé pour choisir un nouveau mot de passe.",
       title: "Mot de passe oublié ?",
@@ -96,24 +96,24 @@ export function passwordResetEmail(input: { resetUrl: string }) {
 export function confirmSignupEmail(input: { confirmUrl: string; displayName?: string }) {
   const name = input.displayName?.trim() || "vous";
   return {
-    subject: "Confirmez votre inscription à Memento Live",
+    subject: "Confirmez votre inscription à MaFeliza",
     html: shell({
       preview: "Une dernière étape pour activer votre compte.",
       title: `Ravi de vous accueillir, ${name}`,
-      intro: `Confirmez votre adresse email pour activer votre compte Memento Live et accéder à tous vos événements.`,
+      intro: `Confirmez votre adresse email pour activer votre compte MaFeliza et accéder à tous vos événements.`,
       cta: { label: "Confirmer mon adresse", url: input.confirmUrl },
-      footer: `Si vous n'avez pas créé de compte Memento Live, ignorez simplement cet email.`,
+      footer: `Si vous n'avez pas créé de compte MaFeliza, ignorez simplement cet email.`,
     }),
   };
 }
 
 export function magicLinkEmail(input: { magicUrl: string }) {
   return {
-    subject: "Votre lien de connexion Memento Live",
+    subject: "Votre lien de connexion MaFeliza",
     html: shell({
       preview: "Connectez-vous en un clic.",
       title: "Votre lien magique",
-      intro: `Cliquez sur le bouton ci-dessous pour vous connecter à Memento Live. Ce lien est valable <strong>1 heure</strong> et à usage unique.`,
+      intro: `Cliquez sur le bouton ci-dessous pour vous connecter à MaFeliza. Ce lien est valable <strong>1 heure</strong> et à usage unique.`,
       cta: { label: "Me connecter", url: input.magicUrl },
       footer: `Vous n'avez pas demandé ce lien ? Ignorez cet email — votre compte reste en sécurité.`,
     }),

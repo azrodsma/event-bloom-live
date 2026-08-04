@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/polls")({
   component: Polls,
   head: () => ({
     meta: [
-      { title: "Sondages en direct · Memento Live" },
+      { title: "Sondages en direct · MaFeliza" },
       { name: "description", content: "Créez des sondages instantanés pendant l'événement et voyez les résultats se mettre à jour en direct." },
-      { property: "og:title", content: "Sondages en direct · Memento Live" },
+      { property: "og:title", content: "Sondages en direct · MaFeliza" },
       { property: "og:description", content: "Sondages live pour vos invités." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

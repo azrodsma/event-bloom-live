@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/decor")({
   component: Decor,
   head: () => ({
     meta: [
-      { title: "Moodboard décoration · Memento Live" },
+      { title: "Moodboard décoration · MaFeliza" },
       { name: "description", content: "L'univers visuel de votre événement : palette, fleurs, tables, lumières." },
-      { property: "og:title", content: "Moodboard décoration · Memento Live" },
+      { property: "og:title", content: "Moodboard décoration · MaFeliza" },
       { property: "og:description", content: "L'ambiance, avant le grand jour." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -49,7 +49,7 @@ const pins: Pin[] = [
 ];
 
 const palette = [
-  { hex: "#E85D8E", name: "Rose Memento" },
+  { hex: "#E85D8E", name: "Rose MaFeliza" },
   { hex: "#FFF8F4", name: "Crème" },
   { hex: "#D9A441", name: "Doré tendre" },
   { hex: "#E8DFD5", name: "Sable" },

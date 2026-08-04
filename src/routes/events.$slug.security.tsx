@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/security")({
   component: Security,
   head: () => ({
     meta: [
-      { title: "Sécurité & urgences · Memento Live" },
+      { title: "Sécurité & urgences · MaFeliza" },
       { name: "description", content: "Consignes de sécurité, numéros d'urgence et plan d'évacuation à portée de main." },
-      { property: "og:title", content: "Sécurité & urgences · Memento Live" },
+      { property: "og:title", content: "Sécurité & urgences · MaFeliza" },
       { property: "og:description", content: "Faire la fête, en confiance." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

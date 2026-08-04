@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/press")({
   component: Press,
   head: () => ({
     meta: [
-      { title: "Presse · Memento Live" },
-      { name: "description", content: "Memento dans les médias : articles, distinctions, kit presse." },
-      { property: "og:title", content: "Presse · Memento Live" },
+      { title: "Presse · MaFeliza" },
+      { name: "description", content: "MaFeliza dans les médias : articles, distinctions, kit presse." },
+      { property: "og:title", content: "Presse · MaFeliza" },
       { property: "og:description", content: "Une nouvelle façon de vivre les célébrations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/app/press")({
 
 const features = [
   { media: "Vogue France", title: "Les nouveaux rituels d'un mariage moderne", date: "mars 2026", quote: "L'app qui a repensé la mémoire du grand jour." },
-  { media: "Les Échos", title: "Memento lève 4M€ pour digitaliser l'événementiel privé", date: "février 2026", quote: "Un pari sur l'émotion, pas sur la publicité." },
+  { media: "Les Échos", title: "MaFeliza lève 4M€ pour digitaliser l'événementiel privé", date: "février 2026", quote: "Un pari sur l'émotion, pas sur la publicité." },
   { media: "Elle Décoration", title: "Le mood board qui remplace Pinterest", date: "janvier 2026", quote: "Précis, esthétique, sans distraction." },
   { media: "Konbini", title: "L'app qui rend les mariages plus doux", date: "décembre 2025", quote: "Pour les invités aussi, ça change tout." },
 ];
@@ -46,7 +46,7 @@ function Press() {
           <Newspaper className="h-6 w-6" />
           <p className="mt-3 font-serif text-3xl leading-tight">Une nouvelle façon de célébrer</p>
           <p className="mt-2 text-sm opacity-90">
-            Fondée en 2024, Memento accompagne 24 000 événements privés et rassemble une communauté de 380 000 utilisateurs mensuels.
+            Fondée en 2024, MaFeliza accompagne 24 000 événements privés et rassemble une communauté de 380 000 utilisateurs mensuels.
           </p>
         </section>
 

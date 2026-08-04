@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/parking")({
   component: Parking,
   head: () => ({
     meta: [
-      { title: "Parking & voiturier · Memento Live" },
+      { title: "Parking & voiturier · MaFeliza" },
       { name: "description", content: "Plan du parking, voiturier et bornes de recharge pour vos invités." },
-      { property: "og:title", content: "Parking & voiturier · Memento Live" },
+      { property: "og:title", content: "Parking & voiturier · MaFeliza" },
       { property: "og:description", content: "Un stationnement fluide dès l'arrivée." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

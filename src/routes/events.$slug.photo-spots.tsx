@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/photo-spots")({
   component: PhotoSpots,
   head: () => ({
     meta: [
-      { title: "Spots photo · Memento Live" },
+      { title: "Spots photo · MaFeliza" },
       { name: "description", content: "Les meilleurs endroits et heures pour capturer vos souvenirs, avec conseils lumière." },
-      { property: "og:title", content: "Spots photo · Memento Live" },
+      { property: "og:title", content: "Spots photo · MaFeliza" },
       { property: "og:description", content: "La lumière parfaite, au bon moment." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

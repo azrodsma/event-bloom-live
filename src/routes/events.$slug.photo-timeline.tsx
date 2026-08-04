@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/photo-timeline")({
   component: PhotoTimeline,
   head: () => ({
     meta: [
-      { title: "Timeline photo · Memento Live" },
+      { title: "Timeline photo · MaFeliza" },
       { name: "description", content: "Minute par minute avec le photographe : lumière, lieux, moments clés." },
-      { property: "og:title", content: "Timeline photo · Memento Live" },
+      { property: "og:title", content: "Timeline photo · MaFeliza" },
       { property: "og:description", content: "10h de reportage millimétré avec Léa Ferrand." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

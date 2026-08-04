@@ -12,9 +12,9 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/events/$slug/display")({
   head: () => ({
     meta: [
-      { title: "Mode écran de salle · Memento Live" },
+      { title: "Mode écran de salle · MaFeliza" },
       { name: "description", content: "Diffusez un diaporama immersif sur l'écran de votre salle : photos, messages, QR code d'invitation." },
-      { property: "og:title", content: "Mode écran de salle · Memento Live" },
+      { property: "og:title", content: "Mode écran de salle · MaFeliza" },
       { property: "og:description", content: "Un diaporama en direct pour votre événement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

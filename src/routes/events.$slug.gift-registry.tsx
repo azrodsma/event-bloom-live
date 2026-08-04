@@ -18,9 +18,9 @@ import { findEvent } from "@/lib/mock-data";
 export const Route = createFileRoute("/events/$slug/gift-registry")({
   head: ({ params }) => ({
     meta: [
-      { title: `Liste de cadeaux · ${params.slug} — Memento Live` },
+      { title: `Liste de cadeaux · ${params.slug} — MaFeliza` },
       { name: "description", content: "Cadeaux ciblés et cagnotte externe : liberté totale des invités." },
-      { property: "og:title", content: "Liste · Memento Live" },
+      { property: "og:title", content: "Liste · MaFeliza" },
       { property: "og:description", content: "Idées curatées, cagnotte externe, zéro commission." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -104,7 +104,7 @@ function GiftRegistry() {
         <section className="rounded-3xl bg-gradient-to-br from-cream to-gold/20 p-6">
           <TrendingUp className="h-5 w-5 text-primary" />
           <h2 className="mt-2 font-display text-3xl leading-tight">L'argent reste dehors. La joie reste dedans.</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Memento ne prend zéro commission. Vos invités paient directement sur la plateforme externe.</p>
+          <p className="mt-2 text-sm text-muted-foreground">MaFeliza ne prend zéro commission. Vos invités paient directement sur la plateforme externe.</p>
           <div className="mt-4 grid grid-cols-2 gap-3">
             <div className="rounded-2xl bg-background/60 p-3">
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Objectif total</p>

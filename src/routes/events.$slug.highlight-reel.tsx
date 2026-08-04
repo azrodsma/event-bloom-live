@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/highlight-reel")({
   component: HighlightReel,
   head: () => ({
     meta: [
-      { title: "Best-of vidéo · Memento Live" },
+      { title: "Best-of vidéo · MaFeliza" },
       { name: "description", content: "Un montage automatique des meilleurs moments de votre événement, généré par IA." },
-      { property: "og:title", content: "Best-of vidéo · Memento Live" },
+      { property: "og:title", content: "Best-of vidéo · MaFeliza" },
       { property: "og:description", content: "Votre journée en 60 secondes de magie." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

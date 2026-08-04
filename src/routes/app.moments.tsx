@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/moments")({
   component: Moments,
   head: () => ({
     meta: [
-      { title: "Mes moments · Memento Live" },
+      { title: "Mes moments · MaFeliza" },
       { name: "description", content: "Un pêle-mêle intelligent de vos plus beaux instants extraits automatiquement de tous vos événements." },
-      { property: "og:title", content: "Mes moments · Memento Live" },
+      { property: "og:title", content: "Mes moments · MaFeliza" },
       { property: "og:description", content: "Vos plus beaux instants, remontés automatiquement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

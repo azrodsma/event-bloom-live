@@ -7,8 +7,8 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/auth/reset-password")({
   head: () => ({
     meta: [
-      { title: "Nouveau mot de passe — Memento Live" },
-      { name: "description", content: "Choisissez un nouveau mot de passe pour votre compte Memento Live." },
+      { title: "Nouveau mot de passe — MaFeliza" },
+      { name: "description", content: "Choisissez un nouveau mot de passe pour votre compte MaFeliza." },
           { name: "robots", content: "noindex" },
 ],
   }),

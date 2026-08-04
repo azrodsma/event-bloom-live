@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/vault")({
   component: Vault,
   head: () => ({
     meta: [
-      { title: "Coffre-fort numérique · Memento Live" },
+      { title: "Coffre-fort numérique · MaFeliza" },
       { name: "description", content: "Vos souvenirs, chiffrés bout en bout, à vie." },
-      { property: "og:title", content: "Coffre-fort · Memento Live" },
+      { property: "og:title", content: "Coffre-fort · MaFeliza" },
       { property: "og:description", content: "AES-256, garantie 100 ans, transmission héritiers." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

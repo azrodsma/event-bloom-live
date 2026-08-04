@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/invitations")({
   component: Invitations,
   head: () => ({
     meta: [
-      { title: "Faire-part personnalisés · Memento Live" },
+      { title: "Faire-part personnalisés · MaFeliza" },
       { name: "description", content: "Créez vos faire-part digitaux et papier assortis, envoyés en 3 clics." },
-      { property: "og:title", content: "Faire-part · Memento Live" },
+      { property: "og:title", content: "Faire-part · MaFeliza" },
       { property: "og:description", content: "L'invitation qui donne le ton." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

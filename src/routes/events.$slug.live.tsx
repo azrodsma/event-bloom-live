@@ -16,7 +16,7 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/events/$slug/live")({
   head: ({ params }) => ({
     meta: [
-      { title: `Live · ${params.slug} — Memento Live` },
+      { title: `Live · ${params.slug} — MaFeliza` },
       { name: "description", content: "Diffusion en direct, chat et réactions." },
     ],
   }),
@@ -345,7 +345,7 @@ function LivePage() {
                 <Gift className="h-4 w-4" /> Participer <ExternalLink className="h-3 w-3" />
               </a>
               <p className="mt-2 text-center text-[10px] text-white/50">
-                Cagnotte externe. Memento Live ne conserve pas les fonds.
+                Cagnotte externe. MaFeliza ne conserve pas les fonds.
               </p>
             </div>
           </div>

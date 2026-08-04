@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/sound-check")({
   component: SoundCheck,
   head: () => ({
     meta: [
-      { title: "Balance son · Memento Live" },
+      { title: "Balance son · MaFeliza" },
       { name: "description", content: "Régie son en direct — chaque micro sous contrôle." },
-      { property: "og:title", content: "Balance son · Memento Live" },
+      { property: "og:title", content: "Balance son · MaFeliza" },
       { property: "og:description", content: "Pas un vœu inaudible, pas un larsen." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/kids-corner")({
   component: KidsCorner,
   head: () => ({
     meta: [
-      { title: "Coin enfants · Memento Live" },
+      { title: "Coin enfants · MaFeliza" },
       { name: "description", content: "Un cocon dédié pour les plus petits invités." },
-      { property: "og:title", content: "Coin enfants · Memento Live" },
+      { property: "og:title", content: "Coin enfants · MaFeliza" },
       { property: "og:description", content: "Ateliers créatifs, sieste douce, animatrice diplômée." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

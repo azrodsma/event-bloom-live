@@ -76,13 +76,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Memento Live — Le réseau social privé de vos plus beaux événements" },
+      { title: "MaFeliza — Le réseau social privé de vos plus beaux événements" },
       {
         name: "description",
         content:
           "Créez une page pour vos événements privés, partagez votre live, recevez des messages, cagnotte externe et livre d'or multimédia.",
       },
-      { property: "og:title", content: "Memento Live" },
+      { property: "og:title", content: "MaFeliza" },
       {
         property: "og:description",
         content: "Vos événements, en direct, en souvenirs.",

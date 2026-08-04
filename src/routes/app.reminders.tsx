@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/reminders")({
   component: Reminders,
   head: () => ({
     meta: [
-      { title: "Rappels doux · Memento Live" },
+      { title: "Rappels doux · MaFeliza" },
       { name: "description", content: "Des notifications bienveillantes qui vous rappellent les gestes importants au bon moment." },
-      { property: "og:title", content: "Rappels doux · Memento Live" },
+      { property: "og:title", content: "Rappels doux · MaFeliza" },
       { property: "og:description", content: "Ne rien oublier, sans stress." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -129,7 +129,7 @@ function Reminders() {
         <p className="text-xs font-bold uppercase tracking-wider text-primary">Tonalité IA</p>
         <p className="mt-2 font-serif text-lg leading-tight">Comment devons-nous vous parler ?</p>
         <p className="mt-1 text-[12px] text-muted-foreground">
-          Sélectionnez le ton — Memento adaptera chaque message.
+          Sélectionnez le ton — MaFeliza adaptera chaque message.
         </p>
         <div className="mt-3 grid grid-cols-3 gap-2">
           {["Douce", "Complice", "Poétique"].map((t, i) => (

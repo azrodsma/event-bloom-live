@@ -10,9 +10,9 @@ import { useMutation } from "@tanstack/react-query";
 export const Route = createFileRoute("/rsvp/$slug")({
   head: ({ params }) => ({
     meta: [
-      { title: `RSVP — ${params.slug} — Memento Live` },
+      { title: `RSVP — ${params.slug} — MaFeliza` },
       { name: "description", content: "Confirmez votre présence à l'événement." },
-      { property: "og:title", content: "Vous êtes invité(e) — Memento Live" },
+      { property: "og:title", content: "Vous êtes invité(e) — MaFeliza" },
       { property: "og:description", content: "Répondez à l'invitation en quelques secondes." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

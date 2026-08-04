@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/perks")({
   component: Perks,
   head: () => ({
     meta: [
-      { title: "Codes avantages · Memento Live" },
+      { title: "Codes avantages · MaFeliza" },
       { name: "description", content: "Réductions négociées pour vos invités : hôtels, taxis, tenues, coiffure." },
-      { property: "og:title", content: "Codes avantages · Memento Live" },
+      { property: "og:title", content: "Codes avantages · MaFeliza" },
       { property: "og:description", content: "Des privilèges pour tous vos invités." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -52,7 +52,7 @@ function Perks() {
           <Ticket className="h-6 w-6" />
           <p className="mt-3 font-serif text-2xl leading-tight">Des privilèges pour ceux qui vous entourent</p>
           <p className="mt-2 text-sm opacity-90">
-            Négociés par Memento Live, valides uniquement pour votre événement.
+            Négociés par MaFeliza, valides uniquement pour votre événement.
           </p>
           <div className="mt-4 flex items-center gap-2 text-xs opacity-90">
             <Users className="h-3.5 w-3.5" /> 136 invités ont déjà profité

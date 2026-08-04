@@ -16,9 +16,9 @@ import { useAuth } from "@/hooks/use-auth";
 export const Route = createFileRoute("/events/$slug/contributors")({
   head: () => ({
     meta: [
-      { title: "Co-organisateurs · Memento Live" },
+      { title: "Co-organisateurs · MaFeliza" },
       { name: "description", content: "Invitez des proches à co-organiser votre événement et attribuez leurs permissions." },
-      { property: "og:title", content: "Co-organisateurs · Memento Live" },
+      { property: "og:title", content: "Co-organisateurs · MaFeliza" },
       { property: "og:description", content: "Gérez l'équipe qui organise l'événement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -212,7 +212,7 @@ function Contributors() {
         <div className="fixed inset-0 z-40 flex items-end justify-center bg-black/40 backdrop-blur-sm sm:items-center" onClick={() => setShowInvite(false)}>
           <div className="w-full max-w-md rounded-t-3xl bg-background p-6 sm:rounded-3xl" onClick={(e) => e.stopPropagation()}>
             <h3 className="font-serif text-xl">Ajouter un membre</h3>
-            <p className="mt-1 text-sm text-muted-foreground">La personne doit déjà avoir un compte Memento Live.</p>
+            <p className="mt-1 text-sm text-muted-foreground">La personne doit déjà avoir un compte MaFeliza.</p>
 
             <label className="mt-5 block text-xs font-medium uppercase tracking-wider text-muted-foreground">Adresse email / pseudo</label>
             <div className="mt-1.5 flex items-center gap-2 rounded-2xl border border-border bg-secondary/40 px-4 py-3">

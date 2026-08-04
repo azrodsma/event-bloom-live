@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/story-composer")({
   component: StoryComposer,
   head: () => ({
     meta: [
-      { title: "Composeur de récit · Memento Live" },
+      { title: "Composeur de récit · MaFeliza" },
       { name: "description", content: "L'IA raconte votre histoire à partir de vos photos et voix." },
-      { property: "og:title", content: "Récit IA · Memento Live" },
+      { property: "og:title", content: "Récit IA · MaFeliza" },
       { property: "og:description", content: "Un magazine sur-mesure généré depuis l'album partagé." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

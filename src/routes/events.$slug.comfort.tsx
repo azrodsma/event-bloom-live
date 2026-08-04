@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/comfort")({
   component: Comfort,
   head: () => ({
     meta: [
-      { title: "Confort invités · Memento Live" },
+      { title: "Confort invités · MaFeliza" },
       { name: "description", content: "Anticipez chaque détail pour que vos invités oublient tout sauf la joie." },
-      { property: "og:title", content: "Confort invités · Memento Live" },
+      { property: "og:title", content: "Confort invités · MaFeliza" },
       { property: "og:description", content: "Le luxe c'est de ne penser à rien." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

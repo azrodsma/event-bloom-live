@@ -12,9 +12,9 @@ export const Route = createFileRoute("/events/$slug/timeline")({
   component: Timeline,
   head: () => ({
     meta: [
-      { title: "Programme · Memento Live" },
+      { title: "Programme · MaFeliza" },
       { name: "description", content: "Suivez le déroulé complet de l'événement, minute par minute." },
-      { property: "og:title", content: "Programme · Memento Live" },
+      { property: "og:title", content: "Programme · MaFeliza" },
       { property: "og:description", content: "Le déroulé de la journée en un coup d'œil." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

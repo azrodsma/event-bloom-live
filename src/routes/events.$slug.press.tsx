@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/press")({
   component: Press,
   head: () => ({
     meta: [
-      { title: "Espace presse & partage · Memento Live" },
+      { title: "Espace presse & partage · MaFeliza" },
       { name: "description", content: "Kit média officiel de l'événement : photos HD, vidéos courtes, communiqué et hashtags." },
-      { property: "og:title", content: "Espace presse & partage · Memento Live" },
+      { property: "og:title", content: "Espace presse & partage · MaFeliza" },
       { property: "og:description", content: "Partagez, avec style et cadre." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -51,9 +51,9 @@ const posts = [
 
 const releaseText = `Sarah & Thomas se sont dit oui le 14 juin 2026 au Château de Villette, en Provence. Une cérémonie laïque intime, suivie d'une soirée en plein air rassemblant 128 invités venus de 12 régions.
 
-Photographies signées Studio Léon — libres d'utilisation pour les médias partenaires avec mention obligatoire "© Studio Léon / Memento Live".`;
+Photographies signées Studio Léon — libres d'utilisation pour les médias partenaires avec mention obligatoire "© Studio Léon / MaFeliza".`;
 
-const hashtags = ["#SarahThomas2026", "#MementoLive", "#ChateauVillette", "#MariageProvence", "#JeMeMarie"];
+const hashtags = ["#SarahThomas2026", "#MaFelizaLive", "#ChateauVillette", "#MariageProvence", "#JeMeMarie"];
 
 function Press() {
   const { slug } = useParams({ from: "/events/$slug/press" });

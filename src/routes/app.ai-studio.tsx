@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/ai-studio")({
   component: AIStudio,
   head: () => ({
     meta: [
-      { title: "Studio IA · Memento Live" },
+      { title: "Studio IA · MaFeliza" },
       { name: "description", content: "Vos assistants créatifs : plans de table, discours, mood board." },
-      { property: "og:title", content: "Studio IA · Memento Live" },
+      { property: "og:title", content: "Studio IA · MaFeliza" },
       { property: "og:description", content: "L'IA au service de votre plus beau jour." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
