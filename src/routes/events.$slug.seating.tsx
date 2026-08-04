@@ -12,9 +12,9 @@ import { findEvent } from "@/lib/mock-data";
 export const Route = createFileRoute("/events/$slug/seating")({
   head: ({ params }) => ({
     meta: [
-      { title: `Plan de table · ${params.slug} — Memento Live` },
+      { title: `Plan de table · ${params.slug} — MaFeliza` },
       { name: "description", content: "Organisez visuellement vos tables et attribuez chaque invité à sa place." },
-      { property: "og:title", content: "Plan de table · Memento Live" },
+      { property: "og:title", content: "Plan de table · MaFeliza" },
       { property: "og:description", content: "Composez visuellement votre plan de table." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

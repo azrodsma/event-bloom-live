@@ -8,7 +8,7 @@ export function Logo({ className = "" }: { className?: string }) {
         </svg>
       </span>
       <span className="font-serif text-xl leading-none tracking-tight text-foreground">
-        Memento<span className="italic text-primary"> Live</span>
+        MaFeliza<span className="italic text-primary"> Live</span>
       </span>
     </span>
   );

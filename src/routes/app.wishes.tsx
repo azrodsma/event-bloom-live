@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/wishes")({
   component: Wishes,
   head: () => ({
     meta: [
-      { title: "Ma liste de souhaits · Memento Live" },
+      { title: "Ma liste de souhaits · MaFeliza" },
       { name: "description", content: "Rassemblez vos envies : anniversaire, mariage, crémaillère. Partagez-les à vos proches en un lien." },
-      { property: "og:title", content: "Ma liste de souhaits · Memento Live" },
+      { property: "og:title", content: "Ma liste de souhaits · MaFeliza" },
       { property: "og:description", content: "Vos envies, rassemblées." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

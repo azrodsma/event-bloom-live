@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/godparents")({
   component: Godparents,
   head: () => ({
     meta: [
-      { title: "Parrains & marraines · Memento Live" },
+      { title: "Parrains & marraines · MaFeliza" },
       { name: "description", content: "Coordination avec les parrains et marraines pour le baptême." },
-      { property: "og:title", content: "Parrains & marraines · Memento Live" },
+      { property: "og:title", content: "Parrains & marraines · MaFeliza" },
       { property: "og:description", content: "Choisir, engager, célébrer." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

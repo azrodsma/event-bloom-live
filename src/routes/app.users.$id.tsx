@@ -9,8 +9,8 @@ import { useAuth } from "@/hooks/use-auth";
 export const Route = createFileRoute("/app/users/$id")({
   head: () => ({
     meta: [
-      { title: "Profil — Memento Live" },
-      { name: "description", content: "Découvrez un profil de la communauté Memento Live." },
+      { title: "Profil — MaFeliza" },
+      { name: "description", content: "Découvrez un profil de la communauté MaFeliza." },
     ],
   }),
   component: UserProfile,

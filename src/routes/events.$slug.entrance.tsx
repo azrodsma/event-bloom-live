@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/entrance")({
   component: Entrance,
   head: () => ({
     meta: [
-      { title: "Entrée des mariés · Memento Live" },
+      { title: "Entrée des mariés · MaFeliza" },
       { name: "description", content: "Chorégraphie, musique et effets pour une entrée mémorable." },
-      { property: "og:title", content: "Entrée des mariés · Memento Live" },
+      { property: "og:title", content: "Entrée des mariés · MaFeliza" },
       { property: "og:description", content: "90 secondes pour donner le ton de la soirée." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

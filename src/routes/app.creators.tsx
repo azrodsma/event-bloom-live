@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/creators")({
   component: Creators,
   head: () => ({
     meta: [
-      { title: "Programme créateurs · Memento Live" },
-      { name: "description", content: "Monétisez vos templates, playlists et moodboards auprès de la communauté Memento." },
-      { property: "og:title", content: "Programme créateurs · Memento Live" },
+      { title: "Programme créateurs · MaFeliza" },
+      { name: "description", content: "Monétisez vos templates, playlists et moodboards auprès de la communauté MaFeliza." },
+      { property: "og:title", content: "Programme créateurs · MaFeliza" },
       { property: "og:description", content: "Vos créations, valorisées." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

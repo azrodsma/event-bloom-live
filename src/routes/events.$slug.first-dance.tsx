@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/first-dance")({
   component: FirstDance,
   head: () => ({
     meta: [
-      { title: "Ouverture de bal · Memento Live" },
+      { title: "Ouverture de bal · MaFeliza" },
       { name: "description", content: "Chorégraphiez votre première danse : morceau, tempo, pas et éclairage." },
-      { property: "og:title", content: "Ouverture de bal · Memento Live" },
+      { property: "og:title", content: "Ouverture de bal · MaFeliza" },
       { property: "og:description", content: "Un moment suspendu, préparé avec soin." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

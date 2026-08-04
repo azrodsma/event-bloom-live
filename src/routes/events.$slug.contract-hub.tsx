@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/contract-hub")({
   component: ContractHub,
   head: () => ({
     meta: [
-      { title: "Contrats prestataires · Memento Live" },
+      { title: "Contrats prestataires · MaFeliza" },
       { name: "description", content: "Tous vos contrats signés, versionnés, sécurisés." },
-      { property: "og:title", content: "Contrats · Memento Live" },
+      { property: "og:title", content: "Contrats · MaFeliza" },
       { property: "og:description", content: "12 contrats, signature électronique DocuSign certifiée eIDAS." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

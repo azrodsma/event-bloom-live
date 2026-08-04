@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/song-dedications")({
   component: SongDedications,
   head: () => ({
     meta: [
-      { title: "Dédicaces musicales · Memento Live" },
+      { title: "Dédicaces musicales · MaFeliza" },
       { name: "description", content: "Offrez une chanson à quelqu'un que vous aimez, avec un mot personnel." },
-      { property: "og:title", content: "Dédicaces musicales · Memento Live" },
+      { property: "og:title", content: "Dédicaces musicales · MaFeliza" },
       { property: "og:description", content: "Un morceau, une émotion, une personne." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

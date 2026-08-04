@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/activity")({
   component: ActivityLog,
   head: () => ({
     meta: [
-      { title: "Journal d'activité · Memento Live" },
+      { title: "Journal d'activité · MaFeliza" },
       { name: "description", content: "Chronologie complète de tout ce qui se passe autour de votre événement : messages, photos, dons, RSVP, réactions." },
-      { property: "og:title", content: "Journal d'activité · Memento Live" },
+      { property: "og:title", content: "Journal d'activité · MaFeliza" },
       { property: "og:description", content: "Fil chronologique de votre événement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

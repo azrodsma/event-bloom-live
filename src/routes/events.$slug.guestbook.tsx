@@ -13,7 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/events/$slug/guestbook")({
   head: ({ params }) => ({
     meta: [
-      { title: `Livre d'or · ${params.slug} — Memento Live` },
+      { title: `Livre d'or · ${params.slug} — MaFeliza` },
       { name: "description", content: "Laissez un message, une photo, une vidéo ou un vocal pour créer un souvenir inoubliable." },
     ],
   }),

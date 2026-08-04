@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/guides")({
   component: Guides,
   head: () => ({
     meta: [
-      { title: "Guide d'accueil · Memento Live" },
+      { title: "Guide d'accueil · MaFeliza" },
       { name: "description", content: "Tout ce qu'il faut savoir pour venir de loin : trains, avions, hôtels et bonnes adresses." },
-      { property: "og:title", content: "Guide d'accueil · Memento Live" },
+      { property: "og:title", content: "Guide d'accueil · MaFeliza" },
       { property: "og:description", content: "Guide d'accueil pour invités venant de loin." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

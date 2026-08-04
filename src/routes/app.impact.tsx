@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/impact")({
   component: Impact,
   head: () => ({
     meta: [
-      { title: "Impact & engagements · Memento Live" },
+      { title: "Impact & engagements · MaFeliza" },
       { name: "description", content: "Nos engagements sociaux, environnementaux et solidaires." },
-      { property: "og:title", content: "Impact · Memento Live" },
+      { property: "og:title", content: "Impact · MaFeliza" },
       { property: "og:description", content: "Célébrer, sans compromis." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

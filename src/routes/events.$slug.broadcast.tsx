@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/broadcast")({
   component: Broadcast,
   head: () => ({
     meta: [
-      { title: "Messages groupés · Memento Live" },
+      { title: "Messages groupés · MaFeliza" },
       { name: "description", content: "Communications ciblées à vos invités : email, SMS, push." },
-      { property: "og:title", content: "Broadcast · Memento Live" },
+      { property: "og:title", content: "Broadcast · MaFeliza" },
       { property: "og:description", content: "Le bon message, au bon moment, au bon groupe." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

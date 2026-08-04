@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/dress-code")({
   component: DressCode,
   head: () => ({
     meta: [
-      { title: "Dress code · Memento Live" },
+      { title: "Dress code · MaFeliza" },
       { name: "description", content: "Palette de couleurs, tenues suggérées et à éviter." },
-      { property: "og:title", content: "Dress code · Memento Live" },
+      { property: "og:title", content: "Dress code · MaFeliza" },
       { property: "og:description", content: "Élégant, cohérent, personnel." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

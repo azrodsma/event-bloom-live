@@ -18,7 +18,7 @@ import { useState } from "react";
 export const Route = createFileRoute("/app/settings")({
   head: () => ({
     meta: [
-      { title: "Paramètres — Memento Live" },
+      { title: "Paramètres — MaFeliza" },
       { name: "description", content: "Gérez votre compte, notifications et confidentialité." },
     ],
   }),
@@ -150,7 +150,7 @@ function Settings() {
             <Trash2 className="h-4 w-4" /> Supprimer mon compte
           </button>
           <p className="pt-2 text-center text-[10px] text-muted-foreground">
-            Memento Live · v1.0.0 · Réalisé avec ❤️ en France
+            MaFeliza · v1.0.0 · Réalisé avec ❤️ en France
           </p>
         </section>
       </main>

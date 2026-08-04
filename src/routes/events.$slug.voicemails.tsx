@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/voicemails")({
   component: Voicemails,
   head: () => ({
     meta: [
-      { title: "Messages vocaux · Memento Live" },
+      { title: "Messages vocaux · MaFeliza" },
       { name: "description", content: "Un répondeur privé pour recueillir les voix de ceux qui comptent." },
-      { property: "og:title", content: "Messages vocaux · Memento Live" },
+      { property: "og:title", content: "Messages vocaux · MaFeliza" },
       { property: "og:description", content: "Les voix qui restent." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

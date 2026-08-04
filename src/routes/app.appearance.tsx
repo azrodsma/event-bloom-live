@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/appearance")({
   component: Appearance,
   head: () => ({
     meta: [
-      { title: "Apparence · Memento Live" },
+      { title: "Apparence · MaFeliza" },
       { name: "description", content: "Personnalisez l'ambiance de l'app : thème, palette, typographie, rayons et grain." },
-      { property: "og:title", content: "Apparence · Memento Live" },
+      { property: "og:title", content: "Apparence · MaFeliza" },
       { property: "og:description", content: "L'app à votre image, jusqu'au dernier pixel." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

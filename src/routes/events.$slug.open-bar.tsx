@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/open-bar")({
   component: OpenBar,
   head: () => ({
     meta: [
-      { title: "Open bar · Memento Live" },
+      { title: "Open bar · MaFeliza" },
       { name: "description", content: "Suivez consommations, stock et rotation en direct." },
-      { property: "og:title", content: "Open bar · Memento Live" },
+      { property: "og:title", content: "Open bar · MaFeliza" },
       { property: "og:description", content: "Le bar qui ne s'assèche jamais." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/photobooth")({
   component: Photobooth,
   head: () => ({
     meta: [
-      { title: "Photobooth · Memento Live" },
+      { title: "Photobooth · MaFeliza" },
       { name: "description", content: "Capturez des instants avec des filtres et accessoires virtuels — vos photos rejoignent instantanément l'album." },
-      { property: "og:title", content: "Photobooth · Memento Live" },
+      { property: "og:title", content: "Photobooth · MaFeliza" },
       { property: "og:description", content: "Un photobooth intégré à votre événement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -224,7 +224,7 @@ function Photobooth() {
         <Sparkles className="h-6 w-6 text-primary" />
         <div className="flex-1">
           <p className="font-serif text-sm">Cadres animés Premium</p>
-          <p className="text-[11px] opacity-70">Débloquez des filtres exclusifs avec Memento Premium</p>
+          <p className="text-[11px] opacity-70">Débloquez des filtres exclusifs avec MaFeliza Premium</p>
         </div>
         <Link to="/app/premium" className="rounded-full bg-white px-3 py-1.5 text-[10px] font-bold text-foreground">
           Voir

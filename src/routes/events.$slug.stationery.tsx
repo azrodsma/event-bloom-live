@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/stationery")({
   component: Stationery,
   head: () => ({
     meta: [
-      { title: "Papeterie · Memento Live" },
+      { title: "Papeterie · MaFeliza" },
       { name: "description", content: "Faire-part, menus, marque-places : univers graphique complet." },
-      { property: "og:title", content: "Papeterie · Memento Live" },
+      { property: "og:title", content: "Papeterie · MaFeliza" },
       { property: "og:description", content: "Le fil rouge visuel de votre événement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

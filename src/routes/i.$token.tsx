@@ -9,7 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 export const Route = createFileRoute("/i/$token")({
   head: () => ({
     meta: [
-      { title: "Invitation personnelle — Memento Live" },
+      { title: "Invitation personnelle — MaFeliza" },
       { name: "description", content: "Répondez à votre invitation personnelle." },
       { name: "robots", content: "noindex" },
     ],

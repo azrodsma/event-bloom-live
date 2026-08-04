@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/referrals")({
   component: Referrals,
   head: () => ({
     meta: [
-      { title: "Parrainage · Memento Live" },
-      { name: "description", content: "Invitez vos proches à créer leur événement et recevez des étoiles Memento." },
-      { property: "og:title", content: "Parrainage · Memento Live" },
+      { title: "Parrainage · MaFeliza" },
+      { name: "description", content: "Invitez vos proches à créer leur événement et recevez des étoiles MaFeliza." },
+      { property: "og:title", content: "Parrainage · MaFeliza" },
       { property: "og:description", content: "Partagez la magie, gagnez des étoiles." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -37,7 +37,7 @@ function Referrals() {
       <main className="mx-auto max-w-2xl space-y-5 px-4 py-5">
         <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-gold p-6 text-white shadow-card">
           <Heart className="h-6 w-6" />
-          <p className="mt-3 font-serif text-3xl leading-tight">Offrez Memento à vos proches</p>
+          <p className="mt-3 font-serif text-3xl leading-tight">Offrez MaFeliza à vos proches</p>
           <p className="mt-2 text-sm opacity-90">
             +50 étoiles à l'inscription, +100 étoiles quand ils créent leur premier événement.
           </p>

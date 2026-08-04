@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/eco")({
   component: Eco,
   head: () => ({
     meta: [
-      { title: "Impact écologique · Memento Live" },
+      { title: "Impact écologique · MaFeliza" },
       { name: "description", content: "Mesurez et réduisez l'empreinte carbone de votre événement." },
-      { property: "og:title", content: "Impact écologique · Memento Live" },
+      { property: "og:title", content: "Impact écologique · MaFeliza" },
       { property: "og:description", content: "Célébrer, en douceur." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

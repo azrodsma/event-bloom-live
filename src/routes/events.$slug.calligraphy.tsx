@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/calligraphy")({
   component: Calligraphy,
   head: () => ({
     meta: [
-      { title: "Calligraphie · Memento Live" },
+      { title: "Calligraphie · MaFeliza" },
       { name: "description", content: "Marque-places, menus et enveloppes calligraphiés à la main." },
-      { property: "og:title", content: "Calligraphie · Memento Live" },
+      { property: "og:title", content: "Calligraphie · MaFeliza" },
       { property: "og:description", content: "Chaque prénom tracé à la plume, jamais imprimé." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

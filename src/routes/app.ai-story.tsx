@@ -22,9 +22,9 @@ export const Route = createFileRoute("/app/ai-story")({
   component: AIStory,
   head: () => ({
     meta: [
-      { title: "Composeur IA · Memento Live" },
+      { title: "Composeur IA · MaFeliza" },
       { name: "description", content: "Générez un storyboard, une voix off et 8 légendes à partir de vos photos et clips." },
-      { property: "og:title", content: "Composeur IA · Memento Live" },
+      { property: "og:title", content: "Composeur IA · MaFeliza" },
       { property: "og:description", content: "L'IA rédige votre highlight reel dans le ton choisi." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

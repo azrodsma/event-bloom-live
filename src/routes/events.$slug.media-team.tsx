@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/media-team")({
   component: MediaTeam,
   head: () => ({
     meta: [
-      { title: "Équipe média · Memento Live" },
+      { title: "Équipe média · MaFeliza" },
       { name: "description", content: "Coordonnez photographes, vidéastes et cadreurs live sur une timeline unique." },
-      { property: "og:title", content: "Équipe média · Memento Live" },
+      { property: "og:title", content: "Équipe média · MaFeliza" },
       { property: "og:description", content: "Chaque instant, capté par la bonne personne." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

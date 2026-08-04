@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/faq")({
   component: EventFaq,
   head: () => ({
     meta: [
-      { title: "FAQ de l'événement · Memento Live" },
+      { title: "FAQ de l'événement · MaFeliza" },
       { name: "description", content: "Toutes les réponses aux questions pratiques des invités : horaires, accès, cadeaux, tenue, hébergement." },
-      { property: "og:title", content: "FAQ de l'événement · Memento Live" },
+      { property: "og:title", content: "FAQ de l'événement · MaFeliza" },
       { property: "og:description", content: "Les réponses aux questions des invités." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

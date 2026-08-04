@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/vows")({
   component: Vows,
   head: () => ({
     meta: [
-      { title: "Vœux · Memento Live" },
+      { title: "Vœux · MaFeliza" },
       { name: "description", content: "Écrivez, répétez et gardez précieusement vos vœux." },
-      { property: "og:title", content: "Vœux · Memento Live" },
+      { property: "og:title", content: "Vœux · MaFeliza" },
       { property: "og:description", content: "Les mots qui changent une vie." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

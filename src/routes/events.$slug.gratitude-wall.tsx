@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/gratitude-wall")({
   component: GratitudeWall,
   head: () => ({
     meta: [
-      { title: "Mur de gratitude · Memento Live" },
+      { title: "Mur de gratitude · MaFeliza" },
       { name: "description", content: "Un mur collaboratif où chaque invité dépose un mot de gratitude." },
-      { property: "og:title", content: "Mur de gratitude · Memento Live" },
+      { property: "og:title", content: "Mur de gratitude · MaFeliza" },
       { property: "og:description", content: "Les mercis qui restent." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

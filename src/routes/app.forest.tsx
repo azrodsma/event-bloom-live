@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/forest")({
   component: Forest,
   head: () => ({
     meta: [
-      { title: "Forêt Memento · Memento Live" },
+      { title: "Forêt MaFeliza · MaFeliza" },
       { name: "description", content: "Un arbre planté pour chaque événement célébré. Notre engagement long terme." },
-      { property: "og:title", content: "Forêt Memento · Memento Live" },
+      { property: "og:title", content: "Forêt MaFeliza · MaFeliza" },
       { property: "og:description", content: "48 200 arbres plantés à ce jour, dans 4 forêts protégées." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -31,7 +31,7 @@ function Forest() {
             <ArrowLeft className="h-4 w-4" />
           </Link>
           <div className="flex-1">
-            <h1 className="font-display text-xl">Forêt Memento</h1>
+            <h1 className="font-display text-xl">Forêt MaFeliza</h1>
             <p className="text-xs text-muted-foreground">48 200 arbres · 4 forêts protégées</p>
           </div>
           <Trees className="h-5 w-5 text-primary" />
@@ -42,7 +42,7 @@ function Forest() {
         <section className="rounded-3xl bg-gradient-to-br from-green-900 via-emerald-800 to-foreground p-6 text-white">
           <Leaf className="h-6 w-6" />
           <h2 className="mt-2 font-display text-3xl leading-tight">Un événement, un arbre. Pour toujours.</h2>
-          <p className="mt-3 text-sm opacity-90">Chaque mariage, baptême ou anniversaire créé sur Memento offre un arbre planté dans une forêt certifiée par Reforest'Action et suivi 20 ans.</p>
+          <p className="mt-3 text-sm opacity-90">Chaque mariage, baptême ou anniversaire créé sur MaFeliza offre un arbre planté dans une forêt certifiée par Reforest'Action et suivi 20 ans.</p>
           <div className="mt-5 grid grid-cols-3 gap-4 text-center">
             <div><p className="font-display text-2xl">48 200</p><p className="text-[10px] opacity-70">arbres plantés</p></div>
             <div><p className="font-display text-2xl">3 616 t</p><p className="text-[10px] opacity-70">CO₂ absorbés</p></div>

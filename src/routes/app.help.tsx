@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/help")({
   component: Help,
   head: () => ({
     meta: [
-      { title: "Centre d'aide · Memento Live" },
+      { title: "Centre d'aide · MaFeliza" },
       { name: "description", content: "Réponses, tutoriels vidéo et support humain 7j/7 pour vos événements." },
-      { property: "og:title", content: "Centre d'aide · Memento Live" },
+      { property: "og:title", content: "Centre d'aide · MaFeliza" },
       { property: "og:description", content: "Une équipe humaine pour vous accompagner." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -26,7 +26,7 @@ const topics = [
 ];
 
 const faqs = [
-  { q: "Memento Live gère-t-il l'argent de la cagnotte ?", a: "Non. Nous encapsulons votre cagnotte externe (Leetchi, Lydia, PayPal Pool…). Les fonds ne transitent jamais par nos serveurs." },
+  { q: "MaFeliza gère-t-il l'argent de la cagnotte ?", a: "Non. Nous encapsulons votre cagnotte externe (Leetchi, Lydia, PayPal Pool…). Les fonds ne transitent jamais par nos serveurs." },
   { q: "Le live est-il hébergé chez vous ?", a: "Non. Nous encapsulons YouTube Live ou Twitch pour éviter les coûts et vous offrir la meilleure qualité." },
   { q: "Puis-je limiter l'accès à mes proches ?", a: "Oui. Chaque événement dispose d'un code invité, d'un QR code et d'une whitelist optionnelle." },
   { q: "Que devient mon événement après la date ?", a: "Il devient un souvenir vivant : replay, livre d'or, album, rétrospective. Archive cloud illimitée offerte 1 an." },

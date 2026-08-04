@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/registry")({
   component: Registry,
   head: () => ({
     meta: [
-      { title: "Liste de cadeaux · Memento Live" },
+      { title: "Liste de cadeaux · MaFeliza" },
       { name: "description", content: "Une liste de cadeaux collaborative — cagnotte externe, voyage de noces ou boutiques partenaires." },
-      { property: "og:title", content: "Liste de cadeaux · Memento Live" },
+      { property: "og:title", content: "Liste de cadeaux · MaFeliza" },
       { property: "og:description", content: "Suggérez à vos invités des idées de cadeaux." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -182,7 +182,7 @@ function Registry() {
       </ul>
 
       <p className="mx-4 mt-6 rounded-2xl border border-dashed border-border p-4 text-center text-[11px] text-muted-foreground">
-        Memento Live ne manipule pas les paiements — chaque contribution passe par votre plateforme externe (Leetchi, Lydia, PayPal…).
+        MaFeliza ne manipule pas les paiements — chaque contribution passe par votre plateforme externe (Leetchi, Lydia, PayPal…).
       </p>
     </div>
   );

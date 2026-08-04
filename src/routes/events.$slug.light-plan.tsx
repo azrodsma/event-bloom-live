@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/light-plan")({
   component: LightPlan,
   head: () => ({
     meta: [
-      { title: "Plan lumière · Memento Live" },
+      { title: "Plan lumière · MaFeliza" },
       { name: "description", content: "Ambiances lumineuses heure par heure : dorée, tamisée, dansante." },
-      { property: "og:title", content: "Plan lumière · Memento Live" },
+      { property: "og:title", content: "Plan lumière · MaFeliza" },
       { property: "og:description", content: "L'atmosphère, orchestrée." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

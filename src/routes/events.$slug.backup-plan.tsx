@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/backup-plan")({
   component: Backup,
   head: () => ({
     meta: [
-      { title: "Plan B météo · Memento Live" },
+      { title: "Plan B météo · MaFeliza" },
       { name: "description", content: "Un plan de repli clair pour chaque scénario météo — briefez toute l'équipe en 30 secondes." },
-      { property: "og:title", content: "Plan B · Memento Live" },
+      { property: "og:title", content: "Plan B · MaFeliza" },
       { property: "og:description", content: "Sereins quoi qu'il arrive." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

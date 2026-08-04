@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/community")({
   component: Community,
   head: () => ({
     meta: [
-      { title: "Communauté · Memento Live" },
+      { title: "Communauté · MaFeliza" },
       { name: "description", content: "Échangez avec d'autres organisateurs passionnés." },
-      { property: "og:title", content: "Communauté · Memento Live" },
+      { property: "og:title", content: "Communauté · MaFeliza" },
       { property: "og:description", content: "Le cercle bienveillant de ceux qui préparent." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

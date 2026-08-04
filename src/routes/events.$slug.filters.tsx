@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/filters")({
   component: Filters,
   head: () => ({
     meta: [
-      { title: "Filtres AR de l'événement · Memento Live" },
+      { title: "Filtres AR de l'événement · MaFeliza" },
       { name: "description", content: "Filtres réalité augmentée personnalisés aux couleurs de votre événement — à partager en story." },
-      { property: "og:title", content: "Filtres AR · Memento Live" },
+      { property: "og:title", content: "Filtres AR · MaFeliza" },
       { property: "og:description", content: "Vos invités portent vos couleurs." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

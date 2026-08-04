@@ -5,10 +5,10 @@ export const Route = createFileRoute("/app/journal")({
   component: Journal,
   head: () => ({
     meta: [
-      { title: "Journal · Memento Live" },
+      { title: "Journal · MaFeliza" },
       { name: "description", content: "Nos plus belles histoires d'événements, écrites à la main." },
-      { property: "og:title", content: "Journal · Memento Live" },
-      { property: "og:description", content: "L'éditorial Memento : témoignages, tendances, coulisses." },
+      { property: "og:title", content: "Journal · MaFeliza" },
+      { property: "og:description", content: "L'éditorial MaFeliza : témoignages, tendances, coulisses." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -43,7 +43,7 @@ function Journal() {
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <div>
-          <p className="font-serif text-lg leading-tight">Journal Memento</p>
+          <p className="font-serif text-lg leading-tight">Journal MaFeliza</p>
           <p className="text-xs text-muted-foreground">Édito, guides et podcasts</p>
         </div>
       </header>

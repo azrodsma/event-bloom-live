@@ -5,10 +5,10 @@ export const Route = createFileRoute("/app/ambassadors")({
   component: Ambassadors,
   head: () => ({
     meta: [
-      { title: "Ambassadeurs Memento · Memento Live" },
+      { title: "Ambassadeurs MaFeliza · MaFeliza" },
       { name: "description", content: "Programme ambassadeurs : parrainez, gagnez, célébrez." },
-      { property: "og:title", content: "Ambassadeurs · Memento Live" },
-      { property: "og:description", content: "Vos amis se marient ? Faites-leur découvrir Memento." },
+      { property: "og:title", content: "Ambassadeurs · MaFeliza" },
+      { property: "og:description", content: "Vos amis se marient ? Faites-leur découvrir MaFeliza." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/app/ambassadors")({
 
 const tiers = [
   { l: "Confident", cond: "1 parrainage réussi", perks: ["50 € offerts en crédit", "Badge doré profil"] },
-  { l: "Complice", cond: "5 parrainages", perks: ["Pack impression premium offert", "Accès bêta anticipé", "Un ticket concert Memento Live"] },
+  { l: "Complice", cond: "5 parrainages", perks: ["Pack impression premium offert", "Accès bêta anticipé", "Un ticket concert MaFeliza"] },
   { l: "Icône", cond: "20 parrainages", perks: ["Week-end découverte lieu partenaire", "Nom gravé sur le mur des ambassadeurs Lyon HQ", "Consultation privée avec CEO"] },
 ];
 

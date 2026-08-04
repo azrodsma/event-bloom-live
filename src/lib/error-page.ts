@@ -3,7 +3,7 @@ export function renderErrorPage(): string {
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>Memento Live — cette page n'a pas pu se charger</title>
+    <title>MaFeliza — cette page n'a pas pu se charger</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       :root { color-scheme: light; }

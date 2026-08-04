@@ -8,7 +8,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/events/$slug/checkin")({
-  head: () => ({ meta: [{ title: "Check-in — Memento Live" }, { name: "description", content: "Accueillez et pointez vos invités à l'arrivée." }] }),
+  head: () => ({ meta: [{ title: "Check-in — MaFeliza" }, { name: "description", content: "Accueillez et pointez vos invités à l'arrivée." }] }),
   loader: async ({ params }) => {
     const ev = await getEventBySlug({ data: { slug: params.slug } });
     if (!ev) throw notFound();

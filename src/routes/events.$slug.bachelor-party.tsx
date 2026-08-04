@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/bachelor-party")({
   component: BachelorParty,
   head: () => ({
     meta: [
-      { title: "EVJF / EVG · Memento Live" },
+      { title: "EVJF / EVG · MaFeliza" },
       { name: "description", content: "Organisation de l'enterrement de vie de jeune fille et garçon." },
-      { property: "og:title", content: "EVJF / EVG · Memento Live" },
+      { property: "og:title", content: "EVJF / EVG · MaFeliza" },
       { property: "og:description", content: "Deux week-ends. Zéro cliché." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

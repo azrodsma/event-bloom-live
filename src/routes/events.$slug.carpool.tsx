@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/carpool")({
   component: Carpool,
   head: () => ({
     meta: [
-      { title: "Covoiturage · Memento Live" },
+      { title: "Covoiturage · MaFeliza" },
       { name: "description", content: "Partagez la route avec les autres invités : proposez ou rejoignez un trajet en quelques secondes." },
-      { property: "og:title", content: "Covoiturage · Memento Live" },
+      { property: "og:title", content: "Covoiturage · MaFeliza" },
       { property: "og:description", content: "Le covoiturage entre invités." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

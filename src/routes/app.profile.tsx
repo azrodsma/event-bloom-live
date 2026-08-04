@@ -10,8 +10,8 @@ import { getMyProfile, updateMyProfile } from "@/lib/profile.functions";
 export const Route = createFileRoute("/app/profile")({
   head: () => ({
     meta: [
-      { title: "Profil — Memento Live" },
-      { name: "description", content: "Votre profil Memento Live." },
+      { title: "Profil — MaFeliza" },
+      { name: "description", content: "Votre profil MaFeliza." },
     ],
   }),
   component: Profile,

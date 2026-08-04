@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/brunch")({
   component: Brunch,
   head: () => ({
     meta: [
-      { title: "Brunch du lendemain · Memento Live" },
+      { title: "Brunch du lendemain · MaFeliza" },
       { name: "description", content: "Prolongez la fête autour d'un brunch décontracté." },
-      { property: "og:title", content: "Brunch · Memento Live" },
+      { property: "og:title", content: "Brunch · MaFeliza" },
       { property: "og:description", content: "Le lendemain, la douceur." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

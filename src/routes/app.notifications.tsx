@@ -10,7 +10,7 @@ import { listMyNotifications, markNotificationRead, markAllNotificationsRead } f
 export const Route = createFileRoute("/app/notifications")({
   head: () => ({
     meta: [
-      { title: "Notifications — Memento Live" },
+      { title: "Notifications — MaFeliza" },
       { name: "description", content: "Toutes vos notifications d'événements." },
     ],
   }),

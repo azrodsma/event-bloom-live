@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/replay")({
   component: Replay,
   head: () => ({
     meta: [
-      { title: "Replay du live · Memento Live" },
+      { title: "Replay du live · MaFeliza" },
       { name: "description", content: "Revivez la diffusion en direct de votre événement avec chapitres, moments forts et téléchargement en HD." },
-      { property: "og:title", content: "Replay du live · Memento Live" },
+      { property: "og:title", content: "Replay du live · MaFeliza" },
       { property: "og:description", content: "Le direct à revivre à tout moment." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

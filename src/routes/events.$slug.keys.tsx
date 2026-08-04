@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/keys")({
   component: Keys,
   head: () => ({
     meta: [
-      { title: "Trousseau · Memento Live" },
+      { title: "Trousseau · MaFeliza" },
       { name: "description", content: "Toutes les clés, badges et codes en un seul trousseau numérique." },
-      { property: "og:title", content: "Trousseau · Memento Live" },
+      { property: "og:title", content: "Trousseau · MaFeliza" },
       { property: "og:description", content: "Aucune porte fermée le jour J." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

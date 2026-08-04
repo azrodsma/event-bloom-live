@@ -11,7 +11,7 @@ import { QrCodeSvg } from "@/components/QrCodeSvg";
 export const Route = createFileRoute("/events/$slug/invite")({
   head: ({ params }) => ({
     meta: [
-      { title: `Invitation — ${params.slug} — Memento Live` },
+      { title: `Invitation — ${params.slug} — MaFeliza` },
       { name: "description", content: "Partagez votre événement à vos invités." },
     ],
   }),

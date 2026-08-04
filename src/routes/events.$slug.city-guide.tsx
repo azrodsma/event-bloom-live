@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/city-guide")({
   component: CityGuide,
   head: () => ({
     meta: [
-      { title: "Guide de la ville · Memento Live" },
+      { title: "Guide de la ville · MaFeliza" },
       { name: "description", content: "Vos invités venus de loin ? Recommandez hôtels, restaurants et balades autour de votre événement." },
-      { property: "og:title", content: "Guide de la ville · Memento Live" },
+      { property: "og:title", content: "Guide de la ville · MaFeliza" },
       { property: "og:description", content: "Un carnet d'adresses signature pour vos proches." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

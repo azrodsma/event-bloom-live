@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/family")({
   component: Family,
   head: () => ({
     meta: [
-      { title: "Cercle familial · Memento Live" },
+      { title: "Cercle familial · MaFeliza" },
       { name: "description", content: "Rassemblez votre tribu, partagez les événements et gardez un fil unique des grandes occasions." },
-      { property: "og:title", content: "Cercle familial · Memento Live" },
+      { property: "og:title", content: "Cercle familial · MaFeliza" },
       { property: "og:description", content: "Une famille, un fil, tous les souvenirs." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

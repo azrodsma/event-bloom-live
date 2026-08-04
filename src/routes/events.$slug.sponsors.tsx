@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/sponsors")({
   component: Sponsors,
   head: () => ({
     meta: [
-      { title: "Partenaires & mécènes · Memento Live" },
+      { title: "Partenaires & mécènes · MaFeliza" },
       { name: "description", content: "Les marques qui soutiennent votre événement avec élégance et discrétion." },
-      { property: "og:title", content: "Partenaires · Memento Live" },
+      { property: "og:title", content: "Partenaires · MaFeliza" },
       { property: "og:description", content: "Un cercle premium, jamais intrusif." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

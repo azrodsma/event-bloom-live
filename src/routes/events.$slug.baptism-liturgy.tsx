@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/baptism-liturgy")({
   component: BaptismLiturgy,
   head: () => ({
     meta: [
-      { title: "Liturgie du baptême · Memento Live" },
+      { title: "Liturgie du baptême · MaFeliza" },
       { name: "description", content: "Chaque rite expliqué, chaque chant préparé." },
-      { property: "og:title", content: "Liturgie · Memento Live" },
+      { property: "og:title", content: "Liturgie · MaFeliza" },
       { property: "og:description", content: "Rituels catholiques, choix des textes, coordination célébrant." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

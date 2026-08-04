@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/wallet")({
   component: WalletRoute,
   head: () => ({
     meta: [
-      { title: "Mon portefeuille · Memento Live" },
+      { title: "Mon portefeuille · MaFeliza" },
       { name: "description", content: "Historique de vos contributions aux cagnottes, reçus téléchargeables et suivi des dons envoyés." },
-      { property: "og:title", content: "Mon portefeuille · Memento Live" },
+      { property: "og:title", content: "Mon portefeuille · MaFeliza" },
       { property: "og:description", content: "Historique de vos contributions." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -32,7 +32,7 @@ interface Tx {
 
 const txs: Tx[] = [
   { id: "t1", type: "contribution", title: "Voyage de noces", event: "Mariage Sarah & Thomas", eventSlug: "sarah-thomas", date: "12 mars 2026", amount: 80, platform: "Leetchi", status: "confirmed" },
-  { id: "t2", type: "gift", title: "Robot pâtissier (KitchenAid)", event: "Mariage Sarah & Thomas", eventSlug: "sarah-thomas", date: "05 mars 2026", amount: 120, platform: "Liste Memento", status: "confirmed" },
+  { id: "t2", type: "gift", title: "Robot pâtissier (KitchenAid)", event: "Mariage Sarah & Thomas", eventSlug: "sarah-thomas", date: "05 mars 2026", amount: 120, platform: "Liste MaFeliza", status: "confirmed" },
   { id: "t3", type: "contribution", title: "Trousseau bébé", event: "Baptême de Gabriel", eventSlug: "bapteme-gabriel", date: "22 février 2026", amount: 50, platform: "Lydia", status: "confirmed" },
   { id: "t4", type: "received", title: "Cadeau reçu · Livre photo", event: "30 ans de Clara", eventSlug: "clara-30", date: "18 février 2026", amount: 45, platform: "Amazon", status: "confirmed" },
   { id: "t5", type: "contribution", title: "Rénovation atelier", event: "Crémaillère Julie & Max", eventSlug: "cremaillere-jm", date: "10 février 2026", amount: 30, platform: "PayPal.me", status: "pending" },
@@ -95,7 +95,7 @@ function WalletRoute() {
         <div className="mt-4 flex items-start gap-2 rounded-2xl bg-secondary/60 p-3">
           <Shield className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
           <p className="text-[11px] text-muted-foreground">
-            Memento ne manipule pas d'argent. Les cagnottes sont hébergées par des tiers agréés (Leetchi, Lydia, PayPal). Cet historique est indicatif.
+            MaFeliza ne manipule pas d'argent. Les cagnottes sont hébergées par des tiers agréés (Leetchi, Lydia, PayPal). Cet historique est indicatif.
           </p>
         </div>
       </section>

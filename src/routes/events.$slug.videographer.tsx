@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/videographer")({
   component: Videographer,
   head: () => ({
     meta: [
-      { title: "Vidéaste · Memento Live" },
+      { title: "Vidéaste · MaFeliza" },
       { name: "description", content: "Brief créatif, plans clés et livrables du vidéaste." },
-      { property: "og:title", content: "Vidéaste · Memento Live" },
+      { property: "og:title", content: "Vidéaste · MaFeliza" },
       { property: "og:description", content: "Le film de votre vie, orchestré à la seconde." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -6,9 +6,9 @@ import { QrCode, ArrowRight } from "lucide-react";
 export const Route = createFileRoute("/join")({
   head: () => ({
     meta: [
-      { title: "Rejoindre un événement — Memento Live" },
+      { title: "Rejoindre un événement — MaFeliza" },
       { name: "description", content: "Entrez votre code d'invitation pour accéder à un événement privé." },
-          { property: "og:title", content: "Rejoindre un événement — Memento Live" },
+          { property: "og:title", content: "Rejoindre un événement — MaFeliza" },
       { property: "og:description", content: "Entrez votre code d'invitation." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://event.bold-lab-agency.com/join" },

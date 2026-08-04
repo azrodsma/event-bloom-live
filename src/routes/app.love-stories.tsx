@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/love-stories")({
   component: LoveStories,
   head: () => ({
     meta: [
-      { title: "Histoires vraies · Memento Live" },
-      { name: "description", content: "Ils se sont mariés avec Memento. Voici leurs récits." },
-      { property: "og:title", content: "Histoires vraies · Memento Live" },
+      { title: "Histoires vraies · MaFeliza" },
+      { name: "description", content: "Ils se sont mariés avec MaFeliza. Voici leurs récits." },
+      { property: "og:title", content: "Histoires vraies · MaFeliza" },
       { property: "og:description", content: "12 mariages, 12 leçons, 12 films émouvants." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

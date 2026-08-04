@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/legal")({
   component: Legal,
   head: () => ({
     meta: [
-      { title: "Confidentialité & mentions · Memento Live" },
+      { title: "Confidentialité & mentions · MaFeliza" },
       { name: "description", content: "Toute la clarté sur vos droits et nos engagements." },
-      { property: "og:title", content: "Confidentialité · Memento Live" },
+      { property: "og:title", content: "Confidentialité · MaFeliza" },
       { property: "og:description", content: "RGPD, hébergement UE, chiffrement bout-en-bout." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

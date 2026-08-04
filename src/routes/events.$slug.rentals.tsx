@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/rentals")({
   component: Rentals,
   head: () => ({
     meta: [
-      { title: "Location matériel · Memento Live" },
+      { title: "Location matériel · MaFeliza" },
       { name: "description", content: "Suivi des locations mobilier, vaisselle et arts de la table." },
-      { property: "og:title", content: "Location matériel · Memento Live" },
+      { property: "og:title", content: "Location matériel · MaFeliza" },
       { property: "og:description", content: "1 200 pièces livrées, comptées, restituées." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

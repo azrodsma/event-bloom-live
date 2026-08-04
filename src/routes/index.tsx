@@ -24,13 +24,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Memento Live — Vos événements, en direct, en souvenirs" },
+      { title: "MaFeliza — Vos événements, en direct, en souvenirs" },
       {
         name: "description",
         content:
           "Le réseau social privé de vos plus beaux événements. Créez, diffusez, collectez et revivez.",
       },
-      { property: "og:title", content: "Memento Live" },
+      { property: "og:title", content: "MaFeliza" },
       {
         property: "og:description",
         content: "Vos événements, en direct, en souvenirs.",
@@ -364,7 +364,7 @@ function Landing() {
       <footer className="border-t border-border bg-surface">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-8 text-xs text-muted-foreground sm:px-6">
           <Logo />
-          <p>© {new Date().getFullYear()} Memento Live · Vos événements, en direct, en souvenirs.</p>
+          <p>© {new Date().getFullYear()} MaFeliza · Vos événements, en direct, en souvenirs.</p>
         </div>
       </footer>
     </div>

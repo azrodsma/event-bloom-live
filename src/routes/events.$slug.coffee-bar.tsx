@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/coffee-bar")({
   component: CoffeeBar,
   head: () => ({
     meta: [
-      { title: "Bar à café · Memento Live" },
+      { title: "Bar à café · MaFeliza" },
       { name: "description", content: "Bar à café artisanal pour le lendemain et les fins de nuit." },
-      { property: "og:title", content: "Bar à café · Memento Live" },
+      { property: "og:title", content: "Bar à café · MaFeliza" },
       { property: "og:description", content: "Un café qui remet du monde." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

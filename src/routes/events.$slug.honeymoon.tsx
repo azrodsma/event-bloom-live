@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/honeymoon")({
   component: Honeymoon,
   head: () => ({
     meta: [
-      { title: "Voyage de noces · Memento Live" },
+      { title: "Voyage de noces · MaFeliza" },
       { name: "description", content: "Planifiez le voyage qui prolonge la magie." },
-      { property: "og:title", content: "Voyage de noces · Memento Live" },
+      { property: "og:title", content: "Voyage de noces · MaFeliza" },
       { property: "og:description", content: "L'après-mariage, encore plus doux." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

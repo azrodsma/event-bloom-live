@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/guestbook/$id")({
   component: GuestbookEntry,
   head: () => ({
     meta: [
-      { title: "Message du livre d'or · Memento Live" },
+      { title: "Message du livre d'or · MaFeliza" },
       { name: "description", content: "Un message précieux laissé dans le livre d'or : texte, photo ou vocal signé par un proche." },
-      { property: "og:title", content: "Message du livre d'or · Memento Live" },
+      { property: "og:title", content: "Message du livre d'or · MaFeliza" },
       { property: "og:description", content: "Un mot pour la vie." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

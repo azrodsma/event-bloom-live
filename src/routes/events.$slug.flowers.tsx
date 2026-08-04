@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/flowers")({
   component: Flowers,
   head: () => ({
     meta: [
-      { title: "Fleurs & compositions · Memento Live" },
+      { title: "Fleurs & compositions · MaFeliza" },
       { name: "description", content: "Composez la palette florale de votre événement — bouquets, centres de table, arches." },
-      { property: "og:title", content: "Fleurs · Memento Live" },
+      { property: "og:title", content: "Fleurs · MaFeliza" },
       { property: "og:description", content: "Le langage secret des pétales." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -134,7 +134,7 @@ function Flowers() {
       </section>
 
       <section className="mx-4 mt-8 rounded-3xl bg-gradient-to-br from-primary/10 via-accent/20 to-primary/5 p-5">
-        <p className="text-xs font-bold uppercase tracking-wider text-primary">Bonus Memento</p>
+        <p className="text-xs font-bold uppercase tracking-wider text-primary">Bonus MaFeliza</p>
         <p className="mt-2 font-serif text-lg leading-tight">Distribution des fleurs post-cérémonie</p>
         <p className="mt-1 text-[12px] text-muted-foreground">
           En fin de soirée, invitez vos convives à repartir avec un brin — moins de gâchis, plus de souvenirs.

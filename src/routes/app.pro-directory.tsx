@@ -5,10 +5,10 @@ export const Route = createFileRoute("/app/pro-directory")({
   component: ProDirectory,
   head: () => ({
     meta: [
-      { title: "Annuaire pro · Memento Live" },
+      { title: "Annuaire pro · MaFeliza" },
       { name: "description", content: "1 240 prestataires vérifiés, notés par leurs pairs et par les mariés." },
-      { property: "og:title", content: "Annuaire pro · Memento Live" },
-      { property: "og:description", content: "Photographes, traiteurs, DJ, fleuristes : la sélection Memento." },
+      { property: "og:title", content: "Annuaire pro · MaFeliza" },
+      { property: "og:description", content: "Photographes, traiteurs, DJ, fleuristes : la sélection MaFeliza." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

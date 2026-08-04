@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/referral")({
   component: Referral,
   head: () => ({
     meta: [
-      { title: "Parrainez Memento · Un mois offert" },
-      { name: "description", content: "Invitez vos proches à découvrir Memento Live et recevez un mois Premium offert à chaque inscription." },
-      { property: "og:title", content: "Parrainez Memento · Un mois offert" },
+      { title: "Parrainez MaFeliza · Un mois offert" },
+      { name: "description", content: "Invitez vos proches à découvrir MaFeliza et recevez un mois Premium offert à chaque inscription." },
+      { property: "og:title", content: "Parrainez MaFeliza · Un mois offert" },
       { property: "og:description", content: "Un mois Premium offert par filleul." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -69,7 +69,7 @@ function Referral() {
             <Gift className="h-8 w-8" />
           </div>
           <p className="mt-4 text-xs font-bold uppercase tracking-[0.25em] text-primary">Programme fidélité</p>
-          <h1 className="mt-1 font-serif text-4xl leading-tight">Offrez Memento,<br />recevez Premium</h1>
+          <h1 className="mt-1 font-serif text-4xl leading-tight">Offrez MaFeliza,<br />recevez Premium</h1>
           <p className="mx-auto mt-3 max-w-xs text-sm text-foreground/70">
             Un mois Premium offert dès que votre filleul crée son premier événement.
           </p>

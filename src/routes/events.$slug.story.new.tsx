@@ -10,7 +10,7 @@ import { useAuth } from "@/hooks/use-auth";
 export const Route = createFileRoute("/events/$slug/story/new")({
   head: ({ params }) => ({
     meta: [
-      { title: `Nouvelle story — ${params.slug} — Memento Live` },
+      { title: `Nouvelle story — ${params.slug} — MaFeliza` },
       { name: "description", content: "Partagez une story éphémère (24 h) pour votre événement." },
     ],
   }),

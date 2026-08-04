@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/late-night")({
   component: LateNight,
   head: () => ({
     meta: [
-      { title: "Fin de soirée · Memento Live" },
+      { title: "Fin de soirée · MaFeliza" },
       { name: "description", content: "Snacks, second souffle et derniers slows." },
-      { property: "og:title", content: "Fin de soirée · Memento Live" },
+      { property: "og:title", content: "Fin de soirée · MaFeliza" },
       { property: "og:description", content: "L'énergie ne retombe jamais." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -9,7 +9,7 @@ import { ChevronLeft, Download, Share2, Heart, Camera, BookHeart, Users, Radio, 
 export const Route = createFileRoute("/events/$slug/souvenir")({
   head: ({ params }) => ({
     meta: [
-      { title: `Le souvenir · ${params.slug} — Memento Live` },
+      { title: `Le souvenir · ${params.slug} — MaFeliza` },
       { name: "description", content: `Revivez cet événement : moments forts, album et livre d'or.` },
       { property: "og:title", content: `Souvenir · ${params.slug}` },
       { property: "og:description", content: "Le récap magique de votre événement." },

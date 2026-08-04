@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/exit")({
   component: Exit,
   head: () => ({
     meta: [
-      { title: "Sortie des mariés · Memento Live" },
+      { title: "Sortie des mariés · MaFeliza" },
       { name: "description", content: "Scénographie de la sortie de cérémonie et lâcher symbolique." },
-      { property: "og:title", content: "Sortie des mariés · Memento Live" },
+      { property: "og:title", content: "Sortie des mariés · MaFeliza" },
       { property: "og:description", content: "La photo emblématique se prépare, elle ne se croise pas les doigts." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

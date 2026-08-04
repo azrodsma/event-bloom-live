@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/live/setup")({
   component: LiveSetup,
   head: () => ({
     meta: [
-      { title: "Configurer votre live · Memento Live" },
+      { title: "Configurer votre live · MaFeliza" },
       { name: "description", content: "Assistant en 4 étapes pour connecter YouTube ou Twitch, tester votre matériel et lancer votre diffusion en direct." },
-      { property: "og:title", content: "Configurer votre live · Memento Live" },
+      { property: "og:title", content: "Configurer votre live · MaFeliza" },
       { property: "og:description", content: "Préparez votre diffusion en direct." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -88,7 +88,7 @@ function LiveSetup() {
             </div>
             <h1 className="mt-2 font-serif text-3xl leading-tight">Où diffuser<br />votre live ?</h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              Memento encapsule le player de la plateforme choisie. Aucun frais d'hébergement vidéo.
+              MaFeliza encapsule le player de la plateforme choisie. Aucun frais d'hébergement vidéo.
             </p>
 
             <div className="mt-6 space-y-3">
@@ -130,7 +130,7 @@ function LiveSetup() {
                 <ShieldCheck className="h-3.5 w-3.5 text-primary" /> Sécurité
               </p>
               <p className="mt-1 text-[11px] text-muted-foreground">
-                Vos invités n'ont pas besoin de compte {platform === "youtube" ? "YouTube" : "Twitch"} : le player est intégré dans votre événement privé Memento.
+                Vos invités n'ont pas besoin de compte {platform === "youtube" ? "YouTube" : "Twitch"} : le player est intégré dans votre événement privé MaFeliza.
               </p>
             </div>
           </section>

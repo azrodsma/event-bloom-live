@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/accessibility")({
   component: A11y,
   head: () => ({
     meta: [
-      { title: "Accessibilité · Memento Live" },
+      { title: "Accessibilité · MaFeliza" },
       { name: "description", content: "Nos engagements accessibilité : WCAG 2.2 AA, LSF, audiodescription." },
-      { property: "og:title", content: "Accessibilité · Memento Live" },
+      { property: "og:title", content: "Accessibilité · MaFeliza" },
       { property: "og:description", content: "Une célébration inclusive, du premier clic à la dernière danse." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

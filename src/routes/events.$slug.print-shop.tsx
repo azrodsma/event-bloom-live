@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/print-shop")({
   component: PrintShop,
   head: () => ({
     meta: [
-      { title: "Boutique souvenirs · Memento Live" },
+      { title: "Boutique souvenirs · MaFeliza" },
       { name: "description", content: "Livre photo, tirages Fine Art, magnets, posters : imprimez vos plus beaux moments." },
-      { property: "og:title", content: "Boutique souvenirs · Memento Live" },
+      { property: "og:title", content: "Boutique souvenirs · MaFeliza" },
       { property: "og:description", content: "Le papier fait tout dire." },
       { property: "og:type", content: "product.group" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -137,7 +137,7 @@ function PrintShop() {
             <span className="italic text-primary">fait tout dire</span>
           </h1>
           <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-            Vos souvenirs Memento, imprimés à la main sur papier Fine Art.
+            Vos souvenirs MaFeliza, imprimés à la main sur papier Fine Art.
           </p>
 
           <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1.5 text-[11px] font-semibold shadow-sm backdrop-blur">

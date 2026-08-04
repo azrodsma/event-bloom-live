@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/saved")({
   component: Saved,
   head: () => ({
     meta: [
-      { title: "Enregistré · Memento Live" },
+      { title: "Enregistré · MaFeliza" },
       { name: "description", content: "Vos posts, moodboards et idées mis de côté pour plus tard." },
-      { property: "og:title", content: "Enregistré · Memento Live" },
+      { property: "og:title", content: "Enregistré · MaFeliza" },
       { property: "og:description", content: "Votre bibliothèque d'inspirations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

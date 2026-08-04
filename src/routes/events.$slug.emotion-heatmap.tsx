@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/emotion-heatmap")({
   component: EmotionHeatmap,
   head: () => ({
     meta: [
-      { title: "Carte émotionnelle · Memento Live" },
+      { title: "Carte émotionnelle · MaFeliza" },
       { name: "description", content: "Les pics d'émotion de la journée, minute par minute." },
-      { property: "og:title", content: "Émotions live · Memento Live" },
+      { property: "og:title", content: "Émotions live · MaFeliza" },
       { property: "og:description", content: "Applaudissements, larmes, éclats de rire : la journée en signal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

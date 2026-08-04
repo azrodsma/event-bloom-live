@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/loyalty")({
   component: Loyalty,
   head: () => ({
     meta: [
-      { title: "Fidélité Memento · Memento Live" },
+      { title: "Fidélité MaFeliza · MaFeliza" },
       { name: "description", content: "Gagnez des étoiles à chaque événement et débloquez des avantages exclusifs." },
-      { property: "og:title", content: "Fidélité Memento · Memento Live" },
+      { property: "og:title", content: "Fidélité MaFeliza · MaFeliza" },
       { property: "og:description", content: "Vos souvenirs récompensés." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -56,7 +56,7 @@ function Loyalty() {
             <Star className="h-3.5 w-3.5 fill-current" /> Palier {currentTier.name}
           </div>
           <p className="mt-2 font-serif text-5xl leading-none">{stars}</p>
-          <p className="mt-1 text-sm opacity-90">étoiles Memento</p>
+          <p className="mt-1 text-sm opacity-90">étoiles MaFeliza</p>
           {nextTier && (
             <>
               <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/25">

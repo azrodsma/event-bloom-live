@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/about")({
   component: About,
   head: () => ({
     meta: [
-      { title: "À propos · Memento Live" },
-      { name: "description", content: "L'histoire, l'équipe et les valeurs de Memento Live." },
-      { property: "og:title", content: "À propos · Memento Live" },
+      { title: "À propos · MaFeliza" },
+      { name: "description", content: "L'histoire, l'équipe et les valeurs de MaFeliza." },
+      { property: "og:title", content: "À propos · MaFeliza" },
       { property: "og:description", content: "Le réseau social privé des plus beaux moments, imaginé à Lyon en 2023." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -81,7 +81,7 @@ function About() {
         </section>
 
         <div className="rounded-2xl bg-cream p-5 text-sm">
-          <p className="font-medium">Memento Live SAS</p>
+          <p className="font-medium">MaFeliza SAS</p>
           <p className="text-xs text-muted-foreground mt-1">42 rue Auguste Comte, 69002 Lyon · RCS Lyon 927 384 552 · Société à mission depuis mai 2025.</p>
         </div>
       </main>

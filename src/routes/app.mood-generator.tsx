@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/mood-generator")({
   component: MoodGen,
   head: () => ({
     meta: [
-      { title: "Générateur de mood board · Memento Live" },
+      { title: "Générateur de mood board · MaFeliza" },
       { name: "description", content: "Décrivez votre vision en une phrase — l'IA compose la palette, la typo et les inspirations." },
-      { property: "og:title", content: "Mood board IA · Memento Live" },
+      { property: "og:title", content: "Mood board IA · MaFeliza" },
       { property: "og:description", content: "De l'idée floue à la vision claire." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

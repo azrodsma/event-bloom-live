@@ -9,10 +9,10 @@ export const Route = createFileRoute("/app/posts/$id")({
   component: PostDetail,
   head: () => ({
     meta: [
-      { title: "Publication · Memento Live" },
-      { name: "description", content: "Découvrez cette publication partagée par la communauté Memento Live." },
-      { property: "og:title", content: "Publication · Memento Live" },
-      { property: "og:description", content: "Un moment capturé sur Memento Live." },
+      { title: "Publication · MaFeliza" },
+      { name: "description", content: "Découvrez cette publication partagée par la communauté MaFeliza." },
+      { property: "og:title", content: "Publication · MaFeliza" },
+      { property: "og:description", content: "Un moment capturé sur MaFeliza." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

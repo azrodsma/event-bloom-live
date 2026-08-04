@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/insurance")({
   component: Insurance,
   head: () => ({
     meta: [
-      { title: "Assurance annulation · Memento Live" },
+      { title: "Assurance annulation · MaFeliza" },
       { name: "description", content: "Assurance annulation événement · remboursement jusqu'à 100%." },
-      { property: "og:title", content: "Assurance annulation · Memento Live" },
+      { property: "og:title", content: "Assurance annulation · MaFeliza" },
       { property: "og:description", content: "Un jour J qui ne peut pas être décalé. Une garantie qui l'anticipe." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

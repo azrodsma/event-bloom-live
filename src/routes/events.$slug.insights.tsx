@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/insights")({
   component: Insights,
   head: () => ({
     meta: [
-      { title: "Insights de l'événement · Memento Live" },
+      { title: "Insights de l'événement · MaFeliza" },
       { name: "description", content: "L'analyse post-événement : engagement, moments forts, contributeurs et sentiments." },
-      { property: "og:title", content: "Insights · Memento Live" },
+      { property: "og:title", content: "Insights · MaFeliza" },
       { property: "og:description", content: "Comprendre ce qui a rendu ce jour unique." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -11,10 +11,10 @@ export const Route = createFileRoute("/app/agenda")({
   component: Agenda,
   head: () => ({
     meta: [
-      { title: "Mon agenda · Memento Live" },
+      { title: "Mon agenda · MaFeliza" },
       { name: "description", content: "Retrouvez tous vos événements et ceux auxquels vous êtes invité·e dans une vue calendrier claire." },
-      { property: "og:title", content: "Mon agenda · Memento Live" },
-      { property: "og:description", content: "Votre calendrier Memento." },
+      { property: "og:title", content: "Mon agenda · MaFeliza" },
+      { property: "og:description", content: "Votre calendrier MaFeliza." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

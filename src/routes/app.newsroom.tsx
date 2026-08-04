@@ -5,10 +5,10 @@ export const Route = createFileRoute("/app/newsroom")({
   component: Newsroom,
   head: () => ({
     meta: [
-      { title: "Newsroom · Memento Live" },
+      { title: "Newsroom · MaFeliza" },
       { name: "description", content: "Annonces produits, levées de fonds et prises de parole." },
-      { property: "og:title", content: "Newsroom · Memento Live" },
-      { property: "og:description", content: "L'actualité de Memento Live en un seul endroit." },
+      { property: "og:title", content: "Newsroom · MaFeliza" },
+      { property: "og:description", content: "L'actualité de MaFeliza en un seul endroit." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -16,9 +16,9 @@ export const Route = createFileRoute("/app/newsroom")({
 });
 
 const posts = [
-  { date: "Jul 2026", tag: "Produit", l: "Memento Live franchit les 50 000 événements orchestrés", d: "Bilan chiffré de 18 mois de croissance et retour sur les fonctionnalités les plus utilisées." },
+  { date: "Jul 2026", tag: "Produit", l: "MaFeliza franchit les 50 000 événements orchestrés", d: "Bilan chiffré de 18 mois de croissance et retour sur les fonctionnalités les plus utilisées." },
   { date: "Jun 2026", tag: "Levée", l: "3,2 M€ menés par Point Nine pour accélérer en Europe", d: "Ouverture de bureaux à Barcelone et Milan, +18 recrutements prévus d'ici fin 2026." },
-  { date: "May 2026", tag: "Presse", l: "Vogue Business classe Memento parmi les 25 start-up à suivre", d: "Article complet dans le numéro de juin, focus sur l'expérience premium et l'écosystème partenaires." },
+  { date: "May 2026", tag: "Presse", l: "Vogue Business classe MaFeliza parmi les 25 start-up à suivre", d: "Article complet dans le numéro de juin, focus sur l'expérience premium et l'écosystème partenaires." },
   { date: "Apr 2026", tag: "Impact", l: "Certification B Corp obtenue avec la note 92,4", d: "Score dans le top 10% des entreprises tech européennes évaluées cette année." },
   { date: "Mar 2026", tag: "Produit", l: "Lancement du Studio IA et de l'assistant vœux", d: "Coaching empathique, chronométrage automatique, suggestions personnalisées : disponible pour tous les plans." },
 ];
@@ -48,7 +48,7 @@ function Newsroom() {
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
         <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
           <p className="text-xs uppercase tracking-widest opacity-70">À la une</p>
-          <h2 className="mt-2 font-display text-2xl leading-tight">Memento Live franchit les 50 000 événements orchestrés</h2>
+          <h2 className="mt-2 font-display text-2xl leading-tight">MaFeliza franchit les 50 000 événements orchestrés</h2>
           <p className="mt-2 text-sm opacity-90">18 mois de croissance, une équipe de 42 personnes, et un cap : devenir la référence européenne des célébrations privées.</p>
         </section>
 

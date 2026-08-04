@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/venues")({
   component: Venues,
   head: () => ({
     meta: [
-      { title: "Lieux de réception · Memento Live" },
+      { title: "Lieux de réception · MaFeliza" },
       { name: "description", content: "Découvrez une sélection de domaines, châteaux et rooftops pour votre événement." },
-      { property: "og:title", content: "Lieux · Memento Live" },
+      { property: "og:title", content: "Lieux · MaFeliza" },
       { property: "og:description", content: "Le décor de vos plus beaux souvenirs." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -58,7 +58,7 @@ function Venues() {
 
       <section className="px-4 pt-6">
         <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          <Sparkles className="h-3.5 w-3.5 text-primary" /> Sélection Memento
+          <Sparkles className="h-3.5 w-3.5 text-primary" /> Sélection MaFeliza
         </div>
         <h1 className="mt-2 font-serif text-3xl leading-tight">Le décor de vos plus beaux souvenirs</h1>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -141,7 +141,7 @@ function Venues() {
       </ul>
 
       <section className="mx-4 mt-6 rounded-3xl bg-gradient-to-br from-primary/10 via-accent/20 to-primary/5 p-5">
-        <p className="text-xs font-bold uppercase tracking-wider text-primary">Concierge Memento</p>
+        <p className="text-xs font-bold uppercase tracking-wider text-primary">Concierge MaFeliza</p>
         <p className="mt-2 font-serif text-lg leading-tight">Nous cherchons pour vous</p>
         <p className="mt-1 text-[12px] text-muted-foreground">
           Décrivez votre vision, budget et date — notre équipe vous propose 3 lieux sur-mesure sous 48h.

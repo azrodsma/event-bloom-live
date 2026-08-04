@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/leaderboard")({
   component: Leaderboard,
   head: () => ({
     meta: [
-      { title: "Classement · Memento Live" },
+      { title: "Classement · MaFeliza" },
       { name: "description", content: "Les organisateurs les plus inspirants du mois." },
-      { property: "og:title", content: "Classement · Memento Live" },
+      { property: "og:title", content: "Classement · MaFeliza" },
       { property: "og:description", content: "La communauté qui inspire, à découvrir." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -40,7 +40,7 @@ function Leaderboard() {
         </Link>
         <div>
           <p className="font-serif text-lg leading-tight">Classement du mois</p>
-          <p className="text-xs text-muted-foreground">Basé sur les étoiles Memento gagnées</p>
+          <p className="text-xs text-muted-foreground">Basé sur les étoiles MaFeliza gagnées</p>
         </div>
       </header>
 

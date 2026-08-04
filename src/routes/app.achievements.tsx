@@ -5,10 +5,10 @@ export const Route = createFileRoute("/app/achievements")({
   component: Achievements,
   head: () => ({
     meta: [
-      { title: "Récompenses · Memento Live" },
+      { title: "Récompenses · MaFeliza" },
       { name: "description", content: "Débloquez des badges à mesure que vous créez et partagez vos plus beaux événements." },
-      { property: "og:title", content: "Récompenses · Memento Live" },
-      { property: "og:description", content: "Collectionnez des badges Memento Live." },
+      { property: "og:title", content: "Récompenses · MaFeliza" },
+      { property: "og:description", content: "Collectionnez des badges MaFeliza." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -35,7 +35,7 @@ const badges: Badge[] = [
   { id: "b5", name: "Rassembleur", desc: "Réunir 100 invités sur un même événement", icon: Users, progress: 100, goal: 100, unlocked: true, rarity: "Épique", color: "from-primary/40 to-accent/20" },
   { id: "b6", name: "Marathon", desc: "Diffuser un live de plus de 4 heures", icon: Calendar, progress: 2, goal: 4, unlocked: false, rarity: "Épique", color: "from-primary/30 to-accent/20" },
   { id: "b7", name: "Ambassadeur·rice", desc: "Parrainer 10 nouveaux comptes", icon: Share2, progress: 3, goal: 10, unlocked: false, rarity: "Épique", color: "from-accent/50 to-primary/20" },
-  { id: "b8", name: "Légende Memento", desc: "Organiser 10 événements complets", icon: Crown, progress: 2, goal: 10, unlocked: false, rarity: "Légendaire", color: "from-primary/60 via-accent/40 to-primary/20" },
+  { id: "b8", name: "Légende MaFeliza", desc: "Organiser 10 événements complets", icon: Crown, progress: 2, goal: 10, unlocked: false, rarity: "Légendaire", color: "from-primary/60 via-accent/40 to-primary/20" },
 ];
 
 const rarityColors: Record<Badge["rarity"], string> = {

@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/auction")({
   component: Auction,
   head: () => ({
     meta: [
-      { title: "Enchère solidaire live · Memento Live" },
+      { title: "Enchère solidaire live · MaFeliza" },
       { name: "description", content: "Enchérissez en direct sur des lots offerts par vos proches — les fonds vont à une association choisie par les hôtes." },
-      { property: "og:title", content: "Enchère solidaire · Memento Live" },
+      { property: "og:title", content: "Enchère solidaire · MaFeliza" },
       { property: "og:description", content: "Célébrer et donner, en même temps." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -12,9 +12,9 @@ export const Route = createFileRoute("/events/$slug/playlist")({
   component: Playlist,
   head: () => ({
     meta: [
-      { title: "Playlist · Memento Live" },
+      { title: "Playlist · MaFeliza" },
       { name: "description", content: "Composez ensemble la bande-son de votre événement." },
-      { property: "og:title", content: "Playlist collaborative · Memento Live" },
+      { property: "og:title", content: "Playlist collaborative · MaFeliza" },
       { property: "og:description", content: "Chaque invité peut suggérer ses morceaux favoris." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

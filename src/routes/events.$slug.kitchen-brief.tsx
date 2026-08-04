@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/kitchen-brief")({
   component: KitchenBrief,
   head: () => ({
     meta: [
-      { title: "Brief cuisine · Memento Live" },
+      { title: "Brief cuisine · MaFeliza" },
       { name: "description", content: "Fiche cuisine consolidée : couverts, allergènes, timings de service." },
-      { property: "og:title", content: "Brief cuisine · Memento Live" },
+      { property: "og:title", content: "Brief cuisine · MaFeliza" },
       { property: "og:description", content: "Un seul document pour le chef, imprimé en A3." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

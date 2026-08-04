@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/confetti")({
   component: Confetti,
   head: () => ({
     meta: [
-      { title: "Confettis & effets · Memento Live" },
+      { title: "Confettis & effets · MaFeliza" },
       { name: "description", content: "Programmez confettis, serpentins et effets scéniques au bon moment." },
-      { property: "og:title", content: "Confettis · Memento Live" },
+      { property: "og:title", content: "Confettis · MaFeliza" },
       { property: "og:description", content: "Le bon effet, à la seconde près." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

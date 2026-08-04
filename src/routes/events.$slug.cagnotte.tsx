@@ -8,7 +8,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/events/$slug/cagnotte")({
-  head: () => ({ meta: [{ title: "Cagnotte — Memento Live" }, { name: "description", content: "Configurez votre cagnotte externe." }] }),
+  head: () => ({ meta: [{ title: "Cagnotte — MaFeliza" }, { name: "description", content: "Configurez votre cagnotte externe." }] }),
   loader: async ({ params }) => {
     const ev = await getEventBySlug({ data: { slug: params.slug } });
     if (!ev) throw notFound();

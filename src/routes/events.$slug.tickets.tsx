@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/tickets")({
   component: Tickets,
   head: () => ({
     meta: [
-      { title: "Billetterie · Memento Live" },
+      { title: "Billetterie · MaFeliza" },
       { name: "description", content: "Billets nominatifs avec QR code, sans manipuler d'argent — reversés vers votre cagnotte externe." },
-      { property: "og:title", content: "Billetterie · Memento Live" },
+      { property: "og:title", content: "Billetterie · MaFeliza" },
       { property: "og:description", content: "Le contrôle d'accès élégant." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -63,7 +63,7 @@ function Tickets() {
           <div className="rounded-[22px] bg-background p-5">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-primary">Memento Live · Billet</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-primary">MaFeliza · Billet</p>
                 <p className="mt-2 font-serif text-2xl leading-tight">Sarah & Thomas</p>
                 <p className="text-xs text-muted-foreground">Château de Vaux · 12 sept. 2026</p>
               </div>
@@ -108,7 +108,7 @@ function Tickets() {
 
         <section className="rounded-3xl bg-cream p-4">
           <div className="flex items-center gap-2 text-xs font-bold text-primary-dark">
-            <Sparkles className="h-4 w-4" /> Zéro flux financier chez Memento
+            <Sparkles className="h-4 w-4" /> Zéro flux financier chez MaFeliza
           </div>
           <ul className="mt-3 space-y-2 text-xs">
             <li className="flex items-start gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-success" /> Paiements optionnels redirigés vers Lydia, Leetchi ou HelloAsso.</li>

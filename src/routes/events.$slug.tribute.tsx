@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/tribute")({
   component: Tribute,
   head: () => ({
     meta: [
-      { title: "Hommage aux absents · Memento Live" },
+      { title: "Hommage aux absents · MaFeliza" },
       { name: "description", content: "Un espace tendre pour honorer ceux qui n'ont pas pu être là. Photos, mots et vocaux." },
-      { property: "og:title", content: "Hommage aux absents · Memento Live" },
+      { property: "og:title", content: "Hommage aux absents · MaFeliza" },
       { property: "og:description", content: "Présents dans nos cœurs." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

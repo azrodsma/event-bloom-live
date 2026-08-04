@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/carbon")({
   component: Carbon,
   head: () => ({
     meta: [
-      { title: "Bilan carbone · Memento Live" },
+      { title: "Bilan carbone · MaFeliza" },
       { name: "description", content: "Mesurez, réduisez et compensez l'empreinte du grand jour." },
-      { property: "og:title", content: "Bilan carbone · Memento Live" },
+      { property: "og:title", content: "Bilan carbone · MaFeliza" },
       { property: "og:description", content: "Un événement à la mesure de vos valeurs." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

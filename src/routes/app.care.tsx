@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/care")({
   component: Care,
   head: () => ({
     meta: [
-      { title: "Bien-être & entraide · Memento Live" },
+      { title: "Bien-être & entraide · MaFeliza" },
       { name: "description", content: "Un espace bienveillant pour les moments difficiles : hommages, deuil, soutien et ressources d'accompagnement." },
-      { property: "og:title", content: "Bien-être & entraide · Memento Live" },
+      { property: "og:title", content: "Bien-être & entraide · MaFeliza" },
       { property: "og:description", content: "Vous n'êtes pas seul·e." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

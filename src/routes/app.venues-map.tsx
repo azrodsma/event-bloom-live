@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/venues-map")({
   component: VenuesMap,
   head: () => ({
     meta: [
-      { title: "Lieux partenaires · Memento Live" },
-      { name: "description", content: "342 lieux d'exception partenaires Memento partout en France." },
-      { property: "og:title", content: "Lieux partenaires · Memento Live" },
+      { title: "Lieux partenaires · MaFeliza" },
+      { name: "description", content: "342 lieux d'exception partenaires MaFeliza partout en France." },
+      { property: "og:title", content: "Lieux partenaires · MaFeliza" },
       { property: "og:description", content: "Châteaux, granges, phares, plages : chaque lieu visité par nos équipes." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -47,7 +47,7 @@ function VenuesMap() {
         <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
           <Globe2 className="h-6 w-6" />
           <h2 className="mt-2 font-display text-3xl leading-tight">Pas de photo Instagram bidon. Uniquement des lieux qu'on a vécus.</h2>
-          <p className="mt-3 text-sm opacity-90">Chaque domaine est audité par un membre de l'équipe Memento : mariage-test, dîner immersion, revue coulisses.</p>
+          <p className="mt-3 text-sm opacity-90">Chaque domaine est audité par un membre de l'équipe MaFeliza : mariage-test, dîner immersion, revue coulisses.</p>
         </section>
 
         <section>

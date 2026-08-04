@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/photoshoot")({
   component: Photoshoot,
   head: () => ({
     meta: [
-      { title: "Séance photos & vidéo · Memento Live" },
+      { title: "Séance photos & vidéo · MaFeliza" },
       { name: "description", content: "Planifiez chaque prise de vue : groupes, lieux, timing, lumière. Aucun cliché oublié." },
-      { property: "og:title", content: "Séance photos · Memento Live" },
+      { property: "og:title", content: "Séance photos · MaFeliza" },
       { property: "og:description", content: "Le shot-list intelligent." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

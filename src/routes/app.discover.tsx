@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/discover")({
   component: Discover,
   head: () => ({
     meta: [
-      { title: "Découvrir · Memento Live" },
+      { title: "Découvrir · MaFeliza" },
       { name: "description", content: "Événements publics ouverts près de chez vous : concerts, expos, festivals privés ouverts." },
-      { property: "og:title", content: "Découvrir · Memento Live" },
+      { property: "og:title", content: "Découvrir · MaFeliza" },
       { property: "og:description", content: "Autour de vous, en ce moment." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

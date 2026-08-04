@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/wardrobe")({
   component: Wardrobe,
   head: () => ({
     meta: [
-      { title: "Vestiaire · Memento Live" },
+      { title: "Vestiaire · MaFeliza" },
       { name: "description", content: "Coordonnez les tenues de la garde rapprochée sans stress." },
-      { property: "og:title", content: "Vestiaire · Memento Live" },
+      { property: "og:title", content: "Vestiaire · MaFeliza" },
       { property: "og:description", content: "Une harmonie visuelle sans imposer d'uniforme." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

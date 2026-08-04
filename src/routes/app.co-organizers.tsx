@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/co-organizers")({
   component: CoOrganizers,
   head: () => ({
     meta: [
-      { title: "Co-organisateurs · Memento Live" },
+      { title: "Co-organisateurs · MaFeliza" },
       { name: "description", content: "Déléguez la préparation à vos proches : rôles, permissions et tâches partagées." },
-      { property: "og:title", content: "Co-organisateurs · Memento Live" },
+      { property: "og:title", content: "Co-organisateurs · MaFeliza" },
       { property: "og:description", content: "À plusieurs, c'est plus doux." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

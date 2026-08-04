@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/gift-ideas")({
   component: GiftIdeas,
   head: () => ({
     meta: [
-      { title: "Idées cadeaux personnalisées · Memento Live" },
+      { title: "Idées cadeaux personnalisées · MaFeliza" },
       { name: "description", content: "Suggestions cadeaux uniques générées selon l'événement, le lien avec la personne et votre budget." },
-      { property: "og:title", content: "Idées cadeaux personnalisées · Memento Live" },
+      { property: "og:title", content: "Idées cadeaux personnalisées · MaFeliza" },
       { property: "og:description", content: "Trouvez le cadeau parfait." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -44,7 +44,7 @@ interface Idea {
 const ideas: Idea[] = [
   { title: "Coffret dégustation grands crus", desc: "Sélection de 3 vins d'exception avec cave d'accueil", price: 89, category: "Gourmet", tags: ["Duo", "Élégant"], match: 96, emoji: "🍷" },
   { title: "Week-end en cabane perchée", desc: "Nuit en pleine nature avec petit-déjeuner artisanal", price: 240, category: "Expérience", tags: ["Romantique", "Nature"], match: 94, emoji: "🌲" },
-  { title: "Photobook Memento personnalisé", desc: "Livre relié en cuir avec les meilleures photos", price: 65, category: "Souvenir", tags: ["Sentimental"], match: 92, emoji: "📖" },
+  { title: "Photobook MaFeliza personnalisé", desc: "Livre relié en cuir avec les meilleures photos", price: 65, category: "Souvenir", tags: ["Sentimental"], match: 92, emoji: "📖" },
   { title: "Machine à espresso Bellezza", desc: "Design italien, 15 bars, mousseur intégré", price: 320, category: "Maison", tags: ["Duo", "Pratique"], match: 88, emoji: "☕" },
   { title: "Séance photo de couple", desc: "2 h avec un photographe local, 30 photos retouchées", price: 190, category: "Expérience", tags: ["Romantique", "Souvenir"], match: 86, emoji: "📸" },
   { title: "Panier bio du terroir", desc: "12 produits artisanaux, livrés dans un panier osier", price: 55, category: "Gourmet", tags: ["Éthique"], match: 82, emoji: "🧺" },
@@ -54,7 +54,7 @@ function GiftIdeas() {
   const [eventType, setEventType] = useState("mariage");
   const [link, setLink] = useState("amis");
   const [budget, setBudget] = useState(150);
-  const [saved, setSaved] = useState<Set<string>>(new Set(["Photobook Memento personnalisé"]));
+  const [saved, setSaved] = useState<Set<string>>(new Set(["Photobook MaFeliza personnalisé"]));
 
   const filtered = ideas.filter((i) => i.price <= budget * 2);
 

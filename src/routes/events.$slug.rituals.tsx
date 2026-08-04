@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/rituals")({
   component: Rituals,
   head: () => ({
     meta: [
-      { title: "Rituels symboliques · Memento Live" },
+      { title: "Rituels symboliques · MaFeliza" },
       { name: "description", content: "Composez votre cérémonie avec des rituels qui vous ressemblent." },
-      { property: "og:title", content: "Rituels · Memento Live" },
+      { property: "og:title", content: "Rituels · MaFeliza" },
       { property: "og:description", content: "Des gestes forts, chargés de sens." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -20,7 +20,7 @@ export type SendEmailInput = z.infer<typeof emailSchema>;
  *
  * Default `from` uses `onboarding@resend.dev` which only delivers to the
  * Resend account owner. To send to arbitrary recipients, verify a domain
- * in Resend and pass `from: "Memento Live <hello@yourdomain.com>"`.
+ * in Resend and pass `from: "MaFeliza <hello@yourdomain.com>"`.
  */
 export const sendEmail = createServerFn({ method: "POST" })
   .inputValidator((input) => emailSchema.parse(input))
@@ -31,7 +31,7 @@ export const sendEmail = createServerFn({ method: "POST" })
     if (!resendKey) throw new Error("RESEND_API_KEY is not configured");
 
     const payload: Record<string, unknown> = {
-      from: data.from ?? "Memento Live <mariage@bold-lab-agency.com>",
+      from: data.from ?? "MaFeliza <mariage@bold-lab-agency.com>",
       to: Array.isArray(data.to) ? data.to : [data.to],
       subject: data.subject,
       html: data.html,

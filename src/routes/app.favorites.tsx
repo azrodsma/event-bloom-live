@@ -12,7 +12,7 @@ import { useState } from "react";
 export const Route = createFileRoute("/app/favorites")({
   head: () => ({
     meta: [
-      { title: "Favoris — Memento Live" },
+      { title: "Favoris — MaFeliza" },
       { name: "description", content: "Vos événements et souvenirs favoris." },
     ],
   }),

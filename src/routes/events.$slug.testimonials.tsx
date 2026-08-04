@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/testimonials")({
   component: Testimonials,
   head: () => ({
     meta: [
-      { title: "Témoignages · Memento Live" },
+      { title: "Témoignages · MaFeliza" },
       { name: "description", content: "Messages laissés par vos proches en amont du jour J." },
-      { property: "og:title", content: "Témoignages · Memento Live" },
+      { property: "og:title", content: "Témoignages · MaFeliza" },
       { property: "og:description", content: "Les mots qui touchent, avant même la cérémonie." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

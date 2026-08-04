@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/year-in-review")({
   component: YearInReview,
   head: () => ({
     meta: [
-      { title: "Votre année Memento · 2026" },
+      { title: "Votre année MaFeliza · 2026" },
       { name: "description", content: "Rétrospective personnalisée de vos moments partagés cette année : événements, photos, réactions, messages." },
-      { property: "og:title", content: "Votre année Memento · 2026" },
+      { property: "og:title", content: "Votre année MaFeliza · 2026" },
       { property: "og:description", content: "L'année à revivre en un clin d'œil." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -60,7 +60,7 @@ function YearInReview() {
         <Link to="/app" className="grid h-9 w-9 place-items-center rounded-full bg-white/10 backdrop-blur" aria-label="Retour">
           <ArrowLeft className="h-5 w-5" />
         </Link>
-        <p className="font-serif text-lg">Memento Wrapped</p>
+        <p className="font-serif text-lg">MaFeliza Wrapped</p>
         <button className="grid h-9 w-9 place-items-center rounded-full bg-white/10 backdrop-blur" aria-label="Partager">
           <Share2 className="h-4 w-4" />
         </button>
@@ -69,7 +69,7 @@ function YearInReview() {
       <section className="px-6 pt-10 text-center">
         <p className="text-xs font-bold uppercase tracking-[0.4em] text-white/60">2026</p>
         <h1 className="mt-4 font-serif text-5xl leading-none">
-          Votre année<br /><span className="text-accent">Memento</span>
+          Votre année<br /><span className="text-accent">MaFeliza</span>
         </h1>
         <p className="mx-auto mt-4 max-w-xs text-sm text-white/70">
           Une année riche en émotions partagées. Voici votre rétrospective personnalisée.
@@ -171,10 +171,10 @@ function YearInReview() {
       <section className="px-4 pt-10">
         <div className="rounded-3xl bg-white/10 p-6 backdrop-blur">
           <Trophy className="mx-auto h-8 w-8 text-accent" />
-          <p className="mt-3 text-center text-xs font-bold uppercase tracking-[0.3em] text-white/60">Votre pouvoir Memento</p>
+          <p className="mt-3 text-center text-xs font-bold uppercase tracking-[0.3em] text-white/60">Votre pouvoir MaFeliza</p>
           <p className="mt-2 text-center font-serif text-3xl leading-tight">La Rassembleuse</p>
           <p className="mt-3 text-center text-xs text-white/80">
-            Vous avez présenté Memento à <span className="font-bold text-accent">3 amis</span> qui ont créé leur premier événement.
+            Vous avez présenté MaFeliza à <span className="font-bold text-accent">3 amis</span> qui ont créé leur premier événement.
             Grâce à vous, ces moments existent aujourd'hui.
           </p>
           <div className="mt-4 flex items-center justify-center gap-1.5">

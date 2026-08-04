@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/trends")({
   component: Trends,
   head: () => ({
     meta: [
-      { title: "Tendances 2026 · Memento Live" },
+      { title: "Tendances 2026 · MaFeliza" },
       { name: "description", content: "Palettes, thèmes et fleurs qui font vibrer les événements cette saison." },
-      { property: "og:title", content: "Tendances 2026 · Memento Live" },
+      { property: "og:title", content: "Tendances 2026 · MaFeliza" },
       { property: "og:description", content: "L'inspiration du moment, chaque semaine." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -109,7 +109,7 @@ function Trends() {
             Les mariages « slow » de 2 jours vont dominer le printemps 2026.
           </p>
           <p className="mt-2 text-xs text-muted-foreground">
-            Basé sur 12 000 événements analysés sur Memento Live.
+            Basé sur 12 000 événements analysés sur MaFeliza.
           </p>
           <button className="mt-3 flex items-center gap-1 rounded-full bg-foreground px-4 py-2 text-xs font-semibold text-background">
             <Calendar className="h-3.5 w-3.5" /> Voir le calendrier

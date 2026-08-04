@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/thank-you-cards")({
   component: ThankYouCards,
   head: () => ({
     meta: [
-      { title: "Cartes de remerciements · Memento Live" },
+      { title: "Cartes de remerciements · MaFeliza" },
       { name: "description", content: "Des remerciements personnalisés, imprimés ou envoyés en un tap." },
-      { property: "og:title", content: "Cartes de remerciements · Memento Live" },
+      { property: "og:title", content: "Cartes de remerciements · MaFeliza" },
       { property: "og:description", content: "Merci, avec vos mots." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

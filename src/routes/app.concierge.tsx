@@ -6,9 +6,9 @@ export const Route = createFileRoute("/app/concierge")({
   component: Concierge,
   head: () => ({
     meta: [
-      { title: "Concierge IA · Memento Live" },
+      { title: "Concierge IA · MaFeliza" },
       { name: "description", content: "Une intelligence artificielle qui répond à toutes vos questions d'organisation — 24/7." },
-      { property: "og:title", content: "Concierge IA · Memento Live" },
+      { property: "og:title", content: "Concierge IA · MaFeliza" },
       { property: "og:description", content: "Votre wedding planner de poche." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/app/concierge")({
 type Msg = { id: number; from: "me" | "ai"; text: string; time: string; chips?: string[] };
 
 const initial: Msg[] = [
-  { id: 1, from: "ai", time: "9:12", text: "Bonjour Sarah 🌸 Je suis Memento, votre concierge. Une question sur l'organisation ?", chips: ["Retro-planning J-30", "Idée cadeau témoin", "Modèle SMS J-2", "Discours en 5 min"] },
+  { id: 1, from: "ai", time: "9:12", text: "Bonjour Sarah 🌸 Je suis MaFeliza, votre concierge. Une question sur l'organisation ?", chips: ["Retro-planning J-30", "Idée cadeau témoin", "Modèle SMS J-2", "Discours en 5 min"] },
   { id: 2, from: "me", time: "9:14", text: "Je suis en retard sur les faire-part. Que faire ?" },
   { id: 3, from: "ai", time: "9:14", text: "Aucun stress. À J-45, voici la stratégie :\n\n• Envoyer une invitation digitale ce soir (relance 48h)\n• Lancer l'impression physique demain avec livraison express (7 j)\n• Prévoir un module RSVP en ligne avec date butoir J-30\n\nJe peux ouvrir le tunnel « Invitation digitale » pour vous ?", chips: ["Oui, ouvrir", "Voir imprimeurs express", "Modèle de relance"] },
   { id: 4, from: "me", time: "9:16", text: "Modèle de relance" },
@@ -68,7 +68,7 @@ function Concierge() {
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <div className="flex flex-col items-center">
-          <p className="font-serif text-base leading-none">Concierge Memento</p>
+          <p className="font-serif text-base leading-none">Concierge MaFeliza</p>
           <p className="mt-0.5 flex items-center gap-1 text-[10px] text-emerald-600">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" /> En ligne
           </p>

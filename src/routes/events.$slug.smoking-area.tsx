@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/smoking-area")({
   component: SmokingArea,
   head: () => ({
     meta: [
-      { title: "Espace fumeurs · Memento Live" },
+      { title: "Espace fumeurs · MaFeliza" },
       { name: "description", content: "Un coin fumeurs pensé, propre et convivial." },
-      { property: "og:title", content: "Espace fumeurs · Memento Live" },
+      { property: "og:title", content: "Espace fumeurs · MaFeliza" },
       { property: "og:description", content: "Discret, ventilé, respectueux des non-fumeurs." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

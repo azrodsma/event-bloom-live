@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/investors")({
   component: Investors,
   head: () => ({
     meta: [
-      { title: "Investisseurs · Memento Live" },
-      { name: "description", content: "Traction, vision et opportunités d'investissement chez Memento Live." },
-      { property: "og:title", content: "Investisseurs · Memento Live" },
+      { title: "Investisseurs · MaFeliza" },
+      { name: "description", content: "Traction, vision et opportunités d'investissement chez MaFeliza." },
+      { property: "og:title", content: "Investisseurs · MaFeliza" },
       { property: "og:description", content: "Nous réinventons la mémoire des grands moments." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -48,7 +48,7 @@ function Investors() {
         <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
           <p className="text-xs uppercase tracking-widest opacity-70">Notre thèse</p>
           <h2 className="mt-2 font-display text-3xl leading-tight">La mémoire des moments qui comptent mérite mieux qu'un cloud photo.</h2>
-          <p className="mt-3 text-sm opacity-90">Memento Live orchestre l'avant, le pendant et l'après des grands événements privés. 60 milliards € dépensés chaque année en Europe — 0% capturé numériquement de bout en bout.</p>
+          <p className="mt-3 text-sm opacity-90">MaFeliza orchestre l'avant, le pendant et l'après des grands événements privés. 60 milliards € dépensés chaque année en Europe — 0% capturé numériquement de bout en bout.</p>
         </section>
 
         <section>

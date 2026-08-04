@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/lost-found")({
   component: LostFound,
   head: () => ({
     meta: [
-      { title: "Objets perdus · Memento Live" },
+      { title: "Objets perdus · MaFeliza" },
       { name: "description", content: "Un objet oublié à la salle ? Signalez-le, retrouvez-le. Coordination sans stress." },
-      { property: "og:title", content: "Objets perdus & retrouvés · Memento Live" },
+      { property: "og:title", content: "Objets perdus & retrouvés · MaFeliza" },
       { property: "og:description", content: "Rien ne se perd, tout se retrouve." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -9,7 +9,7 @@ import { useAuth } from "@/hooks/use-auth";
 export const Route = createFileRoute("/app/messages")({
   head: () => ({
     meta: [
-      { title: "Messages — Memento Live" },
+      { title: "Messages — MaFeliza" },
       { name: "description", content: "Vos conversations privées et de groupe." },
     ],
   }),

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/foundation")({
   component: Foundation,
   head: () => ({
     meta: [
-      { title: "Fondation Memento · Memento Live" },
+      { title: "Fondation MaFeliza · MaFeliza" },
       { name: "description", content: "Notre fondation soutient les familles endeuillées et les mariages solidaires." },
-      { property: "og:title", content: "Fondation Memento · Memento Live" },
+      { property: "og:title", content: "Fondation MaFeliza · MaFeliza" },
       { property: "og:description", content: "1% du chiffre d'affaires reversé chaque année." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -32,7 +32,7 @@ function Foundation() {
             <ArrowLeft className="h-4 w-4" />
           </Link>
           <div className="flex-1">
-            <h1 className="font-display text-xl">Fondation Memento</h1>
+            <h1 className="font-display text-xl">Fondation MaFeliza</h1>
             <p className="text-xs text-muted-foreground">Reconnue d'intérêt général · 2024</p>
           </div>
           <HeartHandshake className="h-5 w-5 text-primary" />
@@ -43,7 +43,7 @@ function Foundation() {
         <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-foreground p-6 text-white">
           <Sparkles className="h-6 w-6" />
           <h2 className="mt-2 font-display text-3xl leading-tight">1% de nos revenus. 100% des moments qui comptent.</h2>
-          <p className="mt-3 text-sm opacity-90">La Fondation Memento agit pour que la joie ne soit jamais réservée à ceux qui peuvent se la payer.</p>
+          <p className="mt-3 text-sm opacity-90">La Fondation MaFeliza agit pour que la joie ne soit jamais réservée à ceux qui peuvent se la payer.</p>
           <div className="mt-5 grid grid-cols-3 gap-4 text-center">
             <div><p className="font-display text-2xl">315 K€</p><p className="text-[10px] opacity-70">budget 2026</p></div>
             <div><p className="font-display text-2xl">240</p><p className="text-[10px] opacity-70">mariages offerts</p></div>

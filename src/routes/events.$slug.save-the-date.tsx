@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/save-the-date")({
   component: SaveTheDate,
   head: () => ({
     meta: [
-      { title: "Save the date · Memento Live" },
+      { title: "Save the date · MaFeliza" },
       { name: "description", content: "Réservez la date bien avant l'invitation officielle." },
-      { property: "og:title", content: "Save the date · Memento Live" },
+      { property: "og:title", content: "Save the date · MaFeliza" },
       { property: "og:description", content: "Une annonce élégante par SMS, email ou vidéo." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

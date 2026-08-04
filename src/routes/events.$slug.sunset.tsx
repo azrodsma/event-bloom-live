@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/sunset")({
   component: Sunset,
   head: () => ({
     meta: [
-      { title: "Lumière du jour · Memento Live" },
+      { title: "Lumière du jour · MaFeliza" },
       { name: "description", content: "Chronomètre solaire pour vos plus belles photos." },
-      { property: "og:title", content: "Lumière du jour · Memento Live" },
+      { property: "og:title", content: "Lumière du jour · MaFeliza" },
       { property: "og:description", content: "Capturez la golden hour à la seconde près." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/changelog")({
   component: Changelog,
   head: () => ({
     meta: [
-      { title: "Nouveautés · Memento Live" },
-      { name: "description", content: "Toutes les nouveautés Memento, semaine après semaine." },
-      { property: "og:title", content: "Changelog · Memento Live" },
+      { title: "Nouveautés · MaFeliza" },
+      { name: "description", content: "Toutes les nouveautés MaFeliza, semaine après semaine." },
+      { property: "og:title", content: "Changelog · MaFeliza" },
       { property: "og:description", content: "Fonctionnalités livrées et améliorations continues." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

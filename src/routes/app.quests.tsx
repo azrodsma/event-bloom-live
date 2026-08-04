@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/quests")({
   component: Quests,
   head: () => ({
     meta: [
-      { title: "Quêtes hebdomadaires · Memento Live" },
+      { title: "Quêtes hebdomadaires · MaFeliza" },
       { name: "description", content: "Des missions douces qui font avancer votre événement chaque semaine." },
-      { property: "og:title", content: "Quêtes · Memento Live" },
+      { property: "og:title", content: "Quêtes · MaFeliza" },
       { property: "og:description", content: "Un petit pas par jour, un grand jour au bout." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

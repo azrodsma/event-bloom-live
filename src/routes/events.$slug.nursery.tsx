@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/nursery")({
   component: Nursery,
   head: () => ({
     meta: [
-      { title: "Nurserie · Memento Live" },
+      { title: "Nurserie · MaFeliza" },
       { name: "description", content: "Espace bébés : biberons, change, sieste, monitoring." },
-      { property: "og:title", content: "Nurserie · Memento Live" },
+      { property: "og:title", content: "Nurserie · MaFeliza" },
       { property: "og:description", content: "Les tout-petits aussi ont leur cocon." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

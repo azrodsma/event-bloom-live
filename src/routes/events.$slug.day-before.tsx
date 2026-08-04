@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/day-before")({
   component: DayBefore,
   head: () => ({
     meta: [
-      { title: "Veille du jour J · Memento Live" },
+      { title: "Veille du jour J · MaFeliza" },
       { name: "description", content: "Répétition, dîner de veille et récap' logistique." },
-      { property: "og:title", content: "Veille · Memento Live" },
+      { property: "og:title", content: "Veille · MaFeliza" },
       { property: "og:description", content: "Le calme, la répétition, la nuit qu'on gagne." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

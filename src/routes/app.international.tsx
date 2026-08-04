@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/international")({
   component: International,
   head: () => ({
     meta: [
-      { title: "Memento International · Memento Live" },
-      { name: "description", content: "Présence internationale, langues supportées et bureaux Memento." },
-      { property: "og:title", content: "International · Memento Live" },
+      { title: "MaFeliza International · MaFeliza" },
+      { name: "description", content: "Présence internationale, langues supportées et bureaux MaFeliza." },
+      { property: "og:title", content: "International · MaFeliza" },
       { property: "og:description", content: "Célébrer, partout." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

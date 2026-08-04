@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/outdoor")({
   component: Outdoor,
   head: () => ({
     meta: [
-      { title: "Extérieur · Memento Live" },
+      { title: "Extérieur · MaFeliza" },
       { name: "description", content: "Gestion des espaces extérieurs, mobilier, ombrage et éclairage." },
-      { property: "og:title", content: "Extérieur · Memento Live" },
+      { property: "og:title", content: "Extérieur · MaFeliza" },
       { property: "og:description", content: "Le jardin transformé en salle de bal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

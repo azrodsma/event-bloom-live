@@ -5,9 +5,9 @@ export const Route = createFileRoute("/app/billing")({
   component: Billing,
   head: () => ({
     meta: [
-      { title: "Abonnement · Memento Live" },
-      { name: "description", content: "Gérez votre formule Memento et vos options premium." },
-      { property: "og:title", content: "Abonnement · Memento Live" },
+      { title: "Abonnement · MaFeliza" },
+      { name: "description", content: "Gérez votre formule MaFeliza et vos options premium." },
+      { property: "og:title", content: "Abonnement · MaFeliza" },
       { property: "og:description", content: "Une formule pensée pour chaque événement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

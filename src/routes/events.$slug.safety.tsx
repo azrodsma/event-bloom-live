@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/safety")({
   component: Safety,
   head: () => ({
     meta: [
-      { title: "Sécurité & premiers secours · Memento Live" },
+      { title: "Sécurité & premiers secours · MaFeliza" },
       { name: "description", content: "Points de secours, référents SST, numéros d'urgence et plan d'évacuation." },
-      { property: "og:title", content: "Sécurité · Memento Live" },
+      { property: "og:title", content: "Sécurité · MaFeliza" },
       { property: "og:description", content: "La fête, en confiance." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

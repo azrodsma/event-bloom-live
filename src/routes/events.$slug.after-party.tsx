@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/after-party")({
   component: AfterParty,
   head: () => ({
     meta: [
-      { title: "After-party · Memento Live" },
+      { title: "After-party · MaFeliza" },
       { name: "description", content: "Prolongez la fête : brunch du lendemain, karaoké, plage privée. Réservez votre place." },
-      { property: "og:title", content: "After-party · Memento Live" },
+      { property: "og:title", content: "After-party · MaFeliza" },
       { property: "og:description", content: "La fête continue." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

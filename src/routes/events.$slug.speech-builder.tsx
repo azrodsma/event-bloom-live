@@ -6,9 +6,9 @@ export const Route = createFileRoute("/events/$slug/speech-builder")({
   component: SpeechBuilder,
   head: () => ({
     meta: [
-      { title: "Assistant discours · Memento Live" },
+      { title: "Assistant discours · MaFeliza" },
       { name: "description", content: "Un discours qui touche juste, écrit avec vos souvenirs et une pincée d'IA." },
-      { property: "og:title", content: "Discours · Memento Live" },
+      { property: "og:title", content: "Discours · MaFeliza" },
       { property: "og:description", content: "Trouver vos mots, sans page blanche." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -70,7 +70,7 @@ function SpeechBuilder() {
         </div>
         <h1 className="mt-2 font-serif text-3xl leading-tight">Un discours<br />qui touche juste</h1>
         <p className="mt-2 max-w-md text-sm text-muted-foreground">
-          Racontez-nous 3 souvenirs — Memento tisse une trame que vous ajustez à votre voix.
+          Racontez-nous 3 souvenirs — MaFeliza tisse une trame que vous ajustez à votre voix.
         </p>
       </section>
 

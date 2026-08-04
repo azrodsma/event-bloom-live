@@ -6,10 +6,10 @@ export const Route = createFileRoute("/app/languages")({
   component: Languages,
   head: () => ({
     meta: [
-      { title: "Langues & région · Memento Live" },
+      { title: "Langues & région · MaFeliza" },
       { name: "description", content: "Choisissez la langue de votre interface et le format régional." },
-      { property: "og:title", content: "Langues · Memento Live" },
-      { property: "og:description", content: "Memento Live parle votre langue." },
+      { property: "og:title", content: "Langues · MaFeliza" },
+      { property: "og:description", content: "MaFeliza parle votre langue." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -44,7 +44,7 @@ function Languages() {
       <main className="mx-auto max-w-2xl space-y-5 px-4 py-5">
         <section className="rounded-3xl bg-gradient-to-br from-cream via-primary/15 to-gold/20 p-6 shadow-card">
           <Globe2 className="h-6 w-6 text-primary-dark" />
-          <p className="mt-3 font-serif text-3xl leading-tight">Memento parle votre langue</p>
+          <p className="mt-3 font-serif text-3xl leading-tight">MaFeliza parle votre langue</p>
           <p className="mt-2 text-sm text-muted-foreground">
             Nous adaptons dates, monnaies et sens de lecture (RTL) automatiquement.
           </p>

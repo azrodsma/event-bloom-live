@@ -10,9 +10,9 @@ export const Route = createFileRoute("/events/$slug/rsvp")({
   component: Rsvp,
   head: ({ params }) => ({
     meta: [
-      { title: `Confirmer ma présence · ${params.slug} — Memento Live` },
+      { title: `Confirmer ma présence · ${params.slug} — MaFeliza` },
       { name: "description", content: "Confirmez votre présence et vos préférences." },
-      { property: "og:title", content: "Confirmer ma présence · Memento Live" },
+      { property: "og:title", content: "Confirmer ma présence · MaFeliza" },
       { property: "og:description", content: "Répondez à l'invitation." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

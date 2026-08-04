@@ -5,9 +5,9 @@ export const Route = createFileRoute("/events/$slug/cake")({
   component: Cake_,
   head: () => ({
     meta: [
-      { title: "Pièce montée & desserts · Memento Live" },
+      { title: "Pièce montée & desserts · MaFeliza" },
       { name: "description", content: "Composition du gâteau, allergies et rituel de découpe." },
-      { property: "og:title", content: "Pièce montée · Memento Live" },
+      { property: "og:title", content: "Pièce montée · MaFeliza" },
       { property: "og:description", content: "Le clou sucré de la soirée." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -72,7 +72,7 @@ function Cake_() {
         <section className="rounded-2xl bg-gold/10 p-4 flex items-start gap-3">
           <Sparkles className="h-4 w-4 text-primary mt-0.5" />
           <div>
-            <p className="font-medium text-sm">Astuce Memento</p>
+            <p className="font-medium text-sm">Astuce MaFeliza</p>
             <p className="text-xs text-muted-foreground">Prévoyez 1,2 part par invité. Les enfants comptent 0,5.</p>
           </div>
         </section>

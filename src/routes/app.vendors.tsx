@@ -7,9 +7,9 @@ export const Route = createFileRoute("/app/vendors")({
   component: Vendors,
   head: () => ({
     meta: [
-      { title: "Prestataires · Memento Live" },
-      { name: "description", content: "Découvrez photographes, DJs, traiteurs et lieux de réception recommandés par la communauté Memento." },
-      { property: "og:title", content: "Prestataires recommandés · Memento Live" },
+      { title: "Prestataires · MaFeliza" },
+      { name: "description", content: "Découvrez photographes, DJs, traiteurs et lieux de réception recommandés par la communauté MaFeliza." },
+      { property: "og:title", content: "Prestataires recommandés · MaFeliza" },
       { property: "og:description", content: "Les meilleurs prestataires événementiels sélectionnés." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -39,7 +39,7 @@ function Vendors() {
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Marketplace</p>
         <h1 className="mt-1 font-serif text-3xl leading-tight">Prestataires recommandés</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Sélectionnés à la main, notés par les couples et familles Memento.
+          Sélectionnés à la main, notés par les couples et familles MaFeliza.
         </p>
 
         <div className="mt-4 flex items-center gap-2">
