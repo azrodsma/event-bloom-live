@@ -70,7 +70,7 @@ export function EventCard({ event }: { event: MockEvent }) {
         </div>
       </div>
 
-      {event.moneyPot && (
+      {event.moneyPot ? (
         <div className="flex items-center justify-between gap-3 px-5 py-4">
           <div className="min-w-0 flex-1">
             <p className="flex items-center gap-1.5 truncate text-xs font-medium text-muted-foreground">
@@ -94,7 +94,21 @@ export function EventCard({ event }: { event: MockEvent }) {
             Rejoindre <ArrowUpRight className="h-3.5 w-3.5" />
           </span>
         </div>
+      ) : (
+        <div className="flex items-center justify-between gap-3 px-5 py-4">
+          <div className="min-w-0">
+            <p className="flex items-center gap-1.5 truncate text-xs font-medium text-muted-foreground">
+              {(() => { const I = eventIcon(event.type); return <I className="h-3.5 w-3.5 shrink-0 text-gold" />; })()}
+              <span className="truncate">{event.isLive ? "En direct maintenant" : "Bientôt en direct"}</span>
+            </p>
+            <p className="mt-2 truncate text-[11px] text-muted-foreground/80">Page événement · souvenirs partagés</p>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-foreground px-3.5 py-2 text-[11px] font-semibold text-background transition-transform group-hover:translate-x-0.5">
+            Rejoindre <ArrowUpRight className="h-3.5 w-3.5" />
+          </span>
+        </div>
       )}
+
     </Link>
   );
 }
