@@ -52,7 +52,7 @@ function Landing() {
   const realEvents = (publicEvents ?? []).map((e) => adaptEvent(e as unknown as DbEvent));
   const showcase = realEvents.length > 0 ? realEvents : mockEvents;
   const liveEvents = showcase.filter((e) => e.isLive);
-  const featured = [...liveEvents, ...showcase.filter((e) => !e.isLive)].slice(0, 3);
+  const featured = [...liveEvents, ...showcase.filter((e) => !e.isLive)].slice(0, 4);
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
