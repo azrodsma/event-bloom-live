@@ -20,7 +20,7 @@ export function EventCard({ event }: { event: MockEvent }) {
           className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10" />
         <div className="pointer-events-none absolute -inset-1 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-100" />
 
         <div className="absolute left-4 top-4 flex items-center gap-2">
@@ -50,9 +50,10 @@ export function EventCard({ event }: { event: MockEvent }) {
           <Heart className={`h-4 w-4 transition-colors ${fav ? "fill-primary text-primary" : ""}`} />
         </button>
 
-        <div className="absolute inset-x-4 bottom-4 text-white">
-          <h3 className="font-serif text-3xl leading-[1.05] drop-shadow-md">{event.title}</h3>
-          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs opacity-95">
+        <div className="absolute inset-x-4 bottom-4 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
+          <h3 className="font-serif text-2xl leading-[1.05] sm:text-3xl">{event.title}</h3>
+          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/95">
+
             <span className="inline-flex items-center gap-1">
               <MapPin className="h-3.5 w-3.5" /> {event.city}
             </span>

@@ -251,12 +251,14 @@ function Landing() {
       </section>
 
       {/* Types événements */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Pour tous vos moments</p>
           <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Mariage, baptême, anniversaire...</h2>
+          <div className="rule-gold mx-auto mt-5 w-24" />
         </div>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-wrap justify-center gap-2.5">
+
           {eventTypes.map((t) => (
             <span
               key={t}
