@@ -280,10 +280,13 @@ function Landing() {
           </Link>
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((e) => (
-            <EventCard key={e.id} event={e} />
+          {featured.map((e, i) => (
+            <div key={e.id} className={i === 3 ? "lg:hidden" : undefined}>
+              <EventCard event={e} />
+            </div>
           ))}
         </div>
+
       </section>
 
       {/* Tarifs */}
