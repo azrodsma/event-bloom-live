@@ -281,7 +281,7 @@ function Landing() {
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((e, i) => (
-            <div key={e.id} className={i === 3 ? "lg:hidden" : undefined}>
+            <div key={e.id} className={i === 3 ? "h-full lg:hidden" : "h-full"}>
               <EventCard event={e} />
             </div>
           ))}
