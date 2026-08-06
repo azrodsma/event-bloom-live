@@ -20,7 +20,7 @@ export function EventCard({ event }: { event: MockEvent }) {
           className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10" />
         <div className="pointer-events-none absolute -inset-1 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-100" />
 
         <div className="absolute left-4 top-4 flex items-center gap-2">
