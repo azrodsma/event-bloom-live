@@ -106,18 +106,28 @@ function AuthPage() {
       <div className="pointer-events-none absolute -left-20 top-20 h-96 w-96 rounded-full bg-primary/20 blur-3xl animate-blob" />
       <div className="pointer-events-none absolute -right-24 bottom-10 h-96 w-96 rounded-full bg-gold/20 blur-3xl animate-blob" style={{ animationDelay: "4s" }} />
 
-      <div className="relative hidden flex-col justify-between p-10 md:flex">
-        <Logo />
+      <div className="relative hidden flex-col justify-center p-10 md:flex lg:p-14">
+        <div className="absolute left-10 top-10 lg:left-14 lg:top-12">
+          <Logo />
+        </div>
         <div>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-light px-3 py-1 text-[11px] font-medium uppercase tracking-widest text-primary">
             ✦ Depuis 2026
           </span>
-          <h2 className="mt-5 font-serif text-6xl leading-[0.95] text-foreground">
+          <h2 className="mt-5 font-serif text-5xl leading-[0.95] text-foreground lg:text-6xl">
             Retrouvez vos<br /><span className="italic text-gradient-primary">plus beaux</span><br />moments.
           </h2>
           <p className="mt-5 max-w-md text-muted-foreground">
             Vos événements, vos proches, vos souvenirs. Dans un espace privé, doux, sans compromis.
           </p>
+          <ul className="mt-7 space-y-2.5 text-sm text-foreground/80">
+            {["Live YouTube/Twitch encapsulé, chat & réactions", "Livre d'or multimédia et album collaboratif", "Cagnotte externe, invitations et RSVP"].map((f) => (
+              <li key={f} className="flex items-start gap-2.5">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-primary" />
+                {f}
+              </li>
+            ))}
+          </ul>
           <div className="mt-8 flex items-center gap-4 text-xs text-muted-foreground">
             <div className="flex -space-x-2">
               {[1,2,3,4].map(i => <span key={i} className="h-8 w-8 rounded-full border-2 border-background bg-gradient-primary" style={{ opacity: 0.4 + i * 0.15 }} />)}
@@ -125,8 +135,9 @@ function AuthPage() {
             <span>Rejoint par 12 400+ hôtes</span>
           </div>
         </div>
-        <p className="text-xs text-muted-foreground">© MaFeliza</p>
+        <p className="absolute bottom-10 left-10 text-xs text-muted-foreground lg:left-14">© MaFeliza</p>
       </div>
+
 
       <div className="relative flex items-center justify-center p-6 sm:p-10">
         <div className="w-full max-w-md rounded-[36px] bg-surface/80 p-8 shadow-modal ring-1 ring-border backdrop-blur-xl">
