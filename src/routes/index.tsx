@@ -131,7 +131,7 @@ function Landing() {
           </div>
 
           {/* Phone mockup */}
-          <div className="relative mx-auto w-full max-w-sm">
+          <div className="relative mx-auto w-full max-w-[19rem] sm:max-w-sm">
             <div className="absolute -inset-6 rounded-[3rem] bg-gradient-primary opacity-20 blur-2xl" />
             <div className="relative rounded-[2.5rem] border border-border bg-dark p-3 shadow-modal">
               <div className="overflow-hidden rounded-[2rem] bg-background">
@@ -139,7 +139,7 @@ function Landing() {
                   <img
                     src={mockEvents[0].cover}
                     alt="Aperçu"
-                    className="h-[520px] w-full object-cover"
+                    className="h-[380px] w-full object-cover sm:h-[460px] lg:h-[520px]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   <div className="absolute left-4 top-4 flex items-center gap-2">
