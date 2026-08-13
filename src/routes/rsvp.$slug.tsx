@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Check, PartyPopper, HelpCircle, UserX } from "lucide-react";
 import { useState } from "react";
 import { getEventBySlug } from "@/lib/events.functions";
 import { submitRsvp } from "@/lib/rsvp.functions";
@@ -78,7 +78,7 @@ function RsvpPage() {
     return (
       <div className="min-h-screen bg-background">
         <div className="mx-auto max-w-md px-5 py-12 text-center">
-          <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-success text-white text-3xl">✓</div>
+          <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-success text-white"><Check className="h-8 w-8" /></div>
           <h1 className="mt-4 font-serif text-3xl">Réponse enregistrée</h1>
           <p className="mt-2 text-sm text-muted-foreground">Merci d'avoir répondu à l'invitation de {event.title}. Les organisateurs sont notifiés.</p>
           <Link to="/events/$slug" params={{ slug: event.slug }} className="mt-6 inline-block rounded-full bg-gradient-primary px-5 py-3 text-sm font-semibold text-white shadow-glow">
@@ -109,22 +109,23 @@ function RsvpPage() {
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Votre réponse</p>
           <div className="grid grid-cols-3 gap-2">
             {([
-              { k: "confirmed", label: "Je viens", emoji: "🎉" },
-              { k: "maybe", label: "Peut-être", emoji: "🤔" },
-              { k: "declined", label: "Absent", emoji: "😔" },
+              { k: "confirmed", label: "Je viens", Icon: PartyPopper },
+              { k: "maybe", label: "Peut-être", Icon: HelpCircle },
+              { k: "declined", label: "Absent", Icon: UserX },
             ] as const).map((o) => (
               <button
                 key={o.k}
                 onClick={() => setStatus(o.k)}
                 className={`rounded-2xl border-2 p-3 text-center text-xs font-semibold transition ${
-                  status === o.k ? "border-primary bg-primary-light" : "border-border bg-background"
+                  status === o.k ? "border-primary bg-primary-light text-primary" : "border-border bg-background text-foreground"
                 }`}
               >
-                <div className="text-xl">{o.emoji}</div>
-                <div className="mt-1">{o.label}</div>
+                <o.Icon className="mx-auto h-5 w-5" />
+                <div className="mt-1.5">{o.label}</div>
               </button>
             ))}
           </div>
+
         </div>
 
         <FormField label="Nom complet *" value={fullName} onChange={setFullName} placeholder="Prénom et nom" />
