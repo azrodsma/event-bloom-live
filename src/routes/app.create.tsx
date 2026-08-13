@@ -219,26 +219,34 @@ function CreatePage() {
         )}
       </div>
 
-      <div className="flex gap-2">
-        {step > 0 && (
-          <button onClick={() => setStep(step - 1)} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium">
-            <ArrowLeft className="h-4 w-4" /> Retour
-          </button>
-        )}
-        {step < steps.length - 1 ? (
-          <button disabled={!canNext} onClick={() => setStep(step + 1)}
-            className="ml-auto inline-flex items-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50">
-            Continuer <ArrowRight className="h-4 w-4" />
-          </button>
-        ) : (
-          <button disabled={mut.isPending} onClick={() => mut.mutate()}
-            className="ml-auto inline-flex items-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50">
-            {mut.isPending ? "Création..." : (<>Créer l'événement <Sparkles className="h-4 w-4" /></>)}
-          </button>
-        )}
+      </div>
+
+      {/* Barre d'action fixe */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border/60 bg-background/90 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-2xl items-center gap-2">
+          {step > 0 && (
+            <button onClick={() => setStep(step - 1)} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium">
+              <ArrowLeft className="h-4 w-4" /> Retour
+            </button>
+          )}
+          {step < steps.length - 1 ? (
+            <button disabled={!canNext} onClick={() => setStep(step + 1)}
+              className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50 sm:flex-none">
+              Continuer <ArrowRight className="h-4 w-4" />
+            </button>
+          ) : (
+            <button disabled={mut.isPending} onClick={() => mut.mutate()}
+              className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50 sm:flex-none">
+              {mut.isPending ? "Création..." : (<>Créer l'événement <Sparkles className="h-4 w-4" /></>)}
+            </button>
+          )}
+        </div>
+      </div>
       </div>
     </div>
   );
+}
+
 }
 
 function Field({ label, value, onChange, ...rest }: { label: string; value: string; onChange: (v: string) => void } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value">) {
