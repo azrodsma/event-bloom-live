@@ -78,7 +78,7 @@ function RsvpPage() {
     return (
       <div className="min-h-screen bg-background">
         <div className="mx-auto max-w-md px-5 py-12 text-center">
-          <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-success text-white text-3xl">✓</div>
+          <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-success text-white"><Check className="h-8 w-8" /></div>
           <h1 className="mt-4 font-serif text-3xl">Réponse enregistrée</h1>
           <p className="mt-2 text-sm text-muted-foreground">Merci d'avoir répondu à l'invitation de {event.title}. Les organisateurs sont notifiés.</p>
           <Link to="/events/$slug" params={{ slug: event.slug }} className="mt-6 inline-block rounded-full bg-gradient-primary px-5 py-3 text-sm font-semibold text-white shadow-glow">
