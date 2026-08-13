@@ -103,12 +103,8 @@ export function EventCard({ event }: { event: MockEvent }) {
               <span className="truncate">{event.isLive ? "En direct maintenant" : "Bientôt en direct"}</span>
             </p>
             <div className="mt-2 flex items-center gap-2">
-              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-gold-light">
-                <div className="h-full w-1/3 rounded-full bg-gradient-gold" />
-              </div>
-              <span className="whitespace-nowrap text-[11px] font-semibold text-muted-foreground">
-                Souvenirs
-              </span>
+              <span className="rounded-full bg-gold-light px-2.5 py-1 text-[11px] font-semibold text-gold">Album souvenir</span>
+              <span className="truncate text-[11px] font-medium text-muted-foreground">Livre d'or ouvert</span>
             </div>
           </div>
           <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-foreground px-3.5 py-2 text-[11px] font-semibold text-background transition-transform group-hover:translate-x-0.5">
@@ -116,6 +112,7 @@ export function EventCard({ event }: { event: MockEvent }) {
           </span>
         </div>
       )}
+
 
 
     </Link>
