@@ -242,12 +242,10 @@ function CreatePage() {
           )}
         </div>
       </div>
-      </div>
     </div>
   );
 }
 
-}
 
 function Field({ label, value, onChange, ...rest }: { label: string; value: string; onChange: (v: string) => void } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value">) {
   return (
