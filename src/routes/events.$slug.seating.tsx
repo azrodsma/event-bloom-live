@@ -9,6 +9,17 @@ import { listSeating, createTable, deleteTable, assignGuest } from "@/lib/seatin
 import { useAuth } from "@/hooks/use-auth";
 import { findEvent } from "@/lib/mock-data";
 
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) {
+      const e = findEvent(params.slug);
+      if (!e) throw notFound();
+      return { event: e, dbId: null as string | null };
+    }
+    return { event: adaptEvent(db), dbId: db.id };
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
 export const Route = createFileRoute("/events/$slug/seating")({
   head: ({ params }) => ({
     meta: [
@@ -20,15 +31,7 @@ export const Route = createFileRoute("/events/$slug/seating")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  loader: async ({ params }) => {
-    const db = await getEventBySlug({ data: { slug: params.slug } });
-    if (!db) {
-      const e = findEvent(params.slug);
-      if (!e) throw notFound();
-      return { event: e, dbId: null as string | null };
-    }
-    return { event: adaptEvent(db), dbId: db.id };
-  },
+  loader: routeLoader,
   component: Seating,
 });
 
@@ -40,7 +43,7 @@ function initials(name: string) {
 }
 
 function Seating() {
-  const { dbId } = Route.useLoaderData();
+  const { dbId } = Route.useLoaderData() as RouteLoaderData;
   const { slug } = useParams({ from: "/events/$slug/seating" });
   const { user } = useAuth();
   const qc = useQueryClient();

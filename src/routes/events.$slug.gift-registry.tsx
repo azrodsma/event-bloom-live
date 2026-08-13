@@ -15,6 +15,17 @@ import {
 import { useAuth } from "@/hooks/use-auth";
 import { findEvent } from "@/lib/mock-data";
 
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) {
+      const e = findEvent(params.slug);
+      if (!e) throw notFound();
+      return { event: e, dbId: null as string | null, isOwner: false };
+    }
+    return { event: adaptEvent(db), dbId: db.id, isOwner: false };
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
 export const Route = createFileRoute("/events/$slug/gift-registry")({
   head: ({ params }) => ({
     meta: [
@@ -26,20 +37,12 @@ export const Route = createFileRoute("/events/$slug/gift-registry")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  loader: async ({ params }) => {
-    const db = await getEventBySlug({ data: { slug: params.slug } });
-    if (!db) {
-      const e = findEvent(params.slug);
-      if (!e) throw notFound();
-      return { event: e, dbId: null as string | null, isOwner: false };
-    }
-    return { event: adaptEvent(db), dbId: db.id, isOwner: false };
-  },
+  loader: routeLoader,
   component: GiftRegistry,
 });
 
 function GiftRegistry() {
-  const { event, dbId } = Route.useLoaderData();
+  const { event, dbId } = Route.useLoaderData() as RouteLoaderData;
   const { slug } = useParams({ from: "/events/$slug/gift-registry" });
   const { user } = useAuth();
   const qc = useQueryClient();

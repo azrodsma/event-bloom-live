@@ -6,6 +6,13 @@ import { getEventBySlug } from "@/lib/events.functions";
 import { submitRsvp } from "@/lib/rsvp.functions";
 import { toast } from "sonner";
 
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
+    const ev = await getEventBySlug({ data: { slug: params.slug } });
+    if (!ev) throw notFound();
+    return { event: ev };
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
 export const Route = createFileRoute("/events/$slug/rsvp")({
   component: Rsvp,
   head: ({ params }) => ({
@@ -18,11 +25,7 @@ export const Route = createFileRoute("/events/$slug/rsvp")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  loader: async ({ params }) => {
-    const ev = await getEventBySlug({ data: { slug: params.slug } });
-    if (!ev) throw notFound();
-    return { event: ev };
-  },
+  loader: routeLoader,
 });
 
 type Attend = "yes" | "no" | "maybe";
@@ -43,7 +46,7 @@ const dietOptions: Array<{ id: Diet; label: string; icon: typeof Utensils }> = [
 ];
 
 function Rsvp() {
-  const { event } = Route.useLoaderData();
+  const { event } = Route.useLoaderData() as RouteLoaderData;
   const { slug } = useParams({ from: "/events/$slug/rsvp" });
   const submit = useServerFn(submitRsvp);
 

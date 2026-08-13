@@ -7,6 +7,13 @@ import { getEventBySlug, createStory } from "@/lib/events.functions";
 import { uploadEventMedia } from "@/lib/storage";
 import { useAuth } from "@/hooks/use-auth";
 
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
+    const ev = await getEventBySlug({ data: { slug: params.slug } });
+    if (!ev) throw notFound();
+    return { event: ev };
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
 export const Route = createFileRoute("/events/$slug/story/new")({
   head: ({ params }) => ({
     meta: [
@@ -14,16 +21,12 @@ export const Route = createFileRoute("/events/$slug/story/new")({
       { name: "description", content: "Partagez une story éphémère (24 h) pour votre événement." },
     ],
   }),
-  loader: async ({ params }) => {
-    const ev = await getEventBySlug({ data: { slug: params.slug } });
-    if (!ev) throw notFound();
-    return { event: ev };
-  },
+  loader: routeLoader,
   component: NewStory,
 });
 
 function NewStory() {
-  const { event } = Route.useLoaderData();
+  const { event } = Route.useLoaderData() as RouteLoaderData;
   const { user } = useAuth();
   const router = useRouter();
   const create = useServerFn(createStory);

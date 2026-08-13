@@ -6,6 +6,18 @@ import { listGuestbookEntries } from "@/lib/guestbook.functions";
 import { adaptEvent } from "@/lib/event-adapter";
 import { ChevronLeft, Download, Share2, Heart, Camera, BookHeart, Users, Radio, Sparkles } from "lucide-react";
 
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) throw notFound();
+    const [stats, media, entries] = await Promise.all([
+      getEventStats({ data: { eventId: db.id } }),
+      listAlbumMedia({ data: { eventId: db.id } }),
+      listGuestbookEntries({ data: { eventId: db.id } }),
+    ]);
+    return { event: adaptEvent(db), stats, media, entries };
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
 export const Route = createFileRoute("/events/$slug/souvenir")({
   head: ({ params }) => ({
     meta: [
@@ -15,21 +27,12 @@ export const Route = createFileRoute("/events/$slug/souvenir")({
       { property: "og:description", content: "Le récap magique de votre événement." },
     ],
   }),
-  loader: async ({ params }) => {
-    const db = await getEventBySlug({ data: { slug: params.slug } });
-    if (!db) throw notFound();
-    const [stats, media, entries] = await Promise.all([
-      getEventStats({ data: { eventId: db.id } }),
-      listAlbumMedia({ data: { eventId: db.id } }),
-      listGuestbookEntries({ data: { eventId: db.id } }),
-    ]);
-    return { event: adaptEvent(db), stats, media, entries };
-  },
+  loader: routeLoader,
   component: Souvenir,
 });
 
 function Souvenir() {
-  const { event, stats, media, entries } = Route.useLoaderData();
+  const { event, stats, media, entries } = Route.useLoaderData() as RouteLoaderData;
   const dateLabel = new Date(event.date).toLocaleDateString("fr-FR", {
     day: "numeric",
     month: "long",

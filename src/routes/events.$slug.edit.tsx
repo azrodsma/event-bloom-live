@@ -7,6 +7,13 @@ import { toast } from "sonner";
 import { getEventBySlug, updateEvent } from "@/lib/events.functions";
 import { useAuth } from "@/hooks/use-auth";
 
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
+    const e = await getEventBySlug({ data: { slug: params.slug } });
+    if (!e) throw notFound();
+    return { event: e };
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
 export const Route = createFileRoute("/events/$slug/edit")({
   head: ({ params }) => ({
     meta: [
@@ -14,11 +21,7 @@ export const Route = createFileRoute("/events/$slug/edit")({
       { name: "description", content: `Modifier les paramètres de ${params.slug}` },
     ],
   }),
-  loader: async ({ params }) => {
-    const e = await getEventBySlug({ data: { slug: params.slug } });
-    if (!e) throw notFound();
-    return { event: e };
-  },
+  loader: routeLoader,
   errorComponent: ({ error }) => <div className="p-8 text-center text-sm text-muted-foreground">{error.message}</div>,
   notFoundComponent: () => <div className="p-8 text-center">Événement introuvable</div>,
   component: EditEvent,
@@ -35,7 +38,7 @@ const types = [
 ] as const;
 
 function EditEvent() {
-  const { event } = Route.useLoaderData();
+  const { event } = Route.useLoaderData() as RouteLoaderData;
   const { user } = useAuth();
   const navigate = useNavigate();
   const update = useServerFn(updateEvent);

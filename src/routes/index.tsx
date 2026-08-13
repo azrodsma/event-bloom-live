@@ -179,7 +179,7 @@ function Landing() {
       </section>
 
       {/* Avant / Pendant / Après */}
-      <section id="concept" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <section id="concept" className="scroll-mt-24 mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Le concept</p>
           <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Avant. Pendant. Après.</h2>
@@ -219,7 +219,7 @@ function Landing() {
       </section>
 
       {/* Features */}
-      <section id="features" className="bg-secondary-light py-20">
+      <section id="features" className="scroll-mt-24 bg-secondary-light py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="text-center">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Fonctionnalités</p>
@@ -271,7 +271,7 @@ function Landing() {
       </section>
 
       {/* Live events preview */}
-      <section id="events" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section id="events" className="scroll-mt-24 mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Découvrir</p>
@@ -292,7 +292,7 @@ function Landing() {
       </section>
 
       {/* Tarifs */}
-      <section id="pricing" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <section id="pricing" className="scroll-mt-24 mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Tarifs</p>
           <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Simple et transparent</h2>

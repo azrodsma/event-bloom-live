@@ -7,6 +7,13 @@ import { createGuestbookEntry } from "@/lib/guestbook.functions";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
+    const db = await getEventBySlug({ data: { slug: params.slug } });
+    if (!db) throw notFound();
+    return { event: { id: db.id, slug: db.slug, title: db.title } };
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
 export const Route = createFileRoute("/events/$slug/guestbook/new")({
   head: ({ params }) => ({
     meta: [
@@ -14,11 +21,7 @@ export const Route = createFileRoute("/events/$slug/guestbook/new")({
       { name: "description", content: `Écrivez un mot doux pour ${params.slug}.` },
     ],
   }),
-  loader: async ({ params }) => {
-    const db = await getEventBySlug({ data: { slug: params.slug } });
-    if (!db) throw notFound();
-    return { event: { id: db.id, slug: db.slug, title: db.title } };
-  },
+  loader: routeLoader,
   component: NewEntry,
 });
 
@@ -36,7 +39,7 @@ async function uploadToStorage(file: Blob, ext: string, eventId: string): Promis
 }
 
 function NewEntry() {
-  const { event } = Route.useLoaderData();
+  const { event } = Route.useLoaderData() as RouteLoaderData;
   const { user } = useAuth();
   const navigate = useNavigate();
   const create = useServerFn(createGuestbookEntry);

@@ -12,14 +12,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/events/$slug/album")({
-  head: ({ params }) => ({
-    meta: [
-      { title: `Album — ${params.slug} — MaFeliza` },
-      { name: "description", content: "Album photo collaboratif de l'événement." },
-    ],
-  }),
-  loader: async ({ params }) => {
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
     const db = await getEventBySlug({ data: { slug: params.slug } });
     if (!db) {
       const e = findEvent(params.slug);
@@ -27,7 +20,17 @@ export const Route = createFileRoute("/events/$slug/album")({
       return { event: e, dbId: null as string | null };
     }
     return { event: adaptEvent(db), dbId: db.id };
-  },
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
+export const Route = createFileRoute("/events/$slug/album")({
+  head: ({ params }) => ({
+    meta: [
+      { title: `Album — ${params.slug} — MaFeliza` },
+      { name: "description", content: "Album photo collaboratif de l'événement." },
+    ],
+  }),
+  loader: routeLoader,
   component: Album,
 });
 
@@ -42,7 +45,7 @@ type Media = {
 };
 
 function Album() {
-  const { event, dbId } = Route.useLoaderData();
+  const { event, dbId } = Route.useLoaderData() as RouteLoaderData;
   const { user } = useAuth();
   const qc = useQueryClient();
   const [selected, setSelected] = useState<string | null>(null);
