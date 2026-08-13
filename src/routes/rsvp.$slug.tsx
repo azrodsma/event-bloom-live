@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ChevronLeft, Check, PartyPopper, HelpCircle, UserX, CalendarDays, MapPin } from "lucide-react";
+import { ChevronLeft, Check, PartyPopper, HelpCircle, UserX, CalendarDays, MapPin, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { getEventBySlug } from "@/lib/events.functions";
 import { submitRsvp } from "@/lib/rsvp.functions";
