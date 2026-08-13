@@ -213,14 +213,21 @@ function Landing() {
               desc: "Livre d'or multimédia, album collaboratif, replay, export des souvenirs.",
               icon: <BookHeart className="h-6 w-6" />,
             },
-          ].map((s) => (
-            <div key={s.tag} className="group rounded-3xl border border-border bg-surface p-5 shadow-card transition hover:-translate-y-1 sm:p-7">
-              <div className="grid h-11 w-11 place-items-center rounded-2xl bg-primary-light text-primary sm:h-12 sm:w-12">
+          ].map((s, i) => (
+            <div
+              key={s.tag}
+              className="group relative overflow-hidden rounded-3xl border border-border bg-surface p-5 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-modal sm:p-7"
+            >
+              <span className="pointer-events-none absolute right-5 top-4 font-serif text-5xl leading-none text-gold/15 transition-colors duration-500 group-hover:text-gold/30 sm:text-6xl">
+                0{i + 1}
+              </span>
+              <div className="grid h-11 w-11 place-items-center rounded-2xl bg-primary-light text-primary transition duration-500 group-hover:bg-gradient-primary group-hover:text-white sm:h-12 sm:w-12">
                 {s.icon}
               </div>
               <p className="mt-4 text-xs font-bold uppercase tracking-widest text-primary sm:mt-5">{s.tag}</p>
               <h3 className="mt-1 font-serif text-xl sm:text-2xl">{s.title}</h3>
-              <p className="mt-2 text-[13px] text-muted-foreground sm:text-sm">{s.desc}</p>
+              <div className="rule-gold mt-3 w-10 opacity-70" />
+              <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground sm:text-sm">{s.desc}</p>
             </div>
           ))}
         </div>
