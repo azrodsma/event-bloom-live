@@ -30,40 +30,62 @@ function Rentals() {
   const total = cats.reduce((a, c) => a + parseInt(c.cost.replace(/\D/g, "")), 0);
   return (
     <div className="module-page">
-      <header className="sticky top-0 z-40 border-b border-border/50 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
-          <Link to="/events/$slug" params={{ slug: "mariage-lea-thomas" }} className="rounded-full bg-cream p-2">
+      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-2xl safe-top">
+        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-3.5">
+          <Link
+            to="/events/$slug"
+            params={{ slug: "mariage-lea-thomas" }}
+            className="glass grid h-10 w-10 place-items-center rounded-full ring-1 ring-border/60 transition-transform active:scale-95"
+            aria-label="Retour"
+          >
             <ArrowLeft className="h-4 w-4" />
           </Link>
-          <div className="flex-1">
-            <h1 className="font-display text-xl">Location matériel</h1>
-            <p className="text-xs text-muted-foreground">8 catégories · 4 loueurs partenaires</p>
+          <div className="min-w-0 flex-1">
+            <h1 className="truncate font-serif text-xl leading-tight">Location matériel</h1>
+            <p className="mt-0.5 truncate text-[11px] text-muted-foreground">8 catégories · 4 loueurs partenaires</p>
           </div>
-          <Package2 className="h-5 w-5 text-primary" />
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-primary-light">
+            <Package2 className="h-4 w-4 text-primary" />
+          </span>
         </div>
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
-          <CheckCircle2 className="h-6 w-6" />
-          <h2 className="mt-2 font-display text-3xl leading-tight">Livré, compté, restitué.</h2>
-          <p className="mt-3 text-sm opacity-90">Inventaire double au dépôt et à la restitution · caution récupérée à 100% sur nos 84 derniers événements.</p>
-          <div className="mt-5 grid grid-cols-3 gap-4 text-center">
-            <div><p className="font-display text-2xl">{total.toLocaleString("fr-FR")} €</p><p className="text-[10px] opacity-70">total location</p></div>
-            <div><p className="font-display text-2xl">4</p><p className="text-[10px] opacity-70">loueurs</p></div>
-            <div><p className="font-display text-2xl">2 j</p><p className="text-[10px] opacity-70">forfait</p></div>
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
+          <div className="pointer-events-none absolute -right-10 -top-12 h-40 w-40 rounded-full bg-gold/25 blur-3xl" />
+          <span className="glass inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold text-white/95">
+            <CheckCircle2 className="h-3.5 w-3.5 text-gold" /> Inventaire vérifié
+          </span>
+          <h2 className="mt-3 font-serif text-3xl leading-[1.05] sm:text-4xl">Livré, compté, restitué.</h2>
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-white/85">
+            Inventaire double au dépôt et à la restitution · caution récupérée à 100 % sur nos 84 derniers événements.
+          </p>
+          <div className="mt-6 grid grid-cols-3 gap-2">
+            {[
+              { v: `${total.toLocaleString("fr-FR")} €`, l: "total location" },
+              { v: "4", l: "loueurs" },
+              { v: "2 j", l: "forfait" },
+            ].map((s) => (
+              <div key={s.l} className="glass rounded-2xl px-3 py-3 text-center">
+                <p className="font-serif text-xl leading-none text-white">{s.v}</p>
+                <p className="mt-1.5 text-[10px] uppercase tracking-[0.14em] text-white/70">{s.l}</p>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section className="space-y-3">
+        <section className="grid gap-3 sm:grid-cols-2">
           {cats.map((c) => (
-            <div key={c.l} className="rounded-2xl border border-border/50 bg-card p-5">
+            <div
+              key={c.l}
+              className="rounded-[26px] bg-surface p-5 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-0.5 hover:ring-primary/30"
+            >
               <div className="flex items-start justify-between gap-3">
-                <p className="font-medium">{c.l}</p>
-                <span className="text-xs text-primary shrink-0">{c.cost}</span>
+                <p className="font-serif text-base leading-snug">{c.l}</p>
+                <span className="shrink-0 rounded-full bg-gold-light px-2.5 py-1 text-[11px] font-semibold text-gold">{c.cost}</span>
               </div>
-              <p className="mt-1 text-xs text-muted-foreground">{c.qty}</p>
-              <p className="mt-2 text-xs text-muted-foreground italic">via {c.vendor}</p>
+              <p className="mt-2.5 inline-flex rounded-full bg-primary-light px-2.5 py-1 text-[11px] font-medium text-primary">{c.qty}</p>
+              <p className="mt-3 text-[11px] text-muted-foreground">via {c.vendor}</p>
             </div>
           ))}
         </section>
