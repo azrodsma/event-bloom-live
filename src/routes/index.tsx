@@ -47,9 +47,17 @@ function Landing() {
   const fetchPublic = useServerFn(listPublicEvents);
   const { data: publicEvents } = useQuery({
     queryKey: ["public-events"],
-    queryFn: () => fetchPublic(),
+    queryFn: async () => {
+      try {
+        return await fetchPublic();
+      } catch {
+        return [];
+      }
+    },
+    retry: false,
   });
   const realEvents = (publicEvents ?? []).map((e) => adaptEvent(e as unknown as DbEvent));
+
   const showcase = realEvents.length > 0 ? realEvents : mockEvents;
   const liveEvents = showcase.filter((e) => e.isLive);
   const featured = [...liveEvents, ...showcase.filter((e) => !e.isLive)].slice(0, 4);
