@@ -214,13 +214,13 @@ function Landing() {
               icon: <BookHeart className="h-6 w-6" />,
             },
           ].map((s) => (
-            <div key={s.tag} className="group rounded-3xl border border-border bg-surface p-7 shadow-card transition hover:-translate-y-1">
-              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary-light text-primary">
+            <div key={s.tag} className="group rounded-3xl border border-border bg-surface p-5 shadow-card transition hover:-translate-y-1 sm:p-7">
+              <div className="grid h-11 w-11 place-items-center rounded-2xl bg-primary-light text-primary sm:h-12 sm:w-12">
                 {s.icon}
               </div>
-              <p className="mt-5 text-xs font-bold uppercase tracking-widest text-primary">{s.tag}</p>
-              <h3 className="mt-1 font-serif text-2xl">{s.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+              <p className="mt-4 text-xs font-bold uppercase tracking-widest text-primary sm:mt-5">{s.tag}</p>
+              <h3 className="mt-1 font-serif text-xl sm:text-2xl">{s.title}</h3>
+              <p className="mt-2 text-[13px] text-muted-foreground sm:text-sm">{s.desc}</p>
             </div>
           ))}
         </div>
