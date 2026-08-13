@@ -10,7 +10,7 @@ type StatusPageProps = {
 
 export function StatusPage({ code, title, description, actions }: StatusPageProps) {
   return (
-    <main className="relative flex min-h-svh items-center justify-center overflow-hidden bg-background px-5 py-16">
+    <main className="relative flex min-h-[68svh] items-center justify-center overflow-hidden bg-background px-5 py-12 sm:min-h-[76svh] sm:py-16">
       {/* décor */}
       <div
         aria-hidden
