@@ -61,7 +61,7 @@ export const listMyEvents = createServerFn({ method: "GET" })
 
 export const getEventBySlug = createServerFn({ method: "GET" })
   .inputValidator((input) => z.object({ slug: z.string().min(1) }).parse(input))
-  .handler(async ({ data }) => {
+  .handler(async ({ data }): Promise<DbEvent | null> => {
     const sb = serverPublic();
     const { data: e, error } = await sb
       .from("events")
@@ -69,8 +69,9 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       .eq("slug", data.slug)
       .maybeSingle();
     if (error) throw new Error(error.message);
-    return e;
+    return e as DbEvent | null;
   });
+
 
 export const listActiveStories = createServerFn({ method: "GET" }).handler(async () => {
   const sb = serverPublic();
