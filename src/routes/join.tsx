@@ -26,14 +26,14 @@ function JoinPage() {
     navigate({ to: "/events/$slug", params: { slug: "sarah-thomas" } });
   };
   return (
-    <div className="min-h-screen bg-gradient-warm">
-      <header className="mx-auto flex max-w-2xl items-center justify-between px-4 py-5 sm:px-6">
+    <div className="flex min-h-dvh flex-col bg-gradient-warm">
+      <header className="mx-auto flex w-full max-w-2xl items-center justify-between px-4 py-5 sm:px-6">
         <Link to="/"><Logo /></Link>
         <Link to="/auth" className="text-sm font-medium text-muted-foreground hover:text-foreground">
           Connexion
         </Link>
       </header>
-      <main className="mx-auto w-full max-w-md px-4 pb-16 pt-4 sm:px-6 sm:pt-10">
+      <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 pb-12 pt-2 sm:px-6">    
         <div className="rounded-[2rem] border border-border/70 bg-surface/80 p-6 text-center shadow-elegant backdrop-blur sm:p-8">
           <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-primary text-white shadow-glow sm:h-20 sm:w-20 sm:rounded-3xl">
             <QrCode className="h-8 w-8 sm:h-9 sm:w-9" />
