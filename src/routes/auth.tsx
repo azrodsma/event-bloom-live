@@ -139,7 +139,7 @@ function AuthPage() {
       </div>
 
 
-      <div className="relative flex items-center justify-center p-6 sm:p-10">
+      <div className="relative flex items-start justify-center px-4 pb-10 pt-8 sm:p-10 md:items-center">
         <div className="w-full max-w-md rounded-[36px] bg-surface/80 p-8 shadow-modal ring-1 ring-border backdrop-blur-xl">
           <div className="md:hidden">
             <Logo />
