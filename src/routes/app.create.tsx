@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { eventTypes } from "@/lib/mock-data";
 import { eventIcon } from "@/lib/event-icons";
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, Gift, Radio, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Gift, Radio, Sparkles } from "lucide-react";
 import { createEvent } from "@/lib/events.functions";
 import { useServerFn } from "@tanstack/react-start";
 import { useMutation } from "@tanstack/react-query";
@@ -83,29 +83,76 @@ function CreatePage() {
   const canNext = step === 0 ? !!selectedType : step === 1 ? title.trim().length >= 2 : true;
 
   return (
-    <div className="space-y-5 px-4 py-4 pb-24">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary">Étape {step + 1} / {steps.length}</p>
-        <h1 className="mt-1 font-serif text-3xl">{steps[step]}</h1>
-      </div>
-      <div className="flex gap-1">
-        {steps.map((_, i) => (
-          <div key={i} className={`h-1 flex-1 rounded-full transition ${i <= step ? "bg-gradient-primary" : "bg-border"}`} />
-        ))}
+    <div className="pb-32">
+      {/* Barre supérieure */}
+      <div className="sticky top-0 z-30 -mx-4 mb-4 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-xl">
+        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3">
+          <button
+            onClick={() => (step > 0 ? setStep(step - 1) : navigate({ to: "/app" }))}
+            aria-label="Retour"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-surface"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </button>
+          <div className="min-w-0 text-center">
+            <p className="truncate font-serif text-lg leading-tight">Nouvel événement</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Étape {step + 1} / {steps.length} · {steps[step]}
+            </p>
+          </div>
+          <span className="shrink-0 rounded-full bg-gradient-primary px-3 py-1 text-[11px] font-bold text-white">
+            {Math.round(((step + 1) / steps.length) * 100)}%
+          </span>
+        </div>
+        {/* Pas numérotés */}
+        <div className="mt-3 flex items-center gap-1.5">
+          {steps.map((label, i) => (
+            <button
+              key={label}
+              onClick={() => i < step && setStep(i)}
+              className="group flex min-w-0 flex-1 flex-col items-center gap-1.5"
+              aria-current={i === step}
+            >
+              <span
+                className={`grid h-6 w-6 shrink-0 place-items-center rounded-full text-[11px] font-bold transition ${
+                  i < step
+                    ? "bg-gold text-white"
+                    : i === step
+                      ? "bg-gradient-primary text-white shadow-glow"
+                      : "border border-border bg-surface text-muted-foreground"
+                }`}
+              >
+                {i < step ? <Check className="h-3.5 w-3.5" /> : i + 1}
+              </span>
+              <span className={`hidden truncate text-[10px] font-semibold sm:block ${i === step ? "text-primary" : "text-muted-foreground"}`}>
+                {label}
+              </span>
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="rounded-3xl bg-surface p-5 shadow-card">
+      <div className="mx-auto max-w-2xl space-y-5">
+      <div className="rounded-3xl border border-border/60 bg-surface p-5 shadow-card">
         {step === 0 && (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {eventTypes.map((t) => (
               <button key={t} onClick={() => setSelectedType(t)}
-                className={`rounded-2xl border p-4 text-left transition ${selectedType === t ? "border-primary bg-primary-light shadow-glow" : "border-border bg-background hover:border-primary/40"}`}>
-                <div className="grid h-10 w-10 place-items-center rounded-xl bg-cream text-primary">{(() => { const I = eventIcon(t); return <I className="h-5 w-5" />; })()}</div>
-                <div className="mt-2 text-sm font-semibold">{t}</div>
+                className={`group relative overflow-hidden rounded-2xl border p-4 text-left transition ${selectedType === t ? "border-primary bg-primary-light shadow-glow" : "border-border bg-background hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card"}`}>
+                {selectedType === t && (
+                  <span className="absolute right-3 top-3 grid h-5 w-5 place-items-center rounded-full bg-gradient-primary text-white">
+                    <Check className="h-3 w-3" />
+                  </span>
+                )}
+                <div className={`grid h-11 w-11 place-items-center rounded-2xl transition ${selectedType === t ? "bg-gradient-primary text-white" : "bg-cream text-primary"}`}>
+                  {(() => { const I = eventIcon(t); return <I className="h-5 w-5" />; })()}
+                </div>
+                <div className="mt-2.5 truncate text-sm font-semibold">{t}</div>
               </button>
             ))}
           </div>
         )}
+
 
         {step === 1 && (
           <div className="space-y-3">
@@ -178,27 +225,33 @@ function CreatePage() {
         )}
       </div>
 
-      <div className="flex gap-2">
-        {step > 0 && (
-          <button onClick={() => setStep(step - 1)} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium">
-            <ArrowLeft className="h-4 w-4" /> Retour
-          </button>
-        )}
-        {step < steps.length - 1 ? (
-          <button disabled={!canNext} onClick={() => setStep(step + 1)}
-            className="ml-auto inline-flex items-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50">
-            Continuer <ArrowRight className="h-4 w-4" />
-          </button>
-        ) : (
-          <button disabled={mut.isPending} onClick={() => mut.mutate()}
-            className="ml-auto inline-flex items-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50">
-            {mut.isPending ? "Création..." : (<>Créer l'événement <Sparkles className="h-4 w-4" /></>)}
-          </button>
-        )}
+      </div>
+
+      {/* Barre d'action fixe */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border/60 bg-background/90 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-2xl items-center gap-2">
+          {step > 0 && (
+            <button onClick={() => setStep(step - 1)} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium">
+              <ArrowLeft className="h-4 w-4" /> Retour
+            </button>
+          )}
+          {step < steps.length - 1 ? (
+            <button disabled={!canNext} onClick={() => setStep(step + 1)}
+              className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50 sm:flex-none">
+              Continuer <ArrowRight className="h-4 w-4" />
+            </button>
+          ) : (
+            <button disabled={mut.isPending} onClick={() => mut.mutate()}
+              className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50 sm:flex-none">
+              {mut.isPending ? "Création..." : (<>Créer l'événement <Sparkles className="h-4 w-4" /></>)}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
 }
+
 
 function Field({ label, value, onChange, ...rest }: { label: string; value: string; onChange: (v: string) => void } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value">) {
   return (
