@@ -19,7 +19,12 @@ export function EventCard({ event }: { event: MockEvent }) {
           alt={event.title}
           className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
           loading="lazy"
+          onError={(e) => {
+            const img = e.currentTarget;
+            img.style.opacity = "0";
+          }}
         />
+        <div className="absolute inset-0 -z-10 bg-gradient-primary opacity-70" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/15" />
         <div className="pointer-events-none absolute -inset-1 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-100" />
 
