@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Plus, Heart } from "lucide-react";
+import { Plus } from "lucide-react";
 import type { MockEvent } from "@/lib/mock-data";
 
 function dayLabel(e: MockEvent) {
