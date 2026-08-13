@@ -96,7 +96,7 @@ function Landing() {
         <div className="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 top-40 h-72 w-72 rounded-full bg-gold/25 blur-3xl" />
 
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-12 sm:py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/70 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground backdrop-blur">
               <Sparkles className="h-3.5 w-3.5" /> Nouveau · Bêta privée
@@ -227,7 +227,7 @@ function Landing() {
       </section>
 
       {/* Features */}
-      <section id="features" className="scroll-mt-24 bg-secondary-light py-20">
+      <section id="features" className="scroll-mt-24 bg-secondary-light py-14 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="text-center">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Fonctionnalités</p>
@@ -259,7 +259,7 @@ function Landing() {
       </section>
 
       {/* Types événements */}
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Pour tous vos moments</p>
           <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Mariage, baptême, anniversaire...</h2>
@@ -279,7 +279,7 @@ function Landing() {
       </section>
 
       {/* Live events preview */}
-      <section id="events" className="scroll-mt-24 mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section id="events" className="scroll-mt-24 mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Découvrir</p>
