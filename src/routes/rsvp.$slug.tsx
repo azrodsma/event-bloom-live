@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ChevronLeft, Check, PartyPopper, HelpCircle, UserX } from "lucide-react";
+import { ChevronLeft, Check, PartyPopper, HelpCircle, UserX, CalendarDays, MapPin } from "lucide-react";
 import { useState } from "react";
 import { getEventBySlug } from "@/lib/events.functions";
 import { submitRsvp } from "@/lib/rsvp.functions";
@@ -90,78 +90,98 @@ function RsvpPage() {
   }
 
   return (
-    <div className="module-page">
-      <header className="relative h-56">
-        {event.cover_url && <img src={event.cover_url} alt="" className="h-full w-full object-cover" />}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/70" />
+    <div className="module-page bg-gradient-mesh">
+      <header className="relative h-64 md:h-80">
+        {event.cover_url && <img src={event.cover_url} alt={`Photo de ${event.title}`} className="h-full w-full object-cover" />}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/40 to-black/80" />
         <Link to="/" className="absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-background/80 backdrop-blur">
           <ChevronLeft className="h-5 w-5" />
         </Link>
-        <div className="absolute inset-x-0 bottom-4 px-5 text-white">
-          <p className="text-[10px] font-semibold uppercase tracking-widest opacity-90">Vous êtes invité(e)</p>
-          <h1 className="mt-1 font-serif text-3xl leading-tight">{event.title}</h1>
-          <p className="text-xs opacity-90">{dateStr}{event.location ? ` · ${event.location}` : ""}</p>
+        <div className="absolute inset-x-0 bottom-14 mx-auto md:bottom-16 max-w-3xl px-5 text-white">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-light">Vous êtes invité(e)</p>
+          <h1 className="mt-1.5 font-serif text-3xl leading-tight drop-shadow md:text-5xl">{event.title}</h1>
+          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs opacity-95 md:text-sm">
+            {dateStr && <span className="inline-flex items-center gap-1.5"><CalendarDays className="h-3.5 w-3.5" />{dateStr}</span>}
+            {event.location && <span className="inline-flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" />{event.location}</span>}
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-md space-y-5 px-5 py-6">
-        <div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Votre réponse</p>
-          <div className="grid grid-cols-3 gap-2">
-            {([
-              { k: "confirmed", label: "Je viens", Icon: PartyPopper },
-              { k: "maybe", label: "Peut-être", Icon: HelpCircle },
-              { k: "declined", label: "Absent", Icon: UserX },
-            ] as const).map((o) => (
-              <button
-                key={o.k}
-                onClick={() => setStatus(o.k)}
-                className={`rounded-2xl border-2 p-3 text-center text-xs font-semibold transition ${
-                  status === o.k ? "border-primary bg-primary-light text-primary" : "border-border bg-background text-foreground"
-                }`}
-              >
-                <o.Icon className="mx-auto h-5 w-5" />
-                <div className="mt-1.5">{o.label}</div>
-              </button>
-            ))}
-          </div>
-
-        </div>
-
-        <FormField label="Nom complet *" value={fullName} onChange={setFullName} placeholder="Prénom et nom" />
-        <FormField label="Email *" type="email" value={email} onChange={setEmail} placeholder="vous@exemple.com" />
-        <FormField label="Téléphone" type="tel" value={phone} onChange={setPhone} placeholder="+33..." />
-
-        {status === "confirmed" && (
-          <>
+      <main className="mx-auto -mt-6 max-w-3xl px-4 pb-14 sm:px-5">
+        <div className="rounded-3xl border border-border/70 bg-card/90 p-5 shadow-elegant backdrop-blur-xl sm:p-7">
+          <div className="space-y-5">
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Accompagnants</label>
-              <div className="mt-2 flex items-center gap-3">
-                <button onClick={() => setPlusOnes(Math.max(0, plusOnes - 1))} className="grid h-10 w-10 place-items-center rounded-full bg-secondary text-lg">−</button>
-                <span className="min-w-[3ch] text-center font-serif text-xl">{plusOnes}</span>
-                <button onClick={() => setPlusOnes(Math.min(10, plusOnes + 1))} className="grid h-10 w-10 place-items-center rounded-full bg-secondary text-lg">+</button>
+              <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Votre réponse</p>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                {([
+                  { k: "confirmed", label: "Je viens", Icon: PartyPopper },
+                  { k: "maybe", label: "Peut-être", Icon: HelpCircle },
+                  { k: "declined", label: "Absent", Icon: UserX },
+                ] as const).map((o) => (
+                  <button
+                    key={o.k}
+                    onClick={() => setStatus(o.k)}
+                    className={`rounded-2xl border-2 p-3 text-center text-xs font-semibold transition sm:p-4 ${
+                      status === o.k
+                        ? "border-primary bg-primary-light text-primary shadow-glow"
+                        : "border-border bg-background text-foreground hover:border-primary/40"
+                    }`}
+                  >
+                    <o.Icon className="mx-auto h-5 w-5" />
+                    <div className="mt-1.5">{o.label}</div>
+                  </button>
+                ))}
               </div>
             </div>
-            <FormField label="Régime alimentaire" value={dietary} onChange={setDietary} placeholder="Végé, allergies, sans gluten..." />
-          </>
-        )}
 
-        <div>
-          <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Un mot pour les mariés / hôtes</label>
-          <textarea rows={3} value={notes} onChange={(e) => setNotes(e.target.value)} className="mt-1 w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary" placeholder="Optionnel" />
+            <div className="rule-gold" />
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <FormField label="Nom complet *" value={fullName} onChange={setFullName} placeholder="Prénom et nom" />
+              <FormField label="Email *" type="email" value={email} onChange={setEmail} placeholder="vous@exemple.com" />
+              <FormField label="Téléphone" type="tel" value={phone} onChange={setPhone} placeholder="+33..." />
+              {status === "confirmed" && (
+                <div>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Accompagnants</label>
+                  <div className="mt-1 flex items-center justify-between rounded-2xl border border-border bg-background px-3 py-2">
+                    <button aria-label="Retirer un accompagnant" onClick={() => setPlusOnes(Math.max(0, plusOnes - 1))} className="grid h-9 w-9 place-items-center rounded-full bg-secondary text-lg leading-none transition hover:bg-primary-light">−</button>
+                    <span className="font-serif text-xl">{plusOnes}</span>
+                    <button aria-label="Ajouter un accompagnant" onClick={() => setPlusOnes(Math.min(10, plusOnes + 1))} className="grid h-9 w-9 place-items-center rounded-full bg-secondary text-lg leading-none transition hover:bg-primary-light">+</button>
+                  </div>
+                </div>
+              )}
+              {status === "confirmed" && (
+                <div className="sm:col-span-2">
+                  <FormField label="Régime alimentaire" value={dietary} onChange={setDietary} placeholder="Végé, allergies, sans gluten..." />
+                </div>
+              )}
+              <div className="sm:col-span-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Un mot pour les mariés / hôtes</label>
+                <textarea rows={3} value={notes} onChange={(e) => setNotes(e.target.value)} className="mt-1 w-full resize-none rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary" placeholder="Optionnel" />
+              </div>
+            </div>
+
+            <button
+              disabled={mut.isPending || !fullName || !email}
+              onClick={() => mut.mutate()}
+              className="w-full rounded-full bg-gradient-primary py-4 text-sm font-bold text-white shadow-glow transition hover:opacity-95 disabled:opacity-50"
+            >
+              {mut.isPending ? "Envoi..." : "Envoyer ma réponse"}
+            </button>
+            <p className="text-center text-[11px] text-muted-foreground">
+              Votre réponse est transmise uniquement aux organisateurs de l'événement.
+            </p>
+          </div>
         </div>
 
-        <button
-          disabled={mut.isPending || !fullName || !email}
-          onClick={() => mut.mutate()}
-          className="w-full rounded-full bg-gradient-primary py-4 text-sm font-bold text-white shadow-glow disabled:opacity-50"
-        >
-          {mut.isPending ? "Envoi..." : "Envoyer ma réponse"}
-        </button>
+        <p className="mt-6 text-center text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+          MaFeliza · Le cadre de vos plus beaux événements
+        </p>
       </main>
     </div>
   );
 }
+
 
 function FormField({ label, value, onChange, ...rest }: { label: string; value: string; onChange: (v: string) => void } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value">) {
   return (
