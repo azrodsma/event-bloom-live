@@ -285,7 +285,7 @@ function Landing() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Découvrir</p>
             <h2 className="mt-2 font-serif text-3xl sm:text-4xl">Événements en direct</h2>
           </div>
-          <Link to="/app/explore" className="text-sm font-semibold text-primary hover:underline">
+          <Link to="/events" className="text-sm font-semibold text-primary hover:underline">
             Tout explorer →
           </Link>
         </div>

@@ -12,13 +12,15 @@ export function EventCard({ event }: { event: MockEvent }) {
       params={{ slug: event.slug }}
       className="group relative flex h-full flex-col overflow-hidden rounded-[32px] bg-surface shadow-card ring-1 ring-border/60 transition-all duration-500 hover:-translate-y-1 hover:shadow-modal hover:ring-primary/30"
     >
-      <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden bg-muted sm:aspect-[16/10]">
-
+      <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden bg-gradient-primary sm:aspect-[16/10]">
         <img
           src={event.cover}
           alt={event.title}
           className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.style.visibility = "hidden";
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/15" />
         <div className="pointer-events-none absolute -inset-1 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-100" />

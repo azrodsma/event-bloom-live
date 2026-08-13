@@ -16,6 +16,7 @@ import { Route as JoinRouteImport } from './routes/join'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventsIndexRouteImport } from './routes/events.index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
 import { Route as RsvpSlugRouteImport } from './routes/rsvp.$slug'
@@ -323,6 +324,11 @@ const AppRoute = AppRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsIndexRoute = EventsIndexRouteImport.update({
+  id: '/events/',
+  path: '/events/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
@@ -1805,6 +1811,7 @@ export interface FileRoutesByFullPath {
   '/rsvp/$slug': typeof RsvpSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
+  '/events/': typeof EventsIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
   '/app/posts/$id': typeof AppPostsIdRoute
   '/app/story/new': typeof AppStoryNewRoute
@@ -2085,6 +2092,7 @@ export interface FileRoutesByTo {
   '/rsvp/$slug': typeof RsvpSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/app': typeof AppIndexRoute
+  '/events': typeof EventsIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
   '/app/posts/$id': typeof AppPostsIdRoute
   '/app/story/new': typeof AppStoryNewRoute
@@ -2368,6 +2376,7 @@ export interface FileRoutesById {
   '/rsvp/$slug': typeof RsvpSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/app/': typeof AppIndexRoute
+  '/events/': typeof EventsIndexRoute
   '/app/messages/$id': typeof AppMessagesIdRoute
   '/app/posts/$id': typeof AppPostsIdRoute
   '/app/story/new': typeof AppStoryNewRoute
@@ -2652,6 +2661,7 @@ export interface FileRouteTypes {
     | '/rsvp/$slug'
     | '/stories/$slug'
     | '/app/'
+    | '/events/'
     | '/app/messages/$id'
     | '/app/posts/$id'
     | '/app/story/new'
@@ -2932,6 +2942,7 @@ export interface FileRouteTypes {
     | '/rsvp/$slug'
     | '/stories/$slug'
     | '/app'
+    | '/events'
     | '/app/messages/$id'
     | '/app/posts/$id'
     | '/app/story/new'
@@ -3214,6 +3225,7 @@ export interface FileRouteTypes {
     | '/rsvp/$slug'
     | '/stories/$slug'
     | '/app/'
+    | '/events/'
     | '/app/messages/$id'
     | '/app/posts/$id'
     | '/app/story/new'
@@ -3406,6 +3418,7 @@ export interface RootRouteChildren {
   ITokenRoute: typeof ITokenRoute
   RsvpSlugRoute: typeof RsvpSlugRoute
   StoriesSlugRoute: typeof StoriesSlugRoute
+  EventsIndexRoute: typeof EventsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -3457,6 +3470,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/': {
+      id: '/events/'
+      path: '/events'
+      fullPath: '/events/'
+      preLoaderRoute: typeof EventsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app/': {
@@ -5988,6 +6008,7 @@ const rootRouteChildren: RootRouteChildren = {
   ITokenRoute: ITokenRoute,
   RsvpSlugRoute: RsvpSlugRoute,
   StoriesSlugRoute: StoriesSlugRoute,
+  EventsIndexRoute: EventsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
