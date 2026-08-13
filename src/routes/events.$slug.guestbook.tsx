@@ -122,7 +122,22 @@ function Guestbook() {
       </header>
 
       <main className="mx-auto max-w-2xl space-y-4 px-4 py-4">
+        {/* Stats souvenir */}
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            { label: "Messages", value: entries.length },
+            { label: "Photos & vidéos", value: entries.filter((e) => e.kind === "photo" || e.kind === "video").length },
+            { label: "Vocaux", value: entries.filter((e) => e.kind === "audio").length },
+          ].map((s) => (
+            <div key={s.label} className="rounded-2xl bg-surface p-3 text-center shadow-card ring-1 ring-border/60">
+              <p className="font-serif text-2xl leading-none text-primary">{s.value}</p>
+              <p className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground">{s.label}</p>
+            </div>
+          ))}
+        </div>
+
         {/* Compose */}
+
         <div className="rounded-3xl bg-surface p-4 shadow-card">
           {user ? (
             <>
@@ -192,7 +207,8 @@ function Guestbook() {
             </p>
           )}
           {filtered.map((m) => (
-            <article key={m.id} className="rounded-3xl bg-surface p-4 shadow-card">
+            <article key={m.id} className="relative overflow-hidden rounded-3xl bg-surface p-4 shadow-card ring-1 ring-border/60">
+              <span className="pointer-events-none absolute -top-3 right-4 font-serif text-6xl text-primary/10">”</span>
               <div className="flex items-start gap-3">
                 <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-primary font-serif text-lg text-white">
                   {m.author_name.slice(0, 1).toUpperCase()}
@@ -221,9 +237,13 @@ function Guestbook() {
                 <button className="inline-flex items-center gap-1 hover:text-primary">
                   <Heart className="h-4 w-4" />
                 </button>
-                <button className="inline-flex items-center gap-1 hover:text-primary">
-                  <MessageCircle className="h-4 w-4" /> Répondre
-                </button>
+                <Link
+                  to="/events/$slug/guestbook/$id"
+                  params={{ slug: event.slug, id: m.id }}
+                  className="inline-flex items-center gap-1 hover:text-primary"
+                >
+                  <MessageCircle className="h-4 w-4" /> Ouvrir
+                </Link>
               </div>
             </article>
           ))}

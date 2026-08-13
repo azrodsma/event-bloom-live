@@ -3,7 +3,7 @@ import { findEvent } from "@/lib/mock-data";
 import { listRegistryItems } from "@/lib/registry.functions";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { X, Share2, Send, Heart, Gift, Users, ExternalLink, LogIn } from "lucide-react";
+import { X, Share2, Send, Heart, Gift, Users, ExternalLink, LogIn, Video } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getEventBySlug } from "@/lib/events.functions";
@@ -37,6 +37,15 @@ export const Route = createFileRoute("/events/$slug/live")({
 
 const tabs = ["Chat", "Cadeaux", "Cagnotte", "Photos"] as const;
 
+const cameras = [
+  { id: "main", label: "Salle" },
+  { id: "altar", label: "Autel" },
+  { id: "guests", label: "Invités" },
+  { id: "drone", label: "Drone" },
+] as const;
+
+const reactions = ["💖", "👏", "🎉", "🥂", "😍"] as const;
+
 type LiveMsg = { id: string; author_name: string | null; content: string; created_at: string };
 
 function LivePage() {
@@ -45,6 +54,7 @@ function LivePage() {
   const qc = useQueryClient();
   const [tab, setTab] = useState<(typeof tabs)[number]>("Chat");
   const [input, setInput] = useState("");
+  const [cam, setCam] = useState<string>("main");
   const [hearts, setHearts] = useState<{ id: number; left: number; emoji: string }[]>([]);
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -158,9 +168,9 @@ function LivePage() {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-dark text-white">
+    <div className="flex h-[100dvh] flex-col bg-dark text-white">
       {/* Player */}
-      <div className="relative aspect-video shrink-0 bg-black sm:aspect-[16/9]">
+      <div className="relative h-[54dvh] shrink-0 bg-black sm:aspect-[16/9] sm:h-auto">
         {event.livestream ? (
           <iframe
             src={event.livestream.embedUrl}
@@ -172,27 +182,103 @@ function LivePage() {
         ) : (
           <div className="flex h-full items-center justify-center">Live indisponible</div>
         )}
-        <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-3">
+
+        {/* Top bar */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between bg-gradient-to-b from-black/70 to-transparent p-3 pb-8">
           <Link
             to="/events/$slug"
             params={{ slug: event.slug }}
-            className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full bg-black/60 backdrop-blur"
+            className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full bg-black/50 ring-1 ring-white/15 backdrop-blur"
           >
             <X className="h-5 w-5" />
           </Link>
           <div className="pointer-events-auto flex items-center gap-2">
-            <span className="animate-pulse-live rounded-full bg-live px-3 py-1 text-[11px] font-bold uppercase">● Live</span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-black/60 px-3 py-1 text-xs backdrop-blur">
+            <span className="animate-pulse-live rounded-full bg-live px-3 py-1 text-[11px] font-bold uppercase tracking-wide">● Live</span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-black/50 px-3 py-1 text-xs ring-1 ring-white/15 backdrop-blur">
               <Users className="h-3 w-3" /> {event.viewers?.toLocaleString("fr-FR") ?? "—"}
             </span>
-            <button className="grid h-10 w-10 place-items-center rounded-full bg-black/60 backdrop-blur">
+            <button className="grid h-10 w-10 place-items-center rounded-full bg-black/50 ring-1 ring-white/15 backdrop-blur">
               <Share2 className="h-4 w-4" />
             </button>
           </div>
         </div>
-        <div className="pointer-events-none absolute bottom-3 left-3 right-3">
-          <p className="text-xs uppercase tracking-widest opacity-80">{event.type} · {event.city}</p>
-          <p className="font-serif text-2xl">{event.title}</p>
+
+        {/* Multi-camera switcher */}
+        <div className="scrollbar-hide absolute left-3 right-16 top-16 flex gap-2 overflow-x-auto">
+          {cameras.map((c) => (
+            <button
+              key={c.id}
+              onClick={() => setCam(c.id)}
+              className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold backdrop-blur transition ${
+                cam === c.id
+                  ? "bg-gradient-primary text-white shadow-glow"
+                  : "bg-black/50 text-white/80 ring-1 ring-white/15"
+              }`}
+            >
+              <Video className="mr-1 inline h-3 w-3" />
+              {c.label}
+            </button>
+          ))}
+          <Link
+            to="/events/$slug/multicam"
+            params={{ slug: event.slug }}
+            className="shrink-0 rounded-full bg-black/50 px-3 py-1.5 text-[11px] font-semibold text-white/80 ring-1 ring-white/15 backdrop-blur"
+          >
+            Régie
+          </Link>
+        </div>
+
+        {/* Cagnotte overlay */}
+        {event.moneyPot && (
+          <a
+            href={event.moneyPot.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute right-3 top-28 w-40 rounded-2xl bg-black/55 p-3 ring-1 ring-white/15 backdrop-blur"
+          >
+            <p className="flex items-center gap-1 text-[10px] uppercase tracking-widest text-gold">
+              <Gift className="h-3 w-3" /> Cagnotte
+            </p>
+            <p className="mt-1 font-serif text-lg leading-none">
+              {event.moneyPot.current.toLocaleString("fr-FR")} {event.moneyPot.currency}
+            </p>
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/15">
+              <div
+                className="h-full rounded-full bg-gradient-primary"
+                style={{ width: `${Math.min(100, (event.moneyPot.current / event.moneyPot.target) * 100)}%` }}
+              />
+            </div>
+          </a>
+        )}
+
+        {/* Chat overlay (last messages) */}
+        <div className="pointer-events-none absolute bottom-3 left-3 max-w-[55%] space-y-1.5">
+          <p className="text-[10px] uppercase tracking-widest text-white/70">{event.type} · {event.city}</p>
+          {msgs.slice(-3).map((m) => (
+            <p
+              key={`ov-${m.id}`}
+              className="w-fit max-w-full truncate rounded-full bg-black/45 px-3 py-1 text-xs backdrop-blur"
+            >
+              <span className="font-semibold" style={{ color: colorFor(m.author_name ?? "Invité") }}>
+                {m.author_name ?? "Invité"}
+              </span>{" "}
+              <span className="text-white/90">{m.content}</span>
+            </p>
+          ))}
+        </div>
+
+        {/* Reaction rail */}
+        <div className="absolute bottom-3 right-3 flex flex-col gap-2">
+          {reactions.map((r) => (
+            <button
+              key={r}
+              onClick={() => heart(r)}
+              className="tap grid h-11 w-11 place-items-center rounded-full bg-black/50 text-xl ring-1 ring-white/15 backdrop-blur transition active:scale-90"
+              aria-label={`Réagir ${r}`}
+            >
+              {r}
+            </button>
+          ))}
         </div>
 
         {/* Floating hearts */}
@@ -206,6 +292,7 @@ function LivePage() {
           </span>
         ))}
       </div>
+
 
       {/* Tabs */}
       <div className="flex shrink-0 gap-1 border-b border-white/10 bg-dark px-3">
