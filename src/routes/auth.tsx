@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, useSearch, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 import { useEffect, useState } from "react";
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
@@ -141,15 +141,20 @@ function AuthPage() {
       </div>
 
 
-      <div className="relative flex min-h-dvh items-center justify-center px-4 py-8 sm:p-10 md:min-h-0">
-        <div className="w-full max-w-md rounded-[36px] bg-surface/80 p-8 shadow-modal ring-1 ring-border backdrop-blur-xl">
-          <div className="md:hidden">
+      <div className="relative flex min-h-dvh flex-col justify-center px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))] sm:p-10 md:min-h-0 md:items-center">
+        <div className="mx-auto w-full max-w-md">
+          <div className="mb-4 flex items-center justify-between md:hidden">
             <Logo />
+            <Link to="/" className="rounded-full bg-surface/80 px-3 py-1.5 text-xs font-medium text-muted-foreground ring-1 ring-border backdrop-blur-xl">
+              Accueil
+            </Link>
           </div>
-          <h1 className="mt-4 font-serif text-4xl leading-tight">
+          <div className="w-full rounded-[32px] bg-surface/85 p-6 shadow-modal ring-1 ring-border backdrop-blur-xl sm:rounded-[36px] sm:p-8">
+          <h1 className="font-serif text-[26px] leading-tight sm:text-4xl">
             {mode === "forgot" ? "Mot de passe oublié" : mode === "login" ? "Ravi de vous revoir" : "Créez votre compte"}
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <div className="rule-gold mt-3 w-12 opacity-70" />
+          <p className="mt-3 text-sm text-muted-foreground">
             {mode === "forgot"
               ? "Entrez votre email : nous vous envoyons un lien sécurisé pour créer un nouveau mot de passe."
               : mode === "login"
@@ -292,6 +297,7 @@ function AuthPage() {
             </p>
           )}
 
+        </div>
         </div>
       </div>
     </div>
