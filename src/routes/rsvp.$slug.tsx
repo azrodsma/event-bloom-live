@@ -91,13 +91,13 @@ function RsvpPage() {
 
   return (
     <div className="module-page bg-gradient-mesh">
-      <header className="relative h-56 md:h-80">
+      <header className="relative h-64 md:h-80">
         {event.cover_url && <img src={event.cover_url} alt={`Photo de ${event.title}`} className="h-full w-full object-cover" />}
         <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/40 to-black/80" />
         <Link to="/" className="absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-background/80 backdrop-blur">
           <ChevronLeft className="h-5 w-5" />
         </Link>
-        <div className="absolute inset-x-0 bottom-5 mx-auto max-w-3xl px-5 text-white">
+        <div className="absolute inset-x-0 bottom-11 mx-auto md:bottom-8 max-w-3xl px-5 text-white">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-light">Vous êtes invité(e)</p>
           <h1 className="mt-1.5 font-serif text-3xl leading-tight drop-shadow md:text-5xl">{event.title}</h1>
           <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs opacity-95 md:text-sm">
