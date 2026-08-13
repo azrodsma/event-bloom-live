@@ -83,16 +83,57 @@ function CreatePage() {
   const canNext = step === 0 ? !!selectedType : step === 1 ? title.trim().length >= 2 : true;
 
   return (
-    <div className="space-y-5 px-4 py-4 pb-24">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary">Étape {step + 1} / {steps.length}</p>
-        <h1 className="mt-1 font-serif text-3xl">{steps[step]}</h1>
+    <div className="pb-32">
+      {/* Barre supérieure */}
+      <div className="sticky top-0 z-30 -mx-4 mb-4 border-b border-border/60 bg-background/85 px-4 py-3 backdrop-blur-xl">
+        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3">
+          <button
+            onClick={() => (step > 0 ? setStep(step - 1) : navigate({ to: "/app" }))}
+            aria-label="Retour"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-surface"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </button>
+          <div className="min-w-0 text-center">
+            <p className="truncate font-serif text-lg leading-tight">Nouvel événement</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Étape {step + 1} / {steps.length} · {steps[step]}
+            </p>
+          </div>
+          <span className="shrink-0 rounded-full bg-gradient-primary px-3 py-1 text-[11px] font-bold text-white">
+            {Math.round(((step + 1) / steps.length) * 100)}%
+          </span>
+        </div>
+        {/* Pas numérotés */}
+        <div className="mt-3 flex items-center gap-1.5">
+          {steps.map((label, i) => (
+            <button
+              key={label}
+              onClick={() => i < step && setStep(i)}
+              className="group flex min-w-0 flex-1 flex-col items-center gap-1.5"
+              aria-current={i === step}
+            >
+              <span
+                className={`grid h-6 w-6 shrink-0 place-items-center rounded-full text-[11px] font-bold transition ${
+                  i < step
+                    ? "bg-gold text-white"
+                    : i === step
+                      ? "bg-gradient-primary text-white shadow-glow"
+                      : "border border-border bg-surface text-muted-foreground"
+                }`}
+              >
+                {i < step ? <Check className="h-3.5 w-3.5" /> : i + 1}
+              </span>
+              <span className={`hidden truncate text-[10px] font-semibold sm:block ${i === step ? "text-primary" : "text-muted-foreground"}`}>
+                {label}
+              </span>
+            </button>
+          ))}
+        </div>
       </div>
-      <div className="flex gap-1">
-        {steps.map((_, i) => (
-          <div key={i} className={`h-1 flex-1 rounded-full transition ${i <= step ? "bg-gradient-primary" : "bg-border"}`} />
-        ))}
-      </div>
+
+      <div className="mx-auto max-w-2xl space-y-5">
+
 
       <div className="rounded-3xl bg-surface p-5 shadow-card">
         {step === 0 && (
