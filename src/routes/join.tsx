@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 import { useState } from "react";
-import { QrCode, ArrowRight } from "lucide-react";
+import { QrCode, ArrowRight, Camera, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/join")({
   head: () => ({
@@ -33,35 +33,45 @@ function JoinPage() {
           Connexion
         </Link>
       </header>
-      <main className="mx-auto flex max-w-md flex-col items-center px-4 pt-10 text-center sm:px-6">
-        <div className="grid h-20 w-20 place-items-center rounded-3xl bg-gradient-primary text-white shadow-glow">
-          <QrCode className="h-9 w-9" />
+      <main className="mx-auto w-full max-w-md px-4 pb-16 pt-4 sm:px-6 sm:pt-10">
+        <div className="rounded-[2rem] border border-border/70 bg-surface/80 p-6 text-center shadow-elegant backdrop-blur sm:p-8">
+          <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-primary text-white shadow-glow sm:h-20 sm:w-20 sm:rounded-3xl">
+            <QrCode className="h-8 w-8 sm:h-9 sm:w-9" />
+          </div>
+          <h1 className="mt-5 font-serif text-[1.75rem] leading-tight sm:text-4xl">Vous avez reçu une invitation ?</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Entrez le code d'invitation reçu par vos proches, ou scannez votre QR code.
+          </p>
+          <form onSubmit={submit} className="mt-6 w-full space-y-3">
+            <input
+              value={code}
+              onChange={(e) => setCode(e.target.value.toUpperCase())}
+              className="w-full rounded-2xl border border-border bg-background px-4 py-4 text-center font-mono text-xl tracking-[0.35em] outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10 sm:text-2xl"
+              placeholder="ABC-123"
+              maxLength={12}
+              inputMode="text"
+              autoCapitalize="characters"
+            />
+            <button
+              type="submit"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow transition active:scale-[0.98]"
+            >
+              Rejoindre l'événement <ArrowRight className="h-4 w-4" />
+            </button>
+            <button type="button" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background px-5 py-3.5 text-sm font-medium transition active:scale-[0.98]">
+              <Camera className="h-4 w-4 text-primary" /> Scanner un QR code
+            </button>
+          </form>
+          <div className="mt-6 flex items-center justify-center gap-2 rounded-2xl bg-primary-light/60 px-4 py-3 text-xs text-muted-foreground">
+            <ShieldCheck className="h-4 w-4 shrink-0 text-primary" />
+            <span>Accès privé : seuls les invités munis d'un code entrent.</span>
+          </div>
+          <p className="mt-4 text-xs text-muted-foreground">
+            Astuce : essayez{" "}
+            <button type="button" onClick={() => setCode("DEMO-001")} className="font-semibold text-primary underline">DEMO-001</button>{" "}
+            pour découvrir un événement de démonstration.
+          </p>
         </div>
-        <h1 className="mt-6 font-serif text-4xl">Vous avez reçu une invitation ?</h1>
-        <p className="mt-3 text-muted-foreground">
-          Entrez le code d'invitation reçu par vos proches, ou scannez votre QR code.
-        </p>
-        <form onSubmit={submit} className="mt-8 w-full space-y-3">
-          <input
-            value={code}
-            onChange={(e) => setCode(e.target.value.toUpperCase())}
-            className="w-full rounded-2xl border border-border bg-surface px-5 py-4 text-center font-mono text-2xl tracking-[0.4em] outline-none focus:border-primary"
-            placeholder="ABC-123"
-            maxLength={12}
-          />
-          <button
-            type="submit"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow"
-          >
-            Rejoindre l'événement <ArrowRight className="h-4 w-4" />
-          </button>
-        </form>
-        <button className="mt-4 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium">
-          📷 Scanner un QR code
-        </button>
-        <p className="mt-8 text-xs text-muted-foreground">
-          Astuce : essayez <button onClick={() => setCode("DEMO-001")} className="font-semibold text-primary underline">DEMO-001</button> pour découvrir un événement de démonstration.
-        </p>
       </main>
     </div>
   );
