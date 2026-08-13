@@ -234,7 +234,7 @@ function Landing() {
             <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Tout ce dont vous avez besoin</h2>
             <div className="rule-gold mx-auto mt-5 w-24" />
           </div>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-4 lg:grid-cols-3">
             {[
               { icon: Radio, title: "Live intégré", desc: "YouTube Live ou Twitch, intégrés à votre page événement." },
               { icon: Gift, title: "Cagnotte externe", desc: "Leetchi, Lydia, OnParticipe, PayPal... Vous choisissez." },
@@ -245,13 +245,13 @@ function Landing() {
             ].map((f) => (
               <div
                 key={f.title}
-                className="group rounded-2xl border border-border/70 bg-surface p-6 shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-soft"
+                className="group rounded-2xl border border-border/70 bg-surface p-4 shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-soft sm:p-6"
               >
-                <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary-light text-primary transition group-hover:bg-gradient-primary group-hover:text-white">
-                  <f.icon className="h-5 w-5" />
+                <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary-light text-primary transition group-hover:bg-gradient-primary group-hover:text-white sm:h-11 sm:w-11">
+                  <f.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
-                <h3 className="mt-4 font-serif text-xl">{f.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+                <h3 className="mt-3 font-serif text-base leading-snug sm:mt-4 sm:text-xl">{f.title}</h3>
+                <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground sm:text-sm">{f.desc}</p>
               </div>
             ))}
           </div>
