@@ -97,7 +97,7 @@ function RsvpPage() {
         <Link to="/" className="absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-background/80 backdrop-blur">
           <ChevronLeft className="h-5 w-5" />
         </Link>
-        <div className="absolute inset-x-0 bottom-11 mx-auto md:bottom-8 max-w-3xl px-5 text-white">
+        <div className="absolute inset-x-0 bottom-11 mx-auto md:bottom-14 max-w-3xl px-5 text-white">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-light">Vous êtes invité(e)</p>
           <h1 className="mt-1.5 font-serif text-3xl leading-tight drop-shadow md:text-5xl">{event.title}</h1>
           <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs opacity-95 md:text-sm">
