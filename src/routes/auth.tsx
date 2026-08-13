@@ -119,9 +119,11 @@ function AuthPage() {
           <h2 className="mt-5 font-serif text-5xl leading-[0.95] text-foreground lg:text-6xl">
             Retrouvez vos<br /><span className="italic text-gradient-primary">plus beaux</span><br />moments.
           </h2>
+          <div className="rule-gold mt-6 w-20" />
           <p className="mt-5 max-w-md text-muted-foreground">
             Vos événements, vos proches, vos souvenirs. Dans un espace privé, doux, sans compromis.
           </p>
+
           <ul className="mt-7 space-y-2.5 text-sm text-foreground/80">
             {["Live YouTube/Twitch encapsulé, chat & réactions", "Livre d'or multimédia et album collaboratif", "Cagnotte externe, invitations et RSVP"].map((f) => (
               <li key={f} className="flex items-start gap-2.5">
