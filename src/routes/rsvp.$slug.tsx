@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ChevronLeft, Check, PartyPopper, HelpCircle, UserX, CalendarDays, MapPin } from "lucide-react";
+import { ChevronLeft, Check, PartyPopper, HelpCircle, UserX, CalendarDays, MapPin, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { getEventBySlug } from "@/lib/events.functions";
 import { submitRsvp } from "@/lib/rsvp.functions";
@@ -28,16 +28,44 @@ export const Route = createFileRoute("/rsvp/$slug")({
   }),
   loader: routeLoader,
   errorComponent: ({ error }) => (
-    <div className="mx-auto max-w-md px-6 py-16 text-center">
-      <p className="font-serif text-2xl">Oups</p>
-      <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+    <div className="grid min-h-dvh place-items-center bg-gradient-mesh px-4 py-16">
+      <div className="w-full max-w-md rounded-[32px] bg-surface/85 p-8 text-center shadow-modal ring-1 ring-border backdrop-blur-xl">
+        <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-primary text-white shadow-glow">
+          <Sparkles className="h-6 w-6" />
+        </div>
+        <p className="mt-5 font-serif text-3xl">Oups</p>
+        <div className="rule-gold mx-auto mt-3 w-14" />
+        <p className="mt-3 text-sm text-muted-foreground">{error.message}</p>
+        <Link
+          to="/events"
+          className="mt-6 inline-flex items-center justify-center rounded-full bg-gradient-primary px-5 py-3 text-sm font-semibold text-white shadow-glow"
+        >
+          Voir les événements
+        </Link>
+      </div>
     </div>
   ),
   notFoundComponent: () => (
-    <div className="mx-auto max-w-md px-6 py-16 text-center">
-      <p className="font-serif text-2xl">Événement introuvable</p>
+    <div className="grid min-h-dvh place-items-center bg-gradient-mesh px-4 py-16">
+      <div className="w-full max-w-md rounded-[32px] bg-surface/85 p-8 text-center shadow-modal ring-1 ring-border backdrop-blur-xl">
+        <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-primary text-white shadow-glow">
+          <Sparkles className="h-6 w-6" />
+        </div>
+        <p className="mt-5 font-serif text-3xl">Événement introuvable</p>
+        <div className="rule-gold mx-auto mt-3 w-14" />
+        <p className="mt-3 text-sm text-muted-foreground">
+          Ce lien d'invitation n'est plus valide. Demandez un nouveau lien aux organisateurs.
+        </p>
+        <Link
+          to="/events"
+          className="mt-6 inline-flex items-center justify-center rounded-full bg-gradient-primary px-5 py-3 text-sm font-semibold text-white shadow-glow"
+        >
+          Voir les événements
+        </Link>
+      </div>
     </div>
   ),
+
   component: RsvpPage,
 });
 
