@@ -1,18 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { StoryRail } from "@/components/StoryRail";
-import { EventCard } from "@/components/EventCard";
+import { EventRail } from "@/components/EventRail";
+import { FeedEventCard } from "@/components/FeedEventCard";
 import { listPublicEvents } from "@/lib/events.functions";
 import { adaptEvent, type DbEvent } from "@/lib/event-adapter";
 import { useState } from "react";
-import { Sparkles, Radio, Calendar, Camera, Heart, ArrowUpRight, Compass, Plus } from "lucide-react";
+import { Sparkles, Radio, Heart, ArrowUpRight, Compass, Plus } from "lucide-react";
 
 export const Route = createFileRoute("/app/")({
   head: () => ({
     meta: [
       { title: "Accueil — MaFeliza" },
       { name: "description", content: "Vos événements, vos proches, en un fil unique." },
+      { property: "og:title", content: "Accueil — MaFeliza" },
+      { property: "og:description", content: "Vos événements, vos proches, en un fil unique." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,
@@ -39,120 +43,66 @@ function Home() {
   const liveCount = events.filter((e) => e.isLive).length;
 
   return (
-    <div className="w-full min-w-0 space-y-8 py-6 sm:space-y-10 lg:py-10">
-      {/* Hero bento */}
-      <section className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-6 lg:auto-rows-[minmax(9.5rem,auto)]">
+    <div className="w-full min-w-0 space-y-5 py-4 sm:space-y-7 lg:py-8">
+      {/* Rail d'événements */}
+      <EventRail events={events} />
 
-        <div className="col-span-2 relative overflow-hidden rounded-[32px] bg-foreground p-6 text-background md:col-span-4 md:p-8 lg:col-span-4 lg:row-span-2 lg:p-10">
-          <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gradient-primary opacity-70 blur-2xl animate-blob lg:h-72 lg:w-72" />
-          <div className="pointer-events-none absolute -bottom-20 -left-10 h-48 w-48 rounded-full bg-gold opacity-40 blur-3xl animate-blob lg:h-64 lg:w-64" style={{ animationDelay: "3s" }} />
-          <div className="relative flex h-full flex-col">
-            <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium uppercase tracking-widest text-background/90 backdrop-blur">
-              <Sparkles className="h-3 w-3" /> Bonjour
-            </span>
-            <h1 className="mt-4 max-w-[15ch] text-balance font-serif text-[clamp(2rem,7vw,2.75rem)] leading-[1.02] tracking-tight md:text-5xl xl:text-6xl">
-              Vos souvenirs,<br /><span className="italic text-primary">en direct</span>.
-            </h1>
-            <p className="mt-3 max-w-[48ch] text-sm text-background/70 lg:text-base">
-              {events.length} événement{events.length > 1 ? "s" : ""} · {liveCount} en live maintenant.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-2 lg:mt-auto lg:pt-8">
-              <Link to="/app/create" className="tap inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">
-                Créer un événement <ArrowUpRight className="h-4 w-4" />
-              </Link>
-              <Link to="/app/explore" className="tap inline-flex items-center gap-1.5 rounded-full border border-background/20 bg-background/5 px-5 py-3 text-sm font-medium text-background backdrop-blur hover:bg-background/10">
-                Explorer
-              </Link>
-            </div>
-          </div>
-        </div>
+      {/* Filtres */}
+      <div className="scrollbar-hide -mx-4 flex gap-2.5 overflow-x-auto px-4 pb-0.5 sm:mx-0 sm:px-0">
+        {tabs.map((t) => {
+          const active = tab === t;
+          const isFav = t === "Favoris";
+          return (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`tap inline-flex shrink-0 items-center gap-1.5 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-colors ${
+                active
+                  ? "bg-primary-light text-primary shadow-card"
+                  : isFav
+                    ? "bg-primary-light/50 text-primary"
+                    : "bg-muted text-foreground/80 hover:bg-muted/70"
+              }`}
+              aria-pressed={active}
+            >
+              {isFav && <Heart className="h-4 w-4 fill-primary text-primary" />}
+              {t}
+            </button>
+          );
+        })}
+      </div>
 
-        <Link to="/app/ai-story" className="tap group col-span-2 relative flex flex-col justify-between overflow-hidden rounded-[28px] bg-gradient-primary p-5 text-white shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
-          <Sparkles className="h-6 w-6 lg:h-7 lg:w-7" />
-          <div className="mt-4">
-            <p className="font-serif text-2xl leading-tight lg:text-3xl">IA Story</p>
-            <p className="mt-1 text-[11px] opacity-90 lg:text-xs">Composez votre highlight reel</p>
-          </div>
-          <ArrowUpRight className="absolute right-4 top-4 h-4 w-4 opacity-80 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-        </Link>
-
-        <Link to="/app/favorites" className="tap col-span-2 flex flex-col justify-between rounded-[28px] bg-cream p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
-          <Heart className="h-5 w-5 text-primary" />
-          <div className="mt-3">
-            <p className="font-serif text-lg leading-tight lg:text-xl">Favoris</p>
-            <p className="text-[11px] text-muted-foreground">Vos moments sauvegardés</p>
-          </div>
-        </Link>
-
-        <Link to="/app/create" className="tap col-span-1 flex flex-col justify-between rounded-[28px] bg-surface p-5 shadow-card ring-1 ring-border transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
-          <Calendar className="h-5 w-5 text-gold" />
-          <div className="mt-3">
-            <p className="font-serif text-lg leading-tight lg:text-xl">Nouveau</p>
-            <p className="text-[11px] text-muted-foreground">Créer en 8 étapes</p>
-          </div>
-        </Link>
-
-        <Link to="/app/explore" className="tap col-span-1 flex flex-col justify-between rounded-[28px] bg-secondary-light p-5 shadow-card transition hover:-translate-y-1 hover:shadow-glow md:col-span-2 lg:col-span-2 lg:p-6">
-          <Camera className="h-5 w-5 text-primary-dark" />
-          <div className="mt-3">
-            <p className="font-serif text-lg leading-tight lg:text-xl">Explorer</p>
-            <p className="text-[11px] text-muted-foreground">Événements publics</p>
-          </div>
-        </Link>
-      </section>
-
-      {/* Stories */}
-      <StoryRail />
-
-      {/* Feed + aside */}
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-10 xl:grid-cols-[minmax(0,1fr)_360px]">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-10 xl:grid-cols-[minmax(0,1fr)_360px]">
         <div className="min-w-0 space-y-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="font-serif text-2xl lg:text-3xl">Votre fil</h2>
-              <p className="text-xs text-muted-foreground">Les événements que vous suivez</p>
-            </div>
-            {liveCount > 0 && (
+          {liveCount > 0 && (
+            <div className="flex items-center justify-between">
+              <h2 className="font-serif text-xl lg:text-2xl">Votre fil</h2>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-live/10 px-3 py-1 text-[11px] font-semibold text-live">
                 <Radio className="h-3 w-3 animate-pulse" /> {liveCount} live
               </span>
-            )}
-          </div>
-          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
-            {tabs.map((t) => (
-              <button
-                key={t}
-                onClick={() => setTab(t)}
-                className={`tap shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all ${
-                  tab === t
-                    ? "bg-foreground text-background shadow-card"
-                    : "border border-border bg-surface text-muted-foreground hover:border-primary/40 hover:text-foreground"
-                }`}
-              >
-                {t}
-              </button>
-            ))}
-          </div>
+            </div>
+          )}
+
           {isLoading ? (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-              {[0, 1, 2, 3].map((i) => (
-                <div key={i} className="relative h-72 overflow-hidden rounded-[32px] bg-muted">
+            <div className="space-y-5">
+              {[0, 1].map((i) => (
+                <div key={i} className="relative h-[28rem] overflow-hidden rounded-[28px] bg-muted">
                   <div className="animate-shimmer absolute inset-0" />
                 </div>
               ))}
             </div>
           ) : filtered.length === 0 ? (
-            <div className="rounded-[32px] bg-surface p-10 text-center shadow-card ring-1 ring-border">
+            <div className="rounded-[28px] bg-surface p-10 text-center shadow-card ring-1 ring-border">
               <p className="font-serif text-2xl">Aucun événement</p>
               <p className="mt-2 text-sm text-muted-foreground">Créez le premier depuis le bouton +.</p>
-              <Link to="/app/create" className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-gradient-primary px-5 py-2.5 text-sm font-semibold text-white shadow-glow">
+              <Link to="/app/create" className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-gradient-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow">
                 <Plus className="h-4 w-4" /> Nouvel événement
               </Link>
             </div>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            <div className="space-y-6">
               {filtered.map((e) => (
-                <EventCard key={e.id} event={e} />
+                <FeedEventCard key={e.id} event={e} />
               ))}
             </div>
           )}
