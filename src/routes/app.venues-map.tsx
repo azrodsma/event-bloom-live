@@ -56,7 +56,7 @@ function VenuesMap() {
           <h3 className="font-display text-lg mb-3">Par région</h3>
           <div className="grid grid-cols-2 gap-3">
             {regions.map((r) => (
-              <div key={r.l} className="rounded-2xl border border-border/50 bg-card p-4">
+              <div key={r.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
                 <p className="font-medium text-sm">{r.l}</p>
                 <p className="font-display text-2xl mt-1 text-primary">{r.n}</p>
                 <p className="text-xs text-muted-foreground">Coup de cœur · {r.star}</p>

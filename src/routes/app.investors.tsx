@@ -57,7 +57,7 @@ function Investors() {
           <h3 className="font-display text-lg mb-3">Traction (T3 2026)</h3>
           <div className="grid grid-cols-2 gap-3">
             {metrics.map((m) => (
-              <div key={m.l} className="rounded-2xl border border-border/50 bg-card p-4">
+              <div key={m.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
                 <m.icon className="h-4 w-4 text-primary" />
                 <p className="mt-2 text-xs text-muted-foreground">{m.l}</p>
                 <p className="font-display text-2xl">{m.v}</p>
@@ -71,7 +71,7 @@ function Investors() {
           <h3 className="font-display text-lg mb-3">Historique de financement</h3>
           <div className="space-y-3">
             {rounds.map((r) => (
-              <div key={r.l} className="rounded-2xl border border-border/50 bg-card p-4">
+              <div key={r.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
                 <div className="flex items-center justify-between">
                   <p className="font-medium">{r.l}</p>
                   <span className="text-xs text-muted-foreground">{r.date}</span>
@@ -83,7 +83,7 @@ function Investors() {
           </div>
         </section>
 
-        <section className="rounded-2xl bg-cream p-5">
+        <section className="rounded-[26px] bg-gradient-mesh p-6 shadow-card ring-1 ring-border/60">
           <p className="font-display text-lg">Data room</p>
           <p className="text-xs text-muted-foreground mt-1">Accessible sur NDA · métriques temps réel, cohortes, unit economics.</p>
           <button className="mt-3 rounded-full bg-foreground px-5 py-2.5 text-sm text-white">Demander l'accès</button>

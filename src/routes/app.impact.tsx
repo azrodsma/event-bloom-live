@@ -49,7 +49,7 @@ function Impact() {
           <h3 className="font-display text-lg mb-3">Chiffres 2026</h3>
           <div className="grid gap-3 sm:grid-cols-3">
             {stats.map((s) => (
-              <div key={s.l} className="rounded-2xl border border-border/50 bg-card p-4">
+              <div key={s.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
                 <s.icon className="h-4 w-4 text-primary" />
                 <p className="mt-2 font-display text-2xl">{s.v}</p>
                 <p className="text-xs text-muted-foreground">{s.l}</p>
@@ -67,7 +67,7 @@ function Impact() {
           </div>
         </section>
 
-        <section className="rounded-2xl bg-cream p-5">
+        <section className="rounded-[26px] bg-gradient-mesh p-6 shadow-card ring-1 ring-border/60">
           <p className="font-display text-lg">Rapport intégré 2026</p>
           <p className="text-xs text-muted-foreground mt-1">Bilan carbone Scope 1-2-3, diversité, gouvernance et redistribution.</p>
           <button className="mt-3 rounded-full bg-foreground px-5 py-2.5 text-sm text-white">Télécharger le PDF (4,2 Mo)</button>

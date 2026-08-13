@@ -52,7 +52,7 @@ function A11y() {
 
         <section className="space-y-3">
           {promises.map((p) => (
-            <div key={p.l} className="rounded-2xl border border-border/50 bg-card p-5">
+            <div key={p.l} className="rounded-[26px] bg-surface p-5 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-0.5 hover:ring-primary/30">
               <p className="font-display text-lg">{p.l}</p>
               <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
             </div>

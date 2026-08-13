@@ -56,7 +56,7 @@ function Vault() {
 
         <section className="space-y-2">
           {items.map((i) => (
-            <div key={i.l} className="rounded-2xl border border-border/50 bg-card p-4">
+            <div key={i.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
               <div className="flex items-center justify-between gap-3">
                 <p className="font-medium text-sm">{i.l}</p>
                 <span className="text-xs text-muted-foreground shrink-0">{i.s}</span>

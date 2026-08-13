@@ -57,7 +57,7 @@ function Transport() {
           <h3 className="font-display text-lg mb-3">Navettes officielles</h3>
           <div className="space-y-3">
             {shuttles.map((s) => (
-              <div key={s.l} className="rounded-2xl border border-border/50 bg-card p-4">
+              <div key={s.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1">
                     <p className="font-medium">{s.l}</p>
@@ -78,7 +78,7 @@ function Transport() {
           <h3 className="font-display text-lg mb-3">Covoiturages invités</h3>
           <div className="space-y-3">
             {carpools.map((c) => (
-              <div key={c.driver} className="rounded-2xl border border-border/50 bg-card p-4">
+              <div key={c.driver} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
                 <div className="flex items-center gap-3">
                   <div className="rounded-full bg-cream p-2"><Car className="h-4 w-4 text-primary" /></div>
                   <div className="flex-1">

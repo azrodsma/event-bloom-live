@@ -49,7 +49,7 @@ function Cake_() {
 
         <section className="space-y-3">
           {tiers.map((t) => (
-            <div key={t.l} className="rounded-2xl border border-border/50 bg-card p-4">
+            <div key={t.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
               <p className="font-medium">{t.l}</p>
               <div className="mt-2 flex flex-wrap gap-3 text-xs text-muted-foreground">
                 <span>{t.parts}</span>
@@ -59,7 +59,7 @@ function Cake_() {
           ))}
         </section>
 
-        <section className="rounded-2xl border border-border/50 bg-card p-4">
+        <section className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
           <div className="flex items-center gap-2 mb-2">
             <Flame className="h-4 w-4 text-primary" />
             <p className="font-medium">Alternatives sucrées</p>

@@ -57,7 +57,7 @@ function Foundation() {
           <h3 className="font-display text-lg mb-3">Nos programmes</h3>
           <div className="space-y-3">
             {programs.map((p) => (
-              <div key={p.l} className="rounded-2xl border border-border/50 bg-card p-5">
+              <div key={p.l} className="rounded-[26px] bg-surface p-5 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-0.5 hover:ring-primary/30">
                 <div className="flex items-start justify-between gap-3">
                   <p className="font-display text-lg">{p.l}</p>
                   <span className="text-xs text-primary shrink-0">{p.budget}</span>
@@ -68,7 +68,7 @@ function Foundation() {
           </div>
         </section>
 
-        <section className="rounded-2xl bg-cream p-5">
+        <section className="rounded-[26px] bg-gradient-mesh p-6 shadow-card ring-1 ring-border/60">
           <p className="font-medium text-sm">Soutenir la fondation</p>
           <p className="text-xs text-muted-foreground mt-1">Don ponctuel · déductible à 66% des impôts (loi française) · reçu fiscal envoyé sous 15 jours.</p>
           <button className="mt-3 rounded-full bg-primary px-5 py-2 text-sm font-medium text-white">Faire un don</button>

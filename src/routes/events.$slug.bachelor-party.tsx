@@ -31,7 +31,7 @@ const evg = { date: "23-25 mai · Marseille", org: "Marc + Antoine", people: 11,
 
 function Card({ t, d }: { t: string; d: typeof evjf }) {
   return (
-    <div className="rounded-2xl border border-border/50 bg-card p-5">
+    <div className="rounded-[26px] bg-surface p-5 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-0.5 hover:ring-primary/30">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-widest text-primary">{t}</p>
