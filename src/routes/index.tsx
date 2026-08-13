@@ -96,7 +96,7 @@ function Landing() {
         <div className="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 top-40 h-72 w-72 rounded-full bg-gold/25 blur-3xl" />
 
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-12 sm:py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/70 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground backdrop-blur">
               <Sparkles className="h-3.5 w-3.5" /> Nouveau · Bêta privée
@@ -214,27 +214,27 @@ function Landing() {
               icon: <BookHeart className="h-6 w-6" />,
             },
           ].map((s) => (
-            <div key={s.tag} className="group rounded-3xl border border-border bg-surface p-7 shadow-card transition hover:-translate-y-1">
-              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary-light text-primary">
+            <div key={s.tag} className="group rounded-3xl border border-border bg-surface p-5 shadow-card transition hover:-translate-y-1 sm:p-7">
+              <div className="grid h-11 w-11 place-items-center rounded-2xl bg-primary-light text-primary sm:h-12 sm:w-12">
                 {s.icon}
               </div>
-              <p className="mt-5 text-xs font-bold uppercase tracking-widest text-primary">{s.tag}</p>
-              <h3 className="mt-1 font-serif text-2xl">{s.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+              <p className="mt-4 text-xs font-bold uppercase tracking-widest text-primary sm:mt-5">{s.tag}</p>
+              <h3 className="mt-1 font-serif text-xl sm:text-2xl">{s.title}</h3>
+              <p className="mt-2 text-[13px] text-muted-foreground sm:text-sm">{s.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Features */}
-      <section id="features" className="scroll-mt-24 bg-secondary-light py-20">
+      <section id="features" className="scroll-mt-24 bg-secondary-light py-14 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="text-center">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Fonctionnalités</p>
             <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Tout ce dont vous avez besoin</h2>
             <div className="rule-gold mx-auto mt-5 w-24" />
           </div>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-4 lg:grid-cols-3">
             {[
               { icon: Radio, title: "Live intégré", desc: "YouTube Live ou Twitch, intégrés à votre page événement." },
               { icon: Gift, title: "Cagnotte externe", desc: "Leetchi, Lydia, OnParticipe, PayPal... Vous choisissez." },
@@ -245,13 +245,13 @@ function Landing() {
             ].map((f) => (
               <div
                 key={f.title}
-                className="group rounded-2xl border border-border/70 bg-surface p-6 shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-soft"
+                className="group rounded-2xl border border-border/70 bg-surface p-4 shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-soft sm:p-6"
               >
-                <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary-light text-primary transition group-hover:bg-gradient-primary group-hover:text-white">
-                  <f.icon className="h-5 w-5" />
+                <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary-light text-primary transition group-hover:bg-gradient-primary group-hover:text-white sm:h-11 sm:w-11">
+                  <f.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
-                <h3 className="mt-4 font-serif text-xl">{f.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+                <h3 className="mt-3 font-serif text-base leading-snug sm:mt-4 sm:text-xl">{f.title}</h3>
+                <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground sm:text-sm">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -259,7 +259,7 @@ function Landing() {
       </section>
 
       {/* Types événements */}
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Pour tous vos moments</p>
           <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Mariage, baptême, anniversaire...</h2>
@@ -279,7 +279,7 @@ function Landing() {
       </section>
 
       {/* Live events preview */}
-      <section id="events" className="scroll-mt-24 mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section id="events" className="scroll-mt-24 mx-auto max-w-6xl px-4 py-12 sm:py-16 sm:px-6">
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Découvrir</p>
