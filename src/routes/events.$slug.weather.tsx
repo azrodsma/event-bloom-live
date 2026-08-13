@@ -64,7 +64,7 @@ function Weather() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-border/50 bg-card p-5">
+        <section className="rounded-[26px] bg-surface p-5 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-0.5 hover:ring-primary/30">
           <div className="flex items-center gap-2">
             <Umbrella className="h-4 w-4 text-primary" />
             <p className="font-display text-lg">Plan de repli</p>

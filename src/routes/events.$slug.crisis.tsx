@@ -78,7 +78,7 @@ function Crisis() {
           <h3 className="font-display text-lg mb-3">Scénarios</h3>
           <div className="space-y-3">
             {scenarios.map((sc) => (
-              <div key={sc.s} className="rounded-2xl border border-border/50 bg-card p-5">
+              <div key={sc.s} className="rounded-[26px] bg-surface p-5 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-0.5 hover:ring-primary/30">
                 <div className="flex items-start justify-between gap-3">
                   <p className="font-medium">{sc.s}</p>
                   <span className="text-[10px] text-primary shrink-0 bg-primary/10 px-2 py-1 rounded-full">{sc.who}</span>

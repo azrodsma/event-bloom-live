@@ -74,7 +74,7 @@ function About() {
           <h3 className="font-display text-lg mb-3">Nos convictions</h3>
           <div className="space-y-3">
             {values.map((v) => (
-              <div key={v.l} className="rounded-2xl border border-border/50 bg-card p-5">
+              <div key={v.l} className="rounded-[26px] bg-surface p-5 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-0.5 hover:ring-primary/30">
                 <p className="font-display text-lg">{v.l}</p>
                 <p className="mt-2 text-sm text-muted-foreground">{v.desc}</p>
               </div>

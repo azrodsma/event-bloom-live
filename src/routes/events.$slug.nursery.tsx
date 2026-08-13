@@ -52,7 +52,7 @@ function Nursery() {
 
         <section className="space-y-3">
           {babies.map((b) => (
-            <div key={b.l} className="rounded-2xl border border-border/50 bg-card p-4">
+            <div key={b.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
               <p className="font-medium">{b.l}</p>
               <p className="text-xs text-muted-foreground">Parents : {b.parents}</p>
               <p className="mt-2 text-xs rounded-lg bg-cream/70 px-3 py-2">{b.needs}</p>

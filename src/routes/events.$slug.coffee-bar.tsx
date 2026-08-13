@@ -51,7 +51,7 @@ function CoffeeBar() {
 
         <section className="grid gap-3 sm:grid-cols-2">
           {drinks.map((d) => (
-            <div key={d.l} className="rounded-2xl border border-border/50 bg-card p-4">
+            <div key={d.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
               <p className="font-medium">{d.l}</p>
               <p className="mt-1 text-xs text-muted-foreground">{d.o}</p>
             </div>

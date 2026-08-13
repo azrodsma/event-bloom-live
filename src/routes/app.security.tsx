@@ -56,7 +56,7 @@ function Security() {
 
         <section className="grid gap-3 sm:grid-cols-2">
           {pillars.map((p) => (
-            <div key={p.l} className="rounded-2xl border border-border/50 bg-card p-5">
+            <div key={p.l} className="rounded-[26px] bg-surface p-5 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-0.5 hover:ring-primary/30">
               <div className="rounded-full bg-primary/10 p-2 w-fit"><p.icon className="h-4 w-4 text-primary" /></div>
               <p className="mt-2 font-display text-lg">{p.l}</p>
               <p className="mt-1 text-xs text-muted-foreground">{p.d}</p>
@@ -79,7 +79,7 @@ function Security() {
           </div>
         </section>
 
-        <section className="rounded-2xl bg-cream p-5">
+        <section className="rounded-[26px] bg-gradient-mesh p-6 shadow-card ring-1 ring-border/60">
           <p className="font-display text-lg">Trust Center</p>
           <p className="text-xs text-muted-foreground mt-1">Rapports d'incidents, uptime temps réel, sous-traitants, PIA RGPD.</p>
           <button className="mt-3 rounded-full bg-foreground px-5 py-2.5 text-sm text-white">Consulter</button>

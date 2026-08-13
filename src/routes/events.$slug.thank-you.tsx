@@ -50,7 +50,7 @@ function ThankYou() {
 
         <section className="space-y-2">
           {cards.map((c) => (
-            <div key={c.n} className="rounded-2xl border border-border/50 bg-card p-4">
+            <div key={c.n} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
               <div className="flex items-start justify-between gap-3">
                 <p className="font-medium">{c.n}</p>
                 <span className="text-xs text-primary">{c.gift}</span>

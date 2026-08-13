@@ -57,7 +57,7 @@ function International() {
           <h3 className="font-display text-lg mb-3">Nos bureaux</h3>
           <div className="grid gap-3 sm:grid-cols-2">
             {offices.map((o) => (
-              <div key={o.city} className="rounded-2xl border border-border/50 bg-card p-4">
+              <div key={o.city} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
                 <div className="flex items-center gap-2">
                   <Building2 className="h-4 w-4 text-primary" />
                   <p className="font-display text-lg">{o.city}</p>

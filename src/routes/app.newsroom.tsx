@@ -56,7 +56,7 @@ function Newsroom() {
 
         <section className="space-y-3">
           {posts.map((p) => (
-            <div key={p.l} className="rounded-2xl border border-border/50 bg-card p-4">
+            <div key={p.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
               <div className="flex items-center gap-2 text-xs">
                 <span className="rounded-full bg-primary/10 px-2 py-0.5 text-primary">{p.tag}</span>
                 <span className="text-muted-foreground">{p.date}</span>
@@ -71,7 +71,7 @@ function Newsroom() {
           <h3 className="font-display text-lg mb-3">Interventions médias</h3>
           <div className="grid gap-3 sm:grid-cols-3">
             {media.map((m) => (
-              <div key={m.l} className="rounded-2xl border border-border/50 bg-card p-4">
+              <div key={m.l} className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:ring-primary/30">
                 <m.icon className="h-4 w-4 text-primary" />
                 <p className="mt-2 font-medium text-sm">{m.l}</p>
                 <p className="text-xs text-muted-foreground">{m.when}</p>
