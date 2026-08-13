@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { eventTypes } from "@/lib/mock-data";
 import { eventIcon } from "@/lib/event-icons";
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, Gift, Radio, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Gift, Radio, Sparkles } from "lucide-react";
 import { createEvent } from "@/lib/events.functions";
 import { useServerFn } from "@tanstack/react-start";
 import { useMutation } from "@tanstack/react-query";
