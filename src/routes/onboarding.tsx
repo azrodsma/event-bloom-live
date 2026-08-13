@@ -194,10 +194,11 @@ function Onboarding() {
             </div>
           </section>
         )}
+        </div>
       </main>
 
       {step < 3 && (
-        <footer className="sticky bottom-0 border-t border-border/60 bg-background/95 px-6 py-4 backdrop-blur-xl">
+        <footer className="relative sticky bottom-0 border-t border-border/60 bg-background/85 px-6 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 backdrop-blur-xl">
           <div className="mx-auto flex max-w-md items-center gap-3">
             {step > 0 && (
               <button
