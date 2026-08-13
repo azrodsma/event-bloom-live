@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound, useParams } from "@tanstack/react-router";
+import { eventErrorComponent, eventNotFoundComponent } from "@/components/RouteState";
 import { ChevronLeft, Users, UserCheck, UserX, HelpCircle, Download, ScanLine, MailPlus, Trash2 } from "lucide-react";
 import { getEventBySlug } from "@/lib/events.functions";
 import { listGuests, getRsvpStats, sendRsvpReminders, deleteGuest } from "@/lib/rsvp.functions";
@@ -13,8 +14,8 @@ export const Route = createFileRoute("/events/$slug/guests")({
     if (!ev) throw notFound();
     return { event: ev };
   },
-  errorComponent: ({ error }) => <div className="p-8 text-center text-sm">{error.message}</div>,
-  notFoundComponent: () => <div className="p-8 text-center">Événement introuvable</div>,
+  errorComponent: eventErrorComponent,
+  notFoundComponent: eventNotFoundComponent,
   component: GuestsPage,
 });
 
