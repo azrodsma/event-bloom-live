@@ -85,18 +85,29 @@ function Onboarding() {
         <div className="rounded-[32px] border border-border/60 bg-surface/85 p-6 shadow-modal backdrop-blur-xl sm:p-8">
         {step === 0 && (
           <section>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Étape 1 · Vous</p>
+            <div className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-primary to-accent text-white shadow-glow">
+              <Sparkles className="h-6 w-6" />
+            </div>
+            <p className="mt-5 text-xs uppercase tracking-[0.2em] text-muted-foreground">Étape 1 · Vous</p>
             <h1 className="mt-2 font-serif text-3xl leading-tight">Comment devons-nous vous appeler&nbsp;?</h1>
             <p className="mt-2 text-sm text-muted-foreground">Votre prénom sera visible par vos invités uniquement.</p>
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Prénom"
-              autoFocus
-              className="mt-6 w-full rounded-2xl border border-border bg-background px-4 py-4 text-lg outline-none focus:border-primary"
-            />
+            <label className="mt-6 block">
+              <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Prénom</span>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Camille"
+                autoFocus
+                className="w-full rounded-2xl border border-border bg-background px-4 py-4 text-lg outline-none transition-colors focus:border-primary focus:bg-surface"
+              />
+            </label>
+            <div className="mt-4 space-y-2 rounded-2xl border border-border/60 bg-secondary/40 p-4 text-xs text-muted-foreground">
+              <p className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-primary" /> Espace 100 % privé, sur invitation</p>
+              <p className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-primary" /> Modifiable à tout moment dans votre profil</p>
+            </div>
           </section>
         )}
+
 
         {step === 1 && (
           <section>
