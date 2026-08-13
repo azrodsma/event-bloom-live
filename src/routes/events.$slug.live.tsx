@@ -3,7 +3,7 @@ import { findEvent } from "@/lib/mock-data";
 import { listRegistryItems } from "@/lib/registry.functions";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { X, Share2, Send, Heart, Gift, Users, ExternalLink, LogIn } from "lucide-react";
+import { X, Share2, Send, Heart, Gift, Users, ExternalLink, LogIn, Video } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getEventBySlug } from "@/lib/events.functions";
@@ -37,6 +37,15 @@ export const Route = createFileRoute("/events/$slug/live")({
 
 const tabs = ["Chat", "Cadeaux", "Cagnotte", "Photos"] as const;
 
+const cameras = [
+  { id: "main", label: "Salle" },
+  { id: "altar", label: "Autel" },
+  { id: "guests", label: "Invités" },
+  { id: "drone", label: "Drone" },
+] as const;
+
+const reactions = ["💖", "👏", "🎉", "🥂", "😍"] as const;
+
 type LiveMsg = { id: string; author_name: string | null; content: string; created_at: string };
 
 function LivePage() {
@@ -45,6 +54,7 @@ function LivePage() {
   const qc = useQueryClient();
   const [tab, setTab] = useState<(typeof tabs)[number]>("Chat");
   const [input, setInput] = useState("");
+  const [cam, setCam] = useState<string>("main");
   const [hearts, setHearts] = useState<{ id: number; left: number; emoji: string }[]>([]);
   const listRef = useRef<HTMLDivElement>(null);
 
