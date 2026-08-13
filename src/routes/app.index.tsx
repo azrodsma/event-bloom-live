@@ -84,22 +84,39 @@ function Home() {
           )}
 
           {isLoading ? (
-            <div className="space-y-5">
+            <div className="space-y-6">
               {[0, 1].map((i) => (
-                <div key={i} className="relative h-[28rem] overflow-hidden rounded-[28px] bg-muted">
-                  <div className="animate-shimmer absolute inset-0" />
+                <div key={i} className="overflow-hidden rounded-[28px] bg-surface shadow-card ring-1 ring-border/60">
+                  <div className="flex items-center gap-3 p-4">
+                    <div className="h-10 w-10 shrink-0 rounded-full bg-muted" />
+                    <div className="min-w-0 flex-1 space-y-2">
+                      <div className="h-3 w-1/2 rounded-full bg-muted" />
+                      <div className="h-2.5 w-1/3 rounded-full bg-muted" />
+                    </div>
+                  </div>
+                  <div className="relative h-64 bg-muted">
+                    <div className="animate-shimmer absolute inset-0" />
+                  </div>
+                  <div className="space-y-2 p-4">
+                    <div className="h-3 w-2/3 rounded-full bg-muted" />
+                    <div className="h-2.5 w-1/2 rounded-full bg-muted" />
+                  </div>
                 </div>
               ))}
             </div>
           ) : filtered.length === 0 ? (
             <div className="rounded-[28px] bg-surface p-10 text-center shadow-card ring-1 ring-border">
-              <p className="font-serif text-2xl">Aucun événement</p>
+              <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-primary-light text-primary">
+                <Sparkles className="h-7 w-7" />
+              </div>
+              <p className="mt-4 font-serif text-2xl">Aucun événement</p>
               <p className="mt-2 text-sm text-muted-foreground">Créez le premier depuis le bouton +.</p>
               <Link to="/app/create" className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-gradient-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow">
                 <Plus className="h-4 w-4" /> Nouvel événement
               </Link>
             </div>
           ) : (
+
             <div className="space-y-6">
               {filtered.map((e) => (
                 <FeedEventCard key={e.id} event={e} />
