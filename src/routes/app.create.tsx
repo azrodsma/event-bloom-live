@@ -133,20 +133,26 @@ function CreatePage() {
       </div>
 
       <div className="mx-auto max-w-2xl space-y-5">
-
-
-      <div className="rounded-3xl bg-surface p-5 shadow-card">
+      <div className="rounded-3xl border border-border/60 bg-surface p-5 shadow-card">
         {step === 0 && (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {eventTypes.map((t) => (
               <button key={t} onClick={() => setSelectedType(t)}
-                className={`rounded-2xl border p-4 text-left transition ${selectedType === t ? "border-primary bg-primary-light shadow-glow" : "border-border bg-background hover:border-primary/40"}`}>
-                <div className="grid h-10 w-10 place-items-center rounded-xl bg-cream text-primary">{(() => { const I = eventIcon(t); return <I className="h-5 w-5" />; })()}</div>
-                <div className="mt-2 text-sm font-semibold">{t}</div>
+                className={`group relative overflow-hidden rounded-2xl border p-4 text-left transition ${selectedType === t ? "border-primary bg-primary-light shadow-glow" : "border-border bg-background hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card"}`}>
+                {selectedType === t && (
+                  <span className="absolute right-3 top-3 grid h-5 w-5 place-items-center rounded-full bg-gradient-primary text-white">
+                    <Check className="h-3 w-3" />
+                  </span>
+                )}
+                <div className={`grid h-11 w-11 place-items-center rounded-2xl transition ${selectedType === t ? "bg-gradient-primary text-white" : "bg-cream text-primary"}`}>
+                  {(() => { const I = eventIcon(t); return <I className="h-5 w-5" />; })()}
+                </div>
+                <div className="mt-2.5 truncate text-sm font-semibold">{t}</div>
               </button>
             ))}
           </div>
         )}
+
 
         {step === 1 && (
           <div className="space-y-3">
