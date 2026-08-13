@@ -12,7 +12,7 @@ export function EventCard({ event }: { event: MockEvent }) {
       params={{ slug: event.slug }}
       className="group relative flex h-full flex-col overflow-hidden rounded-[32px] bg-surface shadow-card ring-1 ring-border/60 transition-all duration-500 hover:-translate-y-1 hover:shadow-modal hover:ring-primary/30"
     >
-      <div className="relative aspect-[4/5] w-full flex-1 overflow-hidden bg-muted sm:aspect-[16/10]">
+      <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden bg-muted sm:aspect-[16/10]">
 
         <img
           src={event.cover}
@@ -20,7 +20,7 @@ export function EventCard({ event }: { event: MockEvent }) {
           className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/15" />
         <div className="pointer-events-none absolute -inset-1 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-100" />
 
         <div className="absolute left-4 top-4 flex items-center gap-2">
@@ -72,7 +72,7 @@ export function EventCard({ event }: { event: MockEvent }) {
       </div>
 
       {event.moneyPot ? (
-        <div className="flex items-center justify-between gap-3 px-5 py-4">
+        <div className="mt-auto flex min-h-[84px] items-center justify-between gap-3 px-5 py-4">
           <div className="min-w-0 flex-1">
             <p className="flex items-center gap-1.5 truncate text-xs font-medium text-muted-foreground">
               <Gift className="h-3.5 w-3.5 shrink-0 text-gold" /> <span className="truncate">{event.moneyPot.title}</span>
@@ -96,7 +96,7 @@ export function EventCard({ event }: { event: MockEvent }) {
           </span>
         </div>
       ) : (
-        <div className="flex items-center justify-between gap-3 px-5 py-4">
+        <div className="mt-auto flex min-h-[84px] items-center justify-between gap-3 px-5 py-4">
           <div className="min-w-0 flex-1">
             <p className="flex items-center gap-1.5 truncate text-xs font-medium text-muted-foreground">
               {(() => { const I = eventIcon(event.type); return <I className="h-3.5 w-3.5 shrink-0 text-gold" />; })()}
