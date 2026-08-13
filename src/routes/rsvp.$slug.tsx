@@ -7,6 +7,13 @@ import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { useMutation } from "@tanstack/react-query";
 
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
+    const ev = await getEventBySlug({ data: { slug: params.slug } });
+    if (!ev) throw notFound();
+    return { event: ev };
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
 export const Route = createFileRoute("/rsvp/$slug")({
   head: ({ params }) => ({
     meta: [
@@ -19,11 +26,7 @@ export const Route = createFileRoute("/rsvp/$slug")({
           { name: "robots", content: "noindex" },
 ],
   }),
-  loader: async ({ params }) => {
-    const ev = await getEventBySlug({ data: { slug: params.slug } });
-    if (!ev) throw notFound();
-    return { event: ev };
-  },
+  loader: routeLoader,
   errorComponent: ({ error }) => (
     <div className="mx-auto max-w-md px-6 py-16 text-center">
       <p className="font-serif text-2xl">Oups</p>
@@ -39,7 +42,7 @@ export const Route = createFileRoute("/rsvp/$slug")({
 });
 
 function RsvpPage() {
-  const { event } = Route.useLoaderData();
+  const { event } = Route.useLoaderData() as RouteLoaderData;
   const submit = useServerFn(submitRsvp);
   const [status, setStatus] = useState<"confirmed" | "declined" | "maybe">("confirmed");
   const [fullName, setFullName] = useState("");

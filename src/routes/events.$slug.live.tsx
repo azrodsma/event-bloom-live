@@ -13,14 +13,7 @@ import { listAlbumMedia } from "@/lib/album.functions";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/events/$slug/live")({
-  head: ({ params }) => ({
-    meta: [
-      { title: `Live · ${params.slug} — MaFeliza` },
-      { name: "description", content: "Diffusion en direct, chat et réactions." },
-    ],
-  }),
-  loader: async ({ params }) => {
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
     const db = await getEventBySlug({ data: { slug: params.slug } });
     if (!db) {
       const e = findEvent(params.slug);
@@ -28,7 +21,17 @@ export const Route = createFileRoute("/events/$slug/live")({
       return { event: e, dbId: null as string | null };
     }
     return { event: adaptEvent(db), dbId: db.id };
-  },
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
+export const Route = createFileRoute("/events/$slug/live")({
+  head: ({ params }) => ({
+    meta: [
+      { title: `Live · ${params.slug} — MaFeliza` },
+      { name: "description", content: "Diffusion en direct, chat et réactions." },
+    ],
+  }),
+  loader: routeLoader,
   component: LivePage,
 });
 
@@ -37,7 +40,7 @@ const tabs = ["Chat", "Cadeaux", "Cagnotte", "Photos"] as const;
 type LiveMsg = { id: string; author_name: string | null; content: string; created_at: string };
 
 function LivePage() {
-  const { event, dbId } = Route.useLoaderData();
+  const { event, dbId } = Route.useLoaderData() as RouteLoaderData;
   const { user } = useAuth();
   const qc = useQueryClient();
   const [tab, setTab] = useState<(typeof tabs)[number]>("Chat");

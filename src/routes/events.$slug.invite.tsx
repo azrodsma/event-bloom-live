@@ -8,6 +8,13 @@ import { toast } from "sonner";
 import { useMemo, useState } from "react";
 import { QrCodeSvg } from "@/components/QrCodeSvg";
 
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
+    const ev = await getEventBySlug({ data: { slug: params.slug } });
+    if (!ev) throw notFound();
+    return { event: ev };
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
 export const Route = createFileRoute("/events/$slug/invite")({
   head: ({ params }) => ({
     meta: [
@@ -15,18 +22,14 @@ export const Route = createFileRoute("/events/$slug/invite")({
       { name: "description", content: "Partagez votre événement à vos invités." },
     ],
   }),
-  loader: async ({ params }) => {
-    const ev = await getEventBySlug({ data: { slug: params.slug } });
-    if (!ev) throw notFound();
-    return { event: ev };
-  },
+  loader: routeLoader,
   errorComponent: ({ error }) => <div className="p-8 text-center text-sm">{error.message}</div>,
   notFoundComponent: () => <div className="p-8 text-center">Événement introuvable</div>,
   component: Invite,
 });
 
 function Invite() {
-  const { event } = Route.useLoaderData();
+  const { event } = Route.useLoaderData() as RouteLoaderData;
   const [copied, setCopied] = useState(false);
   const [personalName, setPersonalName] = useState("");
   const [personalEmail, setPersonalEmail] = useState("");

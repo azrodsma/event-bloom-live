@@ -10,14 +10,7 @@ import { listGuestbookEntries, createGuestbookEntry } from "@/lib/guestbook.func
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/events/$slug/guestbook")({
-  head: ({ params }) => ({
-    meta: [
-      { title: `Livre d'or · ${params.slug} — MaFeliza` },
-      { name: "description", content: "Laissez un message, une photo, une vidéo ou un vocal pour créer un souvenir inoubliable." },
-    ],
-  }),
-  loader: async ({ params }) => {
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
     const db = await getEventBySlug({ data: { slug: params.slug } });
     if (!db) {
       const e = findEvent(params.slug);
@@ -25,7 +18,17 @@ export const Route = createFileRoute("/events/$slug/guestbook")({
       return { event: e, dbId: null as string | null };
     }
     return { event: adaptEvent(db), dbId: db.id };
-  },
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
+export const Route = createFileRoute("/events/$slug/guestbook")({
+  head: ({ params }) => ({
+    meta: [
+      { title: `Livre d'or · ${params.slug} — MaFeliza` },
+      { name: "description", content: "Laissez un message, une photo, une vidéo ou un vocal pour créer un souvenir inoubliable." },
+    ],
+  }),
+  loader: routeLoader,
   component: Guestbook,
 });
 
@@ -41,7 +44,7 @@ type Entry = {
 };
 
 function Guestbook() {
-  const { event, dbId } = Route.useLoaderData();
+  const { event, dbId } = Route.useLoaderData() as RouteLoaderData;
   const { user } = useAuth();
   const qc = useQueryClient();
   const [filter, setFilter] = useState<(typeof filters)[number]>("Tous");

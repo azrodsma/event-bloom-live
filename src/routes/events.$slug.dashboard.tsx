@@ -2,14 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { findEvent } from "@/lib/mock-data";
 import { ChevronLeft, TrendingUp, Users, Heart, MessageCircle, Camera, Gift, Radio, Eye, Download } from "lucide-react";
 
-export const Route = createFileRoute("/events/$slug/dashboard")({
-  head: ({ params }) => ({
-    meta: [
-      { title: "Tableau de bord — MaFeliza" },
-      { name: "description", content: `Statistiques de l'événement ${params.slug}.` },
-    ],
-  }),
-  loader: async ({ params }) => {
+const routeLoader = async ({ params }: { params: { slug: string } }) => {
     const { getEventBySlug } = await import("@/lib/events.functions");
     const { adaptEvent } = await import("@/lib/event-adapter");
     const { getEventStats } = await import("@/lib/stats.functions");
@@ -21,7 +14,17 @@ export const Route = createFileRoute("/events/$slug/dashboard")({
     }
     const stats = await getEventStats({ data: { eventId: db.id } });
     return { event: adaptEvent(db), stats };
-  },
+  };
+type RouteLoaderData = Awaited<ReturnType<typeof routeLoader>>;
+
+export const Route = createFileRoute("/events/$slug/dashboard")({
+  head: ({ params }) => ({
+    meta: [
+      { title: "Tableau de bord — MaFeliza" },
+      { name: "description", content: `Statistiques de l'événement ${params.slug}.` },
+    ],
+  }),
+  loader: routeLoader,
   component: Dashboard,
 });
 
