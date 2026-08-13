@@ -122,7 +122,22 @@ function Guestbook() {
       </header>
 
       <main className="mx-auto max-w-2xl space-y-4 px-4 py-4">
+        {/* Stats souvenir */}
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            { label: "Messages", value: entries.length },
+            { label: "Photos & vidéos", value: entries.filter((e) => e.kind === "photo" || e.kind === "video").length },
+            { label: "Vocaux", value: entries.filter((e) => e.kind === "audio").length },
+          ].map((s) => (
+            <div key={s.label} className="rounded-2xl bg-surface p-3 text-center shadow-card ring-1 ring-border/60">
+              <p className="font-serif text-2xl leading-none text-primary">{s.value}</p>
+              <p className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground">{s.label}</p>
+            </div>
+          ))}
+        </div>
+
         {/* Compose */}
+
         <div className="rounded-3xl bg-surface p-4 shadow-card">
           {user ? (
             <>
