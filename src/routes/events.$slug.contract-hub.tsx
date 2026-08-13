@@ -33,23 +33,25 @@ const contracts = [
 function ContractHub() {
   return (
     <div className="module-page">
-      <header className="sticky top-0 z-40 border-b border-border/50 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
-          <Link to="/events/$slug" params={{ slug: "mariage-lea-thomas" }} className="rounded-full bg-cream p-2">
+      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-2xl safe-top">
+        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-3.5">
+          <Link to="/events/$slug" params={{ slug: "mariage-lea-thomas" }} className="glass grid h-10 w-10 place-items-center rounded-full ring-1 ring-border/60 transition-transform active:scale-95" aria-label="Retour">
             <ArrowLeft className="h-4 w-4" />
           </Link>
-          <div className="flex-1">
-            <h1 className="font-display text-xl">Contrats prestataires</h1>
-            <p className="text-xs text-muted-foreground">12 contrats · 68 785 €</p>
+          <div className="min-w-0 flex-1">
+            <h1 className="truncate font-serif text-xl leading-tight">Contrats prestataires</h1>
+            <p className="mt-0.5 truncate text-[11px] text-muted-foreground">12 contrats · 68 785 €</p>
           </div>
-          <Signature className="h-5 w-5 text-primary" />
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-primary-light">
+            <Signature className="h-4 w-4 text-primary" />
+          </span>
         </div>
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <ScrollText className="h-6 w-6" />
-          <h2 className="mt-2 font-display text-3xl leading-tight">Signature électronique certifiée eIDAS.</h2>
+          <h2 className="mt-2 font-serif text-3xl leading-[1.05] sm:text-4xl">Signature électronique certifiée eIDAS.</h2>
           <p className="mt-3 text-sm opacity-90">Chaque contrat est horodaté, chiffré et archivé 10 ans chez notre hébergeur qualifié SecNumCloud.</p>
         </section>
 
