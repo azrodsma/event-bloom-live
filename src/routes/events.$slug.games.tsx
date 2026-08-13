@@ -27,40 +27,53 @@ const games = [
 function Games() {
   return (
     <div className="module-page">
-      <header className="sticky top-0 z-40 border-b border-border/50 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
-          <Link to="/events/$slug" params={{ slug: "mariage-lea-thomas" }} className="rounded-full bg-cream p-2">
+      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-2xl safe-top">
+        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-3.5">
+          <Link
+            to="/events/$slug"
+            params={{ slug: "mariage-lea-thomas" }}
+            className="glass grid h-10 w-10 place-items-center rounded-full ring-1 ring-border/60 transition-transform active:scale-95"
+            aria-label="Retour"
+          >
             <ArrowLeft className="h-4 w-4" />
           </Link>
-          <div className="flex-1">
-            <h1 className="font-display text-xl">Animations & jeux</h1>
-            <p className="text-xs text-muted-foreground">6 animations · MC : Antoine</p>
+          <div className="min-w-0 flex-1">
+            <h1 className="truncate font-serif text-xl leading-tight">Animations & jeux</h1>
+            <p className="mt-0.5 truncate text-[11px] text-muted-foreground">6 animations · MC : Antoine</p>
           </div>
-          <Gamepad2 className="h-5 w-5 text-primary" />
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-primary-light">
+            <Gamepad2 className="h-4 w-4 text-primary" />
+          </span>
         </div>
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-dark to-foreground p-6 text-white">
-          <Trophy className="h-6 w-6" />
-          <h2 className="mt-2 font-display text-3xl leading-tight">Une soirée sans temps mort</h2>
-          <p className="mt-3 text-sm opacity-90">Ryhtme travaillé avec le MC, transitions musicales, briefings prestataires. On ne laisse rien retomber.</p>
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-primary via-primary-dark to-foreground p-7 text-white shadow-modal">
+          <div className="pointer-events-none absolute -right-10 -top-12 h-40 w-40 rounded-full bg-gold/25 blur-3xl" />
+          <span className="glass inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold text-white/95">
+            <Trophy className="h-3.5 w-3.5 text-gold" /> Programme signé
+          </span>
+          <h2 className="mt-3 font-serif text-3xl leading-[1.05] sm:text-4xl">Une soirée sans temps mort</h2>
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-white/85">
+            Rythme travaillé avec le MC, transitions musicales, briefings prestataires. On ne laisse rien retomber.
+          </p>
         </section>
 
-        <section className="space-y-3">
+        <section className="grid gap-3 sm:grid-cols-2">
           {games.map((g) => (
-            <div key={g.l} className="rounded-2xl border border-border/50 bg-card p-4">
+            <div
+              key={g.l}
+              className="group relative overflow-hidden rounded-[26px] bg-surface p-5 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-0.5 hover:ring-primary/30"
+            >
               <div className="flex items-start justify-between gap-3">
-                <div className="flex-1">
-                  <p className="font-medium">{g.l}</p>
-                  <div className="mt-1 flex flex-wrap gap-3 text-xs text-muted-foreground">
-                    <span className="text-primary">{g.when}</span>
-                    <span>{g.dur}</span>
-                    <span className="flex items-center gap-1"><Users className="h-3 w-3" />{g.players}</span>
-                  </div>
-                </div>
+                <p className="font-serif text-lg leading-snug">{g.l}</p>
+                <span className="shrink-0 rounded-full bg-gold-light px-2.5 py-1 text-[11px] font-semibold text-gold">{g.when}</span>
               </div>
-              <p className="mt-2 text-xs text-muted-foreground">{g.desc}</p>
+              <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[11px] font-medium text-muted-foreground">
+                <span className="rounded-full bg-primary-light px-2.5 py-1 text-primary">{g.dur}</span>
+                <span className="inline-flex items-center gap-1"><Users className="h-3 w-3" />{g.players}</span>
+              </div>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{g.desc}</p>
             </div>
           ))}
         </section>
