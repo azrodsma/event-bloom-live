@@ -170,7 +170,7 @@ function LivePage() {
   return (
     <div className="flex h-[100dvh] flex-col bg-dark text-white">
       {/* Player */}
-      <div className="relative aspect-video shrink-0 bg-black sm:aspect-[16/9]">
+      <div className="relative h-[54dvh] shrink-0 bg-black sm:aspect-[16/9] sm:h-auto">
         {event.livestream ? (
           <iframe
             src={event.livestream.embedUrl}
@@ -234,7 +234,7 @@ function LivePage() {
             href={event.moneyPot.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute bottom-3 right-3 w-40 rounded-2xl bg-black/55 p-3 ring-1 ring-white/15 backdrop-blur"
+            className="absolute right-3 top-28 w-40 rounded-2xl bg-black/55 p-3 ring-1 ring-white/15 backdrop-blur"
           >
             <p className="flex items-center gap-1 text-[10px] uppercase tracking-widest text-gold">
               <Gift className="h-3 w-3" /> Cagnotte
@@ -268,7 +268,7 @@ function LivePage() {
         </div>
 
         {/* Reaction rail */}
-        <div className="absolute bottom-24 right-3 flex flex-col gap-2 sm:bottom-28">
+        <div className="absolute bottom-3 right-3 flex flex-col gap-2">
           {reactions.map((r) => (
             <button
               key={r}
