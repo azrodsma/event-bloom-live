@@ -25,40 +25,65 @@ const roles = [
 function Godparents() {
   return (
     <div className="module-page">
-      <header className="sticky top-0 z-40 border-b border-border/50 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
-          <Link to="/events/$slug" params={{ slug: "mariage-lea-thomas" }} className="rounded-full bg-cream p-2">
+      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-2xl safe-top">
+        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-3.5">
+          <Link
+            to="/events/$slug"
+            params={{ slug: "mariage-lea-thomas" }}
+            className="glass grid h-10 w-10 place-items-center rounded-full ring-1 ring-border/60 transition-transform active:scale-95"
+            aria-label="Retour"
+          >
             <ArrowLeft className="h-4 w-4" />
           </Link>
-          <div className="flex-1">
-            <h1 className="font-display text-xl">Parrains & marraines</h1>
-            <p className="text-xs text-muted-foreground">Baptême de Louis · 12 septembre 2026</p>
+          <div className="min-w-0 flex-1">
+            <h1 className="truncate font-serif text-xl leading-tight">Parrains & marraines</h1>
+            <p className="mt-0.5 truncate text-[11px] text-muted-foreground">Baptême de Louis · 12 septembre 2026</p>
           </div>
-          <Baby className="h-5 w-5 text-primary" />
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-primary-light">
+            <Baby className="h-4 w-4 text-primary" />
+          </span>
         </div>
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-cream to-primary/10 p-6">
-          <Heart className="h-5 w-5 text-primary" />
-          <h2 className="mt-2 font-display text-3xl leading-tight">Quatre personnes qui l'accompagneront pour la vie.</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Deux parrains catholiques déclarés à la paroisse, deux parrains de cœur reconnus par la famille.</p>
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-mesh p-7 shadow-card ring-1 ring-border/60">
+          <div className="pointer-events-none absolute -left-12 -top-12 h-40 w-40 rounded-full bg-primary/15 blur-3xl" />
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-light px-3 py-1 text-[11px] font-semibold text-gold">
+            <Heart className="h-3.5 w-3.5" /> Cercle de cœur
+          </span>
+          <h2 className="mt-3 font-serif text-3xl leading-[1.05] sm:text-4xl">Quatre personnes qui l'accompagneront pour la vie.</h2>
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+            Deux parrains catholiques déclarés à la paroisse, deux parrains de cœur reconnus par la famille.
+          </p>
         </section>
 
-        <section className="space-y-3">
+        <section className="grid gap-3 sm:grid-cols-2">
           {roles.map((r) => (
-            <div key={r.n} className="rounded-2xl border border-border/50 bg-card p-5">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="font-display text-lg">{r.n}</p>
-                  <p className="text-xs text-primary">{r.role}</p>
+            <div
+              key={r.n}
+              className="rounded-[26px] bg-surface p-5 shadow-card ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-0.5 hover:ring-primary/30"
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-primary font-serif text-sm text-primary-foreground">
+                  {r.n.split(" ").map((w) => w[0]).join("").slice(0, 2)}
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate font-serif text-lg leading-tight">{r.n}</p>
+                  <p className="truncate text-[11px] font-semibold text-primary">{r.role}</p>
                 </div>
               </div>
-              <p className="mt-3 text-xs uppercase tracking-widest text-muted-foreground">Missions</p>
-              <ul className="mt-1 space-y-1 text-sm text-muted-foreground">
-                {r.tasks.map((t) => <li key={t}>· {t}</li>)}
+              <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Missions</p>
+              <ul className="mt-1.5 space-y-1.5 text-[13px] leading-relaxed text-muted-foreground">
+                {r.tasks.map((t) => (
+                  <li key={t} className="flex gap-2">
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gold" />
+                    {t}
+                  </li>
+                ))}
               </ul>
-              <p className="mt-3 text-xs text-muted-foreground"><span className="text-primary">Cadeau prévu :</span> {r.gift}</p>
+              <p className="mt-4 rounded-2xl bg-gold-light/60 px-3 py-2 text-[11px] font-medium text-foreground">
+                <span className="text-gold">Cadeau prévu :</span> {r.gift}
+              </p>
             </div>
           ))}
         </section>
