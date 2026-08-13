@@ -187,6 +187,30 @@ function EventsIndex() {
             </div>
           )}
         </div>
+
+        <section className="relative mt-10 overflow-hidden rounded-[36px] bg-gradient-to-br from-foreground to-primary-dark px-6 py-10 text-white shadow-modal sm:px-10 sm:py-12">
+          <div className="pointer-events-none absolute -right-12 -top-16 h-52 w-52 rounded-full bg-gold/25 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-10 h-52 w-52 rounded-full bg-primary/30 blur-3xl" />
+          <div className="relative sm:flex sm:items-end sm:justify-between sm:gap-8">
+            <div className="max-w-xl">
+              <span className="glass inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold text-white/95">
+                <Sparkles className="h-3.5 w-3.5 text-gold" /> Votre tour
+              </span>
+              <h2 className="mt-3 font-serif text-3xl leading-[1.05] sm:text-4xl">
+                Créez le cadre de votre prochain événement.
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-white/85">
+                Live, livre d'or multimédia, album collaboratif et cagnotte externe — en quelques minutes, invités inclus.
+              </p>
+            </div>
+            <Link
+              to="/app/create"
+              className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-foreground shadow-card transition-transform hover:-translate-y-0.5 sm:mt-0"
+            >
+              Créer mon événement <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </section>
       </div>
     </div>
   );
