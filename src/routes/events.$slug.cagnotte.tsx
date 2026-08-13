@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound, useParams } from "@tanstack/react-router";
+import { eventErrorComponent, eventNotFoundComponent } from "@/components/RouteState";
 import { ChevronLeft, ExternalLink, Save } from "lucide-react";
 import { useState } from "react";
 import { getEventBySlug, updateCagnotte } from "@/lib/events.functions";
@@ -14,8 +15,8 @@ export const Route = createFileRoute("/events/$slug/cagnotte")({
     if (!ev) throw notFound();
     return { event: ev };
   },
-  errorComponent: ({ error }) => <div className="p-8 text-center text-sm text-muted-foreground">{error.message}</div>,
-  notFoundComponent: () => <div className="p-8 text-center">Événement introuvable</div>,
+  errorComponent: eventErrorComponent,
+  notFoundComponent: eventNotFoundComponent,
   component: CagnottePage,
 });
 

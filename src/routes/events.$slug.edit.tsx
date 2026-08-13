@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
+import { eventErrorComponent, eventNotFoundComponent } from "@/components/RouteState";
 import { ChevronLeft, Save, Calendar, MapPin, Radio, Lock, Globe } from "lucide-react";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
@@ -22,8 +23,8 @@ export const Route = createFileRoute("/events/$slug/edit")({
     ],
   }),
   loader: routeLoader,
-  errorComponent: ({ error }) => <div className="p-8 text-center text-sm text-muted-foreground">{error.message}</div>,
-  notFoundComponent: () => <div className="p-8 text-center">Événement introuvable</div>,
+  errorComponent: eventErrorComponent,
+  notFoundComponent: eventNotFoundComponent,
   component: EditEvent,
 });
 
