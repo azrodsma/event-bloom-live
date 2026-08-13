@@ -43,9 +43,9 @@ function StoryComposer() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <Sparkles className="h-6 w-6" />
-          <h2 className="mt-2 font-display text-3xl leading-tight">Un magazine, votre histoire, sa voix.</h2>
+          <h2 className="mt-2 font-serif text-3xl leading-[1.05] sm:text-4xl">Un magazine, votre histoire, sa voix.</h2>
           <p className="mt-3 text-sm opacity-90">L'IA analyse vos photos, transcriptions vocales et légendes d'invités pour rédiger 6 chapitres dans le ton que vous choisissez : romantique, drôle, sobre, littéraire.</p>
         </section>
 

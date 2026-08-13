@@ -49,7 +49,7 @@ function Feedback() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <h2 className="font-display text-3xl leading-tight">Chaque retour, une décision produit.</h2>
           <p className="mt-3 text-sm opacity-90">Nos 32 dernières fonctionnalités sont nées d'un message d'utilisateur. Vraiment.</p>
         </section>

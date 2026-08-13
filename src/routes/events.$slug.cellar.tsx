@@ -44,9 +44,9 @@ function Cellar() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <Grape className="h-6 w-6" />
-          <h2 className="mt-2 font-display text-3xl leading-tight">6 cuvées, une histoire.</h2>
+          <h2 className="mt-2 font-serif text-3xl leading-[1.05] sm:text-4xl">6 cuvées, une histoire.</h2>
           <p className="mt-3 text-sm opacity-90">Chaque bouteille choisie avec Antoine, sommelier meilleur ouvrier de France 2023. Chambrées 24h avant, décantées 90 min avant service.</p>
           <div className="mt-5 grid grid-cols-3 gap-4 text-center">
             <div><p className="font-display text-2xl">{total}</p><p className="text-[10px] opacity-70">bouteilles</p></div>

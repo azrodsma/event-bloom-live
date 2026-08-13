@@ -48,9 +48,9 @@ function Academy() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <p className="text-xs uppercase tracking-widest opacity-70">Notre conviction</p>
-          <h2 className="mt-2 font-display text-3xl leading-tight">Organiser le plus beau jour ne devrait pas s'apprendre par erreurs.</h2>
+          <h2 className="mt-2 font-serif text-3xl leading-[1.05] sm:text-4xl">Organiser le plus beau jour ne devrait pas s'apprendre par erreurs.</h2>
         </section>
 
         <section>

@@ -50,7 +50,7 @@ function Civil() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <h2 className="font-display text-3xl leading-tight">Salle des mariages · 11h00.</h2>
           <p className="mt-2 text-sm opacity-90">Officiant : Madame le Maire, Isabelle Roquevert. Durée 30 min. Capacité 60 personnes assises.</p>
         </section>

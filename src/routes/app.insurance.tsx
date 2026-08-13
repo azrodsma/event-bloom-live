@@ -49,7 +49,7 @@ function Insurance() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <h2 className="font-display text-3xl leading-tight">Un jour J ne se décale pas. On l'assure.</h2>
           <p className="mt-3 text-sm opacity-90">Souscription en 4 minutes · effet immédiat · résiliation sous 14 jours sans frais.</p>
         </section>

@@ -48,7 +48,7 @@ function Security() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <p className="text-xs uppercase tracking-widest opacity-70">Notre engagement</p>
           <h2 className="mt-2 font-display text-2xl">Vos souvenirs sont sacrés. Notre stack aussi.</h2>
           <p className="mt-2 text-sm opacity-90">Souveraineté française · chiffrement systématique · audits indépendants publiés chaque année.</p>

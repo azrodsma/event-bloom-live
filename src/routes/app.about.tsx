@@ -48,7 +48,7 @@ function About() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <Award className="h-6 w-6" />
           <h2 className="mt-2 font-display text-4xl leading-tight">Les plus beaux jours méritent une infrastructure à leur hauteur.</h2>
           <p className="mt-4 text-sm opacity-90">Née d'un mariage raté à cause d'un Excel partagé. Une équipe de 24 personnes basée à Lyon, une mission : que plus jamais un moment de vie ne soit gâché par un outil médiocre.</p>

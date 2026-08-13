@@ -47,9 +47,9 @@ function Investors() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <p className="text-xs uppercase tracking-widest opacity-70">Notre thèse</p>
-          <h2 className="mt-2 font-display text-3xl leading-tight">La mémoire des moments qui comptent mérite mieux qu'un cloud photo.</h2>
+          <h2 className="mt-2 font-serif text-3xl leading-[1.05] sm:text-4xl">La mémoire des moments qui comptent mérite mieux qu'un cloud photo.</h2>
           <p className="mt-3 text-sm opacity-90">MaFeliza orchestre l'avant, le pendant et l'après des grands événements privés. 60 milliards € dépensés chaque année en Europe — 0% capturé numériquement de bout en bout.</p>
         </section>
 

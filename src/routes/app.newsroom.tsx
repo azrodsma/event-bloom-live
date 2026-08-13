@@ -48,7 +48,7 @@ function Newsroom() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <p className="text-xs uppercase tracking-widest opacity-70">À la une</p>
           <h2 className="mt-2 font-display text-2xl leading-tight">MaFeliza franchit les 50 000 événements orchestrés</h2>
           <p className="mt-2 text-sm opacity-90">18 mois de croissance, une équipe de 42 personnes, et un cap : devenir la référence européenne des célébrations privées.</p>

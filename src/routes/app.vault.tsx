@@ -43,9 +43,9 @@ function Vault() {
       </header>
 
       <main className="mx-auto max-w-3xl space-y-6 px-4 py-6">
-        <section className="rounded-3xl bg-gradient-to-br from-foreground to-primary-dark p-6 text-white">
+        <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-foreground to-primary-dark p-7 text-white shadow-modal">
           <Fingerprint className="h-6 w-6" />
-          <h2 className="mt-2 font-display text-3xl leading-tight">Ce qui compte doit durer plus longtemps que vous.</h2>
+          <h2 className="mt-2 font-serif text-3xl leading-[1.05] sm:text-4xl">Ce qui compte doit durer plus longtemps que vous.</h2>
           <p className="mt-3 text-sm opacity-90">Vos souvenirs sont fragmentés en trois centres de données (Paris, Marseille, Genève), chacun avec une clef distincte. Perdre un site ne compromet ni la vie privée, ni l'accès.</p>
           <div className="mt-5 grid grid-cols-3 gap-3 text-center">
             <div><p className="font-display text-2xl">37,5 Go</p><p className="text-[10px] opacity-70">stockés</p></div>
