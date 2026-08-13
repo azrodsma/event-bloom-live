@@ -32,16 +32,18 @@ const values = [
 function About() {
   return (
     <div className="min-h-screen bg-background pb-20">
-      <header className="sticky top-0 z-40 border-b border-border/50 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-4">
-          <Link to="/app" className="rounded-full bg-cream p-2">
+      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/70 backdrop-blur-2xl safe-top">
+        <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-3.5">
+          <Link to="/app" className="glass grid h-10 w-10 place-items-center rounded-full ring-1 ring-border/60 transition-transform active:scale-95" aria-label="Retour">
             <ArrowLeft className="h-4 w-4" />
           </Link>
-          <div className="flex-1">
-            <h1 className="font-display text-xl">À propos</h1>
-            <p className="text-xs text-muted-foreground">Lyon · fondée en janvier 2024</p>
+          <div className="min-w-0 flex-1">
+            <h1 className="truncate font-serif text-xl leading-tight">À propos</h1>
+            <p className="mt-0.5 truncate text-[11px] text-muted-foreground">Lyon · fondée en janvier 2024</p>
           </div>
-          <Building2 className="h-5 w-5 text-primary" />
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-primary-light">
+            <Building2 className="h-4 w-4 text-primary" />
+          </span>
         </div>
       </header>
 
