@@ -87,25 +87,52 @@ function EventsIndex() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-warm opacity-70" />
         <div className="pointer-events-none absolute -left-24 top-0 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
         <div className="pointer-events-none absolute -right-16 bottom-0 h-64 w-64 rounded-full bg-gold/25 blur-3xl" />
-        <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Découvrir</p>
-          <h1 className="mt-2 font-serif text-3xl leading-[1.05] sm:text-5xl">
-            Événements en direct
-            <span className="block text-primary">et à venir</span>
-          </h1>
-          <div className="rule-gold mt-5 w-24" />
-          <p className="mt-4 max-w-xl text-sm text-muted-foreground sm:text-base">
-            Rejoignez les célébrations publiques, suivez le live et déposez un mot dans le livre d'or.
-          </p>
-          <div className="mt-5 flex flex-wrap items-center gap-2 text-xs">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-live px-3 py-1.5 font-bold uppercase tracking-wider text-white">
+        <div className="relative mx-auto grid max-w-6xl items-end gap-8 px-4 py-10 sm:px-6 sm:py-14 md:grid-cols-[minmax(0,1fr)_auto]">
+          <div className="min-w-0">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Découvrir</p>
+            <h1 className="mt-2 font-serif text-3xl leading-[1.05] sm:text-5xl">
+              Événements en direct
+              <span className="block text-primary">et à venir</span>
+            </h1>
+            <div className="rule-gold mt-5 w-24" />
+            <p className="mt-4 max-w-xl text-sm text-muted-foreground sm:text-base">
+              Rejoignez les célébrations publiques, suivez le live et déposez un mot dans le livre d'or.
+            </p>
+            <div className="mt-5 flex flex-wrap items-center gap-2 text-xs md:hidden">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-live px-3 py-1.5 font-bold uppercase tracking-wider text-white">
+                <span className="h-1.5 w-1.5 rounded-full bg-white" /> {liveCount} en direct
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 font-semibold text-muted-foreground ring-1 ring-border/70">
+                <Sparkles className="h-3.5 w-3.5 text-gold" /> {events.length} célébrations
+              </span>
+            </div>
+          </div>
+
+          <div className="hidden w-full max-w-[260px] rounded-[28px] bg-surface/85 p-5 shadow-card ring-1 ring-border/60 backdrop-blur md:block">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-live px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white">
               <span className="h-1.5 w-1.5 rounded-full bg-white" /> {liveCount} en direct
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 font-semibold text-muted-foreground ring-1 ring-border/70">
-              <Sparkles className="h-3.5 w-3.5 text-gold" /> {events.length} célébrations
-            </span>
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              <div>
+                <p className="font-serif text-3xl leading-none">{events.length}</p>
+                <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                  Célébrations
+                </p>
+              </div>
+              <div>
+                <p className="font-serif text-3xl leading-none text-primary">
+                  {new Set(events.map((e) => e.city)).size}
+                </p>
+                <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Villes</p>
+              </div>
+            </div>
+            <div className="rule-gold mt-4 w-12" />
+            <p className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Sparkles className="h-3.5 w-3.5 shrink-0 text-gold" /> Album souvenir & livre d'or inclus
+            </p>
           </div>
         </div>
+
       </section>
 
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
