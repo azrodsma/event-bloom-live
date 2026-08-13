@@ -35,7 +35,7 @@ export function EventCard({ event }: { event: MockEvent }) {
             </span>
           ) : (
             <span className="rounded-full bg-gold-light px-2.5 py-1 text-[11px] font-semibold text-gold shadow-gold">
-              J-{event.countdownDays ?? 0}
+              {event.countdownDays && event.countdownDays > 0 ? `J-${event.countdownDays}` : "Souvenirs"}
             </span>
           )}
         </div>
