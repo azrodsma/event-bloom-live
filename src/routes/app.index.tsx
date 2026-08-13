@@ -1,22 +1,27 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { StoryRail } from "@/components/StoryRail";
-import { EventCard } from "@/components/EventCard";
+import { EventRail } from "@/components/EventRail";
+import { FeedEventCard } from "@/components/FeedEventCard";
 import { listPublicEvents } from "@/lib/events.functions";
 import { adaptEvent, type DbEvent } from "@/lib/event-adapter";
 import { useState } from "react";
-import { Sparkles, Radio, Calendar, Camera, Heart, ArrowUpRight, Compass, Plus } from "lucide-react";
+import { Sparkles, Radio, Heart, ArrowUpRight, Compass, Plus } from "lucide-react";
 
 export const Route = createFileRoute("/app/")({
   head: () => ({
     meta: [
       { title: "Accueil — MaFeliza" },
       { name: "description", content: "Vos événements, vos proches, en un fil unique." },
+      { property: "og:title", content: "Accueil — MaFeliza" },
+      { property: "og:description", content: "Vos événements, vos proches, en un fil unique." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,
 });
+
 
 const tabs = ["Pour vous", "En direct", "À venir", "Favoris"] as const;
 
