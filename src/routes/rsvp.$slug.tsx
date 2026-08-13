@@ -109,22 +109,23 @@ function RsvpPage() {
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Votre réponse</p>
           <div className="grid grid-cols-3 gap-2">
             {([
-              { k: "confirmed", label: "Je viens", emoji: "🎉" },
-              { k: "maybe", label: "Peut-être", emoji: "🤔" },
-              { k: "declined", label: "Absent", emoji: "😔" },
+              { k: "confirmed", label: "Je viens", Icon: PartyPopper },
+              { k: "maybe", label: "Peut-être", Icon: HelpCircle },
+              { k: "declined", label: "Absent", Icon: UserX },
             ] as const).map((o) => (
               <button
                 key={o.k}
                 onClick={() => setStatus(o.k)}
                 className={`rounded-2xl border-2 p-3 text-center text-xs font-semibold transition ${
-                  status === o.k ? "border-primary bg-primary-light" : "border-border bg-background"
+                  status === o.k ? "border-primary bg-primary-light text-primary" : "border-border bg-background text-foreground"
                 }`}
               >
-                <div className="text-xl">{o.emoji}</div>
-                <div className="mt-1">{o.label}</div>
+                <o.Icon className="mx-auto h-5 w-5" />
+                <div className="mt-1.5">{o.label}</div>
               </button>
             ))}
           </div>
+
         </div>
 
         <FormField label="Nom complet *" value={fullName} onChange={setFullName} placeholder="Prénom et nom" />
