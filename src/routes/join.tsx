@@ -33,15 +33,19 @@ function JoinPage() {
           Connexion
         </Link>
       </header>
-      <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 pb-12 pt-2 sm:px-6">    
-        <div className="rounded-[2rem] border border-border/70 bg-surface/80 p-6 text-center shadow-elegant backdrop-blur sm:p-8">
+      <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 pb-12 pt-2 sm:max-w-lg sm:px-6">
+        <div className="rounded-[2rem] border border-border/70 bg-surface/85 p-6 text-center shadow-elegant backdrop-blur sm:p-9">
           <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-primary text-white shadow-glow sm:h-20 sm:w-20 sm:rounded-3xl">
             <QrCode className="h-8 w-8 sm:h-9 sm:w-9" />
           </div>
-          <h1 className="mt-5 font-serif text-[1.75rem] leading-tight sm:text-4xl">Vous avez reçu une invitation ?</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <h1 className="mt-5 font-serif text-[1.75rem] leading-tight sm:text-[2.35rem]">
+            Vous avez reçu une invitation ?
+          </h1>
+          <div className="rule-gold mx-auto mt-4 w-16" />
+          <p className="mt-3 text-sm text-muted-foreground">
             Entrez le code d'invitation reçu par vos proches, ou scannez votre QR code.
           </p>
+
           <form onSubmit={submit} className="mt-6 w-full space-y-3">
             <input
               value={code}
