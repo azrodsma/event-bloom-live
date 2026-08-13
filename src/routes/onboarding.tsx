@@ -48,24 +48,41 @@ function Onboarding() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-secondary/40 to-background">
-      <header className="flex items-center justify-between px-4 pt-6">
-        <Logo />
-        <Link to="/app" className="text-xs font-medium text-muted-foreground hover:text-foreground">
+    <div className="relative flex min-h-dvh flex-col overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-warm opacity-70" />
+      <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-primary/25 blur-3xl" />
+      <div className="pointer-events-none absolute -right-20 bottom-10 h-72 w-72 rounded-full bg-gold/25 blur-3xl" />
+
+      <header className="relative flex items-center justify-between px-4 pt-[max(1.25rem,env(safe-area-inset-top))] sm:px-6">
+        <Link to="/">
+          <Logo />
+        </Link>
+        <Link
+          to="/app"
+          className="rounded-full bg-surface/80 px-3.5 py-1.5 text-xs font-semibold text-muted-foreground ring-1 ring-border/70 transition-colors hover:text-foreground"
+        >
           Passer
         </Link>
       </header>
 
-      <div className="mx-auto mt-4 flex w-full max-w-md items-center gap-2 px-6">
-        {Array.from({ length: totalSteps }).map((_, i) => (
-          <span
-            key={i}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${i <= step ? "bg-primary" : "bg-border"}`}
-          />
-        ))}
+      <div className="relative mx-auto mt-5 w-full max-w-md px-6">
+        <div className="flex items-center gap-2">
+          {Array.from({ length: totalSteps }).map((_, i) => (
+            <span
+              key={i}
+              className={`h-1.5 flex-1 rounded-full transition-all duration-500 ${
+                i < step ? "bg-primary/50" : i === step ? "bg-gradient-primary" : "bg-border"
+              }`}
+            />
+          ))}
+        </div>
+        <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          Étape {step + 1} / {totalSteps}
+        </p>
       </div>
 
-      <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-6 py-10">
+      <main className="relative mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 py-6 sm:px-6 sm:py-10">
+        <div className="rounded-[32px] border border-border/60 bg-surface/85 p-6 shadow-modal backdrop-blur-xl sm:p-8">
         {step === 0 && (
           <section>
             <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Étape 1 · Vous</p>
