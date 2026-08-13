@@ -150,8 +150,20 @@ function EventsIndex() {
         <div className="mt-6 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {isLoading
             ? Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="h-[360px] animate-pulse rounded-[32px] bg-muted/60" />
+                <div
+                  key={i}
+                  className="overflow-hidden rounded-[32px] border border-border/60 bg-surface shadow-card"
+                >
+                  <div className="aspect-[4/3] w-full animate-pulse bg-gradient-to-br from-primary/15 via-muted to-gold/15" />
+                  <div className="space-y-2.5 p-5">
+                    <div className="h-3 w-20 animate-pulse rounded-full bg-muted" />
+                    <div className="h-4 w-3/4 animate-pulse rounded-full bg-muted" />
+                    <div className="h-3 w-1/2 animate-pulse rounded-full bg-muted" />
+                    <div className="mt-3 h-9 w-28 animate-pulse rounded-full bg-muted" />
+                  </div>
+                </div>
               ))
+
             : filtered.map((e) => (
                 <div key={e.id} className="h-full">
                   <EventCard event={e} />
