@@ -207,24 +207,64 @@ function AuthPage() {
               </form>
             )
           ) : (
-            <form className="mt-6 space-y-3" onSubmit={handleEmailSubmit}>
+            <form className="mt-6 space-y-4" onSubmit={handleEmailSubmit}>
               {mode === "signup" && (
                 <div className="grid grid-cols-2 gap-3">
-                  <input value={firstName} onChange={(e) => setFirstName(e.target.value)} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Prénom" />
-                  <input value={lastName} onChange={(e) => setLastName(e.target.value)} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Nom" />
+                  <label className="block">
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Prénom</span>
+                    <input value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Camille" />
+                  </label>
+                  <label className="block">
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Nom</span>
+                    <input value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Durand" />
+                  </label>
                 </div>
               )}
-              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Email" />
-              <input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="Mot de passe (min. 6 caractères)" />
+              <label className="block">
+                <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Email</span>
+                <div className="relative">
+                  <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-2xl border border-border bg-background pl-11 pr-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface" placeholder="vous@exemple.com" />
+                </div>
+              </label>
+              <label className="block">
+                <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Mot de passe</span>
+                <div className="relative">
+                  <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    required
+                    minLength={6}
+                    autoComplete={mode === "login" ? "current-password" : "new-password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full rounded-2xl border border-border bg-background pl-11 pr-12 py-3 text-sm outline-none transition-colors focus:border-primary focus:bg-surface"
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+                {mode === "signup" && (
+                  <span className="mt-1.5 block text-[11px] text-muted-foreground">6 caractères minimum.</span>
+                )}
+              </label>
               <button
                 type="submit"
                 disabled={busy}
-                className="inline-flex w-full items-center justify-center rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60"
               >
                 {busy ? "…" : mode === "login" ? "Se connecter" : "Créer mon compte"}
+                {!busy && <ArrowRight className="h-4 w-4" />}
               </button>
             </form>
           )}
+
 
           {mode === "login" && (
             <p className="mt-3 text-center text-xs">
