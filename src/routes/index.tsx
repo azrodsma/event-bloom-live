@@ -144,6 +144,7 @@ function Landing() {
           <div className="relative mx-auto w-full max-w-[19rem] sm:max-w-sm">
             <div className="absolute -inset-6 rounded-[3rem] bg-gradient-primary opacity-20 blur-2xl" />
             <div className="relative rounded-[2.5rem] border border-border bg-dark p-3 shadow-modal">
+              <span className="pointer-events-none absolute left-1/2 top-[10px] z-20 h-1.5 w-16 -translate-x-1/2 rounded-full bg-white/25" />
               <div className="overflow-hidden rounded-[2rem] bg-background">
                 <div className="relative">
                   <img
@@ -153,8 +154,8 @@ function Landing() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   <div className="absolute left-4 top-4 flex items-center gap-2">
-                    <span className="animate-pulse-live rounded-full bg-live px-3 py-1 text-[11px] font-bold uppercase text-white">● Live</span>
-                    <span className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-foreground">
+                    <span className="animate-pulse-live rounded-full bg-live px-3 py-1 text-[11px] font-bold uppercase text-white shadow-card">● Live</span>
+                    <span className="rounded-full border border-white/40 bg-white/85 px-3 py-1 text-[11px] font-semibold text-foreground backdrop-blur-md">
                       <Users className="mr-1 inline h-3 w-3" />2 546
                     </span>
                   </div>
@@ -162,10 +163,10 @@ function Landing() {
                     <p className="text-[11px] uppercase tracking-[0.18em] opacity-80">Mariage · Bordeaux</p>
                     <h3 className="mt-1 font-serif text-3xl leading-tight">Sarah &amp; Thomas</h3>
                     <div className="mt-3 flex items-center gap-2">
-                      <div className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-white/25 bg-white/15 py-1.5 text-xs font-medium backdrop-blur">
-                        <MessageCircle className="h-3.5 w-3.5" /> Chat en direct
+                      <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full border border-white/30 bg-white/10 py-2 text-xs font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] backdrop-blur-xl">
+                        <MessageCircle className="h-3.5 w-3.5 shrink-0" /> Chat en direct
                       </div>
-                      <div className="flex items-center gap-1.5 rounded-full border border-white/25 bg-white/15 px-3 py-1.5 text-xs font-medium backdrop-blur">
+                      <div className="flex shrink-0 items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-3.5 py-2 text-xs font-medium shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] backdrop-blur-xl">
                         <Heart className="h-3.5 w-3.5 fill-current" /> 128
                       </div>
                     </div>
