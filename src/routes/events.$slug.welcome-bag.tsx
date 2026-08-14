@@ -56,7 +56,7 @@ function WelcomeBag() {
 
   return (
     <div className="module-page">
-      <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
+      <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border/40 bg-background/70 px-4 py-3.5 backdrop-blur-2xl safe-top">
         <div className="flex items-center gap-3">
           <Link to="/events/$slug" params={{ slug }} className="grid h-9 w-9 place-items-center rounded-full bg-surface">
             <ArrowLeft className="h-5 w-5" />
