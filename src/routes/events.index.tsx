@@ -183,7 +183,7 @@ function EventsIndex() {
               onClick={() => setFilter(t === filter ? null : t)}
               className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
                 t === filter
-                  ? "bg-primary text-primary-foreground shadow-glow"
+                  ? "bg-gradient-primary text-white shadow-glow"
                   : "bg-surface text-muted-foreground ring-1 ring-border/70"
               }`}
             >
