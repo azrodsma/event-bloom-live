@@ -52,7 +52,7 @@ function Achievements() {
 
   return (
     <div className="pb-24">
-      <div className="sticky top-[57px] z-20 flex items-center justify-between border-b border-border/60 bg-background/90 px-4 py-3 backdrop-blur-xl">
+      <div className="sticky top-[57px] z-20 flex items-center justify-between border-b border-border/40 bg-background/70 px-4 py-3.5 backdrop-blur-2xl safe-top">
         <Link to="/app/profile" className="grid h-9 w-9 place-items-center rounded-full hover:bg-muted" aria-label="Retour">
           <ArrowLeft className="h-5 w-5" />
         </Link>
