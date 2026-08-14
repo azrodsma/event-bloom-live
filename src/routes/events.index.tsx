@@ -62,7 +62,7 @@ function EventsIndex() {
   return (
     <div className="min-h-dvh bg-background">
       <header className="glass sticky top-0 z-30 border-b border-border/60">
-        <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6 sm:py-4">
           <Link
             to="/"
             aria-label="Retour à l'accueil"
@@ -70,17 +70,38 @@ function EventsIndex() {
           >
             <ArrowLeft className="h-4 w-4" />
           </Link>
-          <Link to="/" className="hidden sm:block">
+          <Link to="/" className="hidden shrink-0 sm:block">
             <Logo />
           </Link>
           <p className="min-w-0 flex-1 truncate font-serif text-lg sm:hidden">Événements</p>
+          <nav className="hidden flex-1 items-center justify-center gap-1 md:flex">
+            <Link
+              to="/"
+              className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary-light hover:text-primary"
+            >
+              Accueil
+            </Link>
+            <Link
+              to="/events"
+              className="rounded-full bg-primary-light px-4 py-2 text-sm font-semibold text-primary"
+            >
+              Événements
+            </Link>
+            <Link
+              to="/join"
+              className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary-light hover:text-primary"
+            >
+              J'ai une invitation
+            </Link>
+          </nav>
           <Link
             to="/app"
-            className="shrink-0 rounded-full bg-gradient-primary px-4 py-2 text-xs font-semibold text-white shadow-glow"
+            className="ml-auto shrink-0 rounded-full bg-gradient-primary px-4 py-2 text-xs font-semibold text-white shadow-glow sm:px-5 sm:py-2.5 sm:text-sm"
           >
             Mon espace
           </Link>
         </div>
+
       </header>
 
       <section className="relative overflow-hidden border-b border-border/60">
