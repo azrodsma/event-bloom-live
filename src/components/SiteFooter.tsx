@@ -41,11 +41,14 @@ export function SiteFooter() {
             </p>
             <div className="rule-gold mt-4 w-16" />
           </div>
-          {columns.map((col) => (
-
-            <div key={col.title}>
+          {columns.map((col, i) => (
+            <div key={col.title} className={i === 2 ? "col-span-2 lg:col-span-1" : undefined}>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">{col.title}</p>
-              <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <ul
+                className={`mt-3 space-y-2 text-sm text-muted-foreground ${
+                  i === 2 ? "grid grid-cols-2 gap-x-8 gap-y-2 space-y-0 lg:block lg:space-y-2" : ""
+                }`}
+              >
                 {col.links.map(([label, href]) => (
                   <li key={label}>
                     <a href={href} className="transition-colors hover:text-foreground">
@@ -56,6 +59,7 @@ export function SiteFooter() {
               </ul>
             </div>
           ))}
+
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} MaFeliza · Vos événements, en direct, en souvenirs.</p>
