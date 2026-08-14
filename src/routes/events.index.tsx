@@ -195,7 +195,15 @@ function EventsIndex() {
           ))}
         </div>
 
-        <div className="mt-6 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {!isLoading && (
+          <p className="mt-5 text-xs text-muted-foreground">
+            {filtered.length} événement{filtered.length > 1 ? "s" : ""}
+            {filter ? ` · ${filter}` : ""}
+          </p>
+        )}
+
+        <div className="mt-4 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
           {isLoading
             ? Array.from({ length: 6 }).map((_, i) => (
                 <div
