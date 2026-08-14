@@ -102,9 +102,10 @@ function Landing() {
             <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/70 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground backdrop-blur">
               <Sparkles className="h-3.5 w-3.5" /> Nouveau · Bêta privée
             </span>
-            <h1 className="mt-6 text-balance font-serif text-[2.75rem] leading-[1.03] text-foreground sm:text-6xl md:text-7xl">
+            <h1 className="mt-6 max-w-[34rem] text-balance font-serif text-[2.75rem] leading-[1.03] text-foreground sm:text-5xl md:text-6xl">
               Le réseau social privé de vos plus beaux <span className="italic text-gradient-primary">événements</span>.
             </h1>
+
             <span className="rule-gold mt-6 block max-w-[10rem]" />
             <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
               Créez votre événement, partagez votre live, recevez des messages, centralisez vos souvenirs et laissez vos proches participer, même à distance.
