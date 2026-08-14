@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Search, Radio, ArrowLeft, Sparkles, ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { SiteFooter } from "@/components/SiteFooter";
 import { EventCard } from "@/components/EventCard";
 import { eventTypes, mockEvents } from "@/lib/mock-data";
 import { eventIcon } from "@/lib/event-icons";
@@ -268,6 +269,8 @@ function EventsIndex() {
           </div>
         </section>
       </div>
+
+      <SiteFooter />
     </div>
   );
 }
