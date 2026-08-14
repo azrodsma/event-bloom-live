@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
+import { SiteFooter } from "@/components/SiteFooter";
 import { useState } from "react";
 import { QrCode, ArrowRight, Camera, ShieldCheck } from "lucide-react";
 
@@ -81,6 +82,7 @@ function JoinPage() {
           </p>
         </div>
       </main>
+      <SiteFooter />
     </div>
   );
 }
