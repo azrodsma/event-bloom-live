@@ -110,21 +110,22 @@ function Landing() {
             <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
               Créez votre événement, partagez votre live, recevez des messages, centralisez vos souvenirs et laissez vos proches participer, même à distance.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 to="/app/create"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-primary px-6 py-3.5 text-sm font-semibold text-white shadow-glow transition hover:opacity-95"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-primary px-6 py-3.5 text-sm font-semibold text-white shadow-glow transition hover:opacity-95 sm:w-auto"
               >
                 Créer un événement gratuitement
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/join"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3.5 text-sm font-semibold text-foreground hover:bg-muted"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-surface px-6 py-3.5 text-sm font-semibold text-foreground hover:bg-muted sm:w-auto"
               >
                 <QrCode className="h-4 w-4" /> J'ai reçu une invitation
               </Link>
             </div>
+
             <div className="mt-8 flex items-center gap-6 text-sm text-muted-foreground">
               <div className="flex -space-x-2">
                 {[47, 12, 32, 25].map((n) => (
