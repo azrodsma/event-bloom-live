@@ -27,12 +27,16 @@ function JoinPage() {
   };
   return (
     <div className="flex min-h-dvh flex-col bg-gradient-warm">
-      <header className="mx-auto flex w-full max-w-2xl items-center justify-between px-4 py-5 sm:px-6">
+      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 safe-top sm:px-6 sm:py-5">
         <Link to="/"><Logo /></Link>
-        <Link to="/auth" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+        <Link
+          to="/auth"
+          className="rounded-full bg-surface/80 px-4 py-2 text-sm font-semibold text-foreground ring-1 ring-border/70 backdrop-blur transition-colors hover:text-primary"
+        >
           Connexion
         </Link>
       </header>
+
       <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 pb-12 pt-2 sm:max-w-lg sm:px-6">
         <div className="rounded-[2rem] border border-border/70 bg-surface/85 p-6 text-center shadow-elegant backdrop-blur sm:p-9">
           <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-primary text-white shadow-glow sm:h-20 sm:w-20 sm:rounded-3xl">
