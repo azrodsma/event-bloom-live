@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
+import { SiteFooter } from "@/components/SiteFooter";
 import { EventCard } from "@/components/EventCard";
 import { mockEvents, eventTypes } from "@/lib/mock-data";
 import { eventIcon } from "@/lib/event-icons";
