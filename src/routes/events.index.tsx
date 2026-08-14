@@ -167,7 +167,7 @@ function EventsIndex() {
           />
         </div>
 
-        <div className="scrollbar-hide -mx-4 mt-4 flex gap-2 overflow-x-auto px-4 pb-1 [mask-image:linear-gradient(to_right,transparent,black_16px,black_calc(100%-24px),transparent)] sm:mx-0 sm:flex-wrap sm:px-0 sm:[mask-image:none]">
+        <div className="scrollbar-hide -mx-4 mt-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 [mask-image:linear-gradient(to_right,transparent,black_16px,black_calc(100%-24px),transparent)] sm:mx-0 sm:flex-wrap sm:px-0 sm:[mask-image:none] [&>button]:snap-start">
           <button
             onClick={() => setFilter(null)}
             className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
@@ -195,7 +195,15 @@ function EventsIndex() {
           ))}
         </div>
 
-        <div className="mt-6 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {!isLoading && (
+          <p className="mt-5 text-xs text-muted-foreground">
+            {filtered.length} événement{filtered.length > 1 ? "s" : ""}
+            {filter ? ` · ${filter}` : ""}
+          </p>
+        )}
+
+        <div className="mt-4 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
           {isLoading
             ? Array.from({ length: 6 }).map((_, i) => (
                 <div
