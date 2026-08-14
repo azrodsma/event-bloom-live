@@ -172,7 +172,7 @@ function EventsIndex() {
           <button
             onClick={() => setFilter(null)}
             className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
-              !filter ? "bg-foreground text-background" : "bg-surface text-muted-foreground ring-1 ring-border/70"
+              !filter ? "bg-gradient-primary text-white shadow-glow" : "bg-surface text-muted-foreground ring-1 ring-border/70"
             }`}
           >
             Tous
