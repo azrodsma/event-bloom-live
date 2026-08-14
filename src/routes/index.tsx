@@ -241,10 +241,10 @@ function Landing() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="text-center">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Fonctionnalités</p>
-            <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Tout ce dont vous avez besoin</h2>
+            <h2 className="mt-3 font-serif text-[clamp(1.9rem,8vw,3rem)] leading-[1.1] sm:text-5xl">Tout ce dont vous avez besoin</h2>
             <div className="rule-gold mx-auto mt-5 w-24" />
           </div>
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-4 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {[
               { icon: Radio, title: "Live intégré", desc: "YouTube Live ou Twitch, intégrés à votre page événement." },
               { icon: Gift, title: "Cagnotte externe", desc: "Leetchi, Lydia, OnParticipe, PayPal... Vous choisissez." },
@@ -255,15 +255,18 @@ function Landing() {
             ].map((f) => (
               <div
                 key={f.title}
-                className="group rounded-2xl border border-border/70 bg-surface p-4 shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-soft sm:p-6"
+                className="group flex items-start gap-4 rounded-2xl border border-border/70 bg-surface p-4 shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-soft sm:block sm:p-6"
               >
-                <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary-light text-primary transition group-hover:bg-gradient-primary group-hover:text-white sm:h-11 sm:w-11">
-                  <f.icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary-light text-primary transition group-hover:bg-gradient-primary group-hover:text-white">
+                  <f.icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-3 font-serif text-base leading-snug sm:mt-4 sm:text-xl">{f.title}</h3>
-                <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground sm:text-sm">{f.desc}</p>
+                <div className="min-w-0">
+                  <h3 className="font-serif text-lg leading-snug sm:mt-4 sm:text-xl">{f.title}</h3>
+                  <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground sm:mt-1.5 sm:text-sm">{f.desc}</p>
+                </div>
               </div>
             ))}
+
           </div>
         </div>
       </section>
