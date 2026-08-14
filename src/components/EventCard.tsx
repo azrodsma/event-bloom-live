@@ -74,7 +74,8 @@ export function EventCard({ event }: { event: MockEvent }) {
       </div>
 
       {event.moneyPot ? (
-        <div className="mt-auto flex min-h-[84px] items-center justify-between gap-3 px-5 py-4">
+        <div className="mt-auto flex min-h-[84px] items-center justify-between gap-3 border-t border-border/50 bg-surface px-5 py-4">
+
           <div className="min-w-0 flex-1">
             <p className="flex items-center gap-1.5 truncate text-xs font-medium text-muted-foreground">
               <Gift className="h-3.5 w-3.5 shrink-0 text-gold" /> <span className="truncate">{event.moneyPot.title}</span>
