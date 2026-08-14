@@ -172,8 +172,6 @@ function Landing() {
                     </div>
                   </div>
                 </div>
-
-                </div>
                 <div className="space-y-2 border-t border-border/60 p-4">
                   <p className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
                     <Gift className="h-3.5 w-3.5 text-gold" /> Voyage de noces
