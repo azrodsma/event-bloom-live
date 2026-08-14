@@ -187,13 +187,15 @@ function Landing() {
       </section>
 
       {/* Avant / Pendant / Après */}
-      <section id="concept" className="scroll-mt-24 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <section id="concept" className="scroll-mt-24 mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Le concept</p>
-          <h2 className="mt-3 font-serif text-4xl sm:text-5xl">Avant. Pendant. Après.</h2>
-          <p className="mt-3 text-muted-foreground">Une expérience complète pour chaque événement.</p>
+          <h2 className="mt-3 font-serif text-[clamp(1.9rem,7vw,3rem)] leading-[1.05] sm:text-5xl">Avant. Pendant. Après.</h2>
+          <div className="rule-gold mx-auto mt-4 w-20" />
+          <p className="mt-4 text-sm text-muted-foreground sm:text-base">Une expérience complète pour chaque événement.</p>
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:mt-12 sm:gap-6 md:grid-cols-3">
+
           {[
             {
               tag: "Avant",
