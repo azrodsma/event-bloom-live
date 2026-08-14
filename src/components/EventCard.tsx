@@ -94,7 +94,7 @@ export function EventCard({ event }: { event: MockEvent }) {
               </span>
             </div>
           </div>
-          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-foreground px-3.5 py-2 text-[11px] font-semibold text-background transition-transform group-hover:translate-x-0.5">
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-gradient-primary px-3.5 py-2 text-[11px] font-semibold text-white shadow-glow transition-transform group-hover:translate-x-0.5">
             Rejoindre <ArrowUpRight className="h-3.5 w-3.5" />
           </span>
         </div>
@@ -110,7 +110,7 @@ export function EventCard({ event }: { event: MockEvent }) {
               <span className="truncate text-[11px] font-medium text-muted-foreground">Livre d'or ouvert</span>
             </div>
           </div>
-          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-foreground px-3.5 py-2 text-[11px] font-semibold text-background transition-transform group-hover:translate-x-0.5">
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-gradient-primary px-3.5 py-2 text-[11px] font-semibold text-white shadow-glow transition-transform group-hover:translate-x-0.5">
             Rejoindre <ArrowUpRight className="h-3.5 w-3.5" />
           </span>
         </div>
