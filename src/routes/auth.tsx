@@ -1,7 +1,10 @@
 import { createFileRoute, useNavigate, useSearch, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 import { useEffect, useState } from "react";
-import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Video, Gift, Camera } from "lucide-react";
+import markAsset from "@/assets/mafeliza-mark.png.asset.json";
+import collageAsset from "@/assets/auth-collage.jpg";
+
 import { supabase } from "@/integrations/supabase/client";
 
 import { useAuth } from "@/hooks/use-auth";
