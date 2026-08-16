@@ -152,7 +152,7 @@ function AuthPage() {
           <div className="md:hidden">
             <div className="-mx-1 overflow-hidden rounded-[28px]">
               <img
-                src={collageAsset.url}
+                src={collageAsset}
                 alt="Mariages, baptêmes, anniversaires et remises de diplôme célébrés sur MaFeliza"
                 width={1280}
                 height={640}
