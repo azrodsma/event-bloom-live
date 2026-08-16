@@ -1,7 +1,10 @@
 import { createFileRoute, useNavigate, useSearch, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 import { useEffect, useState } from "react";
-import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Video, Gift, Camera } from "lucide-react";
+import markAsset from "@/assets/mafeliza-mark.png.asset.json";
+import collageAsset from "@/assets/auth-collage.jpg";
+
 import { supabase } from "@/integrations/supabase/client";
 
 import { useAuth } from "@/hooks/use-auth";
@@ -143,15 +146,60 @@ function AuthPage() {
       </div>
 
 
-      <div className="relative flex min-h-dvh flex-col justify-center px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))] sm:p-10 md:min-h-0 md:items-center">
+      <div className="relative flex min-h-dvh flex-col justify-center px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:p-10 md:min-h-0 md:items-center">
         <div className="mx-auto w-full max-w-md">
-          <div className="mb-4 flex items-center justify-between md:hidden">
-            <Logo />
-            <Link to="/" className="rounded-full bg-surface/80 px-3 py-1.5 text-xs font-medium text-muted-foreground ring-1 ring-border backdrop-blur-xl">
-              Accueil
-            </Link>
+          {/* Mobile hero — collage + logo + piliers */}
+          <div className="md:hidden">
+            <div className="-mx-1 overflow-hidden rounded-[28px]">
+              <img
+                src={collageAsset}
+                alt="Mariages, baptêmes, anniversaires et remises de diplôme célébrés sur MaFeliza"
+                width={1280}
+                height={640}
+                loading="eager"
+                className="h-40 w-full object-cover"
+              />
+            </div>
+            <div className="mt-5 flex flex-col items-center">
+              <img src={markAsset.url} alt="Logo MaFeliza" className="h-12 w-12 object-contain" />
+              <span className="mt-2 font-serif text-3xl leading-none tracking-tight text-foreground">MaFeliza</span>
+            </div>
+            <ul className="mt-6 grid grid-cols-3 gap-3">
+              {[
+                { icon: Video, label: "Live multicaméra", tone: "text-primary" },
+                { icon: Gift, label: "Cadeaux & Cagnotte", tone: "text-gold" },
+                { icon: Camera, label: "Album photo collaboratif", tone: "text-primary" },
+              ].map(({ icon: Icon, label, tone }) => (
+                <li key={label} className="flex flex-col items-center text-center">
+                  <span className="grid h-14 w-14 place-items-center rounded-full bg-surface shadow-modal ring-1 ring-border">
+                    <Icon className={`h-6 w-6 ${tone}`} />
+                  </span>
+                  <span className="mt-2 text-[11px] font-medium leading-tight text-muted-foreground">{label}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 space-y-3">
+              <Link
+                to="/app/create"
+                className="flex w-full items-center justify-center rounded-full bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-white shadow-glow"
+              >
+                Créer mon événement gratuitement
+              </Link>
+              <Link
+                to="/join"
+                className="flex w-full items-center justify-center rounded-full border border-border bg-surface px-5 py-3.5 text-sm font-semibold text-foreground"
+              >
+                J'ai reçu une invitation
+              </Link>
+            </div>
+            <div className="my-6 flex items-center gap-3">
+              <span className="h-px flex-1 bg-border" />
+              <span className="text-[11px] uppercase tracking-widest text-muted-foreground">ou connectez-vous</span>
+              <span className="h-px flex-1 bg-border" />
+            </div>
           </div>
           <div className="w-full rounded-[32px] bg-surface/85 p-6 shadow-modal ring-1 ring-border backdrop-blur-xl sm:rounded-[36px] sm:p-8">
+
           <h1 className="font-serif text-[26px] leading-tight sm:text-4xl">
             {mode === "forgot" ? "Mot de passe oublié" : mode === "login" ? "Ravi de vous revoir" : "Créez votre compte"}
           </h1>
