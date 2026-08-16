@@ -146,11 +146,15 @@ function AuthPage() {
       </div>
 
 
-      <div className="relative flex min-h-dvh flex-col justify-center px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:p-10 md:min-h-0 md:items-center">
+      <div className="relative flex flex-col justify-start px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:p-10 md:min-h-0 md:items-center md:justify-center">
         <div className="mx-auto w-full max-w-md">
-          {/* Mobile hero — collage + logo + piliers */}
+          {/* Mobile hero — logo + collage + piliers */}
           <div className="md:hidden">
-            <div className="-mx-1 overflow-hidden rounded-[28px]">
+            <div className="flex flex-col items-center">
+              <img src={markAsset.url} alt="Logo MaFeliza" className="h-11 w-11 object-contain" />
+              <span className="mt-1.5 font-serif text-[28px] leading-none tracking-tight text-foreground">MaFeliza</span>
+            </div>
+            <div className="mt-4 -mx-1 overflow-hidden rounded-[28px]">
               <img
                 src={collageAsset}
                 alt="Mariages, baptêmes, anniversaires et remises de diplôme célébrés sur MaFeliza"
@@ -159,10 +163,6 @@ function AuthPage() {
                 loading="eager"
                 className="h-40 w-full object-cover"
               />
-            </div>
-            <div className="mt-5 flex flex-col items-center">
-              <img src={markAsset.url} alt="Logo MaFeliza" className="h-12 w-12 object-contain" />
-              <span className="mt-2 font-serif text-3xl leading-none tracking-tight text-foreground">MaFeliza</span>
             </div>
             <ul className="mt-6 grid grid-cols-3 gap-3">
               {[
