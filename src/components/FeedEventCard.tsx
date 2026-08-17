@@ -145,12 +145,12 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
       </div>
 
       {/* Infos grid */}
-      <div className="grid grid-cols-2 gap-x-4 gap-y-4 divide-border/60 border-b border-border/60 p-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.15fr)] sm:divide-x">
+      <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,0.82fr)_minmax(0,1.3fr)] gap-3 divide-x divide-border/60 border-b border-border/60 p-4 sm:gap-4">
         <div className="min-w-0">
           <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
             <MapPin className="h-4 w-4 text-primary" /> Lieu
           </p>
-          <p className="mt-1.5 text-sm leading-snug text-muted-foreground">
+          <p className="mt-1.5 text-[13px] leading-snug text-muted-foreground">
             {event.venue || event.city || "À préciser"}
           </p>
           {event.venue && (
@@ -159,21 +159,21 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
             </span>
           )}
         </div>
-        <div className="min-w-0">
+        <div className="min-w-0 pl-3 sm:pl-4">
           <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
             <Calendar className="h-4 w-4 text-primary" /> Date
           </p>
-          <p className="mt-1.5 text-sm leading-snug text-muted-foreground">
+          <p className="mt-1.5 text-[13px] leading-snug text-muted-foreground">
             {dateLabel}
             <br />à {timeLabel}
           </p>
         </div>
         {pot ? (
-          <div className="col-span-2 min-w-0 sm:col-span-1 sm:pl-4">
+          <div className="min-w-0 pl-3 sm:pl-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
               <Gift className="h-4 w-4 text-primary" /> Cagnotte
             </p>
-            <p className="mt-1 font-serif text-2xl leading-tight text-foreground">
+            <p className="mt-1 font-serif text-xl leading-tight text-foreground sm:text-2xl">
               {fmtEur(pot.current)}
             </p>
             <p className="text-xs text-muted-foreground">sur {fmtEur(pot.target)}</p>
@@ -189,13 +189,13 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
               href={pot.url}
               target="_blank"
               rel="noreferrer noopener"
-              className="tap mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow"
+              className="tap mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-primary px-3 py-2.5 text-[13px] font-semibold text-primary-foreground shadow-glow"
             >
-              <Gift className="h-4 w-4" /> Participer à la cagnotte
+              <Gift className="h-4 w-4 shrink-0" /> Participer
             </a>
           </div>
         ) : (
-          <div className="col-span-2 min-w-0 sm:col-span-1 sm:pl-4">
+          <div className="min-w-0 pl-3 sm:pl-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
               <Gift className="h-4 w-4 text-primary" /> Cagnotte
             </p>
@@ -236,17 +236,36 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
             Avant, pendant ou après le live
           </span>
         </span>
-        <Chevron className="h-5 w-5 shrink-0 text-muted-foreground" />
+        <span className="flex shrink-0 items-center">
+          {!!event.guestbookCount && (
+          <span className="flex -space-x-2">
+            {[0, 1].map((i) => (
+              <img
+                key={i}
+                src={event.cover}
+                alt=""
+                className="h-7 w-7 rounded-full object-cover ring-2 ring-surface"
+              />
+            ))}
+          </span>
+          )}
+          {!!event.guestbookCount && (
+          <span className="ml-1 rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold text-foreground">
+            +{event.guestbookCount}
+          </span>
+          )}
+          <Chevron className="ml-1 h-5 w-5 text-muted-foreground" />
+        </span>
       </Link>
 
       {/* Espace caméraman */}
       <Link
         to="/events/$slug/vendors-hub"
         params={{ slug: event.slug }}
-        className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-[18px] bg-iris-light/70 p-3 sm:grid-cols-[auto_minmax(0,1fr)_auto]"
+        className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2.5 rounded-[18px] bg-iris-light/70 p-3 sm:gap-3"
       >
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-iris text-primary-foreground">
-          <Camera className="h-6 w-6" />
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] bg-iris text-primary-foreground sm:h-12 sm:w-12">
+          <Camera className="h-5 w-5 sm:h-6 sm:w-6" />
         </span>
         <span className="min-w-0">
           <span className="block font-semibold leading-tight text-foreground">Espace Caméraman</span>
@@ -255,8 +274,8 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
             images.
           </span>
         </span>
-        <span className="col-span-2 inline-flex items-center justify-center gap-1 rounded-full bg-iris px-4 py-2 text-xs font-semibold text-primary-foreground sm:col-span-1">
-          Accéder à l'espace <Chevron className="h-4 w-4" />
+        <span className="inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-iris px-3 py-2 text-[11px] font-semibold text-primary-foreground sm:px-4 sm:text-xs">
+          Accéder <span className="hidden sm:inline">à l'espace</span> <Chevron className="h-4 w-4" />
         </span>
       </Link>
 
