@@ -42,6 +42,8 @@
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
   --color-live: var(--live);
+  --color-iris: var(--iris);
+  --color-iris-light: var(--iris-light);
   --color-success: var(--success);
   --color-danger: var(--danger);
   --color-warning: var(--warning);
@@ -90,6 +92,8 @@
   --gold: #D9A441;
   --gold-light: #FFF4D8;
   --live: #FF2D55;
+  --iris: #5B5BD6;
+  --iris-light: #ECECFB;
   --success: #32B77A;
   --danger: #EF476F;
   --warning: #F5A524;

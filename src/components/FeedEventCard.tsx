@@ -221,15 +221,17 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
       <Link
         to="/events/$slug/guestbook"
         params={{ slug: event.slug }}
-        className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl border border-primary/40 bg-primary-light/40 p-3"
+        className="tap mx-3 mb-2.5 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl border border-primary bg-surface p-3"
       >
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-secondary-light text-primary-dark">
-          <BookHeart className="h-5 w-5" />
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-iris-light text-iris">
+          <BookHeart className="h-6 w-6" />
         </span>
         <span className="min-w-0">
           <span className="block font-semibold leading-tight text-foreground">Livre d'or</span>
-          <span className="block text-xs text-muted-foreground">
-            Laissez un message · avant, pendant ou après le live
+          <span className="block text-xs leading-snug text-muted-foreground">
+            Laissez un message aux mariés
+            <br />
+            Avant, pendant ou après le live
           </span>
         </span>
         <Chevron className="h-5 w-5 shrink-0 text-muted-foreground" />
@@ -239,19 +241,23 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
       <Link
         to="/events/$slug/vendors-hub"
         params={{ slug: event.slug }}
-        className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl bg-secondary-light p-3"
+        className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-2xl bg-iris-light/70 p-3 sm:grid-cols-[auto_minmax(0,1fr)_auto]"
       >
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white text-primary-dark">
-          <Camera className="h-5 w-5" />
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-iris text-primary-foreground">
+          <Camera className="h-6 w-6" />
         </span>
         <span className="min-w-0">
           <span className="block font-semibold leading-tight text-foreground">Espace Caméraman</span>
-          <span className="block text-xs text-muted-foreground">
-            Entrez le code de l'événement pour accéder au live et partager vos images.
+          <span className="block text-xs leading-snug text-muted-foreground">
+            Vous êtes caméraman ? Entrez le code de l'événement pour accéder au live et partager vos
+            images.
           </span>
         </span>
-        <Chevron className="h-5 w-5 shrink-0 text-muted-foreground" />
+        <span className="col-span-2 inline-flex items-center justify-center gap-1 rounded-full bg-iris px-4 py-2 text-xs font-semibold text-primary-foreground sm:col-span-1">
+          Accéder à l'espace <Chevron className="h-4 w-4" />
+        </span>
       </Link>
+
     </article>
   );
 }
