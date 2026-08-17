@@ -5,8 +5,6 @@ import {
   ChevronLeft,
   Check,
   Copy,
-  Globe,
-  Lock,
   Share2,
   X,
   Link2,
@@ -445,7 +443,7 @@ function CreatePage() {
               onClick={() => mut.mutate()}
               className="tap w-full rounded-full bg-gradient-primary py-4 text-[15px] font-bold text-white shadow-glow disabled:opacity-50"
             >
-              {mut.isPending ? "Création..." : "Publier l'événement"}
+              {mut.isPending ? "Création..." : "Créer l'événement"}
             </button>
           )}
         </div>
@@ -606,35 +604,6 @@ function CodeRow({
         <button onClick={() => onShare(value)} aria-label={`Partager ${label}`} className="tap text-muted-foreground">
           <Share2 className="h-[17px] w-[17px]" />
         </button>
-      </div>
-    </div>
-  );
-}
-
-function CodeField({
-  label,
-  value,
-  onCopy,
-  onShare,
-}: {
-  label: string;
-  value: string;
-  onCopy: (v: string) => void;
-  onShare: (v: string) => void;
-}) {
-  return (
-    <div className="rounded-[16px] border border-border bg-surface px-4 py-3">
-      <p className="text-[12px] text-muted-foreground">{label}</p>
-      <div className="mt-0.5 flex items-center justify-between gap-3">
-        <p className="truncate text-[22px] font-bold tracking-wide">{value}</p>
-        <div className="flex shrink-0 items-center gap-3 text-muted-foreground">
-          <button onClick={() => onCopy(value)} aria-label={`Copier ${label}`} className="tap">
-            <Copy className="h-[18px] w-[18px]" />
-          </button>
-          <button onClick={() => onShare(value)} aria-label={`Partager ${label}`} className="tap">
-            <Share2 className="h-[18px] w-[18px]" />
-          </button>
-        </div>
       </div>
     </div>
   );
