@@ -48,7 +48,7 @@ function Home() {
       <EventRail events={events} />
 
       {/* Filtres */}
-      <div className="scrollbar-hide -mx-4 flex gap-2.5 overflow-x-auto px-4 pb-0.5 sm:mx-0 sm:px-0">
+      <div className="scrollbar-hide grid grid-cols-4 gap-2 sm:flex sm:gap-2.5 sm:overflow-x-auto">
         {tabs.map((t) => {
           const active = tab === t;
           const isFav = t === "Favoris";
@@ -56,7 +56,7 @@ function Home() {
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`tap relative inline-flex shrink-0 items-center gap-1.5 rounded-xl px-5 py-3 text-sm font-semibold transition-colors ${
+              className={`tap relative inline-flex min-w-0 items-center justify-center gap-1 rounded-[14px] px-2 py-3 text-[13px] font-semibold transition-colors sm:shrink-0 sm:gap-1.5 sm:px-5 sm:text-sm ${
                 active
                   ? "bg-primary-light text-primary"
                   : isFav
@@ -65,10 +65,10 @@ function Home() {
               }`}
               aria-pressed={active}
             >
-              {isFav && <Heart className="h-4 w-4 fill-primary text-primary" />}
-              {t}
+              {isFav && <Heart className="h-3.5 w-3.5 shrink-0 fill-primary text-primary" />}
+              <span className="truncate">{t}</span>
               {active && (
-                <span className="absolute inset-x-4 bottom-1 h-[3px] rounded-full bg-primary" />
+                <span className="absolute inset-x-3 bottom-1 h-[3px] rounded-full bg-primary" />
               )}
             </button>
           );
