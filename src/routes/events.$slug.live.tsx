@@ -107,7 +107,7 @@ function LivePage() {
   const registryList = useServerFn(listRegistryItems);
   const { data: gifts = [] } = useQuery({
     queryKey: ["live-registry", dbId],
-    enabled: !!dbId && tab === "Cadeaux",
+    enabled: !!dbId,
     queryFn: async () =>
       (await registryList({ data: { eventId: dbId! } })) as Array<{
         id: string;
