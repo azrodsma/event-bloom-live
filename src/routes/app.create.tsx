@@ -505,11 +505,13 @@ function InvitationPreview({
   date,
   style,
   index,
+  compact = false,
 }: {
   title: string;
   date: string;
   style: string;
   index: number;
+  compact?: boolean;
 }) {
   const units = [
     { v: "12", l: "JOURS" },
@@ -524,20 +526,31 @@ function InvitationPreview({
         ? "from-cream via-gold-light/60 to-background"
         : "from-cream via-background to-primary-light/50";
   return (
-    <div className={`relative overflow-hidden rounded-[16px] bg-gradient-to-br ${bg} px-6 py-7 text-center`}>
+    <div
+      className={`relative overflow-hidden rounded-[16px] bg-gradient-to-br ${bg} text-center ${
+        compact ? "aspect-[3/4.4] px-3 py-5" : "px-6 py-7"
+      }`}
+    >
       <span className="pointer-events-none absolute -left-6 -top-6 h-24 w-24 rounded-full bg-primary/10 blur-xl" />
       <span className="pointer-events-none absolute -bottom-8 -right-4 h-28 w-28 rounded-full bg-gold/15 blur-xl" />
-      <p className="text-2xl italic" style={{ fontFamily: "var(--font-serif, serif)" }}>
+      <p
+        className={compact ? "text-[17px] italic leading-tight" : "text-2xl italic"}
+        style={{ fontFamily: "var(--font-serif, serif)" }}
+      >
         {title}
       </p>
-      <p className="mt-1 text-[12px] italic text-muted-foreground">se marient</p>
-      <p className="mt-3 text-[17px] font-semibold">{formatDate(date) || "24 Mai 2025"}</p>
-      <div className="mx-auto mt-2 h-px w-32 bg-border" />
-      <div className="mt-3 flex items-end justify-center gap-4">
+      <p className={`mt-1 italic text-muted-foreground ${compact ? "text-[10px]" : "text-[12px]"}`}>se marient</p>
+      <p className={`mt-3 font-semibold ${compact ? "text-[12px]" : "text-[17px]"}`}>
+        {formatDate(date) || "24 Mai 2025"}
+      </p>
+      <div className={`mx-auto mt-2 h-px bg-border ${compact ? "w-16" : "w-32"}`} />
+      <div className={`mt-3 flex items-end justify-center ${compact ? "gap-2" : "gap-4"}`}>
         {units.map((u) => (
           <div key={u.l}>
-            <p className="text-xl font-bold leading-none">{u.v}</p>
-            <p className="mt-1 text-[8.5px] tracking-[0.14em] text-muted-foreground">{u.l}</p>
+            <p className={`font-bold leading-none ${compact ? "text-[12px]" : "text-xl"}`}>{u.v}</p>
+            <p className={`mt-1 tracking-[0.14em] text-muted-foreground ${compact ? "text-[6.5px]" : "text-[8.5px]"}`}>
+              {u.l}
+            </p>
           </div>
         ))}
       </div>
