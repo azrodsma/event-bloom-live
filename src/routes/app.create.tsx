@@ -137,7 +137,7 @@ function CreatePage() {
         {step === 0 && (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {eventTypes.map((t) => (
-              <button key={t} onClick={() => setSelectedType(t)}
+              <button key={t} onClick={() => { setSelectedType(t); setStep(1); }}
                 className={`group relative overflow-hidden rounded-2xl border p-4 text-left transition ${selectedType === t ? "border-primary bg-primary-light shadow-glow" : "border-border bg-background hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card"}`}>
                 {selectedType === t && (
                   <span className="absolute right-3 top-3 grid h-5 w-5 place-items-center rounded-full bg-gradient-primary text-white">
@@ -152,6 +152,7 @@ function CreatePage() {
             ))}
           </div>
         )}
+
 
 
         {step === 1 && (
@@ -174,8 +175,9 @@ function CreatePage() {
         {step === 2 && (
           <div className="space-y-3">
             {(["public", "unlisted", "private"] as const).map((v) => (
-              <button key={v} onClick={() => setVisibility(v)}
+              <button key={v} onClick={() => { setVisibility(v); setStep(3); }}
                 className={`flex w-full items-start gap-3 rounded-2xl border p-4 text-left ${visibility === v ? "border-primary bg-primary-light" : "border-border bg-background"}`}>
+
                 <span className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full border-2 ${visibility === v ? "border-primary bg-primary" : "border-border"}`}>
                   {visibility === v && <span className="h-2 w-2 rounded-full bg-white" />}
                 </span>
@@ -228,13 +230,14 @@ function CreatePage() {
       </div>
 
       {/* Barre d'action fixe */}
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border/60 bg-background/90 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 backdrop-blur-xl">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border/60 bg-background/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur-xl safe-x">
         <div className="mx-auto flex max-w-2xl items-center gap-2">
           {step > 0 && (
-            <button onClick={() => setStep(step - 1)} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium">
-              <ArrowLeft className="h-4 w-4" /> Retour
+            <button onClick={() => setStep(step - 1)} className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border bg-surface px-4 py-3 text-sm font-medium sm:px-5">
+              <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">Retour</span>
             </button>
           )}
+
           {step < steps.length - 1 ? (
             <button disabled={!canNext} onClick={() => setStep(step + 1)}
               className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50 sm:flex-none">
