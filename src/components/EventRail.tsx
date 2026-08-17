@@ -47,9 +47,9 @@ export function EventRail({ events }: { events: MockEvent[] }) {
 
               <span
                 aria-hidden
-                className="absolute right-1 top-1 grid h-5 w-5 place-items-center rounded-full bg-surface/95 shadow-card"
+                className="absolute right-1 top-1 grid h-6 w-6 place-items-center rounded-full bg-surface/95 shadow-card"
               >
-                <Heart className="h-3 w-3 text-foreground" strokeWidth={2.5} />
+                <Heart className="h-3.5 w-3.5 text-foreground" strokeWidth={2.5} />
               </span>
 
               <span className="absolute inset-x-0 bottom-0 bg-primary py-0.5 text-center text-[11px] font-bold text-primary-foreground">

@@ -96,10 +96,12 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
             Live
           </span>
         )}
-        <span className="absolute right-14 top-3 inline-flex items-center gap-1 rounded-full bg-black/45 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
-          <Eye className="h-3.5 w-3.5" />
-          {event.viewers ? `${(event.viewers / 1000).toFixed(1).replace(".", ",")}K` : "—"}
-        </span>
+        {!!event.viewers && (
+          <span className="absolute right-14 top-3 inline-flex items-center gap-1 rounded-full bg-black/45 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
+            <Eye className="h-3.5 w-3.5" />
+            {`${(event.viewers / 1000).toFixed(1).replace(".", ",")}K`}
+          </span>
+        )}
         <button
           aria-label="Ajouter aux favoris"
           className="tap absolute right-3 top-2.5 grid h-9 w-9 place-items-center rounded-full bg-white shadow-card"
