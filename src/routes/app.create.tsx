@@ -227,7 +227,7 @@ function CreatePage() {
                   <button
                     key={v}
                     onClick={() => setAccess(v)}
-                    className={`tap flex items-center justify-center gap-2 rounded-2xl border py-3.5 text-sm font-semibold transition ${
+                    className={`tap flex items-center justify-center gap-2 rounded-[16px] border py-3.5 text-sm font-semibold transition ${
                       access === v ? "border-primary bg-primary-light text-primary" : "border-border bg-surface"
                     }`}
                   >
@@ -243,11 +243,11 @@ function CreatePage() {
                 rows={3}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="mt-1 w-full rounded-2xl border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-primary"
+                className="mt-1 w-full rounded-[16px] border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-primary"
                 placeholder="Nous avons la joie de vous convier à notre mariage !"
               />
             </div>
-            <details className="rounded-2xl border border-border bg-surface px-4 py-3">
+            <details className="rounded-[16px] border border-border bg-surface px-4 py-3">
               <summary className="cursor-pointer text-[13px] font-semibold">Live & cagnotte (optionnel)</summary>
               <div className="mt-3 space-y-3">
                 <Field
@@ -288,14 +288,14 @@ function CreatePage() {
             <section>
               <p className="text-[14px] font-bold">Faire-part principal</p>
               <p className="text-[12.5px] text-muted-foreground">(classique avec compte à rebours)</p>
-              <div className="mt-2.5 rounded-3xl border border-primary/30 bg-primary-light/40 p-2.5">
+              <div className="mt-2.5 rounded-[24px] border border-primary/30 bg-primary-light/40 p-2.5">
                 <InvitationPreview
                   title={title || "Sophie & Thomas"}
                   date={date}
                   style={style}
                   index={cardIndex}
                 />
-                <button className="tap mt-2.5 w-full rounded-2xl border border-primary/40 bg-surface/80 py-3 text-[13.5px] font-semibold text-primary">
+                <button className="tap mt-2.5 w-full rounded-[16px] border border-primary/40 bg-surface/80 py-3 text-[13.5px] font-semibold text-primary">
                   Personnaliser
                 </button>
               </div>
@@ -315,8 +315,8 @@ function CreatePage() {
               <p className="text-[14px] font-bold">
                 Faire-part live <span className="font-normal text-muted-foreground">(pour diffusion)</span>
               </p>
-              <div className="mt-2.5 rounded-3xl border border-primary/30 bg-primary-light/40 p-2.5">
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-cream via-background to-primary-light/60 px-5 py-6 text-[13px] leading-relaxed text-foreground/80">
+              <div className="mt-2.5 rounded-[24px] border border-primary/30 bg-primary-light/40 p-2.5">
+                <div className="relative overflow-hidden rounded-[16px] bg-gradient-to-br from-cream via-background to-primary-light/60 px-5 py-6 text-[13px] leading-relaxed text-foreground/80">
                   <p>
                     Nous avons la joie de vous annoncer notre {selectedType?.toLowerCase() ?? "événement"} qui se
                     déroulera en petit comité le {formatDate(date) || "24 Mai 2025"}.
@@ -326,7 +326,7 @@ function CreatePage() {
                     vous invitons à suivre notre cérémonie en direct !
                   </p>
                 </div>
-                <button className="tap mt-2.5 w-full rounded-2xl border border-primary/40 bg-surface/80 py-3 text-[13.5px] font-semibold text-primary">
+                <button className="tap mt-2.5 w-full rounded-[16px] border border-primary/40 bg-surface/80 py-3 text-[13.5px] font-semibold text-primary">
                   Personnaliser
                 </button>
               </div>
@@ -402,7 +402,7 @@ function CreatePage() {
       {/* Modale de succès */}
       {created && (
         <div className="fixed inset-0 z-[70] grid place-items-center bg-foreground/55 px-6 backdrop-blur-sm">
-          <div className="relative w-full max-w-sm overflow-hidden rounded-3xl bg-surface p-6 text-center shadow-2xl">
+          <div className="relative w-full max-w-sm overflow-hidden rounded-[24px] bg-surface p-6 text-center shadow-2xl">
             <button
               onClick={() => navigate({ to: "/app" })}
               aria-label="Fermer"
@@ -477,7 +477,7 @@ function InvitationPreview({
         ? "from-cream via-gold-light/60 to-background"
         : "from-cream via-background to-primary-light/50";
   return (
-    <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${bg} px-6 py-7 text-center`}>
+    <div className={`relative overflow-hidden rounded-[16px] bg-gradient-to-br ${bg} px-6 py-7 text-center`}>
       <span className="pointer-events-none absolute -left-6 -top-6 h-24 w-24 rounded-full bg-primary/10 blur-xl" />
       <span className="pointer-events-none absolute -bottom-8 -right-4 h-28 w-28 rounded-full bg-gold/15 blur-xl" />
       <p className="text-2xl italic" style={{ fontFamily: "var(--font-serif, serif)" }}>
@@ -531,7 +531,7 @@ function CodeField({
   onShare: (v: string) => void;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface px-4 py-3">
+    <div className="rounded-[16px] border border-border bg-surface px-4 py-3">
       <p className="text-[12px] text-muted-foreground">{label}</p>
       <div className="mt-0.5 flex items-center justify-between gap-3">
         <p className="truncate text-[22px] font-bold tracking-wide">{value}</p>
@@ -560,7 +560,7 @@ function Toggle({
   onChange: (v: boolean) => void;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-2xl border border-border bg-surface px-4 py-3.5">
+    <div className="flex items-center justify-between gap-4 rounded-[16px] border border-border bg-surface px-4 py-3.5">
       <div className="min-w-0">
         <p className="text-[13.5px] font-semibold">{label}</p>
         {hint && <p className="text-[12px] text-muted-foreground">{hint}</p>}
@@ -596,7 +596,7 @@ function Field({
         {...rest}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full rounded-2xl border border-border bg-surface px-4 py-3.5 text-sm outline-none focus:border-primary"
+        className="mt-1 w-full rounded-[16px] border border-border bg-surface px-4 py-3.5 text-sm outline-none focus:border-primary"
       />
     </div>
   );
