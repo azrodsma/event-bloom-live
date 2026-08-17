@@ -4,11 +4,12 @@ import {
   Cake,
   Heart,
   Baby,
-  Flame,
-  Milk,
+  Cross,
+  Shirt,
   GraduationCap,
   Leaf,
   Martini,
+  MoreHorizontal,
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
@@ -19,13 +20,13 @@ export const eventTypeLucide: Record<string, LucideIcon> = {
   "Baptême": Bird,
   "Anniversaire": Cake,
   "Fiançailles": Heart,
-  "Baby Shower": Baby,
-  "Communion": Flame,
-  "Naissance": Milk,
+  "Baby Shower": Shirt,
+  "Communion": Cross,
+  "Naissance": Baby,
   "Remise de diplôme": GraduationCap,
   "Retraite": Leaf,
   "Soirée privée": Martini,
-  "Autre": Sparkles,
+  "Autre": MoreHorizontal,
 };
 
 export function eventIcon(type?: string | null): LucideIcon {
