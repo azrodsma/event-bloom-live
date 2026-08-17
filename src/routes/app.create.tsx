@@ -175,8 +175,9 @@ function CreatePage() {
         {step === 2 && (
           <div className="space-y-3">
             {(["public", "unlisted", "private"] as const).map((v) => (
-              <button key={v} onClick={() => setVisibility(v)}
+              <button key={v} onClick={() => { setVisibility(v); setStep(3); }}
                 className={`flex w-full items-start gap-3 rounded-2xl border p-4 text-left ${visibility === v ? "border-primary bg-primary-light" : "border-border bg-background"}`}>
+
                 <span className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full border-2 ${visibility === v ? "border-primary bg-primary" : "border-border"}`}>
                   {visibility === v && <span className="h-2 w-2 rounded-full bg-white" />}
                 </span>
