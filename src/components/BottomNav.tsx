@@ -53,11 +53,10 @@ export function BottomNav() {
   return (
     <nav
       className="fixed inset-x-0 bottom-0 z-40 lg:hidden"
-      style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       aria-label="Navigation principale"
     >
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background via-background/85 to-transparent" />
-      <div className="relative mx-auto flex max-w-md items-center justify-around gap-1 rounded-full border border-border/60 bg-surface/95 px-3 py-2 shadow-modal backdrop-blur-2xl mx-3">
+      <div className="relative flex items-end justify-around gap-1 border-t border-border/60 bg-surface/95 px-2 pb-2 pt-2 backdrop-blur-2xl">
         {items.map((item) => {
           const active = item.exact
             ? pathname === item.to
@@ -68,7 +67,7 @@ export function BottomNav() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="-mt-8 grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-primary text-white shadow-glow ring-4 ring-background transition-all active:scale-90 hover:rotate-90 duration-300"
+                className="-mt-7 mb-1 grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-primary text-white shadow-glow ring-4 ring-surface transition-all duration-300 active:scale-90"
                 aria-label={item.label}
               >
                 <Icon className="h-6 w-6" strokeWidth={2.5} />
@@ -86,15 +85,14 @@ export function BottomNav() {
               aria-current={active ? "page" : undefined}
             >
               <span className="relative">
-                <Icon className={`h-5 w-5 transition-transform ${active ? "scale-110" : "group-hover:scale-105"}`} strokeWidth={active ? 2.5 : 2} />
+                <Icon className={`h-[22px] w-[22px] transition-transform ${active ? "scale-110 fill-primary" : "group-hover:scale-105"}`} strokeWidth={active ? 2 : 1.9} />
                 {showBadge && (
                   <span className="absolute -right-1.5 -top-1 grid min-w-[16px] place-items-center rounded-full bg-primary px-1 text-[9px] font-bold leading-none text-primary-foreground shadow-sm ring-2 ring-surface">
                     {unread > 9 ? "9+" : unread}
                   </span>
                 )}
               </span>
-              <span className="tracking-wide">{item.label}</span>
-              {active && <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-primary" />}
+              <span className={`tracking-wide ${active ? "font-semibold" : ""}`}>{item.label}</span>
             </Link>
           );
         })}
