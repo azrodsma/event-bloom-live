@@ -91,6 +91,7 @@ function CreatePage() {
   const [liveUrl, setLiveUrl] = useState("");
   const [style, setStyle] = useState<(typeof cardStyles)[number]>("Classique");
   const [cardIndex, setCardIndex] = useState(0);
+  const [selectedCard, setSelectedCard] = useState(0);
   const [publishOnPlatform, setPublishOnPlatform] = useState(true);
   const [allowGuestPosts, setAllowGuestPosts] = useState(true);
   const [allowComments, setAllowComments] = useState(true);
@@ -320,13 +321,14 @@ function CreatePage() {
             <div className="grid grid-cols-2 gap-3">
               {[0, 1].map((offset) => {
                 const idx = (cardIndex + offset) % 6;
-                const active = offset === 0;
+                const active = selectedCard === idx;
                 return (
                   <button
                     key={offset}
-                    onClick={() => setCardIndex(idx)}
-                    className={`overflow-hidden rounded-[20px] border-2 p-1 text-left transition ${
-                      active ? "border-primary bg-primary-light/40" : "border-border bg-surface"
+                    onClick={() => setSelectedCard(idx)}
+                    aria-pressed={active}
+                    className={`overflow-hidden rounded-[18px] border-2 p-1 text-left transition ${
+                      active ? "border-primary shadow-glow" : "border-transparent"
                     }`}
                   >
                     <InvitationPreview
