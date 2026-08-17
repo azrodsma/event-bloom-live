@@ -194,263 +194,375 @@ function LivePage() {
     }
   };
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const goTo = (t: (typeof tabs)[number]) => {
+    setTab(t);
+    const el = sectionRefs.current[t];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    else scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const initials = (name: string) =>
+    name
+      .split(" ")
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((p) => p[0]!.toUpperCase())
+      .join("");
+
+  const viewers = event.viewers ?? 0;
+  const compactViewers =
+    viewers >= 1000 ? `${(viewers / 1000).toFixed(1).replace(".", ",")}K` : viewers.toLocaleString("fr-FR");
+
+  const tabIcons: Record<(typeof tabs)[number], typeof Heart> = {
+    Chat: MessageCircle,
+    Réactions: Heart,
+    Cadeaux: Gift,
+    Cagnotte: PiggyBank,
+    Photos: Camera,
+    Caméras: Video,
+  };
+
   return (
     <div className="flex h-[100dvh] flex-col bg-dark text-white">
-      {/* Player */}
-      <div className="relative h-[54dvh] shrink-0 bg-black sm:aspect-[16/9] sm:h-auto">
-        {event.livestream ? (
-          <iframe
-            src={event.livestream.embedUrl}
-            className="h-full w-full"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            title="Live"
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center">Live indisponible</div>
-        )}
+      {/* Barre supérieure : LIVE · vues · titre · partage · … · fermer */}
+      <header className="flex shrink-0 items-center gap-2 px-3 pb-2 pt-[max(0.5rem,env(safe-area-inset-top))]">
+        <span className="animate-pulse-live rounded-lg bg-live px-2.5 py-1 text-[12px] font-extrabold uppercase leading-none tracking-wide">
+          Live
+        </span>
+        <span className="inline-flex shrink-0 items-center gap-1 text-[13px] font-medium text-white/90">
+          <Eye className="h-4 w-4" /> {viewers.toLocaleString("fr-FR")}
+        </span>
+        <h1 className="min-w-0 flex-1 truncate text-center text-[15px] font-semibold">{event.title}</h1>
+        <button className="tap grid h-8 w-8 shrink-0 place-items-center text-white/90" aria-label="Partager">
+          <Share2 className="h-[18px] w-[18px]" />
+        </button>
+        <button className="tap grid h-8 w-8 shrink-0 place-items-center text-white/90" aria-label="Plus d'options">
+          <MoreHorizontal className="h-5 w-5" />
+        </button>
+        <Link
+          to="/events/$slug"
+          params={{ slug: event.slug }}
+          className="tap grid h-8 w-8 shrink-0 place-items-center text-white/90"
+          aria-label="Fermer"
+        >
+          <X className="h-5 w-5" />
+        </Link>
+      </header>
 
-        {/* Top bar */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between bg-gradient-to-b from-black/70 to-transparent p-3 pb-8">
-          <Link
-            to="/events/$slug"
-            params={{ slug: event.slug }}
-            className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full bg-black/50 ring-1 ring-white/15 backdrop-blur"
-          >
-            <X className="h-5 w-5" />
-          </Link>
-          <div className="pointer-events-auto flex items-center gap-2">
-            <span className="animate-pulse-live rounded-full bg-live px-3 py-1 text-[11px] font-bold uppercase tracking-wide">● Live</span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-black/50 px-3 py-1 text-xs ring-1 ring-white/15 backdrop-blur">
-              <Users className="h-3 w-3" /> {event.viewers?.toLocaleString("fr-FR") ?? "—"}
-            </span>
-            <button className="grid h-10 w-10 place-items-center rounded-full bg-black/50 ring-1 ring-white/15 backdrop-blur">
-              <Share2 className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
+      <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto">
+        {/* Lecteur */}
+        <div className="relative h-[52dvh] min-h-[300px] bg-black sm:h-auto sm:aspect-video">
+          {event.livestream ? (
+            <iframe
+              src={event.livestream.embedUrl}
+              className="h-full w-full"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              title="Live"
+            />
+          ) : (
+            <img src={event.cover} alt="" className="h-full w-full object-cover opacity-90" />
+          )}
 
-        {/* Multi-camera switcher */}
-        <div className="scrollbar-hide absolute left-3 right-16 top-16 flex gap-2 overflow-x-auto">
-          {cameras.map((c) => (
-            <button
-              key={c.id}
-              onClick={() => setCam(c.id)}
-              className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold backdrop-blur transition ${
-                cam === c.id
-                  ? "bg-gradient-primary text-white shadow-glow"
-                  : "bg-black/50 text-white/80 ring-1 ring-white/15"
-              }`}
+          {/* Cagnotte en surimpression (haut droite) */}
+          {event.moneyPot && (
+            <a
+              href={event.moneyPot.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute right-2 top-2 flex items-center gap-2 rounded-2xl bg-black/70 px-3 py-2 ring-1 ring-white/10 backdrop-blur"
             >
-              <Video className="mr-1 inline h-3 w-3" />
-              {c.label}
-            </button>
-          ))}
-          <Link
-            to="/events/$slug/multicam"
-            params={{ slug: event.slug }}
-            className="shrink-0 rounded-full bg-black/50 px-3 py-1.5 text-[11px] font-semibold text-white/80 ring-1 ring-white/15 backdrop-blur"
-          >
-            Régie
-          </Link>
-        </div>
+              <span className="text-2xl leading-none">🎁</span>
+              <span>
+                <span className="block text-[20px] font-bold leading-tight">
+                  {event.moneyPot.current.toLocaleString("fr-FR")} {event.moneyPot.currency}
+                </span>
+                <span className="flex items-center gap-1 text-[12px] text-white/80">
+                  Cagnotte des mariés <ChevronRight className="h-3 w-3" />
+                </span>
+              </span>
+            </a>
+          )}
 
-        {/* Cagnotte overlay */}
-        {event.moneyPot && (
-          <a
-            href={event.moneyPot.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute right-3 top-28 w-40 rounded-2xl bg-black/55 p-3 ring-1 ring-white/15 backdrop-blur"
-          >
-            <p className="flex items-center gap-1 text-[10px] uppercase tracking-widest text-gold">
-              <Gift className="h-3 w-3" /> Cagnotte
-            </p>
-            <p className="mt-1 font-serif text-lg leading-none">
-              {event.moneyPot.current.toLocaleString("fr-FR")} {event.moneyPot.currency}
-            </p>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/15">
-              <div
-                className="h-full rounded-full bg-gradient-primary"
-                style={{ width: `${Math.min(100, (event.moneyPot.current / event.moneyPot.target) * 100)}%` }}
-              />
-            </div>
-          </a>
-        )}
-
-        {/* Chat overlay (last messages) */}
-        <div className="pointer-events-none absolute bottom-3 left-3 max-w-[55%] space-y-1.5">
-          <p className="text-[10px] uppercase tracking-widest text-white/70">{event.type} · {event.city}</p>
-          {msgs.slice(-3).map((m) => (
-            <p
-              key={`ov-${m.id}`}
-              className="w-fit max-w-full truncate rounded-full bg-black/45 px-3 py-1 text-xs backdrop-blur"
-            >
-              <span className="font-semibold" style={{ color: colorFor(m.author_name ?? "Invité") }}>
-                {m.author_name ?? "Invité"}
-              </span>{" "}
-              <span className="text-white/90">{m.content}</span>
-            </p>
-          ))}
-        </div>
-
-        {/* Reaction rail */}
-        <div className="absolute bottom-3 right-3 flex flex-col gap-2">
-          {reactions.map((r) => (
-            <button
-              key={r}
-              onClick={() => heart(r)}
-              className="tap grid h-11 w-11 place-items-center rounded-full bg-black/50 text-xl ring-1 ring-white/15 backdrop-blur transition active:scale-90"
-              aria-label={`Réagir ${r}`}
-            >
-              {r}
-            </button>
-          ))}
-        </div>
-
-        {/* Floating hearts */}
-        {hearts.map((h) => (
-          <span
-            key={h.id}
-            className="pointer-events-none absolute bottom-4 animate-float-up text-3xl"
-            style={{ left: `${h.left}%` }}
-          >
-            {h.emoji}
-          </span>
-        ))}
-      </div>
-
-
-      {/* Tabs */}
-      <div className="flex shrink-0 gap-1 border-b border-white/10 bg-dark px-3">
-        {tabs.map((t) => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={`flex-1 border-b-2 px-2 py-3 text-xs font-semibold transition ${
-              tab === t ? "border-primary text-white" : "border-transparent text-white/60"
-            }`}
-          >
-            {t}
-          </button>
-        ))}
-      </div>
-
-      {/* Panel */}
-      <div className="flex min-h-0 flex-1 flex-col">
-        {tab === "Chat" && (
-          <>
-            <div ref={listRef} className="flex-1 space-y-2 overflow-y-auto px-4 py-3">
-              {msgs.length === 0 && (
-                <p className="mt-6 text-center text-xs text-white/50">Sois le premier à écrire un message ✨</p>
-              )}
-              {msgs.map((m) => (
-                <div key={m.id} className="flex items-start gap-2 text-sm">
-                  <span className="font-semibold" style={{ color: colorFor(m.author_name ?? "Invité") }}>
-                    {m.author_name ?? "Invité"}
+          {/* Chat flottant */}
+          <div className="pointer-events-none absolute bottom-14 left-2 max-w-[62%] space-y-2">
+            {msgs.slice(-5).map((m) => {
+              const name = m.author_name ?? "Invité";
+              return (
+                <div key={`ov-${m.id}`} className="flex items-center gap-2">
+                  <span
+                    className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-[11px] font-bold text-white ring-2 ring-white/25"
+                    style={{ background: colorFor(name) }}
+                  >
+                    {initials(name)}
                   </span>
-                  <span className="min-w-0 flex-1 break-words text-white/90">{m.content}</span>
+                  <span className="min-w-0">
+                    <span className="block truncate text-[13px] font-semibold leading-tight">{name}</span>
+                    <span className="block truncate text-[13px] leading-tight text-white/90">{m.content}</span>
+                  </span>
                 </div>
+              );
+            })}
+          </div>
+
+          {/* Colonne de réactions */}
+          <div className="absolute bottom-14 right-2 flex flex-col items-center gap-3">
+            {reactions.map((r, i) => (
+              <button
+                key={`${r}-${i}`}
+                onClick={() => heart(r)}
+                className="tap text-[26px] leading-none drop-shadow-lg transition active:scale-90"
+                aria-label={`Réagir ${r}`}
+              >
+                {r}
+              </button>
+            ))}
+          </div>
+
+          {/* Pastille spectateurs */}
+          <div className="absolute bottom-2 right-2 inline-flex items-center gap-1.5 rounded-lg bg-black/65 px-2.5 py-1.5 text-[12px] font-semibold ring-1 ring-white/10 backdrop-blur">
+            <Users className="h-3.5 w-3.5" /> {compactViewers}
+          </div>
+
+          {/* Cœurs flottants */}
+          {hearts.map((h) => (
+            <span
+              key={h.id}
+              className="pointer-events-none absolute bottom-4 animate-float-up text-3xl"
+              style={{ left: `${h.left}%` }}
+            >
+              {h.emoji}
+            </span>
+          ))}
+        </div>
+
+        {/* Champ de message */}
+        <section
+          ref={(el) => {
+            sectionRefs.current.Chat = el;
+          }}
+          className="px-3 pt-3"
+        >
+          {user ? (
+            <div className="flex items-center gap-2 rounded-2xl bg-white/[0.08] px-4 py-3">
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && submit()}
+                placeholder="Écrire un message..."
+                className="min-w-0 flex-1 bg-transparent text-[15px] outline-none placeholder:text-white/50"
+              />
+              <button
+                onClick={submit}
+                disabled={!input.trim() || !dbId}
+                className="tap shrink-0 text-white/90 disabled:opacity-40"
+                aria-label="Envoyer"
+              >
+                <Send className="h-5 w-5" />
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/auth"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-primary py-3 text-sm font-semibold"
+            >
+              <LogIn className="h-4 w-4" /> Se connecter pour discuter
+            </Link>
+          )}
+        </section>
+
+        {/* Réactions & cadeaux express */}
+        <section
+          ref={(el) => {
+            sectionRefs.current.Réactions = el;
+          }}
+          className="mt-3 px-3"
+        >
+          <div className="flex items-stretch gap-2 rounded-2xl bg-white/[0.06] p-2">
+            <div className="scrollbar-hide flex min-w-0 flex-1 gap-1 overflow-x-auto">
+              {reactionGifts.map((g) => (
+                <button
+                  key={g.label}
+                  onClick={() => heart(g.emoji)}
+                  className="tap flex w-[68px] shrink-0 flex-col items-center gap-1 rounded-xl px-1 py-1.5 transition active:scale-95"
+                >
+                  <span className="text-[24px] leading-none">{g.emoji}</span>
+                  <span className="text-[11px] font-semibold leading-none">{g.label}</span>
+                  <span className="text-[11px] leading-none text-white/60">{g.price === 0 ? "Gratuit" : `${g.price} €`}</span>
+                </button>
               ))}
             </div>
-            <div className="flex shrink-0 items-center gap-2 border-t border-white/10 p-3">
-              {user ? (
-                <>
-                  <input
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && submit()}
-                    placeholder="Envoyer un message..."
-                    className="flex-1 rounded-full bg-white/10 px-4 py-2.5 text-sm outline-none placeholder:text-white/50"
-                  />
-                  <button
-                    onClick={() => heart("💖")}
-                    className="grid h-10 w-10 place-items-center rounded-full bg-live text-white"
-                    aria-label="Envoyer un cœur"
-                  >
-                    <Heart className="h-4 w-4 fill-current" />
-                  </button>
-                  <button
-                    onClick={submit}
-                    disabled={!input.trim() || !dbId}
-                    className="grid h-10 w-10 place-items-center rounded-full bg-gradient-primary disabled:opacity-50"
-                    aria-label="Envoyer"
-                  >
-                    <Send className="h-4 w-4" />
-                  </button>
-                </>
-              ) : (
-                <Link
-                  to="/auth"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-primary py-2.5 text-sm font-semibold"
-                >
-                  <LogIn className="h-4 w-4" /> Se connecter pour discuter
-                </Link>
-              )}
-            </div>
-          </>
-        )}
+            <button
+              onClick={() => goTo("Cadeaux")}
+              className="tap grid w-14 shrink-0 place-items-center rounded-2xl bg-live text-white"
+              aria-label="Plus de cadeaux"
+            >
+              <Plus className="h-6 w-6" />
+            </button>
+          </div>
+        </section>
 
-        {tab === "Cadeaux" && (
-          <div className="flex-1 space-y-3 overflow-y-auto p-4">
-            {gifts.length === 0 ? (
-              <p className="rounded-2xl bg-white/5 p-6 text-center text-sm text-white/60">
-                Aucune idée cadeau pour le moment.
-              </p>
-            ) : (
-              <div className="grid grid-cols-2 gap-3">
-                {gifts.map((g) => (
-                  <a
-                    key={g.id}
-                    href={g.external_url ?? "#"}
-                    target={g.external_url ? "_blank" : undefined}
-                    rel={g.external_url ? "noopener noreferrer" : undefined}
-                    className="group rounded-2xl border border-white/10 bg-white/5 p-3 text-left backdrop-blur transition hover:border-primary"
-                  >
-                    {g.image_url ? (
-                      <img src={g.image_url} alt="" className="aspect-square w-full rounded-xl object-cover" />
-                    ) : (
-                      <div className="grid aspect-square w-full place-items-center rounded-xl bg-white/5 text-4xl">🎁</div>
-                    )}
-                    <p className="mt-2 line-clamp-2 text-sm font-semibold">{g.title}</p>
-                    <div className="mt-1 flex items-center justify-between text-xs">
-                      <span className="text-white/70">
-                        {typeof g.price === "number" ? `${g.price.toLocaleString("fr-FR")} €` : "—"}
-                      </span>
-                      {g.is_reserved ? (
-                        <span className="rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-semibold text-gold">Réservé</span>
-                      ) : (
-                        <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[10px] font-semibold text-primary">Disponible</span>
-                      )}
-                    </div>
-                  </a>
-                ))}
+        {/* Changer de caméra */}
+        <section
+          ref={(el) => {
+            sectionRefs.current.Caméras = el;
+          }}
+          className="mt-5"
+        >
+          <div className="flex items-center justify-between px-3">
+            <h2 className="text-[17px] font-semibold">Changer de caméra</h2>
+            <Link
+              to="/events/$slug/multicam"
+              params={{ slug: event.slug }}
+              className="text-[13px] font-medium text-live"
+            >
+              Voir toutes
+            </Link>
+          </div>
+          <div className="scrollbar-hide mt-2 flex gap-2 overflow-x-auto px-3 pb-1">
+            {cameras.map((c, i) => (
+              <button
+                key={c.id}
+                onClick={() => setCam(c.id)}
+                className={`relative h-[86px] w-[112px] shrink-0 overflow-hidden rounded-xl ring-2 transition ${
+                  cam === c.id ? "ring-live" : "ring-white/10"
+                }`}
+              >
+                <img
+                  src={album[i]?.url ?? event.cover}
+                  alt=""
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                {c.live && (
+                  <span className="absolute left-1.5 top-1.5 rounded-md bg-live px-1.5 py-0.5 text-[9px] font-bold uppercase">
+                    Live
+                  </span>
+                )}
+                <span className="absolute inset-x-0 bottom-0 bg-black/55 py-1 text-[12px] font-medium">{c.label}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Photos des invités */}
+        <section
+          ref={(el) => {
+            sectionRefs.current.Photos = el;
+          }}
+          className="mt-5"
+        >
+          <div className="flex items-center justify-between px-3">
+            <h2 className="text-[17px] font-semibold">
+              Photos des invités <span className="text-live">{album.length}</span>
+            </h2>
+            <Link
+              to="/events/$slug/album"
+              params={{ slug: event.slug }}
+              className="text-[13px] font-medium text-live"
+            >
+              Voir toutes
+            </Link>
+          </div>
+          <div className="scrollbar-hide mt-2 flex gap-2 overflow-x-auto px-3 pb-1">
+            {album.slice(0, 8).map((m) => (
+              <div key={m.id} className="h-[86px] w-[86px] shrink-0 overflow-hidden rounded-xl bg-white/5">
+                {m.media_type === "video" ? (
+                  <video src={m.url} className="h-full w-full object-cover" muted playsInline />
+                ) : (
+                  <img src={m.url} alt="" className="h-full w-full object-cover" loading="lazy" />
+                )}
               </div>
-            )}
+            ))}
+            <Link
+              to="/events/$slug/album"
+              params={{ slug: event.slug }}
+              className="tap grid h-[86px] w-[86px] shrink-0 place-items-center rounded-xl bg-live"
+              aria-label="Ajouter une photo"
+            >
+              <Plus className="h-6 w-6" />
+            </Link>
+          </div>
+        </section>
+
+        {/* Cadeaux */}
+        <section
+          ref={(el) => {
+            sectionRefs.current.Cadeaux = el;
+          }}
+          className="mt-6 px-3"
+        >
+          <div className="flex items-center justify-between">
+            <h2 className="text-[17px] font-semibold">Cadeaux</h2>
             <Link
               to="/events/$slug/gift-registry"
               params={{ slug: event.slug }}
-              className="block rounded-2xl bg-white/10 p-3 text-center text-xs font-semibold text-white/90 backdrop-blur"
+              className="text-[13px] font-medium text-live"
             >
-              Voir toute la liste de cadeaux →
+              Voir toute la liste
             </Link>
           </div>
-        )}
+          {gifts.length === 0 ? (
+            <p className="mt-2 rounded-2xl bg-white/5 p-5 text-center text-sm text-white/60">
+              Aucune idée cadeau pour le moment.
+            </p>
+          ) : (
+            <div className="mt-2 grid grid-cols-2 gap-3">
+              {gifts.slice(0, 4).map((g) => (
+                <a
+                  key={g.id}
+                  href={g.external_url ?? "#"}
+                  target={g.external_url ? "_blank" : undefined}
+                  rel={g.external_url ? "noopener noreferrer" : undefined}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-3 text-left"
+                >
+                  {g.image_url ? (
+                    <img src={g.image_url} alt="" className="aspect-square w-full rounded-xl object-cover" />
+                  ) : (
+                    <div className="grid aspect-square w-full place-items-center rounded-xl bg-white/5 text-4xl">🎁</div>
+                  )}
+                  <p className="mt-2 line-clamp-2 text-sm font-semibold">{g.title}</p>
+                  <div className="mt-1 flex items-center justify-between text-xs">
+                    <span className="text-white/70">
+                      {typeof g.price === "number" ? `${g.price.toLocaleString("fr-FR")} €` : "—"}
+                    </span>
+                    {g.is_reserved ? (
+                      <span className="rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-semibold text-gold">Réservé</span>
+                    ) : (
+                      <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                        Disponible
+                      </span>
+                    )}
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+        </section>
 
-
-        {tab === "Cagnotte" && event.moneyPot && (
-          <div className="flex-1 space-y-4 overflow-y-auto p-4">
-            <div className="rounded-3xl bg-white/5 p-5">
+        {/* Cagnotte */}
+        {event.moneyPot && (
+          <section
+            ref={(el) => {
+              sectionRefs.current.Cagnotte = el;
+            }}
+            className="mt-6 px-3 pb-6"
+          >
+            <div className="rounded-3xl bg-white/[0.06] p-5">
               <p className="text-xs uppercase tracking-widest text-white/60">Via {event.moneyPot.platform}</p>
               <p className="mt-1 font-serif text-2xl">{event.moneyPot.title}</p>
               <div className="mt-4 flex items-end justify-between">
-                <span className="font-serif text-3xl">{event.moneyPot.current.toLocaleString("fr-FR")} {event.moneyPot.currency}</span>
+                <span className="font-serif text-3xl">
+                  {event.moneyPot.current.toLocaleString("fr-FR")} {event.moneyPot.currency}
+                </span>
                 <span className="text-sm text-white/60">/ {event.moneyPot.target.toLocaleString("fr-FR")}</span>
               </div>
               <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/10">
                 <div
                   className="h-full rounded-full bg-gradient-primary"
-                  style={{ width: `${(event.moneyPot.current / event.moneyPot.target) * 100}%` }}
+                  style={{ width: `${Math.min(100, (event.moneyPot.current / event.moneyPot.target) * 100)}%` }}
                 />
               </div>
               <a
@@ -465,28 +577,29 @@ function LivePage() {
                 Cagnotte externe. MaFeliza ne conserve pas les fonds.
               </p>
             </div>
-          </div>
-        )}
-
-        {tab === "Photos" && (
-          <div className="grid flex-1 grid-cols-3 gap-1 overflow-y-auto p-1">
-            {album.length === 0 && (
-              <p className="col-span-3 mt-6 text-center text-xs text-white/50">
-                Aucune photo pour l'instant. Invite tes proches à contribuer !
-              </p>
-            )}
-            {album.map((m) =>
-              m.media_type === "video" ? (
-                <video key={m.id} src={m.url} className="aspect-square h-full w-full object-cover" muted playsInline />
-              ) : (
-                <div key={m.id} className="aspect-square overflow-hidden">
-                  <img src={m.url} alt="" className="h-full w-full object-cover" loading="lazy" />
-                </div>
-              ),
-            )}
-          </div>
+          </section>
         )}
       </div>
+
+      {/* Barre d'onglets inférieure */}
+      <nav className="grid shrink-0 grid-cols-6 border-t border-white/10 bg-dark pb-[max(0.25rem,env(safe-area-inset-bottom))] pt-2">
+        {tabs.map((t) => {
+          const Icon = tabIcons[t];
+          const active = tab === t;
+          return (
+            <button
+              key={t}
+              onClick={() => goTo(t)}
+              className={`flex flex-col items-center gap-1 py-1 text-[10px] font-medium transition ${
+                active ? "text-live" : "text-white/70"
+              }`}
+            >
+              <Icon className="h-5 w-5" />
+              {t}
+            </button>
+          );
+        })}
+      </nav>
     </div>
   );
 }
