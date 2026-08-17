@@ -222,7 +222,7 @@ function CreatePage() {
                 >
                   <span
                     className={`grid h-11 w-11 place-items-center rounded-[14px] ${
-                      active ? "bg-gradient-primary text-white" : "bg-primary-light text-primary"
+                      active ? "bg-gradient-primary text-white" : typeTint[t]
                     }`}
                   >
                     <I className="h-[22px] w-[22px]" />
