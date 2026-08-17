@@ -1,19 +1,20 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { eventTypes } from "@/lib/mock-data";
 import { eventIcon } from "@/lib/event-icons";
 import { useMemo, useState } from "react";
 import {
   ChevronLeft,
   Check,
   Copy,
-  Globe,
-  Lock,
   Share2,
   X,
   Link2,
   Instagram,
   Facebook,
   MessageCircle,
+  Camera,
+  Calendar,
+  MapPin,
+  type LucideIcon,
 } from "lucide-react";
 import { createEvent } from "@/lib/events.functions";
 import { useServerFn } from "@tanstack/react-start";
@@ -32,10 +33,22 @@ export const Route = createFileRoute("/app/create")({
 });
 
 const stepTitles = [
-  "1. Choisissez le type d'événement",
-  "2. Informations de l'événement",
-  "3. Faire-part & Personnalisation",
-  "4. Accès & Partage",
+  "Quel type d'événement souhaitez-vous créer ?",
+  "Informations de base",
+  "Choisissez votre faire-part",
+  "Paramètres d'invitation",
+] as const;
+
+/** Ordre et libellés fidèles à la maquette (grille 2 colonnes, 8 tuiles). */
+const createTypes = [
+  "Mariage",
+  "Anniversaire",
+  "Baby Shower",
+  "Remise de diplôme",
+  "Naissance",
+  "Communion",
+  "Baptême",
+  "Autre événement",
 ] as const;
 
 const typeMap: Record<
@@ -50,6 +63,7 @@ const typeMap: Record<
 };
 
 const cardStyles = ["Classique", "Moderne", "Élégant"] as const;
+
 
 function randomCode(prefix?: string) {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -80,6 +94,7 @@ function CreatePage() {
   const [allowGuestPosts, setAllowGuestPosts] = useState(true);
   const [allowComments, setAllowComments] = useState(true);
   const [enableCagnotte, setEnableCagnotte] = useState(true);
+  const [coverPreview, setCoverPreview] = useState<string | null>(null);
   const [created, setCreated] = useState<{ slug: string } | null>(null);
 
   const guestCode = useMemo(() => randomCode(), []);
@@ -150,10 +165,14 @@ function CreatePage() {
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <p className="truncate text-center text-[17px] font-bold">
-            {step === 0 ? "Créer un événement" : "Création de l'événement"}
-          </p>
-          <span className="h-9 w-9" />
+          <p className="truncate text-center text-[17px] font-bold">Créer un événement</p>
+          <button
+            onClick={() => navigate({ to: "/app" })}
+            aria-label="Annuler"
+            className="tap grid h-9 w-9 shrink-0 place-items-center rounded-full text-foreground"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
         {/* Stepper à points */}
         <div className="mt-3 flex items-center justify-center gap-0">
@@ -176,14 +195,16 @@ function CreatePage() {
       </div>
 
       <div className="mx-auto max-w-2xl">
-        <h1 className="mb-4 font-sans text-[19px] font-bold tracking-tight">{stepTitles[step]}</h1>
+        <h1 className="mb-4 max-w-[16rem] font-sans text-[19px] font-bold leading-snug tracking-tight sm:max-w-none">
+          {stepTitles[step]}
+        </h1>
 
-        {/* ÉTAPE 1 — type */}
+        {/* ÉTAPE 1 — type (grille 2 colonnes, fidèle à la maquette) */}
         {step === 0 && (
-          <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
-            {eventTypes.map((t) => {
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {createTypes.map((t) => {
               const active = selectedType === t;
-              const I = eventIcon(t);
+              const I = eventIcon(t === "Autre événement" ? "Autre" : t);
               return (
                 <button
                   key={t}
@@ -191,52 +212,60 @@ function CreatePage() {
                     setSelectedType(t);
                     setStep(1);
                   }}
-                  className={`flex aspect-[1/0.95] flex-col items-center justify-center gap-2 rounded-[18px] border px-1.5 text-center transition ${
+                  className={`flex aspect-[1/0.82] flex-col items-center justify-center gap-2.5 rounded-[18px] border px-2 text-center transition ${
                     active
                       ? "border-primary bg-primary-light"
                       : "border-border/70 bg-surface hover:border-primary/40"
                   }`}
                 >
                   <span
-                    className={`grid h-10 w-10 place-items-center rounded-[14px] ${
+                    className={`grid h-12 w-12 place-items-center rounded-[16px] ${
                       active ? "bg-gradient-primary text-white" : "bg-primary-light text-primary"
                     }`}
                   >
-                    <I className="h-5 w-5" />
+                    <I className="h-6 w-6" />
                   </span>
-                  <span className="line-clamp-2 text-[11.5px] font-semibold leading-tight">{t}</span>
+                  <span className="line-clamp-2 text-[12.5px] font-semibold leading-tight">{t}</span>
                 </button>
               );
             })}
           </div>
         )}
 
+
         {/* ÉTAPE 2 — informations */}
         {step === 1 && (
           <div className="space-y-3.5">
-            <Field label="Nom de l'événement" value={title} onChange={setTitle} placeholder="Mariage de Sophie & Thomas" />
+            {/* Photo de couverture */}
+            <label className="tap relative block aspect-[16/10] w-full cursor-pointer overflow-hidden rounded-[18px] border border-border bg-muted">
+              {coverPreview ? (
+                <img src={coverPreview} alt="Couverture" className="h-full w-full object-cover" />
+              ) : (
+                <span className="flex h-full w-full flex-col items-center justify-center gap-2 text-muted-foreground">
+                  <Camera className="h-7 w-7" />
+                  <span className="text-[12.5px] font-medium">Ajouter une photo de couverture</span>
+                </span>
+              )}
+              <span className="absolute bottom-2.5 right-2.5 grid h-10 w-10 place-items-center rounded-full bg-surface/95 text-primary shadow-card">
+                <Camera className="h-5 w-5" />
+              </span>
+              <input
+                type="file"
+                accept="image/*"
+                className="sr-only"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) setCoverPreview(URL.createObjectURL(f));
+                }}
+              />
+            </label>
+
+            <Field label="Nom de l'événement" value={title} onChange={setTitle} placeholder="Mariage de Sarah & Thomas" />
             <div className="grid grid-cols-2 gap-3">
-              <Field label="Date" type="date" value={date} onChange={setDate} />
+              <Field label="Date" type="date" value={date} onChange={setDate} icon={Calendar} />
               <Field label="Heure" type="time" value={time} onChange={setTime} />
             </div>
-            <Field label="Lieu" value={location} onChange={setLocation} placeholder="Château de Vaux-le-Vicomte" />
-            <div>
-              <p className="mb-1.5 text-[12.5px] text-muted-foreground">Type d'accès</p>
-              <div className="grid grid-cols-2 gap-3">
-                {(["public", "private"] as const).map((v) => (
-                  <button
-                    key={v}
-                    onClick={() => setAccess(v)}
-                    className={`tap flex items-center justify-center gap-2 rounded-[16px] border py-3.5 text-sm font-semibold transition ${
-                      access === v ? "border-primary bg-primary-light text-primary" : "border-border bg-surface"
-                    }`}
-                  >
-                    {v === "public" ? <Globe className="h-4 w-4" /> : <Lock className="h-4 w-4" />}
-                    {v === "public" ? "Public" : "Privé"}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <Field label="Lieu" value={location} onChange={setLocation} placeholder="Château de Chantilly" icon={MapPin} />
             <div>
               <label className="text-[12.5px] text-muted-foreground">Description</label>
               <textarea
@@ -244,7 +273,7 @@ function CreatePage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="mt-1 w-full rounded-[16px] border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-primary"
-                placeholder="Nous avons la joie de vous convier à notre mariage !"
+                placeholder="Rejoignez-nous pour célébrer notre amour ! 💍❤️"
               />
             </div>
             <details className="rounded-[16px] border border-border bg-surface px-4 py-3">
@@ -266,11 +295,12 @@ function CreatePage() {
               </div>
             </details>
           </div>
+
         )}
 
         {/* ÉTAPE 3 — faire-part */}
         {step === 2 && (
-          <div className="space-y-6">
+          <div className="space-y-5">
             <div className="flex gap-2">
               {cardStyles.map((s) => (
                 <button
@@ -285,31 +315,45 @@ function CreatePage() {
               ))}
             </div>
 
-            <section>
-              <p className="text-[14px] font-bold">Faire-part principal</p>
-              <p className="text-[12.5px] text-muted-foreground">(classique avec compte à rebours)</p>
-              <div className="mt-2.5 rounded-[24px] border border-primary/30 bg-primary-light/40 p-2.5">
-                <InvitationPreview
-                  title={title || "Sophie & Thomas"}
-                  date={date}
-                  style={style}
-                  index={cardIndex}
-                />
-                <button className="tap mt-2.5 w-full rounded-[16px] border border-primary/40 bg-surface/80 py-3 text-[13.5px] font-semibold text-primary">
-                  Personnaliser
-                </button>
-              </div>
-              <div className="mt-3 flex items-center justify-center gap-1.5">
-                {[0, 1, 2, 3, 4, 5].map((i) => (
+            {/* Deux modèles côte à côte, comme sur la maquette */}
+            <div className="grid grid-cols-2 gap-3">
+              {[0, 1].map((offset) => {
+                const idx = (cardIndex + offset) % 6;
+                const active = offset === 0;
+                return (
                   <button
-                    key={i}
-                    onClick={() => setCardIndex(i)}
-                    aria-label={`Modèle ${i + 1}`}
-                    className={`h-1.5 rounded-full transition-all ${i === cardIndex ? "w-4 bg-primary" : "w-1.5 bg-primary/25"}`}
-                  />
-                ))}
-              </div>
-            </section>
+                    key={offset}
+                    onClick={() => setCardIndex(idx)}
+                    className={`overflow-hidden rounded-[20px] border-2 p-1 text-left transition ${
+                      active ? "border-primary bg-primary-light/40" : "border-border bg-surface"
+                    }`}
+                  >
+                    <InvitationPreview
+                      title={title || "Sarah & Thomas"}
+                      date={date}
+                      style={style}
+                      index={idx}
+                      compact
+                    />
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="flex items-center justify-center gap-1.5">
+              {[0, 1, 2, 3, 4, 5].map((i) => (
+                <button
+                  key={i}
+                  onClick={() => setCardIndex(i)}
+                  aria-label={`Modèle ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all ${i === cardIndex ? "w-4 bg-primary" : "w-1.5 bg-primary/25"}`}
+                />
+              ))}
+            </div>
+
+            <button className="tap w-full rounded-[16px] border border-primary/40 bg-surface py-3.5 text-[13.5px] font-semibold text-primary">
+              Personnaliser
+            </button>
 
             <section>
               <p className="text-[14px] font-bold">
@@ -332,47 +376,53 @@ function CreatePage() {
               </div>
             </section>
           </div>
+
         )}
 
         {/* ÉTAPE 4 — accès & partage */}
         {step === 3 && (
-          <div className="space-y-4">
-            <CodeField label="Code invités" value={guestCode} onCopy={copy} onShare={share} />
-            <CodeField label="Code cameraman" value={camCode} onCopy={copy} onShare={share} />
-
-            <div>
-              <p className="mb-2 text-[14px] font-bold">Partager votre événement</p>
-              <div className="grid grid-cols-4 gap-2">
-                {[
-                  { icon: MessageCircle, label: "WhatsApp" },
-                  { icon: Instagram, label: "Instagram" },
-                  { icon: Facebook, label: "Facebook" },
-                  { icon: Link2, label: "Copier le lien" },
-                ].map(({ icon: Icon, label }) => (
-                  <button
-                    key={label}
-                    onClick={() => share(`Rejoignez ${title || "mon événement"} — code ${guestCode}`)}
-                    className="tap flex flex-col items-center gap-1.5"
-                  >
-                    <span className="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface text-primary">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <span className="text-[10.5px] font-medium text-muted-foreground">{label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
+          <div>
+          <div className="divide-y divide-border/70 overflow-hidden rounded-[18px] border border-border bg-surface">
 
             <Toggle
-              label="Publier sur MaFeliza"
-              hint="Votre événement sera visible sur la plateforme."
-              value={publishOnPlatform}
-              onChange={setPublishOnPlatform}
+              label="Événement privé"
+              hint="Seuls les invités avec le code peuvent y accéder."
+              value={access === "private"}
+              onChange={(v) => setAccess(v ? "private" : "public")}
+              flush
             />
-            <Toggle label="Autoriser les invités à publier" value={allowGuestPosts} onChange={setAllowGuestPosts} />
-            <Toggle label="Commentaires invités" value={allowComments} onChange={setAllowComments} />
-            <Toggle label="Participation à la cagnotte" value={enableCagnotte} onChange={setEnableCagnotte} />
+            <CodeRow label="Code des invités" value={guestCode} onCopy={copy} onShare={share} />
+            <CodeRow label="Code caméraman" value={camCode} onCopy={copy} onShare={share} />
+            <Toggle label="Autoriser les invités à publier" value={allowGuestPosts} onChange={setAllowGuestPosts} flush />
+            <Toggle label="Commentaires invités" value={allowComments} onChange={setAllowComments} flush />
+            <Toggle label="Participation à la cagnotte" value={enableCagnotte} onChange={setEnableCagnotte} flush />
+            <Toggle label="Publier sur MaFeliza" value={publishOnPlatform} onChange={setPublishOnPlatform} flush />
           </div>
+
+          <div className="mt-5">
+            <p className="mb-2 text-[14px] font-bold">Partager votre événement</p>
+            <div className="grid grid-cols-4 gap-2">
+              {[
+                { icon: MessageCircle, label: "WhatsApp" },
+                { icon: Instagram, label: "Instagram" },
+                { icon: Facebook, label: "Facebook" },
+                { icon: Link2, label: "Copier le lien" },
+              ].map(({ icon: Icon, label }) => (
+                <button
+                  key={label}
+                  onClick={() => share(`Rejoignez ${title || "mon événement"} — code ${guestCode}`)}
+                  className="tap flex flex-col items-center gap-1.5"
+                >
+                  <span className="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface text-primary">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="text-[10.5px] font-medium text-muted-foreground">{label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+          </div>
+
         )}
       </div>
 
@@ -393,7 +443,7 @@ function CreatePage() {
               onClick={() => mut.mutate()}
               className="tap w-full rounded-full bg-gradient-primary py-4 text-[15px] font-bold text-white shadow-glow disabled:opacity-50"
             >
-              {mut.isPending ? "Création..." : "Publier l'événement"}
+              {mut.isPending ? "Création..." : "Créer l'événement"}
             </button>
           )}
         </div>
@@ -458,11 +508,13 @@ function InvitationPreview({
   date,
   style,
   index,
+  compact = false,
 }: {
   title: string;
   date: string;
   style: string;
   index: number;
+  compact?: boolean;
 }) {
   const units = [
     { v: "12", l: "JOURS" },
@@ -477,20 +529,31 @@ function InvitationPreview({
         ? "from-cream via-gold-light/60 to-background"
         : "from-cream via-background to-primary-light/50";
   return (
-    <div className={`relative overflow-hidden rounded-[16px] bg-gradient-to-br ${bg} px-6 py-7 text-center`}>
+    <div
+      className={`relative overflow-hidden rounded-[16px] bg-gradient-to-br ${bg} text-center ${
+        compact ? "aspect-[3/4.4] px-3 py-5" : "px-6 py-7"
+      }`}
+    >
       <span className="pointer-events-none absolute -left-6 -top-6 h-24 w-24 rounded-full bg-primary/10 blur-xl" />
       <span className="pointer-events-none absolute -bottom-8 -right-4 h-28 w-28 rounded-full bg-gold/15 blur-xl" />
-      <p className="text-2xl italic" style={{ fontFamily: "var(--font-serif, serif)" }}>
+      <p
+        className={compact ? "text-[17px] italic leading-tight" : "text-2xl italic"}
+        style={{ fontFamily: "var(--font-serif, serif)" }}
+      >
         {title}
       </p>
-      <p className="mt-1 text-[12px] italic text-muted-foreground">se marient</p>
-      <p className="mt-3 text-[17px] font-semibold">{formatDate(date) || "24 Mai 2025"}</p>
-      <div className="mx-auto mt-2 h-px w-32 bg-border" />
-      <div className="mt-3 flex items-end justify-center gap-4">
+      <p className={`mt-1 italic text-muted-foreground ${compact ? "text-[10px]" : "text-[12px]"}`}>se marient</p>
+      <p className={`mt-3 font-semibold ${compact ? "text-[12px]" : "text-[17px]"}`}>
+        {formatDate(date) || "24 Mai 2025"}
+      </p>
+      <div className={`mx-auto mt-2 h-px bg-border ${compact ? "w-16" : "w-32"}`} />
+      <div className={`mt-3 flex items-end justify-center ${compact ? "gap-2" : "gap-4"}`}>
         {units.map((u) => (
           <div key={u.l}>
-            <p className="text-xl font-bold leading-none">{u.v}</p>
-            <p className="mt-1 text-[8.5px] tracking-[0.14em] text-muted-foreground">{u.l}</p>
+            <p className={`font-bold leading-none ${compact ? "text-[12px]" : "text-xl"}`}>{u.v}</p>
+            <p className={`mt-1 tracking-[0.14em] text-muted-foreground ${compact ? "text-[6.5px]" : "text-[8.5px]"}`}>
+              {u.l}
+            </p>
           </div>
         ))}
       </div>
@@ -519,7 +582,7 @@ function Confetti() {
   );
 }
 
-function CodeField({
+function CodeRow({
   label,
   value,
   onCopy,
@@ -531,18 +594,16 @@ function CodeField({
   onShare: (v: string) => void;
 }) {
   return (
-    <div className="rounded-[16px] border border-border bg-surface px-4 py-3">
-      <p className="text-[12px] text-muted-foreground">{label}</p>
-      <div className="mt-0.5 flex items-center justify-between gap-3">
-        <p className="truncate text-[22px] font-bold tracking-wide">{value}</p>
-        <div className="flex shrink-0 items-center gap-3 text-muted-foreground">
-          <button onClick={() => onCopy(value)} aria-label={`Copier ${label}`} className="tap">
-            <Copy className="h-[18px] w-[18px]" />
-          </button>
-          <button onClick={() => onShare(value)} aria-label={`Partager ${label}`} className="tap">
-            <Share2 className="h-[18px] w-[18px]" />
-          </button>
-        </div>
+    <div className="flex items-center justify-between gap-3 bg-surface px-4 py-3.5">
+      <p className="text-[13.5px] font-semibold">{label}</p>
+      <div className="flex shrink-0 items-center gap-2.5">
+        <span className="text-[13.5px] font-bold tracking-wide text-muted-foreground">{value}</span>
+        <button onClick={() => onCopy(value)} aria-label={`Copier ${label}`} className="tap text-muted-foreground">
+          <Copy className="h-[17px] w-[17px]" />
+        </button>
+        <button onClick={() => onShare(value)} aria-label={`Partager ${label}`} className="tap text-muted-foreground">
+          <Share2 className="h-[17px] w-[17px]" />
+        </button>
       </div>
     </div>
   );
@@ -553,14 +614,20 @@ function Toggle({
   hint,
   value,
   onChange,
+  flush = false,
 }: {
   label: string;
   hint?: string;
   value: boolean;
   onChange: (v: boolean) => void;
+  flush?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-[16px] border border-border bg-surface px-4 py-3.5">
+    <div
+      className={`flex items-center justify-between gap-4 px-4 py-3.5 ${
+        flush ? "bg-surface" : "rounded-[16px] border border-border bg-surface"
+      }`}
+    >
       <div className="min-w-0">
         <p className="text-[13.5px] font-semibold">{label}</p>
         {hint && <p className="text-[12px] text-muted-foreground">{hint}</p>}
@@ -584,20 +651,28 @@ function Field({
   label,
   value,
   onChange,
+  icon: Icon,
   ...rest
-}: { label: string; value: string; onChange: (v: string) => void } & Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  "onChange" | "value"
->) {
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  icon?: LucideIcon;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value">) {
   return (
     <div>
       <label className="text-[12.5px] text-muted-foreground">{label}</label>
-      <input
-        {...rest}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full rounded-[16px] border border-border bg-surface px-4 py-3.5 text-sm outline-none focus:border-primary"
-      />
+      <div className="relative mt-1">
+        <input
+          {...rest}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className={`w-full rounded-[16px] border border-border bg-surface px-4 py-3.5 text-sm outline-none focus:border-primary ${Icon ? "pr-11" : ""}`}
+        />
+        {Icon && (
+          <Icon className="pointer-events-none absolute right-3.5 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
+        )}
+      </div>
     </div>
   );
 }
