@@ -3,7 +3,24 @@ import { findEvent } from "@/lib/mock-data";
 import { listRegistryItems } from "@/lib/registry.functions";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { X, Share2, Send, Heart, Gift, Users, ExternalLink, LogIn, Video } from "lucide-react";
+import {
+  X,
+  Share2,
+  Send,
+  Heart,
+  Gift,
+  Users,
+  ExternalLink,
+  LogIn,
+  Eye,
+  MoreHorizontal,
+  MessageCircle,
+  Camera,
+  Video,
+  Plus,
+  ChevronRight,
+  PiggyBank,
+} from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getEventBySlug } from "@/lib/events.functions";
