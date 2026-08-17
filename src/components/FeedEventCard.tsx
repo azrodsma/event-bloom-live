@@ -260,8 +260,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
 
       {/* Espace caméraman */}
       <Link
-        to="/events/$slug/vendors-hub"
-        params={{ slug: event.slug }}
+        to="/app/cameraman"
         className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2.5 rounded-[18px] bg-iris-light/70 p-3 sm:gap-3"
       >
         <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] bg-iris text-primary-foreground sm:h-12 sm:w-12">

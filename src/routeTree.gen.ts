@@ -101,6 +101,7 @@ import { Route as AppCoOrganizersRouteImport } from './routes/app.co-organizers'
 import { Route as AppChangelogRouteImport } from './routes/app.changelog'
 import { Route as AppCareersRouteImport } from './routes/app.careers'
 import { Route as AppCareRouteImport } from './routes/app.care'
+import { Route as AppCameramanRouteImport } from './routes/app.cameraman'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
 import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries'
@@ -226,6 +227,7 @@ import { Route as EventsSlugFavorsRouteImport } from './routes/events.$slug.favo
 import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
 import { Route as EventsSlugFamilyTreeRouteImport } from './routes/events.$slug.family-tree'
 import { Route as EventsSlugFamilyPortraitsRouteImport } from './routes/events.$slug.family-portraits'
+import { Route as EventsSlugFairePartRouteImport } from './routes/events.$slug.faire-part'
 import { Route as EventsSlugExitRouteImport } from './routes/events.$slug.exit'
 import { Route as EventsSlugEntranceRouteImport } from './routes/events.$slug.entrance'
 import { Route as EventsSlugEmotionHeatmapRouteImport } from './routes/events.$slug.emotion-heatmap'
@@ -750,6 +752,11 @@ const AppCareersRoute = AppCareersRouteImport.update({
 const AppCareRoute = AppCareRouteImport.update({
   id: '/care',
   path: '/care',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCameramanRoute = AppCameramanRouteImport.update({
+  id: '/cameraman',
+  path: '/cameraman',
   getParentRoute: () => AppRoute,
 } as any)
 const AppBillingRoute = AppBillingRouteImport.update({
@@ -1380,6 +1387,11 @@ const EventsSlugFamilyPortraitsRoute =
     path: '/family-portraits',
     getParentRoute: () => EventsSlugRoute,
   } as any)
+const EventsSlugFairePartRoute = EventsSlugFairePartRouteImport.update({
+  id: '/faire-part',
+  path: '/faire-part',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugExitRoute = EventsSlugExitRouteImport.update({
   id: '/exit',
   path: '/exit',
@@ -1727,6 +1739,7 @@ export interface FileRoutesByFullPath {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
+  '/app/cameraman': typeof AppCameramanRoute
   '/app/care': typeof AppCareRoute
   '/app/careers': typeof AppCareersRoute
   '/app/changelog': typeof AppChangelogRoute
@@ -1872,6 +1885,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/emotion-heatmap': typeof EventsSlugEmotionHeatmapRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/exit': typeof EventsSlugExitRoute
+  '/events/$slug/faire-part': typeof EventsSlugFairePartRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -2009,6 +2023,7 @@ export interface FileRoutesByTo {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
+  '/app/cameraman': typeof AppCameramanRoute
   '/app/care': typeof AppCareRoute
   '/app/careers': typeof AppCareersRoute
   '/app/changelog': typeof AppChangelogRoute
@@ -2153,6 +2168,7 @@ export interface FileRoutesByTo {
   '/events/$slug/emotion-heatmap': typeof EventsSlugEmotionHeatmapRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/exit': typeof EventsSlugExitRoute
+  '/events/$slug/faire-part': typeof EventsSlugFairePartRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -2292,6 +2308,7 @@ export interface FileRoutesById {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
+  '/app/cameraman': typeof AppCameramanRoute
   '/app/care': typeof AppCareRoute
   '/app/careers': typeof AppCareersRoute
   '/app/changelog': typeof AppChangelogRoute
@@ -2437,6 +2454,7 @@ export interface FileRoutesById {
   '/events/$slug/emotion-heatmap': typeof EventsSlugEmotionHeatmapRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/exit': typeof EventsSlugExitRoute
+  '/events/$slug/faire-part': typeof EventsSlugFairePartRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -2577,6 +2595,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
+    | '/app/cameraman'
     | '/app/care'
     | '/app/careers'
     | '/app/changelog'
@@ -2722,6 +2741,7 @@ export interface FileRouteTypes {
     | '/events/$slug/emotion-heatmap'
     | '/events/$slug/entrance'
     | '/events/$slug/exit'
+    | '/events/$slug/faire-part'
     | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
@@ -2859,6 +2879,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
+    | '/app/cameraman'
     | '/app/care'
     | '/app/careers'
     | '/app/changelog'
@@ -3003,6 +3024,7 @@ export interface FileRouteTypes {
     | '/events/$slug/emotion-heatmap'
     | '/events/$slug/entrance'
     | '/events/$slug/exit'
+    | '/events/$slug/faire-part'
     | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
@@ -3141,6 +3163,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
+    | '/app/cameraman'
     | '/app/care'
     | '/app/careers'
     | '/app/changelog'
@@ -3286,6 +3309,7 @@ export interface FileRouteTypes {
     | '/events/$slug/emotion-heatmap'
     | '/events/$slug/entrance'
     | '/events/$slug/exit'
+    | '/events/$slug/faire-part'
     | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
@@ -4065,6 +4089,13 @@ declare module '@tanstack/react-router' {
       path: '/care'
       fullPath: '/app/care'
       preLoaderRoute: typeof AppCareRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/cameraman': {
+      id: '/app/cameraman'
+      path: '/cameraman'
+      fullPath: '/app/cameraman'
+      preLoaderRoute: typeof AppCameramanRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/billing': {
@@ -4942,6 +4973,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugFamilyPortraitsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/faire-part': {
+      id: '/events/$slug/faire-part'
+      path: '/faire-part'
+      fullPath: '/events/$slug/faire-part'
+      preLoaderRoute: typeof EventsSlugFairePartRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/exit': {
       id: '/events/$slug/exit'
       path: '/exit'
@@ -5429,6 +5467,7 @@ interface AppRouteChildren {
   AppAnniversariesRoute: typeof AppAnniversariesRoute
   AppAppearanceRoute: typeof AppAppearanceRoute
   AppBillingRoute: typeof AppBillingRoute
+  AppCameramanRoute: typeof AppCameramanRoute
   AppCareRoute: typeof AppCareRoute
   AppCareersRoute: typeof AppCareersRoute
   AppChangelogRoute: typeof AppChangelogRoute
@@ -5525,6 +5564,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAnniversariesRoute: AppAnniversariesRoute,
   AppAppearanceRoute: AppAppearanceRoute,
   AppBillingRoute: AppBillingRoute,
+  AppCameramanRoute: AppCameramanRoute,
   AppCareRoute: AppCareRoute,
   AppCareersRoute: AppCareersRoute,
   AppChangelogRoute: AppChangelogRoute,
@@ -5702,6 +5742,7 @@ interface EventsSlugRouteChildren {
   EventsSlugEmotionHeatmapRoute: typeof EventsSlugEmotionHeatmapRoute
   EventsSlugEntranceRoute: typeof EventsSlugEntranceRoute
   EventsSlugExitRoute: typeof EventsSlugExitRoute
+  EventsSlugFairePartRoute: typeof EventsSlugFairePartRoute
   EventsSlugFamilyPortraitsRoute: typeof EventsSlugFamilyPortraitsRoute
   EventsSlugFamilyTreeRoute: typeof EventsSlugFamilyTreeRoute
   EventsSlugFaqRoute: typeof EventsSlugFaqRoute
@@ -5875,6 +5916,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugEmotionHeatmapRoute: EventsSlugEmotionHeatmapRoute,
   EventsSlugEntranceRoute: EventsSlugEntranceRoute,
   EventsSlugExitRoute: EventsSlugExitRoute,
+  EventsSlugFairePartRoute: EventsSlugFairePartRoute,
   EventsSlugFamilyPortraitsRoute: EventsSlugFamilyPortraitsRoute,
   EventsSlugFamilyTreeRoute: EventsSlugFamilyTreeRoute,
   EventsSlugFaqRoute: EventsSlugFaqRoute,
