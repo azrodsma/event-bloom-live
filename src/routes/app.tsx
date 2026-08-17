@@ -13,6 +13,7 @@ function AppLayout() {
   const hideNav = pathname.startsWith("/app/create");
   return (
     <div className={`relative min-h-screen overflow-x-hidden bg-gradient-mesh safe-x ${hideNav ? "" : "pb-nav"}`}>
+      {!hideNav && (
       <header className="sticky top-0 z-30 border-b border-border/40 bg-background/80 backdrop-blur-2xl safe-top">
         <div className="container-app grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 py-3">
           <Link
@@ -52,6 +53,7 @@ function AppLayout() {
           <AppTabs />
         </div>
       </header>
+      )}
 
       <main className="container-app min-w-0">
         <Outlet />

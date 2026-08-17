@@ -197,13 +197,13 @@ function CreatePage() {
       </div>
 
       <div className="mx-auto max-w-2xl">
-        <h1 className="mb-4 max-w-[16rem] font-sans text-[19px] font-bold leading-snug tracking-tight sm:max-w-none">
+        <h1 className="mb-3.5 max-w-[16rem] font-sans text-[19px] font-bold leading-snug tracking-tight sm:max-w-none">
           {stepTitles[step]}
         </h1>
 
         {/* ÉTAPE 1 — type (grille 2 colonnes, fidèle à la maquette) */}
         {step === 0 && (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
             {createTypes.map((t) => {
               const active = selectedType === t;
               const I = eventIcon(t === "Autre événement" ? "Autre" : t);
@@ -214,18 +214,18 @@ function CreatePage() {
                     setSelectedType(t);
                     setStep(1);
                   }}
-                  className={`flex aspect-[1/0.82] flex-col items-center justify-center gap-2.5 rounded-[18px] border px-2 text-center transition ${
+                  className={`flex aspect-[1/0.74] flex-col items-center justify-center gap-2 rounded-[16px] border px-2 text-center transition ${
                     active
                       ? "border-primary bg-primary-light"
                       : "border-border/70 bg-surface hover:border-primary/40"
                   }`}
                 >
                   <span
-                    className={`grid h-12 w-12 place-items-center rounded-[16px] ${
+                    className={`grid h-11 w-11 place-items-center rounded-[14px] ${
                       active ? "bg-gradient-primary text-white" : "bg-primary-light text-primary"
                     }`}
                   >
-                    <I className="h-6 w-6" />
+                    <I className="h-[22px] w-[22px]" />
                   </span>
                   <span className="line-clamp-2 text-[12.5px] font-semibold leading-tight">{t}</span>
                 </button>
