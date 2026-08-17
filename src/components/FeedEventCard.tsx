@@ -237,6 +237,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
           </span>
         </span>
         <span className="flex shrink-0 items-center">
+          {!!event.guestbookCount && (
           <span className="flex -space-x-2">
             {[0, 1].map((i) => (
               <img
@@ -247,9 +248,12 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
               />
             ))}
           </span>
+          )}
+          {!!event.guestbookCount && (
           <span className="ml-1 rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold text-foreground">
             +{event.guestbookCount}
           </span>
+          )}
           <Chevron className="ml-1 h-5 w-5 text-muted-foreground" />
         </span>
       </Link>
