@@ -110,7 +110,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
         </button>
 
         {/* Cagnotte + countdown panel */}
-        <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-black/70 p-3.5 text-white backdrop-blur-md sm:inset-x-8">
+        <div className="absolute inset-x-3 bottom-3 rounded-[18px] bg-black/70 p-3.5 text-white backdrop-blur-md sm:inset-x-8">
           <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2">
             <ChevronLeft className="h-5 w-5 shrink-0 opacity-60" />
             <div className="min-w-0 text-center">
@@ -223,7 +223,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
       <Link
         to="/events/$slug/guestbook"
         params={{ slug: event.slug }}
-        className="tap mx-3 mb-2.5 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl border border-primary bg-surface p-3"
+        className="tap mx-3 mb-2.5 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-[18px] border border-primary bg-surface p-3"
       >
         <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-iris-light text-iris">
           <BookHeart className="h-6 w-6" />
@@ -243,7 +243,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
       <Link
         to="/events/$slug/vendors-hub"
         params={{ slug: event.slug }}
-        className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-2xl bg-iris-light/70 p-3 sm:grid-cols-[auto_minmax(0,1fr)_auto]"
+        className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-[18px] bg-iris-light/70 p-3 sm:grid-cols-[auto_minmax(0,1fr)_auto]"
       >
         <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-iris text-primary-foreground">
           <Camera className="h-6 w-6" />
