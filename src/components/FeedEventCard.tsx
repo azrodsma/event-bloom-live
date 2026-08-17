@@ -143,7 +143,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
       </div>
 
       {/* Infos grid */}
-      <div className="grid gap-4 border-b border-border/60 p-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.1fr)]">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-4 divide-border/60 border-b border-border/60 p-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.15fr)] sm:divide-x">
         <div className="min-w-0">
           <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
             <MapPin className="h-4 w-4 text-primary" /> Lieu
@@ -167,7 +167,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
           </p>
         </div>
         {pot ? (
-          <div className="min-w-0">
+          <div className="col-span-2 min-w-0 sm:col-span-1 sm:pl-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
               <Gift className="h-4 w-4 text-primary" /> Cagnotte
             </p>
@@ -193,7 +193,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
             </a>
           </div>
         ) : (
-          <div className="min-w-0">
+          <div className="col-span-2 min-w-0 sm:col-span-1 sm:pl-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
               <Gift className="h-4 w-4 text-primary" /> Cagnotte
             </p>
@@ -223,7 +223,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
         params={{ slug: event.slug }}
         className="tap mx-3 mb-2.5 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl border border-primary bg-surface p-3"
       >
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-iris-light text-iris">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-iris-light text-iris">
           <BookHeart className="h-6 w-6" />
         </span>
         <span className="min-w-0">
@@ -243,7 +243,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
         params={{ slug: event.slug }}
         className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-2xl bg-iris-light/70 p-3 sm:grid-cols-[auto_minmax(0,1fr)_auto]"
       >
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-iris text-primary-foreground">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-iris text-primary-foreground">
           <Camera className="h-6 w-6" />
         </span>
         <span className="min-w-0">
