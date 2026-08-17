@@ -230,13 +230,14 @@ function CreatePage() {
       </div>
 
       {/* Barre d'action fixe */}
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border/60 bg-background/90 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 backdrop-blur-xl">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border/60 bg-background/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur-xl safe-x">
         <div className="mx-auto flex max-w-2xl items-center gap-2">
           {step > 0 && (
-            <button onClick={() => setStep(step - 1)} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium">
-              <ArrowLeft className="h-4 w-4" /> Retour
+            <button onClick={() => setStep(step - 1)} className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border bg-surface px-4 py-3 text-sm font-medium sm:px-5">
+              <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">Retour</span>
             </button>
           )}
+
           {step < steps.length - 1 ? (
             <button disabled={!canNext} onClick={() => setStep(step + 1)}
               className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-50 sm:flex-none">
