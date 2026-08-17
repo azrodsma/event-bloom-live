@@ -163,10 +163,14 @@ function CreatePage() {
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <p className="truncate text-center text-[17px] font-bold">
-            {step === 0 ? "Créer un événement" : "Création de l'événement"}
-          </p>
-          <span className="h-9 w-9" />
+          <p className="truncate text-center text-[17px] font-bold">Créer un événement</p>
+          <button
+            onClick={() => navigate({ to: "/app" })}
+            aria-label="Annuler"
+            className="tap grid h-9 w-9 shrink-0 place-items-center rounded-full text-foreground"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
         {/* Stepper à points */}
         <div className="mt-3 flex items-center justify-center gap-0">
@@ -189,14 +193,16 @@ function CreatePage() {
       </div>
 
       <div className="mx-auto max-w-2xl">
-        <h1 className="mb-4 font-sans text-[19px] font-bold tracking-tight">{stepTitles[step]}</h1>
+        <h1 className="mb-4 max-w-[16rem] font-sans text-[19px] font-bold leading-snug tracking-tight sm:max-w-none">
+          {stepTitles[step]}
+        </h1>
 
-        {/* ÉTAPE 1 — type */}
+        {/* ÉTAPE 1 — type (grille 2 colonnes, fidèle à la maquette) */}
         {step === 0 && (
-          <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
-            {eventTypes.map((t) => {
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {createTypes.map((t) => {
               const active = selectedType === t;
-              const I = eventIcon(t);
+              const I = eventIcon(t === "Autre événement" ? "Autre" : t);
               return (
                 <button
                   key={t}
@@ -204,25 +210,26 @@ function CreatePage() {
                     setSelectedType(t);
                     setStep(1);
                   }}
-                  className={`flex aspect-[1/0.95] flex-col items-center justify-center gap-2 rounded-[18px] border px-1.5 text-center transition ${
+                  className={`flex aspect-[1/0.82] flex-col items-center justify-center gap-2.5 rounded-[18px] border px-2 text-center transition ${
                     active
                       ? "border-primary bg-primary-light"
                       : "border-border/70 bg-surface hover:border-primary/40"
                   }`}
                 >
                   <span
-                    className={`grid h-10 w-10 place-items-center rounded-[14px] ${
+                    className={`grid h-12 w-12 place-items-center rounded-[16px] ${
                       active ? "bg-gradient-primary text-white" : "bg-primary-light text-primary"
                     }`}
                   >
-                    <I className="h-5 w-5" />
+                    <I className="h-6 w-6" />
                   </span>
-                  <span className="line-clamp-2 text-[11.5px] font-semibold leading-tight">{t}</span>
+                  <span className="line-clamp-2 text-[12.5px] font-semibold leading-tight">{t}</span>
                 </button>
               );
             })}
           </div>
         )}
+
 
         {/* ÉTAPE 2 — informations */}
         {step === 1 && (
