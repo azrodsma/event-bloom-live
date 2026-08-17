@@ -1,5 +1,4 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { eventTypes } from "@/lib/mock-data";
 import { eventIcon } from "@/lib/event-icons";
 import { useMemo, useState } from "react";
 import {
@@ -14,6 +13,10 @@ import {
   Instagram,
   Facebook,
   MessageCircle,
+  Camera,
+  Calendar,
+  MapPin,
+  type LucideIcon,
 } from "lucide-react";
 import { createEvent } from "@/lib/events.functions";
 import { useServerFn } from "@tanstack/react-start";
@@ -93,6 +96,7 @@ function CreatePage() {
   const [allowGuestPosts, setAllowGuestPosts] = useState(true);
   const [allowComments, setAllowComments] = useState(true);
   const [enableCagnotte, setEnableCagnotte] = useState(true);
+  const [coverPreview, setCoverPreview] = useState<string | null>(null);
   const [created, setCreated] = useState<{ slug: string } | null>(null);
 
   const guestCode = useMemo(() => randomCode(), []);
@@ -612,20 +616,28 @@ function Field({
   label,
   value,
   onChange,
+  icon: Icon,
   ...rest
-}: { label: string; value: string; onChange: (v: string) => void } & Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  "onChange" | "value"
->) {
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  icon?: LucideIcon;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value">) {
   return (
     <div>
       <label className="text-[12.5px] text-muted-foreground">{label}</label>
-      <input
-        {...rest}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full rounded-[16px] border border-border bg-surface px-4 py-3.5 text-sm outline-none focus:border-primary"
-      />
+      <div className="relative mt-1">
+        <input
+          {...rest}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className={`w-full rounded-[16px] border border-border bg-surface px-4 py-3.5 text-sm outline-none focus:border-primary ${Icon ? "pr-11" : ""}`}
+        />
+        {Icon && (
+          <Icon className="pointer-events-none absolute right-3.5 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
+        )}
+      </div>
     </div>
   );
 }
