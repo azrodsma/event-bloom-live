@@ -100,7 +100,7 @@ function LivePage() {
   const albumList = useServerFn(listAlbumMedia);
   const { data: album = [] } = useQuery({
     queryKey: ["live-album", dbId],
-    enabled: !!dbId && tab === "Photos",
+    enabled: !!dbId,
     queryFn: async () => (await albumList({ data: { eventId: dbId! } })) as Array<{ id: string; url: string; media_type: string }>,
   });
 
