@@ -165,7 +165,7 @@ function RouteGuard() {
   const isProtected = pathname.startsWith("/app") || pathname.startsWith("/events/");
   useEffect(() => {
     if (loading) return;
-    if (isProtected && !user && !window.location.search.includes("qa=1")) {
+    if (isProtected && !user && !window.location.hash.includes("qa")) {
       navigate({ to: "/auth", search: { redirect: pathname } as never, replace: true });
     }
   }, [loading, user, isProtected, pathname, navigate]);
