@@ -584,6 +584,33 @@ function Confetti() {
   );
 }
 
+function CodeRow({
+  label,
+  value,
+  onCopy,
+  onShare,
+}: {
+  label: string;
+  value: string;
+  onCopy: (v: string) => void;
+  onShare: (v: string) => void;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-3 bg-surface px-4 py-3.5">
+      <p className="text-[13.5px] font-semibold">{label}</p>
+      <div className="flex shrink-0 items-center gap-2.5">
+        <span className="text-[13.5px] font-bold tracking-wide text-muted-foreground">{value}</span>
+        <button onClick={() => onCopy(value)} aria-label={`Copier ${label}`} className="tap text-muted-foreground">
+          <Copy className="h-[17px] w-[17px]" />
+        </button>
+        <button onClick={() => onShare(value)} aria-label={`Partager ${label}`} className="tap text-muted-foreground">
+          <Share2 className="h-[17px] w-[17px]" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function CodeField({
   label,
   value,
@@ -618,14 +645,20 @@ function Toggle({
   hint,
   value,
   onChange,
+  flush = false,
 }: {
   label: string;
   hint?: string;
   value: boolean;
   onChange: (v: boolean) => void;
+  flush?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-[16px] border border-border bg-surface px-4 py-3.5">
+    <div
+      className={`flex items-center justify-between gap-4 px-4 py-3.5 ${
+        flush ? "bg-surface" : "rounded-[16px] border border-border bg-surface"
+      }`}
+    >
       <div className="min-w-0">
         <p className="text-[13.5px] font-semibold">{label}</p>
         {hint && <p className="text-[12px] text-muted-foreground">{hint}</p>}
