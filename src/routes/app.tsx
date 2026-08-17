@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet, Link } from "@tanstack/react-router";
+import { createFileRoute, Outlet, Link, useRouterState } from "@tanstack/react-router";
 import { BottomNav } from "@/components/BottomNav";
 import { AppTabs } from "@/components/AppTabs";
 import { Logo } from "@/components/Logo";
@@ -10,8 +10,11 @@ export const Route = createFileRoute("/app")({
 });
 
 function AppLayout() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const hideNav = pathname.startsWith("/app/create");
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-gradient-mesh pb-nav safe-x">
+    <div className={`relative min-h-screen overflow-x-hidden bg-gradient-mesh safe-x ${hideNav ? "" : "pb-nav"}`}>
+
       <header className="sticky top-0 z-30 border-b border-border/40 bg-background/70 backdrop-blur-2xl safe-top">
         <div className="container-app flex items-center justify-between py-3">
           <Link to="/app" className="tap flex items-center"><Logo /></Link>
