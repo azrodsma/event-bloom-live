@@ -163,7 +163,7 @@ function CreatePage() {
                 onClick={() => i < step && setStep(i)}
                 aria-label={label}
                 aria-current={i === step}
-                className={`tap block rounded-full transition ${
+                className={`block rounded-full transition ${
                   i <= step ? "h-2.5 w-2.5 bg-primary" : "h-2 w-2 bg-primary/25"
                 }`}
               />
@@ -176,7 +176,7 @@ function CreatePage() {
       </div>
 
       <div className="mx-auto max-w-2xl">
-        <h1 className="mb-4 text-[19px] font-bold tracking-tight">{stepTitles[step]}</h1>
+        <h1 className="mb-4 font-sans text-[19px] font-bold tracking-tight">{stepTitles[step]}</h1>
 
         {/* ÉTAPE 1 — type */}
         {step === 0 && (
@@ -191,7 +191,7 @@ function CreatePage() {
                     setSelectedType(t);
                     setStep(1);
                   }}
-                  className={`tap flex aspect-[1/1.05] flex-col items-center justify-center gap-2 rounded-2xl border px-1.5 text-center transition ${
+                  className={`flex aspect-[1/0.95] flex-col items-center justify-center gap-2 rounded-[18px] border px-1.5 text-center transition ${
                     active
                       ? "border-primary bg-primary-light"
                       : "border-border/70 bg-surface hover:border-primary/40"
@@ -305,7 +305,7 @@ function CreatePage() {
                     key={i}
                     onClick={() => setCardIndex(i)}
                     aria-label={`Modèle ${i + 1}`}
-                    className={`tap h-1.5 rounded-full transition-all ${i === cardIndex ? "w-4 bg-primary" : "w-1.5 bg-primary/25"}`}
+                    className={`h-1.5 rounded-full transition-all ${i === cardIndex ? "w-4 bg-primary" : "w-1.5 bg-primary/25"}`}
                   />
                 ))}
               </div>
