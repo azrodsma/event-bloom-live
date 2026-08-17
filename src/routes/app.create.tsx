@@ -11,9 +11,7 @@ import {
   Instagram,
   Facebook,
   MessageCircle,
-  Camera,
   Calendar,
-  MapPin,
   Globe,
   Lock,
   type LucideIcon,
@@ -111,7 +109,6 @@ function CreatePage() {
   const [allowGuestPosts, setAllowGuestPosts] = useState(true);
   const [allowComments, setAllowComments] = useState(true);
   const [enableCagnotte, setEnableCagnotte] = useState(true);
-  const [coverPreview, setCoverPreview] = useState<string | null>(null);
   const [created, setCreated] = useState<{ slug: string } | null>(null);
 
   const guestCode = useMemo(() => randomCode(), []);
