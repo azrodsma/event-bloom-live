@@ -383,7 +383,9 @@ function CreatePage() {
 
         {/* ÉTAPE 4 — accès & partage */}
         {step === 3 && (
+          <div>
           <div className="divide-y divide-border/70 overflow-hidden rounded-[18px] border border-border bg-surface">
+
             <Toggle
               label="Événement privé"
               hint="Seuls les invités avec le code peuvent y accéder."
