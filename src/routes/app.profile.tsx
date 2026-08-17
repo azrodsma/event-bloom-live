@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Settings, LogOut, Calendar, MessageCircle, Image, Heart, Pencil, Check, X } from "lucide-react";
+import { Settings, LogOut, Calendar, MessageCircle, Pencil, Check, X, Gift, Video, LifeBuoy, ChevronRight, Camera } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
