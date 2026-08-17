@@ -162,7 +162,9 @@ function RouteGuard() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const isProtected = pathname.startsWith("/app") || pathname.startsWith("/events/");
+  const isPublicEventPage = pathname.endsWith("/faire-part");
+  const isProtected =
+    !isPublicEventPage && (pathname.startsWith("/app") || pathname.startsWith("/events/"));
   useEffect(() => {
     if (loading) return;
     if (isProtected && !user) {
