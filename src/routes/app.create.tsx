@@ -419,7 +419,7 @@ function CreatePage() {
               Vos faire-parts ont été générés avec succès.
             </p>
             <Link
-              to="/events/$slug"
+              to="/events/$slug/faire-part"
               params={{ slug: created.slug }}
               className="tap mt-5 block w-full rounded-full bg-gradient-primary py-3.5 text-[14px] font-bold text-white shadow-glow"
             >
