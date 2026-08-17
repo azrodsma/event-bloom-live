@@ -56,21 +56,25 @@ function Home() {
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`tap inline-flex shrink-0 items-center gap-1.5 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-colors ${
+              className={`tap relative inline-flex shrink-0 items-center gap-1.5 rounded-xl px-5 py-3 text-sm font-semibold transition-colors ${
                 active
-                  ? "bg-primary-light text-primary shadow-card"
+                  ? "bg-primary-light text-primary"
                   : isFav
-                    ? "bg-primary-light/50 text-primary"
-                    : "bg-muted text-foreground/80 hover:bg-muted/70"
+                    ? "bg-primary-light/60 text-primary"
+                    : "bg-muted text-foreground/85 hover:bg-muted/70"
               }`}
               aria-pressed={active}
             >
               {isFav && <Heart className="h-4 w-4 fill-primary text-primary" />}
               {t}
+              {active && (
+                <span className="absolute inset-x-4 bottom-1 h-[3px] rounded-full bg-primary" />
+              )}
             </button>
           );
         })}
       </div>
+
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-10 xl:grid-cols-[minmax(0,1fr)_360px]">
         <div className="min-w-0 space-y-5">
