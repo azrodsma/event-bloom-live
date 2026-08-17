@@ -1,5 +1,7 @@
 import { createFileRoute, useNavigate, useSearch, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
+import { LiveNowRail } from "@/components/LiveNowRail";
+
 import { useEffect, useState } from "react";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Video, Gift, Camera } from "lucide-react";
 import markAsset from "@/assets/mafeliza-mark.png.asset.json";
