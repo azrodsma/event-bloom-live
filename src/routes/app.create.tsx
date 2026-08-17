@@ -234,29 +234,36 @@ function CreatePage() {
         {/* ÉTAPE 2 — informations */}
         {step === 1 && (
           <div className="space-y-3.5">
-            <Field label="Nom de l'événement" value={title} onChange={setTitle} placeholder="Mariage de Sophie & Thomas" />
+            {/* Photo de couverture */}
+            <label className="tap relative block aspect-[16/10] w-full cursor-pointer overflow-hidden rounded-[18px] border border-border bg-muted">
+              {coverPreview ? (
+                <img src={coverPreview} alt="Couverture" className="h-full w-full object-cover" />
+              ) : (
+                <span className="flex h-full w-full flex-col items-center justify-center gap-2 text-muted-foreground">
+                  <Camera className="h-7 w-7" />
+                  <span className="text-[12.5px] font-medium">Ajouter une photo de couverture</span>
+                </span>
+              )}
+              <span className="absolute bottom-2.5 right-2.5 grid h-10 w-10 place-items-center rounded-full bg-surface/95 text-primary shadow-card">
+                <Camera className="h-5 w-5" />
+              </span>
+              <input
+                type="file"
+                accept="image/*"
+                className="sr-only"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) setCoverPreview(URL.createObjectURL(f));
+                }}
+              />
+            </label>
+
+            <Field label="Nom de l'événement" value={title} onChange={setTitle} placeholder="Mariage de Sarah & Thomas" />
             <div className="grid grid-cols-2 gap-3">
-              <Field label="Date" type="date" value={date} onChange={setDate} />
+              <Field label="Date" type="date" value={date} onChange={setDate} icon={Calendar} />
               <Field label="Heure" type="time" value={time} onChange={setTime} />
             </div>
-            <Field label="Lieu" value={location} onChange={setLocation} placeholder="Château de Vaux-le-Vicomte" />
-            <div>
-              <p className="mb-1.5 text-[12.5px] text-muted-foreground">Type d'accès</p>
-              <div className="grid grid-cols-2 gap-3">
-                {(["public", "private"] as const).map((v) => (
-                  <button
-                    key={v}
-                    onClick={() => setAccess(v)}
-                    className={`tap flex items-center justify-center gap-2 rounded-[16px] border py-3.5 text-sm font-semibold transition ${
-                      access === v ? "border-primary bg-primary-light text-primary" : "border-border bg-surface"
-                    }`}
-                  >
-                    {v === "public" ? <Globe className="h-4 w-4" /> : <Lock className="h-4 w-4" />}
-                    {v === "public" ? "Public" : "Privé"}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <Field label="Lieu" value={location} onChange={setLocation} placeholder="Château de Chantilly" icon={MapPin} />
             <div>
               <label className="text-[12.5px] text-muted-foreground">Description</label>
               <textarea
@@ -264,7 +271,7 @@ function CreatePage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="mt-1 w-full rounded-[16px] border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-primary"
-                placeholder="Nous avons la joie de vous convier à notre mariage !"
+                placeholder="Rejoignez-nous pour célébrer notre amour ! 💍❤️"
               />
             </div>
             <details className="rounded-[16px] border border-border bg-surface px-4 py-3">
@@ -286,6 +293,7 @@ function CreatePage() {
               </div>
             </details>
           </div>
+
         )}
 
         {/* ÉTAPE 3 — faire-part */}
