@@ -12,9 +12,9 @@ export function EventRail({ events }: { events: MockEvent[] }) {
     <div className="scrollbar-hide -mx-4 flex items-stretch gap-2.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
       <Link
         to="/app/create"
-        className="tap flex w-[5.75rem] shrink-0 flex-col items-center gap-2 rounded-2xl p-1 sm:w-24"
+        className="tap flex w-[5.75rem] shrink-0 flex-col items-center gap-2 rounded-[20px] p-1 sm:w-24"
       >
-        <div className="grid aspect-square w-full place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow">
+        <div className="grid aspect-square w-full place-items-center rounded-[18px] bg-gradient-primary text-primary-foreground shadow-glow">
           <Plus className="h-9 w-9" strokeWidth={2.5} />
         </div>
         <span className="w-full text-center text-[11px] font-semibold leading-tight text-foreground">
@@ -31,11 +31,11 @@ export function EventRail({ events }: { events: MockEvent[] }) {
             key={e.id}
             to="/events/$slug"
             params={{ slug: e.slug }}
-            className={`tap flex w-[5.75rem] shrink-0 flex-col items-center gap-2 rounded-2xl p-1 sm:w-24 ${
+            className={`tap flex w-[5.75rem] shrink-0 flex-col items-center gap-2 rounded-[20px] p-1 sm:w-24 ${
               highlighted ? "border border-primary bg-primary-light/30" : "border border-transparent"
             }`}
           >
-            <div className="relative aspect-square w-full overflow-hidden rounded-2xl ring-1 ring-border/70">
+            <div className="relative aspect-square w-full overflow-hidden rounded-[18px] ring-1 ring-border/70">
               <img src={e.cover} alt={e.title} className="h-full w-full object-cover" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/25" />
 
