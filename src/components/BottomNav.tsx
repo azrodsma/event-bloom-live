@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, Search, Plus, MessageCircle, User } from "lucide-react";
+import { Home, Search, Plus, Heart, User } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { countUnread } from "@/lib/notifications.functions";
 
 type NavItem = {
-  to: "/app" | "/app/explore" | "/app/create" | "/app/messages" | "/app/profile";
+  to: "/app" | "/app/explore" | "/app/create" | "/app/favorites" | "/app/profile";
   label: string;
   icon: typeof Home;
   exact?: boolean;
@@ -19,7 +19,7 @@ const items: NavItem[] = [
   { to: "/app", label: "Accueil", icon: Home, exact: true },
   { to: "/app/explore", label: "Explorer", icon: Search },
   { to: "/app/create", label: "Créer", icon: Plus, center: true },
-  { to: "/app/messages", label: "Messages", icon: MessageCircle },
+  { to: "/app/favorites", label: "Favoris", icon: Heart },
   { to: "/app/profile", label: "Profil", icon: User },
 ];
 

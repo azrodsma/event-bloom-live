@@ -120,6 +120,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
               <p className="flex items-center justify-center gap-2 font-serif text-2xl leading-tight sm:text-3xl">
                 {pot && <Gift className="h-6 w-6 text-primary" />}
                 {pot ? fmtEur(pot.current) : event.type}
+                {pot && <ChevronRight className="h-5 w-5 opacity-70" />}
               </p>
             </div>
             <ChevronRight className="h-5 w-5 shrink-0 opacity-60" />
@@ -171,7 +172,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
         {pot ? (
           <div className="min-w-0 pl-3 sm:pl-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-              <Gift className="h-4 w-4 text-primary" /> Cagnotte
+              <Gift className="h-4 w-4 text-primary" /> Cagnotte des mariés
             </p>
             <p className="mt-1 font-serif text-xl leading-tight text-foreground sm:text-2xl">
               {fmtEur(pot.current)}
@@ -191,13 +192,13 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
               rel="noreferrer noopener"
               className="tap mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-primary px-3 py-2.5 text-[13px] font-semibold text-primary-foreground shadow-glow"
             >
-              <Gift className="h-4 w-4 shrink-0" /> Participer
+              <Gift className="h-4 w-4 shrink-0" /> Participer à la cagnotte
             </a>
           </div>
         ) : (
           <div className="min-w-0 pl-3 sm:pl-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-              <Gift className="h-4 w-4 text-primary" /> Cagnotte
+              <Gift className="h-4 w-4 text-primary" /> Cagnotte des mariés
             </p>
             <p className="mt-1.5 text-sm text-muted-foreground">Aucune cagnotte pour cet événement.</p>
           </div>
