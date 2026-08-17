@@ -118,7 +118,7 @@ function FairePart() {
         {/* Aperçu des stories */}
         <section className="mt-5">
           <h2 className="px-1 text-[17px] font-bold">Aperçu des stories</h2>
-          <div className="no-scrollbar -mx-1 mt-3 flex gap-3 overflow-x-auto px-1 pb-1">
+          <div className="scrollbar-hide -mx-1 mt-3 flex gap-3 overflow-x-auto px-1 pb-1">
             {(stories.length
               ? stories.slice(0, 8).map((s) => ({ id: s.id, url: s.media_url }))
               : Array.from({ length: 5 }, (_, i) => ({ id: `ph-${i}`, url: event.cover_url ?? "" }))
