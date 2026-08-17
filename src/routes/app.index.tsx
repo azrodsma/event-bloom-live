@@ -67,6 +67,9 @@ function Home() {
             >
               {isFav && <Heart className="h-3.5 w-3.5 shrink-0 fill-primary text-primary" />}
               <span className="truncate">{t}</span>
+              {active && !isFav && (
+                <span className="absolute inset-x-4 bottom-1.5 h-[2px] rounded-full bg-primary" />
+              )}
             </button>
           );
         })}
