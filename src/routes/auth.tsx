@@ -348,7 +348,11 @@ function AuthPage() {
           )}
 
         </div>
+          <div className="md:hidden">
+            <LiveNowRail />
+          </div>
           <div className="mt-5 flex items-center justify-center gap-3 text-[11px] text-muted-foreground md:hidden">
+
             <div className="flex -space-x-2">
               {[1, 2, 3, 4].map((i) => (
                 <span key={i} className="h-6 w-6 rounded-full border-2 border-background bg-gradient-primary" style={{ opacity: 0.4 + i * 0.15 }} />
