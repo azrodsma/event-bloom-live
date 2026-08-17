@@ -11,9 +11,9 @@ import {
   Instagram,
   Facebook,
   MessageCircle,
-  Camera,
   Calendar,
-  MapPin,
+  Globe,
+  Lock,
   type LucideIcon,
 } from "lucide-react";
 import floralFrame from "@/assets/floral-frame.png";
@@ -34,33 +34,35 @@ export const Route = createFileRoute("/app/create")({
 });
 
 const stepTitles = [
-  "Quel type d'événement souhaitez-vous créer ?",
-  "Informations de base",
-  "Choisissez votre faire-part",
-  "Paramètres d'invitation",
+  "1. Choisissez le type d'événement",
+  "2. Informations de l'événement",
+  "3. Choisissez votre faire-part",
+  "4. Accès & Partage",
 ] as const;
 
 /** Ordre et libellés fidèles à la maquette (grille 2 colonnes, 8 tuiles). */
 const createTypes = [
   "Mariage",
-  "Anniversaire",
-  "Baby Shower",
-  "Remise de diplôme",
-  "Naissance",
-  "Communion",
   "Baptême",
-  "Autre événement",
+  "Fiançailles",
+  "Anniversaire",
+  "Communion",
+  "Retraite",
+  "Baby Shower",
+  "Remise diplôme",
+  "Autre",
 ] as const;
 
 const typeTint: Record<string, string> = {
   "Mariage": "bg-primary-light text-primary",
+  "Baptême": "bg-iris-light text-iris",
+  "Fiançailles": "bg-gold-light text-gold",
   "Anniversaire": "bg-primary-light text-primary",
-  "Baby Shower": "bg-iris-light text-iris",
-  "Remise de diplôme": "bg-iris-light text-iris",
-  "Naissance": "bg-primary-light text-primary",
-  "Communion": "bg-gold-light text-gold",
-  "Baptême": "bg-primary-light text-primary",
-  "Autre événement": "bg-iris-light text-iris",
+  "Communion": "bg-iris-light text-iris",
+  "Retraite": "bg-gold-light text-gold",
+  "Baby Shower": "bg-primary-light text-primary",
+  "Remise diplôme": "bg-iris-light text-iris",
+  "Autre": "bg-muted text-foreground/70",
 };
 
 const typeMap: Record<
@@ -107,7 +109,6 @@ function CreatePage() {
   const [allowGuestPosts, setAllowGuestPosts] = useState(true);
   const [allowComments, setAllowComments] = useState(true);
   const [enableCagnotte, setEnableCagnotte] = useState(true);
-  const [coverPreview, setCoverPreview] = useState<string | null>(null);
   const [created, setCreated] = useState<{ slug: string } | null>(null);
 
   const guestCode = useMemo(() => randomCode(), []);
@@ -178,14 +179,10 @@ function CreatePage() {
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <p className="truncate text-center text-[17px] font-bold">Créer un événement</p>
-          <button
-            onClick={() => navigate({ to: "/app" })}
-            aria-label="Annuler"
-            className="tap grid h-9 w-9 shrink-0 place-items-center rounded-full text-foreground"
-          >
-            <X className="h-5 w-5" />
-          </button>
+          <p className="truncate text-center text-[17px] font-bold">
+            {step === 0 ? "Créer un événement" : "Création de l'événement"}
+          </p>
+          <span className="h-9 w-9 shrink-0" />
         </div>
         {/* Stepper à points */}
         <div className="mt-3 flex items-center justify-center gap-0">
@@ -214,10 +211,10 @@ function CreatePage() {
 
         {/* ÉTAPE 1 — type (grille 2 colonnes, fidèle à la maquette) */}
         {step === 0 && (
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+          <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-5">
             {createTypes.map((t) => {
               const active = selectedType === t;
-              const I = eventIcon(t === "Autre événement" ? "Autre" : t);
+              const I = eventIcon(t === "Remise diplôme" ? "Remise de diplôme" : t);
               return (
                 <button
                   key={t}
@@ -225,7 +222,7 @@ function CreatePage() {
                     setSelectedType(t);
                     setStep(1);
                   }}
-                  className={`flex aspect-[1/0.74] flex-col items-center justify-center gap-2 rounded-[16px] border px-2 text-center transition ${
+                  className={`flex aspect-[1/1.02] flex-col items-center justify-center gap-2 rounded-[16px] border px-2 text-center transition ${
                     active
                       ? "border-primary bg-primary-light"
                       : "border-border/70 bg-surface hover:border-primary/40"
@@ -238,7 +235,7 @@ function CreatePage() {
                   >
                     <I className="h-[22px] w-[22px]" />
                   </span>
-                  <span className="line-clamp-2 text-[12.5px] font-semibold leading-tight">{t}</span>
+                  <span className="line-clamp-2 text-[11.5px] font-semibold leading-tight">{t}</span>
                 </button>
               );
             })}
@@ -249,36 +246,45 @@ function CreatePage() {
         {/* ÉTAPE 2 — informations */}
         {step === 1 && (
           <div className="space-y-3.5">
-            {/* Photo de couverture */}
-            <label className="tap relative block aspect-[16/10] w-full cursor-pointer overflow-hidden rounded-[18px] border border-border bg-muted">
-              {coverPreview ? (
-                <img src={coverPreview} alt="Couverture" className="h-full w-full object-cover" />
-              ) : (
-                <span className="flex h-full w-full flex-col items-center justify-center gap-2 text-muted-foreground">
-                  <Camera className="h-7 w-7" />
-                  <span className="text-[12.5px] font-medium">Ajouter une photo de couverture</span>
-                </span>
-              )}
-              <span className="absolute bottom-2.5 right-2.5 grid h-10 w-10 place-items-center rounded-full bg-surface/95 text-primary shadow-card">
-                <Camera className="h-5 w-5" />
-              </span>
-              <input
-                type="file"
-                accept="image/*"
-                className="sr-only"
-                onChange={(e) => {
-                  const f = e.target.files?.[0];
-                  if (f) setCoverPreview(URL.createObjectURL(f));
-                }}
-              />
-            </label>
-
             <Field label="Nom de l'événement" value={title} onChange={setTitle} placeholder="Mariage de Sarah & Thomas" />
             <div className="grid grid-cols-2 gap-3">
               <Field label="Date" type="date" value={date} onChange={setDate} icon={Calendar} />
               <Field label="Heure" type="time" value={time} onChange={setTime} />
             </div>
-            <Field label="Lieu" value={location} onChange={setLocation} placeholder="Château de Chantilly" icon={MapPin} />
+            <div>
+              <label className="text-[12.5px] text-muted-foreground">Lieu</label>
+              <textarea
+                rows={2}
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="mt-1 w-full rounded-[16px] border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-primary"
+                placeholder="Château de Vaux-le-Vicomte&#10;77950 Maincy, France"
+              />
+            </div>
+
+            <div>
+              <label className="text-[12.5px] text-muted-foreground">Type d'accès</label>
+              <div className="mt-1 grid grid-cols-2 gap-3">
+                {([
+                  { v: "public" as const, label: "Public", Icon: Globe },
+                  { v: "private" as const, label: "Privé", Icon: Lock },
+                ]).map(({ v, label, Icon }) => {
+                  const on = access === v;
+                  return (
+                    <button
+                      key={v}
+                      onClick={() => setAccess(v)}
+                      aria-pressed={on}
+                      className={`tap flex items-center justify-center gap-2 rounded-[16px] border py-3.5 text-[13.5px] font-semibold transition ${
+                        on ? "border-primary bg-primary-light text-primary" : "border-border bg-surface text-foreground"
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" /> {label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
             <div>
               <label className="text-[12.5px] text-muted-foreground">Description</label>
               <textarea
@@ -395,48 +401,55 @@ function CreatePage() {
 
         {/* ÉTAPE 4 — accès & partage */}
         {step === 3 && (
-          <div>
-          <div className="divide-y divide-border/70 overflow-hidden rounded-[18px] border border-border bg-surface">
+          <div className="space-y-5">
+            <div className="space-y-3">
+              <CodeCard label="Code invités" value={guestCode} onCopy={copy} onShare={share} />
+              <CodeCard label="Code cameraman" value={camCode} onCopy={copy} onShare={share} />
+            </div>
+
+            <div>
+              <p className="mb-2.5 text-[14px] font-bold">Partager votre événement</p>
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { icon: MessageCircle, label: "WhatsApp", tint: "bg-emerald-50 text-emerald-600" },
+                  { icon: Instagram, label: "Instagram", tint: "bg-primary-light text-primary" },
+                  { icon: Facebook, label: "Facebook", tint: "bg-iris-light text-iris" },
+                  { icon: Link2, label: "Copier le lien", tint: "bg-muted text-foreground/70" },
+                ].map(({ icon: Icon, label, tint }) => (
+                  <button
+                    key={label}
+                    onClick={() => share(`Rejoignez ${title || "mon événement"} — code ${guestCode}`)}
+                    className="tap flex flex-col items-center gap-1.5"
+                  >
+                    <span className={`grid h-12 w-12 place-items-center rounded-full ${tint}`}>
+                      <Icon className="h-[22px] w-[22px]" />
+                    </span>
+                    <span className="text-[10.5px] font-medium text-muted-foreground">{label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
             <Toggle
-              label="Événement privé"
-              hint="Seuls les invités avec le code peuvent y accéder."
-              value={access === "private"}
-              onChange={(v) => setAccess(v ? "private" : "public")}
-              flush
+              label="Publier sur MaFeliza"
+              hint="Votre événement sera visible sur la plateforme."
+              value={publishOnPlatform}
+              onChange={setPublishOnPlatform}
             />
-            <CodeRow label="Code des invités" value={guestCode} onCopy={copy} onShare={share} />
-            <CodeRow label="Code caméraman" value={camCode} onCopy={copy} onShare={share} />
-            <Toggle label="Autoriser les invités à publier" value={allowGuestPosts} onChange={setAllowGuestPosts} flush />
-            <Toggle label="Commentaires invités" value={allowComments} onChange={setAllowComments} flush />
-            <Toggle label="Participation à la cagnotte" value={enableCagnotte} onChange={setEnableCagnotte} flush />
-            <Toggle label="Publier sur MaFeliza" value={publishOnPlatform} onChange={setPublishOnPlatform} flush />
-          </div>
 
-          <div className="mt-5">
-            <p className="mb-2 text-[14px] font-bold">Partager votre événement</p>
-            <div className="grid grid-cols-4 gap-2">
-              {[
-                { icon: MessageCircle, label: "WhatsApp" },
-                { icon: Instagram, label: "Instagram" },
-                { icon: Facebook, label: "Facebook" },
-                { icon: Link2, label: "Copier le lien" },
-              ].map(({ icon: Icon, label }) => (
-                <button
-                  key={label}
-                  onClick={() => share(`Rejoignez ${title || "mon événement"} — code ${guestCode}`)}
-                  className="tap flex flex-col items-center gap-1.5"
-                >
-                  <span className="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface text-primary">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="text-[10.5px] font-medium text-muted-foreground">{label}</span>
-                </button>
-              ))}
+            <div className="divide-y divide-border/70 overflow-hidden rounded-[18px] border border-border bg-surface">
+              <Toggle
+                label="Événement privé"
+                hint="Seuls les invités avec le code peuvent y accéder."
+                value={access === "private"}
+                onChange={(v) => setAccess(v ? "private" : "public")}
+                flush
+              />
+              <Toggle label="Autoriser les invités à publier" value={allowGuestPosts} onChange={setAllowGuestPosts} flush />
+              <Toggle label="Commentaires invités" value={allowComments} onChange={setAllowComments} flush />
+              <Toggle label="Participation à la cagnotte" value={enableCagnotte} onChange={setEnableCagnotte} flush />
             </div>
           </div>
-          </div>
-
         )}
       </div>
 
@@ -447,7 +460,7 @@ function CreatePage() {
             <button
               disabled={!canNext}
               onClick={() => setStep(step + 1)}
-              className="tap w-full rounded-full bg-gradient-primary py-4 text-[15px] font-bold text-white shadow-glow disabled:opacity-50"
+              className="tap w-full rounded-[16px] bg-gradient-primary py-4 text-[15px] font-bold text-white shadow-glow disabled:opacity-50"
             >
               Suivant
             </button>
@@ -455,9 +468,9 @@ function CreatePage() {
             <button
               disabled={mut.isPending}
               onClick={() => mut.mutate()}
-              className="tap w-full rounded-full bg-gradient-primary py-4 text-[15px] font-bold text-white shadow-glow disabled:opacity-50"
+              className="tap w-full rounded-[16px] bg-gradient-primary py-4 text-[15px] font-bold text-white shadow-glow disabled:opacity-50"
             >
-              {mut.isPending ? "Création..." : "Créer l'événement"}
+              {mut.isPending ? "Publication..." : "Publier l'événement"}
             </button>
           )}
         </div>
@@ -475,8 +488,8 @@ function CreatePage() {
               <X className="h-5 w-5" />
             </button>
             <Confetti />
-            <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-gold-light">
-              <Check className="h-9 w-9 text-emerald-600" />
+            <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-gold-light ring-8 ring-gold-light/40">
+              <Check className="h-10 w-10 text-emerald-500" strokeWidth={3} />
             </div>
             <p className="mt-4 font-serif text-2xl">Événement créé !</p>
             <p className="mt-1 text-[13.5px] text-muted-foreground">
@@ -485,13 +498,13 @@ function CreatePage() {
             <Link
               to="/events/$slug/faire-part"
               params={{ slug: created.slug }}
-              className="tap mt-5 block w-full rounded-full bg-gradient-primary py-3.5 text-[14px] font-bold text-white shadow-glow"
+              className="tap mt-5 block w-full rounded-[16px] bg-gradient-primary py-3.5 text-[14px] font-bold text-white shadow-glow"
             >
               Voir le faire-part
             </Link>
             <button
               onClick={() => share(`${window.location.origin}/events/${created.slug}`)}
-              className="tap mt-2.5 w-full rounded-full border border-border bg-background py-3.5 text-[14px] font-semibold"
+              className="tap mt-2.5 w-full rounded-[16px] border border-border bg-background py-3.5 text-[14px] font-semibold"
             >
               Partager
             </button>
@@ -607,7 +620,7 @@ function Confetti() {
   );
 }
 
-function CodeRow({
+function CodeCard({
   label,
   value,
   onCopy,
@@ -619,16 +632,18 @@ function CodeRow({
   onShare: (v: string) => void;
 }) {
   return (
-    <div className="flex items-center justify-between gap-3 bg-surface px-4 py-3.5">
-      <p className="text-[13.5px] font-semibold">{label}</p>
-      <div className="flex shrink-0 items-center gap-2.5">
-        <span className="text-[13.5px] font-bold tracking-wide text-muted-foreground">{value}</span>
-        <button onClick={() => onCopy(value)} aria-label={`Copier ${label}`} className="tap text-muted-foreground">
-          <Copy className="h-[17px] w-[17px]" />
-        </button>
-        <button onClick={() => onShare(value)} aria-label={`Partager ${label}`} className="tap text-muted-foreground">
-          <Share2 className="h-[17px] w-[17px]" />
-        </button>
+    <div>
+      <p className="mb-1 text-[12.5px] text-muted-foreground">{label}</p>
+      <div className="flex items-center justify-between gap-3 rounded-[16px] border border-border bg-surface px-4 py-3.5">
+        <p className="truncate text-[20px] font-extrabold tracking-wide">{value}</p>
+        <div className="flex shrink-0 items-center gap-4 text-muted-foreground">
+          <button onClick={() => onCopy(value)} aria-label={`Copier ${label}`} className="tap">
+            <Copy className="h-[19px] w-[19px]" />
+          </button>
+          <button onClick={() => onShare(value)} aria-label={`Partager ${label}`} className="tap">
+            <Share2 className="h-[19px] w-[19px]" />
+          </button>
+        </div>
       </div>
     </div>
   );
