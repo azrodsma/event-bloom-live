@@ -226,6 +226,7 @@ import { Route as EventsSlugFavorsRouteImport } from './routes/events.$slug.favo
 import { Route as EventsSlugFaqRouteImport } from './routes/events.$slug.faq'
 import { Route as EventsSlugFamilyTreeRouteImport } from './routes/events.$slug.family-tree'
 import { Route as EventsSlugFamilyPortraitsRouteImport } from './routes/events.$slug.family-portraits'
+import { Route as EventsSlugFairePartRouteImport } from './routes/events.$slug.faire-part'
 import { Route as EventsSlugExitRouteImport } from './routes/events.$slug.exit'
 import { Route as EventsSlugEntranceRouteImport } from './routes/events.$slug.entrance'
 import { Route as EventsSlugEmotionHeatmapRouteImport } from './routes/events.$slug.emotion-heatmap'
@@ -1380,6 +1381,11 @@ const EventsSlugFamilyPortraitsRoute =
     path: '/family-portraits',
     getParentRoute: () => EventsSlugRoute,
   } as any)
+const EventsSlugFairePartRoute = EventsSlugFairePartRouteImport.update({
+  id: '/faire-part',
+  path: '/faire-part',
+  getParentRoute: () => EventsSlugRoute,
+} as any)
 const EventsSlugExitRoute = EventsSlugExitRouteImport.update({
   id: '/exit',
   path: '/exit',
@@ -1872,6 +1878,7 @@ export interface FileRoutesByFullPath {
   '/events/$slug/emotion-heatmap': typeof EventsSlugEmotionHeatmapRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/exit': typeof EventsSlugExitRoute
+  '/events/$slug/faire-part': typeof EventsSlugFairePartRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -2153,6 +2160,7 @@ export interface FileRoutesByTo {
   '/events/$slug/emotion-heatmap': typeof EventsSlugEmotionHeatmapRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/exit': typeof EventsSlugExitRoute
+  '/events/$slug/faire-part': typeof EventsSlugFairePartRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -2437,6 +2445,7 @@ export interface FileRoutesById {
   '/events/$slug/emotion-heatmap': typeof EventsSlugEmotionHeatmapRoute
   '/events/$slug/entrance': typeof EventsSlugEntranceRoute
   '/events/$slug/exit': typeof EventsSlugExitRoute
+  '/events/$slug/faire-part': typeof EventsSlugFairePartRoute
   '/events/$slug/family-portraits': typeof EventsSlugFamilyPortraitsRoute
   '/events/$slug/family-tree': typeof EventsSlugFamilyTreeRoute
   '/events/$slug/faq': typeof EventsSlugFaqRoute
@@ -2722,6 +2731,7 @@ export interface FileRouteTypes {
     | '/events/$slug/emotion-heatmap'
     | '/events/$slug/entrance'
     | '/events/$slug/exit'
+    | '/events/$slug/faire-part'
     | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
@@ -3003,6 +3013,7 @@ export interface FileRouteTypes {
     | '/events/$slug/emotion-heatmap'
     | '/events/$slug/entrance'
     | '/events/$slug/exit'
+    | '/events/$slug/faire-part'
     | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
@@ -3286,6 +3297,7 @@ export interface FileRouteTypes {
     | '/events/$slug/emotion-heatmap'
     | '/events/$slug/entrance'
     | '/events/$slug/exit'
+    | '/events/$slug/faire-part'
     | '/events/$slug/family-portraits'
     | '/events/$slug/family-tree'
     | '/events/$slug/faq'
@@ -4942,6 +4954,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsSlugFamilyPortraitsRouteImport
       parentRoute: typeof EventsSlugRoute
     }
+    '/events/$slug/faire-part': {
+      id: '/events/$slug/faire-part'
+      path: '/faire-part'
+      fullPath: '/events/$slug/faire-part'
+      preLoaderRoute: typeof EventsSlugFairePartRouteImport
+      parentRoute: typeof EventsSlugRoute
+    }
     '/events/$slug/exit': {
       id: '/events/$slug/exit'
       path: '/exit'
@@ -5702,6 +5721,7 @@ interface EventsSlugRouteChildren {
   EventsSlugEmotionHeatmapRoute: typeof EventsSlugEmotionHeatmapRoute
   EventsSlugEntranceRoute: typeof EventsSlugEntranceRoute
   EventsSlugExitRoute: typeof EventsSlugExitRoute
+  EventsSlugFairePartRoute: typeof EventsSlugFairePartRoute
   EventsSlugFamilyPortraitsRoute: typeof EventsSlugFamilyPortraitsRoute
   EventsSlugFamilyTreeRoute: typeof EventsSlugFamilyTreeRoute
   EventsSlugFaqRoute: typeof EventsSlugFaqRoute
@@ -5875,6 +5895,7 @@ const EventsSlugRouteChildren: EventsSlugRouteChildren = {
   EventsSlugEmotionHeatmapRoute: EventsSlugEmotionHeatmapRoute,
   EventsSlugEntranceRoute: EventsSlugEntranceRoute,
   EventsSlugExitRoute: EventsSlugExitRoute,
+  EventsSlugFairePartRoute: EventsSlugFairePartRoute,
   EventsSlugFamilyPortraitsRoute: EventsSlugFamilyPortraitsRoute,
   EventsSlugFamilyTreeRoute: EventsSlugFamilyTreeRoute,
   EventsSlugFaqRoute: EventsSlugFaqRoute,
