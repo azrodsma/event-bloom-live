@@ -32,10 +32,22 @@ export const Route = createFileRoute("/app/create")({
 });
 
 const stepTitles = [
-  "1. Choisissez le type d'événement",
-  "2. Informations de l'événement",
-  "3. Faire-part & Personnalisation",
-  "4. Accès & Partage",
+  "Quel type d'événement souhaitez-vous créer ?",
+  "Informations de base",
+  "Choisissez votre faire-part",
+  "Paramètres d'invitation",
+] as const;
+
+/** Ordre et libellés fidèles à la maquette (grille 2 colonnes, 8 tuiles). */
+const createTypes = [
+  "Mariage",
+  "Anniversaire",
+  "Baby Shower",
+  "Remise de diplôme",
+  "Naissance",
+  "Communion",
+  "Baptême",
+  "Autre événement",
 ] as const;
 
 const typeMap: Record<
@@ -50,6 +62,7 @@ const typeMap: Record<
 };
 
 const cardStyles = ["Classique", "Moderne", "Élégant"] as const;
+
 
 function randomCode(prefix?: string) {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
