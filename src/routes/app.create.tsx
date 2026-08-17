@@ -302,7 +302,7 @@ function CreatePage() {
 
         {/* ÉTAPE 3 — faire-part */}
         {step === 2 && (
-          <div className="space-y-6">
+          <div className="space-y-5">
             <div className="flex gap-2">
               {cardStyles.map((s) => (
                 <button
@@ -317,31 +317,45 @@ function CreatePage() {
               ))}
             </div>
 
-            <section>
-              <p className="text-[14px] font-bold">Faire-part principal</p>
-              <p className="text-[12.5px] text-muted-foreground">(classique avec compte à rebours)</p>
-              <div className="mt-2.5 rounded-[24px] border border-primary/30 bg-primary-light/40 p-2.5">
-                <InvitationPreview
-                  title={title || "Sophie & Thomas"}
-                  date={date}
-                  style={style}
-                  index={cardIndex}
-                />
-                <button className="tap mt-2.5 w-full rounded-[16px] border border-primary/40 bg-surface/80 py-3 text-[13.5px] font-semibold text-primary">
-                  Personnaliser
-                </button>
-              </div>
-              <div className="mt-3 flex items-center justify-center gap-1.5">
-                {[0, 1, 2, 3, 4, 5].map((i) => (
+            {/* Deux modèles côte à côte, comme sur la maquette */}
+            <div className="grid grid-cols-2 gap-3">
+              {[0, 1].map((offset) => {
+                const idx = (cardIndex + offset) % 6;
+                const active = offset === 0;
+                return (
                   <button
-                    key={i}
-                    onClick={() => setCardIndex(i)}
-                    aria-label={`Modèle ${i + 1}`}
-                    className={`h-1.5 rounded-full transition-all ${i === cardIndex ? "w-4 bg-primary" : "w-1.5 bg-primary/25"}`}
-                  />
-                ))}
-              </div>
-            </section>
+                    key={offset}
+                    onClick={() => setCardIndex(idx)}
+                    className={`overflow-hidden rounded-[20px] border-2 p-1 text-left transition ${
+                      active ? "border-primary bg-primary-light/40" : "border-border bg-surface"
+                    }`}
+                  >
+                    <InvitationPreview
+                      title={title || "Sarah & Thomas"}
+                      date={date}
+                      style={style}
+                      index={idx}
+                      compact
+                    />
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="flex items-center justify-center gap-1.5">
+              {[0, 1, 2, 3, 4, 5].map((i) => (
+                <button
+                  key={i}
+                  onClick={() => setCardIndex(i)}
+                  aria-label={`Modèle ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all ${i === cardIndex ? "w-4 bg-primary" : "w-1.5 bg-primary/25"}`}
+                />
+              ))}
+            </div>
+
+            <button className="tap w-full rounded-[16px] border border-primary/40 bg-surface py-3.5 text-[13.5px] font-semibold text-primary">
+              Personnaliser
+            </button>
 
             <section>
               <p className="text-[14px] font-bold">
@@ -364,6 +378,7 @@ function CreatePage() {
               </div>
             </section>
           </div>
+
         )}
 
         {/* ÉTAPE 4 — accès & partage */}
