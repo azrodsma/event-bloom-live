@@ -101,6 +101,7 @@ import { Route as AppCoOrganizersRouteImport } from './routes/app.co-organizers'
 import { Route as AppChangelogRouteImport } from './routes/app.changelog'
 import { Route as AppCareersRouteImport } from './routes/app.careers'
 import { Route as AppCareRouteImport } from './routes/app.care'
+import { Route as AppCameramanRouteImport } from './routes/app.cameraman'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppAppearanceRouteImport } from './routes/app.appearance'
 import { Route as AppAnniversariesRouteImport } from './routes/app.anniversaries'
@@ -751,6 +752,11 @@ const AppCareersRoute = AppCareersRouteImport.update({
 const AppCareRoute = AppCareRouteImport.update({
   id: '/care',
   path: '/care',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCameramanRoute = AppCameramanRouteImport.update({
+  id: '/cameraman',
+  path: '/cameraman',
   getParentRoute: () => AppRoute,
 } as any)
 const AppBillingRoute = AppBillingRouteImport.update({
@@ -1733,6 +1739,7 @@ export interface FileRoutesByFullPath {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
+  '/app/cameraman': typeof AppCameramanRoute
   '/app/care': typeof AppCareRoute
   '/app/careers': typeof AppCareersRoute
   '/app/changelog': typeof AppChangelogRoute
@@ -2016,6 +2023,7 @@ export interface FileRoutesByTo {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
+  '/app/cameraman': typeof AppCameramanRoute
   '/app/care': typeof AppCareRoute
   '/app/careers': typeof AppCareersRoute
   '/app/changelog': typeof AppChangelogRoute
@@ -2300,6 +2308,7 @@ export interface FileRoutesById {
   '/app/anniversaries': typeof AppAnniversariesRoute
   '/app/appearance': typeof AppAppearanceRoute
   '/app/billing': typeof AppBillingRoute
+  '/app/cameraman': typeof AppCameramanRoute
   '/app/care': typeof AppCareRoute
   '/app/careers': typeof AppCareersRoute
   '/app/changelog': typeof AppChangelogRoute
@@ -2586,6 +2595,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
+    | '/app/cameraman'
     | '/app/care'
     | '/app/careers'
     | '/app/changelog'
@@ -2869,6 +2879,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
+    | '/app/cameraman'
     | '/app/care'
     | '/app/careers'
     | '/app/changelog'
@@ -3152,6 +3163,7 @@ export interface FileRouteTypes {
     | '/app/anniversaries'
     | '/app/appearance'
     | '/app/billing'
+    | '/app/cameraman'
     | '/app/care'
     | '/app/careers'
     | '/app/changelog'
@@ -4077,6 +4089,13 @@ declare module '@tanstack/react-router' {
       path: '/care'
       fullPath: '/app/care'
       preLoaderRoute: typeof AppCareRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/cameraman': {
+      id: '/app/cameraman'
+      path: '/cameraman'
+      fullPath: '/app/cameraman'
+      preLoaderRoute: typeof AppCameramanRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/billing': {
@@ -5448,6 +5467,7 @@ interface AppRouteChildren {
   AppAnniversariesRoute: typeof AppAnniversariesRoute
   AppAppearanceRoute: typeof AppAppearanceRoute
   AppBillingRoute: typeof AppBillingRoute
+  AppCameramanRoute: typeof AppCameramanRoute
   AppCareRoute: typeof AppCareRoute
   AppCareersRoute: typeof AppCareersRoute
   AppChangelogRoute: typeof AppChangelogRoute
@@ -5544,6 +5564,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAnniversariesRoute: AppAnniversariesRoute,
   AppAppearanceRoute: AppAppearanceRoute,
   AppBillingRoute: AppBillingRoute,
+  AppCameramanRoute: AppCameramanRoute,
   AppCareRoute: AppCareRoute,
   AppCareersRoute: AppCareersRoute,
   AppChangelogRoute: AppChangelogRoute,
