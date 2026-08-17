@@ -52,16 +52,26 @@ export const Route = createFileRoute("/events/$slug/live")({
   component: LivePage,
 });
 
-const tabs = ["Chat", "Cadeaux", "Cagnotte", "Photos"] as const;
+const tabs = ["Chat", "Réactions", "Cadeaux", "Cagnotte", "Photos", "Caméras"] as const;
 
 const cameras = [
-  { id: "main", label: "Salle" },
-  { id: "altar", label: "Autel" },
-  { id: "guests", label: "Invités" },
-  { id: "drone", label: "Drone" },
+  { id: "main", label: "Caméra 1", live: true },
+  { id: "cam2", label: "Caméra 2", live: false },
+  { id: "drone", label: "Drone", live: false },
+  { id: "dj", label: "DJ", live: false },
+  { id: "room", label: "Salle", live: false },
 ] as const;
 
-const reactions = ["💖", "👏", "🎉", "🥂", "😍"] as const;
+/** Réactions payantes façon maquette : libellé + prix */
+const reactionGifts = [
+  { emoji: "❤️", label: "J'aime", price: 0 },
+  { emoji: "👏", label: "Applaudir", price: 1 },
+  { emoji: "😍", label: "Cœur", price: 2 },
+  { emoji: "🎆", label: "Feu d'artifice", price: 5 },
+  { emoji: "🍾", label: "Champagne", price: 10 },
+] as const;
+
+const reactions = reactionGifts.map((r) => r.emoji);
 
 type LiveMsg = { id: string; author_name: string | null; content: string; created_at: string };
 
