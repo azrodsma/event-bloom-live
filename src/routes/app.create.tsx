@@ -570,7 +570,7 @@ function Toggle({
         aria-checked={value}
         aria-label={label}
         onClick={() => onChange(!value)}
-        className={`tap relative h-7 w-12 shrink-0 rounded-full transition ${value ? "bg-emerald-500" : "bg-border"}`}
+        className={`relative h-7 w-12 shrink-0 rounded-full transition ${value ? "bg-gradient-primary" : "bg-border"}`}
       >
         <span
           className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-all ${value ? "left-[22px]" : "left-0.5"}`}
