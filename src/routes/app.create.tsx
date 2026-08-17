@@ -52,6 +52,17 @@ const createTypes = [
   "Autre événement",
 ] as const;
 
+const typeTint: Record<string, string> = {
+  "Mariage": "bg-primary-light text-primary",
+  "Anniversaire": "bg-primary-light text-primary",
+  "Baby Shower": "bg-iris-light text-iris",
+  "Remise de diplôme": "bg-iris-light text-iris",
+  "Naissance": "bg-primary-light text-primary",
+  "Communion": "bg-gold-light text-gold",
+  "Baptême": "bg-primary-light text-primary",
+  "Autre événement": "bg-iris-light text-iris",
+};
+
 const typeMap: Record<
   string,
   "wedding" | "baptism" | "birthday" | "anniversary" | "engagement" | "babyshower" | "other"
@@ -222,7 +233,7 @@ function CreatePage() {
                 >
                   <span
                     className={`grid h-11 w-11 place-items-center rounded-[14px] ${
-                      active ? "bg-gradient-primary text-white" : "bg-primary-light text-primary"
+                      active ? "bg-gradient-primary text-white" : typeTint[t]
                     }`}
                   >
                     <I className="h-[22px] w-[22px]" />

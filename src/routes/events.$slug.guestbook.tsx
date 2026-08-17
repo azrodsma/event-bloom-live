@@ -204,12 +204,14 @@ function Guestbook() {
 
       <main className="mx-auto max-w-2xl space-y-4 px-4 py-4">
         {/* Compteur pilule */}
-        <div className="flex justify-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary-light px-4 py-2 text-[13px] font-semibold text-foreground">
-            <Heart className="h-4 w-4 fill-primary text-primary" />
-            {entries.length} message{entries.length > 1 ? "s" : ""}
-          </span>
-        </div>
+        {!isMediaView && (
+          <div className="flex justify-center">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary-light px-4 py-2 text-[13px] font-semibold text-foreground">
+              <Heart className="h-4 w-4 fill-primary text-primary" />
+              {entries.length} message{entries.length > 1 ? "s" : ""}
+            </span>
+          </div>
+        )}
 
         {/* Recherche (vues média) */}
         {isMediaView && (
@@ -225,8 +227,9 @@ function Guestbook() {
         )}
 
         {/* Composer */}
-        <section className="rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60">
+        <section className={`rounded-[22px] bg-surface p-4 shadow-card ring-1 ring-border/60 ${isMediaView ? "hidden" : ""}`}>
           <p className="text-sm font-bold text-foreground">Écrire un message</p>
+
           {user ? (
             <>
               <textarea
