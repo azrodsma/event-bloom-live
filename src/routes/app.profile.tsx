@@ -63,12 +63,6 @@ function Profile() {
     }
   }, [profile]);
 
-  const stats = [
-    { icon: Calendar, label: "Événements", value: myEvents.length },
-    { icon: MessageCircle, label: "Live", value: myEvents.filter((e) => e.status === "live").length },
-    { icon: Image, label: "À venir", value: myEvents.filter((e) => e.status === "upcoming").length },
-    { icon: Heart, label: "Passés", value: myEvents.filter((e) => e.status === "past").length },
-  ];
 
   async function handleSignOut() {
     await queryClient.cancelQueries();
