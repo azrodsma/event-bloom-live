@@ -137,7 +137,7 @@ function CreatePage() {
         {step === 0 && (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {eventTypes.map((t) => (
-              <button key={t} onClick={() => setSelectedType(t)}
+              <button key={t} onClick={() => { setSelectedType(t); setStep(1); }}
                 className={`group relative overflow-hidden rounded-2xl border p-4 text-left transition ${selectedType === t ? "border-primary bg-primary-light shadow-glow" : "border-border bg-background hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card"}`}>
                 {selectedType === t && (
                   <span className="absolute right-3 top-3 grid h-5 w-5 place-items-center rounded-full bg-gradient-primary text-white">
@@ -152,6 +152,7 @@ function CreatePage() {
             ))}
           </div>
         )}
+
 
 
         {step === 1 && (
