@@ -16,6 +16,7 @@ import {
   MapPin,
   type LucideIcon,
 } from "lucide-react";
+import floralFrame from "@/assets/floral-frame.png";
 import { createEvent } from "@/lib/events.functions";
 import { useServerFn } from "@tanstack/react-start";
 import { useMutation } from "@tanstack/react-query";
@@ -524,42 +525,53 @@ function InvitationPreview({
   ];
   const bg =
     style === "Moderne"
-      ? "from-background via-primary-light/50 to-cream"
+      ? "from-background via-primary-light/40 to-cream"
       : style === "Élégant"
-        ? "from-cream via-gold-light/60 to-background"
-        : "from-cream via-background to-primary-light/50";
+        ? "from-cream via-gold-light/50 to-background"
+        : "from-white via-cream/60 to-primary-light/30";
+  const short = date
+    ? new Date(date).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" }).replace(/\//g, ".")
+    : "12.08.2024";
   return (
     <div
-      className={`relative overflow-hidden rounded-[16px] bg-gradient-to-br ${bg} text-center ${
-        compact ? "aspect-[3/4.4] px-3 py-5" : "px-6 py-7"
+      className={`relative overflow-hidden rounded-[14px] bg-gradient-to-br ${bg} text-center ${
+        compact ? "aspect-[3/4.35] px-3 py-6" : "px-6 py-9"
       }`}
     >
-      <span className="pointer-events-none absolute -left-6 -top-6 h-24 w-24 rounded-full bg-primary/10 blur-xl" />
-      <span className="pointer-events-none absolute -bottom-8 -right-4 h-28 w-28 rounded-full bg-gold/15 blur-xl" />
-      <p
-        className={compact ? "text-[17px] italic leading-tight" : "text-2xl italic"}
-        style={{ fontFamily: "var(--font-serif, serif)" }}
-      >
-        {title}
-      </p>
-      <p className={`mt-1 italic text-muted-foreground ${compact ? "text-[10px]" : "text-[12px]"}`}>se marient</p>
-      <p className={`mt-3 font-semibold ${compact ? "text-[12px]" : "text-[17px]"}`}>
-        {formatDate(date) || "24 Mai 2025"}
-      </p>
-      <div className={`mx-auto mt-2 h-px bg-border ${compact ? "w-16" : "w-32"}`} />
-      <div className={`mt-3 flex items-end justify-center ${compact ? "gap-2" : "gap-4"}`}>
-        {units.map((u) => (
-          <div key={u.l}>
-            <p className={`font-bold leading-none ${compact ? "text-[12px]" : "text-xl"}`}>{u.v}</p>
-            <p className={`mt-1 tracking-[0.14em] text-muted-foreground ${compact ? "text-[6.5px]" : "text-[8.5px]"}`}>
-              {u.l}
-            </p>
+      <img
+        src={floralFrame}
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-70 mix-blend-multiply"
+      />
+      <div className="relative">
+        <p className={`font-script leading-[1.05] text-foreground ${compact ? "text-[22px]" : "text-[40px]"}`}>
+          {title}
+        </p>
+        <p
+          className={`mt-1 italic text-foreground/55 ${compact ? "text-[8.5px]" : "text-[13px]"}`}
+          style={{ fontFamily: "var(--font-serif, serif)" }}
+        >
+          se marient
+        </p>
+        <div className={`mx-auto my-2 h-px bg-foreground/15 ${compact ? "w-10" : "w-24"}`} />
+        <p
+          className={`tracking-[0.18em] text-foreground/70 ${compact ? "text-[8px]" : "text-[12px]"}`}
+        >
+          {short}
+        </p>
+        {!compact && (
+          <div className="mt-5 flex items-end justify-center gap-4">
+            {units.map((u) => (
+              <div key={u.l}>
+                <p className="text-xl font-bold leading-none">{u.v}</p>
+                <p className="mt-1 text-[8.5px] tracking-[0.14em] text-muted-foreground">{u.l}</p>
+              </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
-      <span className="absolute right-3 top-3 text-[10px] font-semibold text-muted-foreground">
-        {index + 1}/6
-      </span>
+      <span className="absolute right-2.5 top-2 text-[9px] font-semibold text-foreground/40">{index + 1}/6</span>
     </div>
   );
 }
