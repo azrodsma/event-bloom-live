@@ -386,10 +386,10 @@ function LivePage() {
                 <button
                   key={g.label}
                   onClick={() => heart(g.emoji)}
-                  className="tap flex w-[68px] shrink-0 flex-col items-center gap-1 rounded-xl px-1 py-1.5 transition active:scale-95"
+                  className="tap flex w-[72px] shrink-0 flex-col items-center gap-1 rounded-xl px-0.5 py-1.5 transition active:scale-95"
                 >
                   <span className="text-[24px] leading-none">{g.emoji}</span>
-                  <span className="text-[11px] font-semibold leading-none">{g.label}</span>
+                  <span className="whitespace-nowrap text-[10px] font-semibold leading-none">{g.label}</span>
                   <span className="text-[11px] leading-none text-white/60">{g.price === 0 ? "Gratuit" : `${g.price} €`}</span>
                 </button>
               ))}
