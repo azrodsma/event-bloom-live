@@ -96,10 +96,12 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
             Live
           </span>
         )}
-        <span className="absolute right-14 top-3 inline-flex items-center gap-1 rounded-full bg-black/45 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
-          <Eye className="h-3.5 w-3.5" />
-          {event.viewers ? `${(event.viewers / 1000).toFixed(1).replace(".", ",")}K` : "—"}
-        </span>
+        {!!event.viewers && (
+          <span className="absolute right-14 top-3 inline-flex items-center gap-1 rounded-full bg-black/45 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
+            <Eye className="h-3.5 w-3.5" />
+            {`${(event.viewers / 1000).toFixed(1).replace(".", ",")}K`}
+          </span>
+        )}
         <button
           aria-label="Ajouter aux favoris"
           className="tap absolute right-3 top-2.5 grid h-9 w-9 place-items-center rounded-full bg-white shadow-card"
@@ -108,7 +110,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
         </button>
 
         {/* Cagnotte + countdown panel */}
-        <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-black/70 p-3.5 text-white backdrop-blur-md sm:inset-x-8">
+        <div className="absolute inset-x-3 bottom-3 rounded-[18px] bg-black/70 p-3.5 text-white backdrop-blur-md sm:inset-x-8">
           <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2">
             <ChevronLeft className="h-5 w-5 shrink-0 opacity-60" />
             <div className="min-w-0 text-center">
@@ -143,7 +145,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
       </div>
 
       {/* Infos grid */}
-      <div className="grid gap-4 border-b border-border/60 p-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.1fr)]">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-4 divide-border/60 border-b border-border/60 p-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.15fr)] sm:divide-x">
         <div className="min-w-0">
           <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
             <MapPin className="h-4 w-4 text-primary" /> Lieu
@@ -167,7 +169,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
           </p>
         </div>
         {pot ? (
-          <div className="min-w-0">
+          <div className="col-span-2 min-w-0 sm:col-span-1 sm:pl-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
               <Gift className="h-4 w-4 text-primary" /> Cagnotte
             </p>
@@ -193,7 +195,7 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
             </a>
           </div>
         ) : (
-          <div className="min-w-0">
+          <div className="col-span-2 min-w-0 sm:col-span-1 sm:pl-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
               <Gift className="h-4 w-4 text-primary" /> Cagnotte
             </p>
@@ -221,9 +223,9 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
       <Link
         to="/events/$slug/guestbook"
         params={{ slug: event.slug }}
-        className="tap mx-3 mb-2.5 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl border border-primary bg-surface p-3"
+        className="tap mx-3 mb-2.5 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-[18px] border border-primary bg-surface p-3"
       >
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-iris-light text-iris">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-iris-light text-iris">
           <BookHeart className="h-6 w-6" />
         </span>
         <span className="min-w-0">
@@ -241,9 +243,9 @@ export function FeedEventCard({ event }: { event: MockEvent }) {
       <Link
         to="/events/$slug/vendors-hub"
         params={{ slug: event.slug }}
-        className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-2xl bg-iris-light/70 p-3 sm:grid-cols-[auto_minmax(0,1fr)_auto]"
+        className="tap mx-3 mb-3 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-[18px] bg-iris-light/70 p-3 sm:grid-cols-[auto_minmax(0,1fr)_auto]"
       >
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-iris text-primary-foreground">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-iris text-primary-foreground">
           <Camera className="h-6 w-6" />
         </span>
         <span className="min-w-0">
