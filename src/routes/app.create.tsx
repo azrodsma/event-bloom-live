@@ -383,43 +383,46 @@ function CreatePage() {
 
         {/* ÉTAPE 4 — accès & partage */}
         {step === 3 && (
-          <div className="space-y-4">
-            <CodeField label="Code invités" value={guestCode} onCopy={copy} onShare={share} />
-            <CodeField label="Code cameraman" value={camCode} onCopy={copy} onShare={share} />
-
-            <div>
-              <p className="mb-2 text-[14px] font-bold">Partager votre événement</p>
-              <div className="grid grid-cols-4 gap-2">
-                {[
-                  { icon: MessageCircle, label: "WhatsApp" },
-                  { icon: Instagram, label: "Instagram" },
-                  { icon: Facebook, label: "Facebook" },
-                  { icon: Link2, label: "Copier le lien" },
-                ].map(({ icon: Icon, label }) => (
-                  <button
-                    key={label}
-                    onClick={() => share(`Rejoignez ${title || "mon événement"} — code ${guestCode}`)}
-                    className="tap flex flex-col items-center gap-1.5"
-                  >
-                    <span className="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface text-primary">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <span className="text-[10.5px] font-medium text-muted-foreground">{label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
+          <div className="divide-y divide-border/70 overflow-hidden rounded-[18px] border border-border bg-surface">
             <Toggle
-              label="Publier sur MaFeliza"
-              hint="Votre événement sera visible sur la plateforme."
-              value={publishOnPlatform}
-              onChange={setPublishOnPlatform}
+              label="Événement privé"
+              hint="Seuls les invités avec le code peuvent y accéder."
+              value={access === "private"}
+              onChange={(v) => setAccess(v ? "private" : "public")}
+              flush
             />
-            <Toggle label="Autoriser les invités à publier" value={allowGuestPosts} onChange={setAllowGuestPosts} />
-            <Toggle label="Commentaires invités" value={allowComments} onChange={setAllowComments} />
-            <Toggle label="Participation à la cagnotte" value={enableCagnotte} onChange={setEnableCagnotte} />
+            <CodeRow label="Code des invités" value={guestCode} onCopy={copy} onShare={share} />
+            <CodeRow label="Code caméraman" value={camCode} onCopy={copy} onShare={share} />
+            <Toggle label="Autoriser les invités à publier" value={allowGuestPosts} onChange={setAllowGuestPosts} flush />
+            <Toggle label="Commentaires invités" value={allowComments} onChange={setAllowComments} flush />
+            <Toggle label="Participation à la cagnotte" value={enableCagnotte} onChange={setEnableCagnotte} flush />
+            <Toggle label="Publier sur MaFeliza" value={publishOnPlatform} onChange={setPublishOnPlatform} flush />
           </div>
+
+          <div className="mt-5">
+            <p className="mb-2 text-[14px] font-bold">Partager votre événement</p>
+            <div className="grid grid-cols-4 gap-2">
+              {[
+                { icon: MessageCircle, label: "WhatsApp" },
+                { icon: Instagram, label: "Instagram" },
+                { icon: Facebook, label: "Facebook" },
+                { icon: Link2, label: "Copier le lien" },
+              ].map(({ icon: Icon, label }) => (
+                <button
+                  key={label}
+                  onClick={() => share(`Rejoignez ${title || "mon événement"} — code ${guestCode}`)}
+                  className="tap flex flex-col items-center gap-1.5"
+                >
+                  <span className="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface text-primary">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="text-[10.5px] font-medium text-muted-foreground">{label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+          </div>
+
         )}
       </div>
 
